@@ -53,12 +53,14 @@
 
 ## 二、godotlsp 现状基线
 
-- **协议层已异步化**(0eda519,`lsp-server-tokio` 0.3):tokio 异步 stdio + `route()` 显式路由 + 每请求 `CancellationToken`(尚未接入计算);请求仍在主循环内同步处理——并发化是 P2 主题;salsa 增量分析(`gdscript-ide`)。
+- **协议层已异步化**(0eda519,`lsp-server-tokio` 0.3):tokio 异步 stdio + `route()` 显式路由 + 每请求 `CancellationToken`。
+- **P2 并发模型已落地**(9dabec4):单写者 `State`(主循环独占)+ 线程池快照(请求解析后拍 `Snapshot`,分析计算 `spawn_blocking` 下沉,结果经双通道回传,响应优先于诊断);50ms 预算事件合并;取消三态(`RequestCancelled`/完成后取消静默丢弃/revision 过期 → `ContentModified`);诊断去抖调度器(自适应延迟 = 最近 15 次耗时中位数 clamp [50,500]ms)+ 代际编辑作废 + 取消重排。
+- **salsa 0.27 写路径硬约束(源码核验)**:`zalsa_mut` → `cancel_others` 以 Condvar 等待 storage clone 计数归 1 —— 快照句柄存活期间写世界会死锁(官方注释明言单线程双句柄死锁)。因此采用「**写者等待在飞读者(有界)**」而非 RA 式中途取消:所有写前 `quiesce()` 等在飞任务归零;unbounded 任务通道消除任务端阻塞环;`MAX_INFLIGHT=4` 约束写等待上界;过期结果靠 revision 比对识别,内核 `Cancellable` 防御性传播。
 - **纯脱离 Godot 客户端运行**(已验证):分析内核源码无进程派生、无网络依赖;引擎模型与 API 文档内嵌于 `gdscript-api`(`engine_docs.bin`),场景感知靠直接解析 `.tscn`/`.tres` 文本。
 - 增量文本同步(UTF-16 位置,夹紧容错)、文件监视兜底 `didOpen` 前的项目感知。
-- 配置:推送(`didChangeConfiguration`)+ 拉取(`workspace/configuration`)双通道。
+- 配置:推送(`didChangeConfiguration`)+ 拉取(`workspace/configuration`)双通道,同批就绪消息中配置响应按序吸收(drain 内每消息前吸收)。
 - 诊断带 `source`/结构化 `code`/`version`;请求级 panic 隔离;`lifecycle_over_duplex` 内存协议测试锁定生命周期语义。
-- 已知边界:通知路径无 panic 防护(状态变更中途捕获会留下半更新状态,宁可崩溃重启);无取消传播(token 已挂载未接入计算)、无进度、无后台线程。
+- 已知边界:通知路径无 panic 防护(状态变更中途捕获会留下半更新状态,宁可崩溃重启);内核不区分语法/语义 pass,分级诊断(P2 第 5 步的分级部分)待内核暴露 fast-pass 后补;进度上报未做。
 
 ## 三、已落地(本轮)
 
