@@ -473,6 +473,39 @@ pub fn keyword_hover(word: &str) -> Option<String> {
     Some(format!("`{word}` — {desc}\n\n[📖 GDScript 基础]({GDSCRIPT_BASICS_URL})"))
 }
 
+// ---- 操作符 / 节点路径 hover(P0 补充:此前完全无兜底) ----
+
+/// 符号操作符的一行 hover(`??`/`==`/`%`/`**`/…)。
+#[must_use]
+pub fn operator_hover(token: &str) -> Option<String> {
+    let (_, desc) = docs::OPERATOR_DOCS.iter().find(|(op, _)| *op == token)?;
+    Some(format!("`{token}` — {desc}\n\n[📖 GDScript 基础]({GDSCRIPT_BASICS_URL})"))
+}
+
+/// 节点路径操作符 hover:`$NodePath` ≡ `get_node()`,`%Name` ≡ 唯一节点引用。
+#[must_use]
+pub fn node_path_hover(op: char) -> Option<String> {
+    let (title, body) = match op {
+        '$' => (
+            "节点路径 `$NodePath`",
+            "等价于 `get_node(\"NodePath\")`——按场景树相对/绝对路径取子节点。\n\n\
+             - `$\"Child\"` 取直接子节点;`$\"../Sibling\"` 取兄弟;`$\".\"` 取自身。\n\
+             - `$` 仅在 `_ready`/`_enter_tree` 之后(节点入树)才有效。\n\
+             - 类型推导为路径指向的节点类型,补全/签名随节点类型变化。",
+        ),
+        '%' => (
+            "唯一节点 `%Name`",
+            "按场景树中标记为「唯一名称(Unique Name)」的节点取引用,等价于 `get_node(\"%Name\")` \
+             或 `get_node_unique(\"Name\")`(4.2+)。\n\n\
+             - 场景面板右键节点 → 「访问为唯一名称」启用。\n\
+             - 跨分支也能稳定取到,适合复用组件/子场景。\n\
+             - 注意:`%` 也是取模运算符(`a % b`),仅当 `%` 后紧跟节点名时为唯一节点引用。",
+        ),
+        _ => return None,
+    };
+    Some(format!("`{op}` — {title}\n\n{body}\n\n[📖 GDScript 基础]({GDSCRIPT_BASICS_URL})"))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -528,13 +561,27 @@ mod tests {
     fn keyword_hover_and_annotation_detail() {
         // 关键字一行 hover + 官方链接。
         let h = keyword_hover("await").unwrap();
-        assert!(h.contains("Waits for a signal"), "{h}");
+        assert!(h.contains("协程"), "{h}");
         assert!(h.contains("docs.godotengine.org/zh-CN/"));
         // 布尔运算符关键字(常用,此前缺失)。
         for kw in ["and", "or", "not"] {
             assert!(keyword_hover(kw).is_some_and(|d| d.contains(kw)), "{kw}");
         }
         assert!(keyword_hover("definitely_not_a_keyword").is_none());
+
+        // 操作符 hover(此前完全无兜底)。
+        for op in ["??", "??=", "==", "!=", "**", "%", "+", "<<", "&&", ".", "[]", "()"] {
+            let h = operator_hover(op).unwrap();
+            assert!(h.contains(op) && h.contains("GDScript 基础"), "{op}: {h}");
+        }
+        assert!(operator_hover("+++").is_none());
+
+        // 节点路径操作符:$=get_node,%=唯一节点。
+        let h = node_path_hover('$').unwrap();
+        assert!(h.contains("get_node"), "{h}");
+        let h = node_path_hover('%').unwrap();
+        assert!(h.contains("唯一节点"), "{h}");
+        assert!(node_path_hover('x').is_none());
 
         // 注解补全回填:一行 detail + 完整文档。
         let (detail, doc) = annotation_info("export_range").unwrap();

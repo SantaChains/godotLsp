@@ -351,7 +351,9 @@ fn handle(state: &State, req: &RequestKind) -> Result<serde_json::Value, String>
             // 再退语言关键字;内核有文档时,追加官方 zh-CN 文档链接(文档跳转)。
             if kernel.as_ref().is_none_or(|h| h.doc.is_empty()) {
                 let fallback = globals_hover_at(&doc.text, offset)
-                    .or_else(|| keyword_hover_at(&doc.text, offset));
+                    .or_else(|| keyword_hover_at(&doc.text, offset))
+                    .or_else(|| node_path_hover_at(&doc.text, offset))
+                    .or_else(|| operator_hover_at(&doc.text, offset));
                 if let Some(md) = fallback {
                     let word = cv::word_range_at(&doc.text, offset);
                     return Ok(cv::to_value(&lsp_types::Hover {
@@ -703,6 +705,56 @@ fn globals_hover_link(text: &str, offset: u32) -> Option<String> {
 fn keyword_hover_at(text: &str, offset: u32) -> Option<String> {
     let range = cv::word_range_at(text, offset)?;
     globals::keyword_hover(&text[range.start as usize..range.end as usize])
+}
+
+/// 节点路径操作符 hover:`$NodePath` / `%Name`(或光标落在 `$`/`%` 前缀本身)。
+/// `%` 后紧跟标识符视为唯一节点,否则当作取模运算符交给 `operator_hover_at`。
+fn node_path_hover_at(text: &str, offset: u32) -> Option<String> {
+    let b = text.as_bytes();
+    let o = offset as usize;
+    if o == 0 || o > b.len() {
+        return None;
+    }
+    let at = b.get(o).copied();
+    let prev = b.get(o.wrapping_sub(1)).copied();
+    if at == Some(b'%') || prev == Some(b'%') {
+        let pct = if at == Some(b'%') { o } else { o - 1 };
+        let next = b.get(pct + 1).copied();
+        if next.is_some_and(|c| c == b'_' || c.is_ascii_alphabetic()) {
+            return globals::node_path_hover('%');
+        }
+        return globals::operator_hover("%");
+    }
+    if at == Some(b'$') || prev == Some(b'$') {
+        return globals::node_path_hover('$');
+    }
+    None
+}
+
+/// 符号操作符 hover:`??`/`==`/`**`/`%`/…(光标落在运算符标点本身时)。
+fn operator_hover_at(text: &str, offset: u32) -> Option<String> {
+    let b = text.as_bytes();
+    let o = offset as usize;
+    if o == 0 || o > b.len() {
+        return None;
+    }
+    let mut s = o;
+    while s > 0 && is_op_char(b[s - 1]) {
+        s -= 1;
+    }
+    let mut e = o;
+    while e < b.len() && is_op_char(b[e]) {
+        e += 1;
+    }
+    if s == e {
+        return None;
+    }
+    globals::operator_hover(&text[s..e])
+}
+
+/// 运算符标点字符(用于 `operator_hover_at` 的连续标点切分;不含结构性 `.()[]`,`)。
+fn is_op_char(c: u8) -> bool {
+    matches!(c, b'+' | b'-' | b'*' | b'/' | b'%' | b'<' | b'>' | b'=' | b'!' | b'&' | b'|' | b'^' | b'~' | b'?')
 }
 
 /// 补全项增强(服务器侧,不动内核):
@@ -1071,5 +1123,37 @@ var s = a%b
         assert!(!in_node_path_context(t, (l3 + 5) as u32), "取模结果后");
         // a%b:% 前是操作数 → 取模
         assert!(!in_node_path_context(t, (l4 + 3) as u32), "a%b 的 b 后");
+    }
+
+    #[test]
+    fn node_path_and_operator_hover_wiring() {
+        // 光标落在 `$` 本身 → 节点路径(get_node)文档。
+        let s1 = "var p = $Panel";
+        let h = node_path_hover_at(s1, 8).unwrap(); // 8 是 `$` 的位置
+        assert!(h.contains("get_node"), "{h}");
+
+        // 光标落在 `$` 后的首字符(其前为 `$`)→ 仍识别为节点路径。
+        assert!(node_path_hover_at(s1, 9).unwrap().contains("get_node"));
+
+        // 光标落在唯一节点 `%Name` 的 `%` 上 → 唯一节点文档。
+        let s2 = "var q = %Sprite";
+        let h = node_path_hover_at(s2, 8).unwrap();
+        assert!(h.contains("唯一节点"), "{h}");
+
+        // 取模 `7 % 3`:`%` 后是操作数(数字)→ 当作取模运算符,非节点路径。
+        let s3 = "var r = 7 % 3";
+        let h = node_path_hover_at(s3, 10).unwrap(); // 10 是 `%` 的位置
+        assert!(h.contains("取模"), "{h}");
+
+        // 符号操作符:`??` / `==` 等。
+        let s4 = "var x = a ?? b";
+        let h = operator_hover_at(s4, 10).unwrap(); // 10 是第一个 `?`
+        assert!(h.contains("??") && h.contains("空合并"), "{h}");
+
+        let s5 = "if a == b";
+        assert!(operator_hover_at(s5, 5).unwrap().contains("=="));
+
+        // 普通标识符不触发操作符 hover。
+        assert!(operator_hover_at("var x", 4).is_none());
     }
 }
