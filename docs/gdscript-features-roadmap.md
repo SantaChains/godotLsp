@@ -30,13 +30,13 @@
 
 ## 二、路线图
 
-### P0 — 提示与准确性(服务器侧,下一迭代)
+### P0 — 提示与准确性(服务器侧)✅ 已完成
 
-1. **成员补全 detail/doc 增强**:`recv.<TAB>` 当前只给名字;经模型补 detail(签名)与文档(hover 预览),与全局面一致。
-2. **签名帮助文档填充**:`sin(` 的 signature help 已有签名但 doc 空;按调用名回填模型文档。
-3. **关键字 hover**:`if`/`match`/`await` 等语言关键字 hover 说明(语料 GDScript reference 提取,同 `extract_docs.py` 管线)。
-4. **注解 detail 回填**:内核注解补全只给名字;按 `ANNOTATION_DOCS` 回填一行说明。
-5. **诊断严格度分级**:把"未使用变量/遮蔽/不可达"等警告按 Godot 编辑器同款分级暴露,避免噪声(严格模式已有,细化分级开关)。
+1. ✅ **成员补全 detail/doc 增强**:`recv.<TAB>` 经接收者 hover 定位类型,引擎模型回填完整签名与文档(方法 `(…) -> R`、属性 `name: T`、信号/常量);自有成员兜底为声明行原文 + `##` 文档注释。
+2. ✅ **签名帮助文档填充**:`sin(` 等全局调用回填模型文档;`recv.method(` 经接收者类型定位类取成员文档;均附 zh-CN 链接。
+3. ✅ **关键字 hover**:35 个关键字/伪常量别名一行说明(`extract_docs.py` 从 GDScript reference Keywords 表提取)。
+4. ✅ **注解 detail 回填**:36 个注解补全带一行说明 + 完整文档 + 链接。
+5. ✅ **诊断分级/降噪**:分级由内核 `WarningSettings`(Godot 编辑器同款 per-code)+ 严格模式开关承担;新增 `diagnostics.ignore` 按码忽略配置(双通道下发)。
 
 ### P1 — 交互(编辑器侧,进 VS Code 插件)
 

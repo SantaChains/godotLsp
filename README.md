@@ -8,8 +8,9 @@ A standalone Godot LSP written in Rust, with a VSCode extension.
 
 - 悬停(类型 + 引擎文档 + `##` 注释)、代码补全、跳转定义、查找引用、重命名、`prepareRename`
 - 引擎全局面补全:1036 引擎类、38 内建类型、单例、`@GlobalScope` 工具函数、GDScript 内建函数、全局枚举及值、`PI`/`TAU` 等常量(签名与文档以引擎模型为权威)
-- 文档跳转:悬停附官方 zh-CN 文档链接;类名/单例/全局函数/注解 hover 全覆盖
-- 诊断(语法 + 语义,支持严格模式)、语义高亮、inlay hint(可开关)、折叠范围、签名帮助
+- 补全/签名文档回填:成员补全与 `recv.method(` 签名帮助按引擎模型补全签名与文档;自有成员补全带声明签名与 `##` 注释;注解补全带说明;语言关键字 hover
+- 文档跳转:悬停附官方 zh-CN 文档链接;类名/单例/全局函数/注解/关键字 hover 全覆盖
+- 诊断(语法 + 语义,支持严格模式与按码忽略)、语义高亮、inlay hint(可开关)、折叠范围、签名帮助
 - 代码操作、整文档与选区格式化
 - 符号高亮(`documentHighlight`)、`res://` 路径可点击跳转(`documentLink`)
 - `Color()` 字面量取色器(`documentColor`)
@@ -75,7 +76,7 @@ command = "godotlsp"
 args = ["--stdio"]
 ```
 
-配置经 `workspace/configuration` / `didChangeConfiguration` 下发,键名与 VSCode 扩展一致(`diagnostics.strict`、`inlayHints.typeHints`)。设计依据与路线图见 [docs/lsp-design.md](docs/lsp-design.md) 与 [docs/gdscript-features-roadmap.md](docs/gdscript-features-roadmap.md)。
+配置经 `workspace/configuration` / `didChangeConfiguration` 下发,键名与 VSCode 扩展一致(`diagnostics.strict`、`diagnostics.ignore`、`inlayHints.typeHints`)。设计依据与路线图见 [docs/lsp-design.md](docs/lsp-design.md) 与 [docs/gdscript-features-roadmap.md](docs/gdscript-features-roadmap.md)。
 
 ## 测试
 

@@ -109,6 +109,12 @@
           "default": false,
           "markdownDescription": "启用严格模式诊断:把默认关闭的可选警告(如未使用的信号参数)也提升为可见警告,便于在编写阶段收紧代码质量。"
         },
+        "godotlsp.diagnostics.ignore": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "markdownDescription": "要忽略的诊断码列表(与 Godot 编辑器同款,如 `UNUSED_VARIABLE`、`SHADOWED_VARIABLE`),按码过滤推送的诊断。"
+        },
         "godotlsp.inlayHints.typeHints": {
           "type": "boolean",
           "default": true,
