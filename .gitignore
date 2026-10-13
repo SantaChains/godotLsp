@@ -1,0 +1,4 @@
+/target
+/.refs
+node_modules/
+*.vsix

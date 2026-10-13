@@ -1,0 +1,120 @@
+{
+  "name": "godotlsp",
+  "displayName": "godotlsp: standalone GDScript Language Server",
+  "description": "Engine-free GDScript language server for Godot 4.x: hover, completion, navigation, diagnostics and formatting without the Godot editor running.",
+  "version": "0.1.0",
+  "publisher": "godotlsp",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-org/godotlsp",
+    "directory": "editors/vscode"
+  },
+  "engines": {
+    "vscode": "^1.91.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Linters",
+    "Formatters"
+  ],
+  "keywords": [
+    "godot",
+    "gdscript",
+    "lsp",
+    "language server",
+    "gamedev"
+  ],
+  "main": "./dist/extension.js",
+  "activationEvents": [],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": "limited",
+      "description": "godotlsp runs a binary configured by the workspace.",
+      "restrictedConfigurations": [
+        "godotlsp.path"
+      ]
+    },
+    "virtualWorkspaces": false
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "gdscript",
+        "aliases": [
+          "GDScript",
+          "gdscript"
+        ],
+        "extensions": [
+          ".gd"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "gdscript",
+        "scopeName": "source.gdscript",
+        "path": "./syntaxes/GDScript.tmLanguage.json"
+      }
+    ],
+    "configurationDefaults": {
+      "[gdscript]": {
+        "editor.insertSpaces": false,
+        "editor.detectIndentation": true,
+        "editor.tabSize": 4
+      }
+    },
+    "commands": [
+      {
+        "command": "godotlsp.restart",
+        "title": "Restart Server",
+        "category": "godotlsp"
+      },
+      {
+        "command": "godotlsp.showOutput",
+        "title": "Show Output",
+        "category": "godotlsp"
+      }
+    ],
+    "configuration": {
+      "title": "godotlsp",
+      "properties": {
+        "godotlsp.path": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "scope": "machine-overridable",
+          "markdownDescription": "Path to the `godotlsp` server executable. Leave empty to use the bundled binary, else `godotlsp` on `PATH`."
+        },
+        "godotlsp.trace.server": {
+          "type": "string",
+          "enum": [
+            "off",
+            "messages",
+            "verbose"
+          ],
+          "default": "off",
+          "markdownDescription": "Log the LSP traffic between the editor and godotlsp to the **godotlsp** output channel."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run build",
+    "build": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --target=node20 --minify",
+    "watch": "npm run build -- --sourcemap --watch",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "vscode-languageclient": "^10.1.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "~1.91.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^5.6.0"
+  }
+}
