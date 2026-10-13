@@ -26,6 +26,7 @@
     "gamedev"
   ],
   "main": "./dist/extension.js",
+  "icon": "icon.png",
   "activationEvents": [],
   "capabilities": {
     "untrustedWorkspaces": {
