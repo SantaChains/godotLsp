@@ -5,3 +5,6 @@ node_modules/
 *.vsix
 editors/vscode/dist/
 editors/vscode/server/
+# 本地语料与工作区数据:未修改的上游资源从源头获取,不入库
+godot-docs/
+.workbuddy/

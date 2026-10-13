@@ -12,6 +12,8 @@ A standalone Godot LSP written in Rust, with a VSCode extension.
 - 符号高亮(`documentHighlight`)、`res://` 路径可点击跳转(`documentLink`)
 - `Color()` 字面量取色器(`documentColor`)
 - 增量文本同步、文件监视(无需打开即感知项目文件增删改)
+- 配置双通道:`workspace/configuration` 拉取 + `didChangeConfiguration` 推送(纯 LSP,无编辑器特设)
+- 诊断带 `source`/`code`/`version`;请求级 panic 隔离,单请求崩溃不拖垮服务器
 - 跨文件解析:`class_name`、autoload、`preload`/`extends`
 - 场景感知:`$NodePath`、`%unique`、`get_node` 到场景节点的类型推断
 - 工作区符号、项目扫描(`project.godot` 热更新、`res://` 路径)
@@ -29,6 +31,50 @@ cargo build --release
 
 VSCode:安装 [editors/vscode](editors/vscode)。`godotlsp.path` 指向服务器二进制,或将二进制拷入 `editors/vscode/server/` 随扩展打包。
 
+### 其他编辑器
+
+服务器是纯 LSP 3.17 over stdio,任何客户端均可直接接入(示例以 `target/release/godotlsp` 为准):
+
+**Neovim**(0.11+ 原生 LSP,`lsp/godotlsp.lua`):
+
+```lua
+vim.lsp.config("godotlsp", {
+  cmd = { vim.fn.expand("~/path/to/godotlsp"), "--stdio" },
+  filetypes = { "gdscript" },
+  root_markers = { "project.godot", ".git" },
+})
+vim.lsp.enable("godotlsp")
+```
+
+**Zed**(`~/.config/zed/settings.json`,利用其自定义 LSP):
+
+```json
+{
+  "lsp": {
+    "godotlsp": {
+      "binary": { "path": "/path/to/godotlsp", "arguments": ["--stdio"] }
+    }
+  },
+  "languages": {
+    "GDScript": { "language_servers": ["godotlsp", "!godot"] }
+  }
+}
+```
+
+**Helix**(`languages.toml`):
+
+```toml
+[[language]]
+name = "gdscript"
+language-servers = ["godotlsp"]
+
+[language-server.godotlsp]
+command = "godotlsp"
+args = ["--stdio"]
+```
+
+配置经 `workspace/configuration` / `didChangeConfiguration` 下发,键名与 VSCode 扩展一致(`diagnostics.strict`、`inlayHints.typeHints`)。设计依据与路线图见 [docs/lsp-design.md](docs/lsp-design.md)。
+
 ## 测试
 
 ```sh
@@ -45,6 +91,7 @@ cargo test
 - [gdls](https://github.com/kurushimee/gdls) — VSCode 扩展复用了其语言配置与 TextMate 语法文件,扩展结构亦受其启发。
 - [gdck](https://github.com/eth0net/gdck) — 无损 GDScript 解析器,技术选型阶段的重要参考。
 - [godot-vscode-plugin](https://github.com/godotengine/godot-vscode-plugin) — 官方插件,功能对照与行为参考。
+- [godot-docs](https://docs.godotengine.org) — Godot 官方文档。本仓库本地 `godot-docs/` 语料源自《GodotEngine.epub》中文翻译(译者:孤辰辰),用于后续离线中文文档集成。
 
 ## License
 
