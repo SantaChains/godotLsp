@@ -1,7 +1,7 @@
 {
   "name": "godotlsp",
   "displayName": "godotlsp: standalone GDScript Language Server",
-  "description": "Engine-free GDScript language server for Godot 4.x: hover, completion, navigation, diagnostics and formatting without the Godot editor running.",
+  "description": "独立于 Godot 引擎运行的 GDScript 语言服务器:悬停文档、补全、导航、诊断与格式化,无需打开 Godot 编辑器。",
   "version": "0.1.0",
   "publisher": "godotlsp",
   "license": "MIT",
@@ -87,7 +87,7 @@
           ],
           "default": null,
           "scope": "machine-overridable",
-          "markdownDescription": "Path to the `godotlsp` server executable. Leave empty to use the bundled binary, else `godotlsp` on `PATH`."
+          "markdownDescription": "`godotlsp` 服务器可执行文件的路径。留空时优先使用扩展自带二进制(server/),否则回退到 `PATH` 中的 `godotlsp`。支持 `${workspaceFolder}` 与 `~`。"
         },
         "godotlsp.trace.server": {
           "type": "string",
@@ -96,8 +96,23 @@
             "messages",
             "verbose"
           ],
+          "enumDescriptions": [
+            "关闭:不记录通信内容。",
+            "消息:记录编辑器与 godotlsp 之间的 LSP 请求/响应。",
+            "详细:在消息级别之上额外记录每个报文的完整内容。"
+          ],
           "default": "off",
-          "markdownDescription": "Log the LSP traffic between the editor and godotlsp to the **godotlsp** output channel."
+          "markdownDescription": "把编辑器与 godotlsp 之间的 LSP 通信记录到 **godotlsp** 输出通道,便于排查问题。"
+        },
+        "godotlsp.diagnostics.strict": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "启用严格模式诊断:把默认关闭的可选警告(如未使用的信号参数)也提升为可见警告,便于在编写阶段收紧代码质量。"
+        },
+        "godotlsp.inlayHints.typeHints": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "在推断出类型的 `:=` 绑定、未标注参数与 `for` 变量旁显示内联 `: 类型` 提示。"
         }
       }
     }

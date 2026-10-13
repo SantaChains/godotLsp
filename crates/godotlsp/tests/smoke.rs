@@ -108,6 +108,7 @@ fn full_stdio_session() {
     }));
     let caps = s.response(1)["result"]["capabilities"].clone();
     assert_eq!(caps["positionEncoding"], "utf-16");
+    assert_eq!(caps["textDocumentSync"], 2, "应为增量同步");
     assert_eq!(caps["hoverProvider"], Value::Bool(true));
     assert!(caps["completionProvider"]["triggerCharacters"].as_array().is_some_and(|a| !a.is_empty()));
     assert!(caps.get("semanticTokensProvider").is_some());
@@ -116,6 +117,9 @@ fn full_stdio_session() {
     assert!(caps.get("inlayHintProvider").is_some());
     assert!(caps.get("foldingRangeProvider").is_some());
     assert!(caps.get("documentFormattingProvider").is_some());
+    assert!(caps.get("documentHighlightProvider").is_some());
+    assert!(caps.get("documentLinkProvider").is_some());
+    assert!(caps.get("colorProvider").is_some());
     s.send(&json!({"jsonrpc": "2.0", "method": "initialized", "params": {}}));
 
     // hover 到 `count`(第 3 行第 5 列)
@@ -169,10 +173,67 @@ fn full_stdio_session() {
         .filter_map(|sym| sym["name"].as_str().map(Into::into)).collect();
     assert!(names.iter().any(|n| n == "tick"), "符号:{names:?}");
 
+    // documentHighlight:`count`(第 5 行)应有声明(第 2 行)+ 引用(第 5 行)
+    step!("documentHighlight");
+    s.send(&json!({"jsonrpc": "2.0", "id": 8, "method": "textDocument/documentHighlight", "params": {
+        "textDocument": {"uri": URI}, "position": {"line": 5, "character": 14}}}));
+    let highlights = s.response(8)["result"].as_array().cloned().unwrap_or_default();
+    assert!(highlights.len() >= 2, "highlight:{highlights:?}");
+
+    // documentLink:res:// 路径 → 项目内文件 URI(根为 crate 目录,Cargo.toml 必然存在)
+    step!("documentLink");
+    change(&mut s, 5, &format!("{GOOD}const P = preload(\"res://Cargo.toml\")\n"));
+    s.send(&json!({"jsonrpc": "2.0", "id": 9, "method": "textDocument/documentLink", "params": {
+        "textDocument": {"uri": URI}}}));
+    let links = s.response(9)["result"].as_array().cloned().unwrap_or_default();
+    let target = links[0]["target"].as_str().unwrap_or_default();
+    assert!(target.ends_with("Cargo.toml"), "links:{links:?}");
+
+    // documentColor:Color( 字面量应被识别为颜色
+    step!("documentColor");
+    change(&mut s, 6, &format!("{GOOD}var c = Color(1, 0.5, 0, 0.8)\n"));
+    s.send(&json!({"jsonrpc": "2.0", "id": 10, "method": "textDocument/documentColor", "params": {
+        "textDocument": {"uri": URI}}}));
+    let colors = s.response(10)["result"].as_array().cloned().unwrap_or_default();
+    assert!(
+        colors.iter().any(|c| (c["color"]["green"].as_f64().unwrap_or(0.0) - 0.5).abs() < 1e-6),
+        "colors:{colors:?}"
+    );
+
+    // 增量同步:在 `var count := 5` 行尾(range 编辑)插入一行,documentSymbol 应看到新符号
+    step!("incremental didChange");
+    s.send(&json!({"jsonrpc": "2.0", "method": "textDocument/didChange", "params": {
+        "textDocument": {"uri": URI, "version": 7},
+        "contentChanges": [{"range": {
+            "start": {"line": 2, "character": 14}, "end": {"line": 2, "character": 14}},
+            "text": "\nvar extra := 1"}]}}));
+    s.send(&json!({"jsonrpc": "2.0", "id": 11, "method": "textDocument/documentSymbol", "params": {
+        "textDocument": {"uri": URI}}}));
+    let names = s.response(11)["result"].clone();
+    let names: Vec<String> = names.as_array().unwrap().iter()
+        .filter_map(|sym| sym["name"].as_str().map(Into::into)).collect();
+    assert!(names.iter().any(|n| n == "extra"), "增量编辑未生效:{names:?}");
+
+    // 配置同步:关闭 inlay 提示 → inlayHint 返回 null;恢复后非空
+    step!("configuration");
+    s.send(&json!({"jsonrpc": "2.0", "method": "workspace/didChangeConfiguration", "params": {
+        "settings": {"godotlsp": {"inlayHints": {"typeHints": false}}}}}));
+    s.send(&json!({"jsonrpc": "2.0", "id": 12, "method": "textDocument/inlayHint", "params": {
+        "textDocument": {"uri": URI}, "range": {"start": {"line": 0, "character": 0},
+        "end": {"line": 20, "character": 0}}}}));
+    assert!(s.response(12)["result"].is_null(), "关闭后 inlayHint 应为 null");
+    s.send(&json!({"jsonrpc": "2.0", "method": "workspace/didChangeConfiguration", "params": {
+        "settings": {"godotlsp": {"inlayHints": {"typeHints": true}}}}}));
+    s.send(&json!({"jsonrpc": "2.0", "id": 13, "method": "textDocument/inlayHint", "params": {
+        "textDocument": {"uri": URI}, "range": {"start": {"line": 0, "character": 0},
+        "end": {"line": 20, "character": 0}}}}));
+    let hints = s.response(13)["result"].as_array().cloned().unwrap_or_default();
+    assert!(!hints.is_empty(), "恢复后应有 inlay 提示:{hints:?}");
+
     // shutdown + exit
     step!("shutdown + exit");
-    s.send(&json!({"jsonrpc": "2.0", "id": 8, "method": "shutdown", "params": null}));
-    s.response(8);
+    s.send(&json!({"jsonrpc": "2.0", "id": 14, "method": "shutdown", "params": null}));
+    s.response(14);
     s.send(&json!({"jsonrpc": "2.0", "method": "exit", "params": null}));
     let status = s.child.wait().expect("exit 后等待退出");
     assert!(status.success(), "exit 后退出码非零:{status}");

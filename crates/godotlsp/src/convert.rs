@@ -51,7 +51,7 @@ impl LineIndex {
         }
     }
 
-    fn line_span(&self, line: u32) -> (usize, usize) {
+    pub(crate) fn line_span(&self, line: u32) -> (usize, usize) {
         let line = line.min(self.line_count() - 1);
         #[allow(clippy::cast_possible_truncation)]
         let start = self.line_starts[line as usize] as usize;
@@ -299,6 +299,7 @@ pub fn references(refs: Vec<Reference>, include_decl: bool, get: DocResolver) ->
 
 /// 跨文件源码变更 → `WorkspaceEdit`。
 #[must_use]
+#[allow(clippy::mutable_key_type)] // lsp-types 的 `WorkspaceEdit` 以 `Uri` 为键,类型即如此
 pub fn workspace_edit(change: SourceChange, get: DocResolver) -> Option<WorkspaceEdit> {
     let mut changes: HashMap<Uri, Vec<TextEdit>> = HashMap::new();
     for FileEdit { file, edits } in change.edits {
@@ -385,8 +386,7 @@ pub fn semantic_tokens(text: &str, index: &LineIndex, tokens: Vec<SemanticToken>
         .into_iter()
         .map(|t| {
             let start = index.position(text, t.range.start);
-            #[allow(clippy::cast_possible_truncation)]
-            let length = (t.range.end - t.range.start) as u32;
+            let length = t.range.end - t.range.start;
             let line = start.line;
             let character = start.character;
             let delta_line = line - prev_line;
@@ -455,7 +455,7 @@ pub fn folding_ranges(text: &str, index: &LineIndex, ranges: Vec<FoldRange>) -> 
 
 fn signature_information(s: gdscript_base::SignatureInfo) -> SignatureInformation {
     let doc = |value: String| {
-        (!value.is_empty()).then(|| lsp_types::Documentation::MarkupContent(MarkupContent {
+        (!value.is_empty()).then_some(lsp_types::Documentation::MarkupContent(MarkupContent {
             kind: MarkupKind::Markdown,
             value,
         }))
@@ -486,7 +486,8 @@ pub fn signature_help(help: GSignatureHelp) -> LspSignatureHelp {
     }
 }
 
-/// 分析器 code action → LSP code action。
+/// 分析器 code action → LSP code action。引擎当前只产出"补类型注解"类修复,
+/// 稳定作为首选动作呈现。
 #[must_use]
 pub fn code_actions(actions: Vec<GCodeAction>, get: DocResolver) -> Vec<CodeActionOrCommand> {
     actions
@@ -499,7 +500,7 @@ pub fn code_actions(actions: Vec<GCodeAction>, get: DocResolver) -> Vec<CodeActi
                 edit: Some(workspace_edit(a.edit, get)?),
                 command: None,
                 data: None,
-                is_preferred: None,
+                is_preferred: Some(true),
                 disabled: None,
             }))
         })

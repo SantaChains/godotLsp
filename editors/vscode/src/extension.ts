@@ -24,8 +24,13 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
   context.subscriptions.push(
     vscode.commands.registerCommand("godotlsp.restart", () => restart()),
     vscode.commands.registerCommand("godotlsp.showOutput", () => output.show(true)),
+    // 轻量配置(严格诊断/内联提示)由语言客户端经 didChangeConfiguration 推送,
+    // 只有服务器二进制路径变化才值得重启进程。
     vscode.workspace.onDidChangeConfiguration(
-      (e) => e.affectsConfiguration(SECTION) && vscode.workspace.isTrusted && void restart(),
+      (e) =>
+        e.affectsConfiguration(`${SECTION}.path`) &&
+        vscode.workspace.isTrusted &&
+        void restart(),
     ),
   );
 
@@ -70,6 +75,13 @@ async function start(): Promise<void> {
   const clientOptions: LanguageClientOptions = {
     documentSelector: [{ scheme: "file", language: "gdscript" }],
     outputChannel: output,
+    synchronize: {
+      // 服务器无需逐个打开即可感知项目文件的增删改,并在配置变化时收到推送。
+      fileEvents: vscode.workspace.createFileSystemWatcher(
+        "**/{*.gd,*.tscn,*.tres,project.godot}",
+      ),
+      configurationSection: SECTION,
+    },
   };
 
   client = new LanguageClient(SECTION, "godotlsp", serverOptions, clientOptions);
@@ -150,7 +162,7 @@ function onPath(exe: string): string | undefined {
 function setStatus(state: "starting" | "running" | "stopped" | "error", tooltip: string): void {
   const icon = { starting: "$(sync~spin)", running: "$(check)", stopped: "$(circle-slash)", error: "$(error)" }[state];
   status.text = `${icon} godotlsp`;
-  status.tooltip = `${tooltip}\nClick to show the godotlsp output.`;
+  status.tooltip = `${tooltip}\n点击查看 godotlsp 输出。`;
   status.backgroundColor =
     state === "error" ? new vscode.ThemeColor("statusBarItem.errorBackground") : undefined;
   status.show();

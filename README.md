@@ -6,9 +6,12 @@ A standalone Godot LSP written in Rust, with a VSCode extension.
 
 ## 功能
 
-- 悬停、代码补全、跳转定义、查找引用、重命名、`prepareRename`
-- 诊断(语法 + 语义)、语义高亮、inlay hint、折叠范围、签名帮助
+- 悬停(类型 + 引擎文档 + `##` 注释)、代码补全、跳转定义、查找引用、重命名、`prepareRename`
+- 诊断(语法 + 语义,支持严格模式)、语义高亮、inlay hint(可开关)、折叠范围、签名帮助
 - 代码操作、整文档与选区格式化
+- 符号高亮(`documentHighlight`)、`res://` 路径可点击跳转(`documentLink`)
+- `Color()` 字面量取色器(`documentColor`)
+- 增量文本同步、文件监视(无需打开即感知项目文件增删改)
 - 跨文件解析:`class_name`、autoload、`preload`/`extends`
 - 场景感知:`$NodePath`、`%unique`、`get_node` 到场景节点的类型推断
 - 工作区符号、项目扫描(`project.godot` 热更新、`res://` 路径)

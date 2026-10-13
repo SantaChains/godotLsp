@@ -1,5 +1,7 @@
 /target
 /.refs
+.history/
 node_modules/
 *.vsix
 editors/vscode/dist/
+editors/vscode/server/

@@ -5,21 +5,24 @@
 
 mod convert;
 mod state;
+mod text;
 mod uri;
 
 use std::error::Error;
 
 use convert::LineIndex;
 use gdscript_base::{FileId, FilePosition, TextRange};
+use gdscript_ide::WarningOverride;
 use lsp_server::{Connection, Message, Notification, Request, Response};
 use lsp_types::{
-    CodeActionParams, CompletionOptions, CompletionParams, DocumentFormattingParams,
-    DocumentRangeFormattingParams, DocumentSymbolParams, FoldingRangeParams,
-    GotoDefinitionParams, HoverParams, InitializeParams, InlayHintParams,
-    PublishDiagnosticsParams, ReferenceParams, RenameParams, SemanticTokensLegend,
-    SemanticTokensOptions, SemanticTokensParams, SemanticTokensServerCapabilities,
-    ServerCapabilities, SignatureHelpOptions, SignatureHelpParams, TextDocumentSyncCapability,
-    TextDocumentSyncKind, Uri, WorkspaceSymbolParams,
+    CodeActionParams, ColorPresentationParams, CompletionOptions, CompletionParams,
+    DocumentColorParams, DocumentFormattingParams, DocumentHighlightParams, DocumentLinkParams,
+    DocumentRangeFormattingParams, DocumentSymbolParams, FoldingRangeParams, GotoDefinitionParams,
+    HoverParams, InitializeParams, InlayHintParams, PublishDiagnosticsParams, ReferenceParams,
+    RenameParams, SemanticTokensLegend, SemanticTokensOptions, SemanticTokensParams,
+    SemanticTokensServerCapabilities, ServerCapabilities, SignatureHelpOptions,
+    SignatureHelpParams, TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
+    WorkspaceSymbolParams,
 };
 
 use crate::convert as cv;
@@ -57,10 +60,18 @@ fn capabilities() -> serde_json::Value {
         .collect();
     let caps = ServerCapabilities {
         position_encoding: Some(lsp_types::PositionEncodingKind::UTF16),
-        text_document_sync: Some(TextDocumentSyncCapability::Kind(TextDocumentSyncKind::FULL)),
+        text_document_sync: Some(TextDocumentSyncCapability::Kind(
+            TextDocumentSyncKind::INCREMENTAL,
+        )),
         hover_provider: Some(lsp_types::HoverProviderCapability::Simple(true)),
         definition_provider: Some(lsp_types::OneOf::Left(true)),
         references_provider: Some(lsp_types::OneOf::Left(true)),
+        document_highlight_provider: Some(lsp_types::OneOf::Left(true)),
+        document_link_provider: Some(lsp_types::DocumentLinkOptions {
+            resolve_provider: Some(false),
+            work_done_progress_options: Default::default(),
+        }),
+        color_provider: Some(lsp_types::ColorProviderCapability::Simple(true)),
         document_symbol_provider: Some(lsp_types::OneOf::Left(true)),
         workspace_symbol_provider: Some(lsp_types::OneOf::Left(true)),
         rename_provider: Some(lsp_types::OneOf::Left(true)),
@@ -159,6 +170,18 @@ fn on_request(connection: &Connection, state: &mut State, req: Request) {
         "textDocument/references" => {
             serde_json::from_value(req.params.clone()).map(RequestKind::References)
         }
+        "textDocument/documentHighlight" => {
+            serde_json::from_value(req.params.clone()).map(RequestKind::DocumentHighlight)
+        }
+        "textDocument/documentLink" => {
+            serde_json::from_value(req.params.clone()).map(RequestKind::DocumentLink)
+        }
+        "textDocument/documentColor" => {
+            serde_json::from_value(req.params.clone()).map(RequestKind::DocumentColor)
+        }
+        "textDocument/colorPresentation" => {
+            serde_json::from_value(req.params.clone()).map(RequestKind::ColorPresentation)
+        }
         "textDocument/rename" => serde_json::from_value(req.params.clone()).map(RequestKind::Rename),
         "textDocument/prepareRename" => serde_json::from_value(req.params.clone())
             .map(RequestKind::PrepareRename),
@@ -219,6 +242,10 @@ enum RequestKind {
     Completion(CompletionParams),
     DocumentSymbol(DocumentSymbolParams),
     References(ReferenceParams),
+    DocumentHighlight(DocumentHighlightParams),
+    DocumentLink(DocumentLinkParams),
+    DocumentColor(DocumentColorParams),
+    ColorPresentation(ColorPresentationParams),
     Rename(RenameParams),
     PrepareRename(lsp_types::TextDocumentPositionParams),
     WorkspaceSymbol(WorkspaceSymbolParams),
@@ -240,10 +267,18 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
             let Some((file, offset)) = position(state, &p.text_document_position_params) else {
                 return Ok(serde_json::Value::Null);
             };
-            analysis.hover(FilePosition { file, offset }).ok().flatten().map(|h| {
-                let doc = state.doc(file).expect("hover 文件已注册");
-                cv::to_value(&cv::hover(&doc.text, &doc.index, h))
-            })
+            let Some(mut h) = analysis.hover(FilePosition { file, offset }).ok().flatten() else {
+                return Ok(serde_json::Value::Null);
+            };
+            let doc = state.doc(file).expect("hover 文件已注册");
+            // 引擎无文档时,回扫声明名上方的 `##` 文档注释(与 Godot 4.4+ 悬停行为对齐)。
+            if h.doc.is_empty() {
+                let line = doc.index.position(&doc.text, h.range.start).line;
+                if let Some(md) = text::doc_comment_above(&doc.text, &doc.index, line) {
+                    h.doc = md;
+                }
+            }
+            Some(cv::to_value(&cv::hover(&doc.text, &doc.index, h)))
         }
         RequestKind::Definition(p) => {
             let Some((file, offset)) = position(state, &p.text_document_position_params) else {
@@ -290,6 +325,50 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
                         &state.resolver(),
                     ))
                 })
+        }
+        RequestKind::DocumentHighlight(p) => {
+            let Some((file, offset)) = position(state, &p.text_document_position_params) else {
+                return Ok(serde_json::Value::Null);
+            };
+            let Some(doc) = state.doc(file) else {
+                return Ok(serde_json::Value::Null);
+            };
+            analysis.find_references(FilePosition { file, offset }).ok().map(|refs| {
+                // 只取本文档内的出现位置,编辑器据此高亮光标符号。
+                let highlights: Vec<lsp_types::DocumentHighlight> = refs
+                    .iter()
+                    .filter(|r| r.file == file)
+                    .map(|r| lsp_types::DocumentHighlight {
+                        range: doc.index.range(&doc.text, r.range),
+                        kind: Some(lsp_types::DocumentHighlightKind::TEXT),
+                    })
+                    .collect();
+                cv::to_value(&highlights)
+            })
+        }
+        RequestKind::DocumentLink(p) => {
+            let Some(file) = file_id(state, &p.text_document.uri) else {
+                return Ok(serde_json::Value::Null);
+            };
+            let Some(doc) = state.doc(file) else {
+                return Ok(serde_json::Value::Null);
+            };
+            let Some(root) = state.root.clone() else {
+                return Ok(serde_json::Value::Null);
+            };
+            Some(cv::to_value(&text::document_links(&doc.text, &root)))
+        }
+        RequestKind::DocumentColor(p) => {
+            let Some(file) = file_id(state, &p.text_document.uri) else {
+                return Ok(serde_json::Value::Null);
+            };
+            let Some(doc) = state.doc(file) else {
+                return Ok(serde_json::Value::Null);
+            };
+            Some(cv::to_value(&text::document_colors(&doc.text)))
+        }
+        RequestKind::ColorPresentation(p) => {
+            Some(cv::to_value(&text::color_presentations(&p.color)))
         }
         RequestKind::Rename(p) => {
             let Some((file, offset)) = position(state, &p.text_document_position) else {
@@ -354,6 +433,9 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
             })
         }
         RequestKind::InlayHint(p) => {
+            if !state.inlay_hints {
+                return Ok(serde_json::Value::Null);
+            }
             let Some(file) = file_id(state, &p.text_document.uri) else {
                 return Ok(serde_json::Value::Null);
             };
@@ -469,18 +551,37 @@ fn on_notification(connection: &Connection, state: &mut State, not: Notification
                 serde_json::from_value::<lsp_types::DidChangeTextDocumentParams>(not.params)
             {
                 let uri = p.text_document.uri.to_string();
-                if let Some(text) = p.content_changes.into_iter().next_back().map(|c| c.text) {
-                    state.open(&uri, text);
-                    publish_diagnostics(connection, state, &uri);
+                if p.content_changes.is_empty() {
+                    return;
                 }
+                if let Some(file) = state.id_of(&uri) {
+                    // 已注册:增量应用 range 编辑。
+                    if !state.apply_changes(file, p.content_changes) {
+                        return;
+                    }
+                } else {
+                    // 未注册的兜底:取最后一个全文变更按打开处理。
+                    let Some(text) = p.content_changes.into_iter().next_back().map(|c| c.text)
+                    else {
+                        return;
+                    };
+                    state.open(&uri, text);
+                }
+                publish_diagnostics(connection, state, &uri);
             }
         }
         "textDocument/didClose" => {
             if let Ok(p) = serde_json::from_value::<lsp_types::DidCloseTextDocumentParams>(not.params)
             {
                 let uri = p.text_document.uri.to_string();
-                publish_empty(connection, &uri);
+                // 关闭后以磁盘内容为准刷新(未保存的编辑丢弃),保持项目视图一致;
+                // 文件已从磁盘消失则移出分析世界。
+                state.watched(&uri);
+                publish_diagnostics(connection, state, &uri);
             }
+        }
+        "workspace/didChangeConfiguration" => {
+            apply_settings(state, &not.params);
         }
         "workspace/didChangeWatchedFiles" => {
             if let Ok(p) =
@@ -493,6 +594,51 @@ fn on_notification(connection: &Connection, state: &mut State, not: Notification
             }
         }
         _ => {}
+    }
+}
+
+/// 客户端配置(与 VSCode `godotlsp.*` 注册项一一对应)。
+#[derive(serde::Deserialize, Default)]
+#[serde(default, rename_all = "camelCase")]
+struct ClientSettings {
+    diagnostics: Option<DiagSettings>,
+    inlay_hints: Option<InlayHintSettings>,
+}
+
+#[derive(serde::Deserialize, Default)]
+#[serde(default)]
+struct DiagSettings {
+    strict: Option<bool>,
+}
+
+#[derive(serde::Deserialize, Default)]
+#[serde(default, rename_all = "camelCase")]
+struct InlayHintSettings {
+    type_hints: Option<bool>,
+}
+
+/// 应用 `didChangeConfiguration` 载荷。`vscode-languageclient` 以
+/// `{ godotlsp: {…} }` 形态推送;兼容把配置节直接内嵌的客户端。
+/// 注意:警告严格度变化不立即重推全项目诊断,由后续编辑/打开自然刷新。
+fn apply_settings(state: &mut State, params: &serde_json::Value) {
+    let settings = params.get("settings").unwrap_or(params);
+    let scoped = settings.get("godotlsp").unwrap_or(settings);
+    let Ok(s) = serde_json::from_value::<ClientSettings>(scoped.clone()) else {
+        return;
+    };
+    if let Some(d) = s.diagnostics
+        && let Some(strict) = d.strict
+    {
+        state.host.set_warning_override(if strict {
+            WarningOverride::Strict
+        } else {
+            WarningOverride::None
+        });
+    }
+    if let Some(i) = s.inlay_hints
+        && let Some(t) = i.type_hints
+    {
+        state.inlay_hints = t;
     }
 }
 
@@ -509,10 +655,6 @@ fn publish_diagnostics(connection: &Connection, state: &State, uri: &str) {
     };
     let lsp_diags = cv::diagnostics(&doc.text, &doc.index, &diags);
     publish(connection, uri, lsp_diags);
-}
-
-fn publish_empty(connection: &Connection, uri: &str) {
-    publish(connection, uri, Vec::new());
 }
 
 fn publish(connection: &Connection, uri: &str, diags: Vec<lsp_types::Diagnostic>) {

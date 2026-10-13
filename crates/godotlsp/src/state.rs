@@ -2,19 +2,19 @@
 
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
-use std::sync::Arc;
 
 use gdscript_base::FileId;
 use gdscript_ide::{AnalysisHost, Change};
 use lsp_types::Uri;
 
 use crate::convert::LineIndex;
+use crate::text::apply_content_changes;
 use crate::uri::{path_to_uri, uri_to_path};
 
 /// 一个已注册文件的文本及其行索引。
 #[derive(Debug, Clone)]
 pub struct Doc {
-    pub text: Arc<str>,
+    pub text: String,
     pub index: LineIndex,
 }
 
@@ -22,6 +22,8 @@ pub struct Doc {
 pub struct State {
     pub host: AnalysisHost,
     pub root: Option<PathBuf>,
+    /// 是否显示 inlay 类型提示(由客户端配置驱动)。
+    pub inlay_hints: bool,
     uris: HashMap<FileId, String>,
     ids: HashMap<String, FileId>,
     docs: HashMap<FileId, Doc>,
@@ -45,6 +47,7 @@ impl State {
         Self {
             host: AnalysisHost::new(),
             root: None,
+            inlay_hints: true,
             uris: HashMap::new(),
             ids: HashMap::new(),
             docs: HashMap::new(),
@@ -65,7 +68,6 @@ impl State {
     }
 
     /// POD→LSP 转换所用的解析回调:为可能已关闭的文件提供 `(uri, text, _len)`。
-    #[must_use]
     pub fn resolver(&self) -> impl Fn(FileId) -> Option<(String, String, u32)> + '_ {
         move |file| {
             let uri = self.uris.get(&file)?;
@@ -93,11 +95,8 @@ impl State {
     pub fn inject(&mut self, uri: &str, res: Option<String>, text: String) -> FileId {
         let file = self.ids.get(uri).copied().unwrap_or_else(|| self.alloc(uri));
         let index = LineIndex::new(&text);
-        let text: Arc<str> = Arc::from(text.as_str());
-        self.docs.insert(file, Doc {
-            text: text.clone(),
-            index,
-        });
+        self.docs.insert(file, Doc { text, index });
+        let text = self.docs[&file].text.clone();
         let mut change = Change::new();
         change.change_file(file, text);
         if let Some(res) = res {
@@ -105,6 +104,23 @@ impl State {
         }
         self.host.apply_change(change);
         file
+    }
+
+    /// 把 `didChange` 增量编辑应用到已注册文档并同步分析世界。编辑时不重发
+    /// `res://` 路径(salsa 要求:重发会无谓失效路径注册表)。
+    pub fn apply_changes(
+        &mut self,
+        file: FileId,
+        changes: Vec<lsp_types::TextDocumentContentChangeEvent>,
+    ) -> bool {
+        let Some(doc) = self.docs.get_mut(&file) else {
+            return false;
+        };
+        apply_content_changes(&mut doc.text, &mut doc.index, changes);
+        let mut change = Change::new();
+        change.change_file(file, doc.text.as_str());
+        self.host.apply_change(change);
+        true
     }
 
     /// `didOpen` — 以编辑器文本在此 URI 下注册。
@@ -119,13 +135,14 @@ impl State {
         let Some(path) = uri.parse::<Uri>().ok().and_then(|u| uri_to_path(&u)) else {
             return;
         };
-        if let Some(root) = self.root.clone() {
-            if path.parent() == Some(root.as_path()) && path.file_name().is_some_and(|n| n == "project.godot") {
-                if let Ok(text) = std::fs::read_to_string(&path) {
-                    self.set_project_config(text);
-                }
-                return;
+        if let Some(root) = self.root.clone()
+            && path.parent() == Some(root.as_path())
+            && path.file_name().is_some_and(|n| n == "project.godot")
+        {
+            if let Ok(text) = std::fs::read_to_string(&path) {
+                self.set_project_config(text);
             }
+            return;
         }
         match std::fs::read_to_string(&path) {
             Ok(text) => {
@@ -168,12 +185,8 @@ impl State {
             };
             let file = self.alloc(&path_to_uri(path).map(|u| u.as_str().to_owned()).unwrap_or_default());
             let index = LineIndex::new(&text);
-            let text: Arc<str> = Arc::from(text.as_str());
-            self.docs.insert(file, Doc {
-                text: text.clone(),
-                index,
-            });
-            change.change_file(file, text);
+            self.docs.insert(file, Doc { text, index });
+            change.change_file(file, self.docs[&file].text.clone());
             if let Some(res) = self.res_path(path) {
                 change.set_file_path(file, res);
             }
