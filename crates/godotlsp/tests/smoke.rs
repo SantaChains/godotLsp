@@ -372,6 +372,82 @@ fn full_stdio_session() {
     assert!(status.success(), "exit 后退出码非零:{status}");
 }
 
+/// P1-7:`$Path`/`%Unique` 节点路径补全(内核 scene_context)+ 全局面合并抑制。
+/// 以 `tests/fixtures/nodepath` 为独立工程根(main.tscn:Main > Panel(unique) > {Button, Sprite})。
+#[test]
+fn node_path_completion_session() {
+    step!("node-path: spawn(夹具工程根)");
+    let mut s = Server::spawn();
+    let root = format!(
+        "file:///{}/",
+        std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("tests/fixtures/nodepath")
+            .to_string_lossy()
+            .replace('\\', "/")
+    );
+    s.send(&json!({
+        "jsonrpc": "2.0", "id": 1, "method": "initialize",
+        "params": {"processId": null, "rootUri": root, "capabilities": {}},
+    }));
+    let _caps = s.response(1)["result"].clone();
+    s.send(&json!({"jsonrpc": "2.0", "method": "initialized", "params": {}}));
+    let uri = format!("{root}main.gd");
+
+    // 夹具磁盘文本:`var p = $Panel/` 在第 3 行,光标紧跟 `/`(char 16)。
+    step!("$Panel/ 补全:只出子节点,不混全局面");
+    s.send(&json!({"jsonrpc": "2.0", "id": 2, "method": "textDocument/completion", "params": {
+        "textDocument": {"uri": uri}, "position": {"line": 3, "character": 16}}}));
+    let items = s.response(2)["result"].clone();
+    let items = if items.is_array() { items } else { items["items"].clone() };
+    let arr = items.as_array().unwrap();
+    let labels: Vec<&str> = arr.iter().filter_map(|i| i["label"].as_str()).collect();
+    assert!(labels.contains(&"Button") && labels.contains(&"Sprite"),
+        "$Panel/ 缺子节点:{labels:?}");
+    assert!(!labels.iter().any(|l| *l == "AStar2D" || *l == "Input"),
+        "节点路径上下文混入了全局面:{} 项", arr.len());
+
+    // `%Panel` unique 补全:第 4 行 `var q = %Panel`,光标紧跟 `%`(char 10)。
+    step!("% 补全:unique 节点,不混全局面");
+    s.send(&json!({"jsonrpc": "2.0", "id": 3, "method": "textDocument/completion", "params": {
+        "textDocument": {"uri": uri}, "position": {"line": 4, "character": 10}}}));
+    let items = s.response(3)["result"].clone();
+    let items = if items.is_array() { items } else { items["items"].clone() };
+    let arr = items.as_array().unwrap();
+    let labels: Vec<&str> = arr.iter().filter_map(|i| i["label"].as_str()).collect();
+    assert!(labels.contains(&"Panel"), "% 缺 unique 节点:{labels:?}");
+    assert!(!labels.iter().any(|l| *l == "AStar2D"),
+        "unique 上下文混入了全局面:{} 项", arr.len());
+
+    // hover `$Panel`(第 3 行 char 13):类型推断应给出 Panel 类与文档。
+    step!("hover $Panel:类型 + 文档");
+    s.send(&json!({"jsonrpc": "2.0", "id": 4, "method": "textDocument/hover", "params": {
+        "textDocument": {"uri": uri}, "position": {"line": 3, "character": 13}}}));
+    let hover = s.response(4)["result"].clone();
+    let value = hover["contents"]["value"].as_str().unwrap_or_default();
+    assert!(value.contains("Panel"), "hover $Panel 缺类型:{value}");
+
+    // 取模不误伤:`a % b` 处补全不应进入路径上下文(全局面照常合并)。
+    step!("取模 % 不抑制全局面");
+    s.send(&json!({"jsonrpc": "2.0", "method": "textDocument/didChange", "params": {
+        "textDocument": {"uri": uri.clone()}, "version": 2,
+        "contentChanges": [{"text": "extends Node2D\n\nfunc _ready() -> void:\n\tvar r = 7 % 3\n\tprint(r)\n"}]}}));
+    s.send(&json!({"jsonrpc": "2.0", "id": 5, "method": "textDocument/completion", "params": {
+        "textDocument": {"uri": uri}, "position": {"line": 4, "character": 8}}}));
+    let items = s.response(5)["result"].clone();
+    let items = if items.is_array() { items } else { items["items"].clone() };
+    let labels: Vec<&str> = items.as_array().unwrap().iter()
+        .filter_map(|i| i["label"].as_str()).collect();
+    assert!(labels.contains(&"AStar2D") || labels.contains(&"print"),
+        "取模后按名补全应含全局面:{:?} 项", labels.len());
+
+    step!("node-path: shutdown + exit");
+    s.send(&json!({"jsonrpc": "2.0", "id": 9, "method": "shutdown", "params": null}));
+    s.response(9);
+    s.send(&json!({"jsonrpc": "2.0", "method": "exit", "params": null}));
+    let status = s.child.wait().expect("exit 后等待退出");
+    assert!(status.success(), "exit 后退出码非零:{status}");
+}
+
 fn change(s: &mut Server, version: i64, text: &str) {
     eprintln!("[step] didChange v{version}");
     s.send(&json!({"jsonrpc": "2.0", "method": "textDocument/didChange", "params": {

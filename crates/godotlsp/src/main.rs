@@ -637,7 +637,8 @@ fn position(state: &State, p: &lsp_types::TextDocumentPositionParams) -> Option<
     Some((file, offset))
 }
 
-/// 光标是否处于"按名补全"上下文:标识符之前不是 `.`(成员)也不是 `@`(注解)。
+/// 光标是否处于"按名补全"上下文:标识符之前不是 `.`(成员)、`@`(注解),
+/// 也不在 `$`/`%` 取节点路径内(节点路径补全由内核独占,合并全局面会污染)。
 fn by_name_context(text: &str, offset: u32) -> bool {
     let b = text.as_bytes();
     let mut ws = (offset as usize).min(b.len());
@@ -645,6 +646,40 @@ fn by_name_context(text: &str, offset: u32) -> bool {
         ws -= 1;
     }
     !matches!(ws.checked_sub(1).map(|i| b[i]), Some(b'.') | Some(b'@'))
+        && !in_node_path_context(text, offset)
+}
+
+/// 光标是否在 `$Path/Seg` / `%Unique/Seg` 取节点路径内。镜像内核
+/// `dollar_path_prefix`/`unique_path_prefix` 的向后字节扫描(无词法器感知,
+/// 字符串/注释内的误报与内核同级,内核侧还会再以解析树复核)。
+fn in_node_path_context(text: &str, offset: u32) -> bool {
+    let b = text.as_bytes();
+    let is_seg = |c: u8| c.is_ascii_alphanumeric() || c == b'_';
+    let mut i = (offset as usize).min(b.len());
+    while i > 0 && is_seg(b[i - 1]) {
+        i -= 1;
+    }
+    loop {
+        match i.checked_sub(1).map(|k| b[k]) {
+            Some(b'$') => return true,
+            // `%` 兼作取模运算符:前一字符是操作数(标识符/右括号)时按取模处理,
+            // 不视为路径(内核侧由解析树精确判定,此处仅为合并抑制的保守近似)。
+            Some(b'%') => {
+                return !i
+                    .checked_sub(2)
+                    .map(|k| matches!(b[k], b')' | b']') || is_seg(b[k]))
+                    .unwrap_or(false);
+            }
+            Some(b'/') => {
+                let mut s = i - 1;
+                while s > 0 && is_seg(b[s - 1]) {
+                    s -= 1;
+                }
+                i = s;
+            }
+            _ => return false,
+        }
+    }
 }
 
 /// 光标处裸标识符的引擎全局面 hover(单例/类/工具函数/常量/枚举值/注解)。
@@ -993,4 +1028,34 @@ fn publish(
         },
     );
     let _ = connection.sender.send(Message::Notification(note));
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn node_path_context_detection() {
+        let t = "var p = $Panel/
+var q = %Sprite
+var r = 7 % 3
+var s = a%b
+";
+        let l2 = t.find("%").unwrap();
+        let l3 = t.find("7 % 3").unwrap();
+        let l4 = t.find("a%b").unwrap();
+        // $ 路径:"var p = $Panel/"
+        assert!(in_node_path_context(t, 9), "$ 后");
+        assert!(in_node_path_context(t, 12), "$Pa 中");
+        assert!(in_node_path_context(t, 14), "$Panel 尾");
+        assert!(in_node_path_context(t, 15), "$Panel/ 后");
+        assert!(!in_node_path_context(t, 8), "$ 之前");
+        assert!(!in_node_path_context(t, 4), "普通标识符 var");
+        // % unique:"var q = %Sprite"
+        assert!(in_node_path_context(t, (l2 + 1) as u32), "% 后");
+        // 取模:"7 % 3" — 光标在结果操作数之后,不得视为路径
+        assert!(!in_node_path_context(t, (l3 + 5) as u32), "取模结果后");
+        // a%b:% 前是操作数 → 取模
+        assert!(!in_node_path_context(t, (l4 + 3) as u32), "a%b 的 b 后");
+    }
 }
