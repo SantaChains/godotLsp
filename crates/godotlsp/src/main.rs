@@ -128,6 +128,9 @@ fn run() -> Result<(), Box<dyn Error + Sync + Send>> {
             let _ = connection.sender.send(Message::Request(req));
             id
         });
+    // LSP 3.17 生命周期。注意 lsp-server 0.10 的 `handle_shutdown` 会代收 exit
+    // 通知(阻塞至多 30s)并回包,返回 true 时正常终止流程已经完结;
+    // exit 在未 shutdown 时到达则属异常终止,按规范以非零码退出。
     for msg in &connection.receiver {
         match msg {
             Message::Request(req) => {
@@ -139,7 +142,8 @@ fn run() -> Result<(), Box<dyn Error + Sync + Send>> {
             }
             Message::Notification(not) => {
                 if not.method == "exit" {
-                    std::process::exit(0);
+                    eprintln!("[godotlsp] 未收到 shutdown 即 exit,以异常码终止");
+                    std::process::exit(1);
                 }
                 on_notification(&connection, &mut state, not);
             }
@@ -174,7 +178,8 @@ fn pull_configuration(init: &InitializeParams) -> Option<Request> {
         }],
     };
     Some(Request {
-        id: RequestId::from(1),
+        // 负 id:服务器发起的请求与客户端请求(正 id)空间隔离,避免对撞。
+        id: RequestId::from(-1),
         method: "workspace/configuration".into(),
         params: cv::to_value(&params),
     })
@@ -929,6 +934,15 @@ fn on_notification(connection: &Connection, state: &mut State, not: Notification
                 for event in p.changes {
                     let uri = event.uri.to_string();
                     state.watched(&uri);
+                    // 磁盘变化同步诊断:仍注册的 .gd 重算推送;已删除的推空清单,
+                    // 让客户端清掉残留标记。
+                    if uri.ends_with(".gd") {
+                        if state.id_of(&uri).is_some() {
+                            publish_diagnostics(connection, state, &uri);
+                        } else {
+                            publish(connection, &uri, Vec::new(), None);
+                        }
+                    }
                 }
             }
         }

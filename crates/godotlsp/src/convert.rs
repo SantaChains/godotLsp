@@ -247,29 +247,44 @@ pub fn document_symbols(text: &str, index: &LineIndex, syms: Vec<GSymbol>) -> Ve
     symbols(text, index, syms)
 }
 
-fn location(
-    state_file: &dyn Fn(FileId) -> Option<(String, String, u32)>,
-    file: FileId,
-    range: TextRange,
-) -> Option<Location> {
-    let (uri, text, _) = state_file(file)?;
-    let index = LineIndex::new(&text);
-    Some(Location {
-        uri: uri.parse::<Uri>().ok()?,
-        range: index.range(&text, range),
-    })
-}
-
 fn with_docs<R>(
     targets: impl IntoIterator<Item = (FileId, TextRange)>,
     get: &dyn Fn(FileId) -> Option<(String, String, u32)>,
     build: impl Fn(Location) -> R,
 ) -> Vec<R> {
-    targets
-        .into_iter()
-        .filter_map(|(f, r)| location(get, f, r))
-        .map(build)
-        .collect()
+    // 按文件分组:每文件只取一次文本、建一次行索引,避免逐 range 重建
+    // (references 在单文件可有数百命中,O(ranges × 文件大小) 会放大成卡顿)。
+    let mut order: Vec<FileId> = Vec::new();
+    let mut grouped: HashMap<FileId, Vec<TextRange>> = HashMap::new();
+    for (f, r) in targets {
+        match grouped.get_mut(&f) {
+            Some(v) => v.push(r),
+            None => {
+                grouped.insert(f, vec![r]);
+                order.push(f);
+            }
+        }
+    }
+    let mut out = Vec::new();
+    for f in order {
+        let Some(ranges) = grouped.remove(&f) else {
+            continue;
+        };
+        let Some((uri, text, _)) = get(f) else {
+            continue;
+        };
+        let index = LineIndex::new(&text);
+        let Ok(uri) = uri.parse::<Uri>() else {
+            continue;
+        };
+        for r in ranges {
+            out.push(build(Location {
+                uri: uri.clone(),
+                range: index.range(&text, r),
+            }));
+        }
+    }
+    out
 }
 
 /// 解析回调的形状:每个 `FileId` 提供 `(uri, text, _len)`。

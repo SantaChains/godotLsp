@@ -89,10 +89,16 @@ fn resolve_res(root: &Path, res: &str) -> Option<Uri> {
 /// 支持 `Color("#rrggbb[aa]")`、`Color("rrggbb[aa]")` 与 `Color(r, g, b[, a])`(0..1 浮点)。
 pub fn document_colors(text: &str) -> Vec<ColorInformation> {
     let index = LineIndex::new(text);
+    let bytes = text.as_bytes();
     let mut out = Vec::new();
     let mut i = 0usize;
     while let Some(pos) = text[i..].find("Color(") {
         let start = i + pos;
+        // 排除 `MyColor(` 之类标识符尾部的误报:`Color(` 前不能是单词字符。
+        if start > 0 && (bytes[start - 1].is_ascii_alphanumeric() || bytes[start - 1] == b'_') {
+            i = start + 6;
+            continue;
+        }
         let Some(close) = text[start..].find(')') else {
             break;
         };
@@ -298,6 +304,15 @@ mod tests {
         assert!((colors[0].color.red - 1.0).abs() < 1e-6);
         assert!((colors[0].color.green - 128.0 / 255.0).abs() < 1e-6);
         assert!((colors[1].color.alpha - 0.8).abs() < 1e-6);
+    }
+
+    #[test]
+    fn colors_ignore_identifier_suffixes() {
+        // `MyColor(`/`_Color(` 不是 Color 构造,不得误报色板。
+        let text = "var x = MyColor(1, 0, 0)\nvar y = _Color(1, 0, 0)\nvar z = Color(1, 0, 0)\n";
+        let colors = document_colors(text);
+        assert_eq!(colors.len(), 1, "{colors:?}");
+        assert_eq!(colors[0].range.start.line, 2);
     }
 
     #[test]
