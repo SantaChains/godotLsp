@@ -134,6 +134,40 @@ fn full_stdio_session() {
     let value = hover["contents"]["value"].as_str().unwrap_or_default();
     assert!(value.contains("```gdscript") && value.contains("int"), "hover:{hover}");
 
+    // hover 引擎类名(`extends Node` 的 Node):内核无结果,全局面兜底 + zh-CN 文档链接
+    step!("hover 引擎类名兜底");
+    s.send(&json!({"jsonrpc": "2.0", "id": 15, "method": "textDocument/hover", "params": {
+        "textDocument": {"uri": URI}, "position": {"line": 0, "character": 10}}}));
+    let node_hover = s.response(15)["result"].clone();
+    let value = node_hover["contents"]["value"].as_str().unwrap_or_default();
+    assert!(value.contains("Node"), "类名 hover:{value}");
+    assert!(value.contains("docs.godotengine.org/zh-CN/"), "缺文档跳转链接:{value}");
+
+    // 按名补全(空行)应包含引擎全局面:单例 Input、工具函数 sin、常量 PI
+    step!("全局面补全合并");
+    s.send(&json!({"jsonrpc": "2.0", "id": 16, "method": "textDocument/completion", "params": {
+        "textDocument": {"uri": URI}, "position": {"line": 1, "character": 0}}}));
+    let globals = s.response(16)["result"].clone();
+    let globals = if globals.is_array() { globals } else { globals["items"].clone() };
+    let labels: Vec<String> = globals.as_array().unwrap().iter()
+        .filter_map(|i| i["label"].as_str().map(Into::into)).collect();
+    for expected in ["Input", "sin", "PI", "Vector2", "preload"] {
+        assert!(labels.iter().any(|l| l == expected), "全局面缺 {expected}");
+    }
+    // 成员上下文(`count.`)不应混入全局符号
+    step!("成员上下文不合并全局面");
+    s.send(&json!({"jsonrpc": "2.0", "method": "textDocument/didChange", "params": {
+        "textDocument": {"uri": URI, "version": 90},
+        "contentChanges": [{"text": "var count := 5\n\nfunc _ready() -> void:\n\tcount.\n"}]}}));
+    s.send(&json!({"jsonrpc": "2.0", "id": 17, "method": "textDocument/completion", "params": {
+        "textDocument": {"uri": URI}, "position": {"line": 3, "character": 7}}}));
+    let member = s.response(17)["result"].clone();
+    let member = if member.is_array() { member } else { member["items"].clone() };
+    let member_labels: Vec<String> = member.as_array().unwrap().iter()
+        .filter_map(|i| i["label"].as_str().map(Into::into)).collect();
+    assert!(!member_labels.iter().any(|l| l == "Input" || l == "PI"),
+        "成员上下文混入了全局面:{member_labels:?}");
+
     // `count.` 之后补全 — 期望 String 成员
     step!("completion");
     change(&mut s, 2, STRINGIFIED);
