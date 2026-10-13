@@ -991,7 +991,7 @@ pub const KEYWORD_DOCS: &[(&str, &str)] = &[
     (r#"var"#, r#"Defines a variable. See Variables."#),
     (r#"breakpoint"#, r#"Editor helper for debugger breakpoints. Unlike breakpoints created by clicking in the gutter, breakpoint is stored in the script itself."#),
     (r#"preload"#, r#"Preloads a class or variable. See Classes as resources."#),
-    (r#"await"#, r#"Waits for a signal or a coroutine to finish. See Awaiting signals or coroutines."#),
+    (r#"await"#, r#"等待信号或协程完成(GDScript 2.0 异步/await)。`await signal` 挂起当前函数直到信号触发;`await coroutine()` 等待被调协程返回。`await get_tree().create_timer(1.0).timeout` 是常用写法(延时 1 秒)。`await` 只能用于用 `async` 标记或本身是协程的函数;协程由调用方以 `await` 驱动。"#),
     (r#"yield"#, r#"Previously used for coroutines. Kept as keyword for transition."#),
     (r#"assert"#, r#"Asserts a condition, logs error on failure. Ignored in non-debug builds. See Assert keyword."#),
     (r#"void"#, r#"Used to represent that a function does not return any value."#),
@@ -1002,4 +1002,41 @@ pub const KEYWORD_DOCS: &[(&str, &str)] = &[
     (r#"and"#, r#"Logical AND operator. Evaluates to true only if both operands are true."#),
     (r#"or"#, r#"Logical OR operator. Evaluates to true if at least one operand is true."#),
     (r#"not"#, r#"Logical NOT operator (unary). Inverts the boolean value of its operand."#)
+];
+
+/// GDScript 操作符一行说明(GDScript reference 操作符 / GDScript basics;符号或运算符型关键字)。
+/// `is`/`as`/`in`/`and`/`or`/`not`/`await` 属语言关键字走 [`KEYWORD_DOCS`],此处为符号操作符与
+/// 运算符语义补充,hover 命中时追加官方 GDScript 基础链接。
+pub const OPERATOR_DOCS: &[(&str, &str)] = &[
+    (r#"+"#, r#"加法 / 字符串拼接(`"a" + "b"`)/ 数组拼接(`[1] + [2]`)。"#),
+    (r#"-"#, r#"减法 / 一元取负(`-x`)。"#),
+    (r#"*"#, r#"乘法 / 重复(`"ab" * 3` → `"ababab"`,`[1] * 3` → `[1, 1, 1]`)。"#),
+    (r#"/"#, r#"除法:整数相除也返回 float(`3 / 2 == 1.5`);要整数商用 `int(3 / 2)` 或 `i / j` 配合 `int`。"#),
+    (r#"%"#, r#"取模(余数)。注意:`%Name` 在 `%` 后紧跟标识符时是「唯一节点」引用,见节点路径说明。"#),
+    (r#"**"#, r#"乘方(`2 ** 8 == 256`)。"#),
+    (r#"=="#, r#"相等比较(值相等;对象比引用请用 `is_same`)。"#),
+    (r#"!="#, r#"不等比较。"#),
+    (r#"<"#, r#"小于。"#),
+    (r#">"#, r#"大于。"#),
+    (r#"<="#, r#"小于等于。"#),
+    (r#">="#, r#"大于等于。"#),
+    (r#"="#, r#"赋值。复合赋值:`+=` `-=` `*=` `/=` `%=` `**=`。"#),
+    (r#"&&"#, r#"逻辑与(短路求值)。关键字形式 `and` 等价。"#),
+    (r#"||"#, r#"逻辑或(短路求值)。关键字形式 `or` 等价。"#),
+    (r#"!"#, r#"逻辑非(一元)。关键字形式 `not` 等价。"#),
+    (r#"&"#, r#"按位与。"#),
+    (r#"|"#, r#"按位或。"#),
+    (r#"^"#, r#"按位异或。"#),
+    (r#"~"#, r#"按位取反(一元)。"#),
+    (r#"<<"#, r#"左移位(`1 << 4 == 16`)。"#),
+    (r#">>"#, r#"右移位。"#),
+    (r#"is"#, r#"类型判断:`a is Node` 为真当 a 是 Node 或其子类的实例,或 a 为指定内建类型(`a is int`)。"#),
+    (r#"as"#, r#"安全转型:`a as Node` 若 a 可转为 Node 则返回该实例,否则返回 null(不抛错)。"#),
+    (r#"in"#, r#"`value in container` 测试成员:`String` 子串 / `Array` 元素 / `Dictionary` 键 / `Range` 范围;也用于 `for x in container` 迭代。"#),
+    (r#"??"#, r#"空合并(GDScript 4.0+):`a ?? b` 当 a 为 null 时取 b,否则取 a。"#),
+    (r#"??="#, r#"空合并赋值(GDScript 4.0+):`a ??= b` 当 a 为 null 时把 b 赋给 a。"#),
+    (r#"if"#, r#"内联条件(三元):`x if cond else y`——cond 为真取 x,否则 y。GDScript 无 `?:` 运算符。"#),
+    (r#"."#, r#"成员访问:`obj.prop`、`obj.method()`、`Type.CONST`。"#),
+    (r#"[]"#, r#"下标 / 索引:`arr[i]`、`dict[key]`、`str[i]`(返回单字符 String)。"#),
+    (r#"()"#, r#"调用。`Callable` 亦可用 `call()` / `call_deferred()` / `bind()`。"#)
 ];

@@ -324,7 +324,7 @@ fn full_stdio_session() {
         "textDocument": {"uri": URI}, "position": {"line": 1, "character": 3}}}));
     let kw = s.response(22)["result"].clone();
     let value = kw["contents"]["value"].as_str().unwrap_or_default();
-    assert!(value.contains("Waits for a signal"), "关键字 hover:{kw}");
+    assert!(value.contains("协程"), "关键字 hover:{kw}");
 
     // P0-4:注解补全 detail 回填
     step!("注解补全回填");
