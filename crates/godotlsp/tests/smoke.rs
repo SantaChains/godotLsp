@@ -266,6 +266,103 @@ fn full_stdio_session() {
     let hints = s.response(13)["result"].as_array().cloned().unwrap_or_default();
     assert!(!hints.is_empty(), "恢复后应有 inlay 提示:{hints:?}");
 
+    // P0-1:成员补全 detail/doc 回填(`Input.` → 引擎模型完整签名 + 文档)
+    step!("成员补全回填");
+    change(&mut s, 20, "extends Node\n\nfunc _ready() -> void:\n\tInput.\n");
+    s.send(&json!({"jsonrpc": "2.0", "id": 18, "method": "textDocument/completion", "params": {
+        "textDocument": {"uri": URI}, "position": {"line": 3, "character": 7}}}));
+    let items = s.response(18)["result"].clone();
+    let items = if items.is_array() { items } else { items["items"].clone() };
+    let pressed = items.as_array().unwrap().iter()
+        .find(|i| i["label"] == "is_action_pressed")
+        .unwrap_or_else(|| panic!("缺 is_action_pressed:{items:?}"));
+    assert!(pressed["detail"].as_str().unwrap_or_default().starts_with("is_action_pressed("),
+        "成员 detail 应为完整签名:{pressed}");
+    assert!(pressed["documentation"]["value"].as_str().unwrap_or_default()
+        .contains("docs.godotengine.org/zh-CN/"), "成员缺文档:{pressed}");
+
+    // P0-1:自有成员 detail 兜底为声明行原文 + `##` 文档注释
+    step!("自有成员回填");
+    change(&mut s, 21, "extends Node\n\n## 累加计数。\nfunc bump(by: int) -> void:\n\tself.\n");
+    s.send(&json!({"jsonrpc": "2.0", "id": 19, "method": "textDocument/completion", "params": {
+        "textDocument": {"uri": URI}, "position": {"line": 4, "character": 6}}}));
+    let items = s.response(19)["result"].clone();
+    let items = if items.is_array() { items } else { items["items"].clone() };
+    let bump = items.as_array().unwrap().iter()
+        .find(|i| i["label"] == "bump")
+        .unwrap_or_else(|| panic!("缺自有成员 bump:{items:?}"));
+    assert_eq!(bump["detail"], "func bump(by: int) -> void", "自有成员 detail 应为声明行:{bump}");
+    assert!(bump["documentation"]["value"].as_str().unwrap_or_default().contains("累加计数"),
+        "自有成员缺文档注释:{bump}");
+
+    // P0-2:签名帮助文档回填(全局函数 `sin(` → 模型文档 + zh-CN 链接)
+    step!("签名帮助文档");
+    change(&mut s, 22, "func f() -> void:\n\tvar s = sin(1.0)\n");
+    s.send(&json!({"jsonrpc": "2.0", "id": 20, "method": "textDocument/signatureHelp", "params": {
+        "textDocument": {"uri": URI}, "position": {"line": 1, "character": 15}}}));
+    let help = s.response(20)["result"].clone();
+    let sig0 = &help["signatures"][0];
+    assert!(sig0["label"].as_str().unwrap_or_default().starts_with("sin("), "{help}");
+    assert!(sig0["documentation"]["value"].as_str().unwrap_or_default().contains("中文文档"),
+        "签名帮助缺文档:{help}");
+
+    // P0-2:成员方法调用文档(`l.set_text("hi")` → Label 成员文档)
+    step!("成员签名帮助文档");
+    change(&mut s, 23, "func f() -> void:\n\tvar l = Label.new()\n\tl.set_text(\"hi\")\n");
+    s.send(&json!({"jsonrpc": "2.0", "id": 21, "method": "textDocument/signatureHelp", "params": {
+        "textDocument": {"uri": URI}, "position": {"line": 2, "character": 12}}}));
+    let help = s.response(21)["result"].clone();
+    let sig0 = &help["signatures"][0];
+    assert!(sig0["label"].as_str().unwrap_or_default().starts_with("set_text("), "{help}");
+    assert!(sig0["documentation"]["value"].as_str().unwrap_or_default().contains("中文文档"),
+        "成员签名帮助缺文档:{help}");
+
+    // P0-3:关键字 hover(`await` → 官方一行说明)
+    step!("关键字 hover");
+    change(&mut s, 24, "func f() -> void:\n\tawait get_tree().process_frame\n");
+    s.send(&json!({"jsonrpc": "2.0", "id": 22, "method": "textDocument/hover", "params": {
+        "textDocument": {"uri": URI}, "position": {"line": 1, "character": 3}}}));
+    let kw = s.response(22)["result"].clone();
+    let value = kw["contents"]["value"].as_str().unwrap_or_default();
+    assert!(value.contains("Waits for a signal"), "关键字 hover:{kw}");
+
+    // P0-4:注解补全 detail 回填
+    step!("注解补全回填");
+    change(&mut s, 25, "func f() -> void:\n\t@\n");
+    s.send(&json!({"jsonrpc": "2.0", "id": 23, "method": "textDocument/completion", "params": {
+        "textDocument": {"uri": URI}, "position": {"line": 1, "character": 2}}}));
+    let items = s.response(23)["result"].clone();
+    let items = if items.is_array() { items } else { items["items"].clone() };
+    let range = items.as_array().unwrap().iter()
+        .find(|i| i["label"] == "export_range")
+        .unwrap_or_else(|| panic!("缺注解 export_range:{items:?}"));
+    assert!(!range["detail"].as_str().unwrap_or_default().is_empty(), "注解缺 detail:{range}");
+    assert!(range["documentation"]["value"].as_str().unwrap_or_default().contains("@export_range"),
+        "注解缺文档:{range}");
+
+    // P0-5:诊断码忽略(UNUSED_VARIABLE 过滤,恢复后重新出现)
+    step!("诊断忽略");
+    const UNUSED_SRC: &str = "func f() -> void:\n\tvar unused = 1\n\tpass\n";
+    change(&mut s, 26, UNUSED_SRC);
+    let diags = s.first_diagnostics();
+    assert!(diags.iter().any(|d| d["code"] == "UNUSED_VARIABLE"), "前置:应有未使用变量警告:{diags:?}");
+    s.send(&json!({"jsonrpc": "2.0", "method": "workspace/didChangeConfiguration", "params": {
+        "settings": {"godotlsp": {"diagnostics": {"ignore": ["UNUSED_VARIABLE"]}}}}}));
+    change(&mut s, 27, UNUSED_SRC);
+    loop {
+        let msg = s.read();
+        if msg["method"] == "textDocument/publishDiagnostics" {
+            let ds = msg["params"]["diagnostics"].as_array().unwrap();
+            assert!(!ds.iter().any(|d| d["code"] == "UNUSED_VARIABLE"), "忽略后仍推送:{ds:?}");
+            break;
+        }
+    }
+    s.send(&json!({"jsonrpc": "2.0", "method": "workspace/didChangeConfiguration", "params": {
+        "settings": {"godotlsp": {"diagnostics": {"ignore": []}}}}}));
+    change(&mut s, 28, UNUSED_SRC);
+    let diags = s.first_diagnostics();
+    assert!(diags.iter().any(|d| d["code"] == "UNUSED_VARIABLE"), "清空忽略后应恢复:{diags:?}");
+
     // shutdown + exit
     step!("shutdown + exit");
     s.send(&json!({"jsonrpc": "2.0", "id": 14, "method": "shutdown", "params": null}));

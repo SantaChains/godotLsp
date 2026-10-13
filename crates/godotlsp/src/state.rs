@@ -30,6 +30,8 @@ pub struct State {
     pub root: Option<PathBuf>,
     /// 是否显示 inlay 类型提示(由客户端配置驱动)。
     pub inlay_hints: bool,
+    /// 客户端要求忽略的诊断码(`UNUSED_VARIABLE` 等 Godot 编辑器同款码)。
+    pub diag_ignore: Vec<String>,
     uris: HashMap<FileId, String>,
     ids: HashMap<String, FileId>,
     docs: HashMap<FileId, Doc>,
@@ -54,6 +56,7 @@ impl State {
             host: AnalysisHost::new(),
             root: None,
             inlay_hints: true,
+            diag_ignore: Vec::new(),
             uris: HashMap::new(),
             ids: HashMap::new(),
             docs: HashMap::new(),

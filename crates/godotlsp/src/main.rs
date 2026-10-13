@@ -342,10 +342,12 @@ fn handle(state: &State, req: &RequestKind) -> Result<serde_json::Value, String>
                     h.doc = md;
                 }
             }
-            // 内核无结果或仍无文档:引擎全局面兜底(类名/单例/工具函数/常量/枚举值/注解);
-            // 内核有文档时,追加官方 zh-CN 文档链接(文档跳转)。
+            // 内核无结果或仍无文档:引擎全局面兜底(类名/单例/工具函数/常量/枚举值/注解),
+            // 再退语言关键字;内核有文档时,追加官方 zh-CN 文档链接(文档跳转)。
             if kernel.as_ref().is_none_or(|h| h.doc.is_empty()) {
-                if let Some(md) = globals_hover_at(&doc.text, offset) {
+                let fallback = globals_hover_at(&doc.text, offset)
+                    .or_else(|| keyword_hover_at(&doc.text, offset));
+                if let Some(md) = fallback {
                     let word = cv::word_range_at(&doc.text, offset);
                     return Ok(cv::to_value(&lsp_types::Hover {
                         contents: lsp_types::HoverContents::Markup(lsp_types::MarkupContent {
@@ -389,6 +391,7 @@ fn handle(state: &State, req: &RequestKind) -> Result<serde_json::Value, String>
                     if by_name_context(&doc.text, offset) {
                         items.extend(globals::completion_items().iter().cloned());
                     }
+                    enrich_completions(state, file, &doc.text, &doc.index, offset, &mut items);
                     cv::to_value(&lsp_types::CompletionResponse::Array(items))
                 })
         }
@@ -550,11 +553,16 @@ fn handle(state: &State, req: &RequestKind) -> Result<serde_json::Value, String>
             let Some((file, offset)) = position(state, &p.text_document_position_params) else {
                 return Ok(serde_json::Value::Null);
             };
-            analysis
+            let Some(mut help) = analysis
                 .signature_help(FilePosition { file, offset })
                 .ok()
                 .flatten()
-                .map(|h| cv::to_value(&cv::signature_help(h)))
+            else {
+                return Ok(serde_json::Value::Null);
+            };
+            let doc = state.doc(file).expect("signature help 文件已注册");
+            enrich_signature_docs(state, file, &doc.text, offset, &mut help);
+            Some(cv::to_value(&cv::signature_help(help)))
         }
         RequestKind::CodeAction(p) => {
             let Some(file) = file_id(state, &p.text_document.uri) else {
@@ -651,6 +659,186 @@ fn globals_hover_link(text: &str, offset: u32) -> Option<String> {
     globals::doc_link(&text[range.start as usize..range.end as usize])
 }
 
+/// 光标处裸标识符的语言关键字 hover(内核与全局面均未命中时兜底)。
+fn keyword_hover_at(text: &str, offset: u32) -> Option<String> {
+    let range = cv::word_range_at(text, offset)?;
+    globals::keyword_hover(&text[range.start as usize..range.end as usize])
+}
+
+/// 补全项增强(服务器侧,不动内核):
+/// - 注解项:一行说明 + 完整官方文档;
+/// - 成员上下文:接收者类型经引擎模型回填完整签名/类型与文档;
+/// - 仍缺 detail 的项(自有成员):声明行原文 + 声明上方 `##` 文档注释。
+fn enrich_completions(
+    state: &State,
+    file: FileId,
+    text: &str,
+    index: &cv::LineIndex,
+    offset: u32,
+    items: &mut [lsp_types::CompletionItem],
+) {
+    // 注解(内核 label 不带 `@`,kind 映射为 PROPERTY 且 detail 恒空)。
+    for it in items.iter_mut() {
+        if it.detail.is_none()
+            && it.kind == Some(lsp_types::CompletionItemKind::PROPERTY)
+            && let Some((detail, doc)) = globals::annotation_info(&it.label)
+        {
+            it.detail = Some(detail.to_owned());
+            it.documentation = Some(markdown_doc(doc));
+        }
+    }
+
+    // 成员上下文:接收者类型 → 完整签名/类型 + 文档。
+    if let Some(ty) = member_receiver_type(state, file, text, offset) {
+        for it in items.iter_mut() {
+            if let Some((detail, doc)) = globals::member_info(&ty, &it.label) {
+                it.detail = Some(detail);
+                it.documentation = Some(markdown_doc(doc));
+            }
+        }
+    }
+
+    // 自有成员兜底:声明行原文 + 上方 `##` 文档注释。
+    if items.iter().any(|it| it.detail.is_none())
+        && let Ok(syms) = state.host.analysis().document_symbols(file)
+    {
+        let mut decls: Vec<(&str, u32)> = Vec::new();
+        collect_decls(&syms, &mut decls);
+        for it in items.iter_mut() {
+            if it.detail.is_some() {
+                continue;
+            }
+            if let Some(&(_, start)) = decls.iter().find(|(n, _)| *n == it.label) {
+                // 用 selection_range(名字)而非 range:内核 decl range 可能回吞脚本头。
+                let line = index.position(text, start).line;
+                let (s, e) = index.line_span(line);
+                let raw = text[s..e].trim();
+                // 函数/类声明行以 `:` 收尾,去掉以呈现签名本体。
+                it.detail = Some(raw.strip_suffix(':').unwrap_or(raw).trim_end().to_owned());
+                if let Some(md) = text::doc_comment_above(text, index, line) {
+                    it.documentation = Some(markdown_doc(md));
+                }
+            }
+        }
+    }
+}
+
+/// 递归收集文档符号的 (名字, 声明行锚点=名字起点)。
+fn collect_decls<'a>(syms: &'a [gdscript_base::DocumentSymbol], out: &mut Vec<(&'a str, u32)>) {
+    for s in syms {
+        out.push((&s.name, s.selection_range.start));
+        collect_decls(&s.children, out);
+    }
+}
+
+fn markdown_doc(value: String) -> lsp_types::Documentation {
+    lsp_types::Documentation::MarkupContent(lsp_types::MarkupContent {
+        kind: lsp_types::MarkupKind::Markdown,
+        value,
+    })
+}
+
+/// 成员上下文 `recv.` 的接收者类型名(内核 hover 的 `ty_label`)。
+/// `offset` 为补全位置(紧跟 `.` 之后)。
+fn member_receiver_type(state: &State, file: FileId, text: &str, offset: u32) -> Option<String> {
+    let bytes = text.as_bytes();
+    let mut i = (offset as usize).min(bytes.len());
+    while i > 0 && bytes[i - 1].is_ascii_whitespace() {
+        i -= 1;
+    }
+    // 须紧跟 `.` 且点前有表达式字符(排除行首点与 `..`)。
+    if i < 2 || bytes[i - 1] != b'.' || bytes[i - 2] == b'.' {
+        return None;
+    }
+    // hover 接收者表达式的末字符,取其类型标签。
+    let h = state
+        .host
+        .analysis()
+        .hover(gdscript_base::FilePosition {
+            file,
+            offset: i as u32 - 2,
+        })
+        .ok()
+        .flatten()?;
+    h.ty_label
+}
+
+/// 签名帮助文档回填(P0-2):内核签名恒无 doc;按调用名回填模型/文档表,
+/// 成员调用(`recv.method(`)经接收者 hover 定位类后取成员文档。
+fn enrich_signature_docs(
+    state: &State,
+    file: FileId,
+    text: &str,
+    offset: u32,
+    help: &mut gdscript_base::SignatureHelp,
+) {
+    for sig in &mut help.signatures {
+        if !sig.doc.is_empty() {
+            continue;
+        }
+        let Some(name) = sig.label.split('(').next().map(str::trim) else {
+            continue;
+        };
+        if name.is_empty() {
+            continue;
+        }
+        if let Some(md) =
+            callee_member_doc(state, file, text, offset, name).or_else(|| globals::signature_doc(name))
+        {
+            sig.doc = md;
+        }
+    }
+}
+
+/// `recv.name(` 形态的成员调用文档;非成员调用返回 None。
+fn callee_member_doc(
+    state: &State,
+    file: FileId,
+    text: &str,
+    offset: u32,
+    name: &str,
+) -> Option<String> {
+    let bytes = text.as_bytes();
+    let cur = (offset as usize).min(bytes.len());
+    // 回溯光标前最内层未闭合的 `(`。
+    let mut depth = 0i32;
+    let mut open = None;
+    for i in (0..cur).rev() {
+        match bytes[i] {
+            b')' => depth += 1,
+            b'(' => {
+                if depth == 0 {
+                    open = Some(i);
+                    break;
+                }
+                depth -= 1;
+            }
+            _ => {}
+        }
+    }
+    let open = open?;
+    // `(` 前恰为调用名,且调用名前是 `.`(成员调用)。
+    if !text[..open].ends_with(name) {
+        return None;
+    }
+    let dot = open.checked_sub(name.len() + 1)?;
+    if dot == 0 || bytes[dot] != b'.' {
+        return None;
+    }
+    // 接收者末字符 hover → 类型 → 成员文档。
+    let h = state
+        .host
+        .analysis()
+        .hover(gdscript_base::FilePosition {
+            file,
+            offset: dot as u32 - 1,
+        })
+        .ok()
+        .flatten()?;
+    let ty = h.ty_label?;
+    globals::member_method_doc(&ty, name)
+}
+
 fn on_notification(connection: &Connection, state: &mut State, not: Notification) {
     match not.method.as_str() {
         "textDocument/didOpen" => {
@@ -725,6 +913,8 @@ struct ClientSettings {
 #[serde(default)]
 struct DiagSettings {
     strict: Option<bool>,
+    /// 忽略的诊断码列表(Godot 编辑器同款,如 `UNUSED_VARIABLE`)。
+    ignore: Option<Vec<String>>,
 }
 
 #[derive(serde::Deserialize, Default)]
@@ -742,14 +932,17 @@ fn apply_settings(state: &mut State, params: &serde_json::Value) {
     let Ok(s) = serde_json::from_value::<ClientSettings>(scoped.clone()) else {
         return;
     };
-    if let Some(d) = s.diagnostics
-        && let Some(strict) = d.strict
-    {
-        state.host.set_warning_override(if strict {
-            WarningOverride::Strict
-        } else {
-            WarningOverride::None
-        });
+    if let Some(d) = s.diagnostics {
+        if let Some(strict) = d.strict {
+            state.host.set_warning_override(if strict {
+                WarningOverride::Strict
+            } else {
+                WarningOverride::None
+            });
+        }
+        if let Some(ignore) = d.ignore {
+            state.diag_ignore = ignore;
+        }
     }
     if let Some(i) = s.inlay_hints
         && let Some(t) = i.type_hints
@@ -768,6 +961,15 @@ fn publish_diagnostics(connection: &Connection, state: &State, uri: &str) {
     let diags = match state.host.analysis().diagnostics(file) {
         Ok(d) => d,
         Err(_) => return,
+    };
+    // 客户端忽略表:按 Godot 编辑器同款诊断码(`UNUSED_VARIABLE` 等)过滤。
+    let diags = if state.diag_ignore.is_empty() {
+        diags
+    } else {
+        diags
+            .into_iter()
+            .filter(|d| !state.diag_ignore.iter().any(|c| c == &d.code))
+            .collect()
     };
     let lsp_diags = cv::diagnostics(&doc.text, &doc.index, &diags);
     publish(connection, uri, lsp_diags, doc.version);
