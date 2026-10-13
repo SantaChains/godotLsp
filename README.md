@@ -1,5 +1,7 @@
 # godotlsp
 
+<img src="editors/vscode/godot_logo.svg" alt="Godot" width="320"/>
+
 A standalone Godot LSP written in Rust, with a VSCode extension.
 
 脱离 Godot 引擎运行的 GDScript 语言服务器:LSP over stdio,内嵌 Godot 4.x 引擎模型,不启动编辑器即可提供完整的语言智能。CI、无头环境、远程开发均可使用。
