@@ -107,13 +107,26 @@ def parse_globalscope_md(text: str) -> tuple[list[str], list[str], list[str]]:
     return singletons, utilities, enums
 
 
+def parse_keywords_md(text: str) -> list[tuple[str, str]]:
+    """GDScript reference 的 Keywords 表(Keyword | Description)。"""
+    kw_sec = text.split("## Keywords", 1)[1].split("\n## ", 1)[0]
+    keywords = []
+    for line in kw_sec.splitlines():
+        m = re.match(r"^([A-Za-z_][A-Za-z0-9_]*)\s*\|\s*(.+)$", line.strip())
+        if m and m.group(1) not in ("Keyword",):
+            keywords.append((m.group(1), re.sub(r"\s+", " ", m.group(2)).strip()))
+    return keywords
+
+
 def main() -> None:
     corpus_dir, out_path = Path(sys.argv[1]), Path(sys.argv[2])
     gd = (corpus_dir / "gdd_1590_@GDScript.md").read_text(encoding="utf-8")
     gs = (corpus_dir / "gdd_1591_@GlobalScope.md").read_text(encoding="utf-8")
+    ref = (corpus_dir / "gdd_0304_GDScript_reference.md").read_text(encoding="utf-8")
 
     annotations, builtin_fns, constants = parse_gdscript_md(gd)
     singletons, utilities, enums = parse_globalscope_md(gs)
+    keywords = parse_keywords_md(ref)
 
     def table(entries: list[tuple[str, str]]) -> str:
         return ",\n".join(f'    ({raw(k)}, {raw(v)})' for k, v in entries)
@@ -157,10 +170,15 @@ pub const BUILTIN_FN_DOCS: &[(&str, &str)] = &[
 pub const CONST_DOCS: &[(&str, &str)] = &[
 {table(constants)}
 ];
+
+/// GDScript 关键字一行说明(GDScript reference Keywords 表,含 PI/TAU 等伪常量别名)。
+pub const KEYWORD_DOCS: &[(&str, &str)] = &[
+{table(keywords)}
+];
 '''
     out_path.write_text(out, encoding="utf-8")
     print(f"annotations={len(annotations)} builtin_fns={len(builtin_fns)} constants={len(constants)}")
-    print(f"singletons={len(singletons)} utilities={len(utilities)} enums={len(enums)}")
+    print(f"singletons={len(singletons)} utilities={len(utilities)} enums={len(enums)} keywords={len(keywords)}")
 
 
 if __name__ == "__main__":

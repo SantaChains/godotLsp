@@ -359,6 +359,120 @@ pub fn hover_markdown(word: &str) -> Option<String> {
     None
 }
 
+// ---- 补全/签名回填(P0-1/2/4) ----
+
+/// `doc` 为空时仅渲染官方文档链接;非空时文档在前。
+fn doc_with_link(doc: &str, link: &str) -> String {
+    let mut md = String::new();
+    if !doc.is_empty() {
+        md.push_str(doc);
+        md.push_str("\n\n");
+    }
+    md.push_str(&format!("[📖 中文文档]({link})"));
+    md
+}
+
+/// 注解补全回填:一行 detail + 完整 Markdown 文档(label 不带 `@`)。
+#[must_use]
+pub fn annotation_info(name: &str) -> Option<(&'static str, String)> {
+    let (_, md) = docs::ANNOTATION_DOCS.iter().find(|(n, _)| *n == name)?;
+    let detail = md
+        .lines()
+        .map(str::trim)
+        .find(|l| !l.is_empty() && !l.starts_with("```") && !l.starts_with('@'))?;
+    Some((detail, format!("{md}\n\n[📖 中文文档]({})", url::gdscript("annotation", name))))
+}
+
+/// 成员补全回填:接收者类型名(内核 hover 的 `ty_label`)+ 成员名 →
+/// (完整签名/类型 detail, 文档 Markdown)。命中引擎类或内建类型成员。
+#[must_use]
+pub fn member_info(ty_name: &str, member: &str) -> Option<(String, String)> {
+    let api = bundled();
+    if let Some(cid) = api.class_by_name(ty_name) {
+        let link = url::class(ty_name);
+        return match api.lookup_member(cid, member) {
+            Some(gdscript_api::MemberRef::Method(sig)) => {
+                let detail = signature(api, member, &sig.params, &sig.return_ty, sig.is_vararg);
+                let doc = sig.doc.and_then(|id| api.doc(id)).unwrap_or_default();
+                Some((detail, doc_with_link(doc, &link)))
+            }
+            Some(gdscript_api::MemberRef::Property(p)) => {
+                let detail = format!("{}: {}", p.name, ty_str(api, &p.ty));
+                let doc = p.doc.and_then(|id| api.doc(id)).unwrap_or_default();
+                Some((detail, doc_with_link(doc, &link)))
+            }
+            Some(gdscript_api::MemberRef::Const(c)) => {
+                let detail = format!("const {}", c.name);
+                let doc = c.doc.and_then(|id| api.doc(id)).unwrap_or_default();
+                Some((detail, doc_with_link(doc, &link)))
+            }
+            Some(gdscript_api::MemberRef::Signal(s)) => {
+                let detail = format!("signal {}", s.name);
+                let doc = s.doc.and_then(|id| api.doc(id)).unwrap_or_default();
+                Some((detail, doc_with_link(doc, &link)))
+            }
+            _ => None,
+        };
+    }
+    let bid = api.builtin_by_name(ty_name)?;
+    let link = url::class(ty_name);
+    if let Some(sig) = api.builtin_method(bid, member) {
+        let detail = signature(api, member, &sig.params, &sig.return_ty, sig.is_vararg);
+        let doc = sig.doc.and_then(|id| api.doc(id)).unwrap_or_default();
+        return Some((detail, doc_with_link(doc, &link)));
+    }
+    let m = api.builtin_member(bid, member)?;
+    let detail = format!("{}: {}", m.name, ty_str(api, &m.ty));
+    Some((detail, doc_with_link("", &link)))
+}
+
+/// 成员方法调用文档(`recv.method(` 的 signature help 回填)。
+#[must_use]
+pub fn member_method_doc(ty_name: &str, method: &str) -> Option<String> {
+    let api = bundled();
+    let link = url::class(ty_name);
+    if let Some(cid) = api.class_by_name(ty_name)
+        && let Some(gdscript_api::MemberRef::Method(sig)) = api.lookup_member(cid, method)
+    {
+        let doc = sig.doc.and_then(|id| api.doc(id)).unwrap_or_default();
+        return Some(doc_with_link(doc, &link));
+    }
+    let bid = api.builtin_by_name(ty_name)?;
+    let sig = api.builtin_method(bid, method)?;
+    let doc = sig.doc.and_then(|id| api.doc(id)).unwrap_or_default();
+    Some(doc_with_link(doc, &link))
+}
+
+/// 全局调用文档回填(`sin(`/`preload(` 等 signature help):工具函数取模型,
+/// GDScript 内建函数取文档表。
+#[must_use]
+pub fn signature_doc(name: &str) -> Option<String> {
+    let api = bundled();
+    if let Some(u) = api.utility(name) {
+        let doc = u.doc.and_then(|id| api.doc(id)).unwrap_or_default();
+        return Some(doc_with_link(doc, &url::globalscope("method", name)));
+    }
+    if api.gdscript_builtin(name).is_some()
+        && let Some((_, md)) = docs::BUILTIN_FN_DOCS.iter().find(|(n, _)| *n == name)
+    {
+        return Some(format!("{md}\n\n[📖 中文文档]({})", url::gdscript("method", name)));
+    }
+    None
+}
+
+// ---- 关键字 hover(P0-3) ----
+
+/// GDScript reference 在线文档(zh-CN)。
+const GDSCRIPT_BASICS_URL: &str =
+    "https://docs.godotengine.org/zh-CN/stable/tutorials/scripting/gdscript/gdscript_basics.html";
+
+/// 语言关键字/伪常量别名的一行 hover(内核与全局面均未命中时兜底)。
+#[must_use]
+pub fn keyword_hover(word: &str) -> Option<String> {
+    let (_, desc) = docs::KEYWORD_DOCS.iter().find(|(n, _)| *n == word)?;
+    Some(format!("`{word}` — {desc}\n\n[📖 GDScript 基础]({GDSCRIPT_BASICS_URL})"))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -380,6 +494,49 @@ mod tests {
         assert!(items.iter().all(|i| i.sort_text.as_deref().is_some_and(|s| s.starts_with('z'))));
         // 名单中不存在的名字已被模型验证过滤(如语料多出的条目)。
         assert!(!has("NotARealSingleton"));
+    }
+
+    #[test]
+    fn member_and_signature_enrichment_hits_model() {
+        // 引擎类方法:完整签名 + 文档链接。
+        let (detail, doc) = member_info("Input", "is_action_pressed").unwrap();
+        assert!(detail.starts_with("is_action_pressed("), "{detail}");
+        assert!(doc.contains("docs.godotengine.org/zh-CN/"), "{doc}");
+
+        // 引擎类属性。
+        let (detail, _) = member_info("Node2D", "position").unwrap();
+        assert_eq!(detail, "position: Vector2");
+
+        // 内建类型方法与属性。
+        let (detail, _) = member_info("String", "to_int").unwrap();
+        assert!(detail.starts_with("to_int("), "{detail}");
+        let (detail, _) = member_info("Vector2", "x").unwrap();
+        assert_eq!(detail, "x: float");
+
+        // 全局/内建函数签名文档。
+        assert!(signature_doc("sin").is_some_and(|d| d.contains("中文文档")));
+        assert!(signature_doc("preload").is_some_and(|d| d.contains("Resource preload")));
+        assert!(signature_doc("not_a_global_fn").is_none());
+        assert!(member_method_doc("Input", "is_action_pressed").is_some());
+
+        // 未命中。
+        assert!(member_info("NotAClass", "x").is_none());
+        assert!(member_info("Node", "not_a_member").is_none());
+    }
+
+    #[test]
+    fn keyword_hover_and_annotation_detail() {
+        // 关键字一行 hover + 官方链接。
+        let h = keyword_hover("await").unwrap();
+        assert!(h.contains("Waits for a signal"), "{h}");
+        assert!(h.contains("docs.godotengine.org/zh-CN/"));
+        assert!(keyword_hover("definitely_not_a_keyword").is_none());
+
+        // 注解补全回填:一行 detail + 完整文档。
+        let (detail, doc) = annotation_info("export_range").unwrap();
+        assert!(!detail.is_empty() && !detail.starts_with("```"), "{detail}");
+        assert!(doc.contains("@export_range") && doc.contains("中文文档"), "{doc}");
+        assert!(annotation_info("not_an_annotation").is_none());
     }
 
     #[test]

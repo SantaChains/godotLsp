@@ -963,3 +963,42 @@ Warning: "Not a Number" is only a concept with floating-point numbers, and has n
 
 ---"#)
 ];
+
+/// GDScript 关键字一行说明(GDScript reference Keywords 表,含 PI/TAU 等伪常量别名)。
+pub const KEYWORD_DOCS: &[(&str, &str)] = &[
+    (r#"if"#, r#"See if/else/elif."#),
+    (r#"elif"#, r#"See if/else/elif."#),
+    (r#"else"#, r#"See if/else/elif."#),
+    (r#"for"#, r#"See for."#),
+    (r#"while"#, r#"See while."#),
+    (r#"match"#, r#"See match."#),
+    (r#"when"#, r#"Used by pattern guards in match statements."#),
+    (r#"break"#, r#"Exits the execution of the current for or while loop."#),
+    (r#"continue"#, r#"Immediately skips to the next iteration of the for or while loop."#),
+    (r#"pass"#, r#"Used where a statement is required syntactically but execution of code is undesired, e.g. in empty functions."#),
+    (r#"return"#, r#"Returns a value from a function."#),
+    (r#"class"#, r#"Defines an inner class. See Inner classes."#),
+    (r#"class_name"#, r#"Defines the script as a globally accessible class with the specified name. See Registering named classes."#),
+    (r#"extends"#, r#"Defines what class to extend with the current class."#),
+    (r#"is"#, r#"Tests whether a variable extends a given class, or is of a given built-in type."#),
+    (r#"in"#, r#"Tests whether a value is within a string, array, range, dictionary, or node. When used with for, it iterates through them instead of testing."#),
+    (r#"as"#, r#"Cast the value to a given type if possible."#),
+    (r#"self"#, r#"Refers to current class instance. See self."#),
+    (r#"super"#, r#"Resolves the scope of the parent method. See Inheritance."#),
+    (r#"signal"#, r#"Defines a signal. See Signals."#),
+    (r#"func"#, r#"Defines a function. See Functions."#),
+    (r#"static"#, r#"Defines a static function or a static member variable."#),
+    (r#"const"#, r#"Defines a constant. See Constants."#),
+    (r#"enum"#, r#"Defines an enum. See Enums."#),
+    (r#"var"#, r#"Defines a variable. See Variables."#),
+    (r#"breakpoint"#, r#"Editor helper for debugger breakpoints. Unlike breakpoints created by clicking in the gutter, breakpoint is stored in the script itself."#),
+    (r#"preload"#, r#"Preloads a class or variable. See Classes as resources."#),
+    (r#"await"#, r#"Waits for a signal or a coroutine to finish. See Awaiting signals or coroutines."#),
+    (r#"yield"#, r#"Previously used for coroutines. Kept as keyword for transition."#),
+    (r#"assert"#, r#"Asserts a condition, logs error on failure. Ignored in non-debug builds. See Assert keyword."#),
+    (r#"void"#, r#"Used to represent that a function does not return any value."#),
+    (r#"PI"#, r#"PI constant."#),
+    (r#"TAU"#, r#"TAU constant."#),
+    (r#"INF"#, r#"Infinity constant. Used for comparisons and as result of calculations."#),
+    (r#"NAN"#, r#"NAN (not a number) constant. Used as impossible result from calculations."#)
+];
