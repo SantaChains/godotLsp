@@ -7,7 +7,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/your-org/godotlsp",
+    "url": "https://github.com/SantaChains/godotLsp",
     "directory": "editors/vscode"
   },
   "engines": {

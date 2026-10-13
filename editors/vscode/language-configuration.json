@@ -29,6 +29,10 @@
 			"end": "^\\s*#\\s*endregion\\b"
 		}
 	},
+	"indentationRules": {
+		"increaseIndentPattern": "^\\s*[^#].*:\\s*(?:#.*)?$",
+		"decreaseIndentPattern": "^\\s*(?:elif|else)\\b[^:]*:\\s*(?:#.*)?$"
+	},
 	"onEnterRules": [
 		{
 			"beforeText": ":\\s*$",

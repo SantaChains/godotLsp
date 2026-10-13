@@ -200,7 +200,9 @@ function runGodot(args: string[]): void {
   }
   const quoted = args.map((a) => (/\s/.test(a) ? `"${a}"` : a));
   const terminal = vscode.window.createTerminal({ name: "Godot", cwd: folder.uri.fsPath });
-  terminal.sendText(`${JSON.stringify(godot)} --path . ${quoted.join(" ")}`.trim());
+  // 路径以引号包裹(含空格常见于 Program Files);不能用 JSON.stringify——
+  // 它会把 Windows 反斜杠转义成 `\\`,终端会收到错误路径。
+  terminal.sendText(`"${godot}" --path . ${quoted.join(" ")}`.trim());
   terminal.show(true);
 }
 
