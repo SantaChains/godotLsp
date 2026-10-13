@@ -16,7 +16,13 @@ use crate::uri::{path_to_uri, uri_to_path};
 pub struct Doc {
     pub text: String,
     pub index: LineIndex,
+    /// 编辑器侧的文档版本;磁盘注册的文件为 `None`。随 `publishDiagnostics` 回传,
+    /// 让客户端丢弃迟到的诊断。
+    pub version: Option<i32>,
 }
+
+/// 客户端配置节名,与编辑器侧 `godotlsp.*` 注册项一一对应。
+pub const SECTION: &str = "godotlsp";
 
 /// 全量服务器状态。单线程:请求在主循环线程上顺序处理,因此分析快照不会在处理中途失效。
 pub struct State {
@@ -67,6 +73,12 @@ impl State {
         self.ids.get(uri).copied()
     }
 
+    /// `file` 对应的注册 URI。
+    #[must_use]
+    pub fn uri_of(&self, file: FileId) -> Option<&str> {
+        self.uris.get(&file).map(String::as_str)
+    }
+
     /// POD→LSP 转换所用的解析回调:为可能已关闭的文件提供 `(uri, text, _len)`。
     pub fn resolver(&self) -> impl Fn(FileId) -> Option<(String, String, u32)> + '_ {
         move |file| {
@@ -92,31 +104,32 @@ impl State {
     }
 
     /// 把文件文本写入分析世界(新增或替换)。
-    pub fn inject(&mut self, uri: &str, res: Option<String>, text: String) -> FileId {
+    pub fn inject(&mut self, uri: &str, res: Option<String>, text: String, version: Option<i32>) -> FileId {
         let file = self.ids.get(uri).copied().unwrap_or_else(|| self.alloc(uri));
         let index = LineIndex::new(&text);
-        self.docs.insert(file, Doc { text, index });
-        let text = self.docs[&file].text.clone();
         let mut change = Change::new();
-        change.change_file(file, text);
+        change.change_file(file, text.as_str());
         if let Some(res) = res {
             change.set_file_path(file, res);
         }
+        self.docs.insert(file, Doc { text, index, version });
         self.host.apply_change(change);
         file
     }
 
-    /// 把 `didChange` 增量编辑应用到已注册文档并同步分析世界。编辑时不重发
+    /// `didChange` 增量编辑应用到已注册文档并同步分析世界。编辑时不重发
     /// `res://` 路径(salsa 要求:重发会无谓失效路径注册表)。
     pub fn apply_changes(
         &mut self,
         file: FileId,
         changes: Vec<lsp_types::TextDocumentContentChangeEvent>,
+        version: Option<i32>,
     ) -> bool {
         let Some(doc) = self.docs.get_mut(&file) else {
             return false;
         };
         apply_content_changes(&mut doc.text, &mut doc.index, changes);
+        doc.version = version;
         let mut change = Change::new();
         change.change_file(file, doc.text.as_str());
         self.host.apply_change(change);
@@ -124,10 +137,10 @@ impl State {
     }
 
     /// `didOpen` — 以编辑器文本在此 URI 下注册。
-    pub fn open(&mut self, uri: &str, text: String) -> FileId {
+    pub fn open(&mut self, uri: &str, text: String, version: Option<i32>) -> FileId {
         let path = uri.parse::<Uri>().ok().and_then(|u| uri_to_path(&u));
         let res = path.as_ref().and_then(|p| self.res_path(p));
-        self.inject(uri, res, text)
+        self.inject(uri, res, text, version)
     }
 
     /// 被监视文件在磁盘上变化:重新加载;若已删除则移除。`project.godot` 走项目配置而非普通文件。
@@ -147,7 +160,7 @@ impl State {
         match std::fs::read_to_string(&path) {
             Ok(text) => {
                 let res = self.res_path(&path);
-                self.inject(uri, res, text);
+                self.inject(uri, res, text, None);
             }
             Err(_) => self.remove(uri),
         }
@@ -185,7 +198,7 @@ impl State {
             };
             let file = self.alloc(&path_to_uri(path).map(|u| u.as_str().to_owned()).unwrap_or_default());
             let index = LineIndex::new(&text);
-            self.docs.insert(file, Doc { text, index });
+            self.docs.insert(file, Doc { text, index, version: None });
             change.change_file(file, self.docs[&file].text.clone());
             if let Some(res) = self.res_path(path) {
                 change.set_file_path(file, res);
@@ -237,11 +250,13 @@ mod tests {
             "file:///proj/markup.gd",
             Some("res://markup.gd".into()),
             "class_name Markup\nfunc parse() -> int:\n\treturn 1\n".into(),
+            None,
         );
         s.inject(
             "file:///proj/main.gd",
             Some("res://main.gd".into()),
             "const M = preload(\"res://markup.gd\")\nfunc go():\n\tvar n := M.new().parse()\n\treturn n\n".into(),
+            None,
         );
         s
     }
@@ -269,6 +284,7 @@ mod tests {
             "file:///p/bad.gd",
             Some("res://bad.gd".into()),
             "func f(:\n\tpass\n".into(),
+            None,
         );
         let diags = s.host.analysis().diagnostics(f).unwrap();
         assert!(!diags.is_empty(), "应产生解析诊断");

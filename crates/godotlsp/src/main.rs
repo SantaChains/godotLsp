@@ -10,23 +10,23 @@ mod uri;
 
 use std::error::Error;
 
-use convert::LineIndex;
 use gdscript_base::{FileId, FilePosition, TextRange};
 use gdscript_ide::WarningOverride;
-use lsp_server::{Connection, Message, Notification, Request, Response};
+use lsp_server::{Connection, Message, Notification, Request, RequestId, Response};
 use lsp_types::{
     CodeActionParams, ColorPresentationParams, CompletionOptions, CompletionParams,
-    DocumentColorParams, DocumentFormattingParams, DocumentHighlightParams, DocumentLinkParams,
-    DocumentRangeFormattingParams, DocumentSymbolParams, FoldingRangeParams, GotoDefinitionParams,
-    HoverParams, InitializeParams, InlayHintParams, PublishDiagnosticsParams, ReferenceParams,
-    RenameParams, SemanticTokensLegend, SemanticTokensOptions, SemanticTokensParams,
+    ConfigurationItem, ConfigurationParams, DocumentColorParams, DocumentFormattingParams,
+    DocumentHighlightParams, DocumentLinkParams, DocumentRangeFormattingParams,
+    DocumentSymbolParams, FoldingRangeParams, GotoDefinitionParams, HoverParams, InitializeParams,
+    InlayHintParams, PublishDiagnosticsParams, ReferenceParams, RenameParams,
+    SemanticTokensLegend, SemanticTokensOptions, SemanticTokensParams,
     SemanticTokensServerCapabilities, ServerCapabilities, SignatureHelpOptions,
     SignatureHelpParams, TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
     WorkspaceSymbolParams,
 };
 
 use crate::convert as cv;
-use crate::state::State;
+use crate::state::{SECTION, State};
 
 fn main() {
     // `--stdio` 是 vscode-languageclient 等客户端附加的标准传输参数,等价于默认行为。
@@ -117,6 +117,15 @@ fn run() -> Result<(), Box<dyn Error + Sync + Send>> {
         "[godotlsp] {} 引擎模型就绪",
         gdscript_api::godot_version()
     );
+    // 拉取式配置:zed/helix 等客户端只回 `workspace/configuration`,不主动推
+    // `didChangeConfiguration`。声明了 `workspace.configuration` 能力即主动拉一次,
+    // 结果与后续推送走同一条 apply_settings 路径。
+    let mut pending_pull: Option<RequestId> =
+        pull_configuration(&init).map(|req| {
+            let id = req.id.clone();
+            let _ = connection.sender.send(Message::Request(req));
+            id
+        });
     for msg in &connection.receiver {
         match msg {
             Message::Request(req) => {
@@ -124,7 +133,7 @@ fn run() -> Result<(), Box<dyn Error + Sync + Send>> {
                     // 协议已结束;分离的 io 线程随进程一并销毁。
                     return Ok(());
                 }
-                on_request(&connection, &mut state, req);
+                on_request(&connection, &state, req);
             }
             Message::Notification(not) => {
                 if not.method == "exit" {
@@ -132,11 +141,56 @@ fn run() -> Result<(), Box<dyn Error + Sync + Send>> {
                 }
                 on_notification(&connection, &mut state, not);
             }
-            Message::Response(_) => {}
+            Message::Response(resp) => {
+                // 目前服务器只发起配置拉取请求;对不上号的响应一律忽略。
+                if pending_pull.as_ref() == Some(&resp.id) {
+                    pending_pull = None;
+                    apply_pulled_configuration(&mut state, resp);
+                }
+            }
         }
     }
     io_threads.join()?;
     Ok(())
+}
+
+/// 客户端声明了配置拉取能力时,构造一次 `workspace/configuration` 请求。
+fn pull_configuration(init: &InitializeParams) -> Option<Request> {
+    let supported = init
+        .capabilities
+        .workspace
+        .as_ref()
+        .and_then(|w| w.configuration)
+        .unwrap_or(false);
+    if !supported {
+        return None;
+    }
+    let params = ConfigurationParams {
+        items: vec![ConfigurationItem {
+            scope_uri: None,
+            section: Some(SECTION.into()),
+        }],
+    };
+    Some(Request {
+        id: RequestId::from(1),
+        method: "workspace/configuration".into(),
+        params: cv::to_value(&params),
+    })
+}
+
+/// 应用配置拉取的响应载荷(第一个条目即 `godotlsp` 配置节)。
+fn apply_pulled_configuration(state: &mut State, resp: Response) {
+    let result = match resp.response_result {
+        Ok(result) => result,
+        Err(err) => {
+            eprintln!("[godotlsp] 配置拉取被客户端拒绝:{}", err.message);
+            return;
+        }
+    };
+    let Some(first) = result.as_array().and_then(|a| a.first().cloned()) else {
+        return;
+    };
+    apply_settings(state, &first);
 }
 
 fn params_root(init: &InitializeParams) -> Option<std::path::PathBuf> {
@@ -151,8 +205,9 @@ fn params_root(init: &InitializeParams) -> Option<std::path::PathBuf> {
         })
 }
 
-fn on_request(connection: &Connection, state: &mut State, req: Request) {
+fn on_request(connection: &Connection, state: &State, req: Request) {
     let id = req.id.clone();
+    let method = req.method.clone();
     let parsed: Result<
         // 内部小求和类型,让所有 handler 共用一条反序列化路径。
         RequestKind,
@@ -224,10 +279,16 @@ fn on_request(connection: &Connection, state: &mut State, req: Request) {
             return;
         }
     };
-    let result = handle(state, &params);
+    // panic 隔离:单个请求的分析崩溃只回错误响应,不拖垮整个服务器
+    // (rust-analyzer 同款防线;分析世界通常仍可服务后续请求)。
+    let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| handle(state, &params)));
     let resp = match result {
-        Ok(value) => Response::new_ok(id, value),
-        Err(msg) => Response::new_err(id, REQUEST_FAILED, msg),
+        Ok(Ok(value)) => Response::new_ok(id, value),
+        Ok(Err(msg)) => Response::new_err(id, REQUEST_FAILED, msg),
+        Err(_) => {
+            eprintln!("[godotlsp] 处理 {method} 时 panic,已隔离");
+            Response::new_err(id, REQUEST_FAILED, format!("内部错误:处理 {method} 时服务器异常(已恢复)"))
+        }
     };
     let _ = connection.sender.send(Message::Response(resp));
 }
@@ -261,7 +322,7 @@ enum RequestKind {
 
 /// 处理请求。`Ok(serde_json::Value::Null)` 渲染为协议层的 `null`。
 #[allow(deprecated)] // SymbolInformation.deprecated 仍是 LSP 3.17 的组成部分
-fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, String> {
+fn handle(state: &State, req: &RequestKind) -> Result<serde_json::Value, String> {
     let analysis = state.host.analysis();
     let result: Option<serde_json::Value> = match req {
         RequestKind::Hover(p) => {
@@ -403,19 +464,20 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
         }
         RequestKind::WorkspaceSymbol(p) => {
             analysis.workspace_symbols(&p.query).ok().map(|targets| {
+                // 直接读注册表:按 FileId 逐个克隆全文再建行索引是 O(n·文件大小) 的浪费。
                 let infos: Vec<lsp_types::SymbolInformation> = targets
                     .iter()
                     .filter_map(|t| {
-                        let (uri, text, _) = (state.resolver())(t.file)?;
-                        let index = LineIndex::new(&text);
+                        let uri = state.uri_of(t.file)?.parse::<Uri>().ok()?;
+                        let doc = state.doc(t.file)?;
                         Some(lsp_types::SymbolInformation {
                             name: t.name.clone(),
                             kind: symbol_kind_of(t.kind),
                             tags: None,
                             deprecated: None,
                             location: lsp_types::Location {
-                                uri: uri.parse::<Uri>().ok()?,
-                                range: index.range(&text, t.focus_range),
+                                uri,
+                                range: doc.index.range(&doc.text, t.focus_range),
                             },
                             container_name: None,
                         })
@@ -543,7 +605,7 @@ fn on_notification(connection: &Connection, state: &mut State, not: Notification
             if let Ok(p) = serde_json::from_value::<lsp_types::DidOpenTextDocumentParams>(not.params)
             {
                 let uri = p.text_document.uri.to_string();
-                state.open(&uri, p.text_document.text);
+                state.open(&uri, p.text_document.text, Some(p.text_document.version));
                 publish_diagnostics(connection, state, &uri);
             }
         }
@@ -552,12 +614,13 @@ fn on_notification(connection: &Connection, state: &mut State, not: Notification
                 serde_json::from_value::<lsp_types::DidChangeTextDocumentParams>(not.params)
             {
                 let uri = p.text_document.uri.to_string();
+                let version = Some(p.text_document.version);
                 if p.content_changes.is_empty() {
                     return;
                 }
                 if let Some(file) = state.id_of(&uri) {
                     // 已注册:增量应用 range 编辑。
-                    if !state.apply_changes(file, p.content_changes) {
+                    if !state.apply_changes(file, p.content_changes, version) {
                         return;
                     }
                 } else {
@@ -566,7 +629,7 @@ fn on_notification(connection: &Connection, state: &mut State, not: Notification
                     else {
                         return;
                     };
-                    state.open(&uri, text);
+                    state.open(&uri, text, version);
                 }
                 publish_diagnostics(connection, state, &uri);
             }
@@ -623,7 +686,7 @@ struct InlayHintSettings {
 /// 注意:警告严格度变化不立即重推全项目诊断,由后续编辑/打开自然刷新。
 fn apply_settings(state: &mut State, params: &serde_json::Value) {
     let settings = params.get("settings").unwrap_or(params);
-    let scoped = settings.get("godotlsp").unwrap_or(settings);
+    let scoped = settings.get(SECTION).unwrap_or(settings);
     let Ok(s) = serde_json::from_value::<ClientSettings>(scoped.clone()) else {
         return;
     };
@@ -655,10 +718,15 @@ fn publish_diagnostics(connection: &Connection, state: &State, uri: &str) {
         Err(_) => return,
     };
     let lsp_diags = cv::diagnostics(&doc.text, &doc.index, &diags);
-    publish(connection, uri, lsp_diags);
+    publish(connection, uri, lsp_diags, doc.version);
 }
 
-fn publish(connection: &Connection, uri: &str, diags: Vec<lsp_types::Diagnostic>) {
+fn publish(
+    connection: &Connection,
+    uri: &str,
+    diags: Vec<lsp_types::Diagnostic>,
+    version: Option<i32>,
+) {
     let Ok(url) = uri.parse::<Uri>() else {
         return;
     };
@@ -667,7 +735,7 @@ fn publish(connection: &Connection, uri: &str, diags: Vec<lsp_types::Diagnostic>
         PublishDiagnosticsParams {
             uri: url,
             diagnostics: diags,
-            version: None,
+            version,
         },
     );
     let _ = connection.sender.send(Message::Notification(note));

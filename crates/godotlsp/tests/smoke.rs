@@ -247,3 +247,63 @@ fn change(s: &mut Server, version: i64, text: &str) {
         "textDocument": {"uri": URI, "version": version},
         "contentChanges": [{"text": text}]}}));
 }
+
+/// 拉取式配置 + 诊断版本:zed/helix 类客户端只回 `workspace/configuration`,
+/// 服务器必须主动拉取;诊断通知需携带文档版本供客户端丢弃迟到结果。
+#[test]
+fn configuration_pull_and_diagnostics_version() {
+    step!("spawn(声明 configuration 能力)");
+    let mut s = Server::spawn();
+    s.send(&json!({
+        "jsonrpc": "2.0", "id": 1, "method": "initialize",
+        "params": {
+            "processId": null, "rootUri": null,
+            "capabilities": {"workspace": {"configuration": true}},
+        },
+    }));
+    s.response(1);
+    s.send(&json!({"jsonrpc": "2.0", "method": "initialized", "params": {}}));
+
+    // 服务器应主动发起 workspace/configuration 请求
+    step!("workspace/configuration 拉取");
+    let req = loop {
+        let msg = s.read();
+        if msg["method"] == "workspace/configuration" {
+            break msg;
+        }
+    };
+    let req_id = req["id"].as_i64().expect("服务器请求应为数字 id");
+    s.send(&json!({
+        "jsonrpc": "2.0", "id": req_id,
+        "result": [{"inlayHints": {"typeHints": false}}],
+    }));
+
+    // 拉取到的配置立即生效:inlayHint 返回 null
+    s.send(&json!({"jsonrpc": "2.0", "method": "textDocument/didOpen", "params": {
+        "textDocument": {"uri": URI, "languageId": "gdscript", "version": 1, "text": GOOD}}}));
+    s.send(&json!({"jsonrpc": "2.0", "id": 2, "method": "textDocument/inlayHint", "params": {
+        "textDocument": {"uri": URI}, "range": {"start": {"line": 0, "character": 0},
+        "end": {"line": 20, "character": 0}}}}));
+    assert!(s.response(2)["result"].is_null(), "拉取配置后 inlayHint 应为 null");
+
+    // publishDiagnostics 携带 didChange 的文档版本
+    step!("诊断版本");
+    s.send(&json!({"jsonrpc": "2.0", "method": "textDocument/didChange", "params": {
+        "textDocument": {"uri": URI, "version": 2},
+        "contentChanges": [{"text": BROKEN}]}}));
+    loop {
+        let msg = s.read();
+        if msg["method"] == "textDocument/publishDiagnostics"
+            && msg["params"]["diagnostics"].as_array().is_some_and(|d| !d.is_empty())
+        {
+            assert_eq!(msg["params"]["version"], 2, "诊断应携带文档版本:{msg}");
+            break;
+        }
+    }
+
+    s.send(&json!({"jsonrpc": "2.0", "id": 3, "method": "shutdown", "params": null}));
+    s.response(3);
+    s.send(&json!({"jsonrpc": "2.0", "method": "exit", "params": null}));
+    let status = s.child.wait().expect("exit 后等待退出");
+    assert!(status.success(), "exit 后退出码非零:{status}");
+}
