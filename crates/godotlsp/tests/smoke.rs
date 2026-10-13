@@ -1,4 +1,4 @@
-//! End-to-end smoke test: spawn the server binary over stdio and run a protocol session.
+//! 端到端冒烟测试:以子进程方式启动服务器二进制,跑一遍完整协议会话。
 
 use std::io::{BufRead, BufReader, Write};
 use std::process::{Child, ChildStdin, ChildStdout, Command, Stdio};
@@ -22,7 +22,7 @@ impl Server {
             .stdout(Stdio::piped())
             .stderr(Stdio::null())
             .spawn()
-            .expect("spawn server");
+            .expect("启动服务器失败");
         let stdin = child.stdin.take().expect("stdin");
         let stdout = BufReader::new(child.stdout.take().expect("stdout"));
         Self { child, stdin, stdout }
@@ -34,7 +34,7 @@ impl Server {
         self.stdin.flush().unwrap();
     }
 
-    /// The next message as JSON, whatever its kind (request/response/notification).
+    /// 读取下一条消息(请求/响应/通知均可)。
     fn read(&mut self) -> Value {
         let mut len = None;
         loop {
@@ -48,13 +48,13 @@ impl Server {
                 len = Some(v.trim().parse::<usize>().unwrap());
             }
         }
-        let len = len.expect("Content-Length header");
+        let len = len.expect("缺少 Content-Length 头");
         let mut body = vec![0u8; len];
         std::io::Read::read_exact(&mut self.stdout, &mut body).unwrap();
         serde_json::from_slice(&body).unwrap()
     }
 
-    /// The next response with `id`, skipping notifications.
+    /// 读取 id 为 `id` 的下一条响应,跳过通知。
     fn response(&mut self, id: u64) -> Value {
         loop {
             let msg = self.read();
@@ -64,7 +64,7 @@ impl Server {
         }
     }
 
-    /// The next publishDiagnostics notification carrying at least one diagnostic.
+    /// 读取下一条携带至少一条诊断的 publishDiagnostics 通知。
     fn first_diagnostics(&mut self) -> Vec<Value> {
         loop {
             let msg = self.read();
@@ -97,7 +97,7 @@ fn full_stdio_session() {
         .map(|r| format!("file:///{}/", r.replace('\\', "/")))
         .unwrap_or_else(|_| format!("file:///{}/", env!("CARGO_MANIFEST_DIR").replace('\\', "/")));
 
-    // initialize → capabilities
+    // initialize → 能力集
     step!("initialize");
     s.send(&json!({
         "jsonrpc": "2.0", "id": 1, "method": "initialize",
@@ -118,7 +118,7 @@ fn full_stdio_session() {
     assert!(caps.get("documentFormattingProvider").is_some());
     s.send(&json!({"jsonrpc": "2.0", "method": "initialized", "params": {}}));
 
-    // hover on `count` (line 2, char 5)
+    // hover 到 `count`(第 3 行第 5 列)
     step!("didOpen + hover");
     s.send(&json!({"jsonrpc": "2.0", "method": "textDocument/didOpen", "params": {
         "textDocument": {"uri": URI, "languageId": "gdscript", "version": 1, "text": GOOD}}}));
@@ -126,37 +126,37 @@ fn full_stdio_session() {
         "textDocument": {"uri": URI}, "position": {"line": 2, "character": 5}}}));
     let hover = s.response(2)["result"].clone();
     let value = hover["contents"]["value"].as_str().unwrap_or_default();
-    assert!(value.contains("```gdscript") && value.contains("int"), "hover: {hover}");
+    assert!(value.contains("```gdscript") && value.contains("int"), "hover:{hover}");
 
-    // completion after `count.` — String members expected
+    // `count.` 之后补全 — 期望 String 成员
     step!("completion");
     change(&mut s, 2, STRINGIFIED);
     s.send(&json!({"jsonrpc": "2.0", "id": 3, "method": "textDocument/completion", "params": {
         "textDocument": {"uri": URI}, "position": {"line": 4, "character": 16}}}));
     let items = s.response(3)["result"].clone();
     let items = if items.is_array() { items } else { items["items"].clone() };
-    assert!(items.as_array().is_some_and(|a| !a.is_empty()), "empty completion: {items}");
+    assert!(items.as_array().is_some_and(|a| !a.is_empty()), "补全为空:{items}");
 
-    // syntax error → publishDiagnostics
+    // 语法错误 → publishDiagnostics
     step!("diagnostics");
     change(&mut s, 3, BROKEN);
     let diags = s.first_diagnostics();
     let d = &diags[0];
     assert_eq!(d["source"], "godotlsp");
-    assert!(d["code"].is_string(), "diagnostic code: {d}");
+    assert!(d["code"].is_string(), "诊断 code:{d}");
     assert!(d["severity"].as_i64().is_some_and(|sev| (1..=4).contains(&sev)));
 
-    // goto definition of `total` from `return total` (line 6, char 9) → its declaration (line 5)
+    // 从 `return total`(第 7 行第 9 列)跳转定义 → 声明处(第 6 行)
     step!("definition");
     change(&mut s, 4, GOOD);
     s.send(&json!({"jsonrpc": "2.0", "id": 5, "method": "textDocument/definition", "params": {
         "textDocument": {"uri": URI}, "position": {"line": 6, "character": 9}}}));
     let result = s.response(5)["result"].clone();
     let loc = if result.is_array() { result[0].clone() } else { result["location"].clone() };
-    assert_eq!(loc["range"]["start"]["line"], 5, "definition: {result}");
-    assert_eq!(loc["range"]["start"]["character"], 5, "definition: {result}");
+    assert_eq!(loc["range"]["start"]["line"], 5, "definition:{result}");
+    assert_eq!(loc["range"]["start"]["character"], 5, "definition:{result}");
 
-    // semantic tokens + document symbols
+    // 语义 token + 文档符号
     step!("semanticTokens + symbols");
     s.send(&json!({"jsonrpc": "2.0", "id": 6, "method": "textDocument/semanticTokens/full", "params": {
         "textDocument": {"uri": URI}}}));
@@ -164,18 +164,18 @@ fn full_stdio_session() {
         "textDocument": {"uri": URI}}}));
     let toks = s.response(6)["result"]["data"].clone();
     let syms = s.response(7)["result"].clone();
-    assert!(toks.as_array().is_some_and(|a| !a.is_empty() && a.len() % 5 == 0), "tokens");
+    assert!(toks.as_array().is_some_and(|a| !a.is_empty() && a.len() % 5 == 0), "token");
     let names: Vec<String> = syms.as_array().unwrap().iter()
         .filter_map(|sym| sym["name"].as_str().map(Into::into)).collect();
-    assert!(names.iter().any(|n| n == "tick"), "symbols: {names:?}");
+    assert!(names.iter().any(|n| n == "tick"), "符号:{names:?}");
 
     // shutdown + exit
     step!("shutdown + exit");
     s.send(&json!({"jsonrpc": "2.0", "id": 8, "method": "shutdown", "params": null}));
     s.response(8);
     s.send(&json!({"jsonrpc": "2.0", "method": "exit", "params": null}));
-    let status = s.child.wait().expect("wait after exit");
-    assert!(status.success(), "nonzero exit after `exit`: {status}");
+    let status = s.child.wait().expect("exit 后等待退出");
+    assert!(status.success(), "exit 后退出码非零:{status}");
 }
 
 fn change(s: &mut Server, version: i64, text: &str) {

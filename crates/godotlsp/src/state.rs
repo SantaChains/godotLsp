@@ -1,4 +1,4 @@
-//! Server state: the analysis host, file registry, in-memory documents, project loading.
+//! 服务器状态:分析宿主、文件注册表、内存文档、项目加载。
 
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
@@ -11,15 +11,14 @@ use lsp_types::Uri;
 use crate::convert::LineIndex;
 use crate::uri::{path_to_uri, uri_to_path};
 
-/// One registered file's text plus its line index.
+/// 一个已注册文件的文本及其行索引。
 #[derive(Debug, Clone)]
 pub struct Doc {
     pub text: Arc<str>,
     pub index: LineIndex,
 }
 
-/// The whole server state. Single-threaded: requests are handled sequentially on the
-/// main loop thread, so an `Analysis` snapshot is only stale across awaits we don't have.
+/// 全量服务器状态。单线程:请求在主循环线程上顺序处理,因此分析快照不会在处理中途失效。
 pub struct State {
     pub host: AnalysisHost,
     pub root: Option<PathBuf>,
@@ -40,7 +39,7 @@ impl Default for State {
 }
 
 impl State {
-    /// An empty state with no project.
+    /// 无项目的空状态。
     #[must_use]
     pub fn new() -> Self {
         Self {
@@ -53,19 +52,19 @@ impl State {
         }
     }
 
-    /// The registered document for `file`.
+    /// `file` 对应的已注册文档。
     #[must_use]
     pub fn doc(&self, file: FileId) -> Option<&Doc> {
         self.docs.get(&file)
     }
 
-    /// The `FileId` registered for `uri`.
+    /// `uri` 对应的 `FileId`。
     #[must_use]
     pub fn id_of(&self, uri: &str) -> Option<FileId> {
         self.ids.get(uri).copied()
     }
 
-    /// The resolver used by POD→LSP conversions for files that may be closed.
+    /// POD→LSP 转换所用的解析回调:为可能已关闭的文件提供 `(uri, text, _len)`。
     #[must_use]
     pub fn resolver(&self) -> impl Fn(FileId) -> Option<(String, String, u32)> + '_ {
         move |file| {
@@ -90,7 +89,7 @@ impl State {
         id
     }
 
-    /// Add or replace a file's text in the analysis world.
+    /// 把文件文本写入分析世界(新增或替换)。
     pub fn inject(&mut self, uri: &str, res: Option<String>, text: String) -> FileId {
         let file = self.ids.get(uri).copied().unwrap_or_else(|| self.alloc(uri));
         let index = LineIndex::new(&text);
@@ -108,15 +107,14 @@ impl State {
         file
     }
 
-    /// `didOpen` — register editor text under this URI.
+    /// `didOpen` — 以编辑器文本在此 URI 下注册。
     pub fn open(&mut self, uri: &str, text: String) -> FileId {
         let path = uri.parse::<Uri>().ok().and_then(|u| uri_to_path(&u));
         let res = path.as_ref().and_then(|p| self.res_path(p));
         self.inject(uri, res, text)
     }
 
-    /// A watched file changed on disk; reload it, or drop it if deleted. `project.godot`
-    /// is re-applied as the project config instead of a file.
+    /// 被监视文件在磁盘上变化:重新加载;若已删除则移除。`project.godot` 走项目配置而非普通文件。
     pub fn watched(&mut self, uri: &str) {
         let Some(path) = uri.parse::<Uri>().ok().and_then(|u| uri_to_path(&u)) else {
             return;
@@ -138,7 +136,7 @@ impl State {
         }
     }
 
-    /// Remove a file from the registry and the analysis world.
+    /// 从注册表与分析世界中移除文件。
     pub fn remove(&mut self, uri: &str) {
         if let Some(file) = self.ids.remove(uri) {
             self.uris.remove(&file);
@@ -149,15 +147,15 @@ impl State {
         }
     }
 
-    /// Set (or replace) the `project.godot` config text.
+    /// 设置(或替换)`project.godot` 配置文本。
     pub fn set_project_config(&mut self, text: String) {
         let mut change = Change::new();
         change.set_project_config(text);
         self.host.apply_change(change);
     }
 
-    /// Walk `root` and register every `.gd`/`.tscn`/`.tres` plus `project.godot`.
-    /// The file set is the whole project, so absence-based diagnostics are enabled.
+    /// 遍历 `root`,注册所有 `.gd`/`.tscn`/`.tres` 以及 `project.godot`。
+    /// 文件集覆盖整个项目,因此基于缺失的跨文件诊断可用。
     pub fn load_project(&mut self, root: PathBuf) {
         self.root = Some(root.clone());
         let mut paths = Vec::new();
@@ -180,13 +178,12 @@ impl State {
                 change.set_file_path(file, res);
             }
         }
-        match std::fs::read_to_string(root.join("project.godot")) {
-            Ok(config) => change.set_project_config(config),
-            Err(_) => {}
+        if let Ok(config) = std::fs::read_to_string(root.join("project.godot")) {
+            change.set_project_config(config);
         }
         change.set_workspace_complete(true);
         self.host.apply_change(change);
-        eprintln!("[godotlsp] loaded {} project files", paths.len());
+        eprintln!("[godotlsp] 已加载 {} 个项目文件", paths.len());
     }
 }
 
@@ -240,7 +237,7 @@ mod tests {
     fn engine_model_is_bundled() {
         assert!(
             !gdscript_api::godot_version().is_empty(),
-            "bundled engine model missing: {}",
+            "内嵌引擎模型缺失: {}",
             gdscript_api::godot_version()
         );
     }
@@ -261,7 +258,7 @@ mod tests {
             "func f(:\n\tpass\n".into(),
         );
         let diags = s.host.analysis().diagnostics(f).unwrap();
-        assert!(!diags.is_empty(), "expected a parse diagnostic");
+        assert!(!diags.is_empty(), "应产生解析诊断");
     }
 
     #[test]
@@ -271,7 +268,7 @@ mod tests {
         let hints = s.host.analysis().inlay_hints(main).unwrap();
         assert!(
             hints.iter().any(|h| h.label.contains("int")),
-            "expected an inferred `: int`, got {hints:?}"
+            "应推断出 `: int`,实际 {hints:?}"
         );
     }
 

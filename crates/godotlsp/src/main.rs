@@ -1,7 +1,7 @@
-//! `godotlsp` — a standalone, engine-free GDScript language server over stdio (LSP 3.17).
+//! `godotlsp` — 独立的、脱离引擎的 GDScript 语言服务器,走 stdio(LSP 3.17)。
 //!
-//! Analysis comes from `gdscript-ide` (salsa-backed, scene-aware); this binary owns the
-//! JSON-RPC loop, position-encoding conversion, project loading, and capability dispatch.
+//! 分析能力来自 `gdscript-ide`(salsa 增量、场景感知);本二进制负责 JSON-RPC
+//! 循环、位置编码转换、项目加载与能力分发。
 
 mod convert;
 mod state;
@@ -31,12 +31,12 @@ fn main() {
             println!("godotlsp {}", env!("CARGO_PKG_VERSION"));
         }
         Some(other) => {
-            eprintln!("[godotlsp] unknown argument: {other}");
+            eprintln!("[godotlsp] 未知参数:{other}");
             std::process::exit(2);
         }
         None => {
             if let Err(e) = run() {
-                eprintln!("[godotlsp] fatal: {e}");
+                eprintln!("[godotlsp] 致命错误:{e}");
                 std::process::exit(1);
             }
         }
@@ -102,14 +102,14 @@ fn run() -> Result<(), Box<dyn Error + Sync + Send>> {
         state.load_project(root);
     }
     eprintln!(
-        "[godotlsp] {} engine model ready",
+        "[godotlsp] {} 引擎模型就绪",
         gdscript_api::godot_version()
     );
     for msg in &connection.receiver {
         match msg {
             Message::Request(req) => {
                 if connection.handle_shutdown(&req)? {
-                    // The protocol is over; detached io threads are torn down with the process.
+                    // 协议已结束;分离的 io 线程随进程一并销毁。
                     return Ok(());
                 }
                 on_request(&connection, &mut state, req);
@@ -142,7 +142,7 @@ fn params_root(init: &InitializeParams) -> Option<std::path::PathBuf> {
 fn on_request(connection: &Connection, state: &mut State, req: Request) {
     let id = req.id.clone();
     let parsed: Result<
-        // A tiny internal sum so every handler shares one deserialize path.
+        // 内部小求和类型,让所有 handler 共用一条反序列化路径。
         RequestKind,
         serde_json::Error,
     > = match req.method.as_str() {
@@ -187,7 +187,7 @@ fn on_request(connection: &Connection, state: &mut State, req: Request) {
             serde_json::from_value(req.params.clone()).map(RequestKind::RangeFormatting)
         }
         _ => {
-            let resp = Response::new_err(id, METHOD_NOT_FOUND, format!("unhandled method {}", req.method));
+            let resp = Response::new_err(id, METHOD_NOT_FOUND, format!("未支持的方法 {}", req.method));
             let _ = connection.sender.send(Message::Response(resp));
             return;
         }
@@ -195,7 +195,7 @@ fn on_request(connection: &Connection, state: &mut State, req: Request) {
     let params = match parsed {
         Ok(p) => p,
         Err(e) => {
-            let resp = Response::new_err(id, INVALID_PARAMS, format!("invalid params: {e}"));
+            let resp = Response::new_err(id, INVALID_PARAMS, format!("参数无效:{e}"));
             let _ = connection.sender.send(Message::Response(resp));
             return;
         }
@@ -212,7 +212,7 @@ const METHOD_NOT_FOUND: i32 = -32601;
 const INVALID_PARAMS: i32 = -32602;
 const REQUEST_FAILED: i32 = -32803;
 
-/// One variant per supported request, so the dispatch table is a single match.
+/// 每个支持的请求一个变体,分发表因此收敛为单个 match。
 enum RequestKind {
     Hover(HoverParams),
     Definition(GotoDefinitionParams),
@@ -231,8 +231,8 @@ enum RequestKind {
     RangeFormatting(DocumentRangeFormattingParams),
 }
 
-/// Handle a request. `Ok(serde_json::Value::Null)` renders as a protocol `null`.
-#[allow(deprecated)] // SymbolInformation.deprecated is still part of LSP 3.17
+/// 处理请求。`Ok(serde_json::Value::Null)` 渲染为协议层的 `null`。
+#[allow(deprecated)] // SymbolInformation.deprecated 仍是 LSP 3.17 的组成部分
 fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, String> {
     let analysis = state.host.analysis();
     let result: Option<serde_json::Value> = match req {
@@ -241,7 +241,7 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
                 return Ok(serde_json::Value::Null);
             };
             analysis.hover(FilePosition { file, offset }).ok().flatten().map(|h| {
-                let doc = state.doc(file).expect("hover file registered");
+                let doc = state.doc(file).expect("hover 文件已注册");
                 cv::to_value(&cv::hover(&doc.text, &doc.index, h))
             })
         }
@@ -270,7 +270,7 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
                 return Ok(serde_json::Value::Null);
             };
             analysis.document_symbols(file).ok().map(|syms| {
-                let doc = state.doc(file).expect("symbol file registered");
+                let doc = state.doc(file).expect("symbol 文件已注册");
                 cv::to_value(&lsp_types::DocumentSymbolResponse::Nested(
                     cv::document_symbols(&doc.text, &doc.index, syms),
                 ))
@@ -298,10 +298,10 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
             match analysis.rename(FilePosition { file, offset }, &p.new_name) {
                 Ok(Ok(change)) => match cv::workspace_edit(change, &state.resolver()) {
                     Some(edit) => Some(cv::to_value(&edit)),
-                    None => return Err("rename edit could not be mapped".into()),
+                    None => return Err("重命名编辑无法映射".into()),
                 },
-                Ok(Err(e)) => return Err(format!("cannot rename: {e:?}")),
-                Err(_) => return Err("rename cancelled by an edit".into()),
+                Ok(Err(e)) => return Err(format!("无法重命名:{e:?}")),
+                Err(_) => return Err("重命名被一次编辑取消".into()),
             }
         }
         RequestKind::PrepareRename(p) => {
@@ -349,7 +349,7 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
                 return Ok(serde_json::Value::Null);
             };
             analysis.semantic_tokens(file).ok().map(|tokens| {
-                let doc = state.doc(file).expect("token file registered");
+                let doc = state.doc(file).expect("token 文件已注册");
                 cv::to_value(&cv::semantic_tokens(&doc.text, &doc.index, tokens))
             })
         }
@@ -358,7 +358,7 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
                 return Ok(serde_json::Value::Null);
             };
             analysis.inlay_hints(file).ok().map(|hints| {
-                let doc = state.doc(file).expect("hint file registered");
+                let doc = state.doc(file).expect("hint 文件已注册");
                 cv::to_value(&cv::inlay_hints(&doc.text, &doc.index, hints))
             })
         }
@@ -367,7 +367,7 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
                 return Ok(serde_json::Value::Null);
             };
             analysis.folding_ranges(file).ok().map(|ranges| {
-                let doc = state.doc(file).expect("fold file registered");
+                let doc = state.doc(file).expect("fold 文件已注册");
                 cv::to_value(&cv::folding_ranges(&doc.text, &doc.index, ranges))
             })
         }
@@ -399,7 +399,7 @@ fn handle(state: &mut State, req: &RequestKind) -> Result<serde_json::Value, Str
                 return Ok(serde_json::Value::Null);
             };
             analysis.format(file).ok().flatten().map(|new_text| {
-                let doc = state.doc(file).expect("format file registered");
+                let doc = state.doc(file).expect("format 文件已注册");
                 cv::to_value(&cv::format_edits(&doc.text, &doc.index, new_text))
             })
         }
@@ -446,7 +446,7 @@ fn file_id(state: &State, uri: &Uri) -> Option<FileId> {
     state.id_of(uri.as_str())
 }
 
-/// `(FileId, byte offset)` for a text-document position, or `None` if unregistered.
+/// 文本文档位置对应的 `(FileId, 字节偏移)`,未注册则 `None`。
 fn position(state: &State, p: &lsp_types::TextDocumentPositionParams) -> Option<(FileId, u32)> {
     let file = file_id(state, &p.text_document.uri)?;
     let doc = state.doc(file)?;

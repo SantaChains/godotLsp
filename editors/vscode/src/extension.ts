@@ -32,7 +32,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
   if (vscode.workspace.isTrusted) {
     await start();
   } else {
-    setStatus("stopped", "godotlsp waits for this workspace to be trusted.");
+    setStatus("stopped", "godotlsp 等待此工作区被信任。");
     context.subscriptions.push(vscode.workspace.onDidGrantWorkspaceTrust(() => start()));
   }
 }
@@ -47,21 +47,21 @@ async function start(): Promise<void> {
   }
   const command = resolveServer();
   if (!command) {
-    setStatus("error", "godotlsp was not found.");
+    setStatus("error", "未找到 godotlsp。");
     void vscode.window
       .showErrorMessage(
-        "godotlsp: no server binary found. Bundle one with the extension (server/), point `godotlsp.path` at it, or put `godotlsp` on PATH.",
-        "Set Path",
+        "godotlsp:未找到服务器二进制。随扩展打包(server/)、将 `godotlsp.path` 指向它,或把 `godotlsp` 放入 PATH。",
+        "设置路径",
       )
       .then((pick) => {
-        if (pick === "Set Path") {
+        if (pick === "设置路径") {
           void vscode.commands.executeCommand("workbench.action.openSettings", "godotlsp.path");
         }
       });
     return;
   }
 
-  output.appendLine(`Starting ${command}`);
+  output.appendLine(`正在启动 ${command}`);
   const serverOptions: ServerOptions = {
     command,
     transport: TransportKind.stdio,
@@ -78,17 +78,17 @@ async function start(): Promise<void> {
       const info = client?.initializeResult?.serverInfo;
       setStatus("running", `${info?.name ?? "godotlsp"} ${info?.version ?? ""}`.trim());
     } else if (e.newState === State.Starting) {
-      setStatus("starting", "godotlsp is starting.");
+      setStatus("starting", "godotlsp 正在启动。");
     } else {
-      setStatus("stopped", "godotlsp is not running.");
+      setStatus("stopped", "godotlsp 未在运行。");
     }
   });
 
   try {
     await client.start();
   } catch (err) {
-    setStatus("error", `godotlsp failed to start: ${String(err)}`);
-    output.appendLine(`Failed to start godotlsp: ${String(err)}`);
+    setStatus("error", `godotlsp 启动失败:${String(err)}`);
+    output.appendLine(`启动 godotlsp 失败:${String(err)}`);
     client = undefined;
   }
 }
@@ -100,7 +100,7 @@ async function stop(): Promise<void> {
     try {
       await c.stop();
     } catch (err) {
-      output.appendLine(`Error while stopping godotlsp: ${String(err)}`);
+      output.appendLine(`停止 godotlsp 时出错:${String(err)}`);
     }
   }
 }
@@ -110,7 +110,7 @@ async function restart(): Promise<void> {
   await start();
 }
 
-/** The `godotlsp.path` setting, else the bundled `server/godotlsp`, else `godotlsp` on PATH. */
+/** `godotlsp.path` 配置,否则扩展自带的 `server/godotlsp`,否则 PATH 上的 `godotlsp`。 */
 function resolveServer(): string | undefined {
   const configured = vscode.workspace.getConfiguration(SECTION).get<string | null>("path");
   if (typeof configured === "string" && configured.trim() !== "") {
@@ -124,7 +124,7 @@ function resolveServer(): string | undefined {
   return onPath(exe);
 }
 
-/** Expands `${workspaceFolder}` and a leading `~` in a path setting. */
+/** 展开路径配置中的 `${workspaceFolder}` 与前导 `~`。 */
 function expand(value: string): string {
   const folder = vscode.workspace.workspaceFolders?.[0]?.uri.fsPath ?? "";
   let v = value.replace(/\$\{workspaceFolder\}/g, folder);

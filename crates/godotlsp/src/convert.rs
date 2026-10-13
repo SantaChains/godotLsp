@@ -1,4 +1,4 @@
-//! POD ↔ LSP conversions: byte offsets ↔ UTF-16 positions, analyzer structs → `lsp-types`.
+//! POD ↔ LSP 转换:字节偏移 ↔ UTF-16 位置,分析器结构 → `lsp-types`。
 
 use std::collections::HashMap;
 
@@ -19,7 +19,7 @@ use lsp_types::{
 };
 use serde::Serialize;
 
-/// Byte offset ↔ UTF-16 position index over one file's text.
+/// 单文件文本之上的字节偏移 ↔ UTF-16 位置索引。
 #[derive(Debug, Clone)]
 pub struct LineIndex {
     line_starts: Vec<u32>,
@@ -27,7 +27,7 @@ pub struct LineIndex {
 }
 
 impl LineIndex {
-    /// Build the index for `text`.
+    /// 为 `text` 建立索引。
     #[must_use]
     pub fn new(text: &str) -> Self {
         let mut line_starts = vec![0u32];
@@ -42,7 +42,7 @@ impl LineIndex {
         Self { line_starts, len }
     }
 
-    /// 0-based line count.
+    /// 0 起始的行数。
     #[must_use]
     pub fn line_count(&self) -> u32 {
         #[allow(clippy::cast_possible_truncation)]
@@ -64,13 +64,13 @@ impl LineIndex {
         (start, end)
     }
 
-    /// Total byte length.
+    /// 总字节长度。
     #[must_use]
     pub fn len(&self) -> u32 {
         self.len
     }
 
-    /// The LSP position of a byte offset.
+    /// 字节偏移对应的 LSP 位置。
     #[must_use]
     pub fn position(&self, text: &str, offset: u32) -> Position {
         let offset = offset.min(self.len);
@@ -92,7 +92,7 @@ impl LineIndex {
         }
     }
 
-    /// The byte offset of an LSP position (clamped into the document).
+    /// LSP 位置对应的字节偏移(夹紧到文档范围内)。
     #[must_use]
     pub fn offset(&self, text: &str, pos: Position) -> u32 {
         let (start, end) = self.line_span(pos.line);
@@ -109,7 +109,7 @@ impl LineIndex {
         u32::try_from(start + byte_col).unwrap_or(u32::MAX)
     }
 
-    /// An LSP range from a byte range.
+    /// 字节范围对应的 LSP 范围。
     #[must_use]
     pub fn range(&self, text: &str, range: TextRange) -> Range {
         Range {
@@ -154,7 +154,7 @@ fn completion_kind(k: CompletionKind) -> CompletionItemKind {
     }
 }
 
-/// Analyzer diagnostics → LSP diagnostics.
+/// 分析器诊断 → LSP 诊断。
 #[must_use]
 pub fn diagnostics(text: &str, index: &LineIndex, diags: &[Diagnostic]) -> Vec<LspDiagnostic> {
     diags
@@ -188,7 +188,7 @@ pub fn diagnostics(text: &str, index: &LineIndex, diags: &[Diagnostic]) -> Vec<L
         .collect()
 }
 
-/// Analyzer hover → LSP hover.
+/// 分析器 hover → LSP hover。
 #[must_use]
 pub fn hover(text: &str, index: &LineIndex, h: HoverResult) -> Hover {
     let mut value = match &h.ty_label {
@@ -210,7 +210,7 @@ pub fn hover(text: &str, index: &LineIndex, h: HoverResult) -> Hover {
     }
 }
 
-/// Analyzer completions → LSP completion items.
+/// 分析器补全项 → LSP 补全项。
 #[must_use]
 pub fn completions(items: Vec<GCompletionItem>) -> Vec<CompletionItem> {
     items
@@ -241,7 +241,7 @@ fn symbols(text: &str, index: &LineIndex, syms: Vec<GSymbol>) -> Vec<DocumentSym
         .collect()
 }
 
-/// Analyzer document symbols → nested LSP document symbols.
+/// 分析器文档符号 → 嵌套 LSP 文档符号。
 #[must_use]
 pub fn document_symbols(text: &str, index: &LineIndex, syms: Vec<GSymbol>) -> Vec<DocumentSymbol> {
     symbols(text, index, syms)
@@ -272,10 +272,10 @@ fn with_docs<R>(
         .collect()
 }
 
-/// Resolver callback shape: `(uri, text, _len)` per `FileId`.
+/// 解析回调的形状:每个 `FileId` 提供 `(uri, text, _len)`。
 pub type DocResolver<'a> = &'a dyn Fn(FileId) -> Option<(String, String, u32)>;
 
-/// Navigation targets → locations (goto definition).
+/// 导航目标 → 位置(跳转定义)。
 #[must_use]
 pub fn nav_targets(targets: Vec<NavTarget>, get: DocResolver) -> Vec<Location> {
     with_docs(
@@ -285,7 +285,7 @@ pub fn nav_targets(targets: Vec<NavTarget>, get: DocResolver) -> Vec<Location> {
     )
 }
 
-/// References → locations, optionally excluding the declaration.
+/// 引用 → 位置,可选排除声明本身。
 #[must_use]
 pub fn references(refs: Vec<Reference>, include_decl: bool, get: DocResolver) -> Vec<Location> {
     with_docs(
@@ -297,7 +297,7 @@ pub fn references(refs: Vec<Reference>, include_decl: bool, get: DocResolver) ->
     )
 }
 
-/// A cross-file source change → `WorkspaceEdit`.
+/// 跨文件源码变更 → `WorkspaceEdit`。
 #[must_use]
 pub fn workspace_edit(change: SourceChange, get: DocResolver) -> Option<WorkspaceEdit> {
     let mut changes: HashMap<Uri, Vec<TextEdit>> = HashMap::new();
@@ -320,7 +320,7 @@ pub fn workspace_edit(change: SourceChange, get: DocResolver) -> Option<Workspac
     })
 }
 
-/// The rename word at a byte offset (for `prepareRename` UX).
+/// 字节偏移处的可重命名单词(用于 `prepareRename` 交互)。
 #[must_use]
 pub fn word_range_at(text: &str, offset: u32) -> Option<TextRange> {
     let b = text.as_bytes();
@@ -344,7 +344,7 @@ fn is_word(c: u8) -> bool {
     c.is_ascii_alphanumeric() || c == b'_'
 }
 
-/// The semantic-token legend: token types and modifiers, in wire order.
+/// 语义 token 图例:token 类型与修饰符,按线上传输顺序。
 #[must_use]
 pub fn semantic_tokens_legend() -> (&'static [&'static str], &'static [&'static str]) {
     (
@@ -376,7 +376,7 @@ fn token_type_index(t: SemanticTokenType) -> u32 {
     }
 }
 
-/// Absolute token ranges → LSP delta-encoded tokens.
+/// 绝对 token 范围 → LSP 差分编码 token。
 #[must_use]
 pub fn semantic_tokens(text: &str, index: &LineIndex, tokens: Vec<SemanticToken>) -> SemanticTokens {
     let mut prev_line = 0u32;
@@ -412,7 +412,7 @@ pub fn semantic_tokens(text: &str, index: &LineIndex, tokens: Vec<SemanticToken>
     }
 }
 
-/// Analyzer inlay hints → LSP inlay hints.
+/// 分析器 inlay hint → LSP inlay hint。
 #[must_use]
 pub fn inlay_hints(text: &str, index: &LineIndex, hints: Vec<InlayHint>) -> Vec<LspInlayHint> {
     hints
@@ -433,7 +433,7 @@ pub fn inlay_hints(text: &str, index: &LineIndex, hints: Vec<InlayHint>) -> Vec<
         .collect()
 }
 
-/// Analyzer fold ranges → LSP folding ranges.
+/// 分析器折叠范围 → LSP 折叠范围。
 #[must_use]
 pub fn folding_ranges(text: &str, index: &LineIndex, ranges: Vec<FoldRange>) -> Vec<FoldingRange> {
     ranges
@@ -476,7 +476,7 @@ fn signature_information(s: gdscript_base::SignatureInfo) -> SignatureInformatio
     }
 }
 
-/// Analyzer signature help → LSP signature help.
+/// 分析器签名帮助 → LSP 签名帮助。
 #[must_use]
 pub fn signature_help(help: GSignatureHelp) -> LspSignatureHelp {
     LspSignatureHelp {
@@ -486,7 +486,7 @@ pub fn signature_help(help: GSignatureHelp) -> LspSignatureHelp {
     }
 }
 
-/// Analyzer code actions → LSP code actions.
+/// 分析器 code action → LSP code action。
 #[must_use]
 pub fn code_actions(actions: Vec<GCodeAction>, get: DocResolver) -> Vec<CodeActionOrCommand> {
     actions
@@ -506,7 +506,7 @@ pub fn code_actions(actions: Vec<GCodeAction>, get: DocResolver) -> Vec<CodeActi
         .collect()
 }
 
-/// Whole-document formatting → a single full-range edit.
+/// 整文档格式化 → 单个全文编辑。
 #[must_use]
 pub fn format_edits(text: &str, index: &LineIndex, new_text: String) -> Vec<TextEdit> {
     vec![TextEdit {
@@ -521,7 +521,7 @@ pub fn format_edits(text: &str, index: &LineIndex, new_text: String) -> Vec<Text
     }]
 }
 
-/// Serialize `value` into a JSON value for the wire.
+/// 把 `value` 序列化为线上传输的 JSON 值。
 pub(crate) fn to_value<T: Serialize>(value: &T) -> serde_json::Value {
     serde_json::to_value(value).unwrap_or(serde_json::Value::Null)
 }

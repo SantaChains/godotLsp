@@ -1,14 +1,13 @@
-//! `file:` URI ↔ filesystem path conversion, percent-encoding aware.
+//! `file:` URI 与文件系统路径的双向转换,含百分号编解码。
 //!
-//! Adapted from `gdscript-analyzer`'s `gdscript-lsp` (MIT OR Apache-2.0), which solved the
-//! same lsp-types 0.97 `Uri` migration.
+//! 改编自 `gdscript-analyzer` 的 `gdscript-lsp`(MIT OR Apache-2.0),
+//! 同样解决了 lsp-types 0.97 的 `Uri` 迁移问题。
 
 use std::path::{Path, PathBuf};
 
 use lsp_types::Uri;
 
-/// Convert a `file:` [`Uri`] to a filesystem path, percent-decoding and stripping the
-/// leading slash before a Windows drive. `None` for non-`file:` URIs.
+/// `file:` [`Uri`] 转文件系统路径:百分号解码,并剥去 Windows 盘符前的斜杠。非 `file:` URI 返回 `None`。
 #[must_use]
 pub fn uri_to_path(uri: &Uri) -> Option<PathBuf> {
     let rest = uri.as_str().strip_prefix("file://")?;
@@ -27,8 +26,7 @@ pub fn uri_to_path(uri: &Uri) -> Option<PathBuf> {
     Some(PathBuf::from(trimmed))
 }
 
-/// Convert a filesystem path to a `file:` [`Uri`], normalizing separators and
-/// percent-encoding reserved characters.
+/// 文件系统路径转 `file:` [`Uri`]:归一化分隔符,百分号编码保留字符。
 #[must_use]
 pub fn path_to_uri(path: &Path) -> Option<Uri> {
     let mut s = path.to_string_lossy().replace('\\', "/");
@@ -45,6 +43,7 @@ pub fn path_to_uri(path: &Path) -> Option<Uri> {
         .ok()
 }
 
+/// 百分号解码 URI 路径片段(`%XX` → 字节);畸形转义原样保留。
 fn percent_decode(s: &str) -> String {
     let bytes = s.as_bytes();
     let mut out = Vec::with_capacity(bytes.len());
@@ -64,6 +63,7 @@ fn percent_decode(s: &str) -> String {
     String::from_utf8_lossy(&out).into_owned()
 }
 
+/// 路径的百分号编码:保留非保留字符集 + `/`(分隔符)+ `:`(Windows 盘符),其余编码。
 fn percent_encode_path(s: &str) -> String {
     let mut out = String::with_capacity(s.len());
     for &b in s.as_bytes() {
@@ -80,6 +80,7 @@ fn percent_encode_path(s: &str) -> String {
     out
 }
 
+/// 十六进制位取值(`0-9`/`a-f`/`A-F`),否则 `None`。
 fn hex_val(b: u8) -> Option<u8> {
     match b {
         b'0'..=b'9' => Some(b - b'0'),
