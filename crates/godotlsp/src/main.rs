@@ -4,6 +4,8 @@
 //! 循环、位置编码转换、项目加载与能力分发。
 
 mod convert;
+mod gdscript_docs;
+mod globals;
 mod state;
 mod text;
 mod uri;
@@ -329,17 +331,38 @@ fn handle(state: &State, req: &RequestKind) -> Result<serde_json::Value, String>
             let Some((file, offset)) = position(state, &p.text_document_position_params) else {
                 return Ok(serde_json::Value::Null);
             };
-            let Some(mut h) = analysis.hover(FilePosition { file, offset }).ok().flatten() else {
-                return Ok(serde_json::Value::Null);
-            };
             let doc = state.doc(file).expect("hover 文件已注册");
-            // 引擎无文档时,回扫声明名上方的 `##` 文档注释(与 Godot 4.4+ 悬停行为对齐)。
-            if h.doc.is_empty() {
+            // 内核 hover;引擎无文档时,回扫声明名上方的 `##` 文档注释(与 Godot 4.4+ 悬停行为对齐)。
+            let mut kernel = analysis.hover(FilePosition { file, offset }).ok().flatten();
+            if let Some(h) = kernel.as_mut()
+                && h.doc.is_empty()
+            {
                 let line = doc.index.position(&doc.text, h.range.start).line;
                 if let Some(md) = text::doc_comment_above(&doc.text, &doc.index, line) {
                     h.doc = md;
                 }
             }
+            // 内核无结果或仍无文档:引擎全局面兜底(类名/单例/工具函数/常量/枚举值/注解);
+            // 内核有文档时,追加官方 zh-CN 文档链接(文档跳转)。
+            if kernel.as_ref().is_none_or(|h| h.doc.is_empty()) {
+                if let Some(md) = globals_hover_at(&doc.text, offset) {
+                    let word = cv::word_range_at(&doc.text, offset);
+                    return Ok(cv::to_value(&lsp_types::Hover {
+                        contents: lsp_types::HoverContents::Markup(lsp_types::MarkupContent {
+                            kind: lsp_types::MarkupKind::Markdown,
+                            value: md,
+                        }),
+                        range: word.map(|r| doc.index.range(&doc.text, r)),
+                    }));
+                }
+            } else if let Some(h) = kernel.as_mut()
+                && let Some(link) = globals_hover_link(&doc.text, offset)
+            {
+                h.doc.push_str(&format!("\n\n[📖 中文文档]({link})"));
+            }
+            let Some(h) = kernel else {
+                return Ok(serde_json::Value::Null);
+            };
             Some(cv::to_value(&cv::hover(&doc.text, &doc.index, h)))
         }
         RequestKind::Definition(p) => {
@@ -359,7 +382,14 @@ fn handle(state: &State, req: &RequestKind) -> Result<serde_json::Value, String>
                 .completions(FilePosition { file, offset })
                 .ok()
                 .map(|items| {
-                    cv::to_value(&lsp_types::CompletionResponse::Array(cv::completions(items)))
+                    let mut items = cv::completions(items);
+                    // 按名上下文(前字符非 `.`/`@`)合并引擎全局面:
+                    // 类、内建类型、单例、工具/内建函数、全局枚举及值、常量。
+                    let doc = state.doc(file).expect("completion 文件已注册");
+                    if by_name_context(&doc.text, offset) {
+                        items.extend(globals::completion_items().iter().cloned());
+                    }
+                    cv::to_value(&lsp_types::CompletionResponse::Array(items))
                 })
         }
         RequestKind::DocumentSymbol(p) => {
@@ -597,6 +627,28 @@ fn position(state: &State, p: &lsp_types::TextDocumentPositionParams) -> Option<
     let doc = state.doc(file)?;
     let offset = doc.index.offset(&doc.text, p.position);
     Some((file, offset))
+}
+
+/// 光标是否处于"按名补全"上下文:标识符之前不是 `.`(成员)也不是 `@`(注解)。
+fn by_name_context(text: &str, offset: u32) -> bool {
+    let b = text.as_bytes();
+    let mut ws = (offset as usize).min(b.len());
+    while ws > 0 && (b[ws - 1].is_ascii_alphanumeric() || b[ws - 1] == b'_') {
+        ws -= 1;
+    }
+    !matches!(ws.checked_sub(1).map(|i| b[i]), Some(b'.') | Some(b'@'))
+}
+
+/// 光标处裸标识符的引擎全局面 hover(单例/类/工具函数/常量/枚举值/注解)。
+fn globals_hover_at(text: &str, offset: u32) -> Option<String> {
+    let range = cv::word_range_at(text, offset)?;
+    globals::hover_markdown(&text[range.start as usize..range.end as usize])
+}
+
+/// 光标处裸标识符的官方文档链接(命中引擎全局面时)。
+fn globals_hover_link(text: &str, offset: u32) -> Option<String> {
+    let range = cv::word_range_at(text, offset)?;
+    globals::doc_link(&text[range.start as usize..range.end as usize])
 }
 
 fn on_notification(connection: &Connection, state: &mut State, not: Notification) {

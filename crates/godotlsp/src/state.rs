@@ -317,4 +317,5 @@ mod tests {
         let items = s.host.analysis().completions(gdscript_base::FilePosition { file: main, offset }).unwrap();
         assert!(!items.is_empty());
     }
+
 }
