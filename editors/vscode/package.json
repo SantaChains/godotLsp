@@ -32,7 +32,8 @@
       "supported": "limited",
       "description": "godotlsp 会运行由工作区配置的二进制文件。",
       "restrictedConfigurations": [
-        "godotlsp.path"
+        "godotlsp.path",
+        "godotlsp.godotExecutable"
       ]
     },
     "virtualWorkspaces": false
@@ -58,6 +59,12 @@
         "path": "./syntaxes/GDScript.tmLanguage.json"
       }
     ],
+    "snippets": [
+      {
+        "language": "gdscript",
+        "path": "./snippets/gdscript.json"
+      }
+    ],
     "configurationDefaults": {
       "[gdscript]": {
         "editor.insertSpaces": false,
@@ -74,6 +81,16 @@
       {
         "command": "godotlsp.showOutput",
         "title": "显示输出",
+        "category": "godotlsp"
+      },
+      {
+        "command": "godotlsp.runProject",
+        "title": "运行项目",
+        "category": "godotlsp"
+      },
+      {
+        "command": "godotlsp.runScene",
+        "title": "运行当前场景",
         "category": "godotlsp"
       }
     ],
@@ -119,6 +136,15 @@
           "type": "boolean",
           "default": true,
           "markdownDescription": "在推断出类型的 `:=` 绑定、未标注参数与 `for` 变量旁显示内联 `: 类型` 提示。"
+        },
+        "godotlsp.godotExecutable": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "scope": "machine-overridable",
+          "markdownDescription": "「运行项目/运行当前场景」命令所用的 Godot 可执行文件路径。留空时使用 `PATH` 中的 `godot`。支持 `${workspaceFolder}` 与 `~`。"
         }
       }
     }

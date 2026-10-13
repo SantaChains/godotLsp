@@ -1,0 +1,82 @@
+{
+  "GDScript 声明": {
+    "prefix": "sig",
+    "body": ["signal ${1:name}(${2:arg})"],
+    "description": "信号声明"
+  },
+  "导出变量": {
+    "prefix": "exv",
+    "body": ["@export var ${1:name}: ${2:type} = ${3:value}"],
+    "description": "@export 变量(带类型)"
+  },
+  "导出节点引用": {
+    "prefix": "exn",
+    "body": ["@export var ${1:name}: ${2:NodeType}"],
+    "description": "@export 节点类型引用"
+  },
+  "导出资源": {
+    "prefix": "exr",
+    "body": ["@export var ${1:name}: ${2:ResourceType}"],
+    "description": "@export 资源引用"
+  },
+  "onready 变量": {
+    "prefix": "onr",
+    "body": ["@onready var ${1:name}: ${2:NodeType} = \\$${3:Path}"],
+    "description": "@onready 取场景节点"
+  },
+  "ready 回调": {
+    "prefix": "rdy",
+    "body": ["func _ready() -> void:", "\t${1:pass}"],
+    "description": "_ready 生命周期回调"
+  },
+  "process 回调": {
+    "prefix": "prc",
+    "body": ["func _process(delta: float) -> void:", "\t${1:pass}"],
+    "description": "_process 每帧回调"
+  },
+  "physics process 回调": {
+    "prefix": "phyp",
+    "body": ["func _physics_process(delta: float) -> void:", "\t${1:pass}"],
+    "description": "_physics_process 物理帧回调"
+  },
+  "input 回调": {
+    "prefix": "inp",
+    "body": ["func _input(event: InputEvent) -> void:", "\t${1:pass}"],
+    "description": "_input 输入回调"
+  },
+  "match 分支": {
+    "prefix": "match",
+    "body": ["match ${1:value}:", "\t${2:pattern}:", "\t\t${3:pass}", "\t_:", "\t\t${4:pass}"],
+    "description": "match 匹配分支(含兜底)"
+  },
+  "lambda": {
+    "prefix": "lam",
+    "body": ["func(${1:args}): ${2:body}"],
+    "description": "匿名函数(lambda)"
+  },
+  "定时器": {
+    "prefix": "timer",
+    "body": ["get_tree().create_timer(${1:seconds}).timeout.connect(func(): ${2:body})"],
+    "description": "SceneTreeTimer 一次性延时"
+  },
+  "连接信号": {
+    "prefix": "conn",
+    "body": ["${1:node}.${2:signal}.connect(${3:callable})"],
+    "description": "连接信号到可调用对象"
+  },
+  "实例化场景": {
+    "prefix": "inst",
+    "body": ["var ${1:node} := ${2:Scene}.instantiate()", "add_child(${1:node})"],
+    "description": "实例化并挂载场景"
+  },
+  "节点路径取节点": {
+    "prefix": "getn",
+    "body": ["\\$${1:Path} as ${2:NodeType}"],
+    "description": "$NodePath 取节点(带类型)"
+  },
+  "断言": {
+    "prefix": "asrt",
+    "body": ["assert(${1:condition}, \"${2:message}\")"],
+    "description": "断言(调试构建生效)"
+  }
+}

@@ -24,6 +24,8 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
   context.subscriptions.push(
     vscode.commands.registerCommand("godotlsp.restart", () => restart()),
     vscode.commands.registerCommand("godotlsp.showOutput", () => output.show(true)),
+    vscode.commands.registerCommand("godotlsp.runProject", () => runGodot([])),
+    vscode.commands.registerCommand("godotlsp.runScene", () => runCurrentScene()),
     // 轻量配置(严格诊断/内联提示)由语言客户端经 didChangeConfiguration 推送,
     // 只有服务器二进制路径变化才值得重启进程。
     vscode.workspace.onDidChangeConfiguration(
@@ -166,4 +168,49 @@ function setStatus(state: "starting" | "running" | "stopped" | "error", tooltip:
   status.backgroundColor =
     state === "error" ? new vscode.ThemeColor("statusBarItem.errorBackground") : undefined;
   status.show();
+}
+
+/** Godot 可执行文件解析:`godotlsp.godotExecutable` 配置,否则 PATH 上的 `godot`。 */
+function resolveGodot(): string | undefined {
+  const configured = vscode.workspace.getConfiguration(SECTION).get<string | null>("godotExecutable");
+  if (typeof configured === "string" && configured.trim() !== "") {
+    return expand(configured.trim());
+  }
+  const exe = process.platform === "win32" ? "godot.exe" : "godot";
+  return onPath(exe);
+}
+
+/** 在集成终端里以项目根为 cwd 运行 Godot(调试/运行属 DAP 域之外的最简入口)。 */
+function runGodot(args: string[]): void {
+  const folder = vscode.workspace.workspaceFolders?.[0];
+  if (!folder) {
+    void vscode.window.showErrorMessage("godotlsp:没有打开的工作区,无法运行 Godot 项目。");
+    return;
+  }
+  const godot = resolveGodot();
+  if (!godot) {
+    void vscode.window
+      .showErrorMessage("godotlsp:未找到 Godot 可执行文件。请设置 `godotlsp.godotExecutable` 或把 `godot` 放入 PATH。", "设置路径")
+      .then((pick) => {
+        if (pick === "设置路径") {
+          void vscode.commands.executeCommand("workbench.action.openSettings", "godotlsp.godotExecutable");
+        }
+      });
+    return;
+  }
+  const quoted = args.map((a) => (/\s/.test(a) ? `"${a}"` : a));
+  const terminal = vscode.window.createTerminal({ name: "Godot", cwd: folder.uri.fsPath });
+  terminal.sendText(`${JSON.stringify(godot)} --path . ${quoted.join(" ")}`.trim());
+  terminal.show(true);
+}
+
+/** 运行当前编辑器打开的场景:`godot --path . <场景文件>`。 */
+async function runCurrentScene(): Promise<void> {
+  const editor = vscode.window.activeTextEditor;
+  const file = editor?.document.uri.fsPath;
+  if (!file || !/\.(tscn|scn)$/i.test(file)) {
+    void vscode.window.showErrorMessage("godotlsp:请先打开一个场景文件(.tscn)再运行场景。");
+    return;
+  }
+  runGodot([file]);
 }
