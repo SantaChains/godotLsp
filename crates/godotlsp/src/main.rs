@@ -29,15 +29,16 @@ use crate::convert as cv;
 use crate::state::State;
 
 fn main() {
+    // `--stdio` 是 vscode-languageclient 等客户端附加的标准传输参数,等价于默认行为。
     match std::env::args().nth(1).as_deref() {
         Some("--version" | "-V") => {
             println!("godotlsp {}", env!("CARGO_PKG_VERSION"));
         }
-        Some(other) => {
+        Some(other) if other != "--stdio" => {
             eprintln!("[godotlsp] 未知参数:{other}");
             std::process::exit(2);
         }
-        None => {
+        _ => {
             if let Err(e) = run() {
                 eprintln!("[godotlsp] 致命错误:{e}");
                 std::process::exit(1);

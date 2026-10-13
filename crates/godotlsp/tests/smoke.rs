@@ -17,7 +17,9 @@ struct Server {
 
 impl Server {
     fn spawn() -> Self {
+        // 带 `--stdio` 启动,与 vscode-languageclient 的真实调用方式一致。
         let mut child = Command::new(env!("CARGO_BIN_EXE_godotlsp"))
+            .arg("--stdio")
             .stdin(Stdio::piped())
             .stdout(Stdio::piped())
             .stderr(Stdio::null())
