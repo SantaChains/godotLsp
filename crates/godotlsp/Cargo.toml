@@ -7,6 +7,9 @@ license = "MIT OR Apache-2.0"
 description = "A standalone, engine-free GDScript language server speaking LSP 3.17 over stdio"
 repository = "https://github.com/godotlsp/godotlsp"
 
+[build-dependencies]
+regex = "1"
+
 [dependencies]
 gdscript-ide = "0.6.1"
 gdscript-base = "0.6.1"
