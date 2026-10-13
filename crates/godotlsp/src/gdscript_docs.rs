@@ -185,9 +185,7 @@ pub const GLOBAL_ENUM_NAMES: &[&str] = &[
     r#"JoyAxis"#,
     r#"MIDIMessage"#,
     r#"Error"#,
-    r#"PropertyHint"#,
-    r#"Variant"#,
-    r#"Variant"#
+    r#"PropertyHint"#
 ];
 
 /// GDScript 注解文档(`@` 后缀名 → Markdown,官方文档原文)。
@@ -1000,5 +998,8 @@ pub const KEYWORD_DOCS: &[(&str, &str)] = &[
     (r#"PI"#, r#"PI constant."#),
     (r#"TAU"#, r#"TAU constant."#),
     (r#"INF"#, r#"Infinity constant. Used for comparisons and as result of calculations."#),
-    (r#"NAN"#, r#"NAN (not a number) constant. Used as impossible result from calculations."#)
+    (r#"NAN"#, r#"NAN (not a number) constant. Used as impossible result from calculations."#),
+    (r#"and"#, r#"Logical AND operator. Evaluates to true only if both operands are true."#),
+    (r#"or"#, r#"Logical OR operator. Evaluates to true if at least one operand is true."#),
+    (r#"not"#, r#"Logical NOT operator (unary). Inverts the boolean value of its operand."#)
 ];

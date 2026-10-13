@@ -530,6 +530,10 @@ mod tests {
         let h = keyword_hover("await").unwrap();
         assert!(h.contains("Waits for a signal"), "{h}");
         assert!(h.contains("docs.godotengine.org/zh-CN/"));
+        // 布尔运算符关键字(常用,此前缺失)。
+        for kw in ["and", "or", "not"] {
+            assert!(keyword_hover(kw).is_some_and(|d| d.contains(kw)), "{kw}");
+        }
         assert!(keyword_hover("definitely_not_a_keyword").is_none());
 
         // 注解补全回填:一行 detail + 完整文档。

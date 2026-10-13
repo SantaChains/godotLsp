@@ -415,7 +415,7 @@ fn node_path_completion_session() {
     let arr = items.as_array().unwrap();
     let labels: Vec<&str> = arr.iter().filter_map(|i| i["label"].as_str()).collect();
     assert!(labels.contains(&"Panel"), "% 缺 unique 节点:{labels:?}");
-    assert!(!labels.iter().any(|l| *l == "AStar2D"),
+    assert!(!labels.contains(&"AStar2D"),
         "unique 上下文混入了全局面:{} 项", arr.len());
 
     // hover `$Panel`(第 3 行 char 13):类型推断应给出 Panel 类与文档。
