@@ -1,6 +1,6 @@
 {
   "name": "godotlsp",
-  "displayName": "godotlsp: standalone GDScript Language Server",
+  "displayName": "godotlsp:独立 GDScript 语言服务器",
   "description": "独立于 Godot 引擎运行的 GDScript 语言服务器:悬停文档、补全、导航、诊断与格式化,无需打开 Godot 编辑器。",
   "version": "0.1.0",
   "publisher": "godotlsp",
@@ -30,7 +30,7 @@
   "capabilities": {
     "untrustedWorkspaces": {
       "supported": "limited",
-      "description": "godotlsp runs a binary configured by the workspace.",
+      "description": "godotlsp 会运行由工作区配置的二进制文件。",
       "restrictedConfigurations": [
         "godotlsp.path"
       ]
@@ -68,12 +68,12 @@
     "commands": [
       {
         "command": "godotlsp.restart",
-        "title": "Restart Server",
+        "title": "重启服务器",
         "category": "godotlsp"
       },
       {
         "command": "godotlsp.showOutput",
-        "title": "Show Output",
+        "title": "显示输出",
         "category": "godotlsp"
       }
     ],
