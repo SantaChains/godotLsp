@@ -38,12 +38,12 @@
 4. ✅ **注解 detail 回填**:36 个注解补全带一行说明 + 完整文档 + 链接。
 5. ✅ **诊断分级/降噪**:分级由内核 `WarningSettings`(Godot 编辑器同款 per-code)+ 严格模式开关承担;新增 `diagnostics.ignore` 按码忽略配置(双通道下发)。
 
-### P1 — 交互(编辑器侧,进 VS Code 插件)
+### P1 — 交互(服务器侧场景感知 + 编辑器侧入口)
 
-6. **运行/调试入口**:插件提供"运行当前场景/项目"命令(调 `godot --path .`),DAP 调试走独立适配器进程;**不进服务器协议**(域隔离准则)。
-7. **`$NodePath` / `%Unique` 场景感知增强**:documentLink 已可点;补 hover(节点类型来自 .tscn 解析,内核已具备推断,补展示)与补全(场景内节点名,服务器侧从 .tscn 提取)。
+6. ✅ **运行/调试入口(运行类)**:插件提供「运行项目/运行当前场景」命令(集成终端调 `godot --path`,可配 `godotlsp.godotExecutable`);DAP 调试仍走 P2-13 独立适配器,**不进服务器协议**(域隔离准则)。
+7. ✅ **`$NodePath` / `%Unique` 场景感知增强**:内核 M2 链路已具备(补全带节点 `type=` detail、hover 类型推断、跳转定义);服务器补节点路径上下文识别,`$`/`%` 上下文下不再合并全局面(探针实测 1662 项污染 → 纯节点列表);取模 `%` 经操作数前缀启发式排除。
 8. **格式化桥接**:优先内建格式化器;提供 `godotlsp.format.engine: gdformat` 开关,外部工具存在时委托(行为兼容诉求)。
-9. **snippet 集**:`@export`、信号声明、`_ready`/`_process` 模板、`match`、lambda(插件 contributes)。
+9. ✅ **snippet 集**:`@export`/`@onready`/信号声明、`_ready`/`_process`/`_physics_process`/`_input` 回调、`match`、lambda、定时器、信号连接、场景实例化等 16 组模板(插件 contributes,中文描述)。
 10. **信号连接视图**:列出脚本内 `connect`/`@rpc` 与场景信号连接(读 .tscn `connection` 段),CodeLens 或面板。
 
 ### P2 — 生态与规模

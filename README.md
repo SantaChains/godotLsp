@@ -10,12 +10,14 @@ A standalone Godot LSP written in Rust, with a VSCode extension.
 - 引擎全局面补全:1036 引擎类、38 内建类型、单例、`@GlobalScope` 工具函数、GDScript 内建函数、全局枚举及值、`PI`/`TAU` 等常量(签名与文档以引擎模型为权威)
 - 补全/签名文档回填:成员补全与 `recv.method(` 签名帮助按引擎模型补全签名与文档;自有成员补全带声明签名与 `##` 注释;注解补全带说明;语言关键字 hover
 - 文档跳转:悬停附官方 zh-CN 文档链接;类名/单例/全局函数/注解/关键字 hover 全覆盖
+- 场景感知:`$Path`/`%Unique` 节点路径补全(带节点类型)、悬停类型与文档、跳转到 .tscn 声明行
 - 诊断(语法 + 语义,支持严格模式与按码忽略)、语义高亮、inlay hint(可开关)、折叠范围、签名帮助
 - 代码操作、整文档与选区格式化
 - 符号高亮(`documentHighlight`)、`res://` 路径可点击跳转(`documentLink`)
 - `Color()` 字面量取色器(`documentColor`)
 - 增量文本同步、文件监视(无需打开即感知项目文件增删改)
 - 配置双通道:`workspace/configuration` 拉取 + `didChangeConfiguration` 推送(纯 LSP,无编辑器特设)
+- VS Code 插件交互:运行项目/当前场景(集成终端调 `godot`)、GDScript snippet 集、重启服务器
 - 诊断带 `source`/`code`/`version`;请求级 panic 隔离,单请求崩溃不拖垮服务器
 - 跨文件解析:`class_name`、autoload、`preload`/`extends`
 - 场景感知:`$NodePath`、`%unique`、`get_node` 到场景节点的类型推断
