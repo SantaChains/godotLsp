@@ -16,7 +16,6 @@ lst-diff/
 
 godot-docs/
 godot-test/
-gdscript-analyzer/
 
 *.txt
 *.log
