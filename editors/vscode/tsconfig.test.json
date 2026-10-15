@@ -9,7 +9,8 @@
     "noUnusedParameters": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
+    "resolveJsonModule": true,
     "outDir": "out-test"
   },
-  "include": ["src/parsers.ts", "tests"]
+  "include": ["src/parsers.ts", "src/configFile.ts", "tests"]
 }

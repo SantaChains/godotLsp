@@ -11,6 +11,7 @@ import {
 import { SymbolTreeProvider } from "./symbols";
 import { ProjectTreeProvider, PTreeDataProvider } from "./projectTree";
 import { SceneTreeProvider } from "./sceneTree";
+import { ConfigCompletionProvider, ConfigHoverProvider } from "./configAssist";
 
 const SECTION = "godotlsp";
 
@@ -51,6 +52,19 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     tree,
     projectView,
     sceneView,
+    // ConfigFile 家族(project.godot/.gdextension/.import/.cfg)的键/值补全与
+    // hover:数据集来自 Godot 源码提取,与语言服务器相互独立。
+    vscode.languages.registerCompletionItemProvider(
+      "godot-project",
+      new ConfigCompletionProvider(),
+      "[",
+      "/",
+      ".",
+      "=",
+      '"',
+      ",",
+    ),
+    vscode.languages.registerHoverProvider("godot-project", new ConfigHoverProvider()),
     vscode.commands.registerCommand("godotlsp.symbols.refresh", () => symbols?.refresh()),
     vscode.commands.registerCommand("godotlsp.project.refresh", () => {
       projectTree?.invalidateClasses();
