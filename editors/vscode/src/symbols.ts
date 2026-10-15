@@ -1,6 +1,8 @@
 import * as vscode from "vscode";
 import type { LanguageClient } from "vscode-languageclient/node";
 import { documentSymbols, iconForKind, LspSymbol } from "./lsp";
+import { withCopy } from "./copyable";
+import { relDisplay } from "./projectTree";
 
 /** 符号树节点:根节点持有文档 URI,子节点只携带符号。 */
 export class SymbolNode {
@@ -47,7 +49,10 @@ export class SymbolTreeProvider implements vscode.TreeDataProvider<SymbolNode> {
       title: "跳转到声明",
       arguments: [node.uri, s.selectionRange.start.line, s.selectionRange.start.character, s.name],
     };
-    return item;
+    return withCopy(item, {
+      name: s.name,
+      ref: node.uri ? `${relDisplay(node.uri)}:${s.selectionRange.start.line + 1}` : undefined,
+    });
   }
 
   async getChildren(node?: SymbolNode): Promise<SymbolNode[]> {

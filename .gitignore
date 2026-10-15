@@ -1,19 +1,23 @@
-/target
+target/
 /.refs
 .history/
 node_modules/
 *.vsix
 editors/vscode/dist/
+editors/vscode/out-test/
 editors/vscode/server/
 
 
 .workbuddy/
-corpus/
+corpus/godot-engine-tests/
 .ruff_cache/
+__pycache__/
+lst-diff/
 
 godot-docs/
 godot-test/
 gdscript-analyzer/
 
+*.txt
 *.log
 godotlsp.code-workspace

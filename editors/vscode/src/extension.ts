@@ -12,6 +12,8 @@ import { SymbolTreeProvider } from "./symbols";
 import { ProjectTreeProvider, PTreeDataProvider } from "./projectTree";
 import { SceneTreeProvider } from "./sceneTree";
 import { ConfigCompletionProvider, ConfigHoverProvider } from "./configAssist";
+import { highlightClampMiddleware } from "./highlight";
+import { copyInfoFrom } from "./copyable";
 
 const SECTION = "godotlsp";
 
@@ -21,6 +23,34 @@ let status: vscode.StatusBarItem;
 let symbols: SymbolTreeProvider | undefined;
 let projectTree: ProjectTreeProvider | undefined;
 let sceneTree: SceneTreeProvider | undefined;
+
+/**
+ * 注册侧边栏视图。
+ *
+ * `createTreeView` 抛 `No view is registered with id` 时,view id 与 manifest
+ * 是一致的(仓库内三方核对),唯一成因是**运行窗口的视图注册表来自旧版
+ * manifest 缓存**——典型场景:安装/升级 vsix 后没有重载窗口,或同版本号
+ * 重打包覆盖安装(VS Code 按版本号缓存 contributions)。捕获后给出可操作
+ * 指引,再原样上抛保留错误面。
+ */
+function createView<T>(
+  id: string,
+  provider: vscode.TreeDataProvider<T>,
+): vscode.TreeView<T> {
+  try {
+    return vscode.window.createTreeView(id, {
+      treeDataProvider: provider,
+      showCollapseAll: true,
+    });
+  } catch (err) {
+    output.error(
+      `侧边栏视图 ${id} 注册失败:${err instanceof Error ? err.message : String(err)}。` +
+        `若信息为 "No view is registered with id",请执行 "Developer: Reload Window" 重载窗口` +
+        `(旧版视图注册表缓存未刷新;若仍失败,先卸载旧版再安装后重载)。`,
+    );
+    throw err;
+  }
+}
 
 export async function activate(context: vscode.ExtensionContext): Promise<void> {
   output = vscode.window.createOutputChannel("godotlsp", { log: true });
@@ -32,20 +62,11 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
   symbols = new SymbolTreeProvider(() => client, output);
   projectTree = new ProjectTreeProvider(() => client, output);
   sceneTree = new SceneTreeProvider();
-  const tree = vscode.window.createTreeView("godotlsp.symbols", {
-    treeDataProvider: symbols,
-    showCollapseAll: true,
-  });
+  const tree = createView("godotlsp.symbols", symbols);
   const projectProvider = new PTreeDataProvider(() => projectTree!.roots());
   const sceneProvider = new PTreeDataProvider(() => sceneTree!.roots());
-  const projectView = vscode.window.createTreeView("godotlsp.project", {
-    treeDataProvider: projectProvider,
-    showCollapseAll: true,
-  });
-  const sceneView = vscode.window.createTreeView("godotlsp.scene", {
-    treeDataProvider: sceneProvider,
-    showCollapseAll: true,
-  });
+  const projectView = createView("godotlsp.project", projectProvider);
+  const sceneView = createView("godotlsp.scene", sceneProvider);
   const isGd = (d: vscode.TextDocument) => d.languageId === "gdscript";
   const isRes = (d: vscode.TextDocument) => d.languageId === "godot-resource";
   context.subscriptions.push(
@@ -75,6 +96,21 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
       sceneProvider.refresh();
     }),
     vscode.commands.registerCommand("godotlsp.goto", gotoSymbol),
+    // 侧边栏条目右键快速复制(三视图共用,载荷解析见 copyable.ts)。
+    vscode.commands.registerCommand("godotlsp.tree.copyName", async (node?: unknown) => {
+      const info = copyInfoFrom(node);
+      const label = (node as vscode.TreeItem | undefined)?.label;
+      const text = info?.name ?? (typeof label === "string" ? label : undefined);
+      if (text) {
+        await vscode.env.clipboard.writeText(text);
+      }
+    }),
+    vscode.commands.registerCommand("godotlsp.tree.copyRef", async (node?: unknown) => {
+      const info = copyInfoFrom(node);
+      if (info?.ref) {
+        await vscode.env.clipboard.writeText(info.ref);
+      }
+    }),
     // 刷新时机:切换编辑器 / 打开与编辑 GDScript / 客户端状态变化。
     vscode.window.onDidChangeActiveTextEditor((e) => {
       symbols?.refresh();
@@ -168,6 +204,8 @@ async function start(): Promise<void> {
   const clientOptions: LanguageClientOptions = {
     documentSelector: [{ scheme: "file", language: "gdscript" }],
     outputChannel: output,
+    // documentHighlight 区间词级矫正(旧内核起点锚行首,详见 highlight.ts)。
+    middleware: highlightClampMiddleware,
     synchronize: {
       // 服务器无需逐个打开即可感知项目文件的增删改,并在配置变化时收到推送。
       fileEvents: vscode.workspace.createFileSystemWatcher(

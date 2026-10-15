@@ -2,7 +2,7 @@
   "name": "godotlsp",
   "displayName": "godotlsp:独立 GDScript 语言服务器",
   "description": "独立于 Godot 引擎运行的 GDScript 语言服务器:悬停文档、补全、导航、诊断与格式化,无需打开 Godot 编辑器。",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "publisher": "SantaChains",
   "license": "MIT",
   "repository": {
@@ -197,6 +197,18 @@
         "command": "godotlsp.goto",
         "title": "跳转到声明",
         "category": "godotlsp"
+      },
+      {
+        "command": "godotlsp.tree.copyName",
+        "title": "复制名称",
+        "category": "godotlsp",
+        "icon": "$(copy)"
+      },
+      {
+        "command": "godotlsp.tree.copyRef",
+        "title": "复制位置引用",
+        "category": "godotlsp",
+        "icon": "$(link)"
       }
     ],
     "menus": {
@@ -215,6 +227,18 @@
           "command": "godotlsp.scene.refresh",
           "when": "view == godotlsp.scene",
           "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "godotlsp.tree.copyName",
+          "when": "viewItem == godotlsp.copyable",
+          "group": "9_copy@1"
+        },
+        {
+          "command": "godotlsp.tree.copyRef",
+          "when": "viewItem == godotlsp.copyable",
+          "group": "9_copy@2"
         }
       ]
     },

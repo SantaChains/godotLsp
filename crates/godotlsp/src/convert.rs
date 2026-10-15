@@ -119,6 +119,36 @@ impl LineIndex {
     }
 }
 
+/// 高亮区间「尾锚收缩」:旧内核 `find_references` 的 `TextRange` 起点锚到
+/// 行首(吞掉缩进制表符/空格),终点正确锚在词尾;表现为高亮框多框选
+/// 前导空白。从区间终点向前跳过非标识符字符,再连续吞并标识符字符
+/// 回到词首——对起点/终点多吞空白两种病态均有效。窗口内无标识符
+/// 字符时原样返回(不该收缩)。
+#[must_use]
+pub fn clamp_word_range(text: &str, index: &LineIndex, range: Range) -> Range {
+    let end = (index.offset(text, range.end) as usize).min(text.len());
+    let bytes = text.as_bytes();
+    let mut i = end;
+    while i > 0 && !(bytes[i - 1].is_ascii_alphanumeric() || bytes[i - 1] == b'_') {
+        i -= 1;
+    }
+    if i == 0 {
+        return range;
+    }
+    let word_end = i;
+    while i > 0 && (bytes[i - 1].is_ascii_alphanumeric() || bytes[i - 1] == b'_') {
+        i -= 1;
+    }
+    let word_start = i;
+    if word_start >= word_end {
+        return range;
+    }
+    Range {
+        start: index.position(text, word_start as u32),
+        end: index.position(text, word_end as u32),
+    }
+}
+
 fn severity(s: Severity) -> Option<DiagnosticSeverity> {
     Some(match s {
         Severity::Error => DiagnosticSeverity::ERROR,
@@ -540,4 +570,70 @@ pub fn format_edits(text: &str, index: &LineIndex, new_text: String) -> Vec<Text
 /// 把 `value` 序列化为线上传输的 JSON 值。
 pub(crate) fn to_value<T: Serialize>(value: &T) -> serde_json::Value {
     serde_json::to_value(value).unwrap_or(serde_json::Value::Null)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn clamp(text: &str, start: (u32, u32), end: (u32, u32)) -> (u32, u32) {
+        let index = LineIndex::new(text);
+        let r = clamp_word_range(
+            text,
+            &index,
+            Range {
+                start: Position { line: start.0, character: start.1 },
+                end: Position { line: end.0, character: end.1 },
+            },
+        );
+        (r.start.character, r.end.character)
+    }
+
+    #[test]
+    fn clamp_收回被吞的行首缩进() {
+        // 旧内核病态:起点锚行首(吞 \t\t),终点正确锚词尾。
+        let text = "\t\ttype_hint_prefixes += \"x\"";
+        let word_end = 2 + 18; // 词尾 UTF-16 列
+        assert_eq!(clamp(text, (0, 0), (0, word_end as u32)), (2, word_end));
+    }
+
+    #[test]
+    fn clamp_纯标识符区间原样保留() {
+        assert_eq!(clamp("  foobar  ", (0, 2), (0, 8)), (2, 8));
+    }
+
+    #[test]
+    fn clamp_终点吞尾随空白时先跳过再收缩() {
+        // 终点错位到词尾 +2 的空白处。
+        assert_eq!(clamp("var value = 1", (0, 0), (0, 10)), (4, 9));
+    }
+
+    #[test]
+    fn clamp_窗口无标识符时原样返回() {
+        assert_eq!(clamp("   \t\t ", (0, 0), (0, 5)), (0, 5));
+    }
+
+    #[test]
+    fn clamp_中文行后的词段换算与收缩正确() {
+        // 第一行含多字节字符,第二行词段收缩不受其字节干扰。
+        let text = "var 变量 = 1\nvalue2";
+        let index = LineIndex::new(text);
+        let r = clamp_word_range(
+            text,
+            &index,
+            Range {
+                start: Position { line: 1, character: 0 },
+                end: Position { line: 1, character: 6 },
+            },
+        );
+        assert_eq!((r.start.line, r.start.character), (1, 0));
+        assert_eq!((r.end.line, r.end.character), (1, 6));
+    }
+
+    #[test]
+    fn clamp_多行文本按各自行独立收缩() {
+        let text = "func a():\n\t\tvalue";
+        // 第二行 value,起点锚行首。
+        assert_eq!(clamp(text, (1, 0), (1, 7)), (2, 7));
+    }
 }

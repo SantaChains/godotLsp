@@ -83,6 +83,14 @@ npm run build          # esbuild 打包 dist/extension.js
 npx @vscode/vsce package --no-dependencies
 ```
 
+## 故障排查
+
+- **`No view is registered with id: godotlsp.xxx`**:运行窗口的视图注册表还是旧版
+  缓存——安装/升级 VSIX 后没有重载窗口,或同版本号覆盖安装。执行
+  `Developer: Reload Window`;若仍失败,先卸载旧版、关窗、重装 VSIX 再重载。
+- **侧边栏无输出 / 诊断不出现**:先看 godotlsp 输出通道(`godotlsp.showOutput`
+  命令);`project.godot` 必须位于工作区根(或 `*.code-workspace` 的第一个目录)。
+
 ## 多 IDE 兼容
 
 服务器是纯 LSP 3.17 实现,能力全协商、配置拉/推双通道,可接入 Neovim / Zed / Helix 等任意 LSP 客户端(接入示例见仓库根 `README.md`)。

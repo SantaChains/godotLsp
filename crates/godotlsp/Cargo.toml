@@ -6,15 +6,18 @@ rust-version = "1.88"
 license = "MIT OR Apache-2.0"
 description = "A standalone, engine-free GDScript language server speaking LSP 3.17 over stdio"
 repository = "https://github.com/godotlsp/godotlsp"
+# R0 硬切期间游离于 workspace 之外(见下方依赖注释);空 workspace 表声明
+# 独立构建身份,使其可用 --manifest-path 单独 check/test 而不误挂父工作区。
+[workspace]
 
 [build-dependencies]
 regex = "1"
 
 [dependencies]
-gdscript-ide = "0.6.1"
-gdscript-base = "0.6.1"
-gdscript-api = "0.6.1"
-lsp-server-tokio = "0.3"
+# R0 硬切:gdscript-ide / gdscript-base / gdscript-api 依赖已移除(2026-10-15)。
+# 本 crate 在 R2 重写为分析层后,将改用 workspace 内的 gdscript-syntax + gdscript-engine,
+# 并从 workspace members 恢复。当前因引用已删除的外部 crate,本 crate 暂不参与构建。
+lsp-server-tokio = "0.4.0"
 lsp-types = "0.97"
 tokio = { version = "1", features = ["rt-multi-thread", "macros", "io-util", "io-std", "time"] }
 futures = "0.3"

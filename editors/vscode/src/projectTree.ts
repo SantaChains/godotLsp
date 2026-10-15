@@ -4,6 +4,7 @@ import * as vscode from "vscode";
 import type { LanguageClient } from "vscode-languageclient/node";
 import { documentSymbols, iconForKind, LspSymbol } from "./lsp";
 import { parseAutoloads } from "./parsers";
+import { withCopy } from "./copyable";
 
 /** 项目结构树节点:jump = 点击跳转目标;expand = 惰性子节点加载器。 */
 export class PNode {
@@ -33,7 +34,10 @@ export function pTreeItem(node: PNode): vscode.TreeItem {
       arguments: [node.jump.uri, node.jump.line, 0, node.label],
     };
   }
-  return item;
+  return withCopy(item, {
+    name: node.label,
+    ref: node.jump ? `${relDisplay(node.jump.uri)}:${node.jump.line + 1}` : node.description,
+  });
 }
 
 /** 通用适配器:把「roots() + PNode 缓存子节点」包装成 TreeDataProvider。 */

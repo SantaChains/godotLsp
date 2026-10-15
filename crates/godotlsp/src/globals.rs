@@ -214,19 +214,33 @@ fn signature(
 // ---- hover ----
 
 /// 官方文档站点链接(zh-CN;`@` 路径转义为 `%40`)。
+///
+/// 锚点规则(对照 docs.godotengine.org 页面源码实测核验):
+/// - 常量/方法/注解:`#class-<类>-<kind>-<小写连字符>`,标识符的
+///   `_` 一律转 `-`(如 `PROPERTY_USAGE_INTERNAL` → `property-usage-internal`);
+/// - 枚举:`#enum-<类去@前缀>-<小写>`,前缀 `enum-` 而非 `class-…-enum-`。
 mod url {
     const BASE: &str = "https://docs.godotengine.org/zh-CN/stable/classes/";
+
+    /// Sphinx 锚点中的标识符变换:小写 + 下划线转连字符。
+    fn anchor(name: &str) -> String {
+        name.to_lowercase().replace('_', "-")
+    }
 
     pub fn class(name: &str) -> String {
         format!("{BASE}class_{}.html", name.to_lowercase())
     }
 
     pub fn globalscope(kind: &str, name: &str) -> String {
-        format!("{BASE}class_%40globalscope.html#class-globalscope-{kind}-{}", name.to_lowercase())
+        format!("{BASE}class_%40globalscope.html#class-globalscope-{kind}-{}", anchor(name))
+    }
+
+    pub fn globalscope_enum(name: &str) -> String {
+        format!("{BASE}class_%40globalscope.html#enum-globalscope-{}", name.to_lowercase())
     }
 
     pub fn gdscript(kind: &str, name: &str) -> String {
-        format!("{BASE}class_%40gdscript.html#class-gdscript-{kind}-{}", name.to_lowercase())
+        format!("{BASE}class_%40gdscript.html#class-gdscript-{kind}-{}", anchor(name))
     }
 }
 
@@ -254,7 +268,7 @@ pub fn doc_link(word: &str) -> Option<String> {
         return Some(url::globalscope("constant", word));
     }
     if api.global_enum(word).is_some() {
-        return Some(url::globalscope("enum", word));
+        return Some(url::globalscope_enum(word));
     }
     if api.global_const(word).is_some() {
         return Some(url::gdscript("constant", word));
@@ -304,7 +318,7 @@ pub fn hover_markdown(word: &str) -> Option<String> {
         return Some(with_link(
             &format!("enum {}", e.name),
             e.doc.and_then(|id| api.doc(id)),
-            url::globalscope("enum", word),
+            url::globalscope_enum(word),
         ));
     }
     if api.global_const(word).is_some()

@@ -832,11 +832,13 @@ fn handle(snap: &Snapshot, req: &RequestKind) -> Result<serde_json::Value, Handl
             };
             let refs = analysis.find_references(FilePosition { file, offset })?;
             // 只取本文档内的出现位置,编辑器据此高亮光标符号。
+            // 旧内核 TextRange 起点锚行首(吞缩进),经 clamp_word_range
+            // 收缩回词段——修在服务器,所有 IDE 客户端同时受益。
             let highlights: Vec<lsp_types::DocumentHighlight> = refs
                 .iter()
                 .filter(|r| r.file == file)
                 .map(|r| lsp_types::DocumentHighlight {
-                    range: doc.index.range(&doc.text, r.range),
+                    range: cv::clamp_word_range(&doc.text, &doc.index, doc.index.range(&doc.text, r.range)),
                     kind: Some(lsp_types::DocumentHighlightKind::TEXT),
                 })
                 .collect();

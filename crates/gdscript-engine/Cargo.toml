@@ -1,0 +1,14 @@
+[package]
+name = "gdscript-engine"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+license = "MIT OR Apache-2.0"
+description = "Godot engine API model ingestion for godotlsp (engine-free, static dataset)"
+
+[dependencies]
+
+[dev-dependencies]
+
+[lints.rust]
+unsafe_code = "deny"

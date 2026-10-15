@@ -1,0 +1,3 @@
+[submodule "gdscript-analyzer"]
+	path = gdscript-analyzer
+	url = https://github.com/reactive-ui-toolkit/gdscript-analyzer
