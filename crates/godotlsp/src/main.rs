@@ -53,6 +53,9 @@ use lsp_types::{
     SignatureHelpParams, TextDocumentSyncCapability, TextDocumentSyncKind, Uri,
     WorkspaceSymbolParams,
 };
+// `<Notification>::METHOD` 关联常量由该 trait 提供;匿名导入避免与
+// `lsp_server_tokio::Notification` 类型名冲突。
+use lsp_types::notification::Notification as _;
 
 use tokio::io::{AsyncRead, AsyncWrite};
 use tokio::sync::{Notify, Semaphore};
@@ -88,6 +91,20 @@ fn main() {
 /// 二进制入口:stdio 传输交给异步主循环。
 async fn run() -> Result<(), Box<dyn Error + Send + Sync>> {
     run_on(Connection::stdio()).await
+}
+
+/// 服务器→客户端日志通知。信息/警告类日志经 `window/logMessage` 送达,
+/// 客户端按消息级别写入输出通道(stderr 会被 vscode-languageclient
+/// 一律按 error 级展示,故仅致命错误才走 stderr)。发送失败静默忽略。
+fn log_notify<T>(conn: &mut Connection<T, ()>, typ: lsp_types::MessageType, message: String)
+where
+    T: AsyncRead + AsyncWrite + Unpin + Send + 'static,
+{
+    let params = lsp_types::LogMessageParams { typ, message };
+    let _ = conn.send(Message::Notification(Notification::new(
+        lsp_types::notification::LogMessage::METHOD,
+        Some(cv::to_value(&params)),
+    )));
 }
 
 /// 阻塞线程池上一次消息处理的结果。
@@ -264,12 +281,22 @@ where
     let init: InitializeParams =
         serde_json::from_value(init_value).map_err(|e| e.to_string())?;
     let mut state = State::new();
-    if let Some(root) = params_root(&init) {
-        state.load_project(root);
-    }
-    eprintln!(
-        "[godotlsp] {} 引擎模型就绪",
-        gdscript_api::godot_version()
+    let loaded = if let Some(root) = params_root(&init) {
+        state.load_project(root)
+    } else {
+        0
+    };
+    // 信息类日志走 `window/logMessage`(客户端按对应级别入输出通道);
+    // stderr 会被 vscode-languageclient 一律按 error 展示,只保留真正的致命错误。
+    log_notify(
+        &mut conn,
+        lsp_types::MessageType::INFO,
+        format!("已加载 {loaded} 个项目文件"),
+    );
+    log_notify(
+        &mut conn,
+        lsp_types::MessageType::INFO,
+        format!("{} 引擎模型就绪", gdscript_api::godot_version()),
     );
 
     // 拉取式配置:zed/helix 等客户端只回 `workspace/configuration`,不主动推
@@ -306,7 +333,11 @@ where
             "workspace/configuration",
             Some(cv::to_value(&params)),
         ))) {
-            eprintln!("[godotlsp] 配置拉取请求发送失败:{e}");
+            log_notify(
+                &mut conn,
+                lsp_types::MessageType::WARNING,
+                format!("配置拉取请求发送失败:{e}"),
+            );
             None
         } else {
             Some(rx)
@@ -1345,8 +1376,20 @@ async fn on_notification(
                 let uri = p.text_document.uri.to_string();
                 // 写前静默:salsa 0.27 要求写时无存活快照句柄。
                 quiesce(inflight).await;
+                // 项目配置自愈:客户端的文件监视可能漏推 project.godot 变更
+                // (典型:会话启动后才在 Godot 里添加 autoload)。打开文档时按
+                // mtime 比对补刀,保证全局解析面(autoload 注册表)及时生效。
+                let config_changed = state.refresh_project_config_if_stale();
                 state.open(&uri, p.text_document.text, Some(p.text_document.version));
                 sched.touch(&uri, Instant::now());
+                if config_changed {
+                    // 全局面变更:其余已打开文档也要重算(配置对所有人生效)。
+                    for u in state.open_uris() {
+                        if u != uri {
+                            sched.touch(&u, Instant::now());
+                        }
+                    }
+                }
             }
         }
         "textDocument/didChange" => {
@@ -1404,9 +1447,15 @@ async fn on_notification(
             {
                 // 每个事件都可能写(watched/inject/remove)。
                 quiesce(inflight).await;
+                let mut config_changed = false;
                 for event in p.changes {
                     let uri = event.uri.to_string();
-                    state.watched(&uri);
+                    // project.godot 重载改变全局解析面(autoload 注册表/引擎版本/
+                    // 警告设置):仅重载不重发会让陈旧诊断挂到下次编辑 —— 合法的
+                    // autoload 单例标识符会被持续误报为未声明。
+                    if state.watched(&uri) {
+                        config_changed = true;
+                    }
                     // 磁盘变化同步诊断:仍注册的 .gd 去抖重算;已删除的推空清单,
                     // 让客户端清掉残留标记。
                     if uri.ends_with(".gd") {
@@ -1415,6 +1464,12 @@ async fn on_notification(
                         } else {
                             publish(sender, &uri, Vec::new(), None);
                         }
+                    }
+                }
+                if config_changed {
+                    // 全局面变更:重算**全部**已打开文档(不只是触发事件的文件)。
+                    for uri in state.open_uris() {
+                        sched.touch(&uri, Instant::now());
                     }
                 }
             }

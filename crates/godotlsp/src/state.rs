@@ -10,6 +10,7 @@
 use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 use std::sync::Arc;
+use std::time::SystemTime;
 
 use gdscript_base::FileId;
 use gdscript_ide::{Analysis, AnalysisHost, Change};
@@ -52,6 +53,11 @@ pub struct State {
     ids: Arc<HashMap<String, FileId>>,
     docs: HashMap<FileId, Arc<Doc>>,
     next_id: u32,
+    /// 是否已加载过项目配置(`project.godot` 文本进 salsa)。
+    project_config_loaded: bool,
+    /// 已加载 `project.godot` 的 mtime —— 自愈比对用(见
+    /// [`State::refresh_project_config_if_stale`])。文件系统不提供 mtime 时为 `None`。
+    project_config_mtime: Option<SystemTime>,
 }
 
 /// 只读快照:阻塞线程池上请求计算所持的一致视图。
@@ -95,6 +101,8 @@ impl State {
             ids: Arc::new(HashMap::new()),
             docs: HashMap::new(),
             next_id: 0,
+            project_config_loaded: false,
+            project_config_mtime: None,
         }
     }
 
@@ -186,18 +194,20 @@ impl State {
     }
 
     /// 被监视文件在磁盘上变化:重新加载;若已删除则移除。`project.godot` 走项目配置而非普通文件。
-    pub fn watched(&mut self, uri: &str) {
+    ///
+    /// 返回 `true` 表示**重载了项目配置** —— 调用方必须重算并重发全部已打开
+    /// 文档的诊断:配置改变的是全局解析面(autoload 注册表 / 引擎版本 / 警告
+    /// 设置),只重载而不重发会让陈旧错误挂到下次编辑(典型误报:用户在 Godot
+    /// 里加好 autoload 单例,LSP 仍持续报 `Identifier "X" not declared`)。
+    pub fn watched(&mut self, uri: &str) -> bool {
         let Some(path) = uri.parse::<Uri>().ok().and_then(|u| uri_to_path(&u)) else {
-            return;
+            return false;
         };
         if let Some(root) = self.root.clone()
             && path.parent() == Some(root.as_path())
             && path.file_name().is_some_and(|n| n == "project.godot")
         {
-            if let Ok(text) = std::fs::read_to_string(&path) {
-                self.set_project_config(text);
-            }
-            return;
+            return self.reload_project_config(&path);
         }
         match std::fs::read_to_string(&path) {
             Ok(text) => {
@@ -206,6 +216,49 @@ impl State {
             }
             Err(_) => self.remove(uri),
         }
+        false
+    }
+
+    /// 从磁盘重载 `project.godot` 并记录 mtime。读失败(如删除中)返回 `false`。
+    fn reload_project_config(&mut self, path: &Path) -> bool {
+        let Ok(text) = std::fs::read_to_string(path) else {
+            return false;
+        };
+        self.project_config_loaded = true;
+        self.project_config_mtime =
+            std::fs::metadata(path).ok().and_then(|m| m.modified().ok());
+        self.set_project_config(text);
+        true
+    }
+
+    /// 项目配置自愈:部分 LSP 客户端(或文件监视偶发失灵)不推送 `project.godot`
+    /// 变更。在文档打开时按 mtime 比对补刀 —— 磁盘版本新于已加载版本即重载。
+    /// 返回 `true` 表示发生了重载(调用方须重算全部已打开文档的诊断)。
+    pub fn refresh_project_config_if_stale(&mut self) -> bool {
+        let Some(root) = self.root.clone() else {
+            return false;
+        };
+        let path = root.join("project.godot");
+        let Ok(meta) = std::fs::metadata(&path) else {
+            return false;
+        };
+        let mtime = meta.modified().ok();
+        if self.project_config_loaded && mtime == self.project_config_mtime {
+            return false;
+        }
+        self.reload_project_config(&path)
+    }
+
+    /// 全部**编辑器已打开**文档的 URI(`Doc::version` 为 `Some`;磁盘注册文件
+    /// 不在此列——它们没有编辑器视图,也无从重发诊断)。全局性变更(项目配置
+    /// 重载)后由主循环用于重算诊断。
+    #[must_use]
+    pub fn open_uris(&self) -> Vec<String> {
+        self.docs
+            .iter()
+            .filter(|(_, d)| d.version.is_some())
+            .filter_map(|(file, _)| self.uris.get(file).cloned())
+            .collect()
     }
 
     /// 从注册表与分析世界中移除文件。
@@ -230,7 +283,10 @@ impl State {
 
     /// 遍历 `root`,注册所有 `.gd`/`.tscn`/`.tres` 以及 `project.godot`。
     /// 文件集覆盖整个项目,因此基于缺失的跨文件诊断可用。
-    pub fn load_project(&mut self, root: PathBuf) {
+    ///
+    /// 返回加载的文件数(调用方经 `window/logMessage` 上报;
+    /// stderr 会被 vscode-languageclient 一律按 error 级展示,不走 stderr)。
+    pub fn load_project(&mut self, root: PathBuf) -> usize {
         self.root = Some(root.clone());
         let mut paths = Vec::new();
         walk(&root, &mut paths);
@@ -248,13 +304,17 @@ impl State {
                 change.set_file_path(file, res);
             }
         }
-        if let Ok(config) = std::fs::read_to_string(root.join("project.godot")) {
+        let cfg_path = root.join("project.godot");
+        if let Ok(config) = std::fs::read_to_string(&cfg_path) {
+            self.project_config_loaded = true;
+            self.project_config_mtime =
+                std::fs::metadata(&cfg_path).ok().and_then(|m| m.modified().ok());
             change.set_project_config(config);
         }
         change.set_workspace_complete(true);
         self.host.apply_change(change);
         self.revision += 1;
-        eprintln!("[godotlsp] 已加载 {} 个项目文件", paths.len());
+        paths.len()
     }
 }
 
@@ -419,5 +479,84 @@ mod tests {
         assert_eq!(snap2.revision, 2);
         assert_eq!(snap2.doc(f).unwrap().text, "var x = 2222\n");
         assert_eq!(snap2.doc(f).unwrap().version, Some(2));
+    }
+
+    // ── 项目配置(project.godot)热重载与自愈 ──
+
+    /// 进程内唯一的临时项目目录(用完即弃,不污染仓库)。
+    fn temp_project(name: &str) -> PathBuf {
+        let dir = std::env::temp_dir()
+            .join(format!("godotlsp-cfg-{}-{name}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        dir
+    }
+
+    fn write_file(path: &Path, text: &str) {
+        std::fs::create_dir_all(path.parent().unwrap()).unwrap();
+        std::fs::write(path, text).unwrap();
+    }
+
+    /// 显式把 mtime 推到 10 秒后,击败文件系统粗糙的 mtime 粒度
+    /// (否则连续两次写在测试内可能不可区分)。
+    fn bump_mtime(path: &Path) {
+        let f = std::fs::OpenOptions::new().write(true).open(path).unwrap();
+        f.set_modified(SystemTime::now() + std::time::Duration::from_secs(10))
+            .unwrap();
+    }
+
+    #[test]
+    fn watched_project_godot_reports_config_reload() {
+        let dir = temp_project("watch");
+        write_file(&dir.join("project.godot"), "[autoload]\nA=\"*res://a.gd\"\n");
+        write_file(&dir.join("a.gd"), "extends Node\n");
+        let mut s = State::new();
+        assert_eq!(s.load_project(dir.clone()), 1);
+
+        // 外部(如 Godot 编辑器)追加 autoload 后,watcher 事件必须报告配置重载。
+        write_file(
+            &dir.join("project.godot"),
+            "[autoload]\nA=\"*res://a.gd\"\nB=\"*res://b.gd\"\n",
+        );
+        write_file(&dir.join("b.gd"), "extends Node\n");
+        let cfg_uri = crate::uri::path_to_uri(&dir.join("project.godot")).unwrap();
+        assert!(s.watched(cfg_uri.as_str()), "project.godot 变更须报告重载");
+
+        // 普通 .gd 的 watcher 事件不是配置重载(走 inject 路径)。
+        let gd_uri = crate::uri::path_to_uri(&dir.join("a.gd")).unwrap();
+        assert!(!s.watched(gd_uri.as_str()));
+    }
+
+    #[test]
+    fn refresh_project_config_if_stale_detects_external_change() {
+        let dir = temp_project("stale");
+        write_file(&dir.join("project.godot"), "[autoload]\nA=\"*res://a.gd\"\n");
+        write_file(&dir.join("a.gd"), "extends Node\n");
+        let mut s = State::new();
+        s.load_project(dir.clone());
+
+        // 未变更:自愈不得触发(每次 didOpen 都会调用,必须零成本)。
+        assert!(!s.refresh_project_config_if_stale());
+
+        // 外部修改 project.godot(新增 autoload):自愈必须捡起。
+        let cfg = dir.join("project.godot");
+        write_file(&cfg, "[autoload]\nA=\"*res://a.gd\"\nGame=\"*res://game.gd\"\n");
+        write_file(&dir.join("game.gd"), "extends Node\n");
+        bump_mtime(&cfg);
+        assert!(s.refresh_project_config_if_stale(), "mtime 变新须重载");
+
+        // 重载后再次自愈:不得重复触发。
+        assert!(!s.refresh_project_config_if_stale());
+    }
+
+    #[test]
+    fn open_uris_lists_only_editor_documents() {
+        let mut s = State::new();
+        // 磁盘注册文件(version=None)不出现在打开列表。
+        s.inject("file:///p/disk.gd", Some("res://disk.gd".into()), "var x = 1\n".into(), None);
+        // didOpen 注册的文档(version=Some)才需要重发诊断。
+        s.inject("file:///p/open.gd", Some("res://open.gd".into()), "var y = 2\n".into(), Some(3));
+        let open = s.open_uris();
+        assert_eq!(open, vec!["file:///p/open.gd".to_string()]);
     }
 }
