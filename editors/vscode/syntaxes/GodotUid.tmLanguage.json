@@ -1,0 +1,29 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Godot UID",
+  "scopeName": "source.godot.uid",
+  "comment": "Godot 4.4+ 资源 UID 文件:单行 uid://<资源 ID>(由引擎生成,勿手改)。字符集与长度核验自 .refs/godot 4.7 core/io/resource_uid.cpp:uuid_characters = a..y + 0..8(GH-83843 差一坑:'z' 与 '9' 永不出现),最长 13 位(0x7FFFFFFFFFFFFFFF);text_to_id 对集外字符返回 INVALID_ID。",
+  "patterns": [
+    {
+      "comment": "合法单行:uid:// + [a-y0-8]{1,13}。",
+      "match": "^\\s*(uid://)([a-y0-8]{1,13})\\s*$",
+      "captures": {
+        "1": { "name": "keyword.other.uid-scheme.godot-uid" },
+        "2": { "name": "constant.character.resource-id.godot-uid" }
+      }
+    },
+    {
+      "comment": "id_to_text 对负 ID 的输出(不应出现在 .uid 文件中)。",
+      "match": "^\\s*(uid://)(<invalid>)\\s*$",
+      "captures": {
+        "1": { "name": "keyword.other.uid-scheme.godot-uid" },
+        "2": { "name": "invalid.illegal.unexpected.godot-uid" }
+      }
+    },
+    {
+      "comment": "任何非单行 uid:// 的内容按异常内容提示着色。",
+      "match": "^[^\\s]+$",
+      "name": "invalid.illegal.unexpected.godot-uid"
+    }
+  ]
+}

@@ -1,0 +1,181 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Godot Resource (tscn/tres)",
+  "scopeName": "source.godot.resource",
+  "comment": "Godot 文本场景/资源格式(.tscn/.tres)。语法核验自 .refs/godot 4.7 scene/resources/resource_format_text.cpp:loader 经 VariantParser::parse_tag_assign_eof 驱动,与 ConfigFile 共用同一套值语法。①节头白名单(loader 只认这些 tag):gd_scene/gd_resource/ext_resource/sub_resource/node/connection/editable/resource;②节头属性 = 标识符=Variant(groups=[...] 等未加引号的构造值可含 ],故属性只在「下一个属性」或「行尾 ]」处收束);③属性行 = 任意非空白键(可含 /) = Variant 值,值可跨物理行(c_escape_multiline 只转义 \\\\ 与 \\\",换行原样保留);④资源引用 ExtResource/SubResource/Resource(uid,path 双参形)。",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#section" },
+    { "include": "#property" }
+  ],
+  "repository": {
+    "section": {
+      "comment": "节头:[gd_scene load_steps=2 format=3 uid=\"...\"] / [node name=\"X\" type=\"Y\" parent=\".\"] / [resource]。属性值可含 ](如 groups=[\"a\"]),故节头在行尾 ] 处收束。",
+      "begin": "(\\[)\\s*(gd_scene|gd_resource|ext_resource|sub_resource|node|connection|editable|resource)\\b",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.godot-resource" },
+        "2": { "name": "entity.name.tag.godot-resource" }
+      },
+      "end": "(\\])\\s*$|$",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.godot-resource" }
+      },
+      "patterns": [
+        { "include": "#attribute" }
+      ]
+    },
+    "attribute": {
+      "comment": "节头属性:name=\"Player\" / load_steps=2 / groups=[\"a\", \"b\"] / node_paths=PackedInt32Array(1, 2)。键为标识符(variant_parser TK_IDENTIFIER:字母/下划线开头)。",
+      "begin": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*(=)",
+      "beginCaptures": {
+        "1": { "name": "entity.other.attribute-name.godot-resource" },
+        "2": { "name": "keyword.operator.assignment.godot-resource" }
+      },
+      "end": "(?=\\s*[a-zA-Z_][a-zA-Z0-9_]*\\s*=)|(?=\\s*\\]\\s*$)|$",
+      "patterns": [
+        { "include": "#value" }
+      ]
+    },
+    "property": {
+      "comment": "资源/节点属性赋值:position = Vector2(0, 0) / script = ExtResource(\"1_abc\") / metadata/key = value。键 = 任意非空白字符(parse_tag_assign_eof 语义,含 / 路径);值可跨行,end 只认下一个节头/属性行起始。",
+      "begin": "^\\s*(\"[^\"]*\"|[^\\s=\"]+)\\s*(=)",
+      "beginCaptures": {
+        "1": { "name": "variable.other.property.godot-resource" },
+        "2": { "name": "keyword.operator.assignment.godot-resource" }
+      },
+      "end": "(?=^\\s*(?:\\[|\"[^\"]*\"\\s*=|[^\\s=;#]+\\s*=))",
+      "patterns": [
+        { "include": "#value" }
+      ]
+    },
+    "value": {
+      "patterns": [
+        { "include": "#stringname-prefix" },
+        { "include": "#resource-ref" },
+        { "include": "#typed-array" },
+        { "include": "#constructor" },
+        { "include": "#string" },
+        { "include": "#color" },
+        { "include": "#signed-inf" },
+        { "include": "#language" },
+        { "include": "#number" },
+        { "include": "#comment" },
+        { "include": "#punctuation" }
+      ]
+    },
+    "stringname-prefix": {
+      "comment": "StringName 前缀:&\"...\"(4.x)与 @\"...\"(3.x 兼容)。核验:variant_parser.cpp get_token case '&'/'@'。",
+      "match": "[&@](?=\")",
+      "name": "keyword.operator.stringname.godot-resource"
+    },
+    "resource-ref": {
+      "comment": "资源引用:ExtResource(\"id\") / SubResource(\"id\") / Resource(\"uid://...\"[, \"path\"])。核验:variant_parser.cpp parse_value 的 id==ExtResource/SubResource/Resource 分支与 encode_resource_reference 双参形。",
+      "begin": "\\b(ExtResource|SubResource|Resource)\\s*(\\()",
+      "beginCaptures": {
+        "1": { "name": "support.function.resource-ref.godot-resource" },
+        "2": { "name": "punctuation.definition.group.begin.godot-resource" }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.group.end.godot-resource" }
+      },
+      "patterns": [
+        { "include": "#string" }
+      ]
+    },
+    "typed-array": {
+      "comment": "类型化数组:Array[Node](...)。核验:VariantWriter ARRAY 分支先写 \"Array[\" 再写类型,收尾 ])。",
+      "begin": "\\b(Array)\\s*(\\[)",
+      "beginCaptures": {
+        "1": { "name": "support.class.variant.godot-resource" },
+        "2": { "name": "punctuation.definition.group.begin.godot-resource" }
+      },
+      "end": "\\]\\s*(?=\\()",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.group.end.godot-resource" }
+      },
+      "patterns": [
+        { "include": "#resource-ref" },
+        { "include": "#constructor" },
+        { "include": "#string" },
+        { "include": "#number" },
+        {
+          "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+          "name": "support.class.variant.godot-resource"
+        }
+      ]
+    },
+    "constructor": {
+      "comment": "Variant 构造器(含 3.x 别名,与 GodotProject 语法同源同表)。核验:variant_parser.cpp parse_value 的 id== 链 + Packed 系列别名分支。",
+      "begin": "\\b(Vector2|Vector2i|Vector3|Vector3i|Vector4|Vector4i|Rect2|Rect2i|Rect3|AABB|Transform2D|Transform3D|Transform|Matrix32|Plane|Quaternion|Quat|Basis|Matrix3|Projection|Color|NodePath|RID|Callable|Signal|Object|Dictionary|Array|PackedByteArray|PoolByteArray|ByteArray|PackedInt32Array|PackedIntArray|PoolIntArray|IntArray|PackedInt64Array|PackedFloat32Array|PackedRealArray|PoolRealArray|FloatArray|PackedFloat64Array|PackedStringArray|PoolStringArray|StringArray|PackedVector2Array|PoolVector2Array|Vector2Array|PackedVector3Array|PoolVector3Array|Vector3Array|PackedVector4Array|PoolVector4Array|Vector4Array|PackedColorArray|PoolColorArray|ColorArray)\\s*(\\()",
+      "beginCaptures": {
+        "1": { "name": "support.class.variant.godot-resource" },
+        "2": { "name": "punctuation.definition.group.begin.godot-resource" }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.group.end.godot-resource" }
+      },
+      "patterns": [
+        { "include": "#stringname-prefix" },
+        { "include": "#resource-ref" },
+        { "include": "#typed-array" },
+        { "include": "#constructor" },
+        { "include": "#string" },
+        { "include": "#color" },
+        { "include": "#signed-inf" },
+        { "include": "#language" },
+        { "include": "#number" },
+        { "include": "#comment" },
+        { "include": "#punctuation" }
+      ]
+    },
+    "string": {
+      "comment": "双引号字符串;可跨物理行(c_escape_multiline 不转义换行)。转义集核验:variant_parser.cpp get_token 的 \\\\ 分支。",
+      "begin": "\"",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.godot-resource" }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.godot-resource" }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.godot-resource",
+          "match": "\\\\(?:[btnfr\"'\\\\/]|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{6}|x[0-9a-fA-F]{2})"
+        }
+      ]
+    },
+    "color": {
+      "comment": "HTML 颜色字面量:#rgb/#rgba/#rrggbb/#rrggbbaa(仅此四种长度)。核验:get_token case '#'→Color::html。",
+      "match": "#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\\b",
+      "name": "constant.character.color.godot-resource"
+    },
+    "signed-inf": {
+      "comment": "带符号无穷:-inf(parse_value 的 -inf 分支)。",
+      "match": "(?<![A-Za-z0-9_.])[-+](?:inf|nan)\\b",
+      "name": "constant.language.godot-resource"
+    },
+    "language": {
+      "comment": "Variant 常量。核验:parse_value 标识符分支——true/false/null/nil/inf/inf_neg/nan。",
+      "name": "constant.language.godot-resource",
+      "match": "\\b(?:true|false|null|nil|inf|inf_neg|nan)\\b"
+    },
+    "number": {
+      "comment": "数字:可选负号 + 整数/小数(容许 1. 尾随点)/科学计数;无 0x(十六进制只在字符串转义)。核验:get_token 数字分支。",
+      "name": "constant.numeric.godot-resource",
+      "match": "(?<![A-Za-z0-9_.])-?[0-9]+(?:\\.[0-9]*)?(?:[eE][-+]?[0-9]+)?\\b"
+    },
+    "comment": {
+      "comment": "分号注释(值后容许;.tscn 正文罕见但格式允许)。",
+      "match": ";.*$",
+      "name": "comment.line.semicolon.godot-resource"
+    },
+    "punctuation": {
+      "comment": "数组/字典/参数分隔符。",
+      "match": "[\\[\\]{}(),:=.]",
+      "name": "punctuation.separator.godot-resource"
+    }
+  }
+}

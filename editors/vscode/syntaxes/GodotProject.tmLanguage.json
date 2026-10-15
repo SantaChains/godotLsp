@@ -1,0 +1,171 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Godot Project (project.godot)",
+  "scopeName": "source.godot.project",
+  "comment": "Godot ConfigFile 格式:project.godot、*.import、*.gdextension、*.cfg(含 .godot/*.cfg 与 override.cfg)。语法核验自 .refs/godot 4.7:core/io/config_file.cpp 全权委托 core/variant/variant_parser.cpp 的 parse_tag_assign_eof——①注释仅分号(行首与值后);②节头是 simple tag:[ 后到第一个未转义 ] 全为节名(支持 \\] 转义);③键 = 任意非空白字符序列(引号键 \"k\"=v 合法),止于第一个 =;④值是 Variant 序列化:构造器/字符串/&\\\"StringName\\\"/@\\\"3.x StringName\\\"/#rrggbb[aa] Color/true|false|null|nil|inf|-inf|inf_neg|nan/数字;⑤值可跨物理行(.import 的 metadata={...}、.godot/*.cfg 的 list=[{...}])。",
+  "patterns": [
+    { "include": "#comment" },
+    { "include": "#section" },
+    { "include": "#property" }
+  ],
+  "repository": {
+    "comment": {
+      "comment": "分号注释。核验:parse_tag_assign_eof 的 case ';'——行首与值后均认可,吃到行尾。",
+      "match": ";.*$",
+      "name": "comment.line.semicolon.godot-project"
+    },
+    "section": {
+      "comment": "节头:simple tag,[ 与第一个未转义 ] 之间全部是节名。核验:_parse_tag(p_simple_tag=true)。",
+      "begin": "(\\[)",
+      "beginCaptures": {
+        "1": { "name": "punctuation.definition.tag.begin.godot-project" }
+      },
+      "end": "(?<!\\\\)(\\])|$",
+      "endCaptures": {
+        "1": { "name": "punctuation.definition.tag.end.godot-project" }
+      },
+      "patterns": [
+        {
+          "match": "\\\\[^\\]]|[^\\]\\\\]+",
+          "name": "entity.name.tag.godot-project"
+        }
+      ]
+    },
+    "property": {
+      "comment": "键值对。键 = 任意非空白字符(引号键整体作为键),止于第一个 =(parse_tag_assign_eof 的 what 累加规则);值可跨行,end 只认下一个节头/键值行起始。",
+      "begin": "^\\s*(\"[^\"]*\"|[^\\s=\"]+)\\s*(=)",
+      "beginCaptures": {
+        "1": { "name": "variable.other.property.godot-project" },
+        "2": { "name": "keyword.operator.assignment.godot-project" }
+      },
+      "end": "(?=^\\s*(?:\\[|\"[^\"]*\"\\s*=|[^\\s=;#]+\\s*=))",
+      "patterns": [
+        { "include": "#value" }
+      ]
+    },
+    "value": {
+      "patterns": [
+        { "include": "#stringname-prefix" },
+        { "include": "#resource-ref" },
+        { "include": "#typed-array" },
+        { "include": "#constructor" },
+        { "include": "#string" },
+        { "include": "#color" },
+        { "include": "#signed-inf" },
+        { "include": "#language" },
+        { "include": "#number" },
+        { "include": "#comment" },
+        { "include": "#punctuation" }
+      ]
+    },
+    "stringname-prefix": {
+      "comment": "StringName 前缀:&\\\"...\\\"(4.x)与 @\\\"...\\\"(3.x 兼容)。核验:variant_parser.cpp get_token case '&'/'@',VariantWriter STRING_NAME 写 &\\\"。",
+      "match": "[&@](?=\")",
+      "name": "keyword.operator.stringname.godot-project"
+    },
+    "resource-ref": {
+      "comment": "资源引用:ExtResource(\\\"id\\\") / SubResource(\\\"id\\\") / Resource(\\\"uid://...\\\"[, \\\"path\\\"])。核验:variant_parser.cpp parse_value id==ExtResource/SubResource/Resource。",
+      "begin": "\\b(ExtResource|SubResource|Resource)\\s*(\\()",
+      "beginCaptures": {
+        "1": { "name": "support.function.resource-ref.godot-project" },
+        "2": { "name": "punctuation.definition.group.begin.godot-project" }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.group.end.godot-project" }
+      },
+      "patterns": [
+        { "include": "#string" }
+      ]
+    },
+    "typed-array": {
+      "comment": "类型化数组:Array[Node](...)/Array[ExtResource(\\\"1_x\\\")](...)。核验:VariantWriter ARRAY 分支先写 \\\"Array[\\\" 再写类型,收尾 ])。",
+      "begin": "\\b(Array)\\s*(\\[)",
+      "beginCaptures": {
+        "1": { "name": "support.class.variant.godot-project" },
+        "2": { "name": "punctuation.definition.group.begin.godot-project" }
+      },
+      "end": "\\]\\s*(?=\\()",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.group.end.godot-project" }
+      },
+      "patterns": [
+        { "include": "#resource-ref" },
+        { "include": "#constructor" },
+        { "include": "#string" },
+        { "include": "#number" },
+        {
+          "match": "\\b[A-Za-z_][A-Za-z0-9_]*\\b",
+          "name": "support.class.variant.godot-project"
+        }
+      ]
+    },
+    "constructor": {
+      "comment": "Variant 构造器(含 3.x 别名)。核验:variant_parser.cpp parse_value 的 id== 链 + Packed 系列别名分支(Pool*/ByteArray/IntArray/FloatArray/Vector2Array/ColorArray/StringArray 等)。注意:无 StringName(...) 构造器(StringName 只认 &\\\" 前缀),无十六进制数字。",
+      "begin": "\\b(Vector2|Vector2i|Vector3|Vector3i|Vector4|Vector4i|Rect2|Rect2i|Rect3|AABB|Transform2D|Transform3D|Transform|Matrix32|Plane|Quaternion|Quat|Basis|Matrix3|Projection|Color|NodePath|RID|Callable|Signal|Object|Dictionary|Array|PackedByteArray|PoolByteArray|ByteArray|PackedInt32Array|PackedIntArray|PoolIntArray|IntArray|PackedInt64Array|PackedFloat32Array|PackedRealArray|PoolRealArray|FloatArray|PackedFloat64Array|PackedStringArray|PoolStringArray|StringArray|PackedVector2Array|PoolVector2Array|Vector2Array|PackedVector3Array|PoolVector3Array|Vector3Array|PackedVector4Array|PoolVector4Array|Vector4Array|PackedColorArray|PoolColorArray|ColorArray)\\s*(\\()",
+      "beginCaptures": {
+        "1": { "name": "support.class.variant.godot-project" },
+        "2": { "name": "punctuation.definition.group.begin.godot-project" }
+      },
+      "end": "\\)",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.group.end.godot-project" }
+      },
+      "patterns": [
+        { "include": "#stringname-prefix" },
+        { "include": "#resource-ref" },
+        { "include": "#typed-array" },
+        { "include": "#constructor" },
+        { "include": "#string" },
+        { "include": "#color" },
+        { "include": "#signed-inf" },
+        { "include": "#language" },
+        { "include": "#number" },
+        { "include": "#comment" },
+        { "include": "#punctuation" }
+      ]
+    },
+    "string": {
+      "comment": "双引号字符串。转义核验:variant_parser.cpp get_token 的 \\\\ 分支——\\\\b \\\\t \\\\n \\\\f \\\\r \\\\uXXXX(4 位)/\\\\UXXXXXX(6 位)/\\\\xNN 及常规字符。",
+      "begin": "\"",
+      "beginCaptures": {
+        "0": { "name": "punctuation.definition.string.begin.godot-project" }
+      },
+      "end": "\"",
+      "endCaptures": {
+        "0": { "name": "punctuation.definition.string.end.godot-project" }
+      },
+      "patterns": [
+        {
+          "name": "constant.character.escape.godot-project",
+          "match": "\\\\(?:[btnfr\"'\\\\/]|u[0-9a-fA-F]{4}|U[0-9a-fA-F]{6}|x[0-9a-fA-F]{2})"
+        }
+      ]
+    },
+    "color": {
+      "comment": "HTML 颜色字面量:#rgb/#rgba/#rrggbb/#rrggbbaa(仅此四种长度)。核验:get_token case '#' 起扫→Color::html 只认 3/4/6/8 位。",
+      "match": "#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})\\b",
+      "name": "constant.character.color.godot-project"
+    },
+    "signed-inf": {
+      "comment": "带符号无穷:-inf(parse_value 的 -inf 分支)。",
+      "match": "(?<![A-Za-z0-9_.])[-+](?:inf|nan)\\b",
+      "name": "constant.language.godot-project"
+    },
+    "language": {
+      "comment": "Variant 常量。核验:parse_value 标识符分支——true/false/null/nil/inf/inf_neg/nan(inf_neg 为 3.x 兼容)。",
+      "name": "constant.language.godot-project",
+      "match": "\\b(?:true|false|null|nil|inf|inf_neg|nan)\\b"
+    },
+    "number": {
+      "comment": "数字:可选负号 + 整数/小数(容许 1. 尾随点)/科学计数。核验:get_token 数字分支(仅 '-',无 '+',无 0x/0b/0o——十六进制只存在于字符串转义);前视断言防误食标识符内的数字。",
+      "name": "constant.numeric.godot-project",
+      "match": "(?<![A-Za-z0-9_.])-?[0-9]+(?:\\.[0-9]*)?(?:[eE][-+]?[0-9]+)?\\b"
+    },
+    "punctuation": {
+      "comment": "数组/字典/参数分隔符。",
+      "match": "[\\[\\]{}(),:=.]",
+      "name": "punctuation.separator.godot-project"
+    }
+  }
+}

@@ -12,18 +12,25 @@ A standalone Godot LSP written in Rust, with a VSCode extension.
 - 引擎全局面补全:1036 引擎类、38 内建类型、单例、`@GlobalScope` 工具函数、GDScript 内建函数、全局枚举及值、`PI`/`TAU` 等常量(签名与文档以引擎模型为权威)
 - 补全/签名文档回填:成员补全与 `recv.method(` 签名帮助按引擎模型补全签名与文档;自有成员补全带声明签名与 `##` 注释;注解补全带说明;语言关键字 hover
 - 文档跳转:悬停附官方 zh-CN 文档链接;类名/单例/全局函数/注解/关键字 hover 全覆盖
-- 场景感知:`$Path`/`%Unique` 节点路径补全(带节点类型)、悬停类型与文档、跳转到 .tscn 声明行
+- 场景感知:`$NodePath`/`%Unique`/`get_node` 节点路径补全(带节点类型)、hover 类型推断、跳转到 .tscn 声明行
 - 诊断(语法 + 语义,支持严格模式与按码忽略)、语义高亮、inlay hint(可开关)、折叠范围、签名帮助
 - 代码操作、整文档与选区格式化
 - 符号高亮(`documentHighlight`)、`res://` 路径可点击跳转(`documentLink`)
 - `Color()` 字面量取色器(`documentColor`)
 - 增量文本同步、文件监视(无需打开即感知项目文件增删改)
 - 配置双通道:`workspace/configuration` 拉取 + `didChangeConfiguration` 推送(纯 LSP,无编辑器特设)
-- VS Code 插件交互:运行项目/当前场景(集成终端调 `godot`)、GDScript snippet 集、重启服务器
-- 诊断带 `source`/`code`/`version`;请求级 panic 隔离,单请求崩溃不拖垮服务器
 - 跨文件解析:`class_name`、autoload、`preload`/`extends`
-- 场景感知:`$NodePath`、`%unique`、`get_node` 到场景节点的类型推断
 - 工作区符号、项目扫描(`project.godot` 热更新、`res://` 路径)
+- 诊断带 `source`/`code`/`version`;请求级 panic 隔离,单请求崩溃不拖垮服务器
+
+**运行期完全脱离 Godot**:引擎模型为构建期内嵌静态数据,无进程、无 FFI;CI、无头环境、远程开发均可使用。`godot` 可执行文件仅是「运行项目/场景」的可选入口。
+
+### VS Code 插件
+
+- **侧边栏符号树**:当前文件的类/函数/枚举/信号/常量,点击跳转声明(数据源 `documentSymbol`,VS Code 内建大纲同样可用)
+- **Godot 程序化文件高亮**:`.tscn`/`.tres`(场景/资源)、`project.godot`/`.godot`/`.import`/`.gdextension`(工程配置)、`.uid`(资源 UID)
+- 运行项目/当前场景(集成终端调 `godot`)、GDScript snippet 集、重启服务器
+- 详见 [editors/vscode/README.md](editors/vscode/README.md)
 
 ## 构建
 
@@ -36,7 +43,7 @@ cargo build --release
 
 任意 LSP 客户端:以 stdio 方式启动 `godotlsp`。
 
-VSCode:安装 [editors/vscode](editors/vscode)。`godotlsp.path` 指向服务器二进制,或将二进制拷入 `editors/vscode/server/` 随扩展打包。
+VSCode:从 VSIX 安装 `editors/vscode/godotlsp-<version>.vsix`(服务器二进制随扩展打包,Windows 开箱即用);或自行构建后用 `godotlsp.path` 指向二进制、拷入 `editors/vscode/server/`。安装、配置与命令见[插件 README](editors/vscode/README.md)。
 
 ### 其他编辑器
 

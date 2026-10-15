@@ -2,12 +2,12 @@
   "name": "godotlsp",
   "displayName": "godotlsp:独立 GDScript 语言服务器",
   "description": "独立于 Godot 引擎运行的 GDScript 语言服务器:悬停文档、补全、导航、诊断与格式化,无需打开 Godot 编辑器。",
-  "version": "0.1.0",
-  "publisher": "godotlsp",
+  "version": "0.1.1",
+  "publisher": "SantaChains",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SantaChains/godotLsp",
+    "url": "https://github.com/SantaChains/godotlsp",
     "directory": "editors/vscode"
   },
   "engines": {
@@ -40,6 +40,31 @@
     "virtualWorkspaces": false
   },
   "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "godotlsp",
+          "title": "godotlsp",
+          "icon": "./icons/godot_mono.svg"
+        }
+      ]
+    },
+    "views": {
+      "godotlsp": [
+        {
+          "id": "godotlsp.symbols",
+          "name": "当前文件符号"
+        },
+        {
+          "id": "godotlsp.project",
+          "name": "项目结构"
+        },
+        {
+          "id": "godotlsp.scene",
+          "name": "场景结构"
+        }
+      ]
+    },
     "languages": [
       {
         "id": "gdscript",
@@ -51,6 +76,42 @@
           ".gd"
         ],
         "configuration": "./language-configuration.json"
+      },
+      {
+        "id": "godot-resource",
+        "aliases": [
+          "Godot Resource",
+          "godotresource"
+        ],
+        "extensions": [
+          ".tscn",
+          ".tres"
+        ],
+        "configuration": "./language-configurations/godot-resource.json"
+      },
+      {
+        "id": "godot-project",
+        "aliases": [
+          "Godot Project",
+          "godotproject"
+        ],
+        "extensions": [
+          ".godot",
+          ".import",
+          ".gdextension",
+          ".cfg"
+        ],
+        "configuration": "./language-configurations/godot-project.json"
+      },
+      {
+        "id": "godot-uid",
+        "aliases": [
+          "Godot UID"
+        ],
+        "extensions": [
+          ".uid"
+        ],
+        "configuration": "./language-configurations/godot-project.json"
       }
     ],
     "grammars": [
@@ -58,6 +119,21 @@
         "language": "gdscript",
         "scopeName": "source.gdscript",
         "path": "./syntaxes/GDScript.tmLanguage.json"
+      },
+      {
+        "language": "godot-resource",
+        "scopeName": "source.godot.resource",
+        "path": "./syntaxes/GodotResource.tmLanguage.json"
+      },
+      {
+        "language": "godot-project",
+        "scopeName": "source.godot.project",
+        "path": "./syntaxes/GodotProject.tmLanguage.json"
+      },
+      {
+        "language": "godot-uid",
+        "scopeName": "source.godot.uid",
+        "path": "./syntaxes/GodotUid.tmLanguage.json"
       }
     ],
     "snippets": [
@@ -68,6 +144,11 @@
     ],
     "configurationDefaults": {
       "[gdscript]": {
+        "editor.insertSpaces": false,
+        "editor.detectIndentation": true,
+        "editor.tabSize": 4
+      },
+      "[godot-resource]": {
         "editor.insertSpaces": false,
         "editor.detectIndentation": true,
         "editor.tabSize": 4
@@ -93,8 +174,50 @@
         "command": "godotlsp.runScene",
         "title": "运行当前场景",
         "category": "godotlsp"
+      },
+      {
+        "command": "godotlsp.symbols.refresh",
+        "title": "刷新符号",
+        "category": "godotlsp",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "godotlsp.project.refresh",
+        "title": "刷新项目结构",
+        "category": "godotlsp",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "godotlsp.scene.refresh",
+        "title": "刷新场景结构",
+        "category": "godotlsp",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "godotlsp.goto",
+        "title": "跳转到声明",
+        "category": "godotlsp"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "godotlsp.symbols.refresh",
+          "when": "view == godotlsp.symbols",
+          "group": "navigation"
+        },
+        {
+          "command": "godotlsp.project.refresh",
+          "when": "view == godotlsp.project",
+          "group": "navigation"
+        },
+        {
+          "command": "godotlsp.scene.refresh",
+          "when": "view == godotlsp.scene",
+          "group": "navigation"
+        }
+      ]
+    },
     "configuration": {
       "title": "godotlsp",
       "properties": {
@@ -120,6 +243,7 @@
             "详细:在消息级别之上额外记录每个报文的完整内容。"
           ],
           "default": "off",
+          "scope": "window",
           "markdownDescription": "把编辑器与 godotlsp 之间的 LSP 通信记录到 **godotlsp** 输出通道,便于排查问题。"
         },
         "godotlsp.diagnostics.strict": {
@@ -154,7 +278,8 @@
     "vscode:prepublish": "npm run build",
     "build": "esbuild src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node --target=node20 --minify",
     "watch": "npm run build -- --sourcemap --watch",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "tsc -p tsconfig.test.json && node --test \"out-test/tests/*.test.js\""
   },
   "dependencies": {
     "vscode-languageclient": "^10.1.2"
