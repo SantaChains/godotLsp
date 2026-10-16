@@ -386,13 +386,23 @@ def gen_builtin_index(all_names: list[str]) -> str:
 
 
 def rewrite_between(path: Path, new_block: str) -> bool:
-    """重写 BEGIN/END 标记区间；文件无区间时整文件替换（仅限生成文件）。"""
+    """重写 BEGIN/END 标记区间。
+
+    安全策略：SUMMARY 不含标记时**报错退出**而非整文件替换——
+    曾经的整文件替换兜底把手写的语法/范式/内部篇条目全部吃掉（W2 事故）。
+    """
     text = path.read_text(encoding="utf-8") if path.exists() else ""
     if BEGIN in text and END in text:
         pre, rest = text.split(BEGIN, 1)
         _, post = rest.split(END, 1)
         path.write_text(pre + new_block + post, encoding="utf-8", newline="\n")
         return True
+    if path == SUMMARY:
+        raise SystemExit(
+            f"{path}: 缺少 BUILTIN 标记区间，拒绝整文件替换。"
+            "请在手写 SUMMARY 中手动加入标记对：\n"
+            f"{BEGIN}\n\n{END}"
+        )
     path.write_text(new_block + "\n", encoding="utf-8", newline="\n")
     return False
 
