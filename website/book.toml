@@ -8,7 +8,8 @@ description = "面向 LSP 与阅读者的 GDScript 语法、Godot 范式与引�
 [output.html]
 git-repository-url = "https://github.com/SantaChains/godotlsp"
 edit-url-template = "https://github.com/SantaChains/godotlsp/edit/main/website/{path}"
-additional-css = []
+additional-css = ["theme/style.css"]
+additional-js = ["assets/custom.js", "assets/bigPicture.js"]
 
 [output.html.search]
 enable = true
