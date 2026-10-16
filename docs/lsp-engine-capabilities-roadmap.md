@@ -47,7 +47,7 @@
 
 > 四个用户诉求映射：常用函数 snippet → C2；文件已输入词条 → C3；频率排序表 → C4；算法/预测 → C1+C5。参照系：rust-analyzer CompletionRelevance（relevance 与 fuzzy 严格分离，`score ^ 0xFFFF_FFFF` 十六进制零填充 sortText）+ clangd 双维分（Quality 符号质量 × Relevance 查询相关，ContextWords/MainFileRefs，扩展字段 `score` 供客户端二次加权）。
 
-11. **C1 sortText 骨架**：四补全面统一评分——fuzzy（前缀 > 子序列，对齐 VSCode 过滤语义）× 分桶 relevance（kind 桶：本文件标识符/局部变量 > 成员 > 类/内建 > 全局常量枚举 > 关键字）；sortText = 桶前缀 + 零填充分数。风险低，先立骨架后逐项加权。
+11. [x] **C1 sortText 骨架**（6aed282）：四补全面统一评分——fuzzy 七带（完全相等/CI 相等/前缀越短越优/CI 前缀/子序列空隙密度/空前缀中性/不匹配）× 分桶 relevance（LOCAL 预留 C3 / MEMBER / FN_GLOBAL / TYPE / CONST / KEYWORD）；sortText = `{bucket:02x}{(0xFFFF-fuzzy):04x}` 取反编码。附带修复:partial 词归面（`Vector3.no` → 成员面、`@ex` → 注解面,旧逻辑只有紧邻点/裸 `@` 才归）。契约不变:仍全量返回,客户端过滤照旧。桶内频率细分留 C4。
 12. **C2 snippet 面**：`snippetSupport` 能力协商（不声明则纯文本降级）。三类模板：① `func _` 上下文出虚方法模板（_ready/_process/_physics_process/_input/_unhandled_input/_draw…按宿主类过滤——Node2D 才出 _draw）；② 语句上下文出控制流模板（for/fori/if/match/await+signal）；③ 高频调用模板（instantiate+add_child、queue_free、connect+lambda、create_tween 链）。与插件 16 条手动 snippet 分工：服务器版多 IDE + 上下文感知，插件版保留作无 LSP 兜底。
 13. **C3 本文件词条面**：词级扫描本文件标识符（出现 ≥2 次的词 + 当前作用域 locals 粗扫），供 nvim/zed/helix（VSCode 自带 wordBasedSuggestions，靠低 sortText 桶 + `godotlsp.completion.localWords` 开关避免重复感）。
 14. **C4 频率排序表**：`tools/gen_freq.py` 构建期挖掘——godot-docs 全部代码块 + corpus（feature-showcase + godot-engine-tests pinned）提取标识符频率 → `completion_freq.json`（include_str! 内嵌，OnceLock）；C1 桶内按频率细分。表再生成纳入 gen_docs --check 常设校验。官方无 Godot API 频率数据集，语料挖掘是可复现替代（fetch_corpus.py 同模式）。
