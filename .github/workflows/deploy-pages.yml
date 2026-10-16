@@ -1,6 +1,6 @@
 # mdBook 中文参考站部署到 GitHub Pages
-# 暂以 .bak 后缀停用（文档尚未完成），启用时将文件重命名为 deploy-pages.yml
 # 仓库 Settings -> Pages -> Build and deployment -> Source 需选择「GitHub Actions」
+# （configure-pages 的 enablement: true 也会尝试自动启用，手动设置一次最稳）
 # 安全基线：action 全部按 commit SHA 固定、job 级最小权限、关闭凭据持久化、锁定构建版本
 name: Deploy Pages
 
@@ -25,11 +25,14 @@ jobs:
     timeout-minutes: 15
     permissions:
       contents: read
+      pages: write
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
         with:
           persist-credentials: false
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+        with:
+          enablement: true
       - name: 安装 mdBook
         run: cargo install mdbook --version 0.4.52 --locked
       - name: 构建
