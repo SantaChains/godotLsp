@@ -18,6 +18,7 @@ use lsp_types::Uri;
 use lsp_types::*;
 
 mod doclinks;
+mod freq;
 mod hoverdata;
 mod langdocs;
 mod scoring;
@@ -617,8 +618,17 @@ fn resolve_receiver(state: &State, src: &str, offset: usize) -> Option<(String, 
 
 
 /// 补全：`.` 后给接收者成员，否则给引擎全局名（类/内建/函数/单例/常量）。
-fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
-    let uri = &p.text_document_position.text_document.uri;
+/// C1 fuzzy + C4 频率细分的合成：空前缀时按频率排名细分中性带（热度排序），
+/// 有前缀时纯 fuzzy（词面已充分区分）。
+fn scored_fuzzy(prefix: &str, label: &str) -> u16 {
+    if prefix.is_empty() {
+        freq::rank(label).map_or(scoring::band::NEUTRAL, scoring::neutral_by_rank)
+    } else {
+        scoring::fuzzy(prefix, label)
+    }
+}
+
+fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    let uri = &p.text_document_position.text_document.uri;
     let Some(src) = state.docs.get(uri) else {
         return CompletionResponse::Array(vec![]);
     };
@@ -639,7 +649,8 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
             items.extend(class_members(&state.engine, &recv_ty));
         }
         for i in &mut items {
-            i.sort_text = Some(scoring::sort_text(scoring::bucket::MEMBER, scoring::fuzzy(prefix, &i.label)));
+            let f = scored_fuzzy(prefix, &i.label);
+            i.sort_text = Some(scoring::sort_text(scoring::bucket::MEMBER, f));
         }
     } else if word_start > 0 && b[word_start - 1] == b'@' {
         // 注解面：`@<|` 只出注解（36 个），不与全局面混淆。
@@ -765,7 +776,12 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
                 Some(CompletionItemKind::SNIPPET) => scoring::bucket::SNIPPET,
                 _ => scoring::bucket::KEYWORD,
             };
-            i.sort_text = Some(scoring::sort_text(bucket, scoring::fuzzy(prefix, &i.label)));
+            let f = if matches!(i.kind, Some(CompletionItemKind::SNIPPET)) {
+                scoring::fuzzy(prefix, &i.label) // snippet 项不吃频率（模板非 API 名）。
+            } else {
+                scored_fuzzy(prefix, &i.label)
+            };
+            i.sort_text = Some(scoring::sort_text(bucket, f));
         }
         // C3：本文件词条面——局部定义（空前缀也出）+ 高频词（有前缀才出，fuzzy>0 过滤）。
         // 排除保留名（引擎类/内建函数/关键字/注解/@GDScript 函数）——
@@ -2178,6 +2194,17 @@ func _ready() -> void:
         let for_kw6 = items6.iter().find(|i| i.label == "for").unwrap();
         assert_eq!(for_kw6.insert_text_format, Some(InsertTextFormat::SNIPPET));
         assert!(for_kw6.insert_text.as_deref().unwrap().starts_with("for ${1:i}"));
+    }
+
+    /// C4 频率细分：空前缀热 API 排前,有前缀不受频率影响。
+    #[test]
+    fn freq_hot_first_on_empty_prefix() {
+        let hot = scored_fuzzy("", "print");
+        let cold = scored_fuzzy("", "zzz_not_an_api_zzz");
+        assert_eq!(cold, scoring::band::NEUTRAL, "未收录项中性分");
+        assert!(hot > cold, "热 API 应细分排前: hot={hot:#06x} cold={cold:#06x}");
+        // 有前缀时纯 fuzzy——频率只在空前缀生效。
+        assert_eq!(scored_fuzzy("pri", "print"), scoring::fuzzy("pri", "print"));
     }
 
     /// C3 本文件词条面：locals 空前缀也出 + 高频词有前缀才出 + 保留名排除 + LOCAL 桶最前。

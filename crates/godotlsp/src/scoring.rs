@@ -38,7 +38,7 @@ pub mod bucket {
 /// | SUBSEQ | 0x8000-0xEFFF | 子序列（空隙越少越好）|
 /// | NEUTRAL | 0x4000 | 空前缀中性分 |
 /// | NONE | 0 | 不匹配 |
-mod band {
+pub mod band {
     pub const EXACT: u16 = 0xFFFF;
     pub const CI_EQ: u16 = 0xFF00;
     pub const PREFIX_TOP: u16 = 0xFE00; // 带内 - extra(≤0x05FF)
@@ -47,6 +47,15 @@ mod band {
     /// 空前缀中性分：桶序主导，fuzzy 不参与。
     pub const NEUTRAL: u16 = 0x4000;
     pub const NONE: u16 = 0;
+}
+
+/// C4：空前缀时按频率排名细分中性带。
+///
+/// rank 0（最热）→ 0x7FFF，排名越大分越低，超出 0x3FFF 名或未命中
+/// → NEUTRAL（与未收录项同权垫底，不被淘汰）。带顶 0x7FFF < SUBSEQ 0x8000，
+/// 带间不重叠。仅空前缀调用——有前缀时 fuzzy 分已充分区分。
+pub fn neutral_by_rank(rank: u32) -> u16 {
+    band::NEUTRAL + 0x3FFF - rank.min(0x3FFF) as u16
 }
 
 /// 词面匹配分：prefix 对 label。
