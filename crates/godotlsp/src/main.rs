@@ -44,8 +44,52 @@ struct State {
     root: Option<std::path::PathBuf>,
     /// 后台诊断发送端（150ms 去抖）。
     diag_sender: std::sync::mpsc::Sender<(Uri, String)>,
-    /// C2：客户端声明了 completionItem.snippetSupport（initialize 协商）。
+    /// 客户端声明了 completionItem.snippetSupport（initialize 协商，不可变）。
+    snippet_support: bool,
+    /// `godotlsp.*` 配置（didChangeConfiguration 推送更新）。
+    config: Config,
+}
+
+/// 服务器侧配置。来源：`workspace/didChangeConfiguration` 的
+/// `settings.godotlsp` 段（VSCode languageclient 在 initialize 后自动全量
+/// 推送一次——拉通道因此省略，缺省值在解析时逐键兜底）。
+#[derive(Clone, Debug)]
+struct Config {
+    /// C2 snippet 模板面（与客户端 snippetSupport 协商双闸门）。
     snippets: bool,
+    /// C3 本文件词条面。默认关——VSCode 的 wordBasedSuggestions 已提供
+    /// 同面补全，默认开会与客户端内置行为重复感。
+    file_words: bool,
+    /// C4 语料频率加权排序（空前缀热度细分）。
+    freq_boost: bool,
+    /// 内联类型提示（inlayHints）。
+    inlay_type_hints: bool,
+}
+
+impl Default for Config {
+    fn default() -> Self {
+        Config { snippets: true, file_words: false, freq_boost: true, inlay_type_hints: true }
+    }
+}
+
+impl Config {
+    /// 从 `settings.godotlsp` 段解析（缺键兜底默认值；非 bool 值忽略）。
+    fn from_section(v: &serde_json::Value) -> Config {
+        let mut c = Config::default();
+        if let Some(b) = v.get("completion").and_then(|s| s.get("snippets")).and_then(|x| x.as_bool()) {
+            c.snippets = b;
+        }
+        if let Some(b) = v.get("completion").and_then(|s| s.get("fileWords")).and_then(|x| x.as_bool()) {
+            c.file_words = b;
+        }
+        if let Some(b) = v.get("completion").and_then(|s| s.get("frequencyBoost")).and_then(|x| x.as_bool()) {
+            c.freq_boost = b;
+        }
+        if let Some(b) = v.get("inlayHints").and_then(|s| s.get("typeHints")).and_then(|x| x.as_bool()) {
+            c.inlay_type_hints = b;
+        }
+        c
+    }
 }
 
 fn main() {
@@ -110,7 +154,7 @@ fn main() {
     let initialize_params: InitializeParams = serde_json::from_value(initialize_value).expect("解析 initialize 参数");
 
     // C2：snippetSupport 协商——客户端不声明则 snippet 面整体不出现。
-    let snippets = initialize_params
+    let snippet_support = initialize_params
         .capabilities
         .text_document
         .as_ref()
@@ -167,7 +211,8 @@ fn main() {
     let (diag_tx, diag_rx) = std::sync::mpsc::channel::<(Uri, String)>();
     let mut state = State {
         engine, real_lower, docs: HashMap::new(), asts: HashMap::new(), doc_versions: HashMap::new(),
-        cancelled: HashSet::new(), uid_map, project, root, diag_sender: diag_tx, snippets,
+        cancelled: HashSet::new(), uid_map, project, root, diag_sender: diag_tx,
+        snippet_support, config: Config::default(),
     };
 
     eprintln!("[godotlsp] 就绪，引擎 {} (来源: {})，项目文件 {}，uid 映射 {}",
@@ -370,7 +415,12 @@ fn handle_notification(notif: Notification, state: &mut State, _conn: &Connectio
             }
         }
         "workspace/didChangeConfiguration" => {
-            // 扩展把 godotlsp.* 设置推过来；轻量设置暂不影响内核，接收即忽略。
+            // VSCode languageclient 推 `settings: { godotlsp: {...} }`（initialize 后
+            // 自动推一次全量 + 用户改动时增量）。逐键解析，缺键兜底默认值。
+            let settings = notif.params.get("settings").cloned().unwrap_or_default();
+            if let Some(section) = settings.get("godotlsp") {
+                state.config = Config::from_section(section);
+            }
         }
         "workspace/didChangeWatchedFiles" => {
             // 扩展监听 **/*.gd 等；项目级 class_name 缓存由客户端侧重建，内核按需忽略。
@@ -618,10 +668,10 @@ fn resolve_receiver(state: &State, src: &str, offset: usize) -> Option<(String, 
 
 
 /// 补全：`.` 后给接收者成员，否则给引擎全局名（类/内建/函数/单例/常量）。
-/// C1 fuzzy + C4 频率细分的合成：空前缀时按频率排名细分中性带（热度排序），
-/// 有前缀时纯 fuzzy（词面已充分区分）。
-fn scored_fuzzy(prefix: &str, label: &str) -> u16 {
-    if prefix.is_empty() {
+/// C1 fuzzy + C4 频率细分的合成：空前缀时按频率排名细分中性带（热度排序，
+/// 受 `godotlsp.completion.frequencyBoost` 开关），有前缀时纯 fuzzy（词面已充分区分）。
+fn scored_fuzzy(prefix: &str, label: &str, freq_boost: bool) -> u16 {
+    if prefix.is_empty() && freq_boost {
         freq::rank(label).map_or(scoring::band::NEUTRAL, scoring::neutral_by_rank)
     } else {
         scoring::fuzzy(prefix, label)
@@ -634,7 +684,8 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    le
     };
     let offset = p.text_document_position.position;
     let b = src.as_bytes();
-    let at = line_start_offset(src, offset.line as usize) + offset.character as usize;
+    // 光标越界防御：客户端可能发超出行数/列数的 position（测试/竞态），clamp 后再切片。
+    let at = (line_start_offset(src, offset.line as usize) + offset.character as usize).min(src.len());
     // C1：向前扫到词首——partial 词也正确归面（`Node.po` → 成员面，prefix="po"）。
     let mut word_start = at;
     while word_start > 0 && (b[word_start - 1].is_ascii_alphanumeric() || b[word_start - 1] == b'_') {
@@ -649,7 +700,7 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    le
             items.extend(class_members(&state.engine, &recv_ty));
         }
         for i in &mut items {
-            let f = scored_fuzzy(prefix, &i.label);
+            let f = scored_fuzzy(prefix, &i.label, state.config.freq_boost);
             i.sort_text = Some(scoring::sort_text(scoring::bucket::MEMBER, f));
         }
     } else if word_start > 0 && b[word_start - 1] == b'@' {
@@ -741,15 +792,16 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    le
                 detail: Some(desc.to_string()),
                 ..CompletionItem::default()
             };
-            if state.snippets
+            let use_snippets = state.snippet_support && state.config.snippets;
+            if use_snippets
                 && let Some(body) = snippets::keyword_snippet(kw) {
                     it.insert_text = Some(body.to_string());
                     it.insert_text_format = Some(InsertTextFormat::SNIPPET);
                 }
             items.push(it);
         }
-        // C2：snippet 面（snippetSupport 协商，客户端不声明则整体不出现）。
-        if state.snippets {
+        // C2：snippet 面（snippetSupport 协商 × godotlsp.completion.snippets 双闸门）。
+        if state.snippet_support && state.config.snippets {
             let line_start = line_start_offset(src, offset.line as usize);
             let line_prefix = &src[line_start..word_start];
             // `func _<|` → 虚方法模板，按宿主继承链过滤（无 extends 默认 RefCounted）。
@@ -779,51 +831,54 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    le
             let f = if matches!(i.kind, Some(CompletionItemKind::SNIPPET)) {
                 scoring::fuzzy(prefix, &i.label) // snippet 项不吃频率（模板非 API 名）。
             } else {
-                scored_fuzzy(prefix, &i.label)
+                scored_fuzzy(prefix, &i.label, state.config.freq_boost)
             };
             i.sort_text = Some(scoring::sort_text(bucket, f));
         }
         // C3：本文件词条面——局部定义（空前缀也出）+ 高频词（有前缀才出，fuzzy>0 过滤）。
         // 排除保留名（引擎类/内建函数/关键字/注解/@GDScript 函数）——
         // 那些已由专门面提供，词条面只出用户自定义标识符，避免同名重复项。
-        let (locals, freq) = file_words(src, at);
-        let reserved: std::collections::HashSet<String> = state
-            .real_lower
-            .iter()
-            .cloned()
-            .chain(langdocs::keywords().iter().map(|(k, _, _)| k.to_string()))
-            .chain(hoverdata::annotations().iter().map(|(a, _)| a.to_string()))
-            .chain(hoverdata::gdscript_fns().iter().map(|(f, _)| f.to_string()))
-            .collect();
-        let mut emitted: std::collections::HashSet<String> =
-            items.iter().map(|i| i.label.clone()).collect();
-        for name in &locals {
-            if !emitted.contains(name.as_str()) {
-                emitted.insert(name.clone());
-                items.push(CompletionItem {
-                    label: name.clone(),
-                    kind: Some(CompletionItemKind::VARIABLE),
-                    detail: Some("局部变量".into()),
-                    sort_text: Some(scoring::sort_text(scoring::bucket::LOCAL, scoring::fuzzy(prefix, name))),
-                    ..CompletionItem::default()
-                });
-            }
-        }
-        if !prefix.is_empty() {
-            for (w, n) in &freq {
-                if emitted.contains(w.as_str()) || reserved.contains(w.to_lowercase().as_str()) {
-                    continue;
-                }
-                let f = scoring::fuzzy(prefix, w);
-                if f > 0 {
-                    emitted.insert(w.clone());
+        // `godotlsp.completion.fileWords` 开关（默认关：VSCode wordBasedSuggestions 已提供同面）。
+        if state.config.file_words {
+            let (locals, freq) = file_words(src, at);
+            let reserved: std::collections::HashSet<String> = state
+                .real_lower
+                .iter()
+                .cloned()
+                .chain(langdocs::keywords().iter().map(|(k, _, _)| k.to_string()))
+                .chain(hoverdata::annotations().iter().map(|(a, _)| a.to_string()))
+                .chain(hoverdata::gdscript_fns().iter().map(|(f, _)| f.to_string()))
+                .collect();
+            let mut emitted: std::collections::HashSet<String> =
+                items.iter().map(|i| i.label.clone()).collect();
+            for name in &locals {
+                if !emitted.contains(name.as_str()) {
+                    emitted.insert(name.clone());
                     items.push(CompletionItem {
-                        label: w.clone(),
+                        label: name.clone(),
                         kind: Some(CompletionItemKind::VARIABLE),
-                        detail: Some(format!("本文件出现 {n} 次")),
-                        sort_text: Some(scoring::sort_text(scoring::bucket::LOCAL, f)),
+                        detail: Some("局部变量".into()),
+                        sort_text: Some(scoring::sort_text(scoring::bucket::LOCAL, scoring::fuzzy(prefix, name))),
                         ..CompletionItem::default()
                     });
+                }
+            }
+            if !prefix.is_empty() {
+                for (w, n) in &freq {
+                    if emitted.contains(w.as_str()) || reserved.contains(w.to_lowercase().as_str()) {
+                        continue;
+                    }
+                    let f = scoring::fuzzy(prefix, w);
+                    if f > 0 {
+                        emitted.insert(w.clone());
+                        items.push(CompletionItem {
+                            label: w.clone(),
+                            kind: Some(CompletionItemKind::VARIABLE),
+                            detail: Some(format!("本文件出现 {n} 次")),
+                            sort_text: Some(scoring::sort_text(scoring::bucket::LOCAL, f)),
+                            ..CompletionItem::default()
+                        });
+                    }
                 }
             }
         }
@@ -1643,6 +1698,9 @@ fn rename(state: &State, p: &RenameParams) -> Result<WorkspaceEdit, String> {
 // ───────────────────────── inlayHints / foldingRange ─────────────────────────
 
 fn inlay_hints(state: &State, p: &InlayHintParams) -> Vec<InlayHint> {
+    if !state.config.inlay_type_hints {
+        return vec![];
+    }
     let uri = &p.text_document.uri;
     let Some(file) = state.asts.get(uri) else { return vec![] };
     let src = state.docs.get(uri).map(|s| s.as_str()).unwrap_or("");
@@ -1974,7 +2032,8 @@ mod hover_tests {
             project: None,
             root: None,
             diag_sender: tx,
-            snippets: false,
+            snippet_support: false,
+            config: Config::default(),
         }
     }
 
@@ -1992,7 +2051,8 @@ mod hover_tests {
             project: None,
             root: None,
             diag_sender: state.diag_sender.clone(),
-            snippets: false,
+            snippet_support: false,
+            config: Config::default(),
         }
     }
 
@@ -2155,7 +2215,8 @@ func _ready() -> void:
 
         // 开启：`extends Node` + `func _re` → _ready/_process 模板,无 _draw（Node 非 CanvasItem）。
         let mut st = state_with(&base, "extends Node\nfunc _re\n");
-        st.snippets = true;
+        st.snippet_support = true;
+        st.config.snippets = true;
         let items = ask(&st, 1, 8);
         let ready = items.iter().find(|i| i.label == "_ready").expect("Node 系应出 _ready 模板");
         assert_eq!(ready.insert_text.as_deref(), Some("_ready() -> void:\n\t$0"));
@@ -2165,13 +2226,15 @@ func _ready() -> void:
 
         // 无 extends → RefCounted 默认 → 不出 _ready（Object 级 _notification 不匹配前缀 _re）。
         let mut st2 = state_with(&base, "func _re\n");
-        st2.snippets = true;
+        st2.snippet_support = true;
+        st2.config.snippets = true;
         let items2 = ask(&st2, 0, 8);
         assert!(!items2.iter().any(|i| i.label == "_ready"), "RefCounted 默认不出 _ready");
 
         // 语句位复合模板：`inst` → instantiate_scene；非语句位（跟在标识符后）不出。
         let mut st3 = state_with(&base, "inst\n");
-        st3.snippets = true;
+        st3.snippet_support = true;
+        st3.config.snippets = true;
         let items3 = ask(&st3, 0, 4);
         let comp = items3.iter().find(|i| i.label == "instantiate_scene").expect("语句位应出 instantiate_scene");
         assert_eq!(comp.insert_text_format, Some(InsertTextFormat::SNIPPET));
@@ -2189,7 +2252,8 @@ func _ready() -> void:
 
         // 开启：`for` 关键字升级为 snippet 插入（label 不变）。
         let mut st6 = state_with(&base, "for\n");
-        st6.snippets = true;
+        st6.snippet_support = true;
+        st6.config.snippets = true;
         let items6 = ask(&st6, 0, 3);
         let for_kw6 = items6.iter().find(|i| i.label == "for").unwrap();
         assert_eq!(for_kw6.insert_text_format, Some(InsertTextFormat::SNIPPET));
@@ -2199,12 +2263,14 @@ func _ready() -> void:
     /// C4 频率细分：空前缀热 API 排前,有前缀不受频率影响。
     #[test]
     fn freq_hot_first_on_empty_prefix() {
-        let hot = scored_fuzzy("", "print");
-        let cold = scored_fuzzy("", "zzz_not_an_api_zzz");
+        let hot = scored_fuzzy("", "print", true);
+        let cold = scored_fuzzy("", "zzz_not_an_api_zzz", true);
         assert_eq!(cold, scoring::band::NEUTRAL, "未收录项中性分");
         assert!(hot > cold, "热 API 应细分排前: hot={hot:#06x} cold={cold:#06x}");
         // 有前缀时纯 fuzzy——频率只在空前缀生效。
-        assert_eq!(scored_fuzzy("pri", "print"), scoring::fuzzy("pri", "print"));
+        assert_eq!(scored_fuzzy("pri", "print", true), scoring::fuzzy("pri", "print"));
+        // freq_boost=false 时空前缀回退纯中性。
+        assert_eq!(scored_fuzzy("", "print", false), scoring::band::NEUTRAL);
     }
 
     /// C3 本文件词条面：locals 空前缀也出 + 高频词有前缀才出 + 保留名排除 + LOCAL 桶最前。
@@ -2227,7 +2293,8 @@ func _ready() -> void:
 
         // locals：var/const/for/参数——空前缀也出，LOCAL 桶（"00"）最前。
         let src = "extends Node\nfunc tick(delta: float, n := 0) -> void:\n\tvar hp := 10\n\tfor i in range(3):\n\t\tpass\n\nfunc other() -> void:\n\t";
-        let st = state_with(&base, src);
+        let mut st = state_with(&base, src);
+        st.config.file_words = true; // 配置开关默认关，测试显式开。
         let items = ask(&st, 7, 1);
         for name in ["hp", "delta", "n", "i"] {
             assert!(
@@ -2241,7 +2308,8 @@ func _ready() -> void:
 
         // 高频词：非声明的重复标识符，有前缀才出；保留名（Sprite2D）不重复出。
         let src2 = "var t := Sprite2D.new()\nvar u := Sprite2D.new()\n\nmove_and_slide()\nmove_and_slide()\nmov";
-        let st2 = state_with(&base, src2);
+        let mut st2 = state_with(&base, src2);
+        st2.config.file_words = true;
         let items2 = ask(&st2, 5, 3);
         let mas = items2
             .iter()
@@ -2298,7 +2366,8 @@ mod color_codelens_tests {
             project: None,
             root: None,
             diag_sender: state.diag_sender.clone(),
-            snippets: false,
+            snippet_support: false,
+            config: Config::default(),
         };
         let colors = document_color(&st, &DocumentColorParams {
             text_document: TextDocumentIdentifier { uri: uri.clone() },
@@ -2349,7 +2418,8 @@ mod color_codelens_tests {
             project: Some(std::sync::Arc::new(project)),
             root: Some(root.clone()),
             diag_sender: tx,
-            snippets: false,
+            snippet_support: false,
+            config: Config::default(),
         };
         // 模拟 didOpen：路径须在 root 之下（code_lens 做 strip_prefix）。
         let gd = root.join("main.gd");
@@ -2397,7 +2467,8 @@ mod rename_tests {
             project: Some(std::sync::Arc::new(project)),
             root: Some(dir.to_path_buf()),
             diag_sender: tx,
-            snippets: false,
+            snippet_support: false,
+            config: Config::default(),
         };
         st.docs.insert(uri.clone(), src.to_string());
         (st, uri)

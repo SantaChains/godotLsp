@@ -334,6 +334,21 @@
           "scope": "window",
           "markdownDescription": "把编辑器与 godotlsp 之间的 LSP 通信记录到 **godotlsp** 输出通道,便于排查问题。"
         },
+        "godotlsp.completion.snippets": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "补全中的上下文感知代码片段:输入 `func _` 时按宿主类给出虚方法模板(`_ready`/`_process`/`_draw` 等),语句位给出高频调用模板。与客户端 snippet 支持协商独立生效。"
+        },
+        "godotlsp.completion.fileWords": {
+          "type": "boolean",
+          "default": false,
+          "markdownDescription": "把当前文件内出现过的自定义标识符(局部变量、出现 ≥2 次的词)加入补全。默认关闭:VSCode 的 `editor.wordBasedSuggestions` 已提供同类补全,开启后两者会同时出现。对 nvim/zed/helix 等无内置词条补全的编辑器建议开启。"
+        },
+        "godotlsp.completion.frequencyBoost": {
+          "type": "boolean",
+          "default": true,
+          "markdownDescription": "按语料统计的 API 使用频率对补全排序加权(构建期从官方文档、示例工程与教程语料挖掘)。关闭后按纯词面匹配度排序。"
+        },
         "godotlsp.diagnostics.strict": {
           "type": "boolean",
           "default": false,

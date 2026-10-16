@@ -55,9 +55,18 @@
 
 ## P4 — 诊断分级与格式化（原 P3）
 
-16. **warning 分级**：WarningSettings per-code 配置 + diagnostics.ignore 双通道。
+16. **warning 分级**：WarningSettings per-code 配置 + diagnostics.ignore 双通道。**前置：诊断码体系**（当前 analysis.errors 只有 message 无 code,`godotlsp.diagnostics.ignore`/`strict` 两设置已声明但服务器无从过滤——挂起至此项）。
 17. **格式化**：内建 formatter，对齐 gdformat。**前置：CST trivia**（保留空白/注释 token，否则格式化丢注释）。
 18. **codeAction**：未声明变量 → preload/class_name 导入建议；未解析节点路径 → 提示补 $/%。
+
+## P3.5 — 配置系统 ✅（2026-10-16,与 C1-C4 同期落地）
+
+- **Config struct**（State 内嵌,可变）：`snippets` / `file_words`(默认关,VSCode wordBasedSuggestions 同面) / `freq_boost` / `inlay_type_hints` 四键。
+- **通道**：`workspace/didChangeConfiguration` 推送解析 `settings.godotlsp` 段逐键兜底；**拉通道省略**——vscode-languageclient 在 `synchronize.configurationSection` 已配置时 initialize 后自动全量推送一次,服务器发起请求基建(负 id 注册 + Response 分支)复杂度不成比例,nvim/zed 推送约定一致,验收时按需补。
+- **插件声明**：`godotlsp.completion.{snippets,fileWords,frequencyBoost}` 三设置(中文 markdownDescription)。
+- **消费**：C2 面 = `snippet_support`(协商)× `config.snippets`(配置)双闸门;C3 面挂 `file_words`;C4 挂 `freq_boost`(scored_fuzzy 参数化);inlayHints 挂 `inlay_type_hints` 短路。
+- **附带健壮性修复**：completion 光标越界 clamp(`at.min(src.len())`)——此前超界 position 会导致切片 panic,catch_unwind 吞掉后**不回 Response**,客户端死等(smoke 实证)。hover/rename/highlight 走 position_to_offset 本有 Option 兜底,不受影响。
+- smoke 4e 段:didChangeConfiguration 推送 → fileWords/snippets 开关端到端生效。
 
 ## P5 — 高级导航与着色（原 P4）
 
