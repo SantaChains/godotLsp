@@ -1194,11 +1194,14 @@ fn document_links(state: &State, p: &DocumentLinkParams) -> Vec<DocumentLink> {
                         });
                     }
             }
-            // uid:// → res:// 映射（§8.1 UID 规格）。
+            // uid:// → res:// 映射（§8.1 UID 规格）；tscn/tres 头部自嵌 uid 指向自己，跳过。
+            // 用路径等价比较而非 Uri 字符串（客户端盘符大小写与 url crate 生成可能不一致）。
             if let Some(uid) = literal.strip_prefix("uid://")
                 && let Some(res_path) = state.uid_map.get(uid) {
                     let path = root.join(res_path);
+                    let self_path = url::Url::parse(uri.as_str()).ok().and_then(|u| u.to_file_path().ok());
                     if path.exists()
+                        && self_path.as_deref() != Some(path.as_path())
                         && let Some(target) = path_to_uri(&path) {
                             links.push(DocumentLink {
                                 range: offset_range(src, start, end + 1),
@@ -1423,6 +1426,21 @@ fn scan_uid_files(base: &std::path::Path, dir: &std::path::Path, map: &mut HashM
                     let res_path = res_path.to_string_lossy().replace('\\', "/");
                     map.insert(uid, res_path);
                 }
+            }
+        // P2.7：tscn/tres 头部自嵌 uid（[gd_scene uid="uid://..."]），只读头部。
+        else if let Some(ext) = path.extension().and_then(|e| e.to_str())
+            && (ext == "tscn" || ext == "tres")
+            && let Ok(mut f) = std::fs::File::open(&path) {
+                use std::io::Read;
+                let mut buf = [0u8; 1024];
+                // 头部限 1KB：uid 必在首行附近；读多了浪费（.tres 可数 MB）。
+                let n = f.read(&mut buf).unwrap_or(0);
+                let head = String::from_utf8_lossy(&buf[..n]);
+                if let Some(uid) = gdscript_project::tscn::scan_header_uid(&head)
+                    && let Ok(rel) = path.strip_prefix(base) {
+                        let res_path = rel.to_string_lossy().replace('\\', "/");
+                        map.entry(uid).or_insert_with(|| res_path);
+                    }
             }
     }
 }

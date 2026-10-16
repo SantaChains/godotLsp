@@ -19,6 +19,10 @@ use gdscript_syntax::ast::File;
 use gdscript_syntax::semantic::ProjectContext;
 use gdscript_syntax::parse;
 
+pub mod tscn;
+
+use tscn::SceneFile;
+
 /// 一个已解析的项目脚本。
 #[derive(Clone, Debug)]
 pub struct Script {
@@ -35,6 +39,10 @@ pub struct Project {
     class_names: HashMap<String, usize>,
     /// autoload 单化名 → 类型（脚本路径或引擎类名）。
     autoloads: HashMap<String, String>,
+    /// tscn/tres 解析结果（P2.7）。
+    pub scenes: Vec<SceneFile>,
+    /// 自嵌 uid → res:// 路径（tscn/tres 头部 uid）。
+    uid_paths: HashMap<String, String>,
 }
 
 impl Project {
@@ -65,7 +73,20 @@ impl Project {
 
         let autoloads = parse_autoload(root.join("project.godot"));
 
-        Ok(Project { engine, scripts, class_names, autoloads })
+        // P2.7：扫描 tscn/tres，建场景索引与自嵌 uid 映射。
+        let mut scenes = Vec::new();
+        let mut uid_paths = HashMap::new();
+        walk_ext(root, &["tscn", "tres"], &mut |p| {
+            let Ok(text) = std::fs::read_to_string(p) else { return };
+            let rel = path_to_res(p, root);
+            let sf = tscn::parse(&rel, &text);
+            if let Some((u, p)) = sf.uid_entry() {
+                uid_paths.insert(u, p);
+            }
+            scenes.push(sf);
+        });
+
+        Ok(Project { engine, scripts, class_names, autoloads, scenes, uid_paths })
     }
 
     /// class_name → 对应脚本。
@@ -82,6 +103,17 @@ impl Project {
     pub fn resolve_preload(&self, res_path: &str) -> Option<&Script> {
         let key = res_path.strip_prefix("res://").unwrap_or(res_path);
         self.scripts.iter().find(|s| s.path == key)
+    }
+
+    /// 自嵌 uid（剥前缀）→ res:// 路径。
+    pub fn uid_to_path(&self, uid: &str) -> Option<&str> {
+        self.uid_paths.get(uid).map(|s| s.as_str())
+    }
+
+    /// res:// 路径 → 场景/资源文件。
+    pub fn scene(&self, res_path: &str) -> Option<&SceneFile> {
+        let key = res_path.strip_prefix("res://").unwrap_or(res_path);
+        self.scenes.iter().find(|s| s.path == key)
     }
 }
 
@@ -100,8 +132,7 @@ impl ProjectContext for Project {
     }
 }
 
-fn walk_gd(dir: &Path, f: &mut dyn FnMut(&Path)) {
-    let Ok(entries) = std::fs::read_dir(dir) else { return };
+fn walk_gd(dir: &Path, f: &mut dyn FnMut(&Path)) {    let Ok(entries) = std::fs::read_dir(dir) else { return };
     for e in entries.flatten() {
         let p = e.path();
         if p.is_dir() {
@@ -111,6 +142,23 @@ fn walk_gd(dir: &Path, f: &mut dyn FnMut(&Path)) {
             }
             walk_gd(&p, f);
         } else if p.extension().map(|x| x == "gd").unwrap_or(false) {
+            f(&p);
+        }
+    }
+}
+
+/// 按扩展名白名单递归遍历（跳过 .godot/.git 等隐藏目录）。
+fn walk_ext(dir: &Path, exts: &[&str], f: &mut dyn FnMut(&Path)) {
+    let Ok(entries) = std::fs::read_dir(dir) else { return };
+    for e in entries.flatten() {
+        let p = e.path();
+        if p.is_dir() {
+            let name = p.file_name().and_then(|n| n.to_str()).unwrap_or("");
+            if name == ".godot" || name.starts_with('.') {
+                continue;
+            }
+            walk_ext(&p, exts, f);
+        } else if p.extension().and_then(|x| x.to_str()).is_some_and(|x| exts.contains(&x)) {
             f(&p);
         }
     }
