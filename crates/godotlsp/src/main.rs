@@ -66,6 +66,10 @@ fn main() {
         folding_range_provider: Some(FoldingRangeProviderCapability::Simple(true)),
         color_provider: Some(ColorProviderCapability::Simple(true)),
         code_lens_provider: Some(CodeLensOptions { resolve_provider: Some(false) }),
+        rename_provider: Some(OneOf::Right(RenameOptions {
+            prepare_provider: Some(true),
+            work_done_progress_options: Default::default(),
+        })),
         workspace: Some(WorkspaceServerCapabilities {
             workspace_folders: Some(WorkspaceFoldersServerCapabilities {
                 supported: Some(true),
@@ -243,6 +247,14 @@ fn handle_request(req: Request, state: &mut State) -> Response {
         return Response::new_err(id, -32802, "RequestCancelled".to_string());
     }
     let params = req.params;
+    // P2.8 rename 单独前置：拒绝重命名要回 error（客户端 toast），不能走 new_ok(null)。
+    if req.method == "textDocument/rename" {
+        let p: RenameParams = serde_json::from_value(params).unwrap();
+        return match rename(state, &p) {
+            Ok(we) => Response::new_ok(id, serde_json::to_value(we).unwrap()),
+            Err(msg) => Response::new_err(id, -32602, msg),
+        };
+    }
     let result = match req.method.as_str() {
         "textDocument/hover" => {
             let p: HoverParams = serde_json::from_value(params).unwrap();
@@ -296,6 +308,10 @@ fn handle_request(req: Request, state: &mut State) -> Response {
         "textDocument/codeLens" => {
             let p: CodeLensParams = serde_json::from_value(params).unwrap();
             serde_json::to_value(code_lens(state, &p)).unwrap()
+        }
+        "textDocument/prepareRename" => {
+            let p: TextDocumentPositionParams = serde_json::from_value(params).unwrap();
+            serde_json::to_value(prepare_rename(state, &p)).unwrap()
         }
         "workspace/symbol" => {
             let p: WorkspaceSymbolParams = serde_json::from_value(params).unwrap();
@@ -1137,9 +1153,12 @@ fn find_references(state: &State, p: &ReferenceParams) -> Option<Vec<Location>> 
     Some(locs)
 }
 
-fn collect_word(src: &str, word: &str, uri: &Uri, out: &mut Vec<Location>) {
+/// 词边界扫描：src 中所有与 word 全词匹配的 (start, end) 偏移。
+/// references 与 rename 共用此实现（P2.8：两者必须同源，rename 后跳转结果才一致）。
+fn collect_spans(src: &str, word: &str) -> Vec<(usize, usize)> {
     let b = src.as_bytes();
     let wb = word.as_bytes();
+    let mut out = Vec::new();
     let mut i = 0;
     while i + wb.len() <= b.len() {
         if &b[i..i + wb.len()] == wb {
@@ -1148,13 +1167,20 @@ fn collect_word(src: &str, word: &str, uri: &Uri, out: &mut Vec<Location>) {
             let after_end = i + wb.len();
             let after_ok = after_end >= b.len() || !(b[after_end].is_ascii_alphanumeric() || b[after_end] == b'_');
             if before_ok && after_ok {
-                out.push(Location {
-                    uri: uri.clone(),
-                    range: offset_range(src, i, after_end),
-                });
+                out.push((i, after_end));
             }
         }
         i += 1;
+    }
+    out
+}
+
+fn collect_word(src: &str, word: &str, uri: &Uri, out: &mut Vec<Location>) {
+    for (s, e) in collect_spans(src, word) {
+        out.push(Location {
+            uri: uri.clone(),
+            range: offset_range(src, s, e),
+        });
     }
 }
 
@@ -1397,6 +1423,99 @@ fn code_lens(state: &State, p: &CodeLensParams) -> Vec<CodeLens> {
         });
     }
     lenses
+}
+
+// ───────────────────────── P2.8 rename（跨文件,词法级与 references 同源） ─────────────────────────
+
+/// 词属于引擎/语言保留命名空间 → 不可 rename。
+fn is_reserved_name(state: &State, word: &str) -> bool {
+    state.engine.class_by_name(word).is_some()
+        || state.engine.builtin_by_name(word).is_some()
+        || state.engine.singletons.iter().any(|s| s.name == word)
+        || state.engine.utility_function(word).is_some()
+        || state.engine.global_enum_value(word).is_some()
+        || state.engine.global_constants.iter().any(|c| c.name == word)
+        || langdocs::keywords().iter().any(|(k, _, _)| *k == word)
+        || hoverdata::gdscript_fn(word).is_some()
+        || hoverdata::annotation(word).is_some()
+}
+
+/// 新名是否为合法 GDScript 标识符（PascalCase/SnakeCase 由调用方自便，只卡字符集）。
+fn is_valid_ident(s: &str) -> bool {
+    let mut ch = s.chars();
+    matches!(ch.next(), Some(c) if c.is_ascii_alphabetic() || c == '_')
+        && ch.all(|c| c.is_ascii_alphanumeric() || c == '_')
+}
+
+/// prepareRename：光标词可 rename 时返回词范围 + placeholder。
+/// 保留名（引擎类/单例/内建函数/关键字/注解/@GDScript 函数/全局常量枚举）返回 None，
+/// 客户端即不触发 rename UI——第一道零误报闸门。
+fn prepare_rename(state: &State, p: &TextDocumentPositionParams) -> Option<PrepareRenameResponse> {
+    let src = state.docs.get(&p.text_document.uri)?;
+    let offset = position_to_offset(src, p.position)?;
+    let (start, word) = word_span(src, offset)?;
+    if is_reserved_name(state, &word) {
+        return None;
+    }
+    Some(PrepareRenameResponse::RangeWithPlaceholder {
+        range: offset_range(src, start, start + word.len()),
+        placeholder: word,
+    })
+}
+
+/// rename：重命名打开文档 + 项目全部 .gd 中的全词匹配（词法级，与 references 同源）。
+/// 只改 .gd——tscn/tres 引用脚本靠 path 而非符号名，改类型字段反而破坏资源文件。
+/// 已知限制（词法级）:同名不同作用域符号会被一并改写（与 find_references 一致）。
+fn rename(state: &State, p: &RenameParams) -> Result<WorkspaceEdit, String> {
+    let uri = &p.text_document_position.text_document.uri;
+    let src = state.docs.get(uri).ok_or_else(|| "文档未打开".to_string())?;
+    let offset = position_to_offset(src, p.text_document_position.position)
+        .ok_or_else(|| "光标不在标识符上".to_string())?;
+    let (_, old) = word_span(src, offset).ok_or_else(|| "光标不在标识符上".to_string())?;
+    if is_reserved_name(state, &old) {
+        return Err(format!("\"{old}\" 是引擎/语言保留名，不可重命名"));
+    }
+    if !is_valid_ident(&p.new_name) {
+        return Err(format!("\"{}\" 不是合法的 GDScript 标识符", p.new_name));
+    }
+    if p.new_name == old {
+        return Err("新名与旧名相同".to_string());
+    }
+    if is_reserved_name(state, &p.new_name) {
+        return Err(format!("\"{}\" 与引擎/语言保留名冲突", p.new_name));
+    }
+
+    let mut changes: HashMap<Uri, Vec<TextEdit>> = HashMap::new();
+    // 打开文档：以编辑器缓冲（state.docs）为准。
+    let self_path = url::Url::parse(uri.as_str()).ok().and_then(|u| u.to_file_path().ok());
+    let mut push_edits = |text: &str, u: &Uri, changes: &mut HashMap<Uri, Vec<TextEdit>>| {
+        let edits: Vec<TextEdit> = collect_spans(text, &old)
+            .into_iter()
+            .map(|(s, e)| TextEdit { range: offset_range(text, s, e), new_text: p.new_name.clone() })
+            .collect();
+        if !edits.is_empty() {
+            changes.insert(u.clone(), edits);
+        }
+    };
+    push_edits(src, uri, &mut changes);
+    // 项目内其他 .gd：磁盘文本。
+    if let (Some(proj), Some(root)) = (&state.project, &state.root) {
+        for script in &proj.scripts {
+            let path = root.join(&script.path);
+            if self_path.as_deref() == Some(path.as_path()) {
+                continue;
+            }
+            if let Ok(text) = std::fs::read_to_string(&path)
+                && let Some(target) = path_to_uri(&path) {
+                    push_edits(&text, &target, &mut changes);
+                }
+        }
+    }
+    Ok(WorkspaceEdit {
+        changes: Some(changes),
+        document_changes: None,
+        change_annotations: None,
+    })
 }
 
 // ───────────────────────── inlayHints / foldingRange ─────────────────────────
@@ -1876,5 +1995,109 @@ mod color_codelens_tests {
         assert_eq!(cmd.command, "godotlsp.openConnection");
         let args = cmd.arguments.as_ref().unwrap();
         assert!(args[0].as_str().unwrap().ends_with("main.tscn"));
+    }
+}
+
+#[cfg(test)]
+mod rename_tests {
+    use super::*;
+
+    fn rename_state(dir: &std::path::Path, open: &str, src: &str) -> (State, Uri) {
+        let json = include_str!("../../gdscript-engine/testdata/extension_api.json");
+        let engine = std::sync::Arc::new(EngineApi::from_json(json).unwrap());
+        let real_lower: HashSet<String> =
+            engine.classes.keys().chain(engine.builtins.keys()).map(|s| s.to_lowercase()).collect();
+        let (tx, _rx) = std::sync::mpsc::channel();
+        let project = Project::open(dir, Some(json)).unwrap();
+        let uri = path_to_uri(&dir.join(open)).unwrap();
+        let mut st = State {
+            engine,
+            real_lower,
+            docs: HashMap::new(),
+            asts: HashMap::new(),
+            doc_versions: HashMap::new(),
+            cancelled: HashSet::new(),
+            uid_map: HashMap::new(),
+            project: Some(std::sync::Arc::new(project)),
+            root: Some(dir.to_path_buf()),
+            diag_sender: tx,
+        };
+        st.docs.insert(uri.clone(), src.to_string());
+        (st, uri)
+    }
+
+    #[test]
+    fn rename_rejects_reserved_invalid_same() {
+        let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+        let mk = |st_docs: &mut HashMap<Uri, String>, new_name: &str, src: &str, pos: Position| {
+            st_docs.insert(uri.clone(), src.to_string());
+            RenameParams {
+                text_document_position: TextDocumentPositionParams {
+                    text_document: TextDocumentIdentifier { uri: uri.clone() },
+                    position: pos,
+                },
+                new_name: new_name.to_string(),
+                work_done_progress_params: Default::default(),
+            }
+        };
+        // 保留名（引擎类）→ prepareRename None（第一道闸门）。
+        let mut st2 = super::hover_tests::test_state();
+        st2.docs.insert(uri.clone(), "var Sprite2D := 1\n".to_string());
+        assert!(prepare_rename(&st2, &TextDocumentPositionParams {
+            text_document: TextDocumentIdentifier { uri: uri.clone() },
+            position: Position { line: 0, character: 5 },
+        }).is_none());
+
+        let mut st = super::hover_tests::test_state();
+        let p = mk(&mut st.docs, "1abc", "var health := 10\n", Position { line: 0, character: 5 });
+        let err = rename(&st, &p).unwrap_err();
+        assert!(err.contains("标识符"), "{err}");
+        let p = mk(&mut st.docs, "health", "var health := 10\n", Position { line: 0, character: 5 });
+        let err = rename(&st, &p).unwrap_err();
+        assert!(err.contains("相同"), "{err}");
+        let p = mk(&mut st.docs, "Node2D", "var health := 10\n", Position { line: 0, character: 5 });
+        let err = rename(&st, &p).unwrap_err();
+        assert!(err.contains("冲突"), "{err}");
+    }
+
+    #[test]
+    fn rename_cross_file_lexical() {
+        let dir = std::env::temp_dir().join(format!("godotlsp_rename_t{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        std::fs::create_dir_all(&dir).unwrap();
+        let a = dir.join("a.gd");
+        let b = dir.join("b.gd");
+        std::fs::write(&a, "extends Node\nfunc do_work() -> void:\n\tdo_work()\n").unwrap();
+        std::fs::write(&b, "extends Node\nvar f := do_work\n").unwrap();
+
+        let (st, uri) = rename_state(&dir, "a.gd", &std::fs::read_to_string(&a).unwrap());
+        let we = rename(&st, &RenameParams {
+            text_document_position: TextDocumentPositionParams {
+                text_document: TextDocumentIdentifier { uri: uri.clone() },
+                position: Position { line: 1, character: 6 }, // do_work 词中
+            },
+            new_name: "do_task".to_string(),
+            work_done_progress_params: Default::default(),
+        }).unwrap();
+        let changes = we.changes.unwrap();
+        assert_eq!(changes.len(), 2, "a.gd（声明+调用）与 b.gd（引用）都应被改: {changes:?}");
+        // 按 uri 精确取（HashMap 无序，勿用 values().find）。
+        let a_edits = changes.get(&uri).unwrap();
+        assert_eq!(a_edits.len(), 2, "a.gd 声明+递归调用: {a_edits:?}");
+        let total: usize = changes.values().map(|v| v.len()).sum();
+        assert_eq!(total, 3, "b.gd 引用一处: {changes:?}");
+        // prepareRename 返回词范围 + placeholder。
+        let pr = prepare_rename(&st, &TextDocumentPositionParams {
+            text_document: TextDocumentIdentifier { uri },
+            position: Position { line: 1, character: 6 },
+        }).unwrap();
+        assert_eq!(pr, PrepareRenameResponse::RangeWithPlaceholder {
+            range: Range {
+                start: Position { line: 1, character: 5 },
+                end: Position { line: 1, character: 12 },
+            },
+            placeholder: "do_work".into(),
+        });
+        let _ = std::fs::remove_dir_all(&dir);
     }
 }

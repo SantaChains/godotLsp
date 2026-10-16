@@ -88,7 +88,29 @@ assert cmd["title"] == "1 个场景连接", cmd
 assert cmd["command"] == "godotlsp.openConnection", cmd
 assert cmd["arguments"][0].endswith("main.tscn"), cmd
 
-# 7. shutdown + exit
+# 7. P2.8 rename：func _ready → on_ready，应返回覆盖 main.gd 的 WorkspaceEdit（tscn 不动）
+ren = request(7, "textDocument/rename", {
+    "textDocument": {"uri": gd_uri},
+    "position": {"line": 6, "character": 7},  # func _ready 词中
+    "newName": "on_ready"})
+print("OK rename:", json.dumps(ren)[:200])
+ch = ren["changes"]
+assert list(ch.keys()) == [gd_uri], ch
+assert len(ch[gd_uri]) == 1 and ch[gd_uri][0]["newText"] == "on_ready", ch
+
+# 7b. rename 保留名拒绝 → error 响应
+send({"jsonrpc":"2.0","id":8,"method":"textDocument/rename","params":{
+    "textDocument":{"uri":gd_uri},"position":{"line":0,"character":9},"newName":"Foo"}})
+for _ in range(10):
+    msg = recv()
+    if msg.get("id") == 8:
+        assert "error" in msg, "保留名 rename 应报错: " + json.dumps(msg)
+        print("OK rename 保留名拒绝:", msg["error"]["message"])
+        break
+else:
+    raise AssertionError("未收到 rename 错误响应")
+
+# 8. shutdown + exit
 send({"jsonrpc":"2.0","id":2,"method":"shutdown","params":None})
 sh = recv()
 assert "result" in sh, sh
