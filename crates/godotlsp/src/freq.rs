@@ -39,4 +39,29 @@ mod tests {
         assert!(rank("Vector2").is_some());
         let _ = node;
     }
+
+    #[test]
+    fn table_invariants() {
+        let ranked: Vec<&str> = serde_json::from_str(include_str!("completion_freq.json"))
+            .expect("completion_freq.json 格式损坏");
+        assert!(!ranked.is_empty(), "频率表为空");
+        // 重复名会让 HashMap collect 静默保留末位 rank,污染排序。
+        let mut seen = std::collections::HashSet::new();
+        for name in &ranked {
+            assert!(seen.insert(*name), "频率表重复名: {name}");
+        }
+        // 泛型形参名污染防线(gen_freq 挖过的坑:SegmentShape2D.a/.b ×
+        // docs 示例变量名),与生成端 len<=2 排除规则对齐。
+        for name in &ranked {
+            assert!(name.len() >= 3, "频率表过短名: {name}");
+            assert!(
+                name.chars().next().unwrap().is_ascii_alphabetic() || name.starts_with('_'),
+                "频率表非法标识符: {name}"
+            );
+            assert!(
+                name.chars().all(|c| c.is_ascii_alphanumeric() || c == '_'),
+                "频率表非法标识符: {name}"
+            );
+        }
+    }
 }

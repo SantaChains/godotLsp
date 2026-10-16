@@ -554,10 +554,8 @@ fn inject_structure(raw: Vec<Token>, src: &str, cont: &HashSet<u32>) -> Vec<Toke
                     lambda = None;
                 }
             }
-            TokenKind::Func if depth > 0 => {
-                if lambda.is_none() {
-                    lambda = Some((depth, cur_line_start_col, Vec::new()));
-                }
+            TokenKind::Func if depth > 0 && lambda.is_none() => {
+                lambda = Some((depth, cur_line_start_col, Vec::new()));
             }
             _ => {}
         }

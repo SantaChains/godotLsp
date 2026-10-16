@@ -15,8 +15,8 @@ use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 
 use gdscript_engine::EngineApi;
-use gdscript_syntax::ast::File;
-use gdscript_syntax::semantic::ProjectContext;
+use gdscript_syntax::ast::{Expr, File, Stmt};
+use gdscript_syntax::semantic::{ProjectContext, ScriptMember};
 use gdscript_syntax::parse;
 
 pub mod tscn;
@@ -43,6 +43,10 @@ pub struct Project {
     pub scenes: Vec<SceneFile>,
     /// 自嵌 uid → res:// 路径（tscn/tres 头部 uid）。
     uid_paths: HashMap<String, String>,
+    /// 命名枚举全局索引：枚举名 → 条目名列表（跨文件 `Class.EnumName.KEY` 链解析）。
+    enum_values: HashMap<String, Vec<String>>,
+    /// class_name → 直接子类键列表（家族成员查询：基类型变量可持子类实例）。
+    subclass_of: HashMap<String, Vec<String>>,
 }
 
 impl Project {
@@ -71,6 +75,28 @@ impl Project {
             scripts.push(Script { path: rel, ast });
         });
 
+        // 命名枚举全局索引（枚举名在 class_name 作用域下近似唯一，平铺即可）。
+        let mut enum_values: HashMap<String, Vec<String>> = HashMap::new();
+        // 子类反查索引：extends 基 class_name → 子类键（家族成员查询用）。
+        let mut subclass_of: HashMap<String, Vec<String>> = HashMap::new();
+        for s in &scripts {
+            for st in &s.ast.body {
+                if let Stmt::Enum(e) = st
+                    && let Some(n) = &e.name
+                {
+                    enum_values
+                        .entry(n.name.clone())
+                        .or_default()
+                        .extend(e.entries.iter().map(|(id, _)| id.name.clone()));
+                }
+            }
+            if let Some(base) = extends_root(&s.ast.extends)
+                && class_names.contains_key(&base)
+            {
+                subclass_of.entry(base).or_default().push(Self::script_key(s));
+            }
+        }
+
         let autoloads = parse_autoload(root.join("project.godot"));
 
         // P2.7：扫描 tscn/tres，建场景索引与自嵌 uid 映射。
@@ -86,17 +112,23 @@ impl Project {
             scenes.push(sf);
         });
 
-        Ok(Project { engine, scripts, class_names, autoloads, scenes, uid_paths })
+        // Godot 4.4+ .uid sidecar（`Keychain.gd.uid` 内容单行 uid://xxx）——
+        // autoload uid 注册形式经此回查脚本路径。
+        walk_ext(root, &["uid"], &mut |p| {
+            let Ok(text) = std::fs::read_to_string(p) else { return };
+            if let Some(u) = text.trim().strip_prefix("uid://")
+                && let Some(res) = path_to_res(p, root).strip_suffix(".uid")
+            {
+                uid_paths.insert(u.to_string(), res.to_string());
+            }
+        });
+
+        Ok(Project { engine, scripts, class_names, autoloads, scenes, uid_paths, enum_values, subclass_of })
     }
 
     /// class_name → 对应脚本。
     pub fn class_name_script(&self, name: &str) -> Option<&Script> {
         self.class_names.get(name).map(|&i| &self.scripts[i])
-    }
-
-    /// autoload 单化名 → 类型描述。
-    pub fn autoload_type(&self, name: &str) -> Option<&str> {
-        self.autoloads.get(name).map(|s| s.as_str())
     }
 
     /// preload("res://x.gd") → 对应脚本。
@@ -115,6 +147,118 @@ impl Project {
         let key = res_path.strip_prefix("res://").unwrap_or(res_path);
         self.scenes.iter().find(|s| s.path == key)
     }
+
+    /// 合并另一个项目的脚本/场景/uid/类名单例索引（多根工作区、子目录嵌套项目用）。
+    /// 后者对同名 uid/单例覆盖前者。
+    pub fn merge(&mut self, other: Project) {
+        let base = self.scripts.len();
+        for (i, s) in other.scripts.iter().enumerate() {
+            if let Some(cn) = &s.ast.class_name {
+                // 合并前 self.scripts.len() 恒为 base，other 脚本按原序追加，
+                // 故其在合并后向量中的下标 = base + i（i 即 other 内下标）。
+                self.class_names.insert(cn.name.clone(), base + i);
+            }
+        }
+        self.scripts.extend(other.scripts);
+        self.scenes.extend(other.scenes);
+        self.uid_paths.extend(other.uid_paths);
+        self.autoloads.extend(other.autoloads);
+        for (n, vals) in other.enum_values {
+            self.enum_values.entry(n).or_default().extend(vals);
+        }
+        for (b, keys) in other.subclass_of {
+            self.subclass_of.entry(b).or_default().extend(keys);
+        }
+    }
+}
+
+impl Project {
+    /// 脚本代表类型键：class_name 或合成 `script:<相对路径>`。
+    fn script_key(script: &Script) -> String {
+        match &script.ast.class_name {
+            Some(cn) => cn.name.clone(),
+            None => format!("script:{}", script.path),
+        }
+    }
+
+    /// 按类型键（class_name 或 script:<path>）取脚本。
+    fn script_by_key(&self, key: &str) -> Option<&Script> {
+        if let Some(&i) = self.class_names.get(key) {
+            return Some(&self.scripts[i]);
+        }
+        let rel = key.strip_prefix("script:")?;
+        self.scripts.iter().find(|s| s.path == rel)
+    }
+
+    /// 沿工程脚本 extends 链查成员（SymmetryGuide → Guide → 引擎类止步——
+    /// 引擎类成员由语义层走引擎模型）。真实工程里子类成员多半在父脚本上，
+    /// 只查单文件会漏（Pixelorama SymmetryGuide.add_point 实测）。
+    fn walk_member_kind(&self, key: &str, name: &str, depth: u8) -> Option<ScriptMember> {
+        if depth > 16 {
+            return None; // 继承环防御
+        }
+        let script = self.script_by_key(key)?;
+        for st in &script.ast.body {
+            match st {
+                Stmt::Func(f) if f.name.name == name => return Some(ScriptMember::Method),
+                Stmt::Var(v) if v.name.name == name => return Some(ScriptMember::Property),
+                Stmt::Const(c) if c.name.name == name => return Some(ScriptMember::Const),
+                Stmt::Signal(s) if s.name.name == name => return Some(ScriptMember::Signal),
+                // 命名枚举名按常量成员暴露（TileSetPanel.TileEditingMode → int）。
+                Stmt::Enum(e) if e.name.as_ref().is_some_and(|n| n.name == name) => {
+                    return Some(ScriptMember::Const)
+                }
+                // 匿名枚举条目 = 该脚本的文件级 int 常量（Brushes.FILE 跨文件裸用）。
+                Stmt::Enum(e)
+                    if e.name.is_none()
+                        && e.entries.iter().any(|(id, _)| id.name == name) =>
+                {
+                    return Some(ScriptMember::Const)
+                }
+                // 内部类名作常量命名空间（Drawer.ColorOp → 类引用）。
+                Stmt::Class(c) if c.name.name == name => return Some(ScriptMember::Const),
+                _ => {}
+            }
+        }
+        let base = extends_root(&script.ast.extends)?;
+        if self.class_names.contains_key(&base) {
+            return self.walk_member_kind(&base, name, depth + 1);
+        }
+        None
+    }
+
+    fn walk_member_type(&self, key: &str, name: &str, depth: u8) -> Option<String> {
+        if depth > 16 {
+            return None;
+        }
+        let script = self.script_by_key(key)?;
+        for st in &script.ast.body {
+            let ty = match st {
+                Stmt::Func(f) if f.name.name == name => &f.ret_ty,
+                Stmt::Var(v) if v.name.name == name => &v.ty,
+                Stmt::Const(c) if c.name.name == name => &c.ty,
+                Stmt::Enum(e) if e.name.as_ref().is_some_and(|n| n.name == name) => {
+                    // 命名枚举是常量命名空间：`Class.EnumName.KEY` 需要枚举名作类型续链。
+                    return e.name.as_ref().map(|n| n.name.clone())
+                }
+                // 匿名枚举条目类型为 int。
+                Stmt::Enum(e)
+                    if e.name.is_none() && e.entries.iter().any(|(id, _)| id.name == name) =>
+                {
+                    return Some("int".into())
+                }
+                // 内部类引用：返回类名自身（ColorOp.new() → 类类型）。
+                Stmt::Class(c) if c.name.name == name => return Some(c.name.name.clone()),
+                _ => continue,
+            };
+            return type_root(ty);
+        }
+        let base = extends_root(&script.ast.extends)?;
+        if self.class_names.contains_key(&base) {
+            return self.walk_member_type(&base, name, depth + 1);
+        }
+        None
+    }
 }
 
 impl ProjectContext for Project {
@@ -123,13 +267,91 @@ impl ProjectContext for Project {
     }
 
     fn autoload_type(&self, name: &str) -> Option<String> {
-        self.autoloads.get(name).cloned()
+        let raw = self.autoloads.get(name)?;
+        // `*res://x.gd` → 解析脚本为 class_name 或合成键；裸类名 → class_name/引擎类。
+        if let Some(_rel) = raw.strip_prefix("res://") {
+            let script = self.resolve_preload(raw)?;
+            return Some(Self::script_key(script));
+        }
+        // Godot 4.4+ uid 注册形式：`Keychain="*uid://xxx"` → uid_paths 回查 res 路径。
+        if let Some(uid) = raw.strip_prefix("uid://") {
+            let rel = self.uid_paths.get(uid)?;
+            let script = self.scripts.iter().find(|s| s.path == rel.as_str())?;
+            return Some(Self::script_key(script));
+        }
+        if self.class_names.contains_key(raw) || self.engine.class_by_name(raw).is_some() {
+            return Some(raw.clone());
+        }
+        None
     }
 
     fn preload_type(&self, res_path: &str) -> Option<String> {
         let script = self.resolve_preload(res_path)?;
-        script.ast.class_name.as_ref().map(|cn| cn.name.clone())
+        // 有 class_name 用全局类型名；无则合成稳定脚本键，供后续脚本成员模型挂载。
+        Some(Self::script_key(script))
     }
+
+    fn script_type_exists(&self, key: &str) -> bool {
+        self.script_by_key(key).is_some()
+    }
+
+    fn script_member_kind(&self, key: &str, name: &str) -> Option<ScriptMember> {
+        self.walk_member_kind(key, name, 0)
+    }
+
+    /// G4.6：返回 var/const 注解类型或 func 返回类型的根类名；无注解 None。
+    fn script_member_type(&self, key: &str, name: &str) -> Option<String> {
+        self.walk_member_type(key, name, 0)
+    }
+
+    fn script_extends_base(&self, key: &str) -> Option<String> {
+        let script = self.script_by_key(key)?;
+        extends_root(&script.ast.extends)
+    }
+
+    fn script_enum_entry(&self, enum_name: &str, key: &str) -> bool {
+        self.enum_values
+            .get(enum_name)
+            .is_some_and(|vals| vals.iter().any(|v| v == key))
+    }
+
+    fn script_family_member(&self, base: &str, name: &str) -> bool {
+        if self.script_member_kind(base, name).is_some() {
+            return true;
+        }
+        // 传递子类闭包 BFS（继承环由 seen 防御）。
+        let mut stack: Vec<&str> = vec![base];
+        let mut seen: std::collections::HashSet<&str> = std::collections::HashSet::new();
+        while let Some(b) = stack.pop() {
+            if !seen.insert(b) {
+                continue;
+            }
+            if let Some(kids) = self.subclass_of.get(b) {
+                for k in kids {
+                    if self.walk_member_kind(k, name, 0).is_some() {
+                        return true;
+                    }
+                    stack.push(k.as_str());
+                }
+            }
+        }
+        false
+    }
+}
+
+/// 从类型表达式提取根类名：`Node2D`、`Array[int]` 取根 Ident；
+/// `preload(...)` / 字符串路径 / 无注解返回 None。
+fn type_root(e: &Option<Expr>) -> Option<String> {
+    match e {
+        Some(Expr::Ident(id)) => Some(id.name.clone()),
+        Some(Expr::Generic(base, _, _)) => type_root(&Some((**base).clone())),
+        _ => None,
+    }
+}
+
+/// 从 `extends` 表达式提取根类名（G4.5）。
+fn extends_root(ext: &Option<Expr>) -> Option<String> {
+    type_root(ext)
 }
 
 fn walk_gd(dir: &Path, f: &mut dyn FnMut(&Path)) {    let Ok(entries) = std::fs::read_dir(dir) else { return };
@@ -141,7 +363,11 @@ fn walk_gd(dir: &Path, f: &mut dyn FnMut(&Path)) {    let Ok(entries) = std::fs:
                 continue;
             }
             walk_gd(&p, f);
-        } else if p.extension().map(|x| x == "gd").unwrap_or(false) {
+        } else if p
+            .extension()
+            .and_then(|x| x.to_str())
+            .is_some_and(|x| x.eq_ignore_ascii_case("gd"))
+        {
             f(&p);
         }
     }
@@ -158,7 +384,11 @@ fn walk_ext(dir: &Path, exts: &[&str], f: &mut dyn FnMut(&Path)) {
                 continue;
             }
             walk_ext(&p, exts, f);
-        } else if p.extension().and_then(|x| x.to_str()).is_some_and(|x| exts.contains(&x)) {
+        } else if p
+            .extension()
+            .and_then(|x| x.to_str())
+            .is_some_and(|x| exts.iter().any(|e| e.eq_ignore_ascii_case(x)))
+        {
             f(&p);
         }
     }

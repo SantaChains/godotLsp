@@ -81,6 +81,15 @@ pub struct EngineClass {
     pub properties: Vec<Property>,
     pub enums: Vec<Enum>,
     pub constants: Vec<Constant>,
+    /// 类声明的信号（Node.ready / CanvasItem.draw…）。
+    pub signals: Vec<EngineSignal>,
+}
+
+/// 引擎类信号（extension_api.json class.signals）。
+#[derive(Clone, Debug)]
+pub struct EngineSignal {
+    pub name: String,
+    pub arguments: Vec<Param>,
 }
 
 /// 内建值类型（Vector2、int、Array、Dictionary、String...）。
@@ -197,6 +206,39 @@ impl EngineApi {
         self.builtins.get(class).and_then(|b| b.enums.iter().find(|e| e.name == name))
     }
 
+    /// 沿继承链查找信号（Node.ready / CanvasItem.draw / Viewport.size_changed）。
+    pub fn find_signal(&self, class: &str, name: &str) -> Option<&EngineSignal> {
+        for cls in self.ancestor_chain(class) {
+            if let Some(c) = self.classes.get(cls)
+                && let Some(s) = c.signals.iter().find(|s| s.name == name) {
+                    return Some(s);
+                }
+        }
+        None
+    }
+
+    /// 枚举值查找：类级枚举值在 `enums[].values`（不在 constants），沿继承链 +
+    /// 内建类枚举兜底（Image.FORMAT_RGBA8 / Vector2.Axis.X）。返回 (枚举名, 值, 宿主类)。
+    pub fn find_enum_value(&self, class: &str, name: &str) -> Option<(&str, i64, &str)> {
+        for cls in self.ancestor_chain(class) {
+            if let Some(c) = self.classes.get(cls) {
+                for e in &c.enums {
+                    if let Some((_, v)) = e.values.iter().find(|(n, _)| *n == name) {
+                        return Some((e.name.as_str(), *v, c.name.as_str()));
+                    }
+                }
+            }
+        }
+        if let Some(b) = self.builtins.get(class) {
+            for e in &b.enums {
+                if let Some((_, v)) = e.values.iter().find(|(n, _)| *n == name) {
+                    return Some((e.name.as_str(), *v, b.name.as_str()));
+                }
+            }
+        }
+        None
+    }
+
     /// 全局枚举按值名查：返回 (枚举名, 数值)。`KEY_LEFT` → ("Key", 4194305)。
     pub fn global_enum_value(&self, name: &str) -> Option<(&str, i64)> {
         for e in &self.global_enums {
@@ -257,6 +299,15 @@ struct RawClass {
     enums: Vec<RawEnum>,
     #[serde(default)]
     constants: Vec<RawConst>,
+    #[serde(default)]
+    signals: Vec<RawSignal>,
+}
+
+#[derive(Deserialize)]
+struct RawSignal {
+    name: String,
+    #[serde(default)]
+    arguments: Vec<RawParam>,
 }
 
 #[derive(Deserialize)]
@@ -371,6 +422,18 @@ impl RawApi {
                             .collect(),
                         enums: c.enums.into_iter().map(into_enum).collect(),
                         constants: c.constants.into_iter().map(into_const).collect(),
+                        signals: c
+                            .signals
+                            .into_iter()
+                            .map(|s| EngineSignal {
+                                name: s.name,
+                                arguments: s
+                                    .arguments
+                                    .into_iter()
+                                    .map(|p| Param { name: p.name, ty: p.ty })
+                                    .collect(),
+                            })
+                            .collect(),
                     },
                 )
             })
