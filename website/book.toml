@@ -10,7 +10,7 @@ git-repository-url = "https://github.com/SantaChains/godotlsp"
 edit-url-template = "https://github.com/SantaChains/godotlsp/edit/main/website/{path}"
 additional-css = ["theme/style.css", "theme/kurosawa.css"]
 additional-js = ["assets/custom.js", "assets/bigPicture.js"]
-default-theme = "rust"
+default-theme = "light"
 preferred-dark-theme = "navy"
 
 [output.html.search]
