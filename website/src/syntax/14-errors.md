@@ -39,7 +39,7 @@ push_warning("旧版存档格式，已自动迁移")       # 黄
 
 输出进调试器 + 远程日志，**不中断执行**。规则：错误信息必须**可行动**——带上路径、参数名、期望值；`push_error("failed")` 这种等于没写。
 
-## assert：开发期不变量
+## assert：开发期不变量 {#kw-assert}
 
 ```gdscript
 assert(slot_count > 0, "slot_count 必须为正，检查场景配置")
@@ -48,6 +48,8 @@ assert(slot_count > 0, "slot_count 必须为正，检查场景配置")
 - **release 构建里整个调用被剥除**——里面的表达式都不会执行（有副作用的 assert 是 bug）。
 - 失败时 debug 构建中断在断言处。
 - 定位：校验「不可能发生的事」；校验玩家输入/外部数据用 `push_error` + 早返回。
+
+<a id="kw-breakpoint"></a>`breakpoint` 语句是写死在脚本里的断点辅助：调试器执行到该行即暂停，与编辑器断点面板中的断点等效，适合临时钉死某条执行路径。
 
 ## 防御式写法惯例
 

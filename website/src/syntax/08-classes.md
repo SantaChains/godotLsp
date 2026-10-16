@@ -2,7 +2,7 @@
 
 **一个 `.gd` 文件就是一个类**；文件级 `extends` 决定它挂在什么上，`class_name` 决定它在全局是否可见。GDScript 没有「裸函数脚本」——即使不写任何声明，脚本也默认继承 `RefCounted`。
 
-## extends 与实例化
+## extends 与实例化 {#kw-extends}
 
 ```gdscript
 # player.gd
@@ -38,7 +38,7 @@ var sword := Item.new(50)                # 参数传给 _init
 
 `_init` 在**实例存在之前**的构造阶段运行（节点还没进树）；需要等树就绪的初始化用 `_ready`，见[场景树章 · 生命周期](11-scenetree.md#生命周期回调全表)。
 
-## class_name：全局注册
+## class_name：全局注册 {#kw-class_name}
 
 ```gdscript
 class_name Player
@@ -51,7 +51,7 @@ extends CharacterBody2D
 
 > 值得注意的是：`class_name` **不产生命名空间**。注册名与内建类冲突会报错；全工程唯一。
 
-## 内部类
+## 内部类 {#kw-class}
 
 ```gdscript
 # 顶层类（本文件即 Player）
@@ -60,8 +60,10 @@ class Inventory:                  # 内部类：常量偏移表之类的小型�
     func add(item: String) -> void:
         slots.append(item)
 
-var inv := Inventory.new()        # 用类名直接构造（无需 preload）
+var inv := Inventory.new()        # 用类名直接构造
 ```
+
+<a id="kw-preload"></a><a id="kw-self"></a>小类不跨文件复用就写内部类，省一次 `preload()`/`class_name` 注册；内部类方法里的 `self` 指内部类实例而非外层脚本。
 
 内部类不进全局注册表，**仅在本脚本作用域可见**（外部访问要经 `Player.Inventory`）。
 
@@ -96,7 +98,7 @@ static var play_count := 0
 
 static 成员属于**类本身**，全工程共享。这是 4.x 实现单例的纯语言手段（与引擎级 [autoload](13-autoload.md) 互补）。
 
-## 枚举
+## 枚举 {#kw-enum}
 
 ```gdscript
 enum State { IDLE, RUN, JUMP }          # 挂在类上：State.IDLE

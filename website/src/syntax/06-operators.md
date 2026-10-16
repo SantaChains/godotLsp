@@ -25,6 +25,8 @@
 | 19 | `x as T` | 类型转换 |
 | 20 | `=` `+=` `-=` `*=` `/=` `**=` `%=` `&=` `\|=` `^=` `<<=` `>>=` | 赋值（**不能出现在表达式中间**） |
 
+<a id="kw-and"></a><a id="kw-or"></a><a id="kw-not"></a>`and`/`or`/`not` 是逻辑运算的关键字形式，均为**短路求值**：`and` 左侧为假不再算右侧，`or` 左侧为真不再算右侧。
+
 > 值得注意的是：`&&`/`||`/`!` 是合法别名，但[官方风格指南](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_styleguide.html)只用 `and`/`or`/`not`。
 
 ## 四个语义陷阱
@@ -56,7 +58,7 @@ print(is_zero_approx(x))         # 判断 |x| 接近 0
 print(is_same(a, b))             # 类型严格的相等（含引用语义）
 ```
 
-## `in` 的多面性
+## `in` 的多面性 {#kw-in}
 
 ```gdscript
 "ell" in "hello"           # 字符串包含 → true
@@ -66,6 +68,32 @@ body in get_tree().root    # 节点是否在该子树下
 ```
 
 `in` 用于 `for` 是迭代语法的一部分，见[流程控制](05-flow.md#while--for)。
+
+## 符号锚点索引 {#op-index}
+
+LSP 跳转用稳定锚点（符号不能直接作 HTML id，故用 ASCII 名；映射唯一权威在
+`langdocs.rs::OPERATOR_DOCS`）。每个锚点给出该运算符的一句话语义：
+
+- <a id="op-plus"></a>`+` — 加法；字符串/数组拼接
+- <a id="op-minus"></a>`-` — 减法；一元取负
+- <a id="op-star"></a>`*` — 乘法；字符串/数组重复
+- <a id="op-slash"></a>`/` — 除法（int 相除也返回 float）
+- <a id="op-percent"></a>`%` — 取模（仅 int）；字符串语境是格式化
+- <a id="op-pow"></a>`**` — 乘方（左结合）
+- <a id="op-eq"></a>`==` — 值相等（引用比较用 `is_same`）
+- <a id="op-ne"></a>`!=` — 值不等
+- <a id="op-assign"></a>`=` — 赋值；复合形式 `+=` `-=` `*=` `/=` `%=` `**=`
+- <a id="op-and"></a>`&&` — 逻辑与（关键字形式 `and`）
+- <a id="op-or"></a>`||` — 逻辑或（关键字形式 `or`）
+- <a id="op-not"></a>`!` — 逻辑非（关键字形式 `not`）
+- <a id="op-band"></a>`&` — 按位与
+- <a id="op-bor"></a>`|` — 按位或
+- <a id="op-bxor"></a>`^` — 按位异或
+- <a id="op-bnot"></a>`~` — 按位取反
+- <a id="op-shl"></a>`<<` — 左移位
+- <a id="op-shr"></a>`>>` — 右移位
+- <a id="op-coalesce"></a>`??` — 空合并：左侧为 null 取右侧
+- <a id="op-coalesce-assign"></a>`??=` — 空合并赋值：左侧为 null 时赋值
 
 ## 使用准则
 

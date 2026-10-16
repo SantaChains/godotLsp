@@ -38,6 +38,19 @@ pub fn member_url(class: &str, member: &str, is_enum: bool, is_real: impl Fn(&st
     format!("{}#{anchor}", class_url(class, is_real))
 }
 
+/// 注解锚点：`#annotation-<名>`（@GDScript 页注解节，生成器同契约）。
+pub fn annotation_url(name: &str, is_real: impl Fn(&str) -> bool) -> String {
+    format!("{}#annotation-{name}", class_url("@GDScript", is_real))
+}
+
+/// 语法篇 URL：`slug` 或 `slug#kw-xxx`（锚点契约见规划文档 §五之三）。
+pub fn syntax_url(target: &str) -> String {
+    match target.split_once('#') {
+        Some((slug, anchor)) => format!("{BASE}syntax/{slug}.html#{anchor}"),
+        None => format!("{BASE}syntax/{target}.html"),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -171,6 +184,16 @@ mod tests {
         assert_eq!(
             member_url("@GlobalScope", "sin", false, is_real_lower),
             "https://santachains.github.io/godotlsp/builtin/class_globalscope.html#sin"
+        );
+    }
+
+    /// §五之三：语法篇目标支持 `slug#kw-x` 锚点形态。
+    #[test]
+    fn syntax_url_with_anchor() {
+        assert_eq!(syntax_url("12-await"), format!("{BASE}syntax/12-await.html"));
+        assert_eq!(
+            syntax_url("12-await#kw-await"),
+            format!("{BASE}syntax/12-await.html#kw-await")
         );
     }
 }

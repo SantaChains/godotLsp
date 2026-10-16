@@ -2,7 +2,7 @@
 
 **信号是 Godot 的观察者模式**：节点 A 声明「发生了什么」，任意多的订阅者收到通知——**A 不需要知道 B 存在**。这是解耦节点间通信的唯一正道，也是 [范式篇 · 三大支柱](../paradigm/01-pillars.md)之一。
 
-## 声明与发射
+## 声明与发射 {#kw-signal}
 
 ```gdscript
 signal health_changed              # 无参

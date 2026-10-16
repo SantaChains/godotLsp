@@ -47,7 +47,7 @@ var verts := PackedVector3Array()   # 几何数据用 Packed，别用 Array[Vect
 
 > 需要注意的是：**方括号**是 `Array[int]`，泛型尖括号写法 `Array<int>` 不存在。Packed 与 typed Array 的取舍：读写密集的定长数值用 Packed，一般逻辑数据用 typed Array。
 
-## 类型转换与检查
+## 类型转换与检查 {#kw-is}
 
 ```gdscript
 if node is CharacterBody2D:        # 类型检查（含继承链）
@@ -56,6 +56,8 @@ if node is CharacterBody2D:        # 类型检查（含继承链）
     var f := float(3)              # f == 3.0
     var s := str(42)               # "42"
 ```
+
+<a id="kw-as"></a>`is` 做类型检查（返回 `bool`），`as` 做安全转换（失败返回 `null`）——两者配合是 GDScript 鸭子类型世界的静态护栏。
 
 三条硬规则：
 

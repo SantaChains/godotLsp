@@ -2,7 +2,7 @@
 
 **`var` 声明变量，`const` 声明常量；类型标注可选，但推荐写全**——4.x 中标注是编译期检查与运行时加速的开关。
 
-## var：成员变量
+## var：成员变量 {#kw-var}
 
 ```gdscript
 var hp := 100                 # := 推断类型（推断为 int）
@@ -20,7 +20,7 @@ var a := 1
 var b := a + 1        # 合法：a 先初始化
 ```
 
-## const：编译期常量
+## const：编译期常量 {#kw-const}
 
 ```gdscript
 const MAX_HP := 100

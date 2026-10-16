@@ -357,3 +357,85 @@ P1 描述层覆盖：类/内建 brief、成员描述（沿继承链回溯）、@
 - 代码块语言标注 `gdscript`（插件/CI 侧后续可做语法高亮 lint）。
 - 所有站内跳转用相对路径 + 显式锚点（`./09-annotations.md#@export`），
   与 LSP doc_link 契约一致——防漂移测试覆盖的对象在 W2 定稿。
+
+## 五之三、文档范式要求：LSP 链接契约（§A–§E，2026-10-16 定稿）
+
+> 定位：本节是**写作层硬约束**，任何手写/生成/修缮页面的行为都必须遵守。
+> §四之一管「数据从哪来」（管线层），本节管「LSP 怎么跳进来、hover 怎么定位」
+> （落地层）。文档站同时是阅读网站与 LSP 跳转目标层，两层身份同等一等公民。
+
+### §A 页面身份稳定
+
+- 手写页 slug 定稿后**永不改名**。GitHub Pages 无 301，改名 = 全网断链。
+- 确需改名：新建页 + 旧路径留重定向 stub（meta refresh + 正文链接），
+  且旧路径保留期 >= 两个发布周期。
+- 生成页 slug 由 `gen_docs.py` 唯一决定（含 `@GDScript`→`class_at_gdscript`
+  消歧规则），任何代码不得私自拼类页 URL。
+
+### §B 锚点显式化（核心条款）
+
+- **所有会被 LSP 链接的节必须显式锚**：标题用 mdbook `{#id}`，节内多点用
+  裸 HTML `<a id="id"></a>`。**禁止依赖中文标题自动锚**——URL 编码不定、
+  改标题即断，契约测试也无法稳定断言。
+- 锚点命名空间（划死，不得挪用）：
+
+  | 命名空间 | 落点 | 例 |
+  |---|---|---|
+  | `kw-<名>` | 语法篇对应章节页 | `#kw-await` → `syntax/12-await.html` |
+  | `op-<ascii名>` | 06-operators 符号锚点索引 | `#op-plus`（符号不可作 id，用 ASCII 名，映射表唯一权威在 `langdocs.rs::OPERATOR_DOCS`） |
+  | `anno-<名>` | 生成页 `class_at_gdscript.html`（LSP 注解出口）；`09-annotations.md` 是人读版不作 LSP 出口 | `#anno-export` |
+  | `c-<短名>` | 概念页章节（按需添加，命名空间预留） | `#c-delta` |
+  | `#<原名>` / `#enum-<名>` / `#<值名>` | 生成类页成员/枚举/枚举值（W2 已定，gen_docs 显式 `{#}` 锁定） | `#position`、`#enum-Axis`、`#AXIS_X` |
+
+- 一个标题覆盖多个关键字时：标题挂主锚，其余用节内 `<a id>` 副锚
+  （如 `## if / elif / else {#kw-if}` + 节内 `kw-elif`/`kw-else`）。
+
+### §C 页内写作规范
+
+- 站内跳转一律相对路径 + 显式锚（`./12-await.html#kw-await`）。
+- 符号首次出现用行内代码；术语交叉引用统一「延伸阅读」blockquote。
+- 锚点必须有**实质落点**：`<a id>` 前后要有至少一句正文描述该符号，
+  禁止悬空锚（锚点周围无内容 = 跳过去白屏，体验违约）。
+
+### §D hover 输出三段式（LSP 端渲染契约）
+
+```
+```<lang>
+签名（类继承链 / 函数签名 / 属性类型 / 常量值）
+```
+<描述正文，可空——缺数据省略，不造句>
+[文档](契约链接)      ← 落点 = §B 锚点，唯一合法出口
+```
+
+- 渲染层零文案约束（§四之一 C2）不变：`main.rs` 不写死描述；
+  关键字/操作符是唯一例外（`langdocs.rs` 正交层兜底表，中文描述允许手写）。
+
+### §E 双向校验闭环
+
+- **出口→锚点**：`tools/check_lsp_contract.py` 解析 `langdocs.rs` 两表
+  （KEYWORD_DOCS / OPERATOR_DOCS）的全部 `slug#anchor` 目标，
+  逐个校验 mdbook 产物 HTML 中 `id="anchor"` 存在。漏一个即红。
+- **锚点→出口**（防悬空锚）：契约脚本同时收集语法篇全部 `kw-*/op-*` 锚，
+  反向要求每个锚都能被 langdocs 表或 §C 正文引用解释；纯装饰锚一律删。
+- 管线防漂移（`gen_docs.py --check`）与本文互不替代：前者管生成页
+  数据一致，本节管手写页链接契约。
+
+### 当前锚点地图（修缮后的事实快照，改动须同步本表）
+
+| 符号 | 目标 |
+|---|---|
+| var/const | `03-vars.html#kw-var` / `#kw-const` |
+| is / as | `04-types.html#kw-is` / `#kw-as`（同节副锚） |
+| if/elif/else | `05-flow.html#kw-if` / `#kw-elif` / `#kw-else` |
+| match / when | `05-flow.html#kw-match` / `#kw-when` |
+| while / for / break / continue | `05-flow.html#kw-while` / `#kw-for` / `#kw-break` / `#kw-continue` |
+| in | `06-operators.html#kw-in`（「`in` 的多面性」节） |
+| and / or / not（关键字） | `06-operators.html#kw-and` / `#kw-or` / `#kw-not` |
+| func / return / void / pass | `07-functions.html#kw-func` / `#kw-return` / `#kw-void` / `#kw-pass` |
+| static | `07-functions.html#kw-static` |
+| super | `07-functions.html#kw-super` |
+| extends / self / class_name / class / enum / preload | `08-classes.html#kw-extends` / `#kw-self` / `#kw-class_name` / `#kw-class` / `#kw-enum` / `#kw-preload` |
+| signal | `10-signals.html#kw-signal` |
+| await / yield | `12-await.html#kw-await` / `#kw-yield` |
+| assert / breakpoint | `14-errors.html#kw-assert` / `#kw-breakpoint` |
+| 符号操作符（20 个） | `06-operators.html#op-*`（见该页符号锚点索引） |

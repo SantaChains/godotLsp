@@ -2,7 +2,7 @@
 
 一篇讲完 GDScript 全部分支与循环构造。**没有 `switch`、没有 `do-while`、没有 `goto`**——分支靠 `if` 与 `match`，循环靠 `while` 与 `for`。
 
-## if / elif / else
+## if / elif / else {#kw-if}
 
 ```gdscript
 if hp <= 0:
@@ -13,9 +13,9 @@ else:
     attack()
 ```
 
-条件必须是 `bool`——**`if 1:` 之类非布尔条件是编译错误**（与 Python 不同）。
+<a id="kw-elif"></a><a id="kw-else"></a>条件必须是 `bool`——**`if 1:` 之类非布尔条件是编译错误**（与 Python 不同）。`elif` 是"否则如果"链式分支；`else` 兜住所有未命中情况，两者都必须跟在 `if`（或 `elif`）之后。
 
-## match：模式匹配
+## match：模式匹配 {#kw-match}
 
 `match` 远强于 switch：支持常量、变量绑定、数组/字典解构与多重模式。
 
@@ -35,9 +35,11 @@ match event.type:
         pass
 ```
 
+<a id="kw-when"></a>`when` 是 match 分支守卫（4.4+）：`var x when x > 100` 先解构绑定再验条件，条件为假则继续向下匹配。
+
 匹配语义：**从上到下首个命中即止**；`_` 分支可省略——全部未命中则整个 match 空过。
 
-## while / for
+## while / for {#kw-while}
 
 ```gdscript
 while lives > 0:
@@ -58,6 +60,8 @@ for k in dict:                 # 遍历键；值用 dict.values()，键用 dict.
 ```
 
 **`for` 的 in 右侧**：`Range`（`range()` 返回惰性区间）、Array、Dictionary（遍历键）、String（遍历字符）、int（4.2+：`for i in 5` 等价 `range(5)`）。
+
+<a id="kw-for"></a><a id="kw-break"></a><a id="kw-continue"></a>`for` 是唯一推荐的确定次数遍历写法；`break` 立即跳出**最内层**循环，`continue` 跳过剩余体直接进入下一轮——两者都只作用于所在循环，不跨层。
 
 没有 `do-while`；需要先执行后判断就 `while true:` + 内部 `break`。
 

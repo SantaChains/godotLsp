@@ -2,7 +2,7 @@
 
 **`await` 把「等一件事发生再继续」写成顺序代码**。GDScript 没有 async 关键字：**函数体内出现 `await`，该函数自动成为协程**——调用它立即返回，到 `await` 处挂起，事件到达后从断点恢复。
 
-## 基本形态
+## 基本形态 {#kw-await}
 
 ```gdscript
 func _ready() -> void:
@@ -23,7 +23,7 @@ await 的右侧是**任何可以「完成」的东西**：
 | `Tween.finished` | 补间播放完 |
 | `ResourceLoader.load_threaded_request` 完成信号 | 资源异步加载 |
 
-## 与 3.x yield 的断代
+## 与 3.x yield 的断代 {#kw-yield}
 
 3.x：`yield(函数调用, "completed")`——返回 GDScriptFunctionState，手动管理恢复；信号要包一层 timer。4.x 一律 `await`，`yield` 仅作迁移期保留关键字。**3.x 心智模型（函数状态对象可传递）在 4.x 不再适用**。
 

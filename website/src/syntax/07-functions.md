@@ -2,7 +2,7 @@
 
 **`func` 声明函数；参数与返回值都可标注类型；函数是第一公民——可以被赋值、传递、存储在变量里**（以 `Callable` 形态）。
 
-## 基本形态
+## 基本形态 {#kw-func}
 
 ```gdscript
 func add(a: int, b: int) -> int:
@@ -18,9 +18,11 @@ func sum(...nums: int) -> int:      # 变参（4.2+），nums 是 Array[int]
     return t
 ```
 
-使用准则：**返回类型一律标注**（不返回值标 `-> void`）——这是免费的编译期检查，也是编辑器补全质量的基石。
+<a id="kw-return"></a><a id="kw-void"></a>`return` 从函数返回值，无返回值函数可裸 `return`；`void` 是「无返回值」的类型标注。使用准则：**返回类型一律标注**（不返回值标 `-> void`）——这是免费的编译期检查，也是编辑器补全质量的基石。
 
-## static func：不依赖实例
+<a id="kw-pass"></a>`pass` 是空语句占位：语法上需要语句但不想执行任何代码时使用（空函数体、未写完的分支），与 Python 同名语句语义一致。
+
+## static func：不依赖实例 {#kw-static}
 
 ```gdscript
 class Math2:
@@ -49,7 +51,7 @@ var later := double.bind(2)         # bind 预绑参数：调用时补齐
 
 lambda **捕获外部局部变量按值拷贝**（捕获瞬间的值），捕获成员变量按引用。这是「回调拿到旧值」类 bug 的根源，见[信号章 · bind](10-signals.md#bind-与参数预绑)。
 
-## super：调用父类实现
+## super：调用父类实现 {#kw-super}
 
 ```gdscript
 func _ready() -> void:
