@@ -2,7 +2,7 @@
   "name": "godotlsp",
   "displayName": "godotlsp:独立 GDScript 语言服务器",
   "description": "独立于 Godot 引擎运行的 GDScript 语言服务器:悬停文档、补全、导航、诊断与格式化,无需打开 Godot 编辑器。",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "publisher": "SantaChains",
   "license": "MIT",
   "repository": {
@@ -219,6 +219,30 @@
         "title": "复制位置引用",
         "category": "godotlsp",
         "icon": "$(link)"
+      },
+      {
+        "command": "godotlsp.symbols.filter",
+        "title": "过滤符号",
+        "category": "godotlsp",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "godotlsp.project.filter",
+        "title": "过滤项目结构",
+        "category": "godotlsp",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "godotlsp.scene.filter",
+        "title": "过滤场景结构",
+        "category": "godotlsp",
+        "icon": "$(filter)"
+      },
+      {
+        "command": "godotlsp.connections.filter",
+        "title": "过滤信号连接",
+        "category": "godotlsp",
+        "icon": "$(filter)"
       }
     ],
     "menus": {
@@ -242,6 +266,26 @@
           "command": "godotlsp.connections.refresh",
           "when": "view == godotlsp.connections",
           "group": "navigation"
+        },
+        {
+          "command": "godotlsp.symbols.filter",
+          "when": "view == godotlsp.symbols",
+          "group": "navigation@2"
+        },
+        {
+          "command": "godotlsp.project.filter",
+          "when": "view == godotlsp.project",
+          "group": "navigation@2"
+        },
+        {
+          "command": "godotlsp.scene.filter",
+          "when": "view == godotlsp.scene",
+          "group": "navigation@2"
+        },
+        {
+          "command": "godotlsp.connections.filter",
+          "when": "view == godotlsp.connections",
+          "group": "navigation@2"
         }
       ],
       "view/item/context": [
@@ -292,7 +336,9 @@
         },
         "godotlsp.diagnostics.ignore": {
           "type": "array",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "default": [],
           "markdownDescription": "要忽略的诊断码列表(与 Godot 编辑器同款,如 `UNUSED_VARIABLE`、`SHADOWED_VARIABLE`),按码过滤推送的诊断。"
         },

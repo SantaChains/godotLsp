@@ -27,6 +27,8 @@
 - **场景结构**:当前 `.tscn` 的节点层级(`[node name/type/parent/instance]`),instance 节点直接显示被实例化资源路径
 - **信号连接**:当前 `.tscn` 的 `[connection]` 声明(发射者 → 信号 → 接收者.方法),点击跳连接行,展开可跳端点节点;缺字段的损坏连接以警告标注(引擎对此拒载)
 
+四视图共用:**标题栏过滤**(子串匹配,保留命中后代)、**光标跟随**(光标移动自动在树中定位展开当前符号/节点/连接)、**诊断旗标**(条目行有错误/警告时以 `✗n ⚠n` 计数标注,悬停看消息)。
+
 ## 支持的文件类型
 
 | 语言 | 扩展名 | 说明 |
@@ -71,6 +73,7 @@ code --install-extension godotlsp-0.1.0.vsix
 | `godotlsp.project.refresh` | 刷新项目结构(重建 class_name 注册表) |
 | `godotlsp.scene.refresh` | 刷新场景结构 |
 | `godotlsp.connections.refresh` | 刷新信号连接 |
+| `godotlsp.*.filter`(四视图各一) | 过滤侧边栏树(留空清除) |
 
 ## 从源码构建
 

@@ -81,6 +81,99 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     connTree?.invalidate();
     connProvider.refresh();
   };
+
+  // ── 21b 视图过滤:四视图共用一个输入框流程,过滤词显示在视图描述行。 ──
+  const describeFilter = (f: string) => (f ? `筛选: ${f}` : undefined);
+  const filterTargets: Record<
+    string,
+    { apply: (f: string) => void; current: () => string; view: vscode.TreeView<unknown> }
+  > = {
+    "godotlsp.symbols": {
+      apply: (f) => {
+        symbols?.setFilter(f);
+        tree.description = describeFilter(f);
+      },
+      current: () => symbols?.getFilter() ?? "",
+      view: tree,
+    },
+    "godotlsp.project": {
+      apply: (f) => {
+        projectProvider.setFilter(f);
+        projectView.description = describeFilter(f);
+      },
+      current: () => projectProvider.getFilter(),
+      view: projectView,
+    },
+    "godotlsp.scene": {
+      apply: (f) => {
+        sceneProvider.setFilter(f);
+        sceneView.description = describeFilter(f);
+      },
+      current: () => sceneProvider.getFilter(),
+      view: sceneView,
+    },
+    "godotlsp.connections": {
+      apply: (f) => {
+        connProvider.setFilter(f);
+        connView.description = describeFilter(f);
+      },
+      current: () => connProvider.getFilter(),
+      view: connView,
+    },
+  };
+  const registerFilter = (viewId: string) =>
+    vscode.commands.registerCommand(`${viewId}.filter`, async () => {
+      const target = filterTargets[viewId];
+      const input = await vscode.window.showInputBox({
+        value: target.current(),
+        prompt: `${target.current() ? "修改" : "输入"}过滤词(名称子串匹配,保留命中后代;留空清除)`,
+        placeHolder: "如:hp、Player、Button…",
+      });
+      if (input !== undefined) {
+        target.apply(input.trim());
+      }
+    });
+  context.subscriptions.push(
+    registerFilter("godotlsp.symbols"),
+    registerFilter("godotlsp.project"),
+    registerFilter("godotlsp.scene"),
+    registerFilter("godotlsp.connections"),
+  );
+
+  // ── 21c 光标跟随:选择变化防抖后 reveal 对应树节点(仅视图可见时)。 ──
+  let followTimer: ReturnType<typeof setTimeout> | undefined;
+  const followCursor = (editor: vscode.TextEditor) => {
+    const line = editor.selection.active.line;
+    if (isGd(editor.document)) {
+      void followIn(tree, symbols?.locate(line));
+    } else if (/\.(tscn|scn)$/i.test(editor.document.fileName)) {
+      void followIn(sceneView, sceneTree?.locate(line));
+      void followIn(connView, connTree?.locate(line));
+    }
+  };
+  context.subscriptions.push(
+    vscode.window.onDidChangeTextEditorSelection((e) => {
+      if (e.textEditor.document.uri.scheme !== "file") {
+        return;
+      }
+      if (followTimer) {
+        clearTimeout(followTimer);
+      }
+      followTimer = setTimeout(() => {
+        followTimer = undefined;
+        followCursor(e.textEditor);
+      }, 250);
+    }),
+  );
+  // 21d:诊断到达/更新时刷新带旗标的视图(仅改 description,成本低)。
+  context.subscriptions.push(
+    vscode.languages.onDidChangeDiagnostics(() => {
+      symbols?.refresh();
+      sceneProvider.refresh();
+      connProvider.refresh();
+    }),
+  );
+
   context.subscriptions.push(
     tree,
     projectView,
@@ -385,6 +478,24 @@ async function runCurrentScene(): Promise<void> {
     return;
   }
   runGodot([file]);
+}
+
+/**
+ * 21c 光标跟随的 reveal:仅视图可见时尝试;过滤中被隐藏的节点 reveal
+ * 会拒绝——跟随是尽力而为,静默吞掉(不打断输入流,不刷错误)。
+ */
+async function followIn(view: vscode.TreeView<unknown>, node: unknown | Promise<unknown>): Promise<void> {
+  if (!view.visible || node === undefined || node === null) {
+    return;
+  }
+  try {
+    const target = await node;
+    if (target) {
+      await view.reveal(target, { select: true, focus: false, expand: true });
+    }
+  } catch {
+    // 尽力而为:元素未渲染(过滤/折叠竞态)时放弃本次跟随。
+  }
 }
 
 /**

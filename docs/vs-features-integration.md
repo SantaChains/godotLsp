@@ -32,7 +32,7 @@
 | 运行项目/场景(6) | `godotExecutable` 配置 | 纯插件 | ✅ |
 | project.godot/gdextension/.import 助手 | project-settings.json | 纯插件 | ✅ |
 | 信号连接视图(P1-10) | parsers.ts 扩展(connection 段) | 纯插件 | ✅ 插件侧 tscn 连接已实现(2026-10-16);gd 侧 connect() 扫描待增量 |
-| 大纲增强包(P2.5-21a~f) | parsers.ts + LSP diagnostics/references | 纯插件 | 待做 |
+| 大纲增强包(P2.5-21a~f) | parsers.ts + LSP diagnostics/references | 纯插件 | ✅ 21b/21c/21d 已实现(2026-10-16,三视图共用);21a/21e/21f 待做 |
 | 资源图谱 E1/E1-G(P2-19) | parsers.ts 泛化 + webview | 纯插件 | 待做 |
 | gdshader S1(P2.6) | TextMate + 正则 | 纯插件 | 待做 |
 | gdformat 桥(P1-8) | 外部命令 + 配置开关 | 纯插件 | 待做 |
@@ -50,8 +50,8 @@
 **D2 · 文档站命令 `godotlsp.openDocs`(✅ 立即,轻量)**
 W2 后 hover 链接已指向自建站,但只有 hover 一条路。加命令:光标处符号(类/成员)→ 按 doclinks 契约拼 URL → `vscode.open`。TS 镜像 slug 逻辑 ~40 行;**漂移风险对策:node:test 复用插件测试基建,用同一份 `extension_api.json` 跑与 rs `doclinks.rs` 同构的断言(slug 消歧/成员锚形态),契约双侧互锁**。hover 链接是兜底,命令是快捷路径(Ctrl+Q 式),并给键盘流补齐。
 
-**D3 · 大纲增强包 21b/21c/21d 先行(✅ 立即,三视图共用组件)**
-排序依据:21b 搜索过滤与 21c follow 是三树视图的**共享组件**(一次实现三视图受益),21d 诊断旗标零协议成本;21a region 扫描进 parsers.ts 顺带;21e TODO 与 21f 图标主题随后。全部纯插件,不碰 rs。
+**D3 · 大纲增强包 21b/21c/21d 先行(✅ 已实现 2026-10-16)**
+落地形态:21b 过滤 = 纯逻辑 `treefilter.ts`(node:test 直测)+ `PTreeDataProvider` 层统一套用(项目/场景/连接三视图)+ symbols 自带;过滤词显示在视图描述行,保留命中后代祖先链。21c 跟随 = 选择事件防抖 250ms,`locate()` 最深区间命中 → `reveal`(尽力而为,过滤隐藏/折叠竞态静默放弃);symbols/场景/连接三视图生效。21d 旗标 = `diagSuffix` 区间求交计数,severity 并入 description(`✗n ⚠n`)、消息进 tooltip,类别图标保留;诊断事件驱动刷新。21a region / 21e TODO / 21f 图标主题待做,全部纯插件,不碰 rs。
 
 **D4 · 信号连接视图(P1-10,✅ 立即,最小闭环)**
 parsers.ts `parseScene` 已解析节点树,`[connection]` 段解析是 ~15 行扩展(engine-analyzer.md S 节四字段规格已有);新 TreeView「信号连接」列出 from/signal/to/method,点击双向跳转(tscn 行 / gd 方法行)。这是官方插件 gap 清单里**成本最低**的差异化项。
@@ -67,7 +67,7 @@ TextMate 语法/文件图标/documentColor/snippet/`#include` documentLink——
 
 ## 四、执行序
 
-**VA(rs 冻结期,全纯插件)**:D4 信号连接视图 → D3 大纲增强包(21b/c/d → 21a → 21e → 21f)→ D2 openDocs 命令 → D7 gdformat 桥 → D6 gdshader S1 → D5 E1 图谱。
+**VA(rs 冻结期,全纯插件)**:~~D4 信号连接视图~~ ✅ → ~~D3 大纲增强包 21b/c/d~~ ✅(余 21a/21e/21f 可随 D2 前穿插)→ **D2 openDocs 命令(下一项)** → D7 gdformat 桥 → D6 gdshader S1 → D5 E1 图谱。
 
 **VB(rs 解冻后)**:① documentSelector 分流扩容(D1)→ ② P2-16 中文文档集成 → ③ E2 `godotlsp/graph` → ④ P1-15 documentHighlight/hover 写入处探针验收(R2 探针)。
 

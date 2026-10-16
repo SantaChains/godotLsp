@@ -5,6 +5,7 @@ import type { LanguageClient } from "vscode-languageclient/node";
 import { documentSymbols, iconForKind, LspSymbol } from "./lsp";
 import { parseAutoloads } from "./parsers";
 import { withCopy } from "./copyable";
+import { diagSuffix, filterTree } from "./treefilter";
 
 /** 项目结构树节点:jump = 点击跳转目标;expand = 惰性子节点加载器。 */
 export class PNode {
@@ -15,10 +16,13 @@ export class PNode {
     readonly icon: string,
     readonly jump: { uri: string; line: number } | undefined,
     readonly expand: (() => Promise<PNode[] | undefined>) | undefined,
-  ) {}
+    children?: PNode[],
+  ) {
+    this.children = children;
+  }
 }
 
-/** PNode → TreeItem(项目结构/场景结构共用)。 */
+/** PNode → TreeItem(项目结构/场景结构/信号连接共用)。 */
 export function pTreeItem(node: PNode): vscode.TreeItem {
   const hasChildren = node.expand !== undefined || (node.children?.length ?? 0) > 0;
   const item = new vscode.TreeItem(
@@ -33,6 +37,19 @@ export function pTreeItem(node: PNode): vscode.TreeItem {
       title: "跳转",
       arguments: [node.jump.uri, node.jump.line, 0, node.label],
     };
+    // 21d:诊断旗标——按跳转行与该行诊断求交,仅在有旗标时改写 description
+    // (图标保留类别语义,severity 计数后缀,消息进 tooltip)。
+    const { suffix, tooltip } = diagSuffix(
+      vscode.languages.getDiagnostics(vscode.Uri.parse(node.jump.uri)),
+      node.jump.line,
+      node.jump.line,
+    );
+    if (suffix) {
+      item.description = (node.description ?? "") + suffix;
+      if (tooltip) {
+        item.tooltip = tooltip;
+      }
+    }
   }
   return withCopy(item, {
     name: node.label,
@@ -40,10 +57,13 @@ export function pTreeItem(node: PNode): vscode.TreeItem {
   });
 }
 
-/** 通用适配器:把「roots() + PNode 缓存子节点」包装成 TreeDataProvider。 */
+/** 通用适配器:把「roots() + PNode 缓存子节点」包装成 TreeDataProvider。
+ * 内置 21b 过滤(项目/场景/连接三视图共用):每层 getChildren 套 filterTree,
+ * 保留命中后代的祖先链;过滤词非空时惰性子节点会被拉起以扫描后代。 */
 export class PTreeDataProvider implements vscode.TreeDataProvider<PNode> {
   private _onDidChange = new vscode.EventEmitter<PNode | undefined | void>();
   readonly onDidChangeTreeData = this._onDidChange.event;
+  private filter = "";
 
   constructor(private readonly roots: () => Promise<PNode[]>) {}
 
@@ -51,10 +71,22 @@ export class PTreeDataProvider implements vscode.TreeDataProvider<PNode> {
     this._onDidChange.fire();
   }
 
-  async getChildren(node?: PNode): Promise<PNode[]> {
-    if (!node) {
-      return this.roots();
-    }
+  setFilter(filter: string): void {
+    this.filter = filter;
+    this.refresh();
+  }
+
+  getFilter(): string {
+    return this.filter;
+  }
+
+  private spec = {
+    labelOf: (n: PNode) => n.label,
+    descOf: (n: PNode) => n.description,
+    kidsOf: async (n: PNode): Promise<PNode[]> => (await this.kids(n)) ?? [],
+  };
+
+  private async kids(node: PNode): Promise<PNode[] | undefined> {
     if (node.children) {
       return node.children;
     }
@@ -62,7 +94,12 @@ export class PTreeDataProvider implements vscode.TreeDataProvider<PNode> {
       node.children = (await node.expand()) ?? [];
       return node.children;
     }
-    return [];
+    return undefined;
+  }
+
+  async getChildren(node?: PNode): Promise<PNode[]> {
+    const raw = node ? ((await this.kids(node)) ?? []) : await this.roots();
+    return this.filter ? filterTree(raw, this.filter, this.spec) : raw;
   }
 
   getTreeItem(node: PNode): vscode.TreeItem {
