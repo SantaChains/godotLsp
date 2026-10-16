@@ -4,7 +4,7 @@
 
 > This class implements a reader that can extract the content of individual files inside a ZIP archive. See also ZIPPacker.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class implements a reader that can extract the content of individual files inside a ZIP archive. See also ZIPPacker.
 

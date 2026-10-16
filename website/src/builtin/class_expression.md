@@ -4,7 +4,7 @@
 
 > An expression can be made of any arithmetic operation, built-in math function call, method call of a passed instance, or built-in type construction call.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An expression can be made of any arithmetic operation, built-in math function call, method call of a passed instance, or built-in type construction call.
 

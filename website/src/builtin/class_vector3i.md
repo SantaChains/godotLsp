@@ -1,8 +1,8 @@
 # Vector3i
 
-> A 3-element structure that can be used to represent 3D grid coordinates or any other triplet of integers.
+> 三维整数向量。x、y、z 分量为整数。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A 3-element structure that can be used to represent 3D grid coordinates or any other triplet of integers.
 

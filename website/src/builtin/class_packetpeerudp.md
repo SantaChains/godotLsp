@@ -4,7 +4,7 @@
 
 > UDP packet peer. Can be used to send and receive raw UDP packets as well as Variants.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 UDP packet peer. Can be used to send and receive raw UDP packets as well as Variants.
 

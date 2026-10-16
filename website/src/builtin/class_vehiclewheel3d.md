@@ -4,7 +4,7 @@
 
 > A node used as a child of a VehicleBody3D parent to simulate the behavior of one of its wheels. This node also acts as a collider to detect if the wheel is touching a surface.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A node used as a child of a VehicleBody3D parent to simulate the behavior of one of its wheels. This node also acts as a collider to detect if the wheel is touching a surface.
 

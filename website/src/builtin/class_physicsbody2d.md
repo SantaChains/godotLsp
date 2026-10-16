@@ -4,7 +4,7 @@
 
 > PhysicsBody2D is an abstract base class for 2D game objects affected by physics. All 2D physics bodies inherit from it.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 PhysicsBody2D is an abstract base class for 2D game objects affected by physics. All 2D physics bodies inherit from it.
 

@@ -4,7 +4,7 @@
 
 > SpinBox is a numerical input text field. It allows entering integers and floating-point numbers. The SpinBox also has up and down buttons that can be clicked to increase or decrease the value. The value can also be changed by dragging the mouse up or down over the SpinBox's arrows.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 SpinBox is a numerical input text field. It allows entering integers and floating-point numbers. The SpinBox also has up and down buttons that can be clicked to increase or decrease the value. The value can also be changed by dragging the mouse up or down over the SpinBox's arrows.
 

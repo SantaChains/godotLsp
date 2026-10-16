@@ -4,7 +4,7 @@
 
 > This is a special node within the AR/VR system that maps the physical location of the center of our tracking space to the virtual location within our game world.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This is a special node within the AR/VR system that maps the physical location of the center of our tracking space to the virtual location within our game world.
 

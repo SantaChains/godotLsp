@@ -4,7 +4,7 @@
 
 > This plugin type exists to modify the process of importing scenes, allowing to change the content as well as add importer options at every stage of the process.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This plugin type exists to modify the process of importing scenes, allowing to change the content as well as add importer options at every stage of the process.
 

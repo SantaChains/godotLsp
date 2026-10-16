@@ -4,7 +4,7 @@
 
 > A box-shaped attractor with varying directions and strengths defined in it that influences particles from GPUParticles3D nodes.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A box-shaped attractor with varying directions and strengths defined in it that influences particles from GPUParticles3D nodes.
 

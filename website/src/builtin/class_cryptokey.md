@@ -4,7 +4,7 @@
 
 > The CryptoKey class represents a cryptographic key. Keys can be loaded and saved like any other Resource.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The CryptoKey class represents a cryptographic key. Keys can be loaded and saved like any other Resource.
 

@@ -4,7 +4,7 @@
 
 > This node takes its parent Path3D, and returns the coordinates of a point within it, given a distance from the first vertex.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This node takes its parent Path3D, and returns the coordinates of a point within it, given a distance from the first vertex.
 

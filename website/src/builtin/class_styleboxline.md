@@ -4,7 +4,7 @@
 
 > A StyleBox that displays a single line of a given color and thickness. The line can be either horizontal or vertical. Useful for separators.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A StyleBox that displays a single line of a given color and thickness. The line can be either horizontal or vertical. Useful for separators.
 

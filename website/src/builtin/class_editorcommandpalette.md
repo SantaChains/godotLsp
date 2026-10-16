@@ -4,7 +4,7 @@
 
 > Object that holds all the available Commands and their shortcuts text. These Commands can be accessed through Editor > Command Palette menu.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Object that holds all the available Commands and their shortcuts text. These Commands can be accessed through Editor > Command Palette menu.
 

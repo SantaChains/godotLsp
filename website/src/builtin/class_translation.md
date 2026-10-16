@@ -4,7 +4,7 @@
 
 > Translation maps a collection of strings to their individual translations, and also provides convenience methods for pluralization.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Translation maps a collection of strings to their individual translations, and also provides convenience methods for pluralization.
 

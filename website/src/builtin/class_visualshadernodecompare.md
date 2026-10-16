@@ -4,7 +4,7 @@
 
 > Compares a and b of type by function. Returns a boolean scalar. Translates to if instruction in shader code.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Compares a and b of type by function. Returns a boolean scalar. Translates to if instruction in shader code.
 

@@ -2,9 +2,9 @@
 
 **继承**：[RefCounted](class_refcounted.md) → [Object](class_object.md) → **DirAccess**
 
-> This class is used to manage directories and their content, even outside of the project folder.
+> 目录遍历和创建。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class is used to manage directories and their content, even outside of the project folder.
 

@@ -4,7 +4,7 @@
 
 > PopupMenu is a modal window used to display a list of options. Useful for toolbars and context menus.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 PopupMenu is a modal window used to display a list of options. Useful for toolbars and context menus.
 

@@ -4,7 +4,7 @@
 
 > This node uses body tracking data from an XRBodyTracker to pose the skeleton of a body mesh.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This node uses body tracking data from an XRBodyTracker to pose the skeleton of a body mesh.
 

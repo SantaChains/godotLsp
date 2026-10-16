@@ -4,7 +4,7 @@
 
 > Result object tracking the asynchronous result of an OpenXR Future object, you can use this object to track the result status.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Result object tracking the asynchronous result of an OpenXR Future object, you can use this object to track the result status.
 

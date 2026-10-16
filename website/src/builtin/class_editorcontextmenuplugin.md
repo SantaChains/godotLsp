@@ -4,7 +4,7 @@
 
 > EditorContextMenuPlugin allows for the addition of custom options in the editor's context menu.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 EditorContextMenuPlugin allows for the addition of custom options in the editor's context menu.
 

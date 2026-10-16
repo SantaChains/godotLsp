@@ -4,7 +4,7 @@
 
 > This class is used to query and configure a certain import format. It is used in conjunction with asset format import plugins.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class is used to query and configure a certain import format. It is used in conjunction with asset format import plugins.
 

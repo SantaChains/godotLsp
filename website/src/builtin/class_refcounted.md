@@ -2,9 +2,9 @@
 
 **继承**：[Object](class_object.md) → **RefCounted**
 
-> Base class for any object that keeps a reference count. Resource and many other helper objects inherit this class.
+> 引用计数对象的基类。自动在无引用时释放，无需手动 free()。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Base class for any object that keeps a reference count. Resource and many other helper objects inherit this class.
 

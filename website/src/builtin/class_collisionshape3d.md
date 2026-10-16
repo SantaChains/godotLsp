@@ -2,9 +2,9 @@
 
 **继承**：[Node3D](class_node3d.md) → [Node](class_node.md) → [Object](class_object.md) → **CollisionShape3D**
 
-> A node that provides a Shape3D to a CollisionObject3D parent and allows it to be edited. This can give a detection shape to an Area3D or turn a PhysicsBody3D into a solid object.
+> 3D 碰撞形状。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A node that provides a Shape3D to a CollisionObject3D parent and allows it to be edited. This can give a detection shape to an Area3D or turn a PhysicsBody3D into a solid object.
 

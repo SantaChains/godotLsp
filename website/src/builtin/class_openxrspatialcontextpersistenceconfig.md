@@ -4,7 +4,7 @@
 
 > Configuration header for spatial persistence. Pass this to OpenXRSpatialEntityExtension.create_spatial_context() as the next parameter to create a spatial context with spatial persistence capabilities.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Configuration header for spatial persistence. Pass this to OpenXRSpatialEntityExtension.create_spatial_context() as the next parameter to create a spatial context with spatial persistence capabilities.
 

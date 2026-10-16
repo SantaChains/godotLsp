@@ -4,7 +4,7 @@
 
 > GridMapEditorPlugin provides access to the GridMap editor functionality.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 GridMapEditorPlugin provides access to the GridMap editor functionality.
 

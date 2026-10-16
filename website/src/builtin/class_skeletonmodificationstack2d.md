@@ -4,7 +4,7 @@
 
 > This resource is used by the Skeleton and holds a stack of SkeletonModification2Ds.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This resource is used by the Skeleton and holds a stack of SkeletonModification2Ds.
 

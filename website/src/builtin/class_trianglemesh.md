@@ -4,7 +4,7 @@
 
 > Creates a bounding volume hierarchy (BVH) tree structure around triangle geometry.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Creates a bounding volume hierarchy (BVH) tree structure around triangle geometry.
 

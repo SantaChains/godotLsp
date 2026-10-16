@@ -4,7 +4,7 @@
 
 > MP3 is a lossy audio format, with worse audio quality compared to ResourceImporterOggVorbis at a given bitrate.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 MP3 is a lossy audio format, with worse audio quality compared to ResourceImporterOggVorbis at a given bitrate.
 

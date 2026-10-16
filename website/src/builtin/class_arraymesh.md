@@ -4,7 +4,7 @@
 
 > The ArrayMesh is used to construct a Mesh by specifying the attributes as arrays.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The ArrayMesh is used to construct a Mesh by specifying the attributes as arrays.
 

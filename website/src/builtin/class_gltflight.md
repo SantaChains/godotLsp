@@ -4,7 +4,7 @@
 
 > Represents a light as defined by the KHR_lights_punctual glTF extension.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Represents a light as defined by the KHR_lights_punctual glTF extension.
 

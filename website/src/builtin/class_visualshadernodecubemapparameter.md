@@ -4,7 +4,7 @@
 
 > Translated to uniform samplerCube in the shader language. The output value can be used as port for VisualShaderNodeCubemap.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Translated to uniform samplerCube in the shader language. The output value can be used as port for VisualShaderNodeCubemap.
 

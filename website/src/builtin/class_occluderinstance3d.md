@@ -4,7 +4,7 @@
 
 > Occlusion culling can improve rendering performance in closed/semi-open areas by hiding geometry that is occluded by other objects.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Occlusion culling can improve rendering performance in closed/semi-open areas by hiding geometry that is occluded by other objects.
 

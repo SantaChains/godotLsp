@@ -1,8 +1,8 @@
 # Signal
 
-> Signal is a built-in Variant type that represents a signal of an Object instance. Like all Variant types, it can be stored in variables and passed to functions. Signals allow all connected Callables (and by extension their respective objects) to listen and react to events, without directly referencing one another. This keeps the code flexible and easier to manage. You can check whether an Object has a given signal name using Object.has_signal().
+> 信号声明类型。用于自定义事件，connect() 连接到 Callable。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Signal is a built-in Variant type that represents a signal of an Object instance. Like all Variant types, it can be stored in variables and passed to functions. Signals allow all connected Callables (and by extension their respective objects) to listen and react to events, without directly referencing one another. This keeps the code flexible and easier to manage. You can check whether an Object has a given signal name using Object.has_signal().
 
@@ -157,18 +157,7 @@ There are notable differences when using this API with C#. See C# API difference
 int connect(callable: Callable, flags: int = 0)
 ```
 
-Connects this signal to the specified callable. Optional flags can be also added to configure the connection's behavior (see ConnectFlags constants). You can provide additional arguments to the connected callable by using Callable.bind().
-
-A signal can only be connected once to the same Callable. If the signal is already connected, this method returns @GlobalScope.ERR_INVALID_PARAMETER and generates an error, unless the signal is connected with Object.CONNECT_REFERENCE_COUNTED. To prevent this, use is_connected() first to check for existing connections.
-
-```gdscript
-for button in $Buttons.get_children():
-    button.pressed.connect(_on_pressed.bind(button))
-func _on_pressed(button):
-    print(button.name, " was pressed")
-```
-
-Note: If the callable's object is freed, the connection will be lost.
+连接信号到 Callable。connect(callable, flags)。
 
 ### disconnect {#disconnect}
 
@@ -176,7 +165,7 @@ Note: If the callable's object is freed, the connection will be lost.
 void disconnect(callable: Callable)
 ```
 
-Disconnects this signal from the specified Callable. If the connection does not exist, generates an error. Use is_connected() to make sure that the connection exists.
+断开信号连接。
 
 ### emit {#emit}
 
@@ -184,7 +173,7 @@ Disconnects this signal from the specified Callable. If the connection does not 
 void emit(...) const
 ```
 
-Emits this signal. All Callables connected to this signal will be triggered. This method supports a variable number of arguments, so parameters can be passed as a comma separated list.
+发射信号。4.x 推荐写法：my_signal.emit(args)。
 
 ### get_connections {#get_connections}
 

@@ -4,7 +4,7 @@
 
 > This class contains a dictionary that uses a list of bone names in SkeletonProfile as key names.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class contains a dictionary that uses a list of bone names in SkeletonProfile as key names.
 

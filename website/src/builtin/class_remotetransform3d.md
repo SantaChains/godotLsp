@@ -4,7 +4,7 @@
 
 > RemoteTransform3D pushes its own Transform3D to another Node3D derived Node (called the remote node) in the scene.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 RemoteTransform3D pushes its own Transform3D to another Node3D derived Node (called the remote node) in the scene.
 

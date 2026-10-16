@@ -1,8 +1,8 @@
 # String
 
-> This is the built-in string Variant type (and the one used by GDScript). Strings may contain any number of Unicode characters, and expose methods useful for manipulating and generating strings. Strings are reference-counted and use a copy-on-write approach (every modification to a string returns a new String), so passing them around is cheap in resources.
+> UTF-8 字符串。支持查找、替换、分割、格式化、正则匹配。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This is the built-in string Variant type (and the one used by GDScript). Strings may contain any number of Unicode characters, and expose methods useful for manipulating and generating strings. Strings are reference-counted and use a copy-on-write approach (every modification to a string returns a new String), so passing them around is cheap in resources.
 
@@ -224,25 +224,7 @@ To get a bool result from a string comparison, use the == operator instead. See 
 int find(what: String, from: int = 0) const
 ```
 
-Returns the index of the first occurrence of what in this string, or -1 if there are none. The search's start can be specified with from, continuing to the end of the string.
-
-```
-print("Team".find("I")) # Prints -1
-print("Potato".find("t"))    # Prints 2
-print("Potato".find("t", 3)) # Prints 4
-print("Potato".find("t", 5)) # Prints -1
-```
-
-```
-GD.Print("Team".Find("I")); // Prints -1
-GD.Print("Potato".Find("t"));    // Prints 2
-GD.Print("Potato".Find("t", 3)); // Prints 4
-GD.Print("Potato".Find("t", 5)); // Prints -1
-```
-
-Note: If you just want to know whether the string contains what, use contains(). In GDScript, you may also use the in operator.
-
-Note: A negative value of from is converted to a starting index by counting back from the last possible index with enough space to find what.
+查找子串位置，找不到返回 -1。
 
 ### findn {#findn}
 
@@ -258,46 +240,7 @@ Returns the index of the first case-insensitive occurrence of what in this strin
 String format(values: Variant, placeholder: String = "{_}") const
 ```
 
-Formats the string by replacing all occurrences of placeholder with the elements of values.
-
-values can be a Dictionary, an Array, or an Object. Any underscores in placeholder will be replaced with the corresponding keys in advance. Array elements use their index as keys.
-
-```gdscript
-# Prints "Waiting for Godot is a play by Samuel Beckett, and Godot Engine is named after it."
-var use_array_values = "Waiting for {0} is a play by {1}, and {0} Engine is named after it."
-print(use_array_values.format(["Godot", "Samuel Beckett"]))
-# Prints "User 42 is Godot."
-print("User {id} is {name}.".format({"id": 42, "name": "Godot"}))
-```
-
-Some additional handling is performed when values is an Array. If placeholder does not contain an underscore, the elements of the values array will be used to replace one occurrence of the placeholder in order; If an element of values is another 2-element array, it'll be interpreted as a key-value pair.
-
-```gdscript
-# Prints "User 42 is Godot."
-print("User {} is {}.".format([42, "Godot"], "{}"))
-print("User {id} is {name}.".format([["id", 42], ["name", "Godot"]]))
-```
-
-When passing an Object, the property names from Object.get_property_list() are used as keys.
-
-```gdscript
-# Prints "Visible true, position (0, 0)"
-var node = Node2D.new()
-print("Visible {visible}, position {position}".format(node))
-```
-
-See also the GDScript format string tutorial.
-
-Note: Each replacement is done sequentially for each element of values, not all at once. This means that if any element is inserted and it contains another placeholder, it may be changed by the next replacement. While this can be very useful, it often causes unexpected results. If not necessary, make sure values's elements do not contain placeholders.
-
-```gdscript
-print("{0} {1}".format(["{1}", "x"]))           # Prints "x x"
-print("{0} {1}".format(["x", "{0}"]))           # Prints "x {0}"
-print("{a} {b}".format({"a": "{b}", "b": "c"})) # Prints "c c"
-print("{a} {b}".format({"b": "c", "a": "{b}"})) # Prints "{b} c"
-```
-
-Note: In C#, it's recommended to interpolate strings with "$" [https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated], instead.
+格式化字符串。"Hello {name}".format({"name": "World"})。
 
 ### get_base_dir {#get_base_dir}
 
@@ -698,7 +641,7 @@ print("Hello World!".left(-4)) # Prints "Hello Wo"
 int length() const
 ```
 
-Returns the number of characters in the string. Empty strings ("") always return 0. See also is_empty().
+字符串字符数。
 
 ### lpad {#lpad}
 
@@ -918,7 +861,7 @@ Repeats this string a number of times. count needs to be greater than 0. Otherwi
 String replace(what: String, forwhat: String) const
 ```
 
-Replaces all occurrences of what inside the string with the given forwhat.
+替换所有匹配子串。
 
 ### replace_char {#replace_char}
 
@@ -1093,29 +1036,7 @@ print(simple_path) # Prints "path/file"
 PackedStringArray split(delimiter: String = "", allow_empty: bool = true, maxsplit: int = 0) const
 ```
 
-Splits the string using a delimiter and returns an array of the substrings. If delimiter is an empty string, each substring will be a single character. This method is the opposite of join().
-
-If allow_empty is false, empty strings between adjacent delimiters are excluded from the array.
-
-If maxsplit is greater than 0, the number of splits may not exceed maxsplit. By default, the entire string is split.
-
-```
-var some_array = "One,Two,Three,Four".split(",", true, 2)
-print(some_array.size()) # Prints 3
-print(some_array[0])     # Prints "One"
-print(some_array[1])     # Prints "Two"
-print(some_array[2])     # Prints "Three,Four"
-```
-
-```
-// C#'s `Split()` does not support the `maxsplit` parameter.
-var someArray = "One,Two,Three".Split(",");
-GD.Print(someArray[0]); // Prints "One"
-GD.Print(someArray[1]); // Prints "Two"
-GD.Print(someArray[2]); // Prints "Three"
-```
-
-Note: If you only need one substring from the array, consider using get_slice() which is faster. If you need to split strings with more complex rules, use the RegEx class instead.
+按分隔符分割为字符串数组。
 
 ### split_floats {#split_floats}
 

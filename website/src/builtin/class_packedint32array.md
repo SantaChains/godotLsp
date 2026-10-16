@@ -1,8 +1,8 @@
 # PackedInt32Array
 
-> An array specifically designed to hold 32-bit integer values. Packs data tightly, so it saves memory for large array sizes.
+> 紧凑 32 位整数数组。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An array specifically designed to hold 32-bit integer values. Packs data tightly, so it saves memory for large array sizes.
 

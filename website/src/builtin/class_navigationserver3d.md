@@ -4,7 +4,7 @@
 
 > NavigationServer3D is the server that handles navigation maps, regions and agents. It does not handle A* navigation from AStar3D.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 NavigationServer3D is the server that handles navigation maps, regions and agents. It does not handle A* navigation from AStar3D.
 

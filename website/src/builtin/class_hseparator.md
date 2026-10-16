@@ -4,7 +4,7 @@
 
 > A horizontal separator used for separating other controls that are arranged vertically. HSeparator is purely visual and normally drawn as a StyleBoxLine.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A horizontal separator used for separating other controls that are arranged vertically. HSeparator is purely visual and normally drawn as a StyleBoxLine.
 

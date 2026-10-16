@@ -4,7 +4,7 @@
 
 > Takes a 4×4 transform matrix and decomposes it into four vec3 values, one from each row of the matrix.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Takes a 4×4 transform matrix and decomposes it into four vec3 values, one from each row of the matrix.
 

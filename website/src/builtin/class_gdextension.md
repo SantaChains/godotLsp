@@ -4,7 +4,7 @@
 
 > The GDExtension resource type represents a shared library [https://en.wikipedia.org/wiki/Shared_library] which can expand the functionality of the engine. The GDExtensionManager singleton is responsible for loading, reloading, and unloading GDExtension resources.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The GDExtension resource type represents a shared library [https://en.wikipedia.org/wiki/Shared_library] which can expand the functionality of the engine. The GDExtensionManager singleton is responsible for loading, reloading, and unloading GDExtension resources.
 

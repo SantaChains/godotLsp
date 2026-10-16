@@ -4,7 +4,7 @@
 
 > SphereOccluder3D stores a sphere shape that can be used by the engine's occlusion culling system.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 SphereOccluder3D stores a sphere shape that can be used by the engine's occlusion culling system.
 

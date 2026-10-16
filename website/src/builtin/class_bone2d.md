@@ -4,7 +4,7 @@
 
 > A hierarchy of Bone2Ds can be bound to a Skeleton2D to control and animate other Node2D nodes.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A hierarchy of Bone2Ds can be bound to a Skeleton2D to control and animate other Node2D nodes.
 

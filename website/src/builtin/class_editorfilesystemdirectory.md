@@ -4,7 +4,7 @@
 
 > A more generalized, low-level variation of the directory concept.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A more generalized, low-level variation of the directory concept.
 

@@ -1,8 +1,8 @@
 # Array
 
-> An array data structure that can contain a sequence of elements of any Variant type by default. Values can optionally be constrained to a specific type by creating a typed array. Elements are accessed by a numerical index starting at 0. Negative indices are used to count from the back (-1 is the last element, -2 is the second to last, etc.).
+> 动态数组。支持 typed Array[int]、Packed*Array 优化内存。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An array data structure that can contain a sequence of elements of any Variant type by default. Values can optionally be constrained to a specific type by creating a typed array. Elements are accessed by a numerical index starting at 0. Negative indices are used to count from the back (-1 is the last element, -2 is the second to last, etc.).
 
@@ -130,7 +130,7 @@ Note: For an empty array, this method always returns false.
 void append(value: Variant)
 ```
 
-Appends value at the end of the array (alias of push_back()).
+末尾追加元素。
 
 ### append_array {#append_array}
 
@@ -264,11 +264,7 @@ deep_subresources_mode must be one of the values from DeepDuplicateMode. By defa
 void erase(value: Variant)
 ```
 
-Finds and removes the first occurrence of value from the array. If value does not exist in the array, nothing happens. To remove an element by index, use remove_at() instead.
-
-Note: This method shifts every element's index after the removed value back, which may have a noticeable performance cost, especially on larger arrays.
-
-Note: Erasing elements while iterating over arrays is not supported and will result in unpredictable behavior.
+移除指定值的所有出现。
 
 ### fill {#fill}
 
@@ -578,7 +574,7 @@ Note: This method shifts every element's index after position back, which may ha
 Variant pop_back()
 ```
 
-Removes and returns the last element of the array. Returns null if the array is empty, without generating an error. See also pop_front().
+移除并返回末尾元素。
 
 ### pop_front {#pop_front}
 
@@ -725,7 +721,7 @@ Note: Like many similar functions in the engine (such as @GlobalScope.randi() or
 int size() const
 ```
 
-Returns the number of elements in the array. Empty arrays ([]) always return 0. See also is_empty().
+数组长度。
 
 ### slice {#slice}
 

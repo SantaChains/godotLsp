@@ -4,7 +4,7 @@
 
 > An implementation of the A* algorithm, used to find the shortest path between two vertices on a connected graph in 2D space.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An implementation of the A* algorithm, used to find the shortest path between two vertices on a connected graph in 2D space.
 

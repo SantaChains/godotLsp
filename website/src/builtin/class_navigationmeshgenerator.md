@@ -4,7 +4,7 @@
 
 > This class is responsible for creating and clearing 3D navigation meshes used as NavigationMesh resources inside NavigationRegion3D. The NavigationMeshGenerator has very limited to no use for 2D as the navigation mesh baking process expects 3D node types and 3D source geometry to parse.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class is responsible for creating and clearing 3D navigation meshes used as NavigationMesh resources inside NavigationRegion3D. The NavigationMeshGenerator has very limited to no use for 2D as the navigation mesh baking process expects 3D node types and 3D source geometry to parse.
 

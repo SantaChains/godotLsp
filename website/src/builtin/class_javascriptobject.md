@@ -4,7 +4,7 @@
 
 > JavaScriptObject is used to interact with JavaScript objects retrieved or created via JavaScriptBridge.get_interface(), JavaScriptBridge.create_object(), or JavaScriptBridge.create_callback().
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 JavaScriptObject is used to interact with JavaScript objects retrieved or created via JavaScriptBridge.get_interface(), JavaScriptBridge.create_object(), or JavaScriptBridge.create_callback().
 

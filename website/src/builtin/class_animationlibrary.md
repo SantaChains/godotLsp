@@ -4,7 +4,7 @@
 
 > An animation library stores a set of animations accessible through StringName keys, for use with AnimationPlayer nodes.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An animation library stores a set of animations accessible through StringName keys, for use with AnimationPlayer nodes.
 

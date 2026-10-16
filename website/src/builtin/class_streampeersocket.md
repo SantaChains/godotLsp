@@ -4,7 +4,7 @@
 
 > StreamPeerSocket is an abstract base class that defines common behavior for socket-based streams.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 StreamPeerSocket is an abstract base class that defines common behavior for socket-based streams.
 

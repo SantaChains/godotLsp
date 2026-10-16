@@ -4,7 +4,7 @@
 
 > A TCP server. Listens to connections on a port and returns a StreamPeerTCP when it gets an incoming connection.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A TCP server. Listens to connections on a port and returns a StreamPeerTCP when it gets an incoming connection.
 

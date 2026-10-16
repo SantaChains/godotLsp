@@ -1,8 +1,8 @@
 # Basis
 
-> The Basis built-in Variant type is a 3×3 matrix [https://en.wikipedia.org/wiki/Matrix_(mathematics)] used to represent 3D rotation, scale, and shear. It is frequently used within a Transform3D.
+> 3x3 旋转矩阵。表示三维旋转和缩放。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The Basis built-in Variant type is a 3×3 matrix [https://en.wikipedia.org/wiki/Matrix_(mathematics)] used to represent 3D rotation, scale, and shear. It is frequently used within a Transform3D.
 

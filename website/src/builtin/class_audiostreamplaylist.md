@@ -4,7 +4,7 @@
 
 > An audio stream that can play back sub-streams in sequence. Streams can be added to the Playlist with set_list_stream(), and shuffled with shuffle.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An audio stream that can play back sub-streams in sequence. Streams can be added to the Playlist with set_list_stream(), and shuffled with shuffle.
 

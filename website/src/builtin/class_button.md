@@ -2,9 +2,9 @@
 
 **继承**：[BaseButton](class_basebutton.md) → [Control](class_control.md) → [CanvasItem](class_canvasitem.md) → [Node](class_node.md) → [Object](class_object.md) → **Button**
 
-> Button is the standard themed button. It can contain text and an icon, and it will display them according to the current Theme.
+> 按钮控件。支持点击、长按、自定义样式。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Button is the standard themed button. It can contain text and an icon, and it will display them according to the current Theme.
 

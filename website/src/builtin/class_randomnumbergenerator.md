@@ -4,7 +4,7 @@
 
 > RandomNumberGenerator is a class for generating pseudo-random numbers. It currently uses PCG32 [https://www.pcg-random.org/].
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 RandomNumberGenerator is a class for generating pseudo-random numbers. It currently uses PCG32 [https://www.pcg-random.org/].
 

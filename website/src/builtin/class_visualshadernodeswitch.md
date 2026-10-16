@@ -4,7 +4,7 @@
 
 > Returns an associated value of the op_type type if the provided boolean value is true or false.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Returns an associated value of the op_type type if the provided boolean value is true or false.
 

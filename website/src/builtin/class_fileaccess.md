@@ -2,9 +2,9 @@
 
 **继承**：[RefCounted](class_refcounted.md) → [Object](class_object.md) → **FileAccess**
 
-> This class can be used to permanently store data in the user device's file system and to read from it. This is useful for storing game save data or player configuration files.
+> 文件读写。支持 res:// 和用户目录。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class can be used to permanently store data in the user device's file system and to read from it. This is useful for storing game save data or player configuration files.
 

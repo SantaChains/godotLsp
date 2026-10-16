@@ -4,7 +4,7 @@
 
 > An animation node used to combine, mix, or blend two or more animations together while keeping them synchronized within an AnimationTree.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An animation node used to combine, mix, or blend two or more animations together while keeping them synchronized within an AnimationTree.
 

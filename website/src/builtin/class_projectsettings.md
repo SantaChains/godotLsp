@@ -4,7 +4,7 @@
 
 > Stores variables that can be accessed from everywhere. Use get_setting(), set_setting() or has_setting() to access them. Variables stored in project.godot are also loaded into ProjectSettings, making this object very useful for reading custom game configuration options.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Stores variables that can be accessed from everywhere. Use get_setting(), set_setting() or has_setting() to access them. Variables stored in project.godot are also loaded into ProjectSettings, making this object very useful for reading custom game configuration options.
 

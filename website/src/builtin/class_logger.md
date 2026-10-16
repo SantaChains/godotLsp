@@ -4,7 +4,7 @@
 
 > Custom logger to receive messages from the internal error/warning stream. Loggers are registered via OS.add_logger().
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Custom logger to receive messages from the internal error/warning stream. Loggers are registered via OS.add_logger().
 

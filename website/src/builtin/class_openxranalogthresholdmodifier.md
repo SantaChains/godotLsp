@@ -4,7 +4,7 @@
 
 > The analog threshold binding modifier can modify a float input to a boolean input with specified thresholds.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The analog threshold binding modifier can modify a float input to a boolean input with specified thresholds.
 

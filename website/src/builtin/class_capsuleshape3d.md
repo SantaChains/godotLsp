@@ -4,7 +4,7 @@
 
 > A 3D capsule shape, intended for use in physics. Usually used to provide a shape for a CollisionShape3D.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A 3D capsule shape, intended for use in physics. Usually used to provide a shape for a CollisionShape3D.
 

@@ -4,7 +4,7 @@
 
 > Base class of SkeletonModifier3D to approach the goal by repeating small rotations.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Base class of SkeletonModifier3D to approach the goal by repeating small rotations.
 

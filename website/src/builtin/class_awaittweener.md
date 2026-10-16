@@ -4,7 +4,7 @@
 
 > AwaitTweener is used to await a specified signal, allowing asynchronous steps in Tween animation. See Tween.tween_await() for more usage information.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 AwaitTweener is used to await a specified signal, allowing asynchronous steps in Tween animation. See Tween.tween_await() for more usage information.
 

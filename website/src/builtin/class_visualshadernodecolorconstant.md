@@ -4,7 +4,7 @@
 
 > Has two output ports representing RGB and alpha channels of Color.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Has two output ports representing RGB and alpha channels of Color.
 

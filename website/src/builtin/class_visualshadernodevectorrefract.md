@@ -4,7 +4,7 @@
 
 > Translated to refract(I, N, eta) in the shader language, where I is the incident vector, N is the normal vector and eta is the ratio of the indices of the refraction.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Translated to refract(I, N, eta) in the shader language, where I is the incident vector, N is the normal vector and eta is the ratio of the indices of the refraction.
 

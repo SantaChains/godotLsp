@@ -4,7 +4,7 @@
 
 > This abstract class helps connect the Node3D scene with the editor-specific EditorNode3DGizmo class.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This abstract class helps connect the Node3D scene with the editor-specific EditorNode3DGizmo class.
 

@@ -4,7 +4,7 @@
 
 > Custom code to generate previews. Check EditorSettings.filesystem/file_dialog/thumbnail_size to find a proper size to generate previews at.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Custom code to generate previews. Check EditorSettings.filesystem/file_dialog/thumbnail_size to find a proper size to generate previews at.
 

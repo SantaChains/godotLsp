@@ -2,9 +2,9 @@
 
 **继承**：[Node](class_node.md) → [Object](class_object.md) → **CanvasItem**
 
-> Abstract base class for everything in 2D space. Canvas items are laid out in a tree; children inherit and extend their parent's transform. CanvasItem is extended by Control for GUI-related nodes, and by Node2D for 2D game objects.
+> 所有 2D 绘制节点的基类。管理绘制顺序、材质、调制颜色、可见性。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Abstract base class for everything in 2D space. Canvas items are laid out in a tree; children inherit and extend their parent's transform. CanvasItem is extended by Control for GUI-related nodes, and by Node2D for 2D game objects.
 

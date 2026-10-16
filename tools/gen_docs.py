@@ -24,6 +24,14 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from translations import TRANSLATIONS
+
+
+def tr(key: str) -> str | None:
+    return TRANSLATIONS.get(key)
+
+
 ROOT = Path(__file__).resolve().parent.parent
 API_JSON = ROOT / "crates/gdscript-engine/testdata/extension_api.json"
 DOCS_DIR = ROOT / "godot-docs"
@@ -287,15 +295,18 @@ def gen_class_page(name: str, cls: dict, kind: str, docs: dict, api: dict, inh_l
     if cls.get("inherits"):
         L.append(f"**继承**：{inh_links}")
         L.append("")
-    if docs["brief"]:
-        L.append(f"> {docs['brief']}")
+    cn_brief = tr(f"class:{name}")
+    if cn_brief or docs["brief"]:
+        main_brief = cn_brief or docs["brief"]
+        L.append(f"> {main_brief}")
         L.append("")
-        L.append(f"<details><summary>官方英文描述（中文精译进行中）</summary>")
-        L.append("")
-        L.append(docs["description"])
-        L.append("")
-        L.append("</details>")
-        L.append("")
+        if docs["description"]:
+            L.append(f"<details><summary>官方英文描述</summary>")
+            L.append("")
+            L.append(docs["description"])
+            L.append("")
+            L.append("</details>")
+            L.append("")
 
     # 方法
     methods = cls.get("methods", [])
@@ -309,7 +320,8 @@ def gen_class_page(name: str, cls: dict, kind: str, docs: dict, api: dict, inh_l
             L.append(render_method(f))
             L.append("```")
             L.append("")
-            L.append(md_desc(docs["methods"].get(f["name"], "")))
+            cn = tr(f"member:{name}.{f['name']}")
+            L.append(md_desc(cn or docs["methods"].get(f["name"], "")))
             L.append("")
 
     # 属性（builtin 用 members）
@@ -609,6 +621,19 @@ def build_hoverdata(entries: dict, docs_idx: dict) -> dict:
             m[f"{name}.{member}"] = hover_para(desc)
         for member, desc in docs["constants"].items():
             m[f"{name}.{member}"] = hover_para(desc)
+    # P0 中文翻译覆盖
+    for name in c:
+        if t := tr(f"class:{name}"):
+            c[name] = t
+    for key in list(m):
+        if t := tr(f"member:{key}"):
+            m[key] = t
+    for name in f:
+        if t := tr(f"fn:{name}"):
+            f[name]["d"] = t
+    for name in a:
+        if t := tr(f"anno:{name}"):
+            a[name] = t
     return {"c": c, "m": m, "f": f, "a": a}
 
 

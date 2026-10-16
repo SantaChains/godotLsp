@@ -4,7 +4,7 @@
 
 > Allows control of AnimationTree state machines created with AnimationNodeStateMachine. Retrieve with $AnimationTree.get("parameters/playback").
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Allows control of AnimationTree state machines created with AnimationNodeStateMachine. Retrieve with $AnimationTree.get("parameters/playback").
 

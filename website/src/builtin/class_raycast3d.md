@@ -4,7 +4,7 @@
 
 > A raycast represents a ray from its origin to its target_position that finds the closest object along its path, if it intersects any.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A raycast represents a ray from its origin to its target_position that finds the closest object along its path, if it intersects any.
 

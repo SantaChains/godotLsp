@@ -4,7 +4,7 @@
 
 > Abstract base class for different font types. It has methods for drawing text and font character introspection.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Abstract base class for different font types. It has methods for drawing text and font character introspection.
 

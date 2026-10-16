@@ -2,9 +2,9 @@
 
 **继承**：[CanvasItem](class_canvasitem.md) → [Node](class_node.md) → [Object](class_object.md) → **Control**
 
-> Base class for all UI-related nodes. Control features a bounding rectangle that defines its extents, an anchor position relative to its parent control or the current viewport, and offsets relative to the anchor. The offsets update automatically when the node, any of its parents, or the screen size change.
+> UI 控件的基类。提供布局、鼠标过滤、主题样式、锚点等 UI 功能。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Base class for all UI-related nodes. Control features a bounding rectangle that defines its extents, an anchor position relative to its parent control or the current viewport, and offsets relative to the anchor. The offsets update automatically when the node, any of its parents, or the screen size change.
 

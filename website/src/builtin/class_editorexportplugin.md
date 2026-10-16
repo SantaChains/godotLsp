@@ -4,7 +4,7 @@
 
 > EditorExportPlugins are automatically invoked whenever the user exports the project. They can be used to modify scenes and resources during project export based on what Feature Tags are set. For each plugin, _export_begin() is called at the beginning of the export process and then _export_file() is called for each exported file.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 EditorExportPlugins are automatically invoked whenever the user exports the project. They can be used to modify scenes and resources during project export based on what Feature Tags are set. For each plugin, _export_begin() is called at the beginning of the export process and then _export_file() is called for each exported file.
 

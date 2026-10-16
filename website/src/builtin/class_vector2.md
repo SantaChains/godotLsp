@@ -1,8 +1,8 @@
 # Vector2
 
-> A 2-element structure that can be used to represent 2D coordinates or any other pair of numeric values.
+> 二维向量。x、y 分量，支持加减、点积、叉积、长度、距离、插值。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A 2-element structure that can be used to represent 2D coordinates or any other pair of numeric values.
 
@@ -174,7 +174,7 @@ This method runs faster than distance_to(), so prefer it if you need to compare 
 float distance_to(to: Vector2) const
 ```
 
-Returns the Euclidean distance [https://en.wikipedia.org/wiki/Euclidean_distance] between this vector and to.
+返回到目标点的距离。
 
 ### dot {#dot}
 
@@ -254,7 +254,7 @@ This method is faster than using is_equal_approx() with one value as a zero vect
 float length() const
 ```
 
-Returns the length (magnitude) of this vector.
+返回向量长度。
 
 ### length_squared {#length_squared}
 
@@ -272,7 +272,7 @@ This method runs faster than length(), so prefer it if you need to compare vecto
 Vector2 lerp(to: Vector2, weight: float) const
 ```
 
-Returns the result of the linear interpolation between this vector and to by amount weight. weight is on the range of 0.0 to 1.0, representing the amount of interpolation.
+线性插值到目标向量。
 
 ### limit_length {#limit_length}
 
@@ -344,9 +344,7 @@ Returns a new vector moved toward to by the fixed delta amount. Will not go past
 Vector2 normalized() const
 ```
 
-Returns the result of scaling the vector to unit length. Equivalent to v / v.length(). Returns (0, 0) if v.length() == 0. See also is_normalized().
-
-Note: This function may return incorrect values if the input vector length is near zero.
+返回单位向量（长度为 1）。
 
 ### orthogonal {#orthogonal}
 

@@ -2,9 +2,9 @@
 
 **继承**：[MainLoop](class_mainloop.md) → [Object](class_object.md) → **SceneTree**
 
-> As one of the most important classes, the SceneTree manages the hierarchy of nodes in a scene, as well as scenes themselves. Nodes can be added, fetched and removed. The whole scene tree (and thus the current scene) can be paused. Scenes can be loaded, switched and reloaded.
+> 管理场景树的单例。提供节点遍历、组查询、当前场景、退出游戏等功能。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 As one of the most important classes, the SceneTree manages the hierarchy of nodes in a scene, as well as scenes themselves. Nodes can be added, fetched and removed. The whole scene tree (and thus the current scene) can be paused. Scenes can be loaded, switched and reloaded.
 
@@ -96,33 +96,7 @@ Note: See change_scene_to_node() for details on the order of operations.
 SceneTreeTimer create_timer(time_sec: float, process_always: bool = true, process_in_physics: bool = false, ignore_time_scale: bool = false)
 ```
 
-Returns a new SceneTreeTimer. After time_sec in seconds have passed, the timer will emit SceneTreeTimer.timeout and will be automatically freed.
-
-If process_always is false, the timer will be paused when setting paused to true.
-
-If process_in_physics is true, the timer will update at the end of the physics frame, instead of the process frame.
-
-If ignore_time_scale is true, the timer will ignore Engine.time_scale and update with the real, elapsed time.
-
-This method is commonly used to create a one-shot delay timer, as in the following example:
-
-```
-func some_function():
-    print("start")
-    await get_tree().create_timer(1.0).timeout
-    print("end")
-```
-
-```
-public async Task SomeFunction()
-{
-    GD.Print("start");
-    await ToSignal(GetTree().CreateTimer(1.0f), SceneTreeTimer.SignalName.Timeout);
-    GD.Print("end");
-}
-```
-
-Note: The timer is always updated after all of the nodes in the tree. A node's Node._process() method would be called before the timer updates (or Node._physics_process() if process_in_physics is set to true).
+创建一次性计时器。await create_timer(1.0).timeout 等待 1 秒。
 
 ### create_tween {#create_tween}
 
@@ -334,11 +308,7 @@ Queues the given obj to be deleted, calling its Object.free() at the end of the 
 void quit(exit_code: int = 0)
 ```
 
-Quits the application at the end of the current iteration, with the given exit_code.
-
-By convention, an exit code of 0 indicates success, whereas any other exit code indicates an error. For portability reasons, it should be between 0 and 125 (inclusive).
-
-Note: On iOS this method doesn't work. Instead, as recommended by the iOS Human Interface Guidelines [https://developer.apple.com/library/archive/qa/qa1561/_index.html], the user is expected to close apps via the Home button.
+退出游戏。quit() 或 quit(exit_code)。
 
 ### reload_current_scene {#reload_current_scene}
 

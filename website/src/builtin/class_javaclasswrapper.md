@@ -4,7 +4,7 @@
 
 > The JavaClassWrapper singleton provides a way for the Godot application to send and receive data through the Java Native Interface [https://developer.android.com/training/articles/perf-jni] (JNI).
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The JavaClassWrapper singleton provides a way for the Godot application to send and receive data through the Java Native Interface [https://developer.android.com/training/articles/perf-jni] (JNI).
 

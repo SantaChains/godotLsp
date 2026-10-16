@@ -4,7 +4,7 @@
 
 > MultiMeshInstance3D is a specialized node to instance GeometryInstance3Ds based on a MultiMesh resource.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 MultiMeshInstance3D is a specialized node to instance GeometryInstance3Ds based on a MultiMesh resource.
 

@@ -1,8 +1,8 @@
 # Transform2D
 
-> The Transform2D built-in Variant type is a 2×3 matrix [https://en.wikipedia.org/wiki/Matrix_(mathematics)] representing a transformation in 2D space. It contains three Vector2 values: x, y, and origin. Together, they can represent translation, rotation, scale, and skew.
+> 2D 变换。由旋转矩阵和平移组成。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The Transform2D built-in Variant type is a 2×3 matrix [https://en.wikipedia.org/wiki/Matrix_(mathematics)] representing a transformation in 2D space. It contains three Vector2 values: x, y, and origin. Together, they can represent translation, rotation, scale, and skew.
 

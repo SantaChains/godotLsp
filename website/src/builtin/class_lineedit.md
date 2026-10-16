@@ -2,9 +2,9 @@
 
 **继承**：[Control](class_control.md) → [CanvasItem](class_canvasitem.md) → [Node](class_node.md) → [Object](class_object.md) → **LineEdit**
 
-> LineEdit provides an input field for editing a single line of text.
+> 单行文本输入框。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 LineEdit provides an input field for editing a single line of text.
 

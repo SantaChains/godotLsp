@@ -4,7 +4,7 @@
 
 > The BMFont format is a format created by the BMFont [https://www.angelcode.com/products/bmfont/] program. Many BMFont-compatible programs also exist, like BMGlyph [https://www.bmglyph.com/].
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The BMFont format is a format created by the BMFont [https://www.angelcode.com/products/bmfont/] program. Many BMFont-compatible programs also exist, like BMGlyph [https://www.bmglyph.com/].
 

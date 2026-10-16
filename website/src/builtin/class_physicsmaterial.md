@@ -4,7 +4,7 @@
 
 > Holds physics-related properties of a surface, namely its roughness and bounciness. This class is used to apply these properties to a physics body.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Holds physics-related properties of a surface, namely its roughness and bounciness. This class is used to apply these properties to a physics body.
 

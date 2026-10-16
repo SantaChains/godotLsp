@@ -4,7 +4,7 @@
 
 > Resizable nodes have a handle that allows the user to adjust their size as needed.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Resizable nodes have a handle that allows the user to adjust their size as needed.
 

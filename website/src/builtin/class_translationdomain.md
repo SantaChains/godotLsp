@@ -4,7 +4,7 @@
 
 > TranslationDomain is a self-contained collection of Translation resources. Translations can be added to or removed from it.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 TranslationDomain is a self-contained collection of Translation resources. Translations can be added to or removed from it.
 

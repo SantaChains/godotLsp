@@ -4,7 +4,7 @@
 
 > Allows to scale the speed of the animation (or reverse it) in any child AnimationNodes. Setting it to 0.0 will pause the animation.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Allows to scale the speed of the animation (or reverse it) in any child AnimationNodes. Setting it to 0.0 will pause the animation.
 

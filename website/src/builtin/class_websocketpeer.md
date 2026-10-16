@@ -4,7 +4,7 @@
 
 > This class represents WebSocket connection, and can be used as a WebSocket client (RFC 6455 [https://datatracker.ietf.org/doc/html/rfc6455]-compliant) or as a remote peer of a WebSocket server.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class represents WebSocket connection, and can be used as a WebSocket client (RFC 6455 [https://datatracker.ietf.org/doc/html/rfc6455]-compliant) or as a remote peer of a WebSocket server.
 

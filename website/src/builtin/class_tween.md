@@ -2,9 +2,9 @@
 
 **继承**：[RefCounted](class_refcounted.md) → [Object](class_object.md) → **Tween**
 
-> Tweens are mostly useful for animations requiring a numerical property to be interpolated over a range of values. The name tween comes from in-betweening, an animation technique where you specify keyframes and the computer interpolates the frames that appear between them. Animating something with a Tween is called tweening.
+> 补间动画器。属性插值动画，支持并行、序列、延迟。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Tweens are mostly useful for animations requiring a numerical property to be interpolated over a range of values. The name tween comes from in-betweening, an animation technique where you specify keyframes and the computer interpolates the frames that appear between them. Animating something with a Tween is called tweening.
 
@@ -226,25 +226,7 @@ Aborts all tweening operations and invalidates the Tween.
 Tween parallel()
 ```
 
-Makes the next Tweener run parallelly to the previous one.
-
-```
-var tween = create_tween()
-tween.tween_property(...)
-tween.parallel().tween_property(...)
-tween.parallel().tween_property(...)
-```
-
-```
-Tween tween = CreateTween();
-tween.TweenProperty(...);
-tween.Parallel().TweenProperty(...);
-tween.Parallel().TweenProperty(...);
-```
-
-All Tweeners in the example will run at the same time.
-
-You can make the Tween parallel by default by using set_parallel().
+并行执行补间动画。
 
 ### pause {#pause}
 
@@ -475,43 +457,7 @@ tween.TweenCallback(Callable.From(() => sprite.Modulate = Colors.Blue)).SetDelay
 IntervalTweener tween_interval(time: float)
 ```
 
-Creates and appends an IntervalTweener. This method can be used to create delays in the tween animation, as an alternative to using the delay in other Tweeners, or when there's no animation (in which case the Tween acts as a timer). time is the length of the interval, in seconds.
-
-Example: Creating an interval in code execution:
-
-```
-# ... some code
-await create_tween().tween_interval(2).finished
-# ... more code
-```
-
-```
-// ... some code
-await ToSignal(CreateTween().TweenInterval(2.0f), Tween.SignalName.Finished);
-// ... more code
-```
-
-Example: Creating an object that moves back and forth and jumps every few seconds:
-
-```
-var tween = create_tween().set_loops()
-tween.tween_property($Sprite, "position:x", 200.0, 1.0).as_relative()
-tween.tween_callback(jump)
-tween.tween_interval(2)
-tween.tween_property($Sprite, "position:x", -200.0, 1.0).as_relative()
-tween.tween_callback(jump)
-tween.tween_interval(2)
-```
-
-```
-Tween tween = CreateTween().SetLoops();
-tween.TweenProperty(GetNode("Sprite"), "position:x", 200.0f, 1.0f).AsRelative();
-tween.TweenCallback(Callable.From(Jump));
-tween.TweenInterval(2.0f);
-tween.TweenProperty(GetNode("Sprite"), "position:x", -200.0f, 1.0f).AsRelative();
-tween.TweenCallback(Callable.From(Jump));
-tween.TweenInterval(2.0f);
-```
+在动画序列中插入等待间隔。
 
 ### tween_method {#tween_method}
 
@@ -562,37 +508,7 @@ private void SetLabelText(int value)
 PropertyTweener tween_property(object: Object, property: NodePath, final_val: Variant, duration: float)
 ```
 
-Creates and appends a PropertyTweener. This method tweens a property of an object between an initial value and final_val in a span of time equal to duration, in seconds. The initial value by default is the property's value at the time the tweening of the PropertyTweener starts.
-
-```
-var tween = create_tween()
-tween.tween_property($Sprite, "position", Vector2(100, 200), 1.0)
-tween.tween_property($Sprite, "position", Vector2(200, 300), 1.0)
-```
-
-```
-Tween tween = CreateTween();
-tween.TweenProperty(GetNode("Sprite"), "position", new Vector2(100.0f, 200.0f), 1.0f);
-tween.TweenProperty(GetNode("Sprite"), "position", new Vector2(200.0f, 300.0f), 1.0f);
-```
-
-will move the sprite to position (100, 200) and then to (200, 300). If you use PropertyTweener.from() or PropertyTweener.from_current(), the starting position will be overwritten by the given value instead. See other methods in PropertyTweener to see how the tweening can be tweaked further.
-
-Note: You can find the correct property name by hovering over the property in the Inspector. You can also provide the components of a property directly by using "property:component" (eg. position:x), where it would only apply to that particular component.
-
-Example: Moving an object twice from the same position, with different transition types:
-
-```
-var tween = create_tween()
-tween.tween_property($Sprite, "position", Vector2.RIGHT * 300, 1.0).as_relative().set_trans(Tween.TRANS_SINE)
-tween.tween_property($Sprite, "position", Vector2.RIGHT * 300, 1.0).as_relative().from_current().set_trans(Tween.TRANS_EXPO)
-```
-
-```
-Tween tween = CreateTween();
-tween.TweenProperty(GetNode("Sprite"), "position", Vector2.Right * 300.0f, 1.0f).AsRelative().SetTrans(Tween.TransitionType.Sine);
-tween.TweenProperty(GetNode("Sprite"), "position", Vector2.Right * 300.0f, 1.0f).AsRelative().FromCurrent().SetTrans(Tween.TransitionType.Expo);
-```
+补间属性。tween_property(node, "position:x", 100, 1.0)。
 
 ### tween_subtween {#tween_subtween}
 

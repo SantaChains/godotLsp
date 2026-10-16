@@ -4,7 +4,7 @@
 
 > Stores information about mouse click events. See Node._input().
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Stores information about mouse click events. See Node._input().
 

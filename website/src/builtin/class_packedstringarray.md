@@ -1,8 +1,8 @@
 # PackedStringArray
 
-> An array specifically designed to hold Strings. Packs data tightly, so it saves memory for large array sizes.
+> 紧凑字符串数组。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An array specifically designed to hold Strings. Packs data tightly, so it saves memory for large array sizes.
 

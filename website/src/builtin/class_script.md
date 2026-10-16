@@ -4,7 +4,7 @@
 
 > A class stored as a resource. A script extends the functionality of all objects that instantiate it.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A class stored as a resource. A script extends the functionality of all objects that instantiate it.
 

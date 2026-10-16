@@ -4,7 +4,7 @@
 
 > Abstraction over TextServer for handling a single paragraph of text.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Abstraction over TextServer for handling a single paragraph of text.
 

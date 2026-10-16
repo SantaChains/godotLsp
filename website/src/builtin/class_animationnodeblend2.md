@@ -4,7 +4,7 @@
 
 > A resource to add to an AnimationNodeBlendTree. Blends two animations linearly based on the amount value.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A resource to add to an AnimationNodeBlendTree. Blends two animations linearly based on the amount value.
 

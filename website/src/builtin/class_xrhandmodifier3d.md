@@ -4,7 +4,7 @@
 
 > This node uses hand tracking data from an XRHandTracker to pose the skeleton of a hand mesh.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This node uses hand tracking data from an XRHandTracker to pose the skeleton of a hand mesh.
 

@@ -4,7 +4,7 @@
 
 > This is the CSG base class that provides CSG operation support to the various CSG nodes in Godot.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This is the CSG base class that provides CSG operation support to the various CSG nodes in Godot.
 

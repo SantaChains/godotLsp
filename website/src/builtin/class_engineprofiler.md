@@ -4,7 +4,7 @@
 
 > This class can be used to implement custom profilers that are able to interact with the engine and editor debugger.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class can be used to implement custom profilers that are able to interact with the engine and editor debugger.
 

@@ -4,7 +4,7 @@
 
 > A baked signed distance field 3D particle collision shape affecting GPUParticles3D nodes.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A baked signed distance field 3D particle collision shape affecting GPUParticles3D nodes.
 

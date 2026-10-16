@@ -1,8 +1,8 @@
 # NodePath
 
-> The NodePath built-in Variant type represents a path to a node or property in a hierarchy of nodes. It is designed to be efficiently passed into many built-in methods (such as Node.get_node(), Object.set_indexed(), Tween.tween_property(), etc.) without a hard dependence on the node or property they point to.
+> 节点路径。用于场景树中的节点引用。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The NodePath built-in Variant type represents a path to a node or property in a hierarchy of nodes. It is designed to be efficiently passed into many built-in methods (such as Node.get_node(), Object.set_indexed(), Tween.tween_property(), etc.) without a hard dependence on the node or property they point to.
 

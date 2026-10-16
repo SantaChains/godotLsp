@@ -4,7 +4,7 @@
 
 > Simple texture that uses a mesh to draw itself. It's limited because flags can't be changed and region drawing is not supported.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Simple texture that uses a mesh to draw itself. It's limited because flags can't be changed and region drawing is not supported.
 

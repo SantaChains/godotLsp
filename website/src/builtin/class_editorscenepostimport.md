@@ -4,7 +4,7 @@
 
 > Imported scenes can be automatically modified right after import by setting their Custom Script Import property to a tool script that inherits from this class.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Imported scenes can be automatically modified right after import by setting their Custom Script Import property to a tool script that inherits from this class.
 

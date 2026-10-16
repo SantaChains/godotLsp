@@ -4,7 +4,7 @@
 
 > Displays a rectangle filled with a solid color. If you need to display the border alone, consider using a Panel instead.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Displays a rectangle filled with a solid color. If you need to display the border alone, consider using a Panel instead.
 

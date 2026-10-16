@@ -4,7 +4,7 @@
 
 > A node that creates a window. The window can either be a native system window or embedded inside another Window (see Viewport.gui_embed_subwindows).
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A node that creates a window. The window can either be a native system window or embedded inside another Window (see Viewport.gui_embed_subwindows).
 

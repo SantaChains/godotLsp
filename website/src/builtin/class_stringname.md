@@ -1,8 +1,8 @@
 # StringName
 
-> StringNames are immutable strings designed for general-purpose representation of unique names (also called "string interning"). Two StringNames with the same value are the same object. Comparing them is extremely fast compared to regular Strings.
+> 优化的字符串类型。比较和哈希极快，适合标识符和枚举值。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 StringNames are immutable strings designed for general-purpose representation of unique names (also called "string interning"). Two StringNames with the same value are the same object. Comparing them is extremely fast compared to regular Strings.
 

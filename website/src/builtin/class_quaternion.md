@@ -1,8 +1,8 @@
 # Quaternion
 
-> The Quaternion built-in Variant type is a 4D data structure that represents rotation in the form of a Hamilton convention quaternion [https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation]. Compared to the Basis type which can store both rotation and scale, quaternions can only store rotation.
+> 四元数。用于旋转，避免万向节死锁。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The Quaternion built-in Variant type is a 4D data structure that represents rotation in the form of a Hamilton convention quaternion [https://en.wikipedia.org/wiki/Quaternions_and_spatial_rotation]. Compared to the Basis type which can store both rotation and scale, quaternions can only store rotation.
 

@@ -4,7 +4,7 @@
 
 > Performs a lookup operation on the texture provided as a uniform for the shader, with support for triplanar mapping.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Performs a lookup operation on the texture provided as a uniform for the shader, with support for triplanar mapping.
 

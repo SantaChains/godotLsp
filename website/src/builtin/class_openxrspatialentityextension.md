@@ -4,7 +4,7 @@
 
 > OpenXR extension that handles spatial entities and, when enabled, allows querying those spatial entities. This extension will also automatically manage XRTracker objects for static entities.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 OpenXR extension that handles spatial entities and, when enabled, allows querying those spatial entities. This extension will also automatically manage XRTracker objects for static entities.
 

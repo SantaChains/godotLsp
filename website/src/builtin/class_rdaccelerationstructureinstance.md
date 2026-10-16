@@ -4,7 +4,7 @@
 
 > RDAccelerationStructureInstance describes an instance of a Bottom-Level Acceleration Structure (BLAS) used in the RenderingDevice.tlas_build() method.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 RDAccelerationStructureInstance describes an instance of a Bottom-Level Acceleration Structure (BLAS) used in the RenderingDevice.tlas_build() method.
 

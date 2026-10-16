@@ -4,7 +4,7 @@
 
 > Represents a camera as defined by the base glTF spec.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Represents a camera as defined by the base glTF spec.
 

@@ -4,7 +4,7 @@
 
 > By changing various properties of this object, such as the start and target position, you can configure path queries to the NavigationServer2D.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 By changing various properties of this object, such as the start and target position, you can configure path queries to the NavigationServer2D.
 

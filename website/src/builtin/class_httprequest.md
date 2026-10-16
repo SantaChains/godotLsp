@@ -2,9 +2,9 @@
 
 **继承**：[Node](class_node.md) → [Object](class_object.md) → **HTTPRequest**
 
-> A node with the ability to send HTTP requests. Uses HTTPClient internally.
+> HTTP 请求节点。异步发送网络请求。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A node with the ability to send HTTP requests. Uses HTTPClient internally.
 

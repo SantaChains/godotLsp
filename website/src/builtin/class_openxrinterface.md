@@ -4,7 +4,7 @@
 
 > The OpenXR interface allows Godot to interact with OpenXR runtimes and make it possible to create XR experiences and games.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The OpenXR interface allows Godot to interact with OpenXR runtimes and make it possible to create XR experiences and games.
 

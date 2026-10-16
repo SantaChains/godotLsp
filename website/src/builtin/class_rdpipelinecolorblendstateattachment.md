@@ -4,7 +4,7 @@
 
 > Controls how blending between source and destination fragments is performed when using RenderingDevice.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Controls how blending between source and destination fragments is performed when using RenderingDevice.
 

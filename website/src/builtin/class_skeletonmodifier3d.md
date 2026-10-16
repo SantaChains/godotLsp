@@ -4,7 +4,7 @@
 
 > SkeletonModifier3D retrieves a target Skeleton3D by having a Skeleton3D parent.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 SkeletonModifier3D retrieves a target Skeleton3D by having a Skeleton3D parent.
 

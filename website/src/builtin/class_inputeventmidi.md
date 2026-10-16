@@ -4,7 +4,7 @@
 
 > InputEventMIDI stores information about messages from MIDI [https://en.wikipedia.org/wiki/MIDI] (Musical Instrument Digital Interface) devices. These may include musical keyboards, synthesizers, and drum machines.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 InputEventMIDI stores information about messages from MIDI [https://en.wikipedia.org/wiki/MIDI] (Musical Instrument Digital Interface) devices. These may include musical keyboards, synthesizers, and drum machines.
 

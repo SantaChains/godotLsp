@@ -4,7 +4,7 @@
 
 > A button that represents a link. This type of button is primarily used for interactions that cause a context change (like linking to a web page).
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A button that represents a link. This type of button is primarily used for interactions that cause a context change (like linking to a web page).
 

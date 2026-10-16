@@ -4,7 +4,7 @@
 
 > Base class of SkeletonModifier3D that automatically generates a joint list from the bones between the root bone and the end bone.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Base class of SkeletonModifier3D that automatically generates a joint list from the bones between the root bone and the end bone.
 

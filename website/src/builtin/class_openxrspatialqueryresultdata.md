@@ -4,7 +4,7 @@
 
 > Object for storing the main query result data when calling OpenXRSpatialEntityExtension.query_snapshot(). This must always be the first component requested.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Object for storing the main query result data when calling OpenXRSpatialEntityExtension.query_snapshot(). This must always be the first component requested.
 

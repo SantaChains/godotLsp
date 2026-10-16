@@ -4,7 +4,7 @@
 
 > A VisualShaderNodeParameter of type int. Offers additional customization for range of accepted values.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A VisualShaderNodeParameter of type int. Offers additional customization for range of accepted values.
 

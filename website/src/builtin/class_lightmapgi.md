@@ -4,7 +4,7 @@
 
 > The LightmapGI node is used to compute and store baked lightmaps. Lightmaps are used to provide high-quality indirect lighting with very little light leaking. LightmapGI can also provide rough reflections using spherical harmonics if directional is enabled. Dynamic objects can receive indirect lighting thanks to light probes, which can be automatically placed by setting generate_probes_subdiv to a value other than GENERATE_PROBES_DISABLED. Additional lightmap probes can also be added by creating LightmapProbe nodes. The downside is that lightmaps are fully static and cannot be baked in an exported project. Baking a LightmapGI node is also slower compared to VoxelGI.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The LightmapGI node is used to compute and store baked lightmaps. Lightmaps are used to provide high-quality indirect lighting with very little light leaking. LightmapGI can also provide rough reflections using spherical harmonics if directional is enabled. Dynamic objects can receive indirect lighting thanks to light probes, which can be automatically placed by setting generate_probes_subdiv to a value other than GENERATE_PROBES_DISABLED. Additional lightmap probes can also be added by creating LightmapProbe nodes. The downside is that lightmaps are fully static and cannot be baked in an exported project. Baking a LightmapGI node is also slower compared to VoxelGI.
 

@@ -4,7 +4,7 @@
 
 > This class should be extended by custom lightmapper classes. Lightmappers can then be used with LightmapGI to provide fast baked global illumination in 3D.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class should be extended by custom lightmapper classes. Lightmappers can then be used with LightmapGI to provide fast baked global illumination in 3D.
 

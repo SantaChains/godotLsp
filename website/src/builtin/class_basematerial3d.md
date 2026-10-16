@@ -4,7 +4,7 @@
 
 > This class serves as a default material with a wide variety of rendering features and properties without the need to write shader code. See the tutorial below for details.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class serves as a default material with a wide variety of rendering features and properties without the need to write shader code. See the tutorial below for details.
 

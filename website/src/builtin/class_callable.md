@@ -1,8 +1,8 @@
 # Callable
 
-> Callable is a built-in Variant type that represents a function. It can either be a method within an Object instance, or a custom callable used for different purposes (see is_custom()). Like all Variant types, it can be stored in variables and passed to other functions. It is most commonly used for signal callbacks.
+> 可调用对象。封装函数和对象绑定，用于信号连接和回调。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Callable is a built-in Variant type that represents a function. It can either be a method within an Object instance, or a custom callable used for different purposes (see is_custom()). Like all Variant types, it can be stored in variables and passed to other functions. It is most commonly used for signal callbacks.
 

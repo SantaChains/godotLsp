@@ -4,7 +4,7 @@
 
 > A "compressor" decreases the volume of sounds when it exceeds a certain volume threshold level.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A "compressor" decreases the volume of sounds when it exceeds a certain volume threshold level.
 

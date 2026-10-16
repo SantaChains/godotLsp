@@ -4,7 +4,7 @@
 
 > Node that can be the parent of PhysicalBone3D and can apply the simulation results to Skeleton3D.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Node that can be the parent of PhysicalBone3D and can apply the simulation results to Skeleton3D.
 

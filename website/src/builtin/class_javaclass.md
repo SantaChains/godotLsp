@@ -4,7 +4,7 @@
 
 > Represents a class from the Java Native Interface. It is returned from JavaClassWrapper.wrap().
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Represents a class from the Java Native Interface. It is returned from JavaClassWrapper.wrap().
 

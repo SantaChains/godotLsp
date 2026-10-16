@@ -4,7 +4,7 @@
 
 > A traversable 2D region based on a NavigationPolygon that NavigationAgent2Ds can use for pathfinding.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A traversable 2D region based on a NavigationPolygon that NavigationAgent2Ds can use for pathfinding.
 

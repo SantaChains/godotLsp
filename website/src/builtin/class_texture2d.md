@@ -4,7 +4,7 @@
 
 > A texture works by registering an image in the video hardware, which then can be used in 3D models or 2D Sprite2D or GUI Control.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A texture works by registering an image in the video hardware, which then can be used in 3D models or 2D Sprite2D or GUI Control.
 

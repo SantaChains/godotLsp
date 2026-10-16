@@ -4,7 +4,7 @@
 
 > CenterContainer is a container that keeps all of its child controls in its center at their minimum size.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 CenterContainer is a container that keeps all of its child controls in its center at their minimum size.
 

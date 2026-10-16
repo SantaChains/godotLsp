@@ -4,7 +4,7 @@
 
 > A "filter" controls the gain of frequencies, using cutoff_hz as a frequency threshold. Filters can help to give room for each sound, and create interesting effects.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A "filter" controls the gain of frequencies, using cutoff_hz as a frequency threshold. Filters can help to give room for each sound, and create interesting effects.
 

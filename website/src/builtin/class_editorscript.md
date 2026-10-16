@@ -4,7 +4,7 @@
 
 > Scripts extending this class and implementing its _run() method can be executed from the Script Editor's File > Run menu option (or by pressing Ctrl + Shift + X) while the editor is running. This is useful for adding custom in-editor functionality to Godot. For more complex additions, consider using EditorPlugins instead.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Scripts extending this class and implementing its _run() method can be executed from the Script Editor's File > Run menu option (or by pressing Ctrl + Shift + X) while the editor is running. This is useful for adding custom in-editor functionality to Godot. For more complex additions, consider using EditorPlugins instead.
 

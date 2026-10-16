@@ -2,9 +2,9 @@
 
 **继承**：[Resource](class_resource.md) → [RefCounted](class_refcounted.md) → [Object](class_object.md) → **InputEvent**
 
-> Abstract base class of all types of input events. See Node._input().
+> 输入事件的基类。包含键盘、鼠标、触摸、手柄等事件类型。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Abstract base class of all types of input events. See Node._input().
 

@@ -4,7 +4,7 @@
 
 > ScriptBacktrace holds an already captured backtrace of a specific script language, such as GDScript or C#, which are captured using Engine.capture_script_backtraces().
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 ScriptBacktrace holds an already captured backtrace of a specific script language, such as GDScript or C#, which are captured using Engine.capture_script_backtraces().
 

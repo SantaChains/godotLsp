@@ -4,7 +4,7 @@
 
 > Holds collision data from the movement of a PhysicsBody2D, usually from PhysicsBody2D.move_and_collide(). When a PhysicsBody2D is moved, it stops if it detects a collision with another body. If a collision is detected, a KinematicCollision2D object is returned.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Holds collision data from the movement of a PhysicsBody2D, usually from PhysicsBody2D.move_and_collide(). When a PhysicsBody2D is moved, it stops if it detects a collision with another body. If a collision is detected, a KinematicCollision2D object is returned.
 

@@ -4,7 +4,7 @@
 
 > Base resource for AnimationTree nodes. In general, it's not used directly, but you can create custom ones with custom blending formulas.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Base resource for AnimationTree nodes. In general, it's not used directly, but you can create custom ones with custom blending formulas.
 

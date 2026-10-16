@@ -4,7 +4,7 @@
 
 > This texture class allows you to use a 2D texture created directly on the RenderingDevice as a texture for materials, meshes, etc.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This texture class allows you to use a 2D texture created directly on the RenderingDevice as a texture for materials, meshes, etc.
 

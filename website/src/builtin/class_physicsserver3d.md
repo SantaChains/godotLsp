@@ -4,7 +4,7 @@
 
 > PhysicsServer3D is the server responsible for all 3D physics. It can directly create and manipulate all physics objects:
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 PhysicsServer3D is the server responsible for all 3D physics. It can directly create and manipulate all physics objects:
 

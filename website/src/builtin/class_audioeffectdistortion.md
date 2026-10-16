@@ -4,7 +4,7 @@
 
 > A "distortion" effect modifies the waveform via a nonlinear mathematical function (see available ones in Mode), based on the amplitude of the waveform's samples.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A "distortion" effect modifies the waveform via a nonlinear mathematical function (see available ones in Mode), based on the amplitude of the waveform's samples.
 

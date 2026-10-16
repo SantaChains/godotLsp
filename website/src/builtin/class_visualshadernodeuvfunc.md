@@ -4,7 +4,7 @@
 
 > UV functions are similar to Vector2 functions, but the input port of this node uses the shader's UV value by default.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 UV functions are similar to Vector2 functions, but the input port of this node uses the shader's UV value by default.
 

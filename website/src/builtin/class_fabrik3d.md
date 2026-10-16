@@ -4,7 +4,7 @@
 
 > FABRIK3D is position based IK, allowing precise and accurate tracking of targets. It's ideal for simple chains without limitations.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 FABRIK3D is position based IK, allowing precise and accurate tracking of targets. It's ideal for simple chains without limitations.
 

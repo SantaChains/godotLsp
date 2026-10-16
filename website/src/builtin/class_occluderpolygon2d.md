@@ -4,7 +4,7 @@
 
 > Editor facility that helps you draw a 2D polygon used as resource for LightOccluder2D.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Editor facility that helps you draw a 2D polygon used as resource for LightOccluder2D.
 

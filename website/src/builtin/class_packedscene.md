@@ -2,9 +2,9 @@
 
 **继承**：[Resource](class_resource.md) → [RefCounted](class_refcounted.md) → [Object](class_object.md) → **PackedScene**
 
-> A simplified interface to a scene file. Provides access to operations and checks that can be performed on the scene resource itself.
+> 打包的场景资源。实例化后产生一棵节点树，是 Godot 复用的核心机制。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A simplified interface to a scene file. Provides access to operations and checks that can be performed on the scene resource itself.
 

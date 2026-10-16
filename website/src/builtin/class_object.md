@@ -1,8 +1,8 @@
 # Object
 
-> An advanced Variant type. All classes in the engine inherit from Object. Each class may define new properties, methods or signals, which are available to all inheriting classes. For example, a Sprite2D instance is able to call Node.add_child() because it inherits from Node.
+> 所有 Godot 对象的基类。提供引用计数、信号连接、成员元数据、脚本附加等核心功能。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An advanced Variant type. All classes in the engine inherit from Object. Each class may define new properties, methods or signals, which are available to all inheriting classes. For example, a Sprite2D instance is able to call Node.add_child() because it inherits from Node.
 
@@ -218,21 +218,7 @@ Note: In C#, signal must be in snake_case when referring to built-in Godot signa
 Variant get(property: StringName) const
 ```
 
-Returns the Variant value of the given property. If the property does not exist, this method returns null.
-
-```
-var node = Node2D.new()
-node.rotation = 1.5
-var a = node.get("rotation") # a is 1.5
-```
-
-```
-var node = new Node2D();
-node.Rotation = 1.5f;
-var a = node.Get(Node2D.PropertyName.Rotation); // a is 1.5
-```
-
-Note: In C#, property must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the PropertyName class to avoid allocating a new StringName on each call.
+动态获取属性。
 
 ### get_class {#get_class}
 
@@ -580,21 +566,7 @@ Removes the given user signal signal from the object. See also add_user_signal()
 void set(property: StringName, value: Variant)
 ```
 
-Assigns value to the given property. If the property does not exist or the given value's type doesn't match, nothing happens.
-
-```
-var node = Node2D.new()
-node.set("global_scale", Vector2(8, 2.5))
-print(node.global_scale) # Prints (8.0, 2.5)
-```
-
-```
-var node = new Node2D();
-node.Set(Node2D.PropertyName.GlobalScale, new Vector2(8, 2.5f));
-GD.Print(node.GlobalScale); // Prints (8, 2.5)
-```
-
-Note: In C#, property must be in snake_case when referring to built-in Godot properties. Prefer using the names exposed in the PropertyName class to avoid allocating a new StringName on each call.
+动态设置属性。set(property, value)。
 
 ### set_block_signals {#set_block_signals}
 

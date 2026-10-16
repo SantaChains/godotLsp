@@ -4,7 +4,7 @@
 
 > Similar to EditorResourcePicker this Control node is used in the editor's Inspector dock, but only to edit the script property of a Node. Default options for creating new resources of all possible subtypes are replaced with dedicated buttons that open the "Attach Node Script" dialog. Can be used with EditorInspectorPlugin to recreate the same behavior.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Similar to EditorResourcePicker this Control node is used in the editor's Inspector dock, but only to edit the script property of a Node. Default options for creating new resources of all possible subtypes are replaced with dedicated buttons that open the "Attach Node Script" dialog. Can be used with EditorInspectorPlugin to recreate the same behavior.
 

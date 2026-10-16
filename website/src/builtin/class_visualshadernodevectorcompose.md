@@ -4,7 +4,7 @@
 
 > Creates a vec2, vec3 or vec4 using scalar values that can be provided from separate inputs.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Creates a vec2, vec3 or vec4 using scalar values that can be provided from separate inputs.
 

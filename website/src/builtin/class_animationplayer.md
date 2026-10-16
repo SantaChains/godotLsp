@@ -2,9 +2,9 @@
 
 **继承**：[AnimationMixer](class_animationmixer.md) → [Node](class_node.md) → [Object](class_object.md) → **AnimationPlayer**
 
-> An animation player is used for general-purpose playback of animations. It contains a dictionary of AnimationLibrary resources and custom blend times between animation transitions.
+> 动画播放节点。管理和播放骨骼、属性动画。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An animation player is used for general-purpose playback of animations. It contains a dictionary of AnimationLibrary resources and custom blend times between animation transitions.
 

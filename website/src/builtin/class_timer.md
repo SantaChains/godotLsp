@@ -2,9 +2,9 @@
 
 **继承**：[Node](class_node.md) → [Object](class_object.md) → **Timer**
 
-> The Timer node is a countdown timer and is the simplest way to handle time-based logic in the engine. When a timer reaches the end of its wait_time, it will emit the timeout signal.
+> 计时器节点。等待指定时间后发射 timeout 信号。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The Timer node is a countdown timer and is the simplest way to handle time-based logic in the engine. When a timer reaches the end of its wait_time, it will emit the timeout signal.
 
@@ -143,9 +143,7 @@ void set_wait_time(time_sec: float)
 void start(time_sec: float = -1)
 ```
 
-Starts the timer, or resets the timer if it was started already. Fails if the timer is not inside the scene tree. If time_sec is greater than 0, this value is used for the wait_time.
-
-Note: This method does not resume a paused timer. See paused.
+启动计时器。start(time) 或 start()。
 
 ### stop {#stop}
 
@@ -153,9 +151,7 @@ Note: This method does not resume a paused timer. See paused.
 void stop()
 ```
 
-Stops the timer. See also paused. Unlike start(), this can safely be called if the timer is not inside the scene tree.
-
-Note: Calling stop() does not emit the timeout signal, as the timer is not considered to have timed out. If this is desired, use $Timer.timeout.emit() after calling stop() to manually emit the signal.
+停止计时器。
 
 ## 属性
 

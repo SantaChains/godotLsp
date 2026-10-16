@@ -4,7 +4,7 @@
 
 > Varying values are shader variables that can be passed between shader functions, e.g. from Vertex shader to Fragment shader.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Varying values are shader variables that can be passed between shader functions, e.g. from Vertex shader to Fragment shader.
 

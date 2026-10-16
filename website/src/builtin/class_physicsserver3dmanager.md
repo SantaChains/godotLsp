@@ -4,7 +4,7 @@
 
 > PhysicsServer3DManager is the API for registering PhysicsServer3D implementations and for setting the default implementation.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 PhysicsServer3DManager is the API for registering PhysicsServer3D implementations and for setting the default implementation.
 

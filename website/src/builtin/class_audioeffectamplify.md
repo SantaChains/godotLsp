@@ -4,7 +4,7 @@
 
 > Increases or decreases the volume being routed through the audio bus.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Increases or decreases the volume being routed through the audio bus.
 

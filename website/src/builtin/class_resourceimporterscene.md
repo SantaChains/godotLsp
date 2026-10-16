@@ -4,7 +4,7 @@
 
 > See also ResourceImporterOBJ, which is used for OBJ models that can be imported as an independent Mesh or a scene.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 See also ResourceImporterOBJ, which is used for OBJ models that can be imported as an independent Mesh or a scene.
 

@@ -1,8 +1,8 @@
 # Dictionary
 
-> Dictionaries are associative containers that contain values referenced by unique keys. Dictionaries will preserve the insertion order when adding new entries. In other programming languages, this data structure is often referred to as a hash map or an associative array.
+> 键值对容器。键和值都是 Variant。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Dictionaries are associative containers that contain values referenced by unique keys. Dictionaries will preserve the insertion order when adding new entries. In other programming languages, this data structure is often referred to as a hash map or an associative array.
 
@@ -321,37 +321,7 @@ Returns the Script instance associated with this typed dictionary's values, or n
 bool has(key: Variant) const
 ```
 
-Returns true if the dictionary contains an entry with the given key.
-
-```
-var my_dict = {
-    "Godot" : 4,
-    210 : null,
-}
-print(my_dict.has("Godot")) # Prints true
-print(my_dict.has(210))     # Prints true
-print(my_dict.has(4))       # Prints false
-```
-
-```
-var myDict = new Godot.Collections.Dictionary
-{
-    { "Godot", 4 },
-    { 210, default },
-};
-GD.Print(myDict.ContainsKey("Godot")); // Prints True
-GD.Print(myDict.ContainsKey(210));     // Prints True
-GD.Print(myDict.ContainsKey(4));       // Prints False
-```
-
-In GDScript, this is equivalent to the in operator:
-
-```gdscript
-if "Godot" in { "Godot": 4 }:
-    print("The key is here!") # Will be printed.
-```
-
-Note: This method returns true as long as the key exists, even if its corresponding value is null.
+判断是否包含指定键。
 
 ### has_all {#has_all}
 
@@ -461,7 +431,7 @@ Returns true if the dictionary's values are typed.
 Array keys() const
 ```
 
-Returns the list of keys in the dictionary.
+返回所有键的数组。
 
 ### make_read_only {#make_read_only}
 
@@ -576,4 +546,4 @@ This method ensures that the dictionary's entries are ordered consistently when 
 Array values() const
 ```
 
-Returns the list of values in this dictionary.
+返回所有值的数组。

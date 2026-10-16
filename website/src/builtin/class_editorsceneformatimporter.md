@@ -4,7 +4,7 @@
 
 > EditorSceneFormatImporter allows to define an importer script for a third-party 3D format.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 EditorSceneFormatImporter allows to define an importer script for a third-party 3D format.
 

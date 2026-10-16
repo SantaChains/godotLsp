@@ -1,8 +1,8 @@
 # Vector3
 
-> A 3-element structure that can be used to represent 3D coordinates or any other triplet of numeric values.
+> 三维向量。x、y、z 分量，支持向量运算、法线、交叉积、距离。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A 3-element structure that can be used to represent 3D coordinates or any other triplet of numeric values.
 

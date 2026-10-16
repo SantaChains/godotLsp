@@ -4,7 +4,7 @@
 
 > This class is the default implementation of MultiplayerAPI, used to provide multiplayer functionalities in Godot Engine.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class is the default implementation of MultiplayerAPI, used to provide multiplayer functionalities in Godot Engine.
 

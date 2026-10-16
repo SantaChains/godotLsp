@@ -4,7 +4,7 @@
 
 > Describes the motion and collision result from PhysicsServer2D.body_test_motion().
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Describes the motion and collision result from PhysicsServer2D.body_test_motion().
 

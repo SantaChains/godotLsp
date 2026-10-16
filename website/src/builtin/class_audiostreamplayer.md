@@ -2,9 +2,9 @@
 
 **继承**：[Node](class_node.md) → [Object](class_object.md) → **AudioStreamPlayer**
 
-> The AudioStreamPlayer node plays an audio stream non-positionally. It is ideal for user interfaces, menus, or background music.
+> 音频播放节点。播放背景音乐和音效。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The AudioStreamPlayer node plays an audio stream non-positionally. It is ideal for user interfaces, menus, or background music.
 

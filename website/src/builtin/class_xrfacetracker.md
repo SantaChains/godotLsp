@@ -4,7 +4,7 @@
 
 > An instance of this object represents a tracked face and its corresponding blend shapes. The blend shapes come from the Unified Expressions [https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/unified-blendshapes] standard, and contain extended details and visuals for each blend shape. Additionally the Tracking Standard Comparison [https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/compatibility/overview] page documents the relationship between Unified Expressions and other standards.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An instance of this object represents a tracked face and its corresponding blend shapes. The blend shapes come from the Unified Expressions [https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/unified-blendshapes] standard, and contain extended details and visuals for each blend shape. Additionally the Tracking Standard Comparison [https://docs.vrcft.io/docs/tutorial-avatars/tutorial-avatars-extras/compatibility/overview] page documents the relationship between Unified Expressions and other standards.
 

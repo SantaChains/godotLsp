@@ -4,7 +4,7 @@
 
 > Base class for AnimationPlayer and AnimationTree to manage animation lists. It also has general properties and methods for playback and blending.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Base class for AnimationPlayer and AnimationTree to manage animation lists. It also has general properties and methods for playback and blending.
 

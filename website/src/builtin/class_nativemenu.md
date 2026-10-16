@@ -4,7 +4,7 @@
 
 > NativeMenu handles low-level access to the OS native global menu bar and popup menus.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 NativeMenu handles low-level access to the OS native global menu bar and popup menus.
 

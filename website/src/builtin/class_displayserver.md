@@ -4,7 +4,7 @@
 
 > DisplayServer handles everything related to window management. It is separated from OS as a single operating system may support multiple display servers.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 DisplayServer handles everything related to window management. It is separated from OS as a single operating system may support multiple display servers.
 

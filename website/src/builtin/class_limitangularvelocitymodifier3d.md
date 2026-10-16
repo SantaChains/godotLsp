@@ -4,7 +4,7 @@
 
 > This modifier limits bone rotation angular velocity by comparing poses between previous and current frame.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This modifier limits bone rotation angular velocity by comparing poses between previous and current frame.
 

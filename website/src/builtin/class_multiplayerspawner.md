@@ -4,7 +4,7 @@
 
 > Spawnable scenes can be configured in the editor or through code (see add_spawnable_scene()).
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Spawnable scenes can be configured in the editor or through code (see add_spawnable_scene()).
 

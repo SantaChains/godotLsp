@@ -4,7 +4,7 @@
 
 > This class implements a writer that allows storing the multiple blobs in a ZIP archive. See also ZIPReader and PCKPacker.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class implements a writer that allows storing the multiple blobs in a ZIP archive. See also ZIPReader and PCKPacker.
 

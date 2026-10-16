@@ -4,7 +4,7 @@
 
 > The compositor resource stores attributes used to customize how a Viewport is rendered.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The compositor resource stores attributes used to customize how a Viewport is rendered.
 

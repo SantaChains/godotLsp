@@ -4,7 +4,7 @@
 
 > Allows modulation of pitch without modifying speed. All frequencies can be raised or lowered with minimal effect on transients.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Allows modulation of pitch without modifying speed. All frequencies can be raised or lowered with minimal effect on transients.
 

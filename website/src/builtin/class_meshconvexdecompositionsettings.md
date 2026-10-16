@@ -4,7 +4,7 @@
 
 > Parameters to be used with a Mesh convex decomposition operation.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Parameters to be used with a Mesh convex decomposition operation.
 

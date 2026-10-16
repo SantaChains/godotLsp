@@ -4,7 +4,7 @@
 
 > A container that keeps its child controls within the area of a StyleBox. Useful for giving controls an outline.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A container that keeps its child controls within the area of a StyleBox. Useful for giving controls an outline.
 

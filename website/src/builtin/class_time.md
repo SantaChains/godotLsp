@@ -2,9 +2,9 @@
 
 **继承**：[Object](class_object.md) → **Time**
 
-> The Time singleton allows converting time between various formats and also getting time information from the system.
+> 时间单例。获取系统时间、日期、计时器。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The Time singleton allows converting time between various formats and also getting time information from the system.
 

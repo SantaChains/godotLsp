@@ -4,7 +4,7 @@
 
 > A "low-pass" filter attenuates frequencies higher than AudioEffectFilter.cutoff_hz and allows lower frequencies to pass unchanged.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A "low-pass" filter attenuates frequencies higher than AudioEffectFilter.cutoff_hz and allows lower frequencies to pass unchanged.
 

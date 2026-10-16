@@ -2,9 +2,9 @@
 
 **继承**：[Object](class_object.md) → **Engine**
 
-> The Engine singleton allows you to query and modify the project's run-time parameters, such as frames per second, time scale, and others. It also stores information about the current build of Godot, such as the current version.
+> 引擎全局单例。提供版本号、帧率、时间缩放、单例注册等信息。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The Engine singleton allows you to query and modify the project's run-time parameters, such as frames per second, time scale, and others. It also stores information about the current build of Godot, such as the current version.
 

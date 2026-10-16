@@ -4,7 +4,7 @@
 
 > A stream peer that handles TCP connections. This object can be used to connect to TCP servers, or also is returned by a TCP server.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A stream peer that handles TCP connections. This object can be used to connect to TCP servers, or also is returned by a TCP server.
 

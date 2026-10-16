@@ -2,9 +2,9 @@
 
 **继承**：[Object](class_object.md) → **Node**
 
-> Nodes are Godot's building blocks. They can be assigned as the child of another node, resulting in a tree arrangement. A given node can contain any number of nodes as children with the requirement that all siblings (direct children of a node) should have unique names.
+> 场景树中的基本单元。所有场景节点都继承自 Node。提供生命周期回调、组管理、节点查找。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Nodes are Godot's building blocks. They can be assigned as the child of another node, resulting in a tree arrangement. A given node can contain any number of nodes as children with the requirement that all siblings (direct children of a node) should have unique names.
 
@@ -222,33 +222,7 @@ Note: This method is only called if the node is present in the scene tree (i.e. 
 void add_child(node: Node, force_readable_name: bool = false, internal: Node.InternalMode = 0)
 ```
 
-Adds a child node. Nodes can have any number of children, but every child must have a unique name. Child nodes are automatically deleted when the parent node is deleted, so an entire scene can be removed by deleting its topmost node.
-
-If force_readable_name is true, improves the readability of the added node. If not named, the node is renamed to its type, and if it shares name with a sibling, a number is suffixed more appropriately. This operation is very slow. As such, it is recommended leaving this to false, which assigns a dummy name featuring @ in both situations.
-
-If internal is different than INTERNAL_MODE_DISABLED, the child will be added as internal node. These nodes are ignored by methods like get_children(), unless their parameter include_internal is true. It also prevents these nodes being duplicated with their parent. The intended usage is to hide the internal nodes from the user, so the user won't accidentally delete or modify them. Used by some GUI nodes, e.g. ColorPicker.
-
-Note: If node already has a parent, this method will fail. Use remove_child() first to remove node from its current parent. For example:
-
-```
-var child_node = get_child(0)
-if child_node.get_parent():
-    child_node.get_parent().remove_child(child_node)
-add_child(child_node)
-```
-
-```
-Node childNode = GetChild(0);
-if (childNode.GetParent() != null)
-{
-    childNode.GetParent().RemoveChild(childNode);
-}
-AddChild(childNode);
-```
-
-If you need the child node to be added below a specific node in the list of children, use add_sibling() instead of this method.
-
-Note: If you want a child to be persisted to a PackedScene, you must set owner in addition to calling add_child(). This is typically relevant for tool scripts and editor plugins. If add_child() is called without setting owner, the newly added Node will not be visible in the scene tree, though it will be visible in the 2D/3D view.
+将节点添加为子节点。add_child 后节点进入场景树，生命周期回调开始触发。
 
 ### add_sibling {#add_sibling}
 
@@ -378,11 +352,7 @@ Note: The method can still be used when the node is not inside SceneTree. It can
 Node duplicate(flags: int = 15) const
 ```
 
-Duplicates the node, returning a new node with all of its properties, signals, groups, and children copied from the original, recursively. The behavior can be tweaked through the flags (see DuplicateFlags). Internal nodes are not duplicated.
-
-Note: For nodes with a Script attached, if Object._init() has been defined with required parameters, the duplicated node will not have a Script.
-
-Note: By default, this method will duplicate only properties marked for serialization (i.e. using @GlobalScope.PROPERTY_USAGE_STORAGE, or in GDScript, @GDScript.@export). If you want to duplicate all properties, use DUPLICATE_INTERNAL_STATE.
+深拷贝节点。
 
 ### find_child {#find_child}
 
@@ -390,15 +360,7 @@ Note: By default, this method will duplicate only properties marked for serializ
 Node find_child(pattern: String, recursive: bool = true, owned: bool = true) const
 ```
 
-Finds the first descendant of this node whose name matches pattern, returning null if no match is found. The matching is done against node names, not their paths, through String.match(). As such, it is case-sensitive, "*" matches zero or more characters, and "?" matches any single character.
-
-If recursive is false, only this node's direct children are checked. Nodes are checked in tree order, so this node's first direct child is checked first, then its own direct children, etc., before moving to the second direct child, and so on. Internal children are also included in the search (see internal parameter in add_child()).
-
-If owned is true, only descendants with a valid owner node are checked.
-
-Note: This method can be very slow. Consider storing a reference to the found node in a variable. Alternatively, use get_node() with unique names (see unique_name_in_owner).
-
-Note: To find all descendant nodes matching a pattern or a class type, see find_children().
+按名称递归查找子节点。
 
 ### find_children {#find_children}
 
@@ -573,40 +535,7 @@ StringName get_name() const
 Node get_node(path: NodePath) const
 ```
 
-Fetches a node. The NodePath can either be a relative path (from this node), or an absolute path (from the SceneTree.root) to a node. If path does not point to a valid node, generates an error and returns null. Attempts to access methods on the return value will result in an "Attempt to call  on a null instance." error.
-
-Note: Fetching by absolute path only works when the node is inside the scene tree (see is_inside_tree()).
-
-Example: Assume this method is called from the Character node, inside the following tree:
-
-```
-┖╴root
-   ┠╴Character (you are here!)
-   ┃  ┠╴Sword
-   ┃  ┖╴Backpack
-   ┃     ┖╴Dagger
-   ┠╴MyGame
-   ┖╴Swamp
-      ┠╴Alligator
-      ┠╴Mosquito
-      ┖╴Goblin
-```
-
-The following calls will return a valid node:
-
-```
-get_node("Sword")
-get_node("Backpack/Dagger")
-get_node("../Swamp/Alligator")
-get_node("/root/MyGame")
-```
-
-```
-GetNode("Sword");
-GetNode("Backpack/Dagger");
-GetNode("../Swamp/Alligator");
-GetNode("/root/MyGame");
-```
+按路径获取节点。路径如 $Player/Sprite2D 或 "Player/Sprite2D"。
 
 ### get_node_and_resource {#get_node_and_resource}
 
@@ -694,7 +623,7 @@ Node get_owner() const
 Node get_parent() const
 ```
 
-Returns this node's parent node, or null if the node doesn't have a parent.
+返回父节点。无父节点返回 null。
 
 ### get_path {#get_path}
 
@@ -814,7 +743,7 @@ Returns true if this node is an instance load placeholder. See InstancePlacehold
 SceneTree get_tree() const
 ```
 
-Returns the SceneTree that contains this node. If this node is not inside the tree, generates an error and returns null. See also is_inside_tree().
+返回场景树 SceneTree。
 
 ### get_tree_string {#get_tree_string}
 
@@ -1160,11 +1089,7 @@ Queues an accessibility information update for this node.
 void queue_free()
 ```
 
-Queues this node to be deleted at the end of the current frame. When deleted, all of its children are deleted as well, and all references to the node and its children become invalid.
-
-Unlike with Object.free(), the node is not deleted instantly, and it can still be accessed before deletion. It is also safe to call queue_free() multiple times. Use Object.is_queued_for_deletion() to check if the node will be deleted at the end of the frame.
-
-Note: The node will only be freed after all other deferred calls are finished. Using this method is not always the same as calling Object.free() through Object.call_deferred().
+在当前帧结束后安全销毁节点。推荐替代 free()。
 
 ### remove_child {#remove_child}
 
@@ -1172,9 +1097,7 @@ Note: The node will only be freed after all other deferred calls are finished. U
 void remove_child(node: Node)
 ```
 
-Removes a child node. The node, along with its children, are not deleted. To delete a node, see queue_free().
-
-Note: When this node is inside the tree, this method sets the owner of the removed node (or its descendants) to null, if their owner is no longer an ancestor (see is_ancestor_of()).
+从父节点移除节点。不销毁，只是脱离树。
 
 ### remove_from_group {#remove_from_group}
 

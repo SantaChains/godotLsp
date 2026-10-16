@@ -4,7 +4,7 @@
 
 > Stores information about multi-touch press/release input events. Supports touch press, touch release and index for multi-touch count and order.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Stores information about multi-touch press/release input events. Supports touch press, touch release and index for multi-touch count and order.
 

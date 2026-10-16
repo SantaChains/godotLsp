@@ -4,7 +4,7 @@
 
 > A singleton used to load resource files from the filesystem.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A singleton used to load resource files from the filesystem.
 

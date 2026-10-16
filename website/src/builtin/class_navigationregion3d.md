@@ -4,7 +4,7 @@
 
 > A traversable 3D region based on a NavigationMesh that NavigationAgent3Ds can use for pathfinding.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A traversable 3D region based on a NavigationMesh that NavigationAgent3Ds can use for pathfinding.
 

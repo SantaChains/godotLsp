@@ -4,7 +4,7 @@
 
 > The GDExtensionManager loads, initializes, and keeps track of all available GDExtension libraries in the project.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The GDExtensionManager loads, initializes, and keeps track of all available GDExtension libraries in the project.
 

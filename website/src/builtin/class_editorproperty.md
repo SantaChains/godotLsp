@@ -4,7 +4,7 @@
 
 > A custom control for editing properties that can be added to the EditorInspector. It is added via EditorInspectorPlugin.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A custom control for editing properties that can be added to the EditorInspector. It is added via EditorInspectorPlugin.
 

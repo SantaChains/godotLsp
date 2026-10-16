@@ -4,7 +4,7 @@
 
 > Translates to smoothstep(edge0, edge1, x) in the shader language.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Translates to smoothstep(edge0, edge1, x) in the shader language.
 

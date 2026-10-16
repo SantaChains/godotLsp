@@ -2,9 +2,9 @@
 
 **继承**：[Object](class_object.md) → **OS**
 
-> The OS class wraps the most common functionalities for communicating with the host operating system, such as the video driver, delays, environment variables, execution of binaries, command line, etc.
+> 操作系统单例。命令行参数、环境变量、屏幕尺寸、退出。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The OS class wraps the most common functionalities for communicating with the host operating system, such as the video driver, delays, environment variables, execution of binaries, command line, etc.
 

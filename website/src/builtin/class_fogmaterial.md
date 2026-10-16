@@ -4,7 +4,7 @@
 
 > A Material resource that can be used by FogVolumes to draw volumetric effects.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A Material resource that can be used by FogVolumes to draw volumetric effects.
 

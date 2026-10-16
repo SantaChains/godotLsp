@@ -4,7 +4,7 @@
 
 > Can play, loop, pause a scroll through audio. See AudioStream and AudioStreamOggVorbis for usage.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Can play, loop, pause a scroll through audio. See AudioStream and AudioStreamOggVorbis for usage.
 

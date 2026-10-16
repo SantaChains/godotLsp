@@ -4,7 +4,7 @@
 
 > Controls camera-specific attributes such as auto-exposure, depth of field, and exposure override.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Controls camera-specific attributes such as auto-exposure, depth of field, and exposure override.
 

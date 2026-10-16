@@ -2,9 +2,9 @@
 
 **继承**：[Node](class_node.md) → [Object](class_object.md) → **Node3D**
 
-> The Node3D node is the base representation of a node in 3D space. All other 3D nodes inherit from this class.
+> 3D 游戏对象的基类。包含 position、rotation、scale 变换，3D 空间中的节点。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The Node3D node is the base representation of a node in 3D space. All other 3D nodes inherit from this class.
 

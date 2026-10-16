@@ -4,7 +4,7 @@
 
 > LightmapProbe represents the position of a single manually placed probe for dynamic object lighting with LightmapGI. Lightmap probes affect the lighting of GeometryInstance3D-derived nodes that have their GeometryInstance3D.gi_mode set to GeometryInstance3D.GI_MODE_DYNAMIC.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 LightmapProbe represents the position of a single manually placed probe for dynamic object lighting with LightmapGI. Lightmap probes affect the lighting of GeometryInstance3D-derived nodes that have their GeometryInstance3D.gi_mode set to GeometryInstance3D.GI_MODE_DYNAMIC.
 

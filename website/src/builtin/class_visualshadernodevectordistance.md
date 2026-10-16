@@ -4,7 +4,7 @@
 
 > Calculates distance from point represented by vector p0 to vector p1.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Calculates distance from point represented by vector p0 to vector p1.
 

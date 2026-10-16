@@ -4,7 +4,7 @@
 
 > A multiplication operation on a transform (4×4 matrix) and a vector, with support for different multiplication operators.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A multiplication operation on a transform (4×4 matrix) and a vector, with support for different multiplication operators.
 

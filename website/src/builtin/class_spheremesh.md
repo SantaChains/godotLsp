@@ -4,7 +4,7 @@
 
 > Class representing a spherical PrimitiveMesh.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Class representing a spherical PrimitiveMesh.
 

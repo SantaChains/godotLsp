@@ -4,7 +4,7 @@
 
 > This is the default binding modifier editor used in the OpenXR action map.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This is the default binding modifier editor used in the OpenXR action map.
 

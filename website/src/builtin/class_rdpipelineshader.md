@@ -4,7 +4,7 @@
 
 > Wraps a shader resource and allows specialization constants to be applied at pipeline creation time.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Wraps a shader resource and allows specialization constants to be applied at pipeline creation time.
 

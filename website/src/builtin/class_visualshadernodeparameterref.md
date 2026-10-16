@@ -4,7 +4,7 @@
 
 > Creating a reference to a VisualShaderNodeParameter allows you to reuse this parameter in different shaders or shader stages easily.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Creating a reference to a VisualShaderNodeParameter allows you to reuse this parameter in different shaders or shader stages easily.
 

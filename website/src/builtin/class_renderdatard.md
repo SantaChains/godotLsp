@@ -4,7 +4,7 @@
 
 > This object manages all render data for the RenderingDevice-based renderers. See also RenderData, RenderSceneData, and RenderSceneDataRD.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This object manages all render data for the RenderingDevice-based renderers. See also RenderData, RenderSceneData, and RenderSceneDataRD.
 

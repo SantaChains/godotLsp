@@ -4,7 +4,7 @@
 
 > Randomness node will output pseudo-random values of the given type based on the specified minimum and maximum values.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Randomness node will output pseudo-random values of the given type based on the specified minimum and maximum values.
 

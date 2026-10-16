@@ -1,8 +1,8 @@
 # Vector2i
 
-> A 2-element structure that can be used to represent 2D grid coordinates or any other pair of integers.
+> 二维整数向量。x、y 分量为整数，用于网格坐标。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A 2-element structure that can be used to represent 2D grid coordinates or any other pair of integers.
 

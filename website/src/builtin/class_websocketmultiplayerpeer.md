@@ -4,7 +4,7 @@
 
 > Base class for WebSocket server and client, allowing them to be used as multiplayer peer for the MultiplayerAPI.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Base class for WebSocket server and client, allowing them to be used as multiplayer peer for the MultiplayerAPI.
 

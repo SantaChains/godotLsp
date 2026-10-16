@@ -4,7 +4,7 @@
 
 > RemoteTransform2D pushes its own Transform2D to another Node2D derived node (called the remote node) in the scene.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 RemoteTransform2D pushes its own Transform2D to another Node2D derived node (called the remote node) in the scene.
 

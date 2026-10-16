@@ -4,7 +4,7 @@
 
 > A 2D capsule shape, intended for use in physics. Usually used to provide a shape for a CollisionShape2D.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A 2D capsule shape, intended for use in physics. Usually used to provide a shape for a CollisionShape2D.
 

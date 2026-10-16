@@ -4,7 +4,7 @@
 
 > A ViewportTexture provides the content of a Viewport as a dynamic Texture2D. This can be used to combine the rendering of Control, Node2D and Node3D nodes. For example, you can use this texture to display a 3D scene inside a TextureRect, or a 2D overlay in a Sprite3D.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A ViewportTexture provides the content of a Viewport as a dynamic Texture2D. This can be used to combine the rendering of Control, Node2D and Node3D nodes. For example, you can use this texture to display a 3D scene inside a TextureRect, or a 2D overlay in a Sprite3D.
 

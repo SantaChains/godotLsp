@@ -4,7 +4,7 @@
 
 > WebXR is an open standard that allows creating VR and AR applications that run in the web browser.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 WebXR is an open standard that allows creating VR and AR applications that run in the web browser.
 

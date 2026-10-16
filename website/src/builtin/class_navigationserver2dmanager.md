@@ -4,7 +4,7 @@
 
 > NavigationServer2DManager is the API for registering NavigationServer2D implementations and setting the default implementation.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 NavigationServer2DManager is the API for registering NavigationServer2D implementations and setting the default implementation.
 

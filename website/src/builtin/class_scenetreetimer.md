@@ -4,7 +4,7 @@
 
 > A one-shot timer managed by the scene tree, which emits timeout on completion. See also SceneTree.create_timer().
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A one-shot timer managed by the scene tree, which emits timeout on completion. See also SceneTree.create_timer().
 

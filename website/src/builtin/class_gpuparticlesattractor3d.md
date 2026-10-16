@@ -4,7 +4,7 @@
 
 > Particle attractors can be used to attract particles towards the attractor's origin, or to push them away from the attractor's origin.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Particle attractors can be used to attract particles towards the attractor's origin, or to push them away from the attractor's origin.
 

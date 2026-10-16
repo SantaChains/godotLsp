@@ -4,7 +4,7 @@
 
 > RDAccelerationStructureGeometry describes a set of triangles used as raytracing geometry in the RenderingDevice.blas_create() method.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 RDAccelerationStructureGeometry describes a set of triangles used as raytracing geometry in the RenderingDevice.blas_create() method.
 

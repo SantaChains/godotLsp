@@ -4,7 +4,7 @@
 
 > This helper class can be used to store Variant values on the filesystem using INI-style formatting. The stored values are identified by a section and a key:
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This helper class can be used to store Variant values on the filesystem using INI-style formatting. The stored values are identified by a section and a key:
 

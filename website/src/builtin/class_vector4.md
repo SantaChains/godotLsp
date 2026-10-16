@@ -2,7 +2,7 @@
 
 > A 4-element structure that can be used to represent 4D coordinates or any other quadruplet of numeric values.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A 4-element structure that can be used to represent 4D coordinates or any other quadruplet of numeric values.
 

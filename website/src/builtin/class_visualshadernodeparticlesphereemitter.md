@@ -4,7 +4,7 @@
 
 > VisualShaderNodeParticleEmitter that makes the particles emitted in sphere shape with the specified inner and outer radii.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 VisualShaderNodeParticleEmitter that makes the particles emitted in sphere shape with the specified inner and outer radii.
 

@@ -4,7 +4,7 @@
 
 > This class is used by various XR interfaces to generate VRS textures that can be used to speed up rendering.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class is used by various XR interfaces to generate VRS textures that can be used to speed up rendering.
 

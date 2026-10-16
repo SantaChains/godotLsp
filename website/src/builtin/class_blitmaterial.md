@@ -4,7 +4,7 @@
 
 > A material resource that can be used by DrawableTextures when processing blit calls to draw.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A material resource that can be used by DrawableTextures when processing blit calls to draw.
 

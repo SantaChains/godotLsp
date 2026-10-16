@@ -4,7 +4,7 @@
 
 > This is the base class for Godot's resource importers. To implement your own resource importers using editor plugins, see EditorImportPlugin.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This is the base class for Godot's resource importers. To implement your own resource importers using editor plugins, see EditorImportPlugin.
 

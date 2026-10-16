@@ -4,7 +4,7 @@
 
 > Texture is the base class for all texture types. Common texture types are Texture2D and ImageTexture. See also Image.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Texture is the base class for all texture types. Common texture types are Texture2D and ImageTexture. See also Image.
 

@@ -4,7 +4,7 @@
 
 > This parameter allows to provide a collection of textures for the shader. You can use VisualShaderNodeTexture2DArray to extract the textures from array.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This parameter allows to provide a collection of textures for the shader. You can use VisualShaderNodeTexture2DArray to extract the textures from array.
 

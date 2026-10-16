@@ -4,7 +4,7 @@
 
 > Provides a low-level interface for creating parsers for XML [https://en.wikipedia.org/wiki/XML] files. This class can serve as base to make custom XML parsers.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Provides a low-level interface for creating parsers for XML [https://en.wikipedia.org/wiki/XML] files. This class can serve as base to make custom XML parsers.
 

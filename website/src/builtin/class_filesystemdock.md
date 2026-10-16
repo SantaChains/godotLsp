@@ -4,7 +4,7 @@
 
 > This class is available only in EditorPlugins and can't be instantiated. You can access it using EditorInterface.get_file_system_dock().
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 This class is available only in EditorPlugins and can't be instantiated. You can access it using EditorInterface.get_file_system_dock().
 

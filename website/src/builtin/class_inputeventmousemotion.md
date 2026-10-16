@@ -4,7 +4,7 @@
 
 > Stores information about a mouse or a pen motion. This includes relative position, absolute position, and velocity. See Node._input().
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Stores information about a mouse or a pen motion. This includes relative position, absolute position, and velocity. See Node._input().
 

@@ -4,7 +4,7 @@
 
 > An infinite plane collision that interacts with SpringBoneSimulator3D. It is an infinite size XZ plane, and the +Y direction is treated as normal.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 An infinite plane collision that interacts with SpringBoneSimulator3D. It is an infinite size XZ plane, and the +Y direction is treated as normal.
 

@@ -4,7 +4,7 @@
 
 > The visibility mask allows us to black out the part of the render result that is invisible due to lens distortion.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The visibility mask allows us to black out the part of the render result that is invisible due to lens distortion.
 

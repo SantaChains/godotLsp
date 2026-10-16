@@ -4,7 +4,7 @@
 
 > Stores position, muting, solo, bypass, effects, effect position, volume, and the connections between buses. See AudioServer for usage.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Stores position, muting, solo, bypass, effects, effect position, volume, and the connections between buses. See AudioServer for usage.
 

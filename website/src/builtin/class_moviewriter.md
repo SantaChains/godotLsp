@@ -4,7 +4,7 @@
 
 > Godot can record videos with non-real-time simulation. Like the --fixed-fps command line argument, this forces the reported delta in Node._process() functions to be identical across frames, regardless of how long it actually took to render the frame. This can be used to record high-quality videos with perfect frame pacing regardless of your hardware's capabilities.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Godot can record videos with non-real-time simulation. Like the --fixed-fps command line argument, this forces the reported delta in Node._process() functions to be identical across frames, regardless of how long it actually took to render the frame. This can be used to record high-quality videos with perfect frame pacing regardless of your hardware's capabilities.
 

@@ -4,7 +4,7 @@
 
 > Translated to texture(cubemap, vec3) in the shader language. Returns a color vector and alpha channel as scalar.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Translated to texture(cubemap, vec3) in the shader language. Returns a color vector and alpha channel as scalar.
 

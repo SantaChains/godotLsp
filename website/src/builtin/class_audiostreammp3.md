@@ -4,7 +4,7 @@
 
 > MP3 audio stream driver. See data if you want to load an MP3 file at run-time. More info can be found in ResourceImporterMP3.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 MP3 audio stream driver. See data if you want to load an MP3 file at run-time. More info can be found in ResourceImporterMP3.
 

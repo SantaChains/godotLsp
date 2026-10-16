@@ -2,9 +2,9 @@
 
 **继承**：[Object](class_object.md) → **Input**
 
-> The Input singleton handles key presses, mouse buttons and movement, gamepads, and input actions. Actions and their events can be set in the Input Map tab in Project > Project Settings, or with the InputMap class.
+> 输入系统单例。处理键盘、鼠标、摇杆、动作映射（action）。
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 The Input singleton handles key presses, mouse buttons and movement, gamepads, and input actions. Actions and their events can be set in the Input Map tab in Project > Project Settings, or with the InputMap class.
 
@@ -106,9 +106,7 @@ If exact_match is false, it ignores additional input modifiers for InputEventKey
 float get_axis(negative_action: StringName, positive_action: StringName) const
 ```
 
-Get axis input by specifying two actions, one negative and one positive.
-
-This is a shorthand for writing Input.get_action_strength("positive_action") - Input.get_action_strength("negative_action").
+返回两个动作之间的差值（如左右移动）。
 
 ### get_connected_joypads {#get_connected_joypads}
 
@@ -386,11 +384,7 @@ Input.MouseMode get_mouse_mode() const
 Vector2 get_vector(negative_x: StringName, positive_x: StringName, negative_y: StringName, positive_y: StringName, deadzone: float = -1.0) const
 ```
 
-Gets an input vector by specifying four actions for the positive and negative X and Y axes.
-
-This method is useful when getting vector input, such as from a joystick, directional pad, arrows, or WASD. The vector has its length limited to 1 and has a circular deadzone, which is useful for using vector input as movement.
-
-By default, the deadzone is automatically calculated from the average of the action deadzones. However, you can override the deadzone to be whatever you want (on the range of 0 to 1).
+返回两个轴的向量。
 
 ### has_joy_light {#has_joy_light}
 
@@ -494,11 +488,7 @@ If exact_match is false, it ignores additional input modifiers for InputEventKey
 bool is_action_pressed(action: StringName, exact_match: bool = false) const
 ```
 
-Returns true if you are pressing the action event.
-
-If exact_match is false, it ignores additional input modifiers for InputEventKey and InputEventMouseButton events, and the direction for InputEventJoypadMotion events.
-
-Note: Due to keyboard ghosting, is_action_pressed() may return false even if one of the action's keys is pressed. See Input examples in the documentation for more information.
+判断动作是否被按下。动作在项目设置→输入映射中定义。
 
 ### is_anything_pressed {#is_anything_pressed}
 
@@ -652,29 +642,7 @@ public override void _Input(InputEvent @event)
 bool is_key_pressed(keycode: Key) const
 ```
 
-Returns true if you are pressing the Latin key in the current keyboard layout. You can pass a Key constant.
-
-is_key_pressed() is only recommended over is_physical_key_pressed() in non-game applications. This ensures that shortcut keys behave as expected depending on the user's keyboard layout, as keyboard shortcuts are generally dependent on the keyboard layout in non-game applications. If in doubt, use is_physical_key_pressed().
-
-Note: Due to keyboard ghosting, is_key_pressed() may return false even if one of the action's keys is pressed. See Input examples in the documentation for more information.
-
-Note: If you want to check if a key was just pressed by using its keycode, use Godot's input action system with is_action_just_pressed() or use the Node._input() method like this instead:
-
-```
-func _input(event):
-    if event is InputEventKey and not event.is_echo() and event.is_pressed() and event.keycode == KEY_SPACE:
-        pass # Your code here.
-```
-
-```
-public override void _Input(InputEvent @event)
-{
-    if (@event is InputEventKey eventKey && !eventKey.IsEcho() && eventKey.Pressed && eventKey.Keycode == Key.Space)
-    {
-        // Your code here.
-    }
-}
-```
+判断键盘按键是否按下。
 
 ### is_mouse_button_pressed {#is_mouse_button_pressed}
 

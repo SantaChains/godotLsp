@@ -4,7 +4,7 @@
 
 > Turning on the option Load As Placeholder for an instantiated scene in the editor causes it to be replaced by an InstancePlaceholder when running the game, this will not replace the node in the editor. This makes it possible to delay actually loading the scene until calling create_instance(). This is useful to avoid loading large scenes all at once by loading parts of it selectively.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 Turning on the option Load As Placeholder for an instantiated scene in the editor causes it to be replaced by an InstancePlaceholder when running the game, this will not replace the node in the editor. This makes it possible to delay actually loading the scene until calling create_instance(). This is useful to avoid loading large scenes all at once by loading parts of it selectively.
 

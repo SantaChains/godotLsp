@@ -4,7 +4,7 @@
 
 > A Texture2D based on an Image. For an image to be displayed, an ImageTexture has to be created from it using the create_from_image() method:
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 A Texture2D based on an Image. For an image to be displayed, an ImageTexture has to be created from it using the create_from_image() method:
 

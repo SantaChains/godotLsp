@@ -4,7 +4,7 @@
 
 > VideoStream resource handling the Ogg Theora [https://www.theora.org/] video format with .ogv extension. The Theora codec is decoded on the CPU.
 
-<details><summary>官方英文描述（中文精译进行中）</summary>
+<details><summary>官方英文描述</summary>
 
 VideoStream resource handling the Ogg Theora [https://www.theora.org/] video format with .ogv extension. The Theora codec is decoded on the CPU.
 
