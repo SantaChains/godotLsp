@@ -20,6 +20,7 @@ use lsp_types::*;
 mod doclinks;
 mod hoverdata;
 mod langdocs;
+mod scoring;
 
 struct State {
     engine: std::sync::Arc<EngineApi>,
@@ -611,14 +612,23 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
     let offset = p.text_document_position.position;
     let b = src.as_bytes();
     let at = line_start_offset(src, offset.line as usize) + offset.character as usize;
-    let after_dot = at > 0 && b[at - 1] == b'.';
+    // C1：向前扫到词首——partial 词也正确归面（`Node.po` → 成员面，prefix="po"）。
+    let mut word_start = at;
+    while word_start > 0 && (b[word_start - 1].is_ascii_alphanumeric() || b[word_start - 1] == b'_') {
+        word_start -= 1;
+    }
+    let prefix = &src[word_start..at];
+    let after_dot = word_start > 0 && b[word_start - 1] == b'.';
     let mut items: Vec<CompletionItem> = Vec::new();
 
     if after_dot {
-        if let Some(recv_ty) = recv_type_at(state, src, at) {
+        if let Some(recv_ty) = recv_type_at(state, src, word_start) {
             items.extend(class_members(&state.engine, &recv_ty));
         }
-    } else if at > 0 && b[at - 1] == b'@' {
+        for i in &mut items {
+            i.sort_text = Some(scoring::sort_text(scoring::bucket::MEMBER, scoring::fuzzy(prefix, &i.label)));
+        }
+    } else if word_start > 0 && b[word_start - 1] == b'@' {
         // 注解面：`@<|` 只出注解（36 个），不与全局面混淆。
         for (name, desc) in hoverdata::annotations() {
             items.push(CompletionItem {
@@ -627,6 +637,9 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
                 detail: Some(desc.to_string()),
                 ..CompletionItem::default()
             });
+        }
+        for i in &mut items {
+            i.sort_text = Some(scoring::sort_text(scoring::bucket::MEMBER, scoring::fuzzy(prefix, &i.label)));
         }
     } else {
         // 全量返回 + 稳定排序（HashMap 迭代序随机，take(n) 会导致补全时有时无）；
@@ -704,6 +717,16 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
                 detail: Some(desc.to_string()),
                 ..CompletionItem::default()
             });
+        }
+        // C1：全局面按 kind 归桶（函数/单例 > 类型 > 常量枚举 > 关键字）+ fuzzy 细分。
+        for i in &mut items {
+            let bucket = match i.kind {
+                Some(CompletionItemKind::FUNCTION) | Some(CompletionItemKind::VARIABLE) => scoring::bucket::FN_GLOBAL,
+                Some(CompletionItemKind::CLASS) | Some(CompletionItemKind::TYPE_PARAMETER) => scoring::bucket::TYPE,
+                Some(CompletionItemKind::CONSTANT) | Some(CompletionItemKind::ENUM_MEMBER) => scoring::bucket::CONST,
+                _ => scoring::bucket::KEYWORD,
+            };
+            i.sort_text = Some(scoring::sort_text(bucket, scoring::fuzzy(prefix, &i.label)));
         }
     }
     CompletionResponse::Array(items)
@@ -1886,6 +1909,43 @@ func _ready() -> void:
         // 成员面（静态类名回退）：Node. → ProcessMode 枚举名。
         let mem = labels("var x = Node.\n", 0, 13);
         assert!(mem.iter().any(|l| l == "ProcessMode"), "Node 成员面应含枚举名 ProcessMode: 命中数 {}", mem.len());
+    }
+
+    /// C1 sortText：partial 词归面（`Vector3.no` → 成员面）+ 桶/fuzzy 编码。
+    #[test]
+    fn completion_sort_text() {
+        let base = test_state();
+        let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+        let ask = |state: &State, ch: u32| -> Vec<CompletionItem> {
+            let p: CompletionParams = serde_json::from_value(serde_json::json!({
+                "textDocument": {"uri": uri},
+                "position": {"line": 0, "character": ch}
+            }))
+            .unwrap();
+            match completion(state, &p) {
+                CompletionResponse::Array(items) => items,
+                _ => vec![],
+            }
+        };
+
+        // 全局面 partial 词："Col" → 类/内建（TYPE 桶）前缀分压过不匹配者与关键字桶。
+        let state = state_with(&base, "var x = Col\n");
+        let items = ask(&state, 11);
+        assert!(items.iter().all(|i| i.sort_text.is_some()), "全局面每项都应有 sortText");
+        let st = |l: &str| {
+            items.iter().find(|i| i.label == l).map(|i| i.sort_text.clone().unwrap()).unwrap_or_else(|| panic!("缺 {l}"))
+        };
+        assert!(st("Color") < st("AudioServer"), "同桶内前缀分: Color={} AudioServer={}", st("Color"), st("AudioServer"));
+        assert!(st("Color") < st("class_name"), "TYPE 桶压过 KEYWORD 桶: {} vs {}", st("Color"), st("class_name"));
+
+        // 成员面 partial 词：`Vector3.no`（旧逻辑只有 `Vector3.` 紧邻点才归成员面）。
+        let state = state_with(&base, "var v := Vector3.no\n");
+        let items = ask(&state, 19);
+        assert!(items.iter().any(|i| i.label == "normalized"), "成员面应识别 partial 词");
+        let st = |l: &str| {
+            items.iter().find(|i| i.label == l).map(|i| i.sort_text.clone().unwrap()).unwrap_or_else(|| panic!("缺 {l}"))
+        };
+        assert!(st("normalized") < st("ONE"), "前缀分应排序: normalized={} ONE={}", st("normalized"), st("ONE"));
     }
 }
 
