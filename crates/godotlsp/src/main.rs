@@ -446,11 +446,19 @@ fn hover(state: &State, p: &HoverParams) -> Option<Hover> {
     let src = state.docs.get(uri)?;
     let offset = position_to_offset(src, p.text_document_position_params.position)?;
 
+    // 精确高亮范围：光标词本身（不含前后空白/符号）。VSCode 对 range=None 的
+    // hover 用自己的分词器回退框选,会把前导空白/制表连进来——显式给范围根治。
+    let hov_range = word_span(src, offset)
+        .map(|(s, w)| offset_range(src, s, s + w.len()));
+
     // 接收者模式：光标落在 `recv.member` 的 member 上。
     if let Some((recv_ty, member)) = resolve_receiver(state, src, offset)
         && let Some(md) = member_hover(state, &recv_ty, &member)
     {
-        return Some(md);
+        return Some(Hover {
+            contents: HoverContents::Markup(MarkupContent { kind: MarkupKind::Markdown, value: md }),
+            range: hov_range,
+        });
     }
 
     // 单词级：光标词紧贴 '@' 时优先按注解查（@export/@onready/…）。
@@ -459,7 +467,7 @@ fn hover(state: &State, p: &HoverParams) -> Option<Hover> {
     let md = hover_word(state, &word, is_annotation)?;
     Some(Hover {
         contents: HoverContents::Markup(MarkupContent { kind: MarkupKind::Markdown, value: md }),
-        range: None,
+        range: hov_range,
     })
 }
 
@@ -551,7 +559,7 @@ fn member_anchor_along<'a>(engine: &'a EngineApi, class: &'a str, member: &str) 
 }
 
 /// 接收者成员 hover：`recv.member` → 属性/方法/枚举/枚举值，附语料描述。
-fn member_hover(state: &State, recv_ty: &str, member: &str) -> Option<Hover> {
+fn member_hover(state: &State, recv_ty: &str, member: &str) -> Option<String> {
     let engine = &state.engine;
     let real = |b: &str| state.real_lower.contains(b);
     let md = if let Some(prop) = engine.find_property(recv_ty, member) {
@@ -583,10 +591,7 @@ fn member_hover(state: &State, recv_ty: &str, member: &str) -> Option<Hover> {
     } else {
         return None;
     };
-    Some(Hover {
-        contents: HoverContents::Markup(MarkupContent { kind: MarkupKind::Markdown, value: md }),
-        range: None,
-    })
+    Some(md)
 }
 
 /// 在类/内建类（含继承链）的枚举值中找 `member`：返回 (枚举名, 值, 描述宿主类)。
@@ -1792,6 +1797,21 @@ fn document_highlight(state: &State, p: &DocumentHighlightParams) -> Vec<Documen
     let mut out = Vec::new();
     let b = src.as_bytes();
     let wb = word.as_bytes();
+    // 赋值算符集合（`=` 与复合赋值;`==`/`!=`/`<=` 等比较不算写）。
+    let is_assign_at = |i: usize| -> bool {
+        let rest = &src[i..];
+        for op in ["=", "+=", "-=", "*=", "/=", "%=", "&=", "|=", "^=", "<<=", ">>="] {
+            if rest.starts_with(op) {
+                // `==` 是比较:排除。
+                if op == "=" && rest[1..].starts_with('=') {
+                    return false;
+                }
+                return true;
+            }
+        }
+        false
+    };
+    // 按字符推进(避免切进多字节字符 panic);逐词匹配 + 词边界判定。
     let mut i = 0;
     while i + wb.len() <= b.len() {
         if &b[i..i + wb.len()] == wb {
@@ -1799,13 +1819,25 @@ fn document_highlight(state: &State, p: &DocumentHighlightParams) -> Vec<Documen
             let after_end = i + wb.len();
             let after_ok = after_end >= b.len() || !(b[after_end].is_ascii_alphanumeric() || b[after_end] == b'_');
             if before_ok && after_ok {
+                let mut j = after_end;
+                while j < b.len() && (b[j] == b' ' || b[j] == b'\t') {
+                    j += 1;
+                }
+                let kind = if j < b.len() && is_assign_at(j) {
+                    DocumentHighlightKind::WRITE
+                } else {
+                    DocumentHighlightKind::READ
+                };
                 out.push(DocumentHighlight {
                     range: offset_range(src, i, after_end),
-                    kind: Some(DocumentHighlightKind::READ),
+                    kind: Some(kind),
                 });
             }
         }
-        i += 1;
+        match src[i..].chars().next() {
+            Some(c) => i += c.len_utf8(),
+            None => break,
+        }
     }
     out
 }

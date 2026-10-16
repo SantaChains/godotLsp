@@ -448,11 +448,24 @@ fn lex_punct(lx: &mut Lx) -> Option<(TokenKind, usize)> {
 fn inject_structure(raw: Vec<Token>, src: &str, cont: &HashSet<u32>) -> Vec<Token> {
     let mut out: Vec<Token> = Vec::with_capacity(raw.len() + 8);
     let mut indent_stack: Vec<u32> = vec![0];
+    // 括号内多行 lambda:depth>0 本不注入结构 token,但 lambda 体是真正的
+    // 缩进块(对齐 Godot gdscript_tokenizer 对表达式内 lambda 的缩进处理)。
+    // 以 lambda 头行为基准维护独立缩进栈;头行基准深度以下的嵌套括号续行
+    // (depth > base_depth)不注入——那是括号续行,不是 lambda 体行。
+    let mut lambda: Option<(i32, u32, Vec<u32>)> = None; // (基准 depth, 头行行首缩进, 体缩进栈)
     let mut prev_line: Option<u32> = None;
     let mut had_prev_token = false;
     let mut depth: i32 = 0;
+    // 当前行首 token 列号(mid-line lambda 的头缩进判定用:lambda 头可以在
+    // 链式调用 `.filter(func(...):` 中间,Func token 的 col 不是行缩进)。
+    let mut cur_line_start_col: u32 = 0;
+    let mut seen_line: Option<u32> = None;
 
     for tok in raw {
+        if seen_line != Some(tok.line) {
+            seen_line = Some(tok.line);
+            cur_line_start_col = tok.col;
+        }
         if let Some(pl) = prev_line
             && tok.line != pl
             && !cont.contains(&tok.line)
@@ -460,8 +473,6 @@ fn inject_structure(raw: Vec<Token>, src: &str, cont: &HashSet<u32>) -> Vec<Toke
             let had = had_prev_token;
             if had && depth == 0 {
                 out.push(Token::new(TokenKind::Newline, tok.start, tok.start, pl, 0));
-            }
-            if had && depth == 0 {
                 let ind = tok.indent();
                 loop {
                     let top = *indent_stack.last().unwrap();
@@ -476,12 +487,78 @@ fn inject_structure(raw: Vec<Token>, src: &str, cont: &HashSet<u32>) -> Vec<Toke
                         break;
                     }
                 }
+            } else if had && depth > 0 {
+                if let Some((base, header_ind, stack)) = lambda.as_mut() {
+                    if depth == *base {
+                        // lambda 体块行:按体缩进栈注入。
+                        // 闭括号行(RParen 等)无条件终结体——闭括号的缩进
+                        // 在真实工程里可以是任意值(常与体对齐)。
+                        let closes = matches!(
+                            tok.kind,
+                            TokenKind::RParen
+                                | TokenKind::RBracket
+                                | TokenKind::RBrace
+                        );
+                        out.push(Token::new(TokenKind::Newline, tok.start, tok.start, pl, 0));
+                        if closes {
+                            for _ in stack.drain(..) {
+                                out.push(Token::new(TokenKind::Dedent, tok.start, tok.start, tok.line, 0));
+                            }
+                            lambda = None;
+                        } else {
+                            let ind = tok.indent();
+                            if stack.is_empty() && ind <= *header_ind {
+                                // 体已结束(缩进回到头行及以下)。
+                                lambda = None;
+                            } else {
+                                loop {
+                                    let Some(&top) = stack.last() else {
+                                        stack.push(ind);
+                                        out.push(Token::new(TokenKind::Indent, tok.start, tok.start, tok.line, 0));
+                                        break;
+                                    };
+                                    if ind > top {
+                                        stack.push(ind);
+                                        out.push(Token::new(TokenKind::Indent, tok.start, tok.start, tok.line, 0));
+                                        break;
+                                    } else if ind < top {
+                                        stack.pop();
+                                        out.push(Token::new(TokenKind::Dedent, tok.start, tok.start, tok.line, 0));
+                                        if stack.is_empty() {
+                                            lambda = None;
+                                            break;
+                                        }
+                                    } else {
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    // depth > base:lambda 体内嵌套括号的续行,不注入。
+                }
             }
         }
         prev_line = Some(tok.line);
         match tok.kind {
             TokenKind::LParen | TokenKind::LBracket | TokenKind::LBrace => depth += 1,
-            TokenKind::RParen | TokenKind::RBracket | TokenKind::RBrace => depth -= 1,
+            TokenKind::RParen | TokenKind::RBracket | TokenKind::RBrace => {
+                depth -= 1;
+                if depth <= 0 {
+                    lambda = None;
+                } else if let Some((base, _, _)) = lambda
+                    && depth < base
+                {
+                    // 闭括号使深度降到 lambda 基准之下:体不可能再继续
+                    //(`}}},` 同行收束多层 dict 的真实形态),立即终结。
+                    lambda = None;
+                }
+            }
+            TokenKind::Func if depth > 0 => {
+                if lambda.is_none() {
+                    lambda = Some((depth, cur_line_start_col, Vec::new()));
+                }
+            }
             _ => {}
         }
         out.push(tok);

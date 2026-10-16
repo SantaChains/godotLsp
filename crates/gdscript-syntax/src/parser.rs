@@ -202,6 +202,13 @@ impl<'a> Parser<'a> {
                 self.advance();
                 continue;
             }
+            // 容错：块级 stray Comma 只在 lambda 体作实参分隔时出现
+            // (`reduce(func(a,b): ... \n return accum,\n {})`),
+            // 跳过并让上层 parse_args 消费。
+            if self.at(TokenKind::Comma) {
+                self.advance();
+                continue;
+            }
             match self.parse_item() {
                 Some(s) => items.push(s),
                 None => self.sync(),
@@ -238,7 +245,15 @@ impl<'a> Parser<'a> {
             // 缩进块。
             self.advance();
             self.bump_if(TokenKind::Indent);
-            let stmts = self.parse_items(&[TokenKind::Dedent]);
+            // 括号/逗号终止:lambda 体缩进块会被外层实参的 `)`/`,` 终结
+            // (词法已保证该行注入 Dedent,但 stray 括号仍可能先行到达)。
+            let stmts = self.parse_items(&[
+                TokenKind::Dedent,
+                TokenKind::RParen,
+                TokenKind::RBracket,
+                TokenKind::RBrace,
+                TokenKind::Comma,
+            ]);
             self.bump_if(TokenKind::Dedent);
             Block {
                 stmts,
@@ -256,6 +271,7 @@ impl<'a> Parser<'a> {
                     TokenKind::RParen,
                     TokenKind::RBracket,
                     TokenKind::RBrace,
+                    TokenKind::Comma, // lambda 内联体后作实参分隔
                 ]) {
                     break;
                 }
@@ -747,11 +763,15 @@ impl<'a> Parser<'a> {
         self.expect(TokenKind::Colon);
         let mut branches = vec![(cond, self.parse_block())];
         let mut else_block = None;
+        // elif/else 可跟在内联体之后的下一行(`if c: stmt\nelif d: ...`),
+        // 链检查前跳过行尾 Newline(多余 Newline 由 parse_items 容错)。
+        self.bump_if(TokenKind::Newline);
         while self.at(TokenKind::Elif) {
             self.advance();
             let c = self.parse_expr();
             self.expect(TokenKind::Colon);
             branches.push((c, self.parse_block()));
+            self.bump_if(TokenKind::Newline);
         }
         if self.at(TokenKind::Else) {
             self.advance();
@@ -980,7 +1000,15 @@ impl<'a> Parser<'a> {
     fn parse_args(&mut self) -> Vec<Arg> {
         self.expect(TokenKind::LParen);
         let mut args = Vec::new();
-        while !self.at(TokenKind::RParen) && !self.at(TokenKind::Eof) {
+        // 括号内 lambda 体恢复结构注入后,参数列表中会出现 Newline/Dedent
+        // (多行调用的单行 lambda 后、多行 lambda 体结束后、参数续行):
+        // 全程容錯跳过,与 GDScript 括号内换行无意义语义一致。
+        // (Dedent 只可能来自括号内 lambda 注入,跳过安全。)
+        loop {
+            while self.bump_if(TokenKind::Newline) || self.bump_if(TokenKind::Dedent) {}
+            if self.at(TokenKind::RParen) || self.at(TokenKind::Eof) {
+                break;
+            }
             // 具名参数：`name = value`
             if self.at(TokenKind::Ident)
                 && (self.peek_at(1).kind == TokenKind::Assign)
@@ -998,10 +1026,15 @@ impl<'a> Parser<'a> {
                     name: None,
                 });
             }
-            if !self.bump_if(TokenKind::Comma) {
+            let mut ate_comma = self.bump_if(TokenKind::Comma);
+            while self.bump_if(TokenKind::Newline) || self.bump_if(TokenKind::Dedent) {
+                ate_comma = true;
+            }
+            if !ate_comma {
                 break;
             }
         }
+        while self.bump_if(TokenKind::Newline) || self.bump_if(TokenKind::Dedent) {}
         self.bump_if(TokenKind::RParen);
         args
     }
@@ -1047,6 +1080,20 @@ impl<'a> Parser<'a> {
                 continue;
             }
             let op = self.peek().kind;
+            // `x not in y` ≡ `not (x in y)`：Not 在二元位且后跟 In 时构成 not-in 链
+            //（GDScript 官方语法,Pixelorama 等真实工程高频使用）。
+            if op == TokenKind::Not && self.peek_at(1).kind == TokenKind::In {
+                self.advance();
+                self.advance();
+                let rhs = self.parse_expr_bp(6);
+                let span = (self.cur_start(), self.last_end);
+                lhs = Expr::Unary(
+                    UnOp::Not,
+                    Box::new(Expr::Binary(Box::new(lhs), BinOp::In, Box::new(rhs), span)),
+                    span,
+                );
+                continue;
+            }
             let (lbp, rbp) = match self.infix_bp(op) {
                 Some(bp) => bp,
                 None => break,
@@ -1352,12 +1399,21 @@ impl<'a> Parser<'a> {
         let start = self.cur_start();
         self.advance(); // [
         let mut elems = Vec::new();
-        while !self.at(TokenKind::RBracket) && !self.at(TokenKind::Eof) {
+        loop {
+            self.bump_if(TokenKind::Newline);
+            if self.at(TokenKind::RBracket) || self.at(TokenKind::Eof) {
+                break;
+            }
             elems.push(self.parse_expr());
-            if !self.bump_if(TokenKind::Comma) {
+            let mut ate_comma = self.bump_if(TokenKind::Comma);
+            while self.bump_if(TokenKind::Newline) {
+                ate_comma = true;
+            }
+            if !ate_comma {
                 break;
             }
         }
+        while self.bump_if(TokenKind::Newline) {}
         self.bump_if(TokenKind::RBracket);
         Expr::Array(elems, (start, self.last_end))
     }
@@ -1366,7 +1422,11 @@ impl<'a> Parser<'a> {
         let start = self.cur_start();
         self.advance(); // {
         let mut entries = Vec::new();
-        while !self.at(TokenKind::RBrace) && !self.at(TokenKind::Eof) {
+        loop {
+            self.bump_if(TokenKind::Newline);
+            if self.at(TokenKind::RBrace) || self.at(TokenKind::Eof) {
+                break;
+            }
             // 字典条目：`key: value` 或 Lua 风格 `key = value`。
             let key = self.parse_expr();
             if self.bump_if(TokenKind::Colon) || self.bump_if(TokenKind::Assign) {
@@ -1380,10 +1440,15 @@ impl<'a> Parser<'a> {
                     self.advance();
                 }
             }
-            if !self.bump_if(TokenKind::Comma) {
+            let mut ate_comma = self.bump_if(TokenKind::Comma);
+            while self.bump_if(TokenKind::Newline) {
+                ate_comma = true;
+            }
+            if !ate_comma {
                 break;
             }
         }
+        while self.bump_if(TokenKind::Newline) {}
         self.bump_if(TokenKind::RBrace);
         Expr::Dict(entries, (start, self.last_end))
     }
