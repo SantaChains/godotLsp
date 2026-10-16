@@ -33,7 +33,14 @@ jobs:
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
         with:
           enablement: true
+      - name: 缓存 mdBook 二进制
+        id: mdbook-cache
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: ~/.cargo/bin/mdbook
+          key: mdbook-0.5.4
       - name: 安装 mdBook
+        if: steps.mdbook-cache.outputs.cache-hit != 'true'
         run: cargo install mdbook --version 0.5.4 --locked
       - name: 构建
         run: mdbook build website
