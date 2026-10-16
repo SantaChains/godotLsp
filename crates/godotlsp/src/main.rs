@@ -767,6 +767,50 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
             };
             i.sort_text = Some(scoring::sort_text(bucket, scoring::fuzzy(prefix, &i.label)));
         }
+        // C3：本文件词条面——局部定义（空前缀也出）+ 高频词（有前缀才出，fuzzy>0 过滤）。
+        // 排除保留名（引擎类/内建函数/关键字/注解/@GDScript 函数）——
+        // 那些已由专门面提供，词条面只出用户自定义标识符，避免同名重复项。
+        let (locals, freq) = file_words(src, at);
+        let reserved: std::collections::HashSet<String> = state
+            .real_lower
+            .iter()
+            .cloned()
+            .chain(langdocs::keywords().iter().map(|(k, _, _)| k.to_string()))
+            .chain(hoverdata::annotations().iter().map(|(a, _)| a.to_string()))
+            .chain(hoverdata::gdscript_fns().iter().map(|(f, _)| f.to_string()))
+            .collect();
+        let mut emitted: std::collections::HashSet<String> =
+            items.iter().map(|i| i.label.clone()).collect();
+        for name in &locals {
+            if !emitted.contains(name.as_str()) {
+                emitted.insert(name.clone());
+                items.push(CompletionItem {
+                    label: name.clone(),
+                    kind: Some(CompletionItemKind::VARIABLE),
+                    detail: Some("局部变量".into()),
+                    sort_text: Some(scoring::sort_text(scoring::bucket::LOCAL, scoring::fuzzy(prefix, name))),
+                    ..CompletionItem::default()
+                });
+            }
+        }
+        if !prefix.is_empty() {
+            for (w, n) in &freq {
+                if emitted.contains(w.as_str()) || reserved.contains(w.to_lowercase().as_str()) {
+                    continue;
+                }
+                let f = scoring::fuzzy(prefix, w);
+                if f > 0 {
+                    emitted.insert(w.clone());
+                    items.push(CompletionItem {
+                        label: w.clone(),
+                        kind: Some(CompletionItemKind::VARIABLE),
+                        detail: Some(format!("本文件出现 {n} 次")),
+                        sort_text: Some(scoring::sort_text(scoring::bucket::LOCAL, f)),
+                        ..CompletionItem::default()
+                    });
+                }
+            }
+        }
     }
     CompletionResponse::Array(items)
 }
@@ -1760,6 +1804,93 @@ fn word_span(src: &str, offset: usize) -> Option<(usize, String)> {
     }
 }
 
+/// C3：本文件自定义标识符提取。
+///
+/// 返回 (局部定义, 高频词)。局部定义 = 光标行之前（含同行）词法扫出的
+/// `var X` / `const X` / `for X in` / 函数参数名；高频词 = 文件内出现
+/// ≥2 次的标识符（跳过与光标词重叠的 token——半截词不计）。
+/// 排序：locals 按声明顺序（作用域就近），高频词按出现次数降序。
+fn file_words(src: &str, cursor: usize) -> (Vec<String>, Vec<(String, u32)>) {
+    let b = src.as_bytes();
+    // 光标词区间：扫描统计时跳过与之重叠的 token（输入中的半截词不计入频次）。
+    let (cs, ce) = match word_span(src, cursor) {
+        Some((s, w)) => (s, s + w.len()),
+        None => (usize::MAX, 0),
+    };
+
+    // 局部定义：逐行扫 var/const/for/func 参数（词法级，行号 ≤ 光标行）。
+    let mut locals: Vec<String> = Vec::new();
+    let mut seen = std::collections::HashSet::new();
+    let cursor_line = src[..cursor.min(src.len())].bytes().filter(|&c| c == b'\n').count();
+    for (ln, line) in src.lines().enumerate() {
+        if ln > cursor_line {
+            break;
+        }
+        let t = line.trim_start();
+        let mut push = |name: &str, locals: &mut Vec<String>, seen: &mut std::collections::HashSet<String>| {
+            if !name.is_empty()
+                && (name.as_bytes()[0].is_ascii_alphabetic() || name.as_bytes()[0] == b'_')
+                && seen.insert(name.to_string())
+            {
+                locals.push(name.to_string());
+            }
+        };
+        if let Some(rest) = t.strip_prefix("var ").or_else(|| t.strip_prefix("const ")) {
+            let name: String = rest.trim().chars().take_while(|&c| c.is_ascii_alphanumeric() || c == '_').collect();
+            push(&name, &mut locals, &mut seen);
+        } else if let Some(rest) = t.strip_prefix("for ") {
+            // for i in ... / for i: int in ...
+            let name: String = rest.trim().chars().take_while(|&c| c.is_ascii_alphanumeric() || c == '_').collect();
+            push(&name, &mut locals, &mut seen);
+        } else if let Some(rest) = t.strip_prefix("func ") {
+            // func f(a, b: int = 1) -> 逐参数取冒号/等号前的名字。
+            if let Some(lp) = rest.find('(') {
+                let params = rest[lp..].trim_start_matches('(');
+                for p in params.split(',') {
+                    let name: String = p
+                        .trim()
+                        .split(':')
+                        .next()
+                        .unwrap_or("")
+                        .split('=')
+                        .next()
+                        .unwrap_or("")
+                        .trim()
+                        .chars()
+                        .take_while(|&c| c.is_ascii_alphanumeric() || c == '_')
+                        .collect();
+                    push(&name, &mut locals, &mut seen);
+                }
+            }
+        }
+    }
+
+    // 高频词：全文标识符计数（跳过光标词区间与字符串字面量外不做区分——词法级）。
+    let mut counts: HashMap<String, u32> = HashMap::new();
+    let mut i = 0;
+    while i < b.len() {
+        if b[i].is_ascii_alphabetic() || b[i] == b'_' {
+            let s = i;
+            while i < b.len() && (b[i].is_ascii_alphanumeric() || b[i] == b'_') {
+                i += 1;
+            }
+            // 与光标词区间重叠的 token 跳过（含正在输入的半截词）。
+            if s < ce && i > cs {
+                continue;
+            }
+            let w = &src[s..i];
+            if w.len() >= 2 {
+                *counts.entry(w.to_string()).or_insert(0) += 1;
+            }
+        } else {
+            i += 1;
+        }
+    }
+    let mut freq: Vec<(String, u32)> = counts.into_iter().filter(|(_, n)| *n >= 2).collect();
+    freq.sort_by(|a, b| b.1.cmp(&a.1).then_with(|| a.0.cmp(&b.0)));
+    (locals, freq)
+}
+
 fn apply_range_change(doc: &mut String, range: &Range, text: &str) {
     let start = position_to_offset(doc, range.start).unwrap_or(doc.len());
     let end = position_to_offset(doc, range.end).unwrap_or(doc.len());
@@ -2047,6 +2178,61 @@ func _ready() -> void:
         let for_kw6 = items6.iter().find(|i| i.label == "for").unwrap();
         assert_eq!(for_kw6.insert_text_format, Some(InsertTextFormat::SNIPPET));
         assert!(for_kw6.insert_text.as_deref().unwrap().starts_with("for ${1:i}"));
+    }
+
+    /// C3 本文件词条面：locals 空前缀也出 + 高频词有前缀才出 + 保留名排除 + LOCAL 桶最前。
+    #[test]
+    fn completion_file_words() {
+        let base = test_state();
+        let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+        let ask = |state: &State, line: u32, ch: u32| -> Vec<CompletionItem> {
+            let p: CompletionParams = serde_json::from_value(serde_json::json!({
+                "textDocument": {"uri": uri},
+                "position": {"line": line, "character": ch}
+            }))
+            .unwrap();
+            match completion(state, &p) {
+                CompletionResponse::Array(items) => items,
+                _ => vec![],
+            }
+        };
+        let is_word_entry = |i: &CompletionItem, detail: &str| i.detail.as_deref() == Some(detail);
+
+        // locals：var/const/for/参数——空前缀也出，LOCAL 桶（"00"）最前。
+        let src = "extends Node\nfunc tick(delta: float, n := 0) -> void:\n\tvar hp := 10\n\tfor i in range(3):\n\t\tpass\n\nfunc other() -> void:\n\t";
+        let st = state_with(&base, src);
+        let items = ask(&st, 7, 1);
+        for name in ["hp", "delta", "n", "i"] {
+            assert!(
+                items.iter().any(|i| i.label == name && is_word_entry(i, "局部变量")),
+                "{name} 应以局部变量出: {:?}",
+                items.iter().filter(|i| is_word_entry(i, "局部变量")).map(|i| &i.label).collect::<Vec<_>>()
+            );
+        }
+        let hp = items.iter().find(|i| i.label == "hp").unwrap();
+        assert!(hp.sort_text.as_deref().unwrap().starts_with("00"), "LOCAL 桶编码: {}", hp.sort_text.as_deref().unwrap());
+
+        // 高频词：非声明的重复标识符，有前缀才出；保留名（Sprite2D）不重复出。
+        let src2 = "var t := Sprite2D.new()\nvar u := Sprite2D.new()\n\nmove_and_slide()\nmove_and_slide()\nmov";
+        let st2 = state_with(&base, src2);
+        let items2 = ask(&st2, 5, 3);
+        let mas = items2
+            .iter()
+            .find(|i| i.label == "move_and_slide" && is_word_entry(i, "本文件出现 2 次"))
+            .expect("高频词 move_and_slide 应出");
+        assert!(mas.sort_text.as_deref().unwrap().starts_with("00"));
+        assert!(
+            !items2.iter().any(|i| i.label == "Sprite2D" && is_word_entry(i, "本文件出现 2 次")),
+            "保留名不该以词条身份重复出现"
+        );
+
+        // 空前缀不出高频词（避免淹没全局面）。
+        let st3 = state_with(&base, "move_and_slide()\nmove_and_slide()\n\n");
+        let items3 = ask(&st3, 2, 0);
+        assert!(
+            !items3.iter().any(|i| i.label == "move_and_slide" && is_word_entry(i, "本文件出现 2 次")),
+            "空前缀不出高频词"
+        );
     }
 }
 
