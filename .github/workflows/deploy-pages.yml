@@ -34,7 +34,7 @@ jobs:
         with:
           enablement: true
       - name: 安装 mdBook
-        run: cargo install mdbook --version 0.4.52 --locked
+        run: cargo install mdbook --version 0.5.4 --locked
       - name: 构建
         run: mdbook build website
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
