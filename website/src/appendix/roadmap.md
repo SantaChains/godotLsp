@@ -1,14 +1,28 @@
 # 学习路线
 
-> 🚧 **骨架阶段占位页**。本页正文按里程碑填充（语法篇 W3、范式/内部篇 W4、类参考由生成管线产出）。
-> 规划见仓库 `docs/gdscript-docs-site-plan.md`。
+**从零到能写游戏的七步路径。**
 
-## 本章计划小节
+## 七步
 
-- ① extends + @onready + $ 节点路径
-- ② 生命周期与 delta
-- ③ @export
-- ④ 信号
-- ⑤ PackedScene 实例化/add_child/queue_free
-- ⑥ 容器与静态类型
-- ⑦ class_name 与输入系统
+| 步骤 | 内容 | 掌握标志 |
+|---|---|---|
+| 1 | extends + @onready + $ 节点路径 | 能引用子节点 |
+| 2 | 生命周期与 delta | _ready/_process/_physics_process |
+| 3 | @export | 编辑器调参数 |
+| 4 | 信号 | 按钮点击响应 |
+| 5 | PackedScene 实例化/add_child/queue_free | 生成子弹 |
+| 6 | 容器与静态类型 | typed array、Dictionary |
+| 7 | class_name 与输入系统 | 多文件项目、键盘移动 |
+
+## 推荐顺序
+
+```
+语法篇 → 范式篇 → internals 篇 → math 篇 → algo 篇 → perf 篇
+```
+
+先会写代码（语法），再会用 Godot 思维（范式），再懂引擎内部（internals），再补数学和算法，最后优化。
+
+## 延伸阅读
+
+- 本站：[三大支柱](../paradigm/01-pillars.md)、[高频坑](pitfalls.md)
+- 官方：[Getting started](https://docs.godotengine.org/en/stable/getting_started/index.html)

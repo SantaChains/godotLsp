@@ -35,6 +35,12 @@
 - [脚本即组件](paradigm/08-script-as-component.md)
 - [组合优于继承](paradigm/09-composition.md)
 
+# UI 架构篇
+
+- [UI 范式全景](ui/00-paradigm-survey.md)
+- [状态与控件分离](ui/01-state-separation.md)
+- [响应式封装实现](ui/02-reactive-wrapper.md)
+
 # 思想篇
 
 - [数据导向设计（DOD）](thought/01-dod.md)
@@ -48,6 +54,9 @@
 - [GDScript 高性能实施](perf/02-gdscript.md)
 - [批量与结构优化](perf/03-bulk.md)
 - [物理与渲染预算](perf/04-physics-render.md)
+- [节点查找的真相](perf/05-node-lookup.md)
+- [大地图分块流式加载](perf/06-chunk-streaming.md)
+- [绕过场景树直调 RenderingServer](perf/07-renderingserver-direct.md)
 
 # 算法篇
 
@@ -74,6 +83,13 @@
 - [Variant 序列化](internals/05-variant.md)
 - [资产管线](internals/06-assets.md)
 - [脚本致命面与静默失败](internals/07-fatal.md)
+
+# GDExtension 高性能篇
+
+- [GDExtension 是什么](ext/01-what-is.md)
+- [C++ 环境搭建](ext/02-setup.md)
+- [暴露类与方法](ext/03-binding.md)
+- [性能边界与模式](ext/04-boundaries.md)
 
 # 附录
 

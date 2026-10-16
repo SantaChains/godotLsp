@@ -49,9 +49,20 @@ Player (CharacterBody2D)
 | `_init()` | 对象被构造时（还不在树中） |
 | `_enter_tree()` | 节点进入场景树 |
 | `_ready()` | 节点及其所有子节点都进入树后 |
-| `_process(delta)` | 每帧 |
+| `_process(delta)` | 每渲染帧 |
 | `_physics_process(delta)` | 每物理帧（默认 60Hz） |
 | `_exit_tree()` | 节点离开场景树 |
+| `_notification(what)` | 通用通知，可监听任意生命周期事件 |
+
+执行顺序（一棵新子树 add_child 后）：
+
+```
+父 _enter_tree → 子 _enter_tree（自顶向下）
+→ 子 _ready（自底向上，最深的先 ready）
+→ 父 _ready
+```
+
+> 值得注意的是：`_ready()` 只在节点第一次进入树时触发一次。`_enter_tree()` 每次进出树都触发。引用子节点用 `@onready` 或 `_ready()`，不要在 `_init()` 里找子节点（此时还没进树）。
 
 ```gdscript
 func _ready():

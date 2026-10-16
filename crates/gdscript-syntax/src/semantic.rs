@@ -67,7 +67,7 @@ pub trait ProjectContext {
     /// autoload 单化名 → 类型。
     fn autoload_type(&self, name: &str) -> Option<String>;
     /// preload("res://x.gd") → 该脚本的 class_name 类型（若声明了）。
-    fn preload_type(&self, res_path: &str) -> Option<String> { None }
+    fn preload_type(&self, _res_path: &str) -> Option<String> { None }
 }
 
 pub fn analyze(file: &File, engine: &EngineApi) -> Analysis {
@@ -148,11 +148,10 @@ impl<'a> Ctx<'a> {
             return true;
         }
         // 项目级跨文件符号：class_name 注册与 autoload 单例。
-        if let Some(p) = self.project {
-            if p.class_name_type(name).is_some() || p.autoload_type(name).is_some() {
+        if let Some(p) = self.project
+            && (p.class_name_type(name).is_some() || p.autoload_type(name).is_some()) {
                 return true;
             }
-        }
         false
     }
 
@@ -446,16 +445,14 @@ impl FileInfo {
         for line in src.lines() {
             let t = line.trim_start();
             for prefix in ["var ", "@onready var "] {
-                if let Some(rest) = t.strip_prefix(prefix) {
-                    if let Some(col) = rest.find(':') {
-                        if rest[..col].trim() == name {
+                if let Some(rest) = t.strip_prefix(prefix)
+                    && let Some(col) = rest.find(':')
+                        && rest[..col].trim() == name {
                             let ty = rest[col + 1..].trim().split('=').next()?.trim();
                             if !ty.is_empty() {
                                 return Some(ty.to_string());
                             }
                         }
-                    }
-                }
             }
         }
         None
