@@ -26,6 +26,11 @@
 
 - `feature-showcase/`：本项目**手写**的、按特性组织的 GDScript 2.0 覆盖样本，
   用于快速冒烟与文档示例（非 Godot 上游）。
+- `godot-demo-projects/`：来自官方 demo 仓库
+  `github.com/godotengine/godot-demo-projects`（**只解出 .gd 文件**）。
+  **许可证：MIT**。拉取用 `uv run tools/fetch_demo.py`（pinned tag
+  `4.7-6ad6167`，2026-10 收录，456 个 .gd）。
+  消费方：`tools/gen_freq.py` 的补全频率表挖掘（权重 ×2,真实工程）。
 
 ## 使用约定
 
