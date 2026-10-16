@@ -15,6 +15,8 @@
 | 手改蓝图生成的 .gd 生成物 | 再生成即覆盖,双 SSOT 冲突;单向 + 头部标注是唯一自洽形态 | 同上,逃生舱节点已覆盖手写需求 |
 | 特定工作流硬编码(类 vscode-git-flow 的 master/develop/feature 固化 UI) | 项目组织习惯一变即废;资源图谱/大纲保持数据驱动(边类型来自文件事实) | 无——原则性排除 |
 | 内嵌/连接 Godot 引擎运行时做语言服务 | 与「完全脱离 Godot」的核心差异化矛盾;官方插件已有引擎内 LSP | 无——v2 引擎模型走 `--dump-extension-api` 静态数据路线(from-scratch-design §7) |
+| **Blender 材质节点 → gdshader 自动转译**(X3) | 工作量巨大且保真度低:Blender 节点图(Cycles/EEVEE 专属节点)与 gdshader 语言模型不同构,glTF 生态的标准答案是 bake 纹理(程序化节点本来就不存活);官方导入器路径才是正道 | glTF 生态出现标准材质中间表示,或社区出现可复用的节点图→shader 编译器 |
+| DAP/配置文件生成 **clobber 已有配置**(godot-rust-vscode 反面教材) | 用户自建 tasks.json/launch.json 被整文件覆写不可接受 | 无——merge-not-clobber 是纪律,不是选择 |
 
 ## 二、技术排除(有更优替代,记录以防重蹈)
 
@@ -39,6 +41,7 @@
 
 - X1 AI 资源管线(规格已备,等消费方);
 - X2 确定性路径派生 uid(见上表);
+- X3 Blender 管线交集的资源可见性部分(E1-G 已覆盖)与 shader 模板(P2.6 S1 顺带);
 - gd 函数级控制流 flowchart(CodeVisualizer 路线:Tree-sitter WASM → IR → Mermaid);
 - 架构规则 lint(依 dependency-cruiser 思想:依赖规则即代码);
 - 手绘草图 → 蓝图节点(hall/draw 的笔输入 + 手写识别 provider 模式参照);
@@ -48,4 +51,5 @@
 
 - **工作区符号池**(Outline Map 式文件级聚合):与项目树/P2-19 B 方案服务器图索引重叠,避免双索引,进图期统一;
 - **GDBlue 运行时解释器**(蓝图 JSON → GDScript 微型解释器执行):性能差 + 生成物路线已闭环;仅当出现「热重载图逻辑不落盘」需求时重评;
-- **3D 城市隐喻架构图**(CodeCharta 式):CI 管线级工程,收益与成本不匹配;其「指标多视觉通道映射」思想已被 codemap 式指标层吸收。
+- **3D 城市隐喻架构图**(CodeCharta 式):CI 管线级工程,收益与成本不匹配;其「指标多视觉通道映射」思想已被 codemap 式指标层吸收;
+- **gdshader 语义级类型检查**(swizzle 合法性/隐式转换/stage 约束——P2.6 S3):全部竞品的共同坟场(GodOfAvacyn 因误报失/community 信任、Godot Files 明示未做),是最差异化机会也是最大成本;升级条件 = S3 前四档(preprocessor/symbol/语法诊断/hover 补全)稳定 + R2 GDScript 内核重写完成 + 零误报验收基准可执行。

@@ -1,0 +1,35 @@
+{
+	// 顺序有语义，别调换：插件用 workspaceFolders[0] 定位 Godot 工程
+	//   - editors/vscode/src/extension.ts:75  语言服务器 cwd
+	//   - editors/vscode/src/extension.ts:185 终端 cwd
+	//   - editors/vscode/src/extension.ts:205 Run Project 的 `--path .`
+	// godot-test 必须排第一。否则 --path . 落到仓库根：那里没有 project.godot，
+	// Godot 会静默打开项目管理器（而不是报错），语言服务器也解析不了 autoload。
+	"folders": [
+		{
+			"name": "godot-test（Godot 工程，须排第一）",
+			"path": "godot-test"
+		},
+		{
+			"name": "godotlsp（Rust 服务与 VS Code 插件）",
+			"path": "."
+		}
+	],
+	"settings": {
+		// 本机 Godot 来自 Steam，PATH 上没有 godot.exe；插件默认只找 PATH，
+		// 不设这一项时 Run Project 会报“未找到 Godot 可执行文件”。
+		"godotlsp.godotExecutable": "D:/Steam/steamapps/common/Godot Engine/godot.windows.opt.tools.64-old.exe",
+		// .refs/ 是 Godot 引擎源码克隆（420MB、数百个 .gd 测试文件），仅供阅读参照；
+		// 排除出文件监听与搜索，避免分析/搜索被拖垮。刻意不用 files.exclude，
+		// 以便在资源管理器里继续浏览引擎源码。
+		"files.watcherExclude": {
+			"**/.refs/**": true,
+			"**/target/**": true,
+			"**/node_modules/**": true
+		},
+		"search.exclude": {
+			"**/.refs/**": true,
+			"**/target/**": true
+		}
+	}
+}

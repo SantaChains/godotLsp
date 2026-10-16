@@ -1,0 +1,85 @@
+# LLVM PGO(Profile-guided Optimization)release 构建工作流
+#
+# 背景:BOLT 官方不支持 Windows PE/COFF(LLVM Discourse 上游确认,无计划支持),
+# 本机 scoop LLVM 23.1.3 也无 llvm-bolt.exe。PGO 是 Windows 原生可行的等价档:
+# 代码布局/内联/分支优化由 LLVM 基于 profile 决策,收益方向与 BOLT 相同(热代码聚簇、icache 命中)。
+#
+# 用法(项目根目录执行):
+#   cargo make pgo                 # 全流程:clean → 插桩构建 → 跑负载 → merge → PGO 优化构建
+#   cargo make pgo-instrument      # 仅阶段1:插桩构建(产物在 target/release,运行时写 profraw)
+#   cargo make pgo-run             # 仅跑负载(默认 cargo test --release;可另手动跑真实 LSP 会话)
+#   cargo make pgo-merge           # 仅合并 profraw → merged.profdata
+#   cargo make pgo-build           # 仅阶段2:profile-use + thin-LTO 优化构建
+#
+# 负载质量决定收益:跑得越像真实使用,优化越准。LSP 服务器最佳负载 = 一次真实编辑会话
+# (打开工程、连续编辑、hover/completion/references 各触发若干次);smoke 测试是兜底档。
+#
+# 可覆盖参数(cargo make --env PGO_DIR=... pgo):
+#   PGO_DIR        profile 数据目录(默认 <workspace>/pgo-data)
+#   LLVM_BIN       llvm-profdata 所在目录(可选;默认从 PATH 解析)
+
+[env]
+PGO_DIR = "${CARGO_MAKE_WORKSPACE_WORKING_DIRECTORY}/pgo-data"
+# llvm-profdata 默认从 PATH 解析;若不在 PATH,设 OS 环境变量 LLVM_BIN 指向其所在目录。
+
+# ── 阶段0:清空 profile 数据 ──────────────────────────────────────────────
+[tasks.pgo-clean]
+description = "清空 pgo-data 目录"
+command = "powershell"
+args = [
+    "-NoProfile",
+    "-Command",
+    '''Remove-Item -Recurse -Force $env:PGO_DIR -ErrorAction SilentlyContinue
+New-Item -ItemType Directory -Force $env:PGO_DIR | Out-Null''',
+]
+
+# ── 阶段1:插桩构建 ──────────────────────────────────────────────────────
+[tasks.pgo-instrument]
+description = "PGO 插桩构建(-Cprofile-generate)"
+env = { "RUSTFLAGS" = "-Cprofile-generate=${PGO_DIR}" }
+command = "cargo"
+args = ["build", "--release"]
+
+# ── 阶段2:运行负载生成 profile ──────────────────────────────────────────
+# 默认负载 = release 模式跑全部测试(含 LSP duplex smoke,覆盖分析热路径)。
+# 可在此之后手动跑真实会话追加 profraw(多份会一起 merge)。
+[tasks.pgo-run]
+description = "运行负载生成 profraw(默认 cargo test --release)"
+env = { "RUSTFLAGS" = "-Cprofile-generate=${PGO_DIR}" }
+command = "cargo"
+args = ["test", "--release"]
+
+# ── 阶段3:合并 profile ─────────────────────────────────────────────────
+[tasks.pgo-merge]
+description = "llvm-profdata merge → merged.profdata"
+command = "powershell"
+args = [
+    "-NoProfile",
+    "-Command",
+    '''$prof = @(Get-ChildItem $env:PGO_DIR -Filter *.profraw)
+if ($prof.Count -eq 0) { throw "no .profraw in $env:PGO_DIR - run pgo-run first" }
+$exe = if ($env:LLVM_BIN) { Join-Path $env:LLVM_BIN "llvm-profdata.exe" } else { "llvm-profdata" }
+& $exe merge -o "$env:PGO_DIR\merged.profdata" $prof.FullName
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+Get-Item "$env:PGO_DIR\merged.profdata" | Format-List Name, Length''',
+]
+
+# ── 阶段4:PGO 优化构建 ─────────────────────────────────────────────────
+# -Cprofile-use 让 LLVM 按真实热度布局代码;thin-LTO + 单 CU 提升跨 crate 内联。
+# 注意:此任务产物 = 发布产物,之后不要再用普通 cargo build --release 覆盖它。
+[tasks.pgo-build]
+description = "PGO 优化构建(-Cprofile-use + thin-LTO)"
+env = { "RUSTFLAGS" = "-Cprofile-use=${PGO_DIR}/merged.profdata -Clto=thin -Ccodegen-units=1" }
+command = "cargo"
+args = ["build", "--release"]
+
+# ── 全流程串联 ──────────────────────────────────────────────────────────
+[tasks.pgo]
+description = "PGO 全流程:clean → instrument → run → merge → build"
+dependencies = [
+    "pgo-clean",
+    "pgo-instrument",
+    "pgo-run",
+    "pgo-merge",
+    "pgo-build",
+]

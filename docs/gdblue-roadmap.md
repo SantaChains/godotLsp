@@ -43,10 +43,12 @@ Godot 4 移除 VS 的原因:动态类型端口、编辑器内嵌引擎的维护�
 ### V1 — BIR 规范 + 只读渲染
 - `.gdblue.json` schema:`functions[]{name, nodeId} + nodes{id, kind, params, ports{in[], out[]}(类型化)} + sequenceEdges[]{from, outPort, to} + dataEdges[]{from, outPort, to, inPort}`;
 - React Flow **只读**视图;.gdblue 文件类型注册(图标/语法/语言);与资源图谱(P2-19 E1-G)互通:蓝图文件是图节点,蓝图内 preload 引用是边;
-- ELK 自动布局(配置锚点:`hierarchyHandling: INCLUDE_CHILDREN`、`edgeRouting: ORTHOGONAL`)。
+- ELK 自动布局(配置锚点:`hierarchyHandling: INCLUDE_CHILDREN`、`edgeRouting: ORTHOGONAL`);
+- **CustomDocument 自定义编辑器**(§9.2):CustomEditorProvider + CustomDocument + onDidChangeCustomDocument(撤销/重做),双击即图、右键回文本。
 
 ### V2 — 编辑器
 - 端口拖拽连线/断开、默认值编辑、**静态类型检查红线**(连接传播)、节点库搜索(复用主路线 21b 搜索语法)、双通道边视觉区分(执行流实线箭头 / 数据流虚线);
+- **cable 自动落端口**(§9.2 Blackprint 实证:拖线到节点自动吸附类型匹配端口)+ **webview↔host 增量同步**(diff 消息,不全图重传);
 - ⚠ 连线 UX 是全项目最大交互深水区——先只读后编辑,鼠标优先,键盘/手写远期。
 
 ### V3 — transpile → GDScript(核心闭环)
@@ -84,3 +86,24 @@ Godot 4 移除 VS 的原因:动态类型端口、编辑器内嵌引擎的维护�
 - corpus 状态机夹具(敌人 AI patrol/attack/flee):蓝图 → 生成 GDScript → 引擎运行行为等价;
 - 端口错型连接全部静态拦截(类型检查夹具);
 - 生成代码过 gdscript-engine 零诊断;AI 端到端(LLM 写蓝图 → 引擎可运行)演练一次。
+
+## 9. 外部参照二轮:ComfyUI/Blackprint 类资料取舍(2026-10-16)
+
+> 输入:一份「VS Code 节点编辑器可行性分析」(ComfyUI/Unity DOTS/三层架构/Canvas 渲染)。逐点对照本路线图与 rejected-designs 的取舍如下——**核心结论:三层架构的前两层与本设计同构,第三层(运行时)与本路线冲突,维持否决;渲染建议与已核验选型冲突,维持 React Flow。**
+
+### 9.1 维持否决的两组建议(理由强化)
+
+- **「运行时层:Godot 内解析 JSON 执行数据流图 + 拓扑排序增量重算」——否决,维持 V3 transpile 路线**。理由:①这正是 rejected-designs 已缓行的「蓝图运行时解释器」,而 godot-visual-script 的 VisualScriptInstance 逐节点解释本就是原版性能包袱与 4.x 移除诱因(§1-§2)——资料等于建议重建一个被引擎弃掉的解释器,再加一层拓扑排序增量优化器,复杂度远超我们的 1:1 直译;②生成 .gd 走引擎原生工具链:断点/分析/导出/静态检查全部免费继承,解释器路线全部要自建;③资料自己的「JSON 驱动、可热重载」在 transpile 路线下同样成立(变更 → 重 transpile → gdscript-engine 验证,V3 管线)。
+- **「务必 Canvas 2D/WebGL 渲染(比 DOM 快得多)」——否决,维持 React Flow + ELK**。依据主路线图 P2-19 已核验的选型证据(双源 benchmark、ELK 复合边、确定性布局);决定性事实:**蓝图 = 函数级画布**(原版 38 节点类、per-function 组织,典型 <100 节点),远在 DOM/SVG 舒适区;React Flow 自带视口虚拟化(仅渲染视口内节点),资料担心的卡顿场景不存在;Canvas 自绘只在 >2000 节点全工程大图触发(升级线已记),蓝图编辑器不在此域。ComfyUI 用 canvas 系渲染不构成证据——它的画布是任意规模工作流,形态不同。
+
+### 9.2 吸收清单(三项进分期,两项进参照系)
+
+- **CustomDocument 自定义编辑器(V1/V2 落地要点)**:`CustomEditorProvider` + `CustomDocument`(打开/保存/backup)+ `onDidChangeCustomDocument`(撤销/重做)——VS Code 自定义编辑器正道,.gdblue.json 双击即图、右键「Open as Text」随时回文本(Blackprint .bpi 同款交互;我们的 SSOT 本就是 JSON 文本,零成本满足);
+- **cable 自动落端口(V2 连线 UX 减压)**:Blackprint 实证——拖线到节点时自动吸附到类型匹配的合适端口(而非必须精确命中端口),配静态类型检查(现代化三招之一)是天然组合,直接降低「连线深水区」的交互压力;
+- **webview↔host 增量同步(V2 实现要点)**:编辑消息只发 diff(变更节点/边),不做全图重传——与主路线 JSON Flow 100ms 节流同构,防通信抖动;
+- **Blackprint 进参照系**(MIT,212★,v0.10 活跃):①**skeleton schema**(节点库的机器可读注册表:skeleton.json 描述节点树/端口类型,编辑器据此渲染与校验)——与我们的 BIR node kinds + 「LSP 对蓝图文件 hover/补全」(§6)同构,数据形状可参照;②**code-generation 是其官方路线**(JS 进行中、Python/C# 实验)——独立佐证「可视化编程的终局是生成宿主语言代码」,与我们 transpile 决策同向;③hot reload / mini preview / cable branching 等交互清单作 V2 校对清单。Flyde 同为「扩展 + 运行时分离」先例,参照价值同上不单独展开。
+- **存疑与谬误标注**:①资料所引「TypeScript Genge」查无此物(Godot 生态无可核验的该扩展),按疑似幻觉处理不采纳;②「Unity DOTS 证明了可视化编辑可行」是论证瑕疵——Behavior Designer/State Designer 是第三方插件且与 DOTS 无关;状态图可视化参照我们 V4 已对标的 Unity Visual Scripting 即可。
+
+### 9.3 与现有设计重合(无增益,记录避免重复劳动)
+
+「每个函数一张独立画布」「控制流节点(Branch/ForEach/混合数据流+控制流)」「组合优于继承」「JSON 中间表示可版本化/序列化/分享」——分别对应本路线图 §1(函数=节点集+边集)、§3 流控组(38 类含 Condition/While/Iterator)、§4-V4(组合式状态机)、§2-招3(.gdblue.json SSOT),已全覆盖;资料的增量价值集中在 9.2 三项交互细节。

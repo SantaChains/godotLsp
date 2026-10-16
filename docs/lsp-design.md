@@ -53,7 +53,7 @@
 
 ## 二、godotlsp 现状基线
 
-- **协议层已异步化**(0eda519,`lsp-server-tokio` 0.3):tokio 异步 stdio + `route()` 显式路由 + 每请求 `CancellationToken`。
+- **协议层已异步化**(0eda519,`lsp-server-tokio` **0.4**,2026-10-16 自 0.3 迁移):tokio 异步 stdio + `route()` 显式路由 + 每请求 `CancellationToken`。0.4 迁移面实录:`Connection.receiver` 转私有(读侧改 `receiver_mut()`/`into_receiver()`,3 处调用点);`Response::ok/err`、`Connection<T, I=()>`、`ClientSender`、`request_queue.outgoing.register(-1)`、`IncomingMessage::CancelHandled` 均未变;`ErrorCode`/`LifecycleState` 转 `#[non_exhaustive]`,MSRV 1.91。34/34 测试(含 duplex e2e/smoke)全绿验证。
 - **P2 并发模型已落地**(9dabec4):单写者 `State`(主循环独占)+ 线程池快照(请求解析后拍 `Snapshot`,分析计算 `spawn_blocking` 下沉,结果经双通道回传,响应优先于诊断);50ms 预算事件合并;取消三态(`RequestCancelled`/完成后取消静默丢弃/revision 过期 → `ContentModified`);诊断去抖调度器(自适应延迟 = 最近 15 次耗时中位数 clamp [50,500]ms)+ 代际编辑作废 + 取消重排。
 - **salsa 0.27 写路径硬约束(源码核验)**:`zalsa_mut` → `cancel_others` 以 Condvar 等待 storage clone 计数归 1 —— 快照句柄存活期间写世界会死锁(官方注释明言单线程双句柄死锁)。因此采用「**写者等待在飞读者(有界)**」而非 RA 式中途取消:所有写前 `quiesce()` 等在飞任务归零;unbounded 任务通道消除任务端阻塞环;`MAX_INFLIGHT=4` 约束写等待上界;过期结果靠 revision 比对识别,内核 `Cancellable` 防御性传播。
 - **纯脱离 Godot 客户端运行**(已验证):分析内核源码无进程派生、无网络依赖;引擎模型与 API 文档内嵌于 `gdscript-api`(`engine_docs.bin`),场景感知靠直接解析 `.tscn`/`.tres` 文本。
