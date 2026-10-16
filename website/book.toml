@@ -1,0 +1,14 @@
+[book]
+authors = ["godotlsp"]
+language = "zh-CN"
+src = "src"
+title = "GDScript 与 Godot 中文参考"
+description = "面向 LSP 与阅读者的 GDScript 语法、Godot 范式与引擎内部机制中文参考"
+
+[output.html]
+git-repository-url = "https://github.com/SantaChains/godotlsp"
+edit-url-template = "https://github.com/SantaChains/godotlsp/edit/main/website/{path}"
+additional-css = []
+
+[output.html.search]
+enable = true
