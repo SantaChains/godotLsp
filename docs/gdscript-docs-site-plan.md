@@ -248,10 +248,12 @@ high-end 诸篇）+ 社区实证的 GDScript 热点知识的体系化。**同不
 - **P0（hover 高频集，全量精译）**：`@GDScript`（全部内建函数）、`@GlobalScope`
   （全部工具函数/枚举/常量）、约 50 个核心类——全部 Variant 数学/容器类型、
   Object/RefCounted/Node/Node2D/Node3D/Control 系主干、常用 Resource。
-  与内核 `gdscript_docs.rs` 文档表互为校验。
-- **P1（全类骨架）**：900 类全部生成——签名表 + 一句话简介 + 成员锚点齐全
-  （跳转链接 100% 可用），正文后续填充。
-- **P2（长尾精译）**：按使用频率逐批补全中文详解。
+  与 LSP `hoverdata.json` / `doclinks.rs` 互为校验（§四之一）。
+- **P1（全类骨架）✅ 提前达成（W2 即完成）**：1076 类页全部生成——签名表 +
+  简介 + 成员锚点齐全（跳转链接 100% 可用）；P1 描述层又补入 21613 条成员
+  首段描述（含枚举值 5.7k 条，全站性解析缺口修复后生效）。
+- **P2（长尾精译）→ 未动工**：按使用频率逐批补全中文详解。**当前描述层
+  是英文原文**——中文化在 gen_docs.py 提取层切换，网站与 hover 双端同批生效。
 
 骨架先行保证「链接全部有效」，精译保证「质量」——两件事解耦。
 
@@ -290,33 +292,42 @@ P1 描述层覆盖：类/内建 brief、成员描述（沿继承链回溯）、@
   （BASE 以此为准，实施前确认仓库 owner）。
 - 版权页：godot-docs 内容 CC BY 3.0，站内署名 + 标注修改 + 版本锁定说明（4.x stable）。
 
-## 六、执行顺序（确认后开工）
+## 六、执行路线图（2026-10-16 状态刷新）
 
-1. W1 清空 `website/` 重建骨架：book.toml + SUMMARY + intro（✅ 2026-10-16）。
-2. W2 `tools/gen_docs.py` + P0 类生成 + 内核 `url` 模块改造 + 防漂移测试（核心闭环）。
-3. W3 语法篇 16 篇（AI 起草，godot-docs 语料逐篇核验）。
-4. W4 范式篇 8 篇 + 引擎内部篇 7 篇（engine-analyzer.md 改写）。
-5. W5 P1 全类骨架 + Pages 工作流上线。
-6. 迭代：P2 精译、附录（高频坑/迁移表/学习路线）、插件入口链接。
-7. **P3 思想篇 4 章 + 性能篇 4 章**（范式思考的纵深；素材：官方 performance
-   文档、Nystrom、Jai 公开资料——三之四/三之五）。
-8. **P4 算法篇 4 章 + 数学篇 6 章**（素材：Red Blob Games、quant67 游戏数学、
-   Gaffer on Games——三之六/三之七）。
-9. W3 起执行 §五之二 写作规范；paradigm 补 09-composition（组合优于继承深挖，
-   与思想篇 01-02 互链）。
+### 已完成（时间序）
 
-### 取舍声明（明确不做）
+| 阶段 | 内容 | 提交 |
+|---|---|---|
+| W1 | `website/` 骨架：book.toml + SUMMARY + 35 stub 页；rust-course 主题恢复（style/custom.js/index.hbs） | `7b4a4de` `2c9ee39` `53b2797` `652052d` |
+| W1.5 | 双配色：浅色=mdbook light（rust-course classic blue 同源）、深色=kurosawa.css（黑泽明意象，覆盖 html.navy 全变量） | `cd9283c` `af9be61` |
+| W2 | `tools/gen_docs.py` 生成器 + **1076 类页全量**（成员锚点显式 `{#}` 锁定）+ 内核 `doclinks.rs` + 防漂移测试 | `2551b2a` |
+| W3 | 语法篇导读 + 16 章正文（gdd 语料逐篇核验；关键字/运算符/注解全表取权威段） | `2a9d031` |
+| P1 描述层 | hoverdata.json（21613 成员 + 16 内建函数 + 36 注解）+ @GDScript 全量三节页 + hover 十级查找链；顺带修 3 个存量 bug（枚举区块解析失效/带默认值属性误判/resolve_receiver 词截断） | `6b4327b` |
+| P1 契约 | §五之三 LSP 链接契约成文 + 语法篇 9 页锚点修缮（34 kw + 20 op）+ `check_lsp_contract.py` 双向校验 | `60dcf7d` |
 
-- **不做完整图形学教材**：GPU 架构/光栅推导/BRDF 数学不展开，图形学速览止于
-  「看懂 Godot 渲染选项在买什么」的深度，深水区走延伸阅读。
-- **不复刻 Nystrom/Red Blob 全书**：模式与算法只收 Godot 语境下高频者
-  （约 15%），其余链接延伸；避免与原书重复劳动。
-- **ECS 不教自研**：Godot 无官方 ECS，教「何时用组合/何时上 Server/MultiMesh」
-  而非在 GDScript 里手写 ECS 框架（性能和语言都不支持，反模式）。
-- **Jai 只讲理念不讲语法**：语言未公开发布，理念层（无隐藏控制流/DOD/编译时）
-  用于校准思维，代码示例一概不用 Jai。
-- **思想/性能/算法/数学四篇全部不入 LSP 锚点契约**：hover/doc_link 只指向
-  syntax/builtin，概念篇纯阅读向，防漂移测试范围不变。
+### 待办队列（按依赖序）
+
+1. **W4 范式篇 8 + 引擎内部篇 7**（stub 已建；engine-analyzer.md 改写）。
+   执行要求：概念页按需落 `c-*` 锚；提交前过双校验（见下方常设要求）。
+2. **W5 Pages 上线**：`.github/workflows/pages.yml`（mdbook 版本锁定 → build →
+   deploy-pages）+ 版权署名页（CC BY 3.0 + 修改标注 + 4.x stable 版本锁定说明）。
+   原「P1 全类骨架」已提前达成，本阶段只剩部署。
+3. **P2 长尾精译**：英文原文 → 中文。在 `gen_docs.py` 提取层切换，
+   网站/hover 双端同批生效（C1 约束保证不漂移）。
+4. **P3 思想篇 4 章 + 性能篇 4 章**（素材：官方 performance、Nystrom、Jai 公开资料——三之四/三之五）。
+5. **P4 算法篇 4 章 + 数学篇 6 章**（素材：Red Blob Games、quant67 游戏数学、Gaffer on Games——三之六/三之七）。
+6. **迭代打磨**（按需穿插）：附录（高频坑/迁移表/学习路线）、插件入口链接、
+   符号操作符 hover 接线（offset 级识别，消费 `op-*` 锚，`OPERATOR_DOCS` 已备好）。
+
+### 常设要求（P1 契约引入，此后每次文档变更生效）
+
+- **提交前三件套**：`python tools/gen_docs.py --check`（生成页数据防漂移）+
+  `mdbook build website && python tools/check_lsp_contract.py`（链接契约）+
+  `cargo test -p godotlsp`（内核单测）。缺一不提交。
+- **LSP 出口扩容规则**：`langdocs.rs` 新增关键字/操作符条目 = 三件套同时改——
+  表条目 + 页面显式锚 + 落点正文；只加表不加锚会被 §E 反向校验拦下。
+- **新页面接入契约**：范式/思想/性能等篇**默认不入 hover 出口**（见取舍声明），
+  仅当某概念需要被 LSP 引用时才落 `c-*` 锚并登记进 §五之三 锚点地图。
 
 ## 五之二、写作风格规范（参照系：rust-course，refs/rust-course 实证抽样）
 
