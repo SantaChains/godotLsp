@@ -168,3 +168,12 @@
 3. **取消三态**:salsa 查询边界轮询 token → Cancelled 时 catch_unwind → Retry / ContentModified / ServerCancelled+retrigger——参照 RA `dispatch.rs`;token 已由 route() 就位。
 4. **双通道优先级 + 编辑作废**:priority(诊断完成/取消)> normal(变更/查询);后续编辑使在途查询作废——参照 pyrefly `queue.rs`。
 5. **诊断节流 + 代际**:自适应去抖(解析耗时中位数 × ratio,clamp 50-500ms)+ 分级 pass + 代际清理——参照 clangd + gopls。
+
+### 6.8 补全排序与 snippet(2026-10-16 深挖,实施依据)
+
+- **rust-analyzer(`ide-completion/src/item.rs` + `to_proto.rs`)**:相关性建模为 `CompletionRelevance` 13 布尔/枚举字段(`exact_name_match` 参数名精确命中、`type_match` 类型对齐、`is_local` 局部变量、`requires_import` 等),`score()` 合成 u32;**fuzzy 匹配分与 relevance 严格分离**("Relevance ignores fuzzy match score"),最终序 = relevance × fuzzy。sortText 编码:`score ^ 0xFFFF_FFFF` 后 `{score:08x}` 十六进制零填充(客户端升序,取反即降序);仅 relevance 最高者置 `preselect`。
+- **clangd(`Quality.h` `SymbolRelevanceSignals` + extensions)**:双维分 `finalScore = fuzzy × (Quality × Relevance)`。Quality 是**与查询无关的符号质量**(引用数/usages);Relevance 是查询相关信号:NameMatch fuzzy、作用域邻近(FunctionScope>ClassScope>FileScope>GlobalScope)、文件邻近(URI 距离)、**ContextWords(补全点附近的词)**、`MainFileRefs`(本文件引用数)。sortText 内嵌总分,另发非标扩展字段 `score`(纯质量分、不含 fuzzy),供客户端自做 fuzzy 过滤时二次加权——**服务端分桶 + 客户端 fuzzy 的混合排序契约**。
+- **VSCode `wordBasedSuggestions`**:本文件已输入词条做补全,是编辑器客户端行为(off/currentDocument/allDocuments)。服务器侧实现同面,对 nvim/zed/helix(默认无此能力)才有增量价值;VSCode 下需避免与客户端词条重复(低 sortText 桶 + 配置开关)。
+- **snippet**:能力经 `completionItem.snippetSupport` 协商;rust-analyzer 模式补全(pattern snippet)与 clangd 函数括号 snippet 均按客户端声明降级为纯文本。上下文感知(如 `func _` 后才出虚方法模板)靠服务端判断,比编辑器静态 snippet 文件精准。
+- **无现成 Godot API 频率数据集**:官方无遥测统计 API 使用频率;可行替代 = 构建期语料挖掘(godot-docs 代码块 + 上游测试语料,pinned commit 可复现),与既有 drift-table/fetch_corpus.py 模式同构。
+- **godotlsp 落地序**(P3,详见 capabilities-roadmap):sortText 分桶骨架 → snippet 面 → 本文件词条面 → 频率表 → 类型感知评分(前置 locals_at/类型推断)。**不做**:ML/LLM/ghost-text inline completion(零依赖 + 隐私定位冲突,Copilot 类职责不属 LSP)、postfix 补全(GDScript 无点链宏生态)。
