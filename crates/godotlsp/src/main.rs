@@ -225,7 +225,9 @@ fn main() {
     let engine_arc = state.engine.clone();
     let project_arc = state.project.clone();
 
-    // 诊断线程：收到任务后等 150ms，期间有新任务就用最新的。
+    // 诊断线程：收到任务后等 150ms，窗口内到达的任务**按 uri 合并**（同 uri 取最新），
+    // 窗口结束逐个分析发布——不能只留最后一条：多文件批量打开（恢复会话/格式化全仓）
+    // 会把前面的文件全部静默丢弃（bench_load.py 在 Pixelorama 上实测复现）。
     std::thread::spawn(move || {
         let recv = diag_rx;
         let conn_sender = conn_sender;
@@ -233,37 +235,40 @@ fn main() {
         let project = project_arc;
         loop {
             let Ok((uri, src)) = recv.recv() else { break };
-            let mut latest = (uri, src);
+            let mut batch: HashMap<Uri, String> = HashMap::new();
+            batch.insert(uri, src);
             while let Ok((u, s)) = recv.recv_timeout(std::time::Duration::from_millis(150)) {
-                latest = (u, s);
+                batch.insert(u, s);
             }
-            let (uri, src) = latest;
-            // 完整分析：parse errors + 语义错误（未声明标识符、类型错误）。
-            let (file, parse_errs) = parse(&src);
-            let mut diags: Vec<Diagnostic> = parse_errs.iter().map(|e| Diagnostic {
-                range: offset_range(&src, e.start, e.end),
-                severity: Some(DiagnosticSeverity::ERROR),
-                message: e.message.clone(),
-                ..Diagnostic::default()
-            }).collect();
-            let proj_ctx: Option<&dyn ProjectContext> = project.as_ref().map(|p| p.as_ref() as &dyn ProjectContext);
-            let analysis = analyze_with(&file, &engine, proj_ctx);
-            for e in analysis.errors {
-                diags.push(Diagnostic {
-                    range: offset_range(&src, e.span.0, e.span.1),
+            let proj_ctx: Option<&dyn ProjectContext> =
+                project.as_ref().map(|p| p.as_ref() as &dyn ProjectContext);
+            for (uri, src) in batch {
+                // 完整分析：parse errors + 语义错误（未声明标识符、类型错误）。
+                let (file, parse_errs) = parse(&src);
+                let mut diags: Vec<Diagnostic> = parse_errs.iter().map(|e| Diagnostic {
+                    range: offset_range(&src, e.start, e.end),
                     severity: Some(DiagnosticSeverity::ERROR),
-                    message: e.message,
+                    message: e.message.clone(),
                     ..Diagnostic::default()
-                });
+                }).collect();
+                let analysis = analyze_with(&file, &engine, proj_ctx);
+                for e in analysis.errors {
+                    diags.push(Diagnostic {
+                        range: offset_range(&src, e.span.0, e.span.1),
+                        severity: Some(DiagnosticSeverity::ERROR),
+                        message: e.message,
+                        ..Diagnostic::default()
+                    });
+                }
+                let _ = conn_sender.send(Message::Notification(Notification::new(
+                    "textDocument/publishDiagnostics".into(),
+                    serde_json::to_value(PublishDiagnosticsParams {
+                        uri,
+                        diagnostics: diags,
+                        version: None,
+                    }).unwrap(),
+                )));
             }
-            let _ = conn_sender.send(Message::Notification(Notification::new(
-                "textDocument/publishDiagnostics".into(),
-                serde_json::to_value(PublishDiagnosticsParams {
-                    uri,
-                    diagnostics: diags,
-                    version: None,
-                }).unwrap(),
-            )));
         }
     });
 
