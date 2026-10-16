@@ -1,3 +1,0 @@
-# mdbook build 产物，全部不入库（CI 部署时直接上传 book/ 目录）
-*
-!.gitignore
