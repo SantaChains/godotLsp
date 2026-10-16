@@ -83,7 +83,8 @@ value = hov["contents"]["value"] if hov else ""
 print("OK hover Node2D:", value.replace("\n", " | "))
 assert "Node2D" in value and "CanvasItem" in value, value
 
-# 4d. 接收者补全：在 doc 里 var node: Node2D，然后 node.< 应补 get_position 等
+# 4d. 接收者补全：在 doc 里 var node: Node2D，然后 node.< 应补 get_position(…) 等
+# (C6.4 起函数面 label 带 (…) 展示后缀,insertText 为 get_position() 约定)
 send({"jsonrpc":"2.0","method":"textDocument/didChange","params":{
     "textDocument":{"uri":"file:///d:/test/main.gd","version":2},
     "contentChanges":[{"text":"extends Node2D\nvar node: Node2D\nfunc _ready():\n    node.\n"}]}})
@@ -98,8 +99,8 @@ for _ in range(10):
         break
 assert comp is not None, "未收到 completion"
 labels = [i["label"] for i in comp]
-print("OK completion node.:", len(labels), "项; 含 get_position:", "get_position" in labels)
-assert "get_position" in labels, labels[:20]
+print("OK completion node.:", len(labels), "项; 含 get_position(…):", "get_position(…)" in labels)
+assert "get_position(…)" in labels, labels[:20]
 
 # 4e. 配置推送：didChangeConfiguration 驱动补全面开关（C2/C3 + C4）。
 def ask_comp(id, line, ch):

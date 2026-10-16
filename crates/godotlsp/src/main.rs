@@ -114,6 +114,16 @@ fn main() {
         inlay_hint_provider: Some(OneOf::Left(true)),
         folding_range_provider: Some(FoldingRangeProviderCapability::Simple(true)),
         color_provider: Some(ColorProviderCapability::Simple(true)),
+        semantic_tokens_provider: Some(
+            SemanticTokensServerCapabilities::SemanticTokensOptions(SemanticTokensOptions {
+                legend: SemanticTokensLegend {
+                    token_types: semtok_legend_types(),
+                    token_modifiers: vec![],
+                },
+                full: Some(SemanticTokensFullOptions::Bool(true)),
+                ..SemanticTokensOptions::default()
+            })
+        ),
         code_lens_provider: Some(CodeLensOptions { resolve_provider: Some(false) }),
         rename_provider: Some(OneOf::Right(RenameOptions {
             prepare_provider: Some(true),
@@ -163,35 +173,65 @@ fn main() {
         .and_then(|ci| ci.snippet_support)
         .unwrap_or(false);
 
-    // 五级摄取梯度（简化版）：workspace .godot/extension_api.json -> 内嵌出厂面。
+    // 根目录：rootUri 优先，否则取首个 workspace folder；多选多根时全部纳入扫描。
     #[allow(deprecated)]
     let root = initialize_params
         .root_uri
-        .or_else(|| initialize_params.workspace_folders.and_then(|f| f.into_iter().next().map(|f| f.uri)))
+        .clone()
+        .or_else(|| {
+            initialize_params
+                .workspace_folders
+                .as_ref()
+                .and_then(|f| f.first().map(|f| f.uri.clone()))
+        })
         .and_then(|u| url_to_path(&u));
 
-    let embedded_json = include_str!("../../gdscript-engine/testdata/extension_api.json");
-    let (engine_json, engine_source) = if let Some(ref r) = root {
-        let candidate = r.join(".godot/extension_api.json");
-        if let Ok(text) = std::fs::read_to_string(&candidate) {
-            if serde_json::from_str::<serde_json::Value>(&text).is_ok() {
-                (text, "workspace")
-            } else {
-                (embedded_json.to_string(), "embedded(parse-failed)")
+    // 多根工作区：把所有 workspace folder 也纳入扫描（rootUri 与首个 folder 去重）。
+    let mut scan_roots: Vec<std::path::PathBuf> = Vec::new();
+    if let Some(r) = &root {
+        scan_roots.push(r.clone());
+    }
+    if let Some(folders) = &initialize_params.workspace_folders {
+        for f in folders {
+            if let Some(p) = url_to_path(&f.uri) {
+                if !scan_roots.iter().any(|e| e == &p) {
+                    scan_roots.push(p);
+                }
             }
-        } else {
-            (embedded_json.to_string(), "embedded")
         }
-    } else {
-        (embedded_json.to_string(), "embedded(no-root)")
-    };
+    }
+
+    let embedded_json = include_str!("../../gdscript-engine/testdata/extension_api.json");
+    // 引擎模型：扫描每个根目录下的 .godot/extension_api.json（项目自带导出面），取首个命中；否则内嵌出厂面。
+    let mut engine_json = embedded_json.to_string();
+    let mut engine_source = "embedded(no-root)";
+    for r in &scan_roots {
+        let candidate = r.join(".godot/extension_api.json");
+        match std::fs::read_to_string(&candidate) {
+            Ok(text) if serde_json::from_str::<serde_json::Value>(&text).is_ok() => {
+                engine_json = text;
+                engine_source = "workspace";
+                break;
+            }
+            Ok(_) => {
+                engine_source = "embedded(parse-failed)";
+            }
+            Err(_) => {
+                if engine_source == "embedded(no-root)" {
+                    engine_source = "embedded";
+                }
+            }
+        }
+    }
 
     let engine = std::sync::Arc::new(EngineApi::from_json(&engine_json).expect("解析引擎模型"));
     let real_lower: HashSet<String> =
         engine.classes.keys().chain(engine.builtins.keys()).map(|s| s.to_lowercase()).collect();
 
     // 版本对齐：读 project.godot config/features，与 dump 版本比对。
-    if let Some(ref r) = root
+    // 优先定位真实项目根（向上查找 project.godot），否则回退到工作区根。
+    let project_root = root.as_ref().and_then(|r| locate_project_root(r)).or(root.clone());
+    if let Some(ref r) = project_root
         && let Ok(pg) = std::fs::read_to_string(r.join("project.godot")) {
             for line in pg.lines() {
                 if line.starts_with("config/features") {
@@ -200,13 +240,26 @@ fn main() {
             }
         }
 
-    // uid:// -> res:// 映射：扫描项目根下所有 *.uid 文件。
+    // uid:// -> res:// 映射：扫描各根下所有 *.uid 文件。
     let mut uid_map: HashMap<String, String> = HashMap::new();
-    if let Some(ref r) = root {
+    for r in &scan_roots {
         scan_uid_files(r, r, &mut uid_map);
     }
 
-    let project = root.as_deref().and_then(|r| Project::open(r, Some(&engine_json)).ok()).map(std::sync::Arc::new);
+    // 跨文件符号图：每个根目录分别打开并合并脚本/场景索引（多根/嵌套项目）。
+    let mut merged: Option<Project> = None;
+    for r in &scan_roots {
+        if let Ok(p) = Project::open(r, Some(&engine_json)) {
+            merged = Some(match merged {
+                None => p,
+                Some(mut acc) => {
+                    acc.merge(p);
+                    acc
+                }
+            });
+        }
+    }
+    let project = merged.map(std::sync::Arc::new);
 
     let (diag_tx, diag_rx) = std::sync::mpsc::channel::<(Uri, String)>();
     let mut state = State {
@@ -215,10 +268,17 @@ fn main() {
         snippet_support, config: Config::default(),
     };
 
-    eprintln!("[godotlsp] 就绪，引擎 {} (来源: {})，项目文件 {}，uid 映射 {}",
-        state.engine.version, engine_source,
+    eprintln!(
+        "[godotlsp] 就绪，引擎 {} (来源: {})，扫描根 {} 个，项目文件 {}，uid 映射 {}",
+        state.engine.version,
+        engine_source,
+        scan_roots.len(),
         state.project.as_ref().map(|p| p.scripts.len()).unwrap_or(0),
-        state.uid_map.len());
+        state.uid_map.len(),
+    );
+    for r in &scan_roots {
+        eprintln!("[godotlsp]   扫描根: {}", r.display());
+    }
 
     // 后台诊断线程：150ms 去抖，击键不直接触发 parse+analyze。
     let conn_sender = connection.sender.clone();
@@ -377,6 +437,11 @@ fn handle_request(req: Request, state: &mut State) -> Response {
         "textDocument/prepareRename" => {
             let p: TextDocumentPositionParams = serde_json::from_value(params).unwrap();
             serde_json::to_value(prepare_rename(state, &p)).unwrap()
+        }
+        "textDocument/semanticTokens/full" => {
+            let p: SemanticTokensParams = serde_json::from_value(params).unwrap();
+            let src = state.docs.get(&p.text_document.uri).cloned().unwrap_or_default();
+            serde_json::to_value(compute_semantic_tokens(&src)).unwrap()
         }
         "workspace/symbol" => {
             let p: WorkspaceSymbolParams = serde_json::from_value(params).unwrap();
@@ -680,11 +745,76 @@ fn resolve_receiver(state: &State, src: &str, offset: usize) -> Option<(String, 
 /// 补全：`.` 后给接收者成员，否则给引擎全局名（类/内建/函数/单例/常量）。
 /// C1 fuzzy + C4 频率细分的合成：空前缀时按频率排名细分中性带（热度排序，
 /// 受 `godotlsp.completion.frequencyBoost` 开关），有前缀时纯 fuzzy（词面已充分区分）。
+/// 频率表以裸 API 名为键（`print`），而 C6.4 起函数面 label 为 `print(…)`——
+/// 查表前剥掉 `(…)` 后缀，否则热度细分对函数面整体失效。
 fn scored_fuzzy(prefix: &str, label: &str, freq_boost: bool) -> u16 {
+    let bare = label.strip_suffix("(…)").unwrap_or(label);
     if prefix.is_empty() && freq_boost {
-        freq::rank(label).map_or(scoring::band::NEUTRAL, scoring::neutral_by_rank)
+        freq::rank(bare).map_or(scoring::band::NEUTRAL, scoring::neutral_by_rank)
     } else {
         scoring::fuzzy(prefix, label)
+    }
+}
+
+/// C6.4 函数补全项：对齐引擎 LSP 适配器的展示/插入约定
+/// (源码锚点 `.refs/godot/modules/gdscript/language_server/gdscript_language_protocol.cpp`):
+/// label 恒为 `name(…)`;insertText 在客户端 snippetSupport 时为 `name($1)`
+/// (Snippet 格式,落标在括号内),否则退化为裸名——上游 `trim_suffix("(")` 同款:
+/// 客户端放不进光标就不给括号(插进去也补不齐)。
+/// callable-expected 上下文(如 `connect(` 二参)不出括号属语义层判定,未做(见路线图)。
+fn function_item(
+    name: &str,
+    kind: CompletionItemKind,
+    detail: Option<String>,
+    snippet_support: bool,
+) -> CompletionItem {
+    let (insert_text, insert_text_format) = if snippet_support {
+        (Some(format!("{name}($1)")), Some(InsertTextFormat::SNIPPET))
+    } else {
+        (Some(name.to_string()), None)
+    };
+    CompletionItem {
+        label: format!("{name}(…)"),
+        kind: Some(kind),
+        detail,
+        insert_text,
+        insert_text_format,
+        ..CompletionItem::default()
+    }
+}
+
+/// 光标是否在 `$Path/Seg` / `%Unique/Seg` 取节点路径内。镜像 fa7d645 的向后
+/// 字节扫描(无词法器感知,字符串/注释内的误报与内核同级,内核侧还会再以解析树复核)。
+/// R4 服务层重写(22882f7)曾丢失本函数,补全在 `$Panel/` 处混入全局面 1662 项
+/// (探针实测,其中 1036 个引擎类)——节点路径上下文必须与全局面互斥。
+/// 入参 `offset` 是光标偏移(自含词内回扫);调用方传词首亦等价。
+fn in_node_path_context(text: &str, offset: usize) -> bool {
+    let b = text.as_bytes();
+    let is_seg = |c: u8| c.is_ascii_alphanumeric() || c == b'_';
+    let mut i = offset.min(b.len());
+    while i > 0 && is_seg(b[i - 1]) {
+        i -= 1;
+    }
+    loop {
+        match i.checked_sub(1).map(|k| b[k]) {
+            Some(b'$') => return true,
+            // `%` 兼作取模运算符:前一字符是操作数(标识符/右括号/右方括号)时按取模处理,
+            // 不视为路径(内核侧由解析树精确判定,此处仅为合并抑制的保守近似)。
+            Some(b'%') => {
+                return !i
+                    .checked_sub(2)
+                    .map(|k| matches!(b[k], b')' | b']') || is_seg(b[k]))
+                    .unwrap_or(false);
+            }
+            Some(b'/') => {
+                let mut s = i - 1;
+                while s > 0 && is_seg(b[s - 1]) {
+                    s -= 1;
+                }
+                i = s;
+            }
+            _ => return false,
+        }
     }
 }
 
@@ -707,7 +837,11 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    le
 
     if after_dot {
         if let Some(recv_ty) = recv_type_at(state, src, word_start) {
-            items.extend(class_members(&state.engine, &recv_ty));
+            items.extend(class_members(&state.engine, &recv_ty, state.snippet_support));
+        } else if let Some(values) = enum_member_values_at(state, src, word_start) {
+            // `Class.Enum.<|>`：接收者是枚举名而非类/变量 → 出该枚举的值面
+            // (引擎成员面对 `AStarGrid2D.Heuristic.` 同款;oracle builtin_enum 桶)。
+            items.extend(values);
         }
         for i in &mut items {
             let f = scored_fuzzy(prefix, &i.label, state.config.freq_boost);
@@ -726,6 +860,11 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    le
         for i in &mut items {
             i.sort_text = Some(scoring::sort_text(scoring::bucket::MEMBER, scoring::fuzzy(prefix, &i.label)));
         }
+    } else if in_node_path_context(src, word_start) {
+        // `$Path/Seg` / `%Unique/Seg` 节点路径上下文(C7.3):全局面合并会污染
+        // (fa7d645 探针实测 1662 项,其中 1036 个引擎类)。场景树节点面待
+        // C7.3+ 工程面接入(project.scenes → tscn NodeDecl);在此之前不出项——
+        // 空列表优于 1662 项噪声,也与引擎"只出场景子节点"同向。
     } else {
         // 全量返回 + 稳定排序（HashMap 迭代序随机，take(n) 会导致补全时有时无）；
         // 前缀/fuzzy 过滤由客户端负责。
@@ -740,12 +879,12 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    le
             items.push(CompletionItem { label: name.to_string(), kind: Some(CompletionItemKind::TYPE_PARAMETER), ..CompletionItem::default() });
         }
         for f in &state.engine.utility_functions {
-            items.push(CompletionItem {
-                label: f.name.clone(),
-                kind: Some(CompletionItemKind::FUNCTION),
-                detail: Some(render_function(f)),
-                ..CompletionItem::default()
-            });
+            items.push(function_item(
+                &f.name,
+                CompletionItemKind::FUNCTION,
+                Some(render_function(f)),
+                state.snippet_support,
+            ));
         }
         for s in &state.engine.singletons {
             items.push(CompletionItem {
@@ -776,12 +915,12 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    le
         }
         // 编译器内建函数（len/preload/range…，不在 extension_api.json）。
         for (name, bf) in hoverdata::gdscript_fns() {
-            items.push(CompletionItem {
-                label: name,
-                kind: Some(CompletionItemKind::FUNCTION),
-                detail: Some(bf.0),
-                ..CompletionItem::default()
-            });
+            items.push(function_item(
+                &name,
+                CompletionItemKind::FUNCTION,
+                Some(bf.0.to_string()),
+                state.snippet_support,
+            ));
         }
         // @GDScript 常量（PI/TAU/INF/NAN）。
         for name in ["PI", "TAU", "INF", "NAN"] {
@@ -919,18 +1058,62 @@ fn recv_type_at(state: &State, src: &str, at: usize) -> Option<String> {
     })
 }
 
-/// 收集某类（含祖先）的方法与属性补全项。
-fn class_members(engine: &EngineApi, class: &str) -> Vec<CompletionItem> {
+/// `Class.Enum.<|>`：after_dot 的接收者既不是变量也不是类名时,按
+/// `类.枚举.` 两段式解析,给出该枚举的值面(label 为裸值名,与引擎成员面一致)。
+/// 覆盖引擎类与内建类(`Vector2.Axis.X` / `AStarGrid2D.Heuristic.HEURISTIC_MAX`)。
+fn enum_member_values_at(state: &State, src: &str, word_start: usize) -> Option<Vec<CompletionItem>> {
+    let b = src.as_bytes();
+    let is_seg = |c: u8| c.is_ascii_alphanumeric() || c == b'_';
+    if word_start < 2 || b[word_start - 1] != b'.' {
+        return None;
+    }
+    // 枚举名:紧邻 word_start 左侧那个 '.' 前的词。
+    let mut e = word_start - 1;
+    while e > 0 && is_seg(b[e - 1]) {
+        e -= 1;
+    }
+    let enum_name = &src[e..word_start - 1];
+    if enum_name.is_empty() || e < 2 || b[e - 1] != b'.' {
+        return None;
+    }
+    // 类名:再左侧一个 '.' 前的词。
+    let mut c = e - 1;
+    while c > 0 && is_seg(b[c - 1]) {
+        c -= 1;
+    }
+    let class_name = &src[c..e - 1];
+    let enums = state
+        .engine
+        .classes
+        .get(class_name)
+        .map(|k| &k.enums)
+        .or_else(|| state.engine.builtins.get(class_name).map(|k| &k.enums))?;
+    let en = enums.iter().find(|en| en.name == enum_name)?;
+    Some(
+        en.values
+            .iter()
+            .map(|(n, v)| CompletionItem {
+                label: n.clone(),
+                kind: Some(CompletionItemKind::ENUM_MEMBER),
+                detail: Some(format!("const {class_name}.{enum_name}.{n} = {v}")),
+                ..CompletionItem::default()
+            })
+            .collect(),
+    )
+}
+
+/// 收集某类（含祖先）的方法与属性补全项。方法走 C6.4 `name(…)` 约定。
+fn class_members(engine: &EngineApi, class: &str, snippet_support: bool) -> Vec<CompletionItem> {
     let mut items: Vec<CompletionItem> = Vec::new();
     for cls in engine.ancestor_chain(class) {
         if let Some(c) = engine.classes.get(cls) {
             for m in &c.methods {
-                items.push(CompletionItem {
-                    label: m.name.clone(),
-                    kind: Some(CompletionItemKind::METHOD),
-                    detail: Some(render_function(m)),
-                    ..CompletionItem::default()
-                });
+                items.push(function_item(
+                    &m.name,
+                    CompletionItemKind::METHOD,
+                    Some(render_function(m)),
+                    snippet_support,
+                ));
             }
             for p in &c.properties {
                 items.push(CompletionItem {
@@ -972,12 +1155,12 @@ fn class_members(engine: &EngineApi, class: &str) -> Vec<CompletionItem> {
     }
     if let Some(b) = engine.builtins.get(class) {
         for m in &b.methods {
-            items.push(CompletionItem {
-                label: m.name.clone(),
-                kind: Some(CompletionItemKind::METHOD),
-                detail: Some(render_function(m)),
-                ..CompletionItem::default()
-            });
+            items.push(function_item(
+                &m.name,
+                CompletionItemKind::METHOD,
+                Some(render_function(m)),
+                snippet_support,
+            ));
         }
         for p in &b.members {
             items.push(CompletionItem {
@@ -1842,13 +2025,333 @@ fn document_highlight(state: &State, p: &DocumentHighlightParams) -> Vec<Documen
     out
 }
 
+// ───────────────────────── 语义着色（符号颜色匹配/区分） ─────────────────────────
+// 服务器下发语义 token，按标准 LSP 语义类型上色，使函数/类型/变量/常量/参数等
+// 在任意主题下都有稳定且可区分的颜色。TextMate 语法只能给粗略作用域、且无法按
+// 语义区分「成员类型 vs 局部变量」，语义 token 填补这一层；括号彩虹色由编辑器基于
+// language-configuration 的 brackets 负责，这里不覆盖运算符/标点，避免冲突。
+
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum SemKind {
+    Keyword,
+    Function,
+    Method,
+    Class,
+    Type,
+    Variable,
+    Parameter,
+    Property,
+    EnumMember,
+    Constant,
+    String,
+    Number,
+    Comment,
+    Operator,
+    Macro,
+}
+
+/// 图例顺序即 token 类型下标，必须稳定。标准 LSP 类型名，主题天然着色。
+const SEM_LEGEND: &[(SemKind, &str)] = &[
+    (SemKind::Keyword, "keyword"),
+    (SemKind::Function, "function"),
+    (SemKind::Method, "method"),
+    (SemKind::Class, "class"),
+    (SemKind::Type, "type"),
+    (SemKind::Variable, "variable"),
+    (SemKind::Parameter, "parameter"),
+    (SemKind::Property, "property"),
+    (SemKind::EnumMember, "enumMember"),
+    (SemKind::Constant, "constant"),
+    (SemKind::String, "string"),
+    (SemKind::Number, "number"),
+    (SemKind::Comment, "comment"),
+    (SemKind::Operator, "operator"),
+    (SemKind::Macro, "macro"),
+];
+
+fn semtok_legend_types() -> Vec<SemanticTokenType> {
+    SEM_LEGEND.iter().map(|(_, s)| SemanticTokenType::new(s)).collect()
+}
+
+fn semtok_index(k: SemKind) -> u32 {
+    SEM_LEGEND.iter().position(|(kk, _)| *kk == k).unwrap() as u32
+}
+
+/// 计算某文档的全量语义 token。基于词法 token + AST 声明名区间上色，再 delta 编码。
+fn compute_semantic_tokens(src: &str) -> SemanticTokens {
+    use gdscript_syntax::token::TokenKind as K;
+    let tokens = gdscript_syntax::tokenize(src);
+    let (file, _errs) = gdscript_syntax::parse(src);
+
+    // 声明名区间 -> 精确语义类型，覆盖词法启发式。
+    let mut special: HashMap<(usize, usize), SemKind> = HashMap::new();
+    collect_decl_spans(&file, &mut special);
+
+    let mut rows: Vec<(u32, u32, u32, u32)> = Vec::new(); // (line, col_utf16, len_utf16, type_idx)
+    for (i, t) in tokens.iter().enumerate() {
+        match t.kind {
+            K::Newline | K::Indent | K::Dedent | K::Eof | K::Error => continue,
+            _ => {}
+        }
+        let kind = if let Some(sk) = special.get(&(t.start, t.end)) {
+            *sk
+        } else {
+            classify_token(t, i, &tokens, src)
+        };
+        // 运算符/标点不覆盖编辑器括号彩虹色与 TextMate 着色。
+        if kind == SemKind::Operator {
+            continue;
+        }
+        let (line, col) = utf16_line_col(src, t.start);
+        let len = utf16_len(src, t.start, t.end);
+        rows.push((line, col, len, semtok_index(kind)));
+    }
+
+    // 按 (line, col) 排序后做相对增量编码（LSP 要求）。
+    rows.sort_by(|a, b| (a.0, a.1).cmp(&(b.0, b.1)));
+    let mut data = Vec::with_capacity(rows.len());
+    let mut prev_line = 0u32;
+    let mut prev_col = 0u32;
+    for (line, col, len, ti) in rows {
+        let delta_line = line - prev_line;
+        let delta_col = if delta_line == 0 { col - prev_col } else { col };
+        data.push(SemanticToken {
+            delta_line,
+            delta_start: delta_col,
+            length: len,
+            token_type: ti,
+            token_modifiers_bitset: 0,
+        });
+        prev_line = line;
+        prev_col = col;
+    }
+    SemanticTokens { result_id: None, data }
+}
+
+fn classify_token(
+    t: &gdscript_syntax::token::Token,
+    i: usize,
+    tokens: &[gdscript_syntax::token::Token],
+    src: &str,
+) -> SemKind {
+    use gdscript_syntax::token::TokenKind as K;
+    match t.kind {
+        K::String => SemKind::String,
+        K::Int | K::Float => SemKind::Number,
+        K::Ident => {
+            let text = &src[t.start..t.end];
+            let next = tokens.get(i + 1).map(|x| x.kind);
+            let prev = if i > 0 { tokens.get(i - 1).map(|x| x.kind) } else { None };
+            // 调用：标识符后紧跟 `(`，`.x(` 视为方法，裸 `x(` 视为函数。
+            if matches!(next, Some(K::LParen)) {
+                return if matches!(prev, Some(K::Dot)) { SemKind::Method } else { SemKind::Function };
+            }
+            // 类型：PascalCase（首字母大写且含小写）。
+            if is_pascal_case(text) {
+                return SemKind::Type;
+            }
+            // 常量：全大写 + 含 `_` 或纯大写长度 > 1。
+            if is_upper_case(text) {
+                return SemKind::Constant;
+            }
+            SemKind::Variable
+        }
+        _ => SemKind::Operator,
+    }
+}
+
+fn is_pascal_case(s: &str) -> bool {
+    let mut has_lower = false;
+    let mut has_upper = false;
+    for c in s.chars() {
+        if c.is_ascii_uppercase() {
+            has_upper = true;
+        } else if c.is_ascii_lowercase() {
+            has_lower = true;
+        } else if !c.is_ascii_alphanumeric() {
+            return false;
+        }
+    }
+    has_upper && has_lower
+}
+
+fn is_upper_case(s: &str) -> bool {
+    !s.is_empty()
+        && s.chars().all(|c| c.is_ascii_uppercase() || c == '_' || c.is_ascii_digit())
+        && s.chars().any(|c| c.is_ascii_uppercase())
+}
+
+fn collect_decl_spans(file: &gdscript_syntax::ast::File, out: &mut HashMap<(usize, usize), SemKind>) {
+    if let Some(cn) = &file.class_name {
+        out.insert(cn.span, SemKind::Class);
+    }
+    for s in &file.body {
+        collect_stmt(s, out);
+    }
+}
+
+fn collect_stmt(s: &gdscript_syntax::ast::Stmt, out: &mut HashMap<(usize, usize), SemKind>) {
+    use gdscript_syntax::ast::Stmt;
+    match s {
+        Stmt::Func(f) => {
+            out.insert(f.name.span, SemKind::Function);
+            for p in &f.params {
+                out.insert(p.name.span, SemKind::Parameter);
+            }
+            collect_block(&f.body, out);
+        }
+        Stmt::Var(v) => {
+            out.insert(v.name.span, SemKind::Variable);
+            if let Some(pb) = &v.property {
+                if let Some(acc) = &pb.get {
+                    collect_accessor(acc, out);
+                }
+                if let Some(acc) = &pb.set {
+                    collect_accessor(acc, out);
+                }
+            }
+        }
+        Stmt::Const(c) => {
+            out.insert(c.name.span, SemKind::Constant);
+        }
+        Stmt::Signal(sg) => {
+            out.insert(sg.name.span, SemKind::Method);
+        }
+        Stmt::Enum(e) => {
+            if let Some(name) = &e.name {
+                out.insert(name.span, SemKind::EnumMember);
+            }
+            for (name, _) in &e.entries {
+                out.insert(name.span, SemKind::EnumMember);
+            }
+        }
+        Stmt::Class(c) => {
+            out.insert(c.name.span, SemKind::Class);
+            for st in &c.body {
+                collect_stmt(st, out);
+            }
+        }
+        Stmt::If { branches, else_block, .. } => {
+            for (_, b) in branches {
+                collect_block(b, out);
+            }
+            if let Some(b) = else_block {
+                collect_block(b, out);
+            }
+        }
+        Stmt::For { vars, body, .. } => {
+            for v in vars {
+                out.insert(v.span, SemKind::Variable);
+            }
+            collect_block(body, out);
+        }
+        Stmt::While { body, .. } => collect_block(body, out),
+        Stmt::Match { arms, .. } => {
+            for a in arms {
+                collect_block(&a.body, out);
+            }
+        }
+        Stmt::Expr(e) => collect_expr(e, out),
+        _ => {}
+    }
+}
+
+fn collect_accessor(acc: &gdscript_syntax::ast::Accessor, out: &mut HashMap<(usize, usize), SemKind>) {
+    match acc {
+        gdscript_syntax::ast::Accessor::Inline { param, body } => {
+            if let Some(p) = param {
+                out.insert(p.span, SemKind::Parameter);
+            }
+            collect_block(body, out);
+        }
+        gdscript_syntax::ast::Accessor::External { func } => {
+            out.insert(func.span, SemKind::Function);
+        }
+    }
+}
+
+fn collect_block(b: &gdscript_syntax::ast::Block, out: &mut HashMap<(usize, usize), SemKind>) {
+    for s in &b.stmts {
+        collect_stmt(s, out);
+    }
+}
+
+fn collect_expr(_e: &gdscript_syntax::ast::Expr, _out: &mut HashMap<(usize, usize), SemKind>) {
+    // 表达式内的标识符已由词法启发式覆盖（调用/类型/常量/变量），不递归以免重复误判。
+}
+
+/// 字节偏移 -> (行号, UTF-16 列)，与 position_encoding=UTF16 对齐。
+fn utf16_line_col(src: &str, byte: usize) -> (u32, u32) {
+    let mut line = 0u32;
+    let mut col = 0u32;
+    for (i, c) in src.char_indices() {
+        if i >= byte {
+            break;
+        }
+        if c == '\n' {
+            line += 1;
+            col = 0;
+        } else {
+            col += c.len_utf16() as u32;
+        }
+    }
+    (line, col)
+}
+
+fn utf16_len(src: &str, start: usize, end: usize) -> u32 {
+    src[start..end].chars().map(|c| c.len_utf16() as u32).sum()
+}
+
 // ───────────────────────── 文本工具 ─────────────────────────
 
 fn url_to_path(u: &Uri) -> Option<std::path::PathBuf> {
     let s = u.as_str();
     let path = s.strip_prefix("file://")?;
     let path = path.strip_prefix('/').unwrap_or(path); // Windows: /D:/… → D:/…
-    Some(std::path::PathBuf::from(path))
+    // URL-decode：部分 LSP 客户端会把 `:`（%3A）、空格（%20）等编码进路径，
+    // 不解会令 Windows 路径无效 → read_dir 静默失败 → 扫描到 0 文件。
+    Some(std::path::PathBuf::from(percent_decode(path)))
+}
+
+/// 对路径做最小化的 URL 百分号解码（%XX → 字节），非法序列原样保留。
+fn percent_decode(s: &str) -> String {
+    let bytes = s.as_bytes();
+    let mut out: Vec<u8> = Vec::with_capacity(bytes.len());
+    let mut i = 0;
+    while i < bytes.len() {
+        if bytes[i] == b'%' && i + 2 < bytes.len() {
+            if let (Some(h), Some(l)) = (hex_val(bytes[i + 1]), hex_val(bytes[i + 2])) {
+                out.push((h << 4) | l);
+                i += 3;
+                continue;
+            }
+        }
+        out.push(bytes[i]);
+        i += 1;
+    }
+    String::from_utf8_lossy(&out).into_owned()
+}
+
+fn hex_val(b: u8) -> Option<u8> {
+    match b {
+        b'0'..=b'9' => Some(b - b'0'),
+        b'A'..=b'F' => Some(b - b'A' + 10),
+        b'a'..=b'f' => Some(b - b'a' + 10),
+        _ => None,
+    }
+}
+
+/// 向上查找包含 `project.godot` 的最近祖先目录（含自身）；找不到返回 None。
+/// 用于「打开的是项目子目录/父目录」时仍能定位真实项目根，加载引擎模型与版本对齐。
+fn locate_project_root(start: &std::path::Path) -> Option<std::path::PathBuf> {
+    let mut cur = Some(start.to_path_buf());
+    while let Some(p) = cur {
+        if p.join("project.godot").is_file() {
+            return Some(p);
+        }
+        cur = p.parent().map(|pp| pp.to_path_buf());
+    }
+    None
 }
 
 fn line_start_offset(src: &str, line: usize) -> usize {
@@ -2021,7 +2524,7 @@ fn scan_uid_files(base: &std::path::Path, dir: &std::path::Path, map: &mut HashM
             if let Some(name) = path.file_name().and_then(|n| n.to_str())
                 && (name == ".godot" || name == ".git") { continue; }
             scan_uid_files(base, &path, map);
-        } else if path.extension().and_then(|e| e.to_str()) == Some("uid")
+        } else if path.extension().and_then(|e| e.to_str()).is_some_and(|e| e.eq_ignore_ascii_case("uid"))
             && let Ok(uid_str) = std::fs::read_to_string(&path) {
                 let uid = uid_str.trim().trim_start_matches("uid://").to_string();
                 if let Ok(rel) = path.strip_prefix(base) {
@@ -2032,7 +2535,7 @@ fn scan_uid_files(base: &std::path::Path, dir: &std::path::Path, map: &mut HashM
             }
         // P2.7：tscn/tres 头部自嵌 uid（[gd_scene uid="uid://..."]），只读头部。
         else if let Some(ext) = path.extension().and_then(|e| e.to_str())
-            && (ext == "tscn" || ext == "tres")
+            && (ext.eq_ignore_ascii_case("tscn") || ext.eq_ignore_ascii_case("tres"))
             && let Ok(mut f) = std::fs::File::open(&path) {
                 use std::io::Read;
                 let mut buf = [0u8; 1024];
@@ -2175,7 +2678,7 @@ func _ready() -> void:
 
         // 全局面：内建函数 / @GDScript 常量 / 关键字 / 全局枚举值 / 类 / 单例。
         let all = labels("# comment\n", 0, 2);
-        for need in ["len", "preload", "PI", "func", "KEY_LEFT", "Sprite2D", "Input"] {
+        for need in ["len(…)", "preload(…)", "PI", "func", "KEY_LEFT", "Sprite2D", "Input"] {
             assert!(all.iter().any(|l| l == need), "全局面应含 {need}: 命中数 {}", all.len());
         }
 
@@ -2187,13 +2690,111 @@ func _ready() -> void:
 
         // 成员面（内建）：Vector3. → 枚举值 / 常量 / 方法。
         let mem = labels("var v := Vector3.\n", 0, 17);
-        for need in ["AXIS_X", "ZERO", "normalized"] {
+        for need in ["AXIS_X", "ZERO", "normalized(…)"] {
             assert!(mem.iter().any(|l| l == need), "Vector3 成员面应含 {need}: 命中数 {}", mem.len());
         }
 
         // 成员面（静态类名回退）：Node. → ProcessMode 枚举名。
         let mem = labels("var x = Node.\n", 0, 13);
         assert!(mem.iter().any(|l| l == "ProcessMode"), "Node 成员面应含枚举名 ProcessMode: 命中数 {}", mem.len());
+
+        // 枚举接收者：`AStarGrid2D.Heuristic.` → 该枚举的值面(裸值名)。
+        let ev = labels("var h := AStarGrid2D.Heuristic.\n", 0, 29);
+        for need in ["HEURISTIC_MAX", "HEURISTIC_OCTILE"] {
+            assert!(ev.iter().any(|l| l == need), "枚举值面应含 {need}: {:?}", ev);
+        }
+    }
+
+    /// C7.3 节点路径上下文识别(镜像 fa7d645 语义;R4 重写回归补测)。
+    #[test]
+    fn node_path_context_detection() {
+        let t = "var p = $Panel/\nvar q = %Sprite\nvar r = 7 % 3\nvar s = a%b\n";
+        let l2 = t.find('%').unwrap();
+        let l3 = t.find("7 % 3").unwrap();
+        let l4 = t.find("a%b").unwrap();
+        // $ 路径:"var p = $Panel/"
+        assert!(in_node_path_context(t, 9), "$ 后");
+        assert!(in_node_path_context(t, 12), "$Pa 中");
+        assert!(in_node_path_context(t, 14), "$Panel 尾");
+        assert!(in_node_path_context(t, 15), "$Panel/ 后");
+        assert!(!in_node_path_context(t, 8), "$ 之前");
+        assert!(!in_node_path_context(t, 4), "普通标识符 var");
+        // % unique:"var q = %Sprite"
+        assert!(in_node_path_context(t, l2 + 1), "% 后");
+        // 取模:"7 % 3" — 光标在结果操作数之后,不得视为路径
+        assert!(!in_node_path_context(t, (l3 + 5) as usize), "取模结果后");
+        // a%b:% 前是操作数 → 取模
+        assert!(!in_node_path_context(t, (l4 + 3) as usize), "a%b 的 b 后");
+    }
+
+    /// C7.3 回归锁:`$Panel/` / `%Sprite` 上下文不再合并全局面
+    /// (fa7d645 探针实测污染 1662 项);取模上下文不受影响。
+    #[test]
+    fn completion_node_path_no_global_pollution() {
+        let base = test_state();
+        let labels = |src: &str, line: u32, ch: u32| -> Vec<String> {
+            let state = state_with(&base, src);
+            let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+            let p: CompletionParams = serde_json::from_value(serde_json::json!({
+                "textDocument": {"uri": uri},
+                "position": {"line": line, "character": ch}
+            }))
+            .unwrap();
+            match completion(&state, &p) {
+                CompletionResponse::Array(items) => items.into_iter().map(|i| i.label).collect(),
+                _ => vec![],
+            }
+        };
+        // `$Panel/` 词尾:不得出现任何全局面项(类/函数/关键字)。
+        let dollar = labels("func _ready():\n\tvar p = $Panel/\n", 1, 15);
+        assert!(dollar.is_empty(), "$Panel/ 应不出全局面: 前 12 项 {:?}", &dollar[..dollar.len().min(12)]);
+        // `%Sprite` 词尾:同上。
+        let unique = labels("func _ready():\n\tvar q = %Sprite\n", 1, 14);
+        assert!(unique.is_empty(), "%Sprite 应不出全局面: 前 12 项 {:?}", &unique[..unique.len().min(12)]);
+        // 取模上下文:`7 % 3` 之后照常出全局面(抑制不得误伤)。
+        let modulo = labels("func _ready():\n\tvar r = 7 % 3\n", 1, 15);
+        assert!(modulo.iter().any(|l| l == "print(…)"), "取模后应仍出全局面: {}", modulo.len());
+    }
+
+    /// C6.4 函数面 insertText 约定(引擎 LSP 适配器同款):snippet 协商时
+    /// `name($1)` + Snippet 格式;无协商时退化为裸名(上游 trim_suffix("("))。
+    #[test]
+    fn completion_function_insert_text_convention() {
+        let base = test_state();
+        let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+        let ask = |state: &State, line: u32, ch: u32| -> Vec<CompletionItem> {
+            let p: CompletionParams = serde_json::from_value(serde_json::json!({
+                "textDocument": {"uri": uri},
+                "position": {"line": line, "character": ch}
+            }))
+            .unwrap();
+            match completion(state, &p) {
+                CompletionResponse::Array(items) => items,
+                _ => vec![],
+            }
+        };
+        // snippet 协商 + 开启:全局面 print → label "print(…)" / insertText "print($1)"。
+        let mut st = state_with(&base, "print\n");
+        st.snippet_support = true;
+        let items = ask(&st, 0, 5);
+        let print = items.iter().find(|i| i.label == "print(…)").expect("应出 print(…)");
+        assert_eq!(print.insert_text.as_deref(), Some("print($1)"));
+        assert_eq!(print.insert_text_format, Some(InsertTextFormat::SNIPPET));
+        // 无 snippet 协商:insertText 退化为裸名(不放括号,客户端补不进光标)。
+        let st2 = state_with(&base, "print\n");
+        let items2 = ask(&st2, 0, 5);
+        let print2 = items2.iter().find(|i| i.label == "print(…)").expect("应出 print(…)");
+        assert_eq!(print2.insert_text.as_deref(), Some("print"));
+        assert_eq!(print2.insert_text_format, None);
+        // 成员面同约定:Vector3.normalized → "normalized($1)"(协商时)。
+        let mut st3 = state_with(&base, "var v := Vector3.normalized\n");
+        st3.snippet_support = true;
+        let items3 = ask(&st3, 0, 27);
+        let norm = items3
+            .iter()
+            .find(|i| i.label == "normalized(…)")
+            .expect("成员面应出 normalized(…)");
+        assert_eq!(norm.insert_text.as_deref(), Some("normalized($1)"));
     }
 
     /// C1 sortText：partial 词归面（`Vector3.no` → 成员面）+ 桶/fuzzy 编码。
@@ -2226,11 +2827,11 @@ func _ready() -> void:
         // 成员面 partial 词：`Vector3.no`（旧逻辑只有 `Vector3.` 紧邻点才归成员面）。
         let state = state_with(&base, "var v := Vector3.no\n");
         let items = ask(&state, 19);
-        assert!(items.iter().any(|i| i.label == "normalized"), "成员面应识别 partial 词");
+        assert!(items.iter().any(|i| i.label == "normalized(…)"), "成员面应识别 partial 词");
         let st = |l: &str| {
             items.iter().find(|i| i.label == l).map(|i| i.sort_text.clone().unwrap()).unwrap_or_else(|| panic!("缺 {l}"))
         };
-        assert!(st("normalized") < st("ONE"), "前缀分应排序: normalized={} ONE={}", st("normalized"), st("ONE"));
+        assert!(st("normalized(…)") < st("ONE"), "前缀分应排序: normalized={} ONE={}", st("normalized(…)"), st("ONE"));
     }
 
     /// C2 snippet 面：协商开关两侧 + 上下文感知（宿主过滤/语句位）。
