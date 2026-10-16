@@ -294,7 +294,14 @@ void set_spin_sides(spin_sides: int)
 polygon: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_polygon(value: PackedVector2Array)
+- PackedVector2Array get_polygon()
+
+The point array that defines the 2D polygon that is extruded. This can be a convex or concave polygon with 3 or more points. The polygon must not have any intersecting edges. Otherwise, triangulation will fail and no mesh will be generated.
+
+Note: If only 1 or 2 points are defined in polygon, no mesh will be generated.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.
 
 ### mode {#mode}
 
@@ -480,17 +487,7 @@ Material to use for the resulting mesh. The UV maps the top half of the material
 enum Mode { MODE_DEPTH = 0, MODE_SPIN = 1, MODE_PATH = 2 }
 ```
 
-Mode MODE_DEPTH = 0
-
-The polygon shape is extruded along the negative Z axis.
-
-Mode MODE_SPIN = 1
-
-The polygon shape is extruded by rotating it around the Y axis.
-
-Mode MODE_PATH = 2
-
-The polygon shape is extruded along the Path3D specified in path_node.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MODE_DEPTH {#MODE_DEPTH}
 
@@ -498,7 +495,7 @@ The polygon shape is extruded along the Path3D specified in path_node.
 MODE_DEPTH = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The polygon shape is extruded along the negative Z axis.
 
 #### MODE_SPIN {#MODE_SPIN}
 
@@ -506,7 +503,7 @@ MODE_DEPTH = 0
 MODE_SPIN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The polygon shape is extruded by rotating it around the Y axis.
 
 #### MODE_PATH {#MODE_PATH}
 
@@ -514,7 +511,9 @@ MODE_SPIN = 1
 MODE_PATH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The polygon shape is extruded along the Path3D specified in path_node.
+
+---
 
 ### PathRotation {#enum-PathRotation}
 
@@ -522,21 +521,7 @@ MODE_PATH = 2
 enum PathRotation { PATH_ROTATION_POLYGON = 0, PATH_ROTATION_PATH = 1, PATH_ROTATION_PATH_FOLLOW = 2 }
 ```
 
-PathRotation PATH_ROTATION_POLYGON = 0
-
-The polygon shape is not rotated.
-
-Note: Requires the path Z coordinates to continually decrease to ensure viable shapes.
-
-PathRotation PATH_ROTATION_PATH = 1
-
-The polygon shape is rotated along the path, but it is not rotated around the path axis.
-
-Note: Requires the path Z coordinates to continually decrease to ensure viable shapes.
-
-PathRotation PATH_ROTATION_PATH_FOLLOW = 2
-
-The polygon shape follows the path and its rotations around the path axis.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PATH_ROTATION_POLYGON {#PATH_ROTATION_POLYGON}
 
@@ -544,7 +529,9 @@ The polygon shape follows the path and its rotations around the path axis.
 PATH_ROTATION_POLYGON = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The polygon shape is not rotated.
+
+Note: Requires the path Z coordinates to continually decrease to ensure viable shapes.
 
 #### PATH_ROTATION_PATH {#PATH_ROTATION_PATH}
 
@@ -552,7 +539,9 @@ PATH_ROTATION_POLYGON = 0
 PATH_ROTATION_PATH = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The polygon shape is rotated along the path, but it is not rotated around the path axis.
+
+Note: Requires the path Z coordinates to continually decrease to ensure viable shapes.
 
 #### PATH_ROTATION_PATH_FOLLOW {#PATH_ROTATION_PATH_FOLLOW}
 
@@ -560,7 +549,9 @@ PATH_ROTATION_PATH = 1
 PATH_ROTATION_PATH_FOLLOW = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The polygon shape follows the path and its rotations around the path axis.
+
+---
 
 ### PathIntervalType {#enum-PathIntervalType}
 
@@ -568,13 +559,7 @@ PATH_ROTATION_PATH_FOLLOW = 2
 enum PathIntervalType { PATH_INTERVAL_DISTANCE = 0, PATH_INTERVAL_SUBDIVIDE = 1 }
 ```
 
-PathIntervalType PATH_INTERVAL_DISTANCE = 0
-
-When mode is set to MODE_PATH, path_interval will determine the distance, in meters, each interval of the path will extrude.
-
-PathIntervalType PATH_INTERVAL_SUBDIVIDE = 1
-
-When mode is set to MODE_PATH, path_interval will subdivide the polygons along the path.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PATH_INTERVAL_DISTANCE {#PATH_INTERVAL_DISTANCE}
 
@@ -582,7 +567,7 @@ When mode is set to MODE_PATH, path_interval will subdivide the polygons along t
 PATH_INTERVAL_DISTANCE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When mode is set to MODE_PATH, path_interval will determine the distance, in meters, each interval of the path will extrude.
 
 #### PATH_INTERVAL_SUBDIVIDE {#PATH_INTERVAL_SUBDIVIDE}
 
@@ -590,4 +575,6 @@ PATH_INTERVAL_DISTANCE = 0
 PATH_INTERVAL_SUBDIVIDE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When mode is set to MODE_PATH, path_interval will subdivide the polygons along the path.
+
+---

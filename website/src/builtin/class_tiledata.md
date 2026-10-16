@@ -495,7 +495,10 @@ If true, the tile will display transposed, i.e. with horizontal and vertical tex
 texture_origin: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_texture_origin(value: Vector2i)
+- Vector2i get_texture_origin()
+
+Offsets the position of where the tile is drawn.
 
 ### modulate {#modulate}
 
@@ -503,7 +506,10 @@ texture_origin: Vector2i
 modulate: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_modulate(value: Color)
+- Color get_modulate()
+
+Color modulation of the tile.
 
 ### material {#material}
 

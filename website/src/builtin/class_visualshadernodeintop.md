@@ -49,57 +49,7 @@ An operator to be applied to the inputs.
 enum Operator { OP_ADD = 0, OP_SUB = 1, OP_MUL = 2, OP_DIV = 3, OP_MOD = 4, OP_MAX = 5, OP_MIN = 6, OP_BITWISE_AND = 7, OP_BITWISE_OR = 8, OP_BITWISE_XOR = 9, OP_BITWISE_LEFT_SHIFT = 10, OP_BITWISE_RIGHT_SHIFT = 11, OP_ENUM_SIZE = 12 }
 ```
 
-Operator OP_ADD = 0
-
-Sums two numbers using a + b.
-
-Operator OP_SUB = 1
-
-Subtracts two numbers using a - b.
-
-Operator OP_MUL = 2
-
-Multiplies two numbers using a * b.
-
-Operator OP_DIV = 3
-
-Divides two numbers using a / b.
-
-Operator OP_MOD = 4
-
-Calculates the remainder of two numbers using a % b.
-
-Operator OP_MAX = 5
-
-Returns the greater of two numbers. Translates to max(a, b) in the Godot Shader Language.
-
-Operator OP_MIN = 6
-
-Returns the lesser of two numbers. Translates to max(a, b) in the Godot Shader Language.
-
-Operator OP_BITWISE_AND = 7
-
-Returns the result of bitwise AND operation on the integer. Translates to a & b in the Godot Shader Language.
-
-Operator OP_BITWISE_OR = 8
-
-Returns the result of bitwise OR operation for two integers. Translates to a | b in the Godot Shader Language.
-
-Operator OP_BITWISE_XOR = 9
-
-Returns the result of bitwise XOR operation for two integers. Translates to a ^ b in the Godot Shader Language.
-
-Operator OP_BITWISE_LEFT_SHIFT = 10
-
-Returns the result of bitwise left shift operation on the integer. Translates to a << b in the Godot Shader Language.
-
-Operator OP_BITWISE_RIGHT_SHIFT = 11
-
-Returns the result of bitwise right shift operation on the integer. Translates to a >> b in the Godot Shader Language.
-
-Operator OP_ENUM_SIZE = 12
-
-Represents the size of the Operator enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OP_ADD {#OP_ADD}
 
@@ -107,7 +57,7 @@ Represents the size of the Operator enum.
 OP_ADD = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sums two numbers using a + b.
 
 #### OP_SUB {#OP_SUB}
 
@@ -115,7 +65,7 @@ OP_ADD = 0
 OP_SUB = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Subtracts two numbers using a - b.
 
 #### OP_MUL {#OP_MUL}
 
@@ -123,7 +73,7 @@ OP_SUB = 1
 OP_MUL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiplies two numbers using a * b.
 
 #### OP_DIV {#OP_DIV}
 
@@ -131,7 +81,7 @@ OP_MUL = 2
 OP_DIV = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Divides two numbers using a / b.
 
 #### OP_MOD {#OP_MOD}
 
@@ -139,7 +89,7 @@ OP_DIV = 3
 OP_MOD = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Calculates the remainder of two numbers using a % b.
 
 #### OP_MAX {#OP_MAX}
 
@@ -147,7 +97,7 @@ OP_MOD = 4
 OP_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the greater of two numbers. Translates to max(a, b) in the Godot Shader Language.
 
 #### OP_MIN {#OP_MIN}
 
@@ -155,7 +105,7 @@ OP_MAX = 5
 OP_MIN = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the lesser of two numbers. Translates to max(a, b) in the Godot Shader Language.
 
 #### OP_BITWISE_AND {#OP_BITWISE_AND}
 
@@ -163,7 +113,7 @@ OP_MIN = 6
 OP_BITWISE_AND = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the result of bitwise AND operation on the integer. Translates to a & b in the Godot Shader Language.
 
 #### OP_BITWISE_OR {#OP_BITWISE_OR}
 
@@ -171,7 +121,7 @@ OP_BITWISE_AND = 7
 OP_BITWISE_OR = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the result of bitwise OR operation for two integers. Translates to a | b in the Godot Shader Language.
 
 #### OP_BITWISE_XOR {#OP_BITWISE_XOR}
 
@@ -179,7 +129,7 @@ OP_BITWISE_OR = 8
 OP_BITWISE_XOR = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the result of bitwise XOR operation for two integers. Translates to a ^ b in the Godot Shader Language.
 
 #### OP_BITWISE_LEFT_SHIFT {#OP_BITWISE_LEFT_SHIFT}
 
@@ -187,7 +137,7 @@ OP_BITWISE_XOR = 9
 OP_BITWISE_LEFT_SHIFT = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the result of bitwise left shift operation on the integer. Translates to a << b in the Godot Shader Language.
 
 #### OP_BITWISE_RIGHT_SHIFT {#OP_BITWISE_RIGHT_SHIFT}
 
@@ -195,7 +145,7 @@ OP_BITWISE_LEFT_SHIFT = 10
 OP_BITWISE_RIGHT_SHIFT = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the result of bitwise right shift operation on the integer. Translates to a >> b in the Godot Shader Language.
 
 #### OP_ENUM_SIZE {#OP_ENUM_SIZE}
 
@@ -203,4 +153,6 @@ OP_BITWISE_RIGHT_SHIFT = 11
 OP_ENUM_SIZE = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Operator enum.
+
+---

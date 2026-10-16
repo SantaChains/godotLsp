@@ -255,6 +255,33 @@ high-end 诸篇）+ 社区实证的 GDScript 热点知识的体系化。**同不
 
 骨架先行保证「链接全部有效」，精译保证「质量」——两件事解耦。
 
+### 四之一、hover ↔ mdbook 一致性约束（P1 落地，2026-10-16）
+
+hover 描述层与文档站共用**单一事实源 + 单一提取器**，防漂移靠结构而非自觉：
+
+1. **C1 单一提取器**：网站页与 LSP hover 描述均由 `tools/gen_docs.py` 的
+   `split_blocks` / `parse_entries_full` / `parse_enum_entries` 派生——
+   **禁止第二套解析器**（历史上 parse_entries 的两次缺口——枚举区块空行分隔、
+   带默认值属性被误判为函数——都靠"只修一处"立即双端生效）。
+2. **C2 渲染层零文案**：`hoverdata.rs` / `main.rs` 不写死任何描述文本；
+   缺数据 = 省略段落，不造句。描述永远来自 hoverdata.json。
+3. **C3 锚点契约共享**：hover 链接一律走 `doclinks.rs`（类页/成员/枚举/
+   注解 `#annotation-<名>`/语法篇 `syntax_url`），与网站 `{#id}` 显式锚点
+   同一契约，cargo test 逐枚举校验。
+4. **C4 伪类全量**：@GDScript 页由语料生成全量三节（内建函数/常量/注解），
+   使 len/preload/range/@export 的 hover 链接可落锚。
+5. **C5 正交层显式登记**：关键字/操作符不在类参考语料中，走 `langdocs.rs`
+   兜底表（恢复自旧架构），链接指向语法篇页——这是**唯一**允许手写描述的地方，
+   已在此处声明。
+6. **防漂移测试**：`python tools/gen_docs.py --check` 比对网站页与
+   hoverdata.json 双产物；`hoverdata::tests::key_entries_present` +
+   `hover_tests::hover_member_and_enum` 端到端回归（13 场景冒烟全绿）。
+
+P1 描述层覆盖：类/内建 brief、成员描述（沿继承链回溯）、@GDScript 内建函数
+（签名+描述，extension_api.json 之外）、注解（@ 前缀识别）、关键字（中文描述）、
+全局/类/内建枚举值。顺带修复：resolve_receiver 成员词截断 bug（光标在词中间
+时成员名只取到光标处——旧架构同样存在，被 word 级兜底掩盖）。
+
 ## 五、部署
 
 - `.github/workflows/pages.yml`：checkout → 装 mdbook（rust-lang 版本锁定）→

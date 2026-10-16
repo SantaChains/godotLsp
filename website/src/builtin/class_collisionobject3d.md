@@ -406,21 +406,7 @@ Note: Due to the lack of continuous collision detection, this signal may not be 
 enum DisableMode { DISABLE_MODE_REMOVE = 0, DISABLE_MODE_MAKE_STATIC = 1, DISABLE_MODE_KEEP_ACTIVE = 2 }
 ```
 
-DisableMode DISABLE_MODE_REMOVE = 0
-
-When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, remove from the physics simulation to stop all physics interactions with this CollisionObject3D.
-
-Automatically re-added to the physics simulation when the Node is processed again.
-
-DisableMode DISABLE_MODE_MAKE_STATIC = 1
-
-When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, make the body static. Doesn't affect Area3D. PhysicsBody3D can't be affected by forces or other bodies while static.
-
-Automatically set PhysicsBody3D back to its original mode when the Node is processed again.
-
-DisableMode DISABLE_MODE_KEEP_ACTIVE = 2
-
-When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, do not affect the physics simulation.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DISABLE_MODE_REMOVE {#DISABLE_MODE_REMOVE}
 
@@ -428,7 +414,9 @@ When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, do not affect the p
 DISABLE_MODE_REMOVE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, remove from the physics simulation to stop all physics interactions with this CollisionObject3D.
+
+Automatically re-added to the physics simulation when the Node is processed again.
 
 #### DISABLE_MODE_MAKE_STATIC {#DISABLE_MODE_MAKE_STATIC}
 
@@ -436,7 +424,9 @@ DISABLE_MODE_REMOVE = 0
 DISABLE_MODE_MAKE_STATIC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, make the body static. Doesn't affect Area3D. PhysicsBody3D can't be affected by forces or other bodies while static.
+
+Automatically set PhysicsBody3D back to its original mode when the Node is processed again.
 
 #### DISABLE_MODE_KEEP_ACTIVE {#DISABLE_MODE_KEEP_ACTIVE}
 
@@ -444,4 +434,6 @@ DISABLE_MODE_MAKE_STATIC = 1
 DISABLE_MODE_KEEP_ACTIVE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, do not affect the physics simulation.
+
+---

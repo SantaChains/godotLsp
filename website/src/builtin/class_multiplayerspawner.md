@@ -114,7 +114,10 @@ Note: Spawnable scenes are spawned automatically. spawn() is only needed for cus
 spawn_path: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_spawn_path(value: NodePath)
+- NodePath get_spawn_path()
+
+Path to the spawn root. Spawnable scenes that are added as direct children are replicated to other peers.
 
 ### spawn_limit {#spawn_limit}
 

@@ -36,4 +36,7 @@ void set_constant(constant: Vector3)
 constant: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_constant(value: Vector3)
+- Vector3 get_constant()
+
+A Vector3 constant which represents the state of this node.

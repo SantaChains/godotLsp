@@ -121,17 +121,7 @@ The compression level used when start_file() is called. Use CompressionLevel as 
 enum ZipAppend { APPEND_CREATE = 0, APPEND_CREATEAFTER = 1, APPEND_ADDINZIP = 2 }
 ```
 
-ZipAppend APPEND_CREATE = 0
-
-Create a new zip archive at the given path.
-
-ZipAppend APPEND_CREATEAFTER = 1
-
-Append a new zip archive to the end of the already existing file at the given path.
-
-ZipAppend APPEND_ADDINZIP = 2
-
-Add new files to the existing zip archive at the given path.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### APPEND_CREATE {#APPEND_CREATE}
 
@@ -139,7 +129,7 @@ Add new files to the existing zip archive at the given path.
 APPEND_CREATE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Create a new zip archive at the given path.
 
 #### APPEND_CREATEAFTER {#APPEND_CREATEAFTER}
 
@@ -147,7 +137,7 @@ APPEND_CREATE = 0
 APPEND_CREATEAFTER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Append a new zip archive to the end of the already existing file at the given path.
 
 #### APPEND_ADDINZIP {#APPEND_ADDINZIP}
 
@@ -155,7 +145,9 @@ APPEND_CREATEAFTER = 1
 APPEND_ADDINZIP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Add new files to the existing zip archive at the given path.
+
+---
 
 ### CompressionLevel {#enum-CompressionLevel}
 
@@ -163,21 +155,7 @@ APPEND_ADDINZIP = 2
 enum CompressionLevel { COMPRESSION_DEFAULT = -1, COMPRESSION_NONE = 0, COMPRESSION_FAST = 1, COMPRESSION_BEST = 9 }
 ```
 
-CompressionLevel COMPRESSION_DEFAULT = -1
-
-Start a file with the default Deflate compression level (6). This is a good compromise between speed and file size.
-
-CompressionLevel COMPRESSION_NONE = 0
-
-Start a file with no compression. This is also known as the "Store" compression mode and is the fastest method of packing files inside a ZIP archive. Consider using this mode for files that are already compressed (such as JPEG, PNG, MP3, or Ogg Vorbis files).
-
-CompressionLevel COMPRESSION_FAST = 1
-
-Start a file with the fastest Deflate compression level (1). This is fast to compress, but results in larger file sizes than COMPRESSION_DEFAULT. Decompression speed is generally unaffected by the chosen compression level.
-
-CompressionLevel COMPRESSION_BEST = 9
-
-Start a file with the best Deflate compression level (9). This is slow to compress, but results in smaller file sizes than COMPRESSION_DEFAULT. Decompression speed is generally unaffected by the chosen compression level.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### COMPRESSION_DEFAULT {#COMPRESSION_DEFAULT}
 
@@ -185,7 +163,7 @@ Start a file with the best Deflate compression level (9). This is slow to compre
 COMPRESSION_DEFAULT = -1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Start a file with the default Deflate compression level (6). This is a good compromise between speed and file size.
 
 #### COMPRESSION_NONE {#COMPRESSION_NONE}
 
@@ -193,7 +171,7 @@ COMPRESSION_DEFAULT = -1
 COMPRESSION_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Start a file with no compression. This is also known as the "Store" compression mode and is the fastest method of packing files inside a ZIP archive. Consider using this mode for files that are already compressed (such as JPEG, PNG, MP3, or Ogg Vorbis files).
 
 #### COMPRESSION_FAST {#COMPRESSION_FAST}
 
@@ -201,7 +179,7 @@ COMPRESSION_NONE = 0
 COMPRESSION_FAST = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Start a file with the fastest Deflate compression level (1). This is fast to compress, but results in larger file sizes than COMPRESSION_DEFAULT. Decompression speed is generally unaffected by the chosen compression level.
 
 #### COMPRESSION_BEST {#COMPRESSION_BEST}
 
@@ -209,4 +187,6 @@ COMPRESSION_FAST = 1
 COMPRESSION_BEST = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Start a file with the best Deflate compression level (9). This is slow to compress, but results in smaller file sizes than COMPRESSION_DEFAULT. Decompression speed is generally unaffected by the chosen compression level.
+
+---

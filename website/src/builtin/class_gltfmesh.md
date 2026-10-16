@@ -126,7 +126,12 @@ The ImporterMesh object representing the mesh itself.
 blend_weights: PackedFloat32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_blend_weights(value: PackedFloat32Array)
+- PackedFloat32Array get_blend_weights()
+
+An array of floats representing the blend weights of the mesh.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedFloat32Array for more details.
 
 ### instance_materials {#instance_materials}
 

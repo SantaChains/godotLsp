@@ -143,13 +143,7 @@ The transfer mode to use when sending outgoing packet. Either text or binary.
 enum WriteMode { WRITE_MODE_TEXT = 0, WRITE_MODE_BINARY = 1 }
 ```
 
-WriteMode WRITE_MODE_TEXT = 0
-
-Tells the channel to send data over this channel as text. An external peer (non-Godot) would receive this as a string.
-
-WriteMode WRITE_MODE_BINARY = 1
-
-Tells the channel to send data over this channel as binary. An external peer (non-Godot) would receive this as array buffer or blob.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### WRITE_MODE_TEXT {#WRITE_MODE_TEXT}
 
@@ -157,7 +151,7 @@ Tells the channel to send data over this channel as binary. An external peer (no
 WRITE_MODE_TEXT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tells the channel to send data over this channel as text. An external peer (non-Godot) would receive this as a string.
 
 #### WRITE_MODE_BINARY {#WRITE_MODE_BINARY}
 
@@ -165,7 +159,9 @@ WRITE_MODE_TEXT = 0
 WRITE_MODE_BINARY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tells the channel to send data over this channel as binary. An external peer (non-Godot) would receive this as array buffer or blob.
+
+---
 
 ### ChannelState {#enum-ChannelState}
 
@@ -173,21 +169,7 @@ WRITE_MODE_BINARY = 1
 enum ChannelState { STATE_CONNECTING = 0, STATE_OPEN = 1, STATE_CLOSING = 2, STATE_CLOSED = 3 }
 ```
 
-ChannelState STATE_CONNECTING = 0
-
-The channel was created, but it's still trying to connect.
-
-ChannelState STATE_OPEN = 1
-
-The channel is currently open, and data can flow over it.
-
-ChannelState STATE_CLOSING = 2
-
-The channel is being closed, no new messages will be accepted, but those already in queue will be flushed.
-
-ChannelState STATE_CLOSED = 3
-
-The channel was closed, or connection failed.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STATE_CONNECTING {#STATE_CONNECTING}
 
@@ -195,7 +177,7 @@ The channel was closed, or connection failed.
 STATE_CONNECTING = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The channel was created, but it's still trying to connect.
 
 #### STATE_OPEN {#STATE_OPEN}
 
@@ -203,7 +185,7 @@ STATE_CONNECTING = 0
 STATE_OPEN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The channel is currently open, and data can flow over it.
 
 #### STATE_CLOSING {#STATE_CLOSING}
 
@@ -211,7 +193,7 @@ STATE_OPEN = 1
 STATE_CLOSING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The channel is being closed, no new messages will be accepted, but those already in queue will be flushed.
 
 #### STATE_CLOSED {#STATE_CLOSED}
 
@@ -219,4 +201,6 @@ STATE_CLOSING = 2
 STATE_CLOSED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The channel was closed, or connection failed.
+
+---

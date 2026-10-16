@@ -182,7 +182,12 @@ void set_scroll_scale(scale: Vector2)
 scroll_scale: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scroll_scale(value: Vector2)
+- Vector2 get_scroll_scale()
+
+Multiplier to the final Parallax2D's offset. Can be used to simulate distance from the camera.
+
+For example, a value of 1 scrolls at the same speed as the camera. A value greater than 1 scrolls faster, making objects appear closer. Less than 1 scrolls slower, making objects appear further, and a value of 0 stops the objects completely.
 
 ### scroll_offset {#scroll_offset}
 
@@ -190,7 +195,12 @@ scroll_scale: Vector2
 scroll_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scroll_offset(value: Vector2)
+- Vector2 get_scroll_offset()
+
+The Parallax2D's offset. Similar to screen_offset and Node2D.position, but will not be overridden.
+
+Note: Values will loop if repeat_size is set higher than 0.
 
 ### repeat_size {#repeat_size}
 
@@ -198,7 +208,10 @@ scroll_offset: Vector2
 repeat_size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_repeat_size(value: Vector2)
+- Vector2 get_repeat_size()
+
+Repeats the Texture2D of each of this node's children and offsets them by this value. When scrolling, the node's position loops, giving the illusion of an infinite scrolling background if the values are larger than the screen size. If an axis is set to 0, the Texture2D will not be repeated.
 
 ### autoscroll {#autoscroll}
 
@@ -206,7 +219,10 @@ repeat_size: Vector2
 autoscroll: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_autoscroll(value: Vector2)
+- Vector2 get_autoscroll()
+
+Velocity at which the offset scrolls automatically, in pixels per second.
 
 ### repeat_times {#repeat_times}
 
@@ -225,7 +241,10 @@ Overrides the amount of times the texture repeats. Each texture copy spreads eve
 limit_begin: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_limit_begin(value: Vector2)
+- Vector2 get_limit_begin()
+
+Top-left limits for scrolling to begin. If the camera is outside of this limit, the Parallax2D stops scrolling. Must be lower than limit_end minus the viewport size to work.
 
 ### limit_end {#limit_end}
 
@@ -233,7 +252,10 @@ limit_begin: Vector2
 limit_end: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_limit_end(value: Vector2)
+- Vector2 get_limit_end()
+
+Bottom-right limits for scrolling to end. If the camera is outside of this limit, the Parallax2D will stop scrolling. Must be higher than limit_begin and the viewport size combined to work.
 
 ### follow_viewport {#follow_viewport}
 
@@ -263,4 +285,7 @@ If true, Parallax2D's position is not affected by the position of the camera.
 screen_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_screen_offset(value: Vector2)
+- Vector2 get_screen_offset()
+
+Offset used to scroll this Parallax2D. This value is updated automatically unless ignore_camera_scroll is true.

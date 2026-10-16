@@ -42,4 +42,9 @@ void set_points(points: PackedVector3Array)
 points: Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_points(value: PackedVector3Array)
+- PackedVector3Array get_points()
+
+The list of 3D points forming the convex polygon shape.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector3Array for more details.

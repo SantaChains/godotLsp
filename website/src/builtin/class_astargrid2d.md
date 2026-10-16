@@ -350,7 +350,10 @@ Note: All point data (solidity and weight scale) will be cleared.
 region: Rect2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_region(value: Rect2i)
+- Rect2i get_region()
+
+The region of grid cells available for pathfinding. If changed, update() needs to be called before finding the next path.
 
 ### size {#size}
 
@@ -358,7 +361,12 @@ region: Rect2i
 size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector2i)
+- Vector2i get_size()
+
+Deprecated: Use region instead.
+
+The size of the grid (number of cells of size cell_size on each axis). If changed, update() needs to be called before finding the next path.
 
 ### offset {#offset}
 
@@ -366,7 +374,10 @@ size: Vector2i
 offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset(value: Vector2)
+- Vector2 get_offset()
+
+The offset of the grid which will be applied to calculate the resulting point position returned by get_point_path(). If changed, update() needs to be called before finding the next path.
 
 ### cell_size {#cell_size}
 
@@ -374,7 +385,10 @@ offset: Vector2
 cell_size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_cell_size(value: Vector2)
+- Vector2 get_cell_size()
+
+The size of the point cell which will be applied to calculate the resulting point position returned by get_point_path(). If changed, update() needs to be called before finding the next path.
 
 ### cell_shape {#cell_shape}
 
@@ -441,7 +455,13 @@ A specific DiagonalMode mode which will force the path to avoid or accept the sp
 enum Heuristic { HEURISTIC_EUCLIDEAN = 0, HEURISTIC_MANHATTAN = 1, HEURISTIC_OCTILE = 2, HEURISTIC_CHEBYSHEV = 3, HEURISTIC_MAX = 4 }
 ```
 
-Heuristic HEURISTIC_EUCLIDEAN = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### HEURISTIC_EUCLIDEAN {#HEURISTIC_EUCLIDEAN}
+
+```gdscript
+HEURISTIC_EUCLIDEAN = 0
+```
 
 The Euclidean heuristic [https://en.wikipedia.org/wiki/Euclidean_distance] to be used for the pathfinding using the following formula:
 
@@ -453,7 +473,11 @@ result = sqrt(dx * dx + dy * dy)
 
 Note: This is also the internal heuristic used in AStar3D and AStar2D by default (with the inclusion of possible z-axis coordinate).
 
-Heuristic HEURISTIC_MANHATTAN = 1
+#### HEURISTIC_MANHATTAN {#HEURISTIC_MANHATTAN}
+
+```gdscript
+HEURISTIC_MANHATTAN = 1
+```
 
 The Manhattan heuristic [https://en.wikipedia.org/wiki/Taxicab_geometry] to be used for the pathfinding using the following formula:
 
@@ -465,7 +489,11 @@ result = dx + dy
 
 Note: This heuristic is intended to be used with 4-side orthogonal movements, provided by setting the diagonal_mode to DIAGONAL_MODE_NEVER.
 
-Heuristic HEURISTIC_OCTILE = 2
+#### HEURISTIC_OCTILE {#HEURISTIC_OCTILE}
+
+```gdscript
+HEURISTIC_OCTILE = 2
+```
 
 The Octile heuristic to be used for the pathfinding using the following formula:
 
@@ -476,7 +504,11 @@ f = sqrt(2) - 1
 result = (dx < dy) ? f * dx + dy : f * dy + dx;
 ```
 
-Heuristic HEURISTIC_CHEBYSHEV = 3
+#### HEURISTIC_CHEBYSHEV {#HEURISTIC_CHEBYSHEV}
+
+```gdscript
+HEURISTIC_CHEBYSHEV = 3
+```
 
 The Chebyshev heuristic [https://en.wikipedia.org/wiki/Chebyshev_distance] to be used for the pathfinding using the following formula:
 
@@ -486,49 +518,15 @@ dy = abs(to_id.y - from_id.y)
 result = max(dx, dy)
 ```
 
-Heuristic HEURISTIC_MAX = 4
-
-Represents the size of the Heuristic enum.
-
-#### HEURISTIC_EUCLIDEAN {#HEURISTIC_EUCLIDEAN}
-
-```gdscript
-HEURISTIC_EUCLIDEAN = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### HEURISTIC_MANHATTAN {#HEURISTIC_MANHATTAN}
-
-```gdscript
-HEURISTIC_MANHATTAN = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### HEURISTIC_OCTILE {#HEURISTIC_OCTILE}
-
-```gdscript
-HEURISTIC_OCTILE = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### HEURISTIC_CHEBYSHEV {#HEURISTIC_CHEBYSHEV}
-
-```gdscript
-HEURISTIC_CHEBYSHEV = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### HEURISTIC_MAX {#HEURISTIC_MAX}
 
 ```gdscript
 HEURISTIC_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Heuristic enum.
+
+---
 
 ### DiagonalMode {#enum-DiagonalMode}
 
@@ -536,25 +534,7 @@ HEURISTIC_MAX = 4
 enum DiagonalMode { DIAGONAL_MODE_ALWAYS = 0, DIAGONAL_MODE_NEVER = 1, DIAGONAL_MODE_AT_LEAST_ONE_WALKABLE = 2, DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES = 3, DIAGONAL_MODE_MAX = 4 }
 ```
 
-DiagonalMode DIAGONAL_MODE_ALWAYS = 0
-
-The pathfinding algorithm will ignore solid neighbors around the target cell and allow passing using diagonals.
-
-DiagonalMode DIAGONAL_MODE_NEVER = 1
-
-The pathfinding algorithm will ignore all diagonals and the way will be always orthogonal.
-
-DiagonalMode DIAGONAL_MODE_AT_LEAST_ONE_WALKABLE = 2
-
-The pathfinding algorithm will avoid using diagonals if at least two obstacles have been placed around the neighboring cells of the specific path segment.
-
-DiagonalMode DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES = 3
-
-The pathfinding algorithm will avoid using diagonals if any obstacle has been placed around the neighboring cells of the specific path segment.
-
-DiagonalMode DIAGONAL_MODE_MAX = 4
-
-Represents the size of the DiagonalMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DIAGONAL_MODE_ALWAYS {#DIAGONAL_MODE_ALWAYS}
 
@@ -562,7 +542,7 @@ Represents the size of the DiagonalMode enum.
 DIAGONAL_MODE_ALWAYS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The pathfinding algorithm will ignore solid neighbors around the target cell and allow passing using diagonals.
 
 #### DIAGONAL_MODE_NEVER {#DIAGONAL_MODE_NEVER}
 
@@ -570,7 +550,7 @@ DIAGONAL_MODE_ALWAYS = 0
 DIAGONAL_MODE_NEVER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The pathfinding algorithm will ignore all diagonals and the way will be always orthogonal.
 
 #### DIAGONAL_MODE_AT_LEAST_ONE_WALKABLE {#DIAGONAL_MODE_AT_LEAST_ONE_WALKABLE}
 
@@ -578,7 +558,7 @@ DIAGONAL_MODE_NEVER = 1
 DIAGONAL_MODE_AT_LEAST_ONE_WALKABLE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The pathfinding algorithm will avoid using diagonals if at least two obstacles have been placed around the neighboring cells of the specific path segment.
 
 #### DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES {#DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES}
 
@@ -586,7 +566,7 @@ DIAGONAL_MODE_AT_LEAST_ONE_WALKABLE = 2
 DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The pathfinding algorithm will avoid using diagonals if any obstacle has been placed around the neighboring cells of the specific path segment.
 
 #### DIAGONAL_MODE_MAX {#DIAGONAL_MODE_MAX}
 
@@ -594,7 +574,9 @@ DIAGONAL_MODE_ONLY_IF_NO_OBSTACLES = 3
 DIAGONAL_MODE_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the DiagonalMode enum.
+
+---
 
 ### CellShape {#enum-CellShape}
 
@@ -602,21 +584,7 @@ DIAGONAL_MODE_MAX = 4
 enum CellShape { CELL_SHAPE_SQUARE = 0, CELL_SHAPE_ISOMETRIC_RIGHT = 1, CELL_SHAPE_ISOMETRIC_DOWN = 2, CELL_SHAPE_MAX = 3 }
 ```
 
-CellShape CELL_SHAPE_SQUARE = 0
-
-Rectangular cell shape.
-
-CellShape CELL_SHAPE_ISOMETRIC_RIGHT = 1
-
-Diamond cell shape (for isometric look). Cell coordinates layout where the horizontal axis goes up-right, and the vertical one goes down-right.
-
-CellShape CELL_SHAPE_ISOMETRIC_DOWN = 2
-
-Diamond cell shape (for isometric look). Cell coordinates layout where the horizontal axis goes down-right, and the vertical one goes down-left.
-
-CellShape CELL_SHAPE_MAX = 3
-
-Represents the size of the CellShape enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CELL_SHAPE_SQUARE {#CELL_SHAPE_SQUARE}
 
@@ -624,7 +592,7 @@ Represents the size of the CellShape enum.
 CELL_SHAPE_SQUARE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Rectangular cell shape.
 
 #### CELL_SHAPE_ISOMETRIC_RIGHT {#CELL_SHAPE_ISOMETRIC_RIGHT}
 
@@ -632,7 +600,7 @@ CELL_SHAPE_SQUARE = 0
 CELL_SHAPE_ISOMETRIC_RIGHT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Diamond cell shape (for isometric look). Cell coordinates layout where the horizontal axis goes up-right, and the vertical one goes down-right.
 
 #### CELL_SHAPE_ISOMETRIC_DOWN {#CELL_SHAPE_ISOMETRIC_DOWN}
 
@@ -640,7 +608,7 @@ CELL_SHAPE_ISOMETRIC_RIGHT = 1
 CELL_SHAPE_ISOMETRIC_DOWN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Diamond cell shape (for isometric look). Cell coordinates layout where the horizontal axis goes down-right, and the vertical one goes down-left.
 
 #### CELL_SHAPE_MAX {#CELL_SHAPE_MAX}
 
@@ -648,4 +616,6 @@ CELL_SHAPE_ISOMETRIC_DOWN = 2
 CELL_SHAPE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the CellShape enum.
+
+---

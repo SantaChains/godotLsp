@@ -97,13 +97,7 @@ The Curve that is rendered onto the texture. Should be a unit Curve.
 enum TextureMode { TEXTURE_MODE_RGB = 0, TEXTURE_MODE_RED = 1 }
 ```
 
-TextureMode TEXTURE_MODE_RGB = 0
-
-Store the curve equally across the red, green and blue channels. This uses more video memory, but is more compatible with shaders that only read the green and blue values.
-
-TextureMode TEXTURE_MODE_RED = 1
-
-Store the curve only in the red channel. This saves video memory, but some custom shaders may not be able to work with this.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TEXTURE_MODE_RGB {#TEXTURE_MODE_RGB}
 
@@ -111,7 +105,7 @@ Store the curve only in the red channel. This saves video memory, but some custo
 TEXTURE_MODE_RGB = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Store the curve equally across the red, green and blue channels. This uses more video memory, but is more compatible with shaders that only read the green and blue values.
 
 #### TEXTURE_MODE_RED {#TEXTURE_MODE_RED}
 
@@ -119,4 +113,6 @@ TEXTURE_MODE_RGB = 0
 TEXTURE_MODE_RED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Store the curve only in the red channel. This saves video memory, but some custom shaders may not be able to work with this.
+
+---

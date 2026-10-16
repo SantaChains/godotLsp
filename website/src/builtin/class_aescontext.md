@@ -120,25 +120,7 @@ Note: The size of src must be a multiple of 16. Apply some padding if needed.
 enum Mode { MODE_ECB_ENCRYPT = 0, MODE_ECB_DECRYPT = 1, MODE_CBC_ENCRYPT = 2, MODE_CBC_DECRYPT = 3, MODE_MAX = 4 }
 ```
 
-Mode MODE_ECB_ENCRYPT = 0
-
-AES electronic codebook encryption mode.
-
-Mode MODE_ECB_DECRYPT = 1
-
-AES electronic codebook decryption mode.
-
-Mode MODE_CBC_ENCRYPT = 2
-
-AES cipher block chaining encryption mode.
-
-Mode MODE_CBC_DECRYPT = 3
-
-AES cipher block chaining decryption mode.
-
-Mode MODE_MAX = 4
-
-Maximum value for the mode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MODE_ECB_ENCRYPT {#MODE_ECB_ENCRYPT}
 
@@ -146,7 +128,7 @@ Maximum value for the mode enum.
 MODE_ECB_ENCRYPT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+AES electronic codebook encryption mode.
 
 #### MODE_ECB_DECRYPT {#MODE_ECB_DECRYPT}
 
@@ -154,7 +136,7 @@ MODE_ECB_ENCRYPT = 0
 MODE_ECB_DECRYPT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+AES electronic codebook decryption mode.
 
 #### MODE_CBC_ENCRYPT {#MODE_CBC_ENCRYPT}
 
@@ -162,7 +144,7 @@ MODE_ECB_DECRYPT = 1
 MODE_CBC_ENCRYPT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+AES cipher block chaining encryption mode.
 
 #### MODE_CBC_DECRYPT {#MODE_CBC_DECRYPT}
 
@@ -170,7 +152,7 @@ MODE_CBC_ENCRYPT = 2
 MODE_CBC_DECRYPT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+AES cipher block chaining decryption mode.
 
 #### MODE_MAX {#MODE_MAX}
 
@@ -178,4 +160,6 @@ MODE_CBC_DECRYPT = 3
 MODE_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum value for the mode enum.
+
+---

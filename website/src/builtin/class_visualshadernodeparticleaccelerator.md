@@ -49,21 +49,7 @@ Defines in what manner the particles will be accelerated.
 enum Mode { MODE_LINEAR = 0, MODE_RADIAL = 1, MODE_TANGENTIAL = 2, MODE_MAX = 3 }
 ```
 
-Mode MODE_LINEAR = 0
-
-The particles will be accelerated based on their velocity.
-
-Mode MODE_RADIAL = 1
-
-The particles will be accelerated towards or away from the center.
-
-Mode MODE_TANGENTIAL = 2
-
-The particles will be accelerated tangentially to the radius vector from center to their position.
-
-Mode MODE_MAX = 3
-
-Represents the size of the Mode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MODE_LINEAR {#MODE_LINEAR}
 
@@ -71,7 +57,7 @@ Represents the size of the Mode enum.
 MODE_LINEAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The particles will be accelerated based on their velocity.
 
 #### MODE_RADIAL {#MODE_RADIAL}
 
@@ -79,7 +65,7 @@ MODE_LINEAR = 0
 MODE_RADIAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The particles will be accelerated towards or away from the center.
 
 #### MODE_TANGENTIAL {#MODE_TANGENTIAL}
 
@@ -87,7 +73,7 @@ MODE_RADIAL = 1
 MODE_TANGENTIAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The particles will be accelerated tangentially to the radius vector from center to their position.
 
 #### MODE_MAX {#MODE_MAX}
 
@@ -95,4 +81,6 @@ MODE_TANGENTIAL = 2
 MODE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Mode enum.
+
+---

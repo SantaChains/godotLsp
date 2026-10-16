@@ -56,25 +56,7 @@ Poll the connection to check for incoming packets. Call this frequently to updat
 enum Status { STATUS_DISCONNECTED = 0, STATUS_HANDSHAKING = 1, STATUS_CONNECTED = 2, STATUS_ERROR = 3, STATUS_ERROR_HOSTNAME_MISMATCH = 4 }
 ```
 
-Status STATUS_DISCONNECTED = 0
-
-A status representing a PacketPeerDTLS that is disconnected.
-
-Status STATUS_HANDSHAKING = 1
-
-A status representing a PacketPeerDTLS that is currently performing the handshake with a remote peer.
-
-Status STATUS_CONNECTED = 2
-
-A status representing a PacketPeerDTLS that is connected to a remote peer.
-
-Status STATUS_ERROR = 3
-
-A status representing a PacketPeerDTLS in a generic error state.
-
-Status STATUS_ERROR_HOSTNAME_MISMATCH = 4
-
-An error status that shows a mismatch in the DTLS certificate domain presented by the host and the domain requested for validation.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STATUS_DISCONNECTED {#STATUS_DISCONNECTED}
 
@@ -82,7 +64,7 @@ An error status that shows a mismatch in the DTLS certificate domain presented b
 STATUS_DISCONNECTED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A status representing a PacketPeerDTLS that is disconnected.
 
 #### STATUS_HANDSHAKING {#STATUS_HANDSHAKING}
 
@@ -90,7 +72,7 @@ STATUS_DISCONNECTED = 0
 STATUS_HANDSHAKING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A status representing a PacketPeerDTLS that is currently performing the handshake with a remote peer.
 
 #### STATUS_CONNECTED {#STATUS_CONNECTED}
 
@@ -98,7 +80,7 @@ STATUS_HANDSHAKING = 1
 STATUS_CONNECTED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A status representing a PacketPeerDTLS that is connected to a remote peer.
 
 #### STATUS_ERROR {#STATUS_ERROR}
 
@@ -106,7 +88,7 @@ STATUS_CONNECTED = 2
 STATUS_ERROR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A status representing a PacketPeerDTLS in a generic error state.
 
 #### STATUS_ERROR_HOSTNAME_MISMATCH {#STATUS_ERROR_HOSTNAME_MISMATCH}
 
@@ -114,4 +96,6 @@ STATUS_ERROR = 3
 STATUS_ERROR_HOSTNAME_MISMATCH = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An error status that shows a mismatch in the DTLS certificate domain presented by the host and the domain requested for validation.
+
+---

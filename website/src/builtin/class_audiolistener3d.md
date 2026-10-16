@@ -85,17 +85,7 @@ Note: The Doppler effect will only be heard on AudioStreamPlayer3Ds if AudioStre
 enum DopplerTracking { DOPPLER_TRACKING_DISABLED = 0, DOPPLER_TRACKING_IDLE_STEP = 1, DOPPLER_TRACKING_PHYSICS_STEP = 2 }
 ```
 
-DopplerTracking DOPPLER_TRACKING_DISABLED = 0
-
-Disables Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] simulation (default).
-
-DopplerTracking DOPPLER_TRACKING_IDLE_STEP = 1
-
-Simulate Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] by tracking positions of objects that are changed in _process. Changes in the relative velocity of this listener compared to those objects affect how audio is perceived (changing the audio's AudioStreamPlayer3D.pitch_scale).
-
-DopplerTracking DOPPLER_TRACKING_PHYSICS_STEP = 2
-
-Simulate Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] by tracking positions of objects that are changed in _physics_process. Changes in the relative velocity of this listener compared to those objects affect how audio is perceived (changing the audio's AudioStreamPlayer3D.pitch_scale).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DOPPLER_TRACKING_DISABLED {#DOPPLER_TRACKING_DISABLED}
 
@@ -103,7 +93,7 @@ Simulate Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] by tracki
 DOPPLER_TRACKING_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] simulation (default).
 
 #### DOPPLER_TRACKING_IDLE_STEP {#DOPPLER_TRACKING_IDLE_STEP}
 
@@ -111,7 +101,7 @@ DOPPLER_TRACKING_DISABLED = 0
 DOPPLER_TRACKING_IDLE_STEP = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Simulate Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] by tracking positions of objects that are changed in _process. Changes in the relative velocity of this listener compared to those objects affect how audio is perceived (changing the audio's AudioStreamPlayer3D.pitch_scale).
 
 #### DOPPLER_TRACKING_PHYSICS_STEP {#DOPPLER_TRACKING_PHYSICS_STEP}
 
@@ -119,4 +109,6 @@ DOPPLER_TRACKING_IDLE_STEP = 1
 DOPPLER_TRACKING_PHYSICS_STEP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Simulate Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] by tracking positions of objects that are changed in _physics_process. Changes in the relative velocity of this listener compared to those objects affect how audio is perceived (changing the audio's AudioStreamPlayer3D.pitch_scale).
+
+---

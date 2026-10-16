@@ -447,7 +447,10 @@ Sets the motion mode which defines the behavior of move_and_slide().
 up_direction: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_up_direction(value: Vector2)
+- Vector2 get_up_direction()
+
+Vector pointing upwards, used to determine what is a wall and what is a floor (or a ceiling) when calling move_and_slide(). Defaults to Vector2.UP. As the vector will be normalized it can't be equal to Vector2.ZERO, if you want all collisions to be reported as walls, consider using MOTION_MODE_FLOATING as motion_mode.
 
 ### velocity {#velocity}
 
@@ -455,7 +458,12 @@ up_direction: Vector2
 velocity: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_velocity(value: Vector2)
+- Vector2 get_velocity()
+
+Current velocity vector in pixels per second, used and modified during calls to move_and_slide().
+
+Note: A common mistake is setting this property to the desired velocity multiplied by delta, which produces a motion vector in pixels.
 
 ### slide_on_ceiling {#slide_on_ceiling}
 
@@ -609,13 +617,7 @@ A lower value forces the collision algorithm to use more exact detection, so it 
 enum MotionMode { MOTION_MODE_GROUNDED = 0, MOTION_MODE_FLOATING = 1 }
 ```
 
-MotionMode MOTION_MODE_GROUNDED = 0
-
-Apply when notions of walls, ceiling and floor are relevant. In this mode the body motion will react to slopes (acceleration/slowdown). This mode is suitable for sided games like platformers.
-
-MotionMode MOTION_MODE_FLOATING = 1
-
-Apply when there is no notion of floor or ceiling. All collisions will be reported as on_wall. In this mode, when you slide, the speed will always be constant. This mode is suitable for top-down games.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MOTION_MODE_GROUNDED {#MOTION_MODE_GROUNDED}
 
@@ -623,7 +625,7 @@ Apply when there is no notion of floor or ceiling. All collisions will be report
 MOTION_MODE_GROUNDED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Apply when notions of walls, ceiling and floor are relevant. In this mode the body motion will react to slopes (acceleration/slowdown). This mode is suitable for sided games like platformers.
 
 #### MOTION_MODE_FLOATING {#MOTION_MODE_FLOATING}
 
@@ -631,7 +633,9 @@ MOTION_MODE_GROUNDED = 0
 MOTION_MODE_FLOATING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Apply when there is no notion of floor or ceiling. All collisions will be reported as on_wall. In this mode, when you slide, the speed will always be constant. This mode is suitable for top-down games.
+
+---
 
 ### PlatformOnLeave {#enum-PlatformOnLeave}
 
@@ -639,17 +643,7 @@ MOTION_MODE_FLOATING = 1
 enum PlatformOnLeave { PLATFORM_ON_LEAVE_ADD_VELOCITY = 0, PLATFORM_ON_LEAVE_ADD_UPWARD_VELOCITY = 1, PLATFORM_ON_LEAVE_DO_NOTHING = 2 }
 ```
 
-PlatformOnLeave PLATFORM_ON_LEAVE_ADD_VELOCITY = 0
-
-Add the last platform velocity to the velocity when you leave a moving platform.
-
-PlatformOnLeave PLATFORM_ON_LEAVE_ADD_UPWARD_VELOCITY = 1
-
-Add the last platform velocity to the velocity when you leave a moving platform, but any downward motion is ignored. It's useful to keep full jump height even when the platform is moving down.
-
-PlatformOnLeave PLATFORM_ON_LEAVE_DO_NOTHING = 2
-
-Do nothing when leaving a platform.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PLATFORM_ON_LEAVE_ADD_VELOCITY {#PLATFORM_ON_LEAVE_ADD_VELOCITY}
 
@@ -657,7 +651,7 @@ Do nothing when leaving a platform.
 PLATFORM_ON_LEAVE_ADD_VELOCITY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Add the last platform velocity to the velocity when you leave a moving platform.
 
 #### PLATFORM_ON_LEAVE_ADD_UPWARD_VELOCITY {#PLATFORM_ON_LEAVE_ADD_UPWARD_VELOCITY}
 
@@ -665,7 +659,7 @@ PLATFORM_ON_LEAVE_ADD_VELOCITY = 0
 PLATFORM_ON_LEAVE_ADD_UPWARD_VELOCITY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Add the last platform velocity to the velocity when you leave a moving platform, but any downward motion is ignored. It's useful to keep full jump height even when the platform is moving down.
 
 #### PLATFORM_ON_LEAVE_DO_NOTHING {#PLATFORM_ON_LEAVE_DO_NOTHING}
 
@@ -673,4 +667,6 @@ PLATFORM_ON_LEAVE_ADD_UPWARD_VELOCITY = 1
 PLATFORM_ON_LEAVE_DO_NOTHING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do nothing when leaving a platform.
+
+---

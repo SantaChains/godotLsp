@@ -49,137 +49,7 @@ A function to be applied to the scalar.
 enum Function { FUNC_SIN = 0, FUNC_COS = 1, FUNC_TAN = 2, FUNC_ASIN = 3, FUNC_ACOS = 4, FUNC_ATAN = 5, FUNC_SINH = 6, FUNC_COSH = 7, FUNC_TANH = 8, FUNC_LOG = 9, FUNC_EXP = 10, FUNC_SQRT = 11, FUNC_ABS = 12, FUNC_SIGN = 13, FUNC_FLOOR = 14, FUNC_ROUND = 15, FUNC_CEIL = 16, FUNC_FRACT = 17, FUNC_SATURATE = 18, FUNC_NEGATE = 19, FUNC_ACOSH = 20, FUNC_ASINH = 21, FUNC_ATANH = 22, FUNC_DEGREES = 23, FUNC_EXP2 = 24, FUNC_INVERSE_SQRT = 25, FUNC_LOG2 = 26, FUNC_RADIANS = 27, FUNC_RECIPROCAL = 28, FUNC_ROUNDEVEN = 29, FUNC_TRUNC = 30, FUNC_ONEMINUS = 31, FUNC_MAX = 32 }
 ```
 
-Function FUNC_SIN = 0
-
-Returns the sine of the parameter. Translates to sin(x) in the Godot Shader Language.
-
-Function FUNC_COS = 1
-
-Returns the cosine of the parameter. Translates to cos(x) in the Godot Shader Language.
-
-Function FUNC_TAN = 2
-
-Returns the tangent of the parameter. Translates to tan(x) in the Godot Shader Language.
-
-Function FUNC_ASIN = 3
-
-Returns the arc-sine of the parameter. Translates to asin(x) in the Godot Shader Language.
-
-Function FUNC_ACOS = 4
-
-Returns the arc-cosine of the parameter. Translates to acos(x) in the Godot Shader Language.
-
-Function FUNC_ATAN = 5
-
-Returns the arc-tangent of the parameter. Translates to atan(x) in the Godot Shader Language.
-
-Function FUNC_SINH = 6
-
-Returns the hyperbolic sine of the parameter. Translates to sinh(x) in the Godot Shader Language.
-
-Function FUNC_COSH = 7
-
-Returns the hyperbolic cosine of the parameter. Translates to cosh(x) in the Godot Shader Language.
-
-Function FUNC_TANH = 8
-
-Returns the hyperbolic tangent of the parameter. Translates to tanh(x) in the Godot Shader Language.
-
-Function FUNC_LOG = 9
-
-Returns the natural logarithm of the parameter. Translates to log(x) in the Godot Shader Language.
-
-Function FUNC_EXP = 10
-
-Returns the natural exponentiation of the parameter. Translates to exp(x) in the Godot Shader Language.
-
-Function FUNC_SQRT = 11
-
-Returns the square root of the parameter. Translates to sqrt(x) in the Godot Shader Language.
-
-Function FUNC_ABS = 12
-
-Returns the absolute value of the parameter. Translates to abs(x) in the Godot Shader Language.
-
-Function FUNC_SIGN = 13
-
-Extracts the sign of the parameter. Translates to sign(x) in the Godot Shader Language.
-
-Function FUNC_FLOOR = 14
-
-Finds the nearest integer less than or equal to the parameter. Translates to floor(x) in the Godot Shader Language.
-
-Function FUNC_ROUND = 15
-
-Finds the nearest integer to the parameter. Translates to round(x) in the Godot Shader Language.
-
-Function FUNC_CEIL = 16
-
-Finds the nearest integer that is greater than or equal to the parameter. Translates to ceil(x) in the Godot Shader Language.
-
-Function FUNC_FRACT = 17
-
-Computes the fractional part of the argument. Translates to fract(x) in the Godot Shader Language.
-
-Function FUNC_SATURATE = 18
-
-Clamps the value between 0.0 and 1.0 using min(max(x, 0.0), 1.0).
-
-Function FUNC_NEGATE = 19
-
-Negates the x using -(x).
-
-Function FUNC_ACOSH = 20
-
-Returns the arc-hyperbolic-cosine of the parameter. Translates to acosh(x) in the Godot Shader Language.
-
-Function FUNC_ASINH = 21
-
-Returns the arc-hyperbolic-sine of the parameter. Translates to asinh(x) in the Godot Shader Language.
-
-Function FUNC_ATANH = 22
-
-Returns the arc-hyperbolic-tangent of the parameter. Translates to atanh(x) in the Godot Shader Language.
-
-Function FUNC_DEGREES = 23
-
-Convert a quantity in radians to degrees. Translates to degrees(x) in the Godot Shader Language.
-
-Function FUNC_EXP2 = 24
-
-Returns 2 raised by the power of the parameter. Translates to exp2(x) in the Godot Shader Language.
-
-Function FUNC_INVERSE_SQRT = 25
-
-Returns the inverse of the square root of the parameter. Translates to inversesqrt(x) in the Godot Shader Language.
-
-Function FUNC_LOG2 = 26
-
-Returns the base 2 logarithm of the parameter. Translates to log2(x) in the Godot Shader Language.
-
-Function FUNC_RADIANS = 27
-
-Convert a quantity in degrees to radians. Translates to radians(x) in the Godot Shader Language.
-
-Function FUNC_RECIPROCAL = 28
-
-Finds reciprocal value of dividing 1 by x (i.e. 1 / x).
-
-Function FUNC_ROUNDEVEN = 29
-
-Finds the nearest even integer to the parameter. Translates to roundEven(x) in the Godot Shader Language.
-
-Function FUNC_TRUNC = 30
-
-Returns a value equal to the nearest integer to x whose absolute value is not larger than the absolute value of x. Translates to trunc(x) in the Godot Shader Language.
-
-Function FUNC_ONEMINUS = 31
-
-Subtracts scalar x from 1 (i.e. 1 - x).
-
-Function FUNC_MAX = 32
-
-Represents the size of the Function enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FUNC_SIN {#FUNC_SIN}
 
@@ -187,7 +57,7 @@ Represents the size of the Function enum.
 FUNC_SIN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the sine of the parameter. Translates to sin(x) in the Godot Shader Language.
 
 #### FUNC_COS {#FUNC_COS}
 
@@ -195,7 +65,7 @@ FUNC_SIN = 0
 FUNC_COS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the cosine of the parameter. Translates to cos(x) in the Godot Shader Language.
 
 #### FUNC_TAN {#FUNC_TAN}
 
@@ -203,7 +73,7 @@ FUNC_COS = 1
 FUNC_TAN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the tangent of the parameter. Translates to tan(x) in the Godot Shader Language.
 
 #### FUNC_ASIN {#FUNC_ASIN}
 
@@ -211,7 +81,7 @@ FUNC_TAN = 2
 FUNC_ASIN = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the arc-sine of the parameter. Translates to asin(x) in the Godot Shader Language.
 
 #### FUNC_ACOS {#FUNC_ACOS}
 
@@ -219,7 +89,7 @@ FUNC_ASIN = 3
 FUNC_ACOS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the arc-cosine of the parameter. Translates to acos(x) in the Godot Shader Language.
 
 #### FUNC_ATAN {#FUNC_ATAN}
 
@@ -227,7 +97,7 @@ FUNC_ACOS = 4
 FUNC_ATAN = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the arc-tangent of the parameter. Translates to atan(x) in the Godot Shader Language.
 
 #### FUNC_SINH {#FUNC_SINH}
 
@@ -235,7 +105,7 @@ FUNC_ATAN = 5
 FUNC_SINH = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the hyperbolic sine of the parameter. Translates to sinh(x) in the Godot Shader Language.
 
 #### FUNC_COSH {#FUNC_COSH}
 
@@ -243,7 +113,7 @@ FUNC_SINH = 6
 FUNC_COSH = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the hyperbolic cosine of the parameter. Translates to cosh(x) in the Godot Shader Language.
 
 #### FUNC_TANH {#FUNC_TANH}
 
@@ -251,7 +121,7 @@ FUNC_COSH = 7
 FUNC_TANH = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the hyperbolic tangent of the parameter. Translates to tanh(x) in the Godot Shader Language.
 
 #### FUNC_LOG {#FUNC_LOG}
 
@@ -259,7 +129,7 @@ FUNC_TANH = 8
 FUNC_LOG = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the natural logarithm of the parameter. Translates to log(x) in the Godot Shader Language.
 
 #### FUNC_EXP {#FUNC_EXP}
 
@@ -267,7 +137,7 @@ FUNC_LOG = 9
 FUNC_EXP = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the natural exponentiation of the parameter. Translates to exp(x) in the Godot Shader Language.
 
 #### FUNC_SQRT {#FUNC_SQRT}
 
@@ -275,7 +145,7 @@ FUNC_EXP = 10
 FUNC_SQRT = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the square root of the parameter. Translates to sqrt(x) in the Godot Shader Language.
 
 #### FUNC_ABS {#FUNC_ABS}
 
@@ -283,7 +153,7 @@ FUNC_SQRT = 11
 FUNC_ABS = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the absolute value of the parameter. Translates to abs(x) in the Godot Shader Language.
 
 #### FUNC_SIGN {#FUNC_SIGN}
 
@@ -291,7 +161,7 @@ FUNC_ABS = 12
 FUNC_SIGN = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Extracts the sign of the parameter. Translates to sign(x) in the Godot Shader Language.
 
 #### FUNC_FLOOR {#FUNC_FLOOR}
 
@@ -299,7 +169,7 @@ FUNC_SIGN = 13
 FUNC_FLOOR = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Finds the nearest integer less than or equal to the parameter. Translates to floor(x) in the Godot Shader Language.
 
 #### FUNC_ROUND {#FUNC_ROUND}
 
@@ -307,7 +177,7 @@ FUNC_FLOOR = 14
 FUNC_ROUND = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Finds the nearest integer to the parameter. Translates to round(x) in the Godot Shader Language.
 
 #### FUNC_CEIL {#FUNC_CEIL}
 
@@ -315,7 +185,7 @@ FUNC_ROUND = 15
 FUNC_CEIL = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Finds the nearest integer that is greater than or equal to the parameter. Translates to ceil(x) in the Godot Shader Language.
 
 #### FUNC_FRACT {#FUNC_FRACT}
 
@@ -323,7 +193,7 @@ FUNC_CEIL = 16
 FUNC_FRACT = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Computes the fractional part of the argument. Translates to fract(x) in the Godot Shader Language.
 
 #### FUNC_SATURATE {#FUNC_SATURATE}
 
@@ -331,7 +201,7 @@ FUNC_FRACT = 17
 FUNC_SATURATE = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Clamps the value between 0.0 and 1.0 using min(max(x, 0.0), 1.0).
 
 #### FUNC_NEGATE {#FUNC_NEGATE}
 
@@ -339,7 +209,7 @@ FUNC_SATURATE = 18
 FUNC_NEGATE = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Negates the x using -(x).
 
 #### FUNC_ACOSH {#FUNC_ACOSH}
 
@@ -347,7 +217,7 @@ FUNC_NEGATE = 19
 FUNC_ACOSH = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the arc-hyperbolic-cosine of the parameter. Translates to acosh(x) in the Godot Shader Language.
 
 #### FUNC_ASINH {#FUNC_ASINH}
 
@@ -355,7 +225,7 @@ FUNC_ACOSH = 20
 FUNC_ASINH = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the arc-hyperbolic-sine of the parameter. Translates to asinh(x) in the Godot Shader Language.
 
 #### FUNC_ATANH {#FUNC_ATANH}
 
@@ -363,7 +233,7 @@ FUNC_ASINH = 21
 FUNC_ATANH = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the arc-hyperbolic-tangent of the parameter. Translates to atanh(x) in the Godot Shader Language.
 
 #### FUNC_DEGREES {#FUNC_DEGREES}
 
@@ -371,7 +241,7 @@ FUNC_ATANH = 22
 FUNC_DEGREES = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Convert a quantity in radians to degrees. Translates to degrees(x) in the Godot Shader Language.
 
 #### FUNC_EXP2 {#FUNC_EXP2}
 
@@ -379,7 +249,7 @@ FUNC_DEGREES = 23
 FUNC_EXP2 = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns 2 raised by the power of the parameter. Translates to exp2(x) in the Godot Shader Language.
 
 #### FUNC_INVERSE_SQRT {#FUNC_INVERSE_SQRT}
 
@@ -387,7 +257,7 @@ FUNC_EXP2 = 24
 FUNC_INVERSE_SQRT = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the inverse of the square root of the parameter. Translates to inversesqrt(x) in the Godot Shader Language.
 
 #### FUNC_LOG2 {#FUNC_LOG2}
 
@@ -395,7 +265,7 @@ FUNC_INVERSE_SQRT = 25
 FUNC_LOG2 = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the base 2 logarithm of the parameter. Translates to log2(x) in the Godot Shader Language.
 
 #### FUNC_RADIANS {#FUNC_RADIANS}
 
@@ -403,7 +273,7 @@ FUNC_LOG2 = 26
 FUNC_RADIANS = 27
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Convert a quantity in degrees to radians. Translates to radians(x) in the Godot Shader Language.
 
 #### FUNC_RECIPROCAL {#FUNC_RECIPROCAL}
 
@@ -411,7 +281,7 @@ FUNC_RADIANS = 27
 FUNC_RECIPROCAL = 28
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Finds reciprocal value of dividing 1 by x (i.e. 1 / x).
 
 #### FUNC_ROUNDEVEN {#FUNC_ROUNDEVEN}
 
@@ -419,7 +289,7 @@ FUNC_RECIPROCAL = 28
 FUNC_ROUNDEVEN = 29
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Finds the nearest even integer to the parameter. Translates to roundEven(x) in the Godot Shader Language.
 
 #### FUNC_TRUNC {#FUNC_TRUNC}
 
@@ -427,7 +297,7 @@ FUNC_ROUNDEVEN = 29
 FUNC_TRUNC = 30
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns a value equal to the nearest integer to x whose absolute value is not larger than the absolute value of x. Translates to trunc(x) in the Godot Shader Language.
 
 #### FUNC_ONEMINUS {#FUNC_ONEMINUS}
 
@@ -435,7 +305,7 @@ FUNC_TRUNC = 30
 FUNC_ONEMINUS = 31
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Subtracts scalar x from 1 (i.e. 1 - x).
 
 #### FUNC_MAX {#FUNC_MAX}
 
@@ -443,4 +313,6 @@ FUNC_ONEMINUS = 31
 FUNC_MAX = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Function enum.
+
+---

@@ -51,4 +51,9 @@ void set_viewport_path_in_scene(path: NodePath)
 viewport_path: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_viewport_path_in_scene(value: NodePath)
+- NodePath get_viewport_path_in_scene()
+
+The path to the Viewport node to display. This is relative to the local scene root (see Resource.get_local_scene()), not to the nodes that use this texture.
+
+Note: In the editor, this path is automatically updated when the target viewport or one of its ancestors is renamed or moved. At runtime, this path may not automatically update if the scene root cannot be found.

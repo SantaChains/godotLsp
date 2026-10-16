@@ -282,21 +282,7 @@ Triangulates the polygon specified by the points in polygon. Returns a PackedInt
 enum PolyBooleanOperation { OPERATION_UNION = 0, OPERATION_DIFFERENCE = 1, OPERATION_INTERSECTION = 2, OPERATION_XOR = 3 }
 ```
 
-PolyBooleanOperation OPERATION_UNION = 0
-
-Create regions where either subject or clip polygons (or both) are filled.
-
-PolyBooleanOperation OPERATION_DIFFERENCE = 1
-
-Create regions where subject polygons are filled except where clip polygons are filled.
-
-PolyBooleanOperation OPERATION_INTERSECTION = 2
-
-Create regions where both subject and clip polygons are filled.
-
-PolyBooleanOperation OPERATION_XOR = 3
-
-Create regions where either subject or clip polygons are filled but not where both are filled.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OPERATION_UNION {#OPERATION_UNION}
 
@@ -304,7 +290,7 @@ Create regions where either subject or clip polygons are filled but not where bo
 OPERATION_UNION = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Create regions where either subject or clip polygons (or both) are filled.
 
 #### OPERATION_DIFFERENCE {#OPERATION_DIFFERENCE}
 
@@ -312,7 +298,7 @@ OPERATION_UNION = 0
 OPERATION_DIFFERENCE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Create regions where subject polygons are filled except where clip polygons are filled.
 
 #### OPERATION_INTERSECTION {#OPERATION_INTERSECTION}
 
@@ -320,7 +306,7 @@ OPERATION_DIFFERENCE = 1
 OPERATION_INTERSECTION = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Create regions where both subject and clip polygons are filled.
 
 #### OPERATION_XOR {#OPERATION_XOR}
 
@@ -328,7 +314,9 @@ OPERATION_INTERSECTION = 2
 OPERATION_XOR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Create regions where either subject or clip polygons are filled but not where both are filled.
+
+---
 
 ### PolyJoinType {#enum-PolyJoinType}
 
@@ -336,17 +324,7 @@ OPERATION_XOR = 3
 enum PolyJoinType { JOIN_SQUARE = 0, JOIN_ROUND = 1, JOIN_MITER = 2 }
 ```
 
-PolyJoinType JOIN_SQUARE = 0
-
-Squaring is applied uniformally at all convex edge joins at 1 * delta.
-
-PolyJoinType JOIN_ROUND = 1
-
-While flattened paths can never perfectly trace an arc, they are approximated by a series of arc chords.
-
-PolyJoinType JOIN_MITER = 2
-
-There's a necessary limit to mitered joins since offsetting edges that join at very acute angles will produce excessively long and narrow "spikes". For any given edge join, when miter offsetting would exceed that maximum distance, "square" joining is applied.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### JOIN_SQUARE {#JOIN_SQUARE}
 
@@ -354,7 +332,7 @@ There's a necessary limit to mitered joins since offsetting edges that join at v
 JOIN_SQUARE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Squaring is applied uniformally at all convex edge joins at 1 * delta.
 
 #### JOIN_ROUND {#JOIN_ROUND}
 
@@ -362,7 +340,7 @@ JOIN_SQUARE = 0
 JOIN_ROUND = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+While flattened paths can never perfectly trace an arc, they are approximated by a series of arc chords.
 
 #### JOIN_MITER {#JOIN_MITER}
 
@@ -370,7 +348,9 @@ JOIN_ROUND = 1
 JOIN_MITER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There's a necessary limit to mitered joins since offsetting edges that join at very acute angles will produce excessively long and narrow "spikes". For any given edge join, when miter offsetting would exceed that maximum distance, "square" joining is applied.
+
+---
 
 ### PolyEndType {#enum-PolyEndType}
 
@@ -378,25 +358,7 @@ JOIN_MITER = 2
 enum PolyEndType { END_POLYGON = 0, END_JOINED = 1, END_BUTT = 2, END_SQUARE = 3, END_ROUND = 4 }
 ```
 
-PolyEndType END_POLYGON = 0
-
-Endpoints are joined using the PolyJoinType value and the path filled as a polygon.
-
-PolyEndType END_JOINED = 1
-
-Endpoints are joined using the PolyJoinType value and the path filled as a polyline.
-
-PolyEndType END_BUTT = 2
-
-Endpoints are squared off with no extension.
-
-PolyEndType END_SQUARE = 3
-
-Endpoints are squared off and extended by delta units.
-
-PolyEndType END_ROUND = 4
-
-Endpoints are rounded off and extended by delta units.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### END_POLYGON {#END_POLYGON}
 
@@ -404,7 +366,7 @@ Endpoints are rounded off and extended by delta units.
 END_POLYGON = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Endpoints are joined using the PolyJoinType value and the path filled as a polygon.
 
 #### END_JOINED {#END_JOINED}
 
@@ -412,7 +374,7 @@ END_POLYGON = 0
 END_JOINED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Endpoints are joined using the PolyJoinType value and the path filled as a polyline.
 
 #### END_BUTT {#END_BUTT}
 
@@ -420,7 +382,7 @@ END_JOINED = 1
 END_BUTT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Endpoints are squared off with no extension.
 
 #### END_SQUARE {#END_SQUARE}
 
@@ -428,7 +390,7 @@ END_BUTT = 2
 END_SQUARE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Endpoints are squared off and extended by delta units.
 
 #### END_ROUND {#END_ROUND}
 
@@ -436,4 +398,6 @@ END_SQUARE = 3
 END_ROUND = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Endpoints are rounded off and extended by delta units.
+
+---

@@ -134,7 +134,32 @@ void set_loop_offset(seconds: float)
 data: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_data(value: PackedByteArray)
+- PackedByteArray get_data()
+
+Contains the audio data in bytes.
+
+You can load a file without having to import it beforehand using the code snippet below. Keep in mind that this snippet loads the whole file into memory and may not be ideal for huge files (hundreds of megabytes or more).
+
+```
+func load_mp3(path):
+    var file = FileAccess.open(path, FileAccess.READ)
+    var sound = AudioStreamMP3.new()
+    sound.data = file.get_buffer(file.get_length())
+    return sound
+```
+
+```
+public AudioStreamMP3 LoadMP3(string path)
+{
+    using var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+    var sound = new AudioStreamMP3();
+    sound.Data = file.GetBuffer(file.GetLength());
+    return sound;
+}
+```
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### bpm {#bpm}
 

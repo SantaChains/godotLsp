@@ -120,7 +120,12 @@ void set_view_count(view_count: int)
 size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector2i)
+- Vector2i get_size()
+
+The width and height of the sub-viewport. Must be set to a value greater than or equal to 2 pixels on both dimensions. Otherwise, nothing will be displayed.
+
+Note: If the parent node is a SubViewportContainer and its SubViewportContainer.stretch is true, the viewport size cannot be changed manually.
 
 ### size_2d_override {#size_2d_override}
 
@@ -128,7 +133,10 @@ size: Vector2i
 size_2d_override: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size_2d_override(value: Vector2i)
+- Vector2i get_size_2d_override()
+
+The 2D size override of the sub-viewport. If either the width or height is 0, the override is disabled.
 
 ### size_2d_override_stretch {#size_2d_override_stretch}
 
@@ -184,17 +192,7 @@ The update mode when the sub-viewport is used as a render target.
 enum ClearMode { CLEAR_MODE_ALWAYS = 0, CLEAR_MODE_NEVER = 1, CLEAR_MODE_ONCE = 2 }
 ```
 
-ClearMode CLEAR_MODE_ALWAYS = 0
-
-Always clear the render target before drawing.
-
-ClearMode CLEAR_MODE_NEVER = 1
-
-Never clear the render target.
-
-ClearMode CLEAR_MODE_ONCE = 2
-
-Clear the render target on the next frame, then switch to CLEAR_MODE_NEVER.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CLEAR_MODE_ALWAYS {#CLEAR_MODE_ALWAYS}
 
@@ -202,7 +200,7 @@ Clear the render target on the next frame, then switch to CLEAR_MODE_NEVER.
 CLEAR_MODE_ALWAYS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always clear the render target before drawing.
 
 #### CLEAR_MODE_NEVER {#CLEAR_MODE_NEVER}
 
@@ -210,7 +208,7 @@ CLEAR_MODE_ALWAYS = 0
 CLEAR_MODE_NEVER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Never clear the render target.
 
 #### CLEAR_MODE_ONCE {#CLEAR_MODE_ONCE}
 
@@ -218,7 +216,9 @@ CLEAR_MODE_NEVER = 1
 CLEAR_MODE_ONCE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Clear the render target on the next frame, then switch to CLEAR_MODE_NEVER.
+
+---
 
 ### UpdateMode {#enum-UpdateMode}
 
@@ -226,25 +226,7 @@ CLEAR_MODE_ONCE = 2
 enum UpdateMode { UPDATE_DISABLED = 0, UPDATE_ONCE = 1, UPDATE_WHEN_VISIBLE = 2, UPDATE_WHEN_PARENT_VISIBLE = 3, UPDATE_ALWAYS = 4 }
 ```
 
-UpdateMode UPDATE_DISABLED = 0
-
-Do not update the render target.
-
-UpdateMode UPDATE_ONCE = 1
-
-Update the render target once, then switch to UPDATE_DISABLED.
-
-UpdateMode UPDATE_WHEN_VISIBLE = 2
-
-Update the render target only when it is visible. This is the default value.
-
-UpdateMode UPDATE_WHEN_PARENT_VISIBLE = 3
-
-Update the render target only when its parent is visible.
-
-UpdateMode UPDATE_ALWAYS = 4
-
-Always update the render target.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### UPDATE_DISABLED {#UPDATE_DISABLED}
 
@@ -252,7 +234,7 @@ Always update the render target.
 UPDATE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not update the render target.
 
 #### UPDATE_ONCE {#UPDATE_ONCE}
 
@@ -260,7 +242,7 @@ UPDATE_DISABLED = 0
 UPDATE_ONCE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Update the render target once, then switch to UPDATE_DISABLED.
 
 #### UPDATE_WHEN_VISIBLE {#UPDATE_WHEN_VISIBLE}
 
@@ -268,7 +250,7 @@ UPDATE_ONCE = 1
 UPDATE_WHEN_VISIBLE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Update the render target only when it is visible. This is the default value.
 
 #### UPDATE_WHEN_PARENT_VISIBLE {#UPDATE_WHEN_PARENT_VISIBLE}
 
@@ -276,7 +258,7 @@ UPDATE_WHEN_VISIBLE = 2
 UPDATE_WHEN_PARENT_VISIBLE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Update the render target only when its parent is visible.
 
 #### UPDATE_ALWAYS {#UPDATE_ALWAYS}
 
@@ -284,4 +266,6 @@ UPDATE_WHEN_PARENT_VISIBLE = 3
 UPDATE_ALWAYS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always update the render target.
+
+---

@@ -830,25 +830,7 @@ Note: This method is implemented on macOS.
 enum Feature { FEATURE_GLOBAL_MENU = 0, FEATURE_POPUP_MENU = 1, FEATURE_OPEN_CLOSE_CALLBACK = 2, FEATURE_HOVER_CALLBACK = 3, FEATURE_KEY_CALLBACK = 4 }
 ```
 
-Feature FEATURE_GLOBAL_MENU = 0
-
-NativeMenu supports native global main menu.
-
-Feature FEATURE_POPUP_MENU = 1
-
-NativeMenu supports native popup menus.
-
-Feature FEATURE_OPEN_CLOSE_CALLBACK = 2
-
-NativeMenu supports menu open and close callbacks.
-
-Feature FEATURE_HOVER_CALLBACK = 3
-
-NativeMenu supports menu item hover callback.
-
-Feature FEATURE_KEY_CALLBACK = 4
-
-NativeMenu supports menu item accelerator/key callback.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FEATURE_GLOBAL_MENU {#FEATURE_GLOBAL_MENU}
 
@@ -856,7 +838,7 @@ NativeMenu supports menu item accelerator/key callback.
 FEATURE_GLOBAL_MENU = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+NativeMenu supports native global main menu.
 
 #### FEATURE_POPUP_MENU {#FEATURE_POPUP_MENU}
 
@@ -864,7 +846,7 @@ FEATURE_GLOBAL_MENU = 0
 FEATURE_POPUP_MENU = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+NativeMenu supports native popup menus.
 
 #### FEATURE_OPEN_CLOSE_CALLBACK {#FEATURE_OPEN_CLOSE_CALLBACK}
 
@@ -872,7 +854,7 @@ FEATURE_POPUP_MENU = 1
 FEATURE_OPEN_CLOSE_CALLBACK = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+NativeMenu supports menu open and close callbacks.
 
 #### FEATURE_HOVER_CALLBACK {#FEATURE_HOVER_CALLBACK}
 
@@ -880,7 +862,7 @@ FEATURE_OPEN_CLOSE_CALLBACK = 2
 FEATURE_HOVER_CALLBACK = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+NativeMenu supports menu item hover callback.
 
 #### FEATURE_KEY_CALLBACK {#FEATURE_KEY_CALLBACK}
 
@@ -888,7 +870,9 @@ FEATURE_HOVER_CALLBACK = 3
 FEATURE_KEY_CALLBACK = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+NativeMenu supports menu item accelerator/key callback.
+
+---
 
 ### SystemMenus {#enum-SystemMenus}
 
@@ -896,29 +880,7 @@ FEATURE_KEY_CALLBACK = 4
 enum SystemMenus { INVALID_MENU_ID = 0, MAIN_MENU_ID = 1, APPLICATION_MENU_ID = 2, WINDOW_MENU_ID = 3, HELP_MENU_ID = 4, DOCK_MENU_ID = 5 }
 ```
 
-SystemMenus INVALID_MENU_ID = 0
-
-Invalid special system menu ID.
-
-SystemMenus MAIN_MENU_ID = 1
-
-Global main menu ID.
-
-SystemMenus APPLICATION_MENU_ID = 2
-
-Application (first menu after "Apple" menu on macOS) menu ID.
-
-SystemMenus WINDOW_MENU_ID = 3
-
-"Window" menu ID (on macOS this menu includes standard window control items and a list of open windows).
-
-SystemMenus HELP_MENU_ID = 4
-
-"Help" menu ID (on macOS this menu includes help search bar).
-
-SystemMenus DOCK_MENU_ID = 5
-
-Dock icon right-click menu ID (on macOS this menu include standard application control items and a list of open windows).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### INVALID_MENU_ID {#INVALID_MENU_ID}
 
@@ -926,7 +888,7 @@ Dock icon right-click menu ID (on macOS this menu include standard application c
 INVALID_MENU_ID = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid special system menu ID.
 
 #### MAIN_MENU_ID {#MAIN_MENU_ID}
 
@@ -934,7 +896,7 @@ INVALID_MENU_ID = 0
 MAIN_MENU_ID = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Global main menu ID.
 
 #### APPLICATION_MENU_ID {#APPLICATION_MENU_ID}
 
@@ -942,7 +904,7 @@ MAIN_MENU_ID = 1
 APPLICATION_MENU_ID = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Application (first menu after "Apple" menu on macOS) menu ID.
 
 #### WINDOW_MENU_ID {#WINDOW_MENU_ID}
 
@@ -950,7 +912,7 @@ APPLICATION_MENU_ID = 2
 WINDOW_MENU_ID = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+"Window" menu ID (on macOS this menu includes standard window control items and a list of open windows).
 
 #### HELP_MENU_ID {#HELP_MENU_ID}
 
@@ -958,7 +920,7 @@ WINDOW_MENU_ID = 3
 HELP_MENU_ID = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+"Help" menu ID (on macOS this menu includes help search bar).
 
 #### DOCK_MENU_ID {#DOCK_MENU_ID}
 
@@ -966,4 +928,6 @@ HELP_MENU_ID = 4
 DOCK_MENU_ID = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock icon right-click menu ID (on macOS this menu include standard application control items and a list of open windows).
+
+---

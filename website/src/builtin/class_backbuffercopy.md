@@ -65,7 +65,10 @@ Buffer mode.
 rect: Rect2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_rect(value: Rect2)
+- Rect2 get_rect()
+
+The area covered by the BackBufferCopy. Only used if copy_mode is COPY_MODE_RECT.
 
 ## 枚举
 
@@ -75,17 +78,7 @@ rect: Rect2
 enum CopyMode { COPY_MODE_DISABLED = 0, COPY_MODE_RECT = 1, COPY_MODE_VIEWPORT = 2 }
 ```
 
-CopyMode COPY_MODE_DISABLED = 0
-
-Disables the buffering mode. This means the BackBufferCopy node will directly use the portion of screen it covers.
-
-CopyMode COPY_MODE_RECT = 1
-
-BackBufferCopy buffers a rectangular region.
-
-CopyMode COPY_MODE_VIEWPORT = 2
-
-BackBufferCopy buffers the entire screen.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### COPY_MODE_DISABLED {#COPY_MODE_DISABLED}
 
@@ -93,7 +86,7 @@ BackBufferCopy buffers the entire screen.
 COPY_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables the buffering mode. This means the BackBufferCopy node will directly use the portion of screen it covers.
 
 #### COPY_MODE_RECT {#COPY_MODE_RECT}
 
@@ -101,7 +94,7 @@ COPY_MODE_DISABLED = 0
 COPY_MODE_RECT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+BackBufferCopy buffers a rectangular region.
 
 #### COPY_MODE_VIEWPORT {#COPY_MODE_VIEWPORT}
 
@@ -109,4 +102,6 @@ COPY_MODE_RECT = 1
 COPY_MODE_VIEWPORT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+BackBufferCopy buffers the entire screen.
+
+---

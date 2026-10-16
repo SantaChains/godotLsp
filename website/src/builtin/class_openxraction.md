@@ -96,7 +96,12 @@ The type of action.
 toplevel_paths: PackedStringArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_toplevel_paths(value: PackedStringArray)
+- PackedStringArray get_toplevel_paths()
+
+A collections of toplevel paths to which this action can be bound.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedStringArray for more details.
 
 ## 枚举
 
@@ -106,21 +111,7 @@ toplevel_paths: PackedStringArray
 enum ActionType { OPENXR_ACTION_BOOL = 0, OPENXR_ACTION_FLOAT = 1, OPENXR_ACTION_VECTOR2 = 2, OPENXR_ACTION_POSE = 3 }
 ```
 
-ActionType OPENXR_ACTION_BOOL = 0
-
-This action provides a boolean value.
-
-ActionType OPENXR_ACTION_FLOAT = 1
-
-This action provides a float value between 0.0 and 1.0 for any analog input such as triggers.
-
-ActionType OPENXR_ACTION_VECTOR2 = 2
-
-This action provides a Vector2 value and can be bound to embedded trackpads and joysticks.
-
-ActionType OPENXR_ACTION_POSE = 3
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OPENXR_ACTION_BOOL {#OPENXR_ACTION_BOOL}
 
@@ -128,7 +119,7 @@ There is currently no description for this enum. Please help us by contributing 
 OPENXR_ACTION_BOOL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This action provides a boolean value.
 
 #### OPENXR_ACTION_FLOAT {#OPENXR_ACTION_FLOAT}
 
@@ -136,7 +127,7 @@ OPENXR_ACTION_BOOL = 0
 OPENXR_ACTION_FLOAT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This action provides a float value between 0.0 and 1.0 for any analog input such as triggers.
 
 #### OPENXR_ACTION_VECTOR2 {#OPENXR_ACTION_VECTOR2}
 
@@ -144,7 +135,7 @@ OPENXR_ACTION_FLOAT = 1
 OPENXR_ACTION_VECTOR2 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This action provides a Vector2 value and can be bound to embedded trackpads and joysticks.
 
 #### OPENXR_ACTION_POSE {#OPENXR_ACTION_POSE}
 
@@ -152,4 +143,6 @@ OPENXR_ACTION_VECTOR2 = 2
 OPENXR_ACTION_POSE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+---

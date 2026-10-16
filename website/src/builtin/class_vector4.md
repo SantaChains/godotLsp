@@ -324,21 +324,7 @@ The vector's W component. Also accessible by using the index position [3].
 enum Axis { AXIS_X = 0, AXIS_Y = 1, AXIS_Z = 2, AXIS_W = 3 }
 ```
 
-Axis AXIS_X = 0
-
-Enumerated value for the X axis. Returned by max_axis_index() and min_axis_index().
-
-Axis AXIS_Y = 1
-
-Enumerated value for the Y axis. Returned by max_axis_index() and min_axis_index().
-
-Axis AXIS_Z = 2
-
-Enumerated value for the Z axis. Returned by max_axis_index() and min_axis_index().
-
-Axis AXIS_W = 3
-
-Enumerated value for the W axis. Returned by max_axis_index() and min_axis_index().
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AXIS_X {#AXIS_X}
 
@@ -346,7 +332,7 @@ Enumerated value for the W axis. Returned by max_axis_index() and min_axis_index
 AXIS_X = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the X axis. Returned by max_axis_index() and min_axis_index().
 
 #### AXIS_Y {#AXIS_Y}
 
@@ -354,7 +340,7 @@ AXIS_X = 0
 AXIS_Y = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the Y axis. Returned by max_axis_index() and min_axis_index().
 
 #### AXIS_Z {#AXIS_Z}
 
@@ -362,7 +348,7 @@ AXIS_Y = 1
 AXIS_Z = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the Z axis. Returned by max_axis_index() and min_axis_index().
 
 #### AXIS_W {#AXIS_W}
 
@@ -370,7 +356,9 @@ AXIS_Z = 2
 AXIS_W = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the W axis. Returned by max_axis_index() and min_axis_index().
+
+---
 
 ## 常量
 
@@ -380,7 +368,15 @@ AXIS_W = 3
 const ZERO = Vector4(0, 0, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Zero vector, a vector with all components set to 0.
+
+ONE = Vector4(1, 1, 1, 1) 
+
+One vector, a vector with all components set to 1.
+
+INF = Vector4(inf, inf, inf, inf) 
+
+Infinity vector, a vector with all components set to @GDScript.INF.
 
 ### ONE {#ONE}
 

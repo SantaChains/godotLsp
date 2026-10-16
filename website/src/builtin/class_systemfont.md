@@ -284,7 +284,12 @@ void set_subpixel_positioning(subpixel_positioning: TextServer.SubpixelPositioni
 font_names: PackedStringArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_font_names(value: PackedStringArray)
+- PackedStringArray get_font_names()
+
+Array of font family names to search, first matching font found is used.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedStringArray for more details.
 
 ### font_italic {#font_italic}
 

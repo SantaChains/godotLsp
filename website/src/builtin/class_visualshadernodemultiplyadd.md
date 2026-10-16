@@ -49,25 +49,7 @@ A type of operands and returned value.
 enum OpType { OP_TYPE_SCALAR = 0, OP_TYPE_VECTOR_2D = 1, OP_TYPE_VECTOR_3D = 2, OP_TYPE_VECTOR_4D = 3, OP_TYPE_MAX = 4 }
 ```
 
-OpType OP_TYPE_SCALAR = 0
-
-A floating-point scalar type.
-
-OpType OP_TYPE_VECTOR_2D = 1
-
-A 2D vector type.
-
-OpType OP_TYPE_VECTOR_3D = 2
-
-A 3D vector type.
-
-OpType OP_TYPE_VECTOR_4D = 3
-
-A 4D vector type.
-
-OpType OP_TYPE_MAX = 4
-
-Represents the size of the OpType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OP_TYPE_SCALAR {#OP_TYPE_SCALAR}
 
@@ -75,7 +57,7 @@ Represents the size of the OpType enum.
 OP_TYPE_SCALAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A floating-point scalar type.
 
 #### OP_TYPE_VECTOR_2D {#OP_TYPE_VECTOR_2D}
 
@@ -83,7 +65,7 @@ OP_TYPE_SCALAR = 0
 OP_TYPE_VECTOR_2D = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 2D vector type.
 
 #### OP_TYPE_VECTOR_3D {#OP_TYPE_VECTOR_3D}
 
@@ -91,7 +73,7 @@ OP_TYPE_VECTOR_2D = 1
 OP_TYPE_VECTOR_3D = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 3D vector type.
 
 #### OP_TYPE_VECTOR_4D {#OP_TYPE_VECTOR_4D}
 
@@ -99,7 +81,7 @@ OP_TYPE_VECTOR_3D = 2
 OP_TYPE_VECTOR_4D = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 4D vector type.
 
 #### OP_TYPE_MAX {#OP_TYPE_MAX}
 
@@ -107,4 +89,6 @@ OP_TYPE_VECTOR_4D = 3
 OP_TYPE_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the OpType enum.
+
+---

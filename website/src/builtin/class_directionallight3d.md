@@ -171,17 +171,7 @@ Whether this DirectionalLight3D is visible in the sky, in the scene, or both in 
 enum ShadowMode { SHADOW_ORTHOGONAL = 0, SHADOW_PARALLEL_2_SPLITS = 1, SHADOW_PARALLEL_4_SPLITS = 2 }
 ```
 
-ShadowMode SHADOW_ORTHOGONAL = 0
-
-Renders the entire scene's shadow map from an orthogonal point of view. This is the fastest directional shadow mode. May result in blurrier shadows on close objects.
-
-ShadowMode SHADOW_PARALLEL_2_SPLITS = 1
-
-Splits the view frustum in 2 areas, each with its own shadow map. This shadow mode is a compromise between SHADOW_ORTHOGONAL and SHADOW_PARALLEL_4_SPLITS in terms of performance.
-
-ShadowMode SHADOW_PARALLEL_4_SPLITS = 2
-
-Splits the view frustum in 4 areas, each with its own shadow map. This is the slowest directional shadow mode.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHADOW_ORTHOGONAL {#SHADOW_ORTHOGONAL}
 
@@ -189,7 +179,7 @@ Splits the view frustum in 4 areas, each with its own shadow map. This is the sl
 SHADOW_ORTHOGONAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Renders the entire scene's shadow map from an orthogonal point of view. This is the fastest directional shadow mode. May result in blurrier shadows on close objects.
 
 #### SHADOW_PARALLEL_2_SPLITS {#SHADOW_PARALLEL_2_SPLITS}
 
@@ -197,7 +187,7 @@ SHADOW_ORTHOGONAL = 0
 SHADOW_PARALLEL_2_SPLITS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Splits the view frustum in 2 areas, each with its own shadow map. This shadow mode is a compromise between SHADOW_ORTHOGONAL and SHADOW_PARALLEL_4_SPLITS in terms of performance.
 
 #### SHADOW_PARALLEL_4_SPLITS {#SHADOW_PARALLEL_4_SPLITS}
 
@@ -205,7 +195,9 @@ SHADOW_PARALLEL_2_SPLITS = 1
 SHADOW_PARALLEL_4_SPLITS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Splits the view frustum in 4 areas, each with its own shadow map. This is the slowest directional shadow mode.
+
+---
 
 ### SkyMode {#enum-SkyMode}
 
@@ -213,17 +205,7 @@ SHADOW_PARALLEL_4_SPLITS = 2
 enum SkyMode { SKY_MODE_LIGHT_AND_SKY = 0, SKY_MODE_LIGHT_ONLY = 1, SKY_MODE_SKY_ONLY = 2 }
 ```
 
-SkyMode SKY_MODE_LIGHT_AND_SKY = 0
-
-Makes the light visible in both scene lighting and sky rendering.
-
-SkyMode SKY_MODE_LIGHT_ONLY = 1
-
-Makes the light visible in scene lighting only (including direct lighting and global illumination). When using this mode, the light will not be visible from sky shaders.
-
-SkyMode SKY_MODE_SKY_ONLY = 2
-
-Makes the light visible to sky shaders only. When using this mode the light will not cast light into the scene (either through direct lighting or through global illumination), but can be accessed through sky shaders. This can be useful, for example, when you want to control sky effects without illuminating the scene (during a night cycle, for example).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SKY_MODE_LIGHT_AND_SKY {#SKY_MODE_LIGHT_AND_SKY}
 
@@ -231,7 +213,7 @@ Makes the light visible to sky shaders only. When using this mode the light will
 SKY_MODE_LIGHT_AND_SKY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the light visible in both scene lighting and sky rendering.
 
 #### SKY_MODE_LIGHT_ONLY {#SKY_MODE_LIGHT_ONLY}
 
@@ -239,7 +221,7 @@ SKY_MODE_LIGHT_AND_SKY = 0
 SKY_MODE_LIGHT_ONLY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the light visible in scene lighting only (including direct lighting and global illumination). When using this mode, the light will not be visible from sky shaders.
 
 #### SKY_MODE_SKY_ONLY {#SKY_MODE_SKY_ONLY}
 
@@ -247,4 +229,6 @@ SKY_MODE_LIGHT_ONLY = 1
 SKY_MODE_SKY_ONLY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the light visible to sky shaders only. When using this mode the light will not cast light into the scene (either through direct lighting or through global illumination), but can be accessed through sky shaders. This can be useful, for example, when you want to control sky effects without illuminating the scene (during a night cycle, for example).
+
+---

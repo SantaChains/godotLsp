@@ -88,7 +88,10 @@ void set_subdivide_width(subdivide: int)
 size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3)
+- Vector3 get_size()
+
+The box's width, height and depth.
 
 ### subdivide_width {#subdivide_width}
 

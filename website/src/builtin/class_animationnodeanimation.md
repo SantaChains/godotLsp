@@ -250,13 +250,7 @@ Note: If the Animation.loop_mode isn't set to looping, the Animation.track_set_i
 enum PlayMode { PLAY_MODE_FORWARD = 0, PLAY_MODE_BACKWARD = 1 }
 ```
 
-PlayMode PLAY_MODE_FORWARD = 0
-
-Plays animation in forward direction.
-
-PlayMode PLAY_MODE_BACKWARD = 1
-
-Plays animation in backward direction.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PLAY_MODE_FORWARD {#PLAY_MODE_FORWARD}
 
@@ -264,7 +258,7 @@ Plays animation in backward direction.
 PLAY_MODE_FORWARD = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plays animation in forward direction.
 
 #### PLAY_MODE_BACKWARD {#PLAY_MODE_BACKWARD}
 
@@ -272,4 +266,6 @@ PLAY_MODE_FORWARD = 0
 PLAY_MODE_BACKWARD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plays animation in backward direction.
+
+---

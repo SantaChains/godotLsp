@@ -80,17 +80,7 @@ Specifies the type of updates to perform on the bones.
 enum BoneUpdate { BONE_UPDATE_FULL = 0, BONE_UPDATE_ROTATION_ONLY = 1, BONE_UPDATE_MAX = 2 }
 ```
 
-BoneUpdate BONE_UPDATE_FULL = 0
-
-The skeleton's bones are fully updated (both position and rotation) to match the tracked bones.
-
-BoneUpdate BONE_UPDATE_ROTATION_ONLY = 1
-
-The skeleton's bones are only rotated to align with the tracked bones, preserving bone length.
-
-BoneUpdate BONE_UPDATE_MAX = 2
-
-Represents the size of the BoneUpdate enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BONE_UPDATE_FULL {#BONE_UPDATE_FULL}
 
@@ -98,7 +88,7 @@ Represents the size of the BoneUpdate enum.
 BONE_UPDATE_FULL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The skeleton's bones are fully updated (both position and rotation) to match the tracked bones.
 
 #### BONE_UPDATE_ROTATION_ONLY {#BONE_UPDATE_ROTATION_ONLY}
 
@@ -106,7 +96,7 @@ BONE_UPDATE_FULL = 0
 BONE_UPDATE_ROTATION_ONLY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The skeleton's bones are only rotated to align with the tracked bones, preserving bone length.
 
 #### BONE_UPDATE_MAX {#BONE_UPDATE_MAX}
 
@@ -114,4 +104,6 @@ BONE_UPDATE_ROTATION_ONLY = 1
 BONE_UPDATE_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the BoneUpdate enum.
+
+---

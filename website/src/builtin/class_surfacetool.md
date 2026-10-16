@@ -338,41 +338,7 @@ Specifies weight values to use for the next vertex. weights must contain 4 value
 enum CustomFormat { CUSTOM_RGBA8_UNORM = 0, CUSTOM_RGBA8_SNORM = 1, CUSTOM_RG_HALF = 2, CUSTOM_RGBA_HALF = 3, CUSTOM_R_FLOAT = 4, CUSTOM_RG_FLOAT = 5, CUSTOM_RGB_FLOAT = 6, CUSTOM_RGBA_FLOAT = 7, CUSTOM_MAX = 8 }
 ```
 
-CustomFormat CUSTOM_RGBA8_UNORM = 0
-
-Limits range of data passed to set_custom() to unsigned normalized 0 to 1 stored in 8 bits per channel. See Mesh.ARRAY_CUSTOM_RGBA8_UNORM.
-
-CustomFormat CUSTOM_RGBA8_SNORM = 1
-
-Limits range of data passed to set_custom() to signed normalized -1 to 1 stored in 8 bits per channel. See Mesh.ARRAY_CUSTOM_RGBA8_SNORM.
-
-CustomFormat CUSTOM_RG_HALF = 2
-
-Stores data passed to set_custom() as half precision floats, and uses only red and green color channels. See Mesh.ARRAY_CUSTOM_RG_HALF.
-
-CustomFormat CUSTOM_RGBA_HALF = 3
-
-Stores data passed to set_custom() as half precision floats and uses all color channels. See Mesh.ARRAY_CUSTOM_RGBA_HALF.
-
-CustomFormat CUSTOM_R_FLOAT = 4
-
-Stores data passed to set_custom() as full precision floats, and uses only red color channel. See Mesh.ARRAY_CUSTOM_R_FLOAT.
-
-CustomFormat CUSTOM_RG_FLOAT = 5
-
-Stores data passed to set_custom() as full precision floats, and uses only red and green color channels. See Mesh.ARRAY_CUSTOM_RG_FLOAT.
-
-CustomFormat CUSTOM_RGB_FLOAT = 6
-
-Stores data passed to set_custom() as full precision floats, and uses only red, green and blue color channels. See Mesh.ARRAY_CUSTOM_RGB_FLOAT.
-
-CustomFormat CUSTOM_RGBA_FLOAT = 7
-
-Stores data passed to set_custom() as full precision floats, and uses all color channels. See Mesh.ARRAY_CUSTOM_RGBA_FLOAT.
-
-CustomFormat CUSTOM_MAX = 8
-
-Used to indicate a disabled custom channel.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CUSTOM_RGBA8_UNORM {#CUSTOM_RGBA8_UNORM}
 
@@ -380,7 +346,7 @@ Used to indicate a disabled custom channel.
 CUSTOM_RGBA8_UNORM = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Limits range of data passed to set_custom() to unsigned normalized 0 to 1 stored in 8 bits per channel. See Mesh.ARRAY_CUSTOM_RGBA8_UNORM.
 
 #### CUSTOM_RGBA8_SNORM {#CUSTOM_RGBA8_SNORM}
 
@@ -388,7 +354,7 @@ CUSTOM_RGBA8_UNORM = 0
 CUSTOM_RGBA8_SNORM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Limits range of data passed to set_custom() to signed normalized -1 to 1 stored in 8 bits per channel. See Mesh.ARRAY_CUSTOM_RGBA8_SNORM.
 
 #### CUSTOM_RG_HALF {#CUSTOM_RG_HALF}
 
@@ -396,7 +362,7 @@ CUSTOM_RGBA8_SNORM = 1
 CUSTOM_RG_HALF = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stores data passed to set_custom() as half precision floats, and uses only red and green color channels. See Mesh.ARRAY_CUSTOM_RG_HALF.
 
 #### CUSTOM_RGBA_HALF {#CUSTOM_RGBA_HALF}
 
@@ -404,7 +370,7 @@ CUSTOM_RG_HALF = 2
 CUSTOM_RGBA_HALF = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stores data passed to set_custom() as half precision floats and uses all color channels. See Mesh.ARRAY_CUSTOM_RGBA_HALF.
 
 #### CUSTOM_R_FLOAT {#CUSTOM_R_FLOAT}
 
@@ -412,7 +378,7 @@ CUSTOM_RGBA_HALF = 3
 CUSTOM_R_FLOAT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stores data passed to set_custom() as full precision floats, and uses only red color channel. See Mesh.ARRAY_CUSTOM_R_FLOAT.
 
 #### CUSTOM_RG_FLOAT {#CUSTOM_RG_FLOAT}
 
@@ -420,7 +386,7 @@ CUSTOM_R_FLOAT = 4
 CUSTOM_RG_FLOAT = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stores data passed to set_custom() as full precision floats, and uses only red and green color channels. See Mesh.ARRAY_CUSTOM_RG_FLOAT.
 
 #### CUSTOM_RGB_FLOAT {#CUSTOM_RGB_FLOAT}
 
@@ -428,7 +394,7 @@ CUSTOM_RG_FLOAT = 5
 CUSTOM_RGB_FLOAT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stores data passed to set_custom() as full precision floats, and uses only red, green and blue color channels. See Mesh.ARRAY_CUSTOM_RGB_FLOAT.
 
 #### CUSTOM_RGBA_FLOAT {#CUSTOM_RGBA_FLOAT}
 
@@ -436,7 +402,7 @@ CUSTOM_RGB_FLOAT = 6
 CUSTOM_RGBA_FLOAT = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stores data passed to set_custom() as full precision floats, and uses all color channels. See Mesh.ARRAY_CUSTOM_RGBA_FLOAT.
 
 #### CUSTOM_MAX {#CUSTOM_MAX}
 
@@ -444,7 +410,9 @@ CUSTOM_RGBA_FLOAT = 7
 CUSTOM_MAX = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used to indicate a disabled custom channel.
+
+---
 
 ### SkinWeightCount {#enum-SkinWeightCount}
 
@@ -452,13 +420,7 @@ CUSTOM_MAX = 8
 enum SkinWeightCount { SKIN_4_WEIGHTS = 0, SKIN_8_WEIGHTS = 1 }
 ```
 
-SkinWeightCount SKIN_4_WEIGHTS = 0
-
-Each individual vertex can be influenced by only 4 bone weights.
-
-SkinWeightCount SKIN_8_WEIGHTS = 1
-
-Each individual vertex can be influenced by up to 8 bone weights.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SKIN_4_WEIGHTS {#SKIN_4_WEIGHTS}
 
@@ -466,7 +428,7 @@ Each individual vertex can be influenced by up to 8 bone weights.
 SKIN_4_WEIGHTS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Each individual vertex can be influenced by only 4 bone weights.
 
 #### SKIN_8_WEIGHTS {#SKIN_8_WEIGHTS}
 
@@ -474,4 +436,6 @@ SKIN_4_WEIGHTS = 0
 SKIN_8_WEIGHTS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Each individual vertex can be influenced by up to 8 bone weights.
+
+---

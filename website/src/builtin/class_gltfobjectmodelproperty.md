@@ -238,49 +238,7 @@ The type of data stored in the Godot property. This is the type of the property 
 enum GLTFObjectModelType { GLTF_OBJECT_MODEL_TYPE_UNKNOWN = 0, GLTF_OBJECT_MODEL_TYPE_BOOL = 1, GLTF_OBJECT_MODEL_TYPE_FLOAT = 2, GLTF_OBJECT_MODEL_TYPE_FLOAT_ARRAY = 3, GLTF_OBJECT_MODEL_TYPE_FLOAT2 = 4, GLTF_OBJECT_MODEL_TYPE_FLOAT3 = 5, GLTF_OBJECT_MODEL_TYPE_FLOAT4 = 6, GLTF_OBJECT_MODEL_TYPE_FLOAT2X2 = 7, GLTF_OBJECT_MODEL_TYPE_FLOAT3X3 = 8, GLTF_OBJECT_MODEL_TYPE_FLOAT4X4 = 9, GLTF_OBJECT_MODEL_TYPE_INT = 10 }
 ```
 
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_UNKNOWN = 0
-
-Unknown or not set object model type. If the object model type is set to this value, the real type still needs to be determined.
-
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_BOOL = 1
-
-Object model type "bool". Represented in the glTF JSON as a boolean, and encoded in a GLTFAccessor as "SCALAR". When encoded in an accessor, a value of 0 is false, and any other value is true.
-
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_FLOAT = 2
-
-Object model type "float". Represented in the glTF JSON as a number, and encoded in a GLTFAccessor as "SCALAR".
-
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_FLOAT_ARRAY = 3
-
-Object model type "float[]". Represented in the glTF JSON as an array of numbers, and encoded in a GLTFAccessor as "SCALAR".
-
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_FLOAT2 = 4
-
-Object model type "float2". Represented in the glTF JSON as an array of two numbers, and encoded in a GLTFAccessor as "VEC2".
-
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_FLOAT3 = 5
-
-Object model type "float3". Represented in the glTF JSON as an array of three numbers, and encoded in a GLTFAccessor as "VEC3".
-
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_FLOAT4 = 6
-
-Object model type "float4". Represented in the glTF JSON as an array of four numbers, and encoded in a GLTFAccessor as "VEC4".
-
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_FLOAT2X2 = 7
-
-Object model type "float2x2". Represented in the glTF JSON as an array of four numbers, and encoded in a GLTFAccessor as "MAT2".
-
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_FLOAT3X3 = 8
-
-Object model type "float3x3". Represented in the glTF JSON as an array of nine numbers, and encoded in a GLTFAccessor as "MAT3".
-
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_FLOAT4X4 = 9
-
-Object model type "float4x4". Represented in the glTF JSON as an array of sixteen numbers, and encoded in a GLTFAccessor as "MAT4".
-
-GLTFObjectModelType GLTF_OBJECT_MODEL_TYPE_INT = 10
-
-Object model type "int". Represented in the glTF JSON as a number, and encoded in a GLTFAccessor as "SCALAR". The range of values is limited to signed integers. For KHR_interactivity, only 32-bit integers are supported.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GLTF_OBJECT_MODEL_TYPE_UNKNOWN {#GLTF_OBJECT_MODEL_TYPE_UNKNOWN}
 
@@ -288,7 +246,7 @@ Object model type "int". Represented in the glTF JSON as a number, and encoded i
 GLTF_OBJECT_MODEL_TYPE_UNKNOWN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unknown or not set object model type. If the object model type is set to this value, the real type still needs to be determined.
 
 #### GLTF_OBJECT_MODEL_TYPE_BOOL {#GLTF_OBJECT_MODEL_TYPE_BOOL}
 
@@ -296,7 +254,7 @@ GLTF_OBJECT_MODEL_TYPE_UNKNOWN = 0
 GLTF_OBJECT_MODEL_TYPE_BOOL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object model type "bool". Represented in the glTF JSON as a boolean, and encoded in a GLTFAccessor as "SCALAR". When encoded in an accessor, a value of 0 is false, and any other value is true.
 
 #### GLTF_OBJECT_MODEL_TYPE_FLOAT {#GLTF_OBJECT_MODEL_TYPE_FLOAT}
 
@@ -304,7 +262,7 @@ GLTF_OBJECT_MODEL_TYPE_BOOL = 1
 GLTF_OBJECT_MODEL_TYPE_FLOAT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object model type "float". Represented in the glTF JSON as a number, and encoded in a GLTFAccessor as "SCALAR".
 
 #### GLTF_OBJECT_MODEL_TYPE_FLOAT_ARRAY {#GLTF_OBJECT_MODEL_TYPE_FLOAT_ARRAY}
 
@@ -312,7 +270,7 @@ GLTF_OBJECT_MODEL_TYPE_FLOAT = 2
 GLTF_OBJECT_MODEL_TYPE_FLOAT_ARRAY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object model type "float[]". Represented in the glTF JSON as an array of numbers, and encoded in a GLTFAccessor as "SCALAR".
 
 #### GLTF_OBJECT_MODEL_TYPE_FLOAT2 {#GLTF_OBJECT_MODEL_TYPE_FLOAT2}
 
@@ -320,7 +278,7 @@ GLTF_OBJECT_MODEL_TYPE_FLOAT_ARRAY = 3
 GLTF_OBJECT_MODEL_TYPE_FLOAT2 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object model type "float2". Represented in the glTF JSON as an array of two numbers, and encoded in a GLTFAccessor as "VEC2".
 
 #### GLTF_OBJECT_MODEL_TYPE_FLOAT3 {#GLTF_OBJECT_MODEL_TYPE_FLOAT3}
 
@@ -328,7 +286,7 @@ GLTF_OBJECT_MODEL_TYPE_FLOAT2 = 4
 GLTF_OBJECT_MODEL_TYPE_FLOAT3 = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object model type "float3". Represented in the glTF JSON as an array of three numbers, and encoded in a GLTFAccessor as "VEC3".
 
 #### GLTF_OBJECT_MODEL_TYPE_FLOAT4 {#GLTF_OBJECT_MODEL_TYPE_FLOAT4}
 
@@ -336,7 +294,7 @@ GLTF_OBJECT_MODEL_TYPE_FLOAT3 = 5
 GLTF_OBJECT_MODEL_TYPE_FLOAT4 = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object model type "float4". Represented in the glTF JSON as an array of four numbers, and encoded in a GLTFAccessor as "VEC4".
 
 #### GLTF_OBJECT_MODEL_TYPE_FLOAT2X2 {#GLTF_OBJECT_MODEL_TYPE_FLOAT2X2}
 
@@ -344,7 +302,7 @@ GLTF_OBJECT_MODEL_TYPE_FLOAT4 = 6
 GLTF_OBJECT_MODEL_TYPE_FLOAT2X2 = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object model type "float2x2". Represented in the glTF JSON as an array of four numbers, and encoded in a GLTFAccessor as "MAT2".
 
 #### GLTF_OBJECT_MODEL_TYPE_FLOAT3X3 {#GLTF_OBJECT_MODEL_TYPE_FLOAT3X3}
 
@@ -352,7 +310,7 @@ GLTF_OBJECT_MODEL_TYPE_FLOAT2X2 = 7
 GLTF_OBJECT_MODEL_TYPE_FLOAT3X3 = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object model type "float3x3". Represented in the glTF JSON as an array of nine numbers, and encoded in a GLTFAccessor as "MAT3".
 
 #### GLTF_OBJECT_MODEL_TYPE_FLOAT4X4 {#GLTF_OBJECT_MODEL_TYPE_FLOAT4X4}
 
@@ -360,7 +318,7 @@ GLTF_OBJECT_MODEL_TYPE_FLOAT3X3 = 8
 GLTF_OBJECT_MODEL_TYPE_FLOAT4X4 = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object model type "float4x4". Represented in the glTF JSON as an array of sixteen numbers, and encoded in a GLTFAccessor as "MAT4".
 
 #### GLTF_OBJECT_MODEL_TYPE_INT {#GLTF_OBJECT_MODEL_TYPE_INT}
 
@@ -368,4 +326,6 @@ GLTF_OBJECT_MODEL_TYPE_FLOAT4X4 = 9
 GLTF_OBJECT_MODEL_TYPE_INT = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object model type "int". Represented in the glTF JSON as a number, and encoded in a GLTFAccessor as "SCALAR". The range of values is limited to signed integers. For KHR_interactivity, only 32-bit integers are supported.
+
+---

@@ -452,7 +452,10 @@ void set_zoom(zoom: Vector2)
 offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset(value: Vector2)
+- Vector2 get_offset()
+
+The camera's relative offset. Useful for looking around or camera shake animations. The offsetted camera can go past the limits defined in limit_top, limit_bottom, limit_left and limit_right.
 
 ### anchor_mode {#anchor_mode}
 
@@ -495,7 +498,12 @@ When the camera is currently active and enabled is set to false, the next enable
 zoom: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_zoom(value: Vector2)
+- Vector2 get_zoom()
+
+The camera's zoom. Higher values are more zoomed in. For example, a zoom of Vector2(2.0, 2.0) will be twice as zoomed in on each axis (the view covers an area four times smaller). In contrast, a zoom of Vector2(0.5, 0.5) will be twice as zoomed out on each axis (the view covers an area four times larger). The X and Y components should generally always be set to the same value, unless you wish to stretch the camera view.
+
+Note: FontFile.oversampling does not take Camera2D zoom into account. This means that zooming in/out will cause bitmap fonts and rasterized (non-MSDF) dynamic fonts to appear blurry or pixelated unless the font is part of a CanvasLayer that makes it ignore camera zoom. To ensure text remains crisp regardless of zoom, you can enable MSDF font rendering by enabling ProjectSettings.gui/theme/default_font_multichannel_signed_distance_field (applies to the default project font only), or enabling Multichannel Signed Distance Field in the import options of a DynamicFont for custom fonts. On system fonts, SystemFont.multichannel_signed_distance_field can be enabled in the inspector.
 
 ### custom_viewport {#custom_viewport}
 
@@ -768,13 +776,7 @@ If true, draws the camera's drag margin rectangle in the editor.
 enum AnchorMode { ANCHOR_MODE_FIXED_TOP_LEFT = 0, ANCHOR_MODE_DRAG_CENTER = 1 }
 ```
 
-AnchorMode ANCHOR_MODE_FIXED_TOP_LEFT = 0
-
-The camera's position is fixed so that the top-left corner is always at the origin.
-
-AnchorMode ANCHOR_MODE_DRAG_CENTER = 1
-
-The camera's position takes into account vertical/horizontal offsets and the screen size.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ANCHOR_MODE_FIXED_TOP_LEFT {#ANCHOR_MODE_FIXED_TOP_LEFT}
 
@@ -782,7 +784,7 @@ The camera's position takes into account vertical/horizontal offsets and the scr
 ANCHOR_MODE_FIXED_TOP_LEFT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The camera's position is fixed so that the top-left corner is always at the origin.
 
 #### ANCHOR_MODE_DRAG_CENTER {#ANCHOR_MODE_DRAG_CENTER}
 
@@ -790,7 +792,9 @@ ANCHOR_MODE_FIXED_TOP_LEFT = 0
 ANCHOR_MODE_DRAG_CENTER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The camera's position takes into account vertical/horizontal offsets and the screen size.
+
+---
 
 ### Camera2DProcessCallback {#enum-Camera2DProcessCallback}
 
@@ -798,13 +802,7 @@ ANCHOR_MODE_DRAG_CENTER = 1
 enum Camera2DProcessCallback { CAMERA2D_PROCESS_PHYSICS = 0, CAMERA2D_PROCESS_IDLE = 1 }
 ```
 
-Camera2DProcessCallback CAMERA2D_PROCESS_PHYSICS = 0
-
-The camera updates during physics frames (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS).
-
-Camera2DProcessCallback CAMERA2D_PROCESS_IDLE = 1
-
-The camera updates during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CAMERA2D_PROCESS_PHYSICS {#CAMERA2D_PROCESS_PHYSICS}
 
@@ -812,7 +810,7 @@ The camera updates during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS
 CAMERA2D_PROCESS_PHYSICS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The camera updates during physics frames (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS).
 
 #### CAMERA2D_PROCESS_IDLE {#CAMERA2D_PROCESS_IDLE}
 
@@ -820,4 +818,6 @@ CAMERA2D_PROCESS_PHYSICS = 0
 CAMERA2D_PROCESS_IDLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The camera updates during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS).
+
+---

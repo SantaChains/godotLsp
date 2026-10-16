@@ -363,7 +363,10 @@ The extra distance added to the GeometryInstance3D's bounding box (AABB) to incr
 custom_aabb: AABB
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_custom_aabb(value: AABB)
+- AABB get_custom_aabb()
+
+Overrides the bounding box of this node with a custom one. This can be used to avoid the expensive AABB recalculation that happens when a skeleton is used with a MeshInstance3D or to have precise control over the MeshInstance3D's bounding box. To use the default AABB, set value to an AABB with all fields set to 0.0. To avoid frustum culling, set custom_aabb to a very large AABB that covers your entire game world such as AABB(-10000, -10000, -10000, 20000, 20000, 20000). To disable all forms of culling (including occlusion and layer culling), call RenderingServer.instance_set_ignore_culling() on the GeometryInstance3D's RID.
 
 ### lod_bias {#lod_bias}
 
@@ -497,27 +500,7 @@ Controls which instances will be faded when approaching the limits of the visibi
 enum ShadowCastingSetting { SHADOW_CASTING_SETTING_OFF = 0, SHADOW_CASTING_SETTING_ON = 1, SHADOW_CASTING_SETTING_DOUBLE_SIDED = 2, SHADOW_CASTING_SETTING_SHADOWS_ONLY = 3 }
 ```
 
-ShadowCastingSetting SHADOW_CASTING_SETTING_OFF = 0
-
-Will not cast any shadows. Use this to improve performance for small geometry that is unlikely to cast noticeable shadows (such as debris).
-
-ShadowCastingSetting SHADOW_CASTING_SETTING_ON = 1
-
-Will cast shadows from all visible faces in the GeometryInstance3D.
-
-Will take culling into account, so faces not being rendered will not be taken into account when shadow casting.
-
-ShadowCastingSetting SHADOW_CASTING_SETTING_DOUBLE_SIDED = 2
-
-Will cast shadows from all visible faces in the GeometryInstance3D.
-
-Will not take culling into account, so all faces will be taken into account when shadow casting.
-
-ShadowCastingSetting SHADOW_CASTING_SETTING_SHADOWS_ONLY = 3
-
-Will only show the shadows casted from this object.
-
-In other words, the actual mesh will not be visible, only the shadows casted from the mesh will be.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHADOW_CASTING_SETTING_OFF {#SHADOW_CASTING_SETTING_OFF}
 
@@ -525,7 +508,7 @@ In other words, the actual mesh will not be visible, only the shadows casted fro
 SHADOW_CASTING_SETTING_OFF = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Will not cast any shadows. Use this to improve performance for small geometry that is unlikely to cast noticeable shadows (such as debris).
 
 #### SHADOW_CASTING_SETTING_ON {#SHADOW_CASTING_SETTING_ON}
 
@@ -533,7 +516,9 @@ SHADOW_CASTING_SETTING_OFF = 0
 SHADOW_CASTING_SETTING_ON = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Will cast shadows from all visible faces in the GeometryInstance3D.
+
+Will take culling into account, so faces not being rendered will not be taken into account when shadow casting.
 
 #### SHADOW_CASTING_SETTING_DOUBLE_SIDED {#SHADOW_CASTING_SETTING_DOUBLE_SIDED}
 
@@ -541,7 +526,9 @@ SHADOW_CASTING_SETTING_ON = 1
 SHADOW_CASTING_SETTING_DOUBLE_SIDED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Will cast shadows from all visible faces in the GeometryInstance3D.
+
+Will not take culling into account, so all faces will be taken into account when shadow casting.
 
 #### SHADOW_CASTING_SETTING_SHADOWS_ONLY {#SHADOW_CASTING_SETTING_SHADOWS_ONLY}
 
@@ -549,7 +536,11 @@ SHADOW_CASTING_SETTING_DOUBLE_SIDED = 2
 SHADOW_CASTING_SETTING_SHADOWS_ONLY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Will only show the shadows casted from this object.
+
+In other words, the actual mesh will not be visible, only the shadows casted from the mesh will be.
+
+---
 
 ### GIMode {#enum-GIMode}
 
@@ -557,17 +548,7 @@ SHADOW_CASTING_SETTING_SHADOWS_ONLY = 3
 enum GIMode { GI_MODE_DISABLED = 0, GI_MODE_STATIC = 1, GI_MODE_DYNAMIC = 2 }
 ```
 
-GIMode GI_MODE_DISABLED = 0
-
-Disabled global illumination mode. Use for dynamic objects that do not contribute to global illumination (such as characters). When using VoxelGI and SDFGI, the geometry will receive indirect lighting and reflections but the geometry will not be considered in GI baking.
-
-GIMode GI_MODE_STATIC = 1
-
-Baked global illumination mode. Use for static objects that contribute to global illumination (such as level geometry). This GI mode is effective when using VoxelGI, SDFGI and LightmapGI.
-
-GIMode GI_MODE_DYNAMIC = 2
-
-Dynamic global illumination mode. Use for dynamic objects that contribute to global illumination. This GI mode is only effective when using VoxelGI, but it has a higher performance impact than GI_MODE_STATIC. When using other GI methods, this will act the same as GI_MODE_DISABLED. When using LightmapGI, the object will receive indirect lighting using lightmap probes instead of using the baked lightmap texture.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GI_MODE_DISABLED {#GI_MODE_DISABLED}
 
@@ -575,7 +556,7 @@ Dynamic global illumination mode. Use for dynamic objects that contribute to glo
 GI_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disabled global illumination mode. Use for dynamic objects that do not contribute to global illumination (such as characters). When using VoxelGI and SDFGI, the geometry will receive indirect lighting and reflections but the geometry will not be considered in GI baking.
 
 #### GI_MODE_STATIC {#GI_MODE_STATIC}
 
@@ -583,7 +564,7 @@ GI_MODE_DISABLED = 0
 GI_MODE_STATIC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Baked global illumination mode. Use for static objects that contribute to global illumination (such as level geometry). This GI mode is effective when using VoxelGI, SDFGI and LightmapGI.
 
 #### GI_MODE_DYNAMIC {#GI_MODE_DYNAMIC}
 
@@ -591,7 +572,9 @@ GI_MODE_STATIC = 1
 GI_MODE_DYNAMIC = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dynamic global illumination mode. Use for dynamic objects that contribute to global illumination. This GI mode is only effective when using VoxelGI, but it has a higher performance impact than GI_MODE_STATIC. When using other GI methods, this will act the same as GI_MODE_DISABLED. When using LightmapGI, the object will receive indirect lighting using lightmap probes instead of using the baked lightmap texture.
+
+---
 
 ### LightmapScale {#enum-LightmapScale}
 
@@ -599,35 +582,7 @@ GI_MODE_DYNAMIC = 2
 enum LightmapScale { LIGHTMAP_SCALE_1X = 0, LIGHTMAP_SCALE_2X = 1, LIGHTMAP_SCALE_4X = 2, LIGHTMAP_SCALE_8X = 3, LIGHTMAP_SCALE_MAX = 4 }
 ```
 
-LightmapScale LIGHTMAP_SCALE_1X = 0
-
-Deprecated: Use gi_lightmap_texel_scale instead.
-
-The standard texel density for lightmapping with LightmapGI.
-
-LightmapScale LIGHTMAP_SCALE_2X = 1
-
-Deprecated: Use gi_lightmap_texel_scale instead.
-
-Multiplies texel density by 2× for lightmapping with LightmapGI. To ensure consistency in texel density, use this when scaling a mesh by a factor between 1.5 and 3.0.
-
-LightmapScale LIGHTMAP_SCALE_4X = 2
-
-Deprecated: Use gi_lightmap_texel_scale instead.
-
-Multiplies texel density by 4× for lightmapping with LightmapGI. To ensure consistency in texel density, use this when scaling a mesh by a factor between 3.0 and 6.0.
-
-LightmapScale LIGHTMAP_SCALE_8X = 3
-
-Deprecated: Use gi_lightmap_texel_scale instead.
-
-Multiplies texel density by 8× for lightmapping with LightmapGI. To ensure consistency in texel density, use this when scaling a mesh by a factor greater than 6.0.
-
-LightmapScale LIGHTMAP_SCALE_MAX = 4
-
-Deprecated: Use gi_lightmap_texel_scale instead.
-
-Represents the size of the LightmapScale enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LIGHTMAP_SCALE_1X {#LIGHTMAP_SCALE_1X}
 
@@ -635,7 +590,9 @@ Represents the size of the LightmapScale enum.
 LIGHTMAP_SCALE_1X = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use gi_lightmap_texel_scale instead.
+
+The standard texel density for lightmapping with LightmapGI.
 
 #### LIGHTMAP_SCALE_2X {#LIGHTMAP_SCALE_2X}
 
@@ -643,7 +600,9 @@ LIGHTMAP_SCALE_1X = 0
 LIGHTMAP_SCALE_2X = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use gi_lightmap_texel_scale instead.
+
+Multiplies texel density by 2× for lightmapping with LightmapGI. To ensure consistency in texel density, use this when scaling a mesh by a factor between 1.5 and 3.0.
 
 #### LIGHTMAP_SCALE_4X {#LIGHTMAP_SCALE_4X}
 
@@ -651,7 +610,9 @@ LIGHTMAP_SCALE_2X = 1
 LIGHTMAP_SCALE_4X = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use gi_lightmap_texel_scale instead.
+
+Multiplies texel density by 4× for lightmapping with LightmapGI. To ensure consistency in texel density, use this when scaling a mesh by a factor between 3.0 and 6.0.
 
 #### LIGHTMAP_SCALE_8X {#LIGHTMAP_SCALE_8X}
 
@@ -659,7 +620,9 @@ LIGHTMAP_SCALE_4X = 2
 LIGHTMAP_SCALE_8X = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use gi_lightmap_texel_scale instead.
+
+Multiplies texel density by 8× for lightmapping with LightmapGI. To ensure consistency in texel density, use this when scaling a mesh by a factor greater than 6.0.
 
 #### LIGHTMAP_SCALE_MAX {#LIGHTMAP_SCALE_MAX}
 
@@ -667,7 +630,11 @@ LIGHTMAP_SCALE_8X = 3
 LIGHTMAP_SCALE_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use gi_lightmap_texel_scale instead.
+
+Represents the size of the LightmapScale enum.
+
+---
 
 ### VisibilityRangeFadeMode {#enum-VisibilityRangeFadeMode}
 
@@ -675,21 +642,7 @@ LIGHTMAP_SCALE_MAX = 4
 enum VisibilityRangeFadeMode { VISIBILITY_RANGE_FADE_DISABLED = 0, VISIBILITY_RANGE_FADE_SELF = 1, VISIBILITY_RANGE_FADE_DEPENDENCIES = 2 }
 ```
 
-VisibilityRangeFadeMode VISIBILITY_RANGE_FADE_DISABLED = 0
-
-Will not fade itself nor its visibility dependencies, hysteresis will be used instead. This is the fastest approach to manual LOD, but it can result in noticeable LOD transitions depending on how the LOD meshes are authored. See visibility_range_begin and Node3D.visibility_parent for more information.
-
-VisibilityRangeFadeMode VISIBILITY_RANGE_FADE_SELF = 1
-
-Will fade-out itself when reaching the limits of its own visibility range. This is slower than VISIBILITY_RANGE_FADE_DISABLED, but it can provide smoother transitions. The fading range is determined by visibility_range_begin_margin and visibility_range_end_margin.
-
-Note: Only supported when using the Forward+ rendering method. When using the Mobile or Compatibility rendering method, this mode acts like VISIBILITY_RANGE_FADE_DISABLED but with hysteresis disabled.
-
-VisibilityRangeFadeMode VISIBILITY_RANGE_FADE_DEPENDENCIES = 2
-
-Will fade-in its visibility dependencies (see Node3D.visibility_parent) when reaching the limits of its own visibility range. This is slower than VISIBILITY_RANGE_FADE_DISABLED, but it can provide smoother transitions. The fading range is determined by visibility_range_begin_margin and visibility_range_end_margin.
-
-Note: Only supported when using the Forward+ rendering method. When using the Mobile or Compatibility rendering method, this mode acts like VISIBILITY_RANGE_FADE_DISABLED but with hysteresis disabled.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VISIBILITY_RANGE_FADE_DISABLED {#VISIBILITY_RANGE_FADE_DISABLED}
 
@@ -697,7 +650,7 @@ Note: Only supported when using the Forward+ rendering method. When using the Mo
 VISIBILITY_RANGE_FADE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Will not fade itself nor its visibility dependencies, hysteresis will be used instead. This is the fastest approach to manual LOD, but it can result in noticeable LOD transitions depending on how the LOD meshes are authored. See visibility_range_begin and Node3D.visibility_parent for more information.
 
 #### VISIBILITY_RANGE_FADE_SELF {#VISIBILITY_RANGE_FADE_SELF}
 
@@ -705,7 +658,9 @@ VISIBILITY_RANGE_FADE_DISABLED = 0
 VISIBILITY_RANGE_FADE_SELF = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Will fade-out itself when reaching the limits of its own visibility range. This is slower than VISIBILITY_RANGE_FADE_DISABLED, but it can provide smoother transitions. The fading range is determined by visibility_range_begin_margin and visibility_range_end_margin.
+
+Note: Only supported when using the Forward+ rendering method. When using the Mobile or Compatibility rendering method, this mode acts like VISIBILITY_RANGE_FADE_DISABLED but with hysteresis disabled.
 
 #### VISIBILITY_RANGE_FADE_DEPENDENCIES {#VISIBILITY_RANGE_FADE_DEPENDENCIES}
 
@@ -713,4 +668,8 @@ VISIBILITY_RANGE_FADE_SELF = 1
 VISIBILITY_RANGE_FADE_DEPENDENCIES = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Will fade-in its visibility dependencies (see Node3D.visibility_parent) when reaching the limits of its own visibility range. This is slower than VISIBILITY_RANGE_FADE_DISABLED, but it can provide smoother transitions. The fading range is determined by visibility_range_begin_margin and visibility_range_end_margin.
+
+Note: Only supported when using the Forward+ rendering method. When using the Mobile or Compatibility rendering method, this mode acts like VISIBILITY_RANGE_FADE_DISABLED but with hysteresis disabled.
+
+---

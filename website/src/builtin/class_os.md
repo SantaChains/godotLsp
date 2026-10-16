@@ -1235,21 +1235,7 @@ Note: On start-up, this is the same as ProjectSettings.application/run/delta_smo
 enum RenderingDriver { RENDERING_DRIVER_VULKAN = 0, RENDERING_DRIVER_OPENGL3 = 1, RENDERING_DRIVER_D3D12 = 2, RENDERING_DRIVER_METAL = 3 }
 ```
 
-RenderingDriver RENDERING_DRIVER_VULKAN = 0
-
-The Vulkan rendering driver. It requires Vulkan 1.0 support and automatically uses features from Vulkan 1.1, 1.2, and 1.3 if available.
-
-RenderingDriver RENDERING_DRIVER_OPENGL3 = 1
-
-The OpenGL 3 rendering driver. It uses OpenGL 3.3 Core Profile on desktop platforms, OpenGL ES 3.0 on mobile devices, and WebGL 2.0 on Web.
-
-RenderingDriver RENDERING_DRIVER_D3D12 = 2
-
-The Direct3D 12 rendering driver. It requires the 12_0 feature level and Shader Model 6.0 support.
-
-RenderingDriver RENDERING_DRIVER_METAL = 3
-
-The Metal rendering driver.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RENDERING_DRIVER_VULKAN {#RENDERING_DRIVER_VULKAN}
 
@@ -1257,7 +1243,7 @@ The Metal rendering driver.
 RENDERING_DRIVER_VULKAN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Vulkan rendering driver. It requires Vulkan 1.0 support and automatically uses features from Vulkan 1.1, 1.2, and 1.3 if available.
 
 #### RENDERING_DRIVER_OPENGL3 {#RENDERING_DRIVER_OPENGL3}
 
@@ -1265,7 +1251,7 @@ RENDERING_DRIVER_VULKAN = 0
 RENDERING_DRIVER_OPENGL3 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The OpenGL 3 rendering driver. It uses OpenGL 3.3 Core Profile on desktop platforms, OpenGL ES 3.0 on mobile devices, and WebGL 2.0 on Web.
 
 #### RENDERING_DRIVER_D3D12 {#RENDERING_DRIVER_D3D12}
 
@@ -1273,7 +1259,7 @@ RENDERING_DRIVER_OPENGL3 = 1
 RENDERING_DRIVER_D3D12 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Direct3D 12 rendering driver. It requires the 12_0 feature level and Shader Model 6.0 support.
 
 #### RENDERING_DRIVER_METAL {#RENDERING_DRIVER_METAL}
 
@@ -1281,7 +1267,9 @@ RENDERING_DRIVER_D3D12 = 2
 RENDERING_DRIVER_METAL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Metal rendering driver.
+
+---
 
 ### SystemDir {#enum-SystemDir}
 
@@ -1289,37 +1277,7 @@ RENDERING_DRIVER_METAL = 3
 enum SystemDir { SYSTEM_DIR_DESKTOP = 0, SYSTEM_DIR_DCIM = 1, SYSTEM_DIR_DOCUMENTS = 2, SYSTEM_DIR_DOWNLOADS = 3, SYSTEM_DIR_MOVIES = 4, SYSTEM_DIR_MUSIC = 5, SYSTEM_DIR_PICTURES = 6, SYSTEM_DIR_RINGTONES = 7 }
 ```
 
-SystemDir SYSTEM_DIR_DESKTOP = 0
-
-Refers to the Desktop directory path.
-
-SystemDir SYSTEM_DIR_DCIM = 1
-
-Refers to the DCIM (Digital Camera Images) directory path.
-
-SystemDir SYSTEM_DIR_DOCUMENTS = 2
-
-Refers to the Documents directory path.
-
-SystemDir SYSTEM_DIR_DOWNLOADS = 3
-
-Refers to the Downloads directory path.
-
-SystemDir SYSTEM_DIR_MOVIES = 4
-
-Refers to the Movies (or Videos) directory path.
-
-SystemDir SYSTEM_DIR_MUSIC = 5
-
-Refers to the Music directory path.
-
-SystemDir SYSTEM_DIR_PICTURES = 6
-
-Refers to the Pictures directory path.
-
-SystemDir SYSTEM_DIR_RINGTONES = 7
-
-Refers to the Ringtones directory path.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SYSTEM_DIR_DESKTOP {#SYSTEM_DIR_DESKTOP}
 
@@ -1327,7 +1285,7 @@ Refers to the Ringtones directory path.
 SYSTEM_DIR_DESKTOP = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Refers to the Desktop directory path.
 
 #### SYSTEM_DIR_DCIM {#SYSTEM_DIR_DCIM}
 
@@ -1335,7 +1293,7 @@ SYSTEM_DIR_DESKTOP = 0
 SYSTEM_DIR_DCIM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Refers to the DCIM (Digital Camera Images) directory path.
 
 #### SYSTEM_DIR_DOCUMENTS {#SYSTEM_DIR_DOCUMENTS}
 
@@ -1343,7 +1301,7 @@ SYSTEM_DIR_DCIM = 1
 SYSTEM_DIR_DOCUMENTS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Refers to the Documents directory path.
 
 #### SYSTEM_DIR_DOWNLOADS {#SYSTEM_DIR_DOWNLOADS}
 
@@ -1351,7 +1309,7 @@ SYSTEM_DIR_DOCUMENTS = 2
 SYSTEM_DIR_DOWNLOADS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Refers to the Downloads directory path.
 
 #### SYSTEM_DIR_MOVIES {#SYSTEM_DIR_MOVIES}
 
@@ -1359,7 +1317,7 @@ SYSTEM_DIR_DOWNLOADS = 3
 SYSTEM_DIR_MOVIES = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Refers to the Movies (or Videos) directory path.
 
 #### SYSTEM_DIR_MUSIC {#SYSTEM_DIR_MUSIC}
 
@@ -1367,7 +1325,7 @@ SYSTEM_DIR_MOVIES = 4
 SYSTEM_DIR_MUSIC = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Refers to the Music directory path.
 
 #### SYSTEM_DIR_PICTURES {#SYSTEM_DIR_PICTURES}
 
@@ -1375,7 +1333,7 @@ SYSTEM_DIR_MUSIC = 5
 SYSTEM_DIR_PICTURES = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Refers to the Pictures directory path.
 
 #### SYSTEM_DIR_RINGTONES {#SYSTEM_DIR_RINGTONES}
 
@@ -1383,7 +1341,9 @@ SYSTEM_DIR_PICTURES = 6
 SYSTEM_DIR_RINGTONES = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Refers to the Ringtones directory path.
+
+---
 
 ### StdHandleType {#enum-StdHandleType}
 
@@ -1391,25 +1351,7 @@ SYSTEM_DIR_RINGTONES = 7
 enum StdHandleType { STD_HANDLE_INVALID = 0, STD_HANDLE_CONSOLE = 1, STD_HANDLE_FILE = 2, STD_HANDLE_PIPE = 3, STD_HANDLE_UNKNOWN = 4 }
 ```
 
-StdHandleType STD_HANDLE_INVALID = 0
-
-Standard I/O device is invalid. No data can be received from or sent to these standard I/O devices.
-
-StdHandleType STD_HANDLE_CONSOLE = 1
-
-Standard I/O device is a console. This typically occurs when Godot is run from a terminal with no redirection. This is also used for all standard I/O devices when running Godot from the editor, at least on desktop platforms.
-
-StdHandleType STD_HANDLE_FILE = 2
-
-Standard I/O device is a regular file. This typically occurs with redirection from a terminal, e.g. godot > stdout.txt, godot < stdin.txt or godot > stdout_stderr.txt 2>&1.
-
-StdHandleType STD_HANDLE_PIPE = 3
-
-Standard I/O device is a FIFO/pipe. This typically occurs with pipe usage from a terminal, e.g. echo "Hello" | godot.
-
-StdHandleType STD_HANDLE_UNKNOWN = 4
-
-Standard I/O device type is unknown.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STD_HANDLE_INVALID {#STD_HANDLE_INVALID}
 
@@ -1417,7 +1359,7 @@ Standard I/O device type is unknown.
 STD_HANDLE_INVALID = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Standard I/O device is invalid. No data can be received from or sent to these standard I/O devices.
 
 #### STD_HANDLE_CONSOLE {#STD_HANDLE_CONSOLE}
 
@@ -1425,7 +1367,7 @@ STD_HANDLE_INVALID = 0
 STD_HANDLE_CONSOLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Standard I/O device is a console. This typically occurs when Godot is run from a terminal with no redirection. This is also used for all standard I/O devices when running Godot from the editor, at least on desktop platforms.
 
 #### STD_HANDLE_FILE {#STD_HANDLE_FILE}
 
@@ -1433,7 +1375,7 @@ STD_HANDLE_CONSOLE = 1
 STD_HANDLE_FILE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Standard I/O device is a regular file. This typically occurs with redirection from a terminal, e.g. godot > stdout.txt, godot < stdin.txt or godot > stdout_stderr.txt 2>&1.
 
 #### STD_HANDLE_PIPE {#STD_HANDLE_PIPE}
 
@@ -1441,7 +1383,7 @@ STD_HANDLE_FILE = 2
 STD_HANDLE_PIPE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Standard I/O device is a FIFO/pipe. This typically occurs with pipe usage from a terminal, e.g. echo "Hello" | godot.
 
 #### STD_HANDLE_UNKNOWN {#STD_HANDLE_UNKNOWN}
 
@@ -1449,4 +1391,6 @@ STD_HANDLE_PIPE = 3
 STD_HANDLE_UNKNOWN = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Standard I/O device type is unknown.
+
+---

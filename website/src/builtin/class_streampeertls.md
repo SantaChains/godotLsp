@@ -70,25 +70,7 @@ Poll the connection to check for incoming bytes. Call this right before StreamPe
 enum Status { STATUS_DISCONNECTED = 0, STATUS_HANDSHAKING = 1, STATUS_CONNECTED = 2, STATUS_ERROR = 3, STATUS_ERROR_HOSTNAME_MISMATCH = 4 }
 ```
 
-Status STATUS_DISCONNECTED = 0
-
-A status representing a StreamPeerTLS that is disconnected.
-
-Status STATUS_HANDSHAKING = 1
-
-A status representing a StreamPeerTLS during handshaking.
-
-Status STATUS_CONNECTED = 2
-
-A status representing a StreamPeerTLS that is connected to a host.
-
-Status STATUS_ERROR = 3
-
-A status representing a StreamPeerTLS in error state.
-
-Status STATUS_ERROR_HOSTNAME_MISMATCH = 4
-
-An error status that shows a mismatch in the TLS certificate domain presented by the host and the domain requested for validation.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STATUS_DISCONNECTED {#STATUS_DISCONNECTED}
 
@@ -96,7 +78,7 @@ An error status that shows a mismatch in the TLS certificate domain presented by
 STATUS_DISCONNECTED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A status representing a StreamPeerTLS that is disconnected.
 
 #### STATUS_HANDSHAKING {#STATUS_HANDSHAKING}
 
@@ -104,7 +86,7 @@ STATUS_DISCONNECTED = 0
 STATUS_HANDSHAKING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A status representing a StreamPeerTLS during handshaking.
 
 #### STATUS_CONNECTED {#STATUS_CONNECTED}
 
@@ -112,7 +94,7 @@ STATUS_HANDSHAKING = 1
 STATUS_CONNECTED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A status representing a StreamPeerTLS that is connected to a host.
 
 #### STATUS_ERROR {#STATUS_ERROR}
 
@@ -120,7 +102,7 @@ STATUS_CONNECTED = 2
 STATUS_ERROR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A status representing a StreamPeerTLS in error state.
 
 #### STATUS_ERROR_HOSTNAME_MISMATCH {#STATUS_ERROR_HOSTNAME_MISMATCH}
 
@@ -128,4 +110,6 @@ STATUS_ERROR = 3
 STATUS_ERROR_HOSTNAME_MISMATCH = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An error status that shows a mismatch in the TLS certificate domain presented by the host and the domain requested for validation.
+
+---

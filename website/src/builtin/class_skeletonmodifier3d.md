@@ -144,29 +144,7 @@ Note: If you want to get the modified bone pose by the modifier, you must use Sk
 enum BoneAxis { BONE_AXIS_PLUS_X = 0, BONE_AXIS_MINUS_X = 1, BONE_AXIS_PLUS_Y = 2, BONE_AXIS_MINUS_Y = 3, BONE_AXIS_PLUS_Z = 4, BONE_AXIS_MINUS_Z = 5 }
 ```
 
-BoneAxis BONE_AXIS_PLUS_X = 0
-
-Enumerated value for the +X axis.
-
-BoneAxis BONE_AXIS_MINUS_X = 1
-
-Enumerated value for the -X axis.
-
-BoneAxis BONE_AXIS_PLUS_Y = 2
-
-Enumerated value for the +Y axis.
-
-BoneAxis BONE_AXIS_MINUS_Y = 3
-
-Enumerated value for the -Y axis.
-
-BoneAxis BONE_AXIS_PLUS_Z = 4
-
-Enumerated value for the +Z axis.
-
-BoneAxis BONE_AXIS_MINUS_Z = 5
-
-Enumerated value for the -Z axis.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BONE_AXIS_PLUS_X {#BONE_AXIS_PLUS_X}
 
@@ -174,7 +152,7 @@ Enumerated value for the -Z axis.
 BONE_AXIS_PLUS_X = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the +X axis.
 
 #### BONE_AXIS_MINUS_X {#BONE_AXIS_MINUS_X}
 
@@ -182,7 +160,7 @@ BONE_AXIS_PLUS_X = 0
 BONE_AXIS_MINUS_X = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the -X axis.
 
 #### BONE_AXIS_PLUS_Y {#BONE_AXIS_PLUS_Y}
 
@@ -190,7 +168,7 @@ BONE_AXIS_MINUS_X = 1
 BONE_AXIS_PLUS_Y = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the +Y axis.
 
 #### BONE_AXIS_MINUS_Y {#BONE_AXIS_MINUS_Y}
 
@@ -198,7 +176,7 @@ BONE_AXIS_PLUS_Y = 2
 BONE_AXIS_MINUS_Y = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the -Y axis.
 
 #### BONE_AXIS_PLUS_Z {#BONE_AXIS_PLUS_Z}
 
@@ -206,7 +184,7 @@ BONE_AXIS_MINUS_Y = 3
 BONE_AXIS_PLUS_Z = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the +Z axis.
 
 #### BONE_AXIS_MINUS_Z {#BONE_AXIS_MINUS_Z}
 
@@ -214,7 +192,9 @@ BONE_AXIS_PLUS_Z = 4
 BONE_AXIS_MINUS_Z = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the -Z axis.
+
+---
 
 ### BoneDirection {#enum-BoneDirection}
 
@@ -222,33 +202,7 @@ BONE_AXIS_MINUS_Z = 5
 enum BoneDirection { BONE_DIRECTION_PLUS_X = 0, BONE_DIRECTION_MINUS_X = 1, BONE_DIRECTION_PLUS_Y = 2, BONE_DIRECTION_MINUS_Y = 3, BONE_DIRECTION_PLUS_Z = 4, BONE_DIRECTION_MINUS_Z = 5, BONE_DIRECTION_FROM_PARENT = 6 }
 ```
 
-BoneDirection BONE_DIRECTION_PLUS_X = 0
-
-Enumerated value for the +X axis.
-
-BoneDirection BONE_DIRECTION_MINUS_X = 1
-
-Enumerated value for the -X axis.
-
-BoneDirection BONE_DIRECTION_PLUS_Y = 2
-
-Enumerated value for the +Y axis.
-
-BoneDirection BONE_DIRECTION_MINUS_Y = 3
-
-Enumerated value for the -Y axis.
-
-BoneDirection BONE_DIRECTION_PLUS_Z = 4
-
-Enumerated value for the +Z axis.
-
-BoneDirection BONE_DIRECTION_MINUS_Z = 5
-
-Enumerated value for the -Z axis.
-
-BoneDirection BONE_DIRECTION_FROM_PARENT = 6
-
-Enumerated value for the axis from a parent bone to the child bone.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BONE_DIRECTION_PLUS_X {#BONE_DIRECTION_PLUS_X}
 
@@ -256,7 +210,7 @@ Enumerated value for the axis from a parent bone to the child bone.
 BONE_DIRECTION_PLUS_X = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the +X axis.
 
 #### BONE_DIRECTION_MINUS_X {#BONE_DIRECTION_MINUS_X}
 
@@ -264,7 +218,7 @@ BONE_DIRECTION_PLUS_X = 0
 BONE_DIRECTION_MINUS_X = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the -X axis.
 
 #### BONE_DIRECTION_PLUS_Y {#BONE_DIRECTION_PLUS_Y}
 
@@ -272,7 +226,7 @@ BONE_DIRECTION_MINUS_X = 1
 BONE_DIRECTION_PLUS_Y = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the +Y axis.
 
 #### BONE_DIRECTION_MINUS_Y {#BONE_DIRECTION_MINUS_Y}
 
@@ -280,7 +234,7 @@ BONE_DIRECTION_PLUS_Y = 2
 BONE_DIRECTION_MINUS_Y = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the -Y axis.
 
 #### BONE_DIRECTION_PLUS_Z {#BONE_DIRECTION_PLUS_Z}
 
@@ -288,7 +242,7 @@ BONE_DIRECTION_MINUS_Y = 3
 BONE_DIRECTION_PLUS_Z = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the +Z axis.
 
 #### BONE_DIRECTION_MINUS_Z {#BONE_DIRECTION_MINUS_Z}
 
@@ -296,7 +250,7 @@ BONE_DIRECTION_PLUS_Z = 4
 BONE_DIRECTION_MINUS_Z = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the -Z axis.
 
 #### BONE_DIRECTION_FROM_PARENT {#BONE_DIRECTION_FROM_PARENT}
 
@@ -304,7 +258,9 @@ BONE_DIRECTION_MINUS_Z = 5
 BONE_DIRECTION_FROM_PARENT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the axis from a parent bone to the child bone.
+
+---
 
 ### SecondaryDirection {#enum-SecondaryDirection}
 
@@ -312,37 +268,7 @@ BONE_DIRECTION_FROM_PARENT = 6
 enum SecondaryDirection { SECONDARY_DIRECTION_NONE = 0, SECONDARY_DIRECTION_PLUS_X = 1, SECONDARY_DIRECTION_MINUS_X = 2, SECONDARY_DIRECTION_PLUS_Y = 3, SECONDARY_DIRECTION_MINUS_Y = 4, SECONDARY_DIRECTION_PLUS_Z = 5, SECONDARY_DIRECTION_MINUS_Z = 6, SECONDARY_DIRECTION_CUSTOM = 7 }
 ```
 
-SecondaryDirection SECONDARY_DIRECTION_NONE = 0
-
-Enumerated value for the case when the axis is undefined.
-
-SecondaryDirection SECONDARY_DIRECTION_PLUS_X = 1
-
-Enumerated value for the +X axis.
-
-SecondaryDirection SECONDARY_DIRECTION_MINUS_X = 2
-
-Enumerated value for the -X axis.
-
-SecondaryDirection SECONDARY_DIRECTION_PLUS_Y = 3
-
-Enumerated value for the +Y axis.
-
-SecondaryDirection SECONDARY_DIRECTION_MINUS_Y = 4
-
-Enumerated value for the -Y axis.
-
-SecondaryDirection SECONDARY_DIRECTION_PLUS_Z = 5
-
-Enumerated value for the +Z axis.
-
-SecondaryDirection SECONDARY_DIRECTION_MINUS_Z = 6
-
-Enumerated value for the -Z axis.
-
-SecondaryDirection SECONDARY_DIRECTION_CUSTOM = 7
-
-Enumerated value for an optional axis.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SECONDARY_DIRECTION_NONE {#SECONDARY_DIRECTION_NONE}
 
@@ -350,7 +276,7 @@ Enumerated value for an optional axis.
 SECONDARY_DIRECTION_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the case when the axis is undefined.
 
 #### SECONDARY_DIRECTION_PLUS_X {#SECONDARY_DIRECTION_PLUS_X}
 
@@ -358,7 +284,7 @@ SECONDARY_DIRECTION_NONE = 0
 SECONDARY_DIRECTION_PLUS_X = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the +X axis.
 
 #### SECONDARY_DIRECTION_MINUS_X {#SECONDARY_DIRECTION_MINUS_X}
 
@@ -366,7 +292,7 @@ SECONDARY_DIRECTION_PLUS_X = 1
 SECONDARY_DIRECTION_MINUS_X = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the -X axis.
 
 #### SECONDARY_DIRECTION_PLUS_Y {#SECONDARY_DIRECTION_PLUS_Y}
 
@@ -374,7 +300,7 @@ SECONDARY_DIRECTION_MINUS_X = 2
 SECONDARY_DIRECTION_PLUS_Y = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the +Y axis.
 
 #### SECONDARY_DIRECTION_MINUS_Y {#SECONDARY_DIRECTION_MINUS_Y}
 
@@ -382,7 +308,7 @@ SECONDARY_DIRECTION_PLUS_Y = 3
 SECONDARY_DIRECTION_MINUS_Y = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the -Y axis.
 
 #### SECONDARY_DIRECTION_PLUS_Z {#SECONDARY_DIRECTION_PLUS_Z}
 
@@ -390,7 +316,7 @@ SECONDARY_DIRECTION_MINUS_Y = 4
 SECONDARY_DIRECTION_PLUS_Z = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the +Z axis.
 
 #### SECONDARY_DIRECTION_MINUS_Z {#SECONDARY_DIRECTION_MINUS_Z}
 
@@ -398,7 +324,7 @@ SECONDARY_DIRECTION_PLUS_Z = 5
 SECONDARY_DIRECTION_MINUS_Z = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the -Z axis.
 
 #### SECONDARY_DIRECTION_CUSTOM {#SECONDARY_DIRECTION_CUSTOM}
 
@@ -406,7 +332,9 @@ SECONDARY_DIRECTION_MINUS_Z = 6
 SECONDARY_DIRECTION_CUSTOM = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for an optional axis.
+
+---
 
 ### RotationAxis {#enum-RotationAxis}
 
@@ -414,25 +342,7 @@ SECONDARY_DIRECTION_CUSTOM = 7
 enum RotationAxis { ROTATION_AXIS_X = 0, ROTATION_AXIS_Y = 1, ROTATION_AXIS_Z = 2, ROTATION_AXIS_ALL = 3, ROTATION_AXIS_CUSTOM = 4 }
 ```
 
-RotationAxis ROTATION_AXIS_X = 0
-
-Enumerated value for the rotation of the X axis.
-
-RotationAxis ROTATION_AXIS_Y = 1
-
-Enumerated value for the rotation of the Y axis.
-
-RotationAxis ROTATION_AXIS_Z = 2
-
-Enumerated value for the rotation of the Z axis.
-
-RotationAxis ROTATION_AXIS_ALL = 3
-
-Enumerated value for the unconstrained rotation.
-
-RotationAxis ROTATION_AXIS_CUSTOM = 4
-
-Enumerated value for an optional rotation axis.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ROTATION_AXIS_X {#ROTATION_AXIS_X}
 
@@ -440,7 +350,7 @@ Enumerated value for an optional rotation axis.
 ROTATION_AXIS_X = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the rotation of the X axis.
 
 #### ROTATION_AXIS_Y {#ROTATION_AXIS_Y}
 
@@ -448,7 +358,7 @@ ROTATION_AXIS_X = 0
 ROTATION_AXIS_Y = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the rotation of the Y axis.
 
 #### ROTATION_AXIS_Z {#ROTATION_AXIS_Z}
 
@@ -456,7 +366,7 @@ ROTATION_AXIS_Y = 1
 ROTATION_AXIS_Z = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the rotation of the Z axis.
 
 #### ROTATION_AXIS_ALL {#ROTATION_AXIS_ALL}
 
@@ -464,7 +374,7 @@ ROTATION_AXIS_Z = 2
 ROTATION_AXIS_ALL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the unconstrained rotation.
 
 #### ROTATION_AXIS_CUSTOM {#ROTATION_AXIS_CUSTOM}
 
@@ -472,4 +382,6 @@ ROTATION_AXIS_ALL = 3
 ROTATION_AXIS_CUSTOM = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for an optional rotation axis.
+
+---

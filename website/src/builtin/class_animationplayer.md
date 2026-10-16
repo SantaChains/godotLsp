@@ -684,17 +684,7 @@ Note: The signal is not emitted when the animation is changed via play() or by a
 enum AnimationProcessCallback { ANIMATION_PROCESS_PHYSICS = 0, ANIMATION_PROCESS_IDLE = 1, ANIMATION_PROCESS_MANUAL = 2 }
 ```
 
-AnimationProcessCallback ANIMATION_PROCESS_PHYSICS = 0
-
-Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS.
-
-AnimationProcessCallback ANIMATION_PROCESS_IDLE = 1
-
-Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_IDLE.
-
-AnimationProcessCallback ANIMATION_PROCESS_MANUAL = 2
-
-Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ANIMATION_PROCESS_PHYSICS {#ANIMATION_PROCESS_PHYSICS}
 
@@ -702,7 +692,7 @@ Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL.
 ANIMATION_PROCESS_PHYSICS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS.
 
 #### ANIMATION_PROCESS_IDLE {#ANIMATION_PROCESS_IDLE}
 
@@ -710,7 +700,7 @@ ANIMATION_PROCESS_PHYSICS = 0
 ANIMATION_PROCESS_IDLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_IDLE.
 
 #### ANIMATION_PROCESS_MANUAL {#ANIMATION_PROCESS_MANUAL}
 
@@ -718,7 +708,9 @@ ANIMATION_PROCESS_IDLE = 1
 ANIMATION_PROCESS_MANUAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL.
+
+---
 
 ### AnimationMethodCallMode {#enum-AnimationMethodCallMode}
 
@@ -726,13 +718,7 @@ ANIMATION_PROCESS_MANUAL = 2
 enum AnimationMethodCallMode { ANIMATION_METHOD_CALL_DEFERRED = 0, ANIMATION_METHOD_CALL_IMMEDIATE = 1 }
 ```
 
-AnimationMethodCallMode ANIMATION_METHOD_CALL_DEFERRED = 0
-
-Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_METHOD_DEFERRED.
-
-AnimationMethodCallMode ANIMATION_METHOD_CALL_IMMEDIATE = 1
-
-Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ANIMATION_METHOD_CALL_DEFERRED {#ANIMATION_METHOD_CALL_DEFERRED}
 
@@ -740,7 +726,7 @@ Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE.
 ANIMATION_METHOD_CALL_DEFERRED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_METHOD_DEFERRED.
 
 #### ANIMATION_METHOD_CALL_IMMEDIATE {#ANIMATION_METHOD_CALL_IMMEDIATE}
 
@@ -748,4 +734,6 @@ ANIMATION_METHOD_CALL_DEFERRED = 0
 ANIMATION_METHOD_CALL_IMMEDIATE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE.
+
+---

@@ -395,7 +395,10 @@ When used with an Android Surface, this may allow DRM content to be presented, a
 android_surface_size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_android_surface_size(value: Vector2i)
+- Vector2i get_android_surface_size()
+
+The size of the Android surface to create if use_android_surface is enabled.
 
 ### sort_order {#sort_order}
 
@@ -585,7 +588,12 @@ Note: This property only has an effect on devices that support the OpenXR XR_FB_
 swapchain_state_border_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_border_color(value: Color)
+- Color get_border_color()
+
+The border color of the swapchain state that is used when the wrap mode clamps to the border.
+
+Note: This property only has an effect on devices that support the OpenXR XR_FB_swapchain_update_state OpenGLES/Vulkan extensions.
 
 ## 枚举
 
@@ -595,17 +603,7 @@ swapchain_state_border_color: Color
 enum Filter { FILTER_NEAREST = 0, FILTER_LINEAR = 1, FILTER_CUBIC = 2 }
 ```
 
-Filter FILTER_NEAREST = 0
-
-Perform nearest-neighbor filtering when sampling the texture.
-
-Filter FILTER_LINEAR = 1
-
-Perform linear filtering when sampling the texture.
-
-Filter FILTER_CUBIC = 2
-
-Perform cubic filtering when sampling the texture.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FILTER_NEAREST {#FILTER_NEAREST}
 
@@ -613,7 +611,7 @@ Perform cubic filtering when sampling the texture.
 FILTER_NEAREST = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Perform nearest-neighbor filtering when sampling the texture.
 
 #### FILTER_LINEAR {#FILTER_LINEAR}
 
@@ -621,7 +619,7 @@ FILTER_NEAREST = 0
 FILTER_LINEAR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Perform linear filtering when sampling the texture.
 
 #### FILTER_CUBIC {#FILTER_CUBIC}
 
@@ -629,7 +627,9 @@ FILTER_LINEAR = 1
 FILTER_CUBIC = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Perform cubic filtering when sampling the texture.
+
+---
 
 ### MipmapMode {#enum-MipmapMode}
 
@@ -637,19 +637,7 @@ FILTER_CUBIC = 2
 enum MipmapMode { MIPMAP_MODE_DISABLED = 0, MIPMAP_MODE_NEAREST = 1, MIPMAP_MODE_LINEAR = 2 }
 ```
 
-MipmapMode MIPMAP_MODE_DISABLED = 0
-
-Disable mipmapping.
-
-Note: Mipmapping can only be disabled in the Compatibility renderer.
-
-MipmapMode MIPMAP_MODE_NEAREST = 1
-
-Use the mipmap of the nearest resolution.
-
-MipmapMode MIPMAP_MODE_LINEAR = 2
-
-Use linear interpolation of the two mipmaps of the nearest resolution.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MIPMAP_MODE_DISABLED {#MIPMAP_MODE_DISABLED}
 
@@ -657,7 +645,9 @@ Use linear interpolation of the two mipmaps of the nearest resolution.
 MIPMAP_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disable mipmapping.
+
+Note: Mipmapping can only be disabled in the Compatibility renderer.
 
 #### MIPMAP_MODE_NEAREST {#MIPMAP_MODE_NEAREST}
 
@@ -665,7 +655,7 @@ MIPMAP_MODE_DISABLED = 0
 MIPMAP_MODE_NEAREST = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the mipmap of the nearest resolution.
 
 #### MIPMAP_MODE_LINEAR {#MIPMAP_MODE_LINEAR}
 
@@ -673,7 +663,9 @@ MIPMAP_MODE_NEAREST = 1
 MIPMAP_MODE_LINEAR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use linear interpolation of the two mipmaps of the nearest resolution.
+
+---
 
 ### Wrap {#enum-Wrap}
 
@@ -681,27 +673,7 @@ MIPMAP_MODE_LINEAR = 2
 enum Wrap { WRAP_CLAMP_TO_BORDER = 0, WRAP_CLAMP_TO_EDGE = 1, WRAP_REPEAT = 2, WRAP_MIRRORED_REPEAT = 3, WRAP_MIRROR_CLAMP_TO_EDGE = 4 }
 ```
 
-Wrap WRAP_CLAMP_TO_BORDER = 0
-
-Clamp the texture to its specified border color.
-
-Wrap WRAP_CLAMP_TO_EDGE = 1
-
-Clamp the texture to its edge color.
-
-Wrap WRAP_REPEAT = 2
-
-Repeat the texture infinitely.
-
-Wrap WRAP_MIRRORED_REPEAT = 3
-
-Repeat the texture infinitely, mirroring it on each repeat.
-
-Wrap WRAP_MIRROR_CLAMP_TO_EDGE = 4
-
-Mirror the texture once and then clamp the texture to its edge color.
-
-Note: This wrap mode is not available in the Compatibility renderer.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### WRAP_CLAMP_TO_BORDER {#WRAP_CLAMP_TO_BORDER}
 
@@ -709,7 +681,7 @@ Note: This wrap mode is not available in the Compatibility renderer.
 WRAP_CLAMP_TO_BORDER = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Clamp the texture to its specified border color.
 
 #### WRAP_CLAMP_TO_EDGE {#WRAP_CLAMP_TO_EDGE}
 
@@ -717,7 +689,7 @@ WRAP_CLAMP_TO_BORDER = 0
 WRAP_CLAMP_TO_EDGE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Clamp the texture to its edge color.
 
 #### WRAP_REPEAT {#WRAP_REPEAT}
 
@@ -725,7 +697,7 @@ WRAP_CLAMP_TO_EDGE = 1
 WRAP_REPEAT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Repeat the texture infinitely.
 
 #### WRAP_MIRRORED_REPEAT {#WRAP_MIRRORED_REPEAT}
 
@@ -733,7 +705,7 @@ WRAP_REPEAT = 2
 WRAP_MIRRORED_REPEAT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Repeat the texture infinitely, mirroring it on each repeat.
 
 #### WRAP_MIRROR_CLAMP_TO_EDGE {#WRAP_MIRROR_CLAMP_TO_EDGE}
 
@@ -741,7 +713,11 @@ WRAP_MIRRORED_REPEAT = 3
 WRAP_MIRROR_CLAMP_TO_EDGE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mirror the texture once and then clamp the texture to its edge color.
+
+Note: This wrap mode is not available in the Compatibility renderer.
+
+---
 
 ### Swizzle {#enum-Swizzle}
 
@@ -749,29 +725,7 @@ WRAP_MIRROR_CLAMP_TO_EDGE = 4
 enum Swizzle { SWIZZLE_RED = 0, SWIZZLE_GREEN = 1, SWIZZLE_BLUE = 2, SWIZZLE_ALPHA = 3, SWIZZLE_ZERO = 4, SWIZZLE_ONE = 5 }
 ```
 
-Swizzle SWIZZLE_RED = 0
-
-Maps a color channel to the value of the red channel.
-
-Swizzle SWIZZLE_GREEN = 1
-
-Maps a color channel to the value of the green channel.
-
-Swizzle SWIZZLE_BLUE = 2
-
-Maps a color channel to the value of the blue channel.
-
-Swizzle SWIZZLE_ALPHA = 3
-
-Maps a color channel to the value of the alpha channel.
-
-Swizzle SWIZZLE_ZERO = 4
-
-Maps a color channel to the value of zero.
-
-Swizzle SWIZZLE_ONE = 5
-
-Maps a color channel to the value of one.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SWIZZLE_RED {#SWIZZLE_RED}
 
@@ -779,7 +733,7 @@ Maps a color channel to the value of one.
 SWIZZLE_RED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maps a color channel to the value of the red channel.
 
 #### SWIZZLE_GREEN {#SWIZZLE_GREEN}
 
@@ -787,7 +741,7 @@ SWIZZLE_RED = 0
 SWIZZLE_GREEN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maps a color channel to the value of the green channel.
 
 #### SWIZZLE_BLUE {#SWIZZLE_BLUE}
 
@@ -795,7 +749,7 @@ SWIZZLE_GREEN = 1
 SWIZZLE_BLUE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maps a color channel to the value of the blue channel.
 
 #### SWIZZLE_ALPHA {#SWIZZLE_ALPHA}
 
@@ -803,7 +757,7 @@ SWIZZLE_BLUE = 2
 SWIZZLE_ALPHA = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maps a color channel to the value of the alpha channel.
 
 #### SWIZZLE_ZERO {#SWIZZLE_ZERO}
 
@@ -811,7 +765,7 @@ SWIZZLE_ALPHA = 3
 SWIZZLE_ZERO = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maps a color channel to the value of zero.
 
 #### SWIZZLE_ONE {#SWIZZLE_ONE}
 
@@ -819,7 +773,9 @@ SWIZZLE_ZERO = 4
 SWIZZLE_ONE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maps a color channel to the value of one.
+
+---
 
 ### EyeVisibility {#enum-EyeVisibility}
 
@@ -827,17 +783,7 @@ SWIZZLE_ONE = 5
 enum EyeVisibility { EYE_VISIBILITY_BOTH = 0, EYE_VISIBILITY_LEFT = 1, EYE_VISIBILITY_RIGHT = 2 }
 ```
 
-EyeVisibility EYE_VISIBILITY_BOTH = 0
-
-The layer is visible to both the left and right eyes.
-
-EyeVisibility EYE_VISIBILITY_LEFT = 1
-
-The layer is visible only to the left eye.
-
-EyeVisibility EYE_VISIBILITY_RIGHT = 2
-
-The layer is visible only to the right eye.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EYE_VISIBILITY_BOTH {#EYE_VISIBILITY_BOTH}
 
@@ -845,7 +791,7 @@ The layer is visible only to the right eye.
 EYE_VISIBILITY_BOTH = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The layer is visible to both the left and right eyes.
 
 #### EYE_VISIBILITY_LEFT {#EYE_VISIBILITY_LEFT}
 
@@ -853,7 +799,7 @@ EYE_VISIBILITY_BOTH = 0
 EYE_VISIBILITY_LEFT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The layer is visible only to the left eye.
 
 #### EYE_VISIBILITY_RIGHT {#EYE_VISIBILITY_RIGHT}
 
@@ -861,4 +807,6 @@ EYE_VISIBILITY_LEFT = 1
 EYE_VISIBILITY_RIGHT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The layer is visible only to the right eye.
+
+---

@@ -161,7 +161,10 @@ The index of the Bone2D node that the modification will operate on.
 bone2d_node: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_bone2d_node(value: NodePath)
+- NodePath get_bone2d_node()
+
+The Bone2D node that the modification will operate on.
 
 ### target_nodepath {#target_nodepath}
 
@@ -169,4 +172,7 @@ bone2d_node: NodePath
 target_nodepath: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_node(value: NodePath)
+- NodePath get_target_node()
+
+The NodePath to the node that is the target for the LookAt modification. This node is what the modification will rotate the Bone2D to.

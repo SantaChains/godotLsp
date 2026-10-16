@@ -142,7 +142,9 @@ In the scalar equation of the plane ax + by + cz = d, this is d, while the (a, b
 normal: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The normal of the plane, typically a unit vector. Shouldn't be a zero vector as Plane with such normal does not represent a valid plane.
+
+In the scalar equation of the plane ax + by + cz = d, this is the vector (a, b, c), where d is the d property.
 
 ## 常量
 
@@ -152,7 +154,15 @@ normal: Vector3
 const PLANE_YZ = Plane(1, 0, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A plane that extends in the Y and Z axes (normal vector points +X).
+
+PLANE_XZ = Plane(0, 1, 0, 0) 
+
+A plane that extends in the X and Z axes (normal vector points +Y).
+
+PLANE_XY = Plane(0, 0, 1, 0) 
+
+A plane that extends in the X and Y axes (normal vector points +Z).
 
 ### PLANE_XZ {#PLANE_XZ}
 

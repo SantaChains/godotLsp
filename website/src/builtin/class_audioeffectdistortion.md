@@ -167,25 +167,7 @@ Gain after the effect, in dB. Value can range from -80 to 24.
 enum Mode { MODE_CLIP = 0, MODE_ATAN = 1, MODE_LOFI = 2, MODE_OVERDRIVE = 3, MODE_WAVESHAPE = 4 }
 ```
 
-Mode MODE_CLIP = 0
-
-Flattens the waveform at 0 dB in a sharp manner. drive increases amplitude of samples exponentially. This mode functions as a hard clipper if drive is set to 0, and is the only mode that clips audio signals at 0 dB.
-
-Mode MODE_ATAN = 1
-
-Flattens the waveform in a smooth manner, following an arctangent curve. The audio decreases in volume, before flattening peaks to PI * 4.0 (linear value), if it was normalized beforehand.
-
-Mode MODE_LOFI = 2
-
-Decreases audio bit depth to achieve a low-resolution audio signal, going from 16-bit to 2-bit. Can be used to emulate the sound of early digital audio devices.
-
-Mode MODE_OVERDRIVE = 3
-
-Emulates the warm distortion produced by a field effect transistor, which is commonly used in solid-state musical instrument amplifiers. drive has no effect in this mode.
-
-Mode MODE_WAVESHAPE = 4
-
-Flattens the waveform in a smooth manner, until it reaches a sharp peak at drive = 1, following a generic absolute sigmoid function.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MODE_CLIP {#MODE_CLIP}
 
@@ -193,7 +175,7 @@ Flattens the waveform in a smooth manner, until it reaches a sharp peak at drive
 MODE_CLIP = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flattens the waveform at 0 dB in a sharp manner. drive increases amplitude of samples exponentially. This mode functions as a hard clipper if drive is set to 0, and is the only mode that clips audio signals at 0 dB.
 
 #### MODE_ATAN {#MODE_ATAN}
 
@@ -201,7 +183,7 @@ MODE_CLIP = 0
 MODE_ATAN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flattens the waveform in a smooth manner, following an arctangent curve. The audio decreases in volume, before flattening peaks to PI * 4.0 (linear value), if it was normalized beforehand.
 
 #### MODE_LOFI {#MODE_LOFI}
 
@@ -209,7 +191,7 @@ MODE_ATAN = 1
 MODE_LOFI = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Decreases audio bit depth to achieve a low-resolution audio signal, going from 16-bit to 2-bit. Can be used to emulate the sound of early digital audio devices.
 
 #### MODE_OVERDRIVE {#MODE_OVERDRIVE}
 
@@ -217,7 +199,7 @@ MODE_LOFI = 2
 MODE_OVERDRIVE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Emulates the warm distortion produced by a field effect transistor, which is commonly used in solid-state musical instrument amplifiers. drive has no effect in this mode.
 
 #### MODE_WAVESHAPE {#MODE_WAVESHAPE}
 
@@ -225,4 +207,6 @@ MODE_OVERDRIVE = 3
 MODE_WAVESHAPE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flattens the waveform in a smooth manner, until it reaches a sharp peak at drive = 1, following a generic absolute sigmoid function.
+
+---

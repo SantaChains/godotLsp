@@ -237,7 +237,14 @@ A bitfield determining all navigation layers the link belongs to. These navigati
 start_position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_start_position(value: Vector2)
+- Vector2 get_start_position()
+
+Starting position of the link.
+
+This position will search out the nearest polygon in the navigation mesh to attach to.
+
+The distance the link will search is controlled by NavigationServer2D.map_set_link_connection_radius().
 
 ### end_position {#end_position}
 
@@ -245,7 +252,14 @@ start_position: Vector2
 end_position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_end_position(value: Vector2)
+- Vector2 get_end_position()
+
+Ending position of the link.
+
+This position will search out the nearest polygon in the navigation mesh to attach to.
+
+The distance the link will search is controlled by NavigationServer2D.map_set_link_connection_radius().
 
 ### enter_cost {#enter_cost}
 

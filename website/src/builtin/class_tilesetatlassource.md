@@ -379,7 +379,10 @@ The atlas texture.
 margins: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_margins(value: Vector2i)
+- Vector2i get_margins()
+
+Margins, in pixels, to offset the origin of the grid in the texture.
 
 ### separation {#separation}
 
@@ -387,7 +390,10 @@ margins: Vector2i
 separation: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_separation(value: Vector2i)
+- Vector2i get_separation()
+
+Separation, in pixels, between each tile texture region of the grid.
 
 ### texture_region_size {#texture_region_size}
 
@@ -395,7 +401,10 @@ separation: Vector2i
 texture_region_size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_texture_region_size(value: Vector2i)
+- Vector2i get_texture_region_size()
+
+The base tile size in the texture (in pixel). This size must be bigger than or equal to the TileSet's tile_size value.
 
 ### use_texture_padding {#use_texture_padding}
 
@@ -418,17 +427,7 @@ Disabling this setting might lead a small performance improvement, as generating
 enum TileAnimationMode { TILE_ANIMATION_MODE_DEFAULT = 0, TILE_ANIMATION_MODE_RANDOM_START_TIMES = 1, TILE_ANIMATION_MODE_MAX = 2 }
 ```
 
-TileAnimationMode TILE_ANIMATION_MODE_DEFAULT = 0
-
-Tile animations start at same time, looking identical.
-
-TileAnimationMode TILE_ANIMATION_MODE_RANDOM_START_TIMES = 1
-
-Tile animations start at random times, looking varied.
-
-TileAnimationMode TILE_ANIMATION_MODE_MAX = 2
-
-Represents the size of the TileAnimationMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TILE_ANIMATION_MODE_DEFAULT {#TILE_ANIMATION_MODE_DEFAULT}
 
@@ -436,7 +435,7 @@ Represents the size of the TileAnimationMode enum.
 TILE_ANIMATION_MODE_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tile animations start at same time, looking identical.
 
 #### TILE_ANIMATION_MODE_RANDOM_START_TIMES {#TILE_ANIMATION_MODE_RANDOM_START_TIMES}
 
@@ -444,7 +443,7 @@ TILE_ANIMATION_MODE_DEFAULT = 0
 TILE_ANIMATION_MODE_RANDOM_START_TIMES = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tile animations start at random times, looking varied.
 
 #### TILE_ANIMATION_MODE_MAX {#TILE_ANIMATION_MODE_MAX}
 
@@ -452,7 +451,9 @@ TILE_ANIMATION_MODE_RANDOM_START_TIMES = 1
 TILE_ANIMATION_MODE_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the TileAnimationMode enum.
+
+---
 
 ## 常量
 

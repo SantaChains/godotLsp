@@ -298,7 +298,10 @@ If true, Light2D will only appear when editing the scene.
 color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_color(value: Color)
+- Color get_color()
+
+The Light2D's Color.
 
 ### energy {#energy}
 
@@ -396,7 +399,10 @@ If true, the Light2D will cast shadows.
 shadow_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_shadow_color(value: Color)
+- Color get_shadow_color()
+
+Color of shadows cast by the Light2D.
 
 ### shadow_filter {#shadow_filter}
 
@@ -439,17 +445,7 @@ The shadow mask. Used with LightOccluder2D to cast shadows. Only occluders with 
 enum ShadowFilter { SHADOW_FILTER_NONE = 0, SHADOW_FILTER_PCF5 = 1, SHADOW_FILTER_PCF13 = 2 }
 ```
 
-ShadowFilter SHADOW_FILTER_NONE = 0
-
-No filter applies to the shadow map. This provides hard shadow edges and is the fastest to render. See shadow_filter.
-
-ShadowFilter SHADOW_FILTER_PCF5 = 1
-
-Percentage closer filtering (5 samples) applies to the shadow map. This is slower compared to hard shadow rendering. See shadow_filter.
-
-ShadowFilter SHADOW_FILTER_PCF13 = 2
-
-Percentage closer filtering (13 samples) applies to the shadow map. This is the slowest shadow filtering mode, and should be used sparingly. See shadow_filter.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHADOW_FILTER_NONE {#SHADOW_FILTER_NONE}
 
@@ -457,7 +453,7 @@ Percentage closer filtering (13 samples) applies to the shadow map. This is the 
 SHADOW_FILTER_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No filter applies to the shadow map. This provides hard shadow edges and is the fastest to render. See shadow_filter.
 
 #### SHADOW_FILTER_PCF5 {#SHADOW_FILTER_PCF5}
 
@@ -465,7 +461,7 @@ SHADOW_FILTER_NONE = 0
 SHADOW_FILTER_PCF5 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Percentage closer filtering (5 samples) applies to the shadow map. This is slower compared to hard shadow rendering. See shadow_filter.
 
 #### SHADOW_FILTER_PCF13 {#SHADOW_FILTER_PCF13}
 
@@ -473,7 +469,9 @@ SHADOW_FILTER_PCF5 = 1
 SHADOW_FILTER_PCF13 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Percentage closer filtering (13 samples) applies to the shadow map. This is the slowest shadow filtering mode, and should be used sparingly. See shadow_filter.
+
+---
 
 ### BlendMode {#enum-BlendMode}
 
@@ -481,17 +479,7 @@ SHADOW_FILTER_PCF13 = 2
 enum BlendMode { BLEND_MODE_ADD = 0, BLEND_MODE_SUB = 1, BLEND_MODE_MIX = 2 }
 ```
 
-BlendMode BLEND_MODE_ADD = 0
-
-Adds the value of pixels corresponding to the Light2D to the values of pixels under it. This is the common behavior of a light.
-
-BlendMode BLEND_MODE_SUB = 1
-
-Subtracts the value of pixels corresponding to the Light2D to the values of pixels under it, resulting in inversed light effect.
-
-BlendMode BLEND_MODE_MIX = 2
-
-Mix the value of pixels corresponding to the Light2D to the values of pixels under it by linear interpolation.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BLEND_MODE_ADD {#BLEND_MODE_ADD}
 
@@ -499,7 +487,7 @@ Mix the value of pixels corresponding to the Light2D to the values of pixels und
 BLEND_MODE_ADD = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adds the value of pixels corresponding to the Light2D to the values of pixels under it. This is the common behavior of a light.
 
 #### BLEND_MODE_SUB {#BLEND_MODE_SUB}
 
@@ -507,7 +495,7 @@ BLEND_MODE_ADD = 0
 BLEND_MODE_SUB = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Subtracts the value of pixels corresponding to the Light2D to the values of pixels under it, resulting in inversed light effect.
 
 #### BLEND_MODE_MIX {#BLEND_MODE_MIX}
 
@@ -515,4 +503,6 @@ BLEND_MODE_SUB = 1
 BLEND_MODE_MIX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mix the value of pixels corresponding to the Light2D to the values of pixels under it by linear interpolation.
+
+---

@@ -103,41 +103,7 @@ Specifies the type of the texture if source is set to SOURCE_TEXTURE.
 enum Source { SOURCE_TEXTURE = 0, SOURCE_SCREEN = 1, SOURCE_2D_TEXTURE = 2, SOURCE_2D_NORMAL = 3, SOURCE_DEPTH = 4, SOURCE_PORT = 5, SOURCE_3D_NORMAL = 6, SOURCE_ROUGHNESS = 7, SOURCE_MAX = 8 }
 ```
 
-Source SOURCE_TEXTURE = 0
-
-Use the texture given as an argument for this function.
-
-Source SOURCE_SCREEN = 1
-
-Use the current viewport's texture as the source.
-
-Source SOURCE_2D_TEXTURE = 2
-
-Use the texture from this shader's texture built-in (e.g. a texture of a Sprite2D).
-
-Source SOURCE_2D_NORMAL = 3
-
-Use the texture from this shader's normal map built-in.
-
-Source SOURCE_DEPTH = 4
-
-Use the depth texture captured during the depth prepass. Only available when the depth prepass is used (i.e. in spatial shaders and in the forward_plus or gl_compatibility renderers).
-
-Source SOURCE_PORT = 5
-
-Use the texture provided in the input port for this function.
-
-Source SOURCE_3D_NORMAL = 6
-
-Use the normal buffer captured during the depth prepass. Only available when the normal-roughness buffer is available (i.e. in spatial shaders and in the forward_plus renderer).
-
-Source SOURCE_ROUGHNESS = 7
-
-Use the roughness buffer captured during the depth prepass. Only available when the normal-roughness buffer is available (i.e. in spatial shaders and in the forward_plus renderer).
-
-Source SOURCE_MAX = 8
-
-Represents the size of the Source enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SOURCE_TEXTURE {#SOURCE_TEXTURE}
 
@@ -145,7 +111,7 @@ Represents the size of the Source enum.
 SOURCE_TEXTURE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the texture given as an argument for this function.
 
 #### SOURCE_SCREEN {#SOURCE_SCREEN}
 
@@ -153,7 +119,7 @@ SOURCE_TEXTURE = 0
 SOURCE_SCREEN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the current viewport's texture as the source.
 
 #### SOURCE_2D_TEXTURE {#SOURCE_2D_TEXTURE}
 
@@ -161,7 +127,7 @@ SOURCE_SCREEN = 1
 SOURCE_2D_TEXTURE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the texture from this shader's texture built-in (e.g. a texture of a Sprite2D).
 
 #### SOURCE_2D_NORMAL {#SOURCE_2D_NORMAL}
 
@@ -169,7 +135,7 @@ SOURCE_2D_TEXTURE = 2
 SOURCE_2D_NORMAL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the texture from this shader's normal map built-in.
 
 #### SOURCE_DEPTH {#SOURCE_DEPTH}
 
@@ -177,7 +143,7 @@ SOURCE_2D_NORMAL = 3
 SOURCE_DEPTH = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the depth texture captured during the depth prepass. Only available when the depth prepass is used (i.e. in spatial shaders and in the forward_plus or gl_compatibility renderers).
 
 #### SOURCE_PORT {#SOURCE_PORT}
 
@@ -185,7 +151,7 @@ SOURCE_DEPTH = 4
 SOURCE_PORT = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the texture provided in the input port for this function.
 
 #### SOURCE_3D_NORMAL {#SOURCE_3D_NORMAL}
 
@@ -193,7 +159,7 @@ SOURCE_PORT = 5
 SOURCE_3D_NORMAL = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the normal buffer captured during the depth prepass. Only available when the normal-roughness buffer is available (i.e. in spatial shaders and in the forward_plus renderer).
 
 #### SOURCE_ROUGHNESS {#SOURCE_ROUGHNESS}
 
@@ -201,7 +167,7 @@ SOURCE_3D_NORMAL = 6
 SOURCE_ROUGHNESS = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the roughness buffer captured during the depth prepass. Only available when the normal-roughness buffer is available (i.e. in spatial shaders and in the forward_plus renderer).
 
 #### SOURCE_MAX {#SOURCE_MAX}
 
@@ -209,7 +175,9 @@ SOURCE_ROUGHNESS = 7
 SOURCE_MAX = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Source enum.
+
+---
 
 ### TextureType {#enum-TextureType}
 
@@ -217,21 +185,7 @@ SOURCE_MAX = 8
 enum TextureType { TYPE_DATA = 0, TYPE_COLOR = 1, TYPE_NORMAL_MAP = 2, TYPE_MAX = 3 }
 ```
 
-TextureType TYPE_DATA = 0
-
-No hints are added to the uniform declaration.
-
-TextureType TYPE_COLOR = 1
-
-Adds source_color as hint to the uniform declaration for proper conversion from nonlinear sRGB encoding to linear encoding.
-
-TextureType TYPE_NORMAL_MAP = 2
-
-Adds hint_normal as hint to the uniform declaration, which internally converts the texture for proper usage as normal map.
-
-TextureType TYPE_MAX = 3
-
-Represents the size of the TextureType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TYPE_DATA {#TYPE_DATA}
 
@@ -239,7 +193,7 @@ Represents the size of the TextureType enum.
 TYPE_DATA = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No hints are added to the uniform declaration.
 
 #### TYPE_COLOR {#TYPE_COLOR}
 
@@ -247,7 +201,7 @@ TYPE_DATA = 0
 TYPE_COLOR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adds source_color as hint to the uniform declaration for proper conversion from nonlinear sRGB encoding to linear encoding.
 
 #### TYPE_NORMAL_MAP {#TYPE_NORMAL_MAP}
 
@@ -255,7 +209,7 @@ TYPE_COLOR = 1
 TYPE_NORMAL_MAP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adds hint_normal as hint to the uniform declaration, which internally converts the texture for proper usage as normal map.
 
 #### TYPE_MAX {#TYPE_MAX}
 
@@ -263,4 +217,6 @@ TYPE_NORMAL_MAP = 2
 TYPE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the TextureType enum.
+
+---

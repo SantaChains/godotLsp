@@ -94,17 +94,7 @@ Updates the computation with the given chunk of data.
 enum HashType { HASH_MD5 = 0, HASH_SHA1 = 1, HASH_SHA256 = 2 }
 ```
 
-HashType HASH_MD5 = 0
-
-Hashing algorithm: MD5.
-
-HashType HASH_SHA1 = 1
-
-Hashing algorithm: SHA-1.
-
-HashType HASH_SHA256 = 2
-
-Hashing algorithm: SHA-256.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HASH_MD5 {#HASH_MD5}
 
@@ -112,7 +102,7 @@ Hashing algorithm: SHA-256.
 HASH_MD5 = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hashing algorithm: MD5.
 
 #### HASH_SHA1 {#HASH_SHA1}
 
@@ -120,7 +110,7 @@ HASH_MD5 = 0
 HASH_SHA1 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hashing algorithm: SHA-1.
 
 #### HASH_SHA256 {#HASH_SHA256}
 
@@ -128,4 +118,6 @@ HASH_SHA1 = 1
 HASH_SHA256 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hashing algorithm: SHA-256.
+
+---

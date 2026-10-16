@@ -38,4 +38,7 @@ void set_plane(plane: Plane)
 plane: Plane
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_plane(value: Plane)
+- Plane get_plane()
+
+The Plane used by the WorldBoundaryShape3D for collision.

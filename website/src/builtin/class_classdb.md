@@ -266,25 +266,7 @@ Returns whether inherits is an ancestor of class or not.
 enum APIType { API_CORE = 0, API_EDITOR = 1, API_EXTENSION = 2, API_EDITOR_EXTENSION = 3, API_NONE = 4 }
 ```
 
-APIType API_CORE = 0
-
-Native Core class type.
-
-APIType API_EDITOR = 1
-
-Native Editor class type.
-
-APIType API_EXTENSION = 2
-
-GDExtension class type.
-
-APIType API_EDITOR_EXTENSION = 3
-
-GDExtension Editor class type.
-
-APIType API_NONE = 4
-
-Unknown class type.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### API_CORE {#API_CORE}
 
@@ -292,7 +274,7 @@ Unknown class type.
 API_CORE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Native Core class type.
 
 #### API_EDITOR {#API_EDITOR}
 
@@ -300,7 +282,7 @@ API_CORE = 0
 API_EDITOR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Native Editor class type.
 
 #### API_EXTENSION {#API_EXTENSION}
 
@@ -308,7 +290,7 @@ API_EDITOR = 1
 API_EXTENSION = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+GDExtension class type.
 
 #### API_EDITOR_EXTENSION {#API_EDITOR_EXTENSION}
 
@@ -316,7 +298,7 @@ API_EXTENSION = 2
 API_EDITOR_EXTENSION = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+GDExtension Editor class type.
 
 #### API_NONE {#API_NONE}
 
@@ -324,4 +306,6 @@ API_EDITOR_EXTENSION = 3
 API_NONE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unknown class type.
+
+---

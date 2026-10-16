@@ -260,7 +260,10 @@ void set_target_position(target_position: Vector3)
 map: RID
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_map(value: RID)
+- RID get_map()
+
+The navigation map RID used in the path query.
 
 ### start_position {#start_position}
 
@@ -268,7 +271,10 @@ map: RID
 start_position: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_start_position(value: Vector3)
+- Vector3 get_start_position()
+
+The pathfinding start position in global coordinates.
 
 ### target_position {#target_position}
 
@@ -276,7 +282,10 @@ start_position: Vector3
 target_position: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_position(value: Vector3)
+- Vector3 get_target_position()
+
+The pathfinding target position in global coordinates.
 
 ### navigation_layers {#navigation_layers}
 
@@ -426,9 +435,7 @@ The maximum distance a searched polygon can be away from the start polygon befor
 enum PathfindingAlgorithm { PATHFINDING_ALGORITHM_ASTAR = 0 }
 ```
 
-PathfindingAlgorithm PATHFINDING_ALGORITHM_ASTAR = 0
-
-The path query uses the default A* pathfinding algorithm.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PATHFINDING_ALGORITHM_ASTAR {#PATHFINDING_ALGORITHM_ASTAR}
 
@@ -436,7 +443,9 @@ The path query uses the default A* pathfinding algorithm.
 PATHFINDING_ALGORITHM_ASTAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The path query uses the default A* pathfinding algorithm.
+
+---
 
 ### PathPostProcessing {#enum-PathPostProcessing}
 
@@ -444,17 +453,7 @@ PATHFINDING_ALGORITHM_ASTAR = 0
 enum PathPostProcessing { PATH_POSTPROCESSING_CORRIDORFUNNEL = 0, PATH_POSTPROCESSING_EDGECENTERED = 1, PATH_POSTPROCESSING_NONE = 2 }
 ```
 
-PathPostProcessing PATH_POSTPROCESSING_CORRIDORFUNNEL = 0
-
-Applies a funnel algorithm to the raw path corridor found by the pathfinding algorithm. This will result in the shortest path possible inside the path corridor. This postprocessing very much depends on the navigation mesh polygon layout and the created corridor. Especially tile- or gridbased layouts can face artificial corners with diagonal movement due to a jagged path corridor imposed by the cell shapes.
-
-PathPostProcessing PATH_POSTPROCESSING_EDGECENTERED = 1
-
-Centers every path position in the middle of the traveled navigation mesh polygon edge. This creates better paths for tile- or gridbased layouts that restrict the movement to the cells center.
-
-PathPostProcessing PATH_POSTPROCESSING_NONE = 2
-
-Applies no postprocessing and returns the raw path corridor as found by the pathfinding algorithm.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PATH_POSTPROCESSING_CORRIDORFUNNEL {#PATH_POSTPROCESSING_CORRIDORFUNNEL}
 
@@ -462,7 +461,7 @@ Applies no postprocessing and returns the raw path corridor as found by the path
 PATH_POSTPROCESSING_CORRIDORFUNNEL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Applies a funnel algorithm to the raw path corridor found by the pathfinding algorithm. This will result in the shortest path possible inside the path corridor. This postprocessing very much depends on the navigation mesh polygon layout and the created corridor. Especially tile- or gridbased layouts can face artificial corners with diagonal movement due to a jagged path corridor imposed by the cell shapes.
 
 #### PATH_POSTPROCESSING_EDGECENTERED {#PATH_POSTPROCESSING_EDGECENTERED}
 
@@ -470,7 +469,7 @@ PATH_POSTPROCESSING_CORRIDORFUNNEL = 0
 PATH_POSTPROCESSING_EDGECENTERED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Centers every path position in the middle of the traveled navigation mesh polygon edge. This creates better paths for tile- or gridbased layouts that restrict the movement to the cells center.
 
 #### PATH_POSTPROCESSING_NONE {#PATH_POSTPROCESSING_NONE}
 
@@ -478,7 +477,11 @@ PATH_POSTPROCESSING_EDGECENTERED = 1
 PATH_POSTPROCESSING_NONE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Applies no postprocessing and returns the raw path corridor as found by the pathfinding algorithm.
+
+---
+
+flags PathMetadataFlags:
 
 ### PathMetadataFlags {#enum-PathMetadataFlags}
 
@@ -494,7 +497,7 @@ enum PathMetadataFlags（位标志） { PATH_METADATA_INCLUDE_NONE = 0, PATH_MET
 PATH_METADATA_INCLUDE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Don't include any additional metadata about the returned path.
 
 #### PATH_METADATA_INCLUDE_TYPES {#PATH_METADATA_INCLUDE_TYPES}
 
@@ -502,7 +505,7 @@ PATH_METADATA_INCLUDE_NONE = 0
 PATH_METADATA_INCLUDE_TYPES = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Include the type of navigation primitive (region or link) that each point of the path goes through.
 
 #### PATH_METADATA_INCLUDE_RIDS {#PATH_METADATA_INCLUDE_RIDS}
 
@@ -510,7 +513,7 @@ PATH_METADATA_INCLUDE_TYPES = 1
 PATH_METADATA_INCLUDE_RIDS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Include the RIDs of the regions and links that each point of the path goes through.
 
 #### PATH_METADATA_INCLUDE_OWNERS {#PATH_METADATA_INCLUDE_OWNERS}
 
@@ -518,7 +521,7 @@ PATH_METADATA_INCLUDE_RIDS = 2
 PATH_METADATA_INCLUDE_OWNERS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Include the ObjectIDs of the Objects which manage the regions and links each point of the path goes through.
 
 #### PATH_METADATA_INCLUDE_ALL {#PATH_METADATA_INCLUDE_ALL}
 
@@ -526,4 +529,6 @@ PATH_METADATA_INCLUDE_OWNERS = 4
 PATH_METADATA_INCLUDE_ALL = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Include all available metadata about the returned path.
+
+---

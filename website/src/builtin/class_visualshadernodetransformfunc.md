@@ -49,17 +49,7 @@ The function to be computed.
 enum Function { FUNC_INVERSE = 0, FUNC_TRANSPOSE = 1, FUNC_MAX = 2 }
 ```
 
-Function FUNC_INVERSE = 0
-
-Perform the inverse operation on the Transform3D matrix.
-
-Function FUNC_TRANSPOSE = 1
-
-Perform the transpose operation on the Transform3D matrix.
-
-Function FUNC_MAX = 2
-
-Represents the size of the Function enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FUNC_INVERSE {#FUNC_INVERSE}
 
@@ -67,7 +57,7 @@ Represents the size of the Function enum.
 FUNC_INVERSE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Perform the inverse operation on the Transform3D matrix.
 
 #### FUNC_TRANSPOSE {#FUNC_TRANSPOSE}
 
@@ -75,7 +65,7 @@ FUNC_INVERSE = 0
 FUNC_TRANSPOSE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Perform the transpose operation on the Transform3D matrix.
 
 #### FUNC_MAX {#FUNC_MAX}
 
@@ -83,4 +73,6 @@ FUNC_TRANSPOSE = 1
 FUNC_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Function enum.
+
+---

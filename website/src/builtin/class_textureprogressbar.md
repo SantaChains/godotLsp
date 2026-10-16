@@ -265,7 +265,12 @@ See Range.value, Range.max_value.
 radial_center_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_radial_center_offset(value: Vector2)
+- Vector2 get_radial_center_offset()
+
+Offsets texture_progress if fill_mode is FILL_CLOCKWISE, FILL_COUNTER_CLOCKWISE, or FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE.
+
+Note: The effective radial center always stays within the texture_progress bounds. If you need to move it outside the texture's bounds, modify the texture_progress to contain additional empty space where needed.
 
 ### nine_patch_stretch {#nine_patch_stretch}
 
@@ -363,7 +368,10 @@ The value property comes from Range. See Range.value, Range.min_value, Range.max
 texture_progress_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_texture_progress_offset(value: Vector2)
+- Vector2 get_texture_progress_offset()
+
+The offset of texture_progress. Useful for texture_over and texture_under with fancy borders, to avoid transparent margins in your progress texture.
 
 ### tint_under {#tint_under}
 
@@ -371,7 +379,10 @@ texture_progress_offset: Vector2
 tint_under: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tint_under(value: Color)
+- Color get_tint_under()
+
+Multiplies the color of the bar's texture_under texture.
 
 ### tint_over {#tint_over}
 
@@ -379,7 +390,10 @@ tint_under: Color
 tint_over: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tint_over(value: Color)
+- Color get_tint_over()
+
+Multiplies the color of the bar's texture_over texture. The effect is similar to CanvasItem.modulate, except it only affects this specific texture instead of the entire node.
 
 ### tint_progress {#tint_progress}
 
@@ -387,7 +401,10 @@ tint_over: Color
 tint_progress: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tint_progress(value: Color)
+- Color get_tint_progress()
+
+Multiplies the color of the bar's texture_progress texture.
 
 ## 枚举
 
@@ -397,41 +414,7 @@ tint_progress: Color
 enum FillMode { FILL_LEFT_TO_RIGHT = 0, FILL_RIGHT_TO_LEFT = 1, FILL_TOP_TO_BOTTOM = 2, FILL_BOTTOM_TO_TOP = 3, FILL_CLOCKWISE = 4, FILL_COUNTER_CLOCKWISE = 5, FILL_BILINEAR_LEFT_AND_RIGHT = 6, FILL_BILINEAR_TOP_AND_BOTTOM = 7, FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE = 8 }
 ```
 
-FillMode FILL_LEFT_TO_RIGHT = 0
-
-The texture_progress fills from left to right.
-
-FillMode FILL_RIGHT_TO_LEFT = 1
-
-The texture_progress fills from right to left.
-
-FillMode FILL_TOP_TO_BOTTOM = 2
-
-The texture_progress fills from top to bottom.
-
-FillMode FILL_BOTTOM_TO_TOP = 3
-
-The texture_progress fills from bottom to top.
-
-FillMode FILL_CLOCKWISE = 4
-
-Turns the node into a radial bar. The texture_progress fills clockwise. See radial_center_offset, radial_initial_angle and radial_fill_degrees to control the way the bar fills up.
-
-FillMode FILL_COUNTER_CLOCKWISE = 5
-
-Turns the node into a radial bar. The texture_progress fills counterclockwise. See radial_center_offset, radial_initial_angle and radial_fill_degrees to control the way the bar fills up.
-
-FillMode FILL_BILINEAR_LEFT_AND_RIGHT = 6
-
-The texture_progress fills from the center, expanding both towards the left and the right.
-
-FillMode FILL_BILINEAR_TOP_AND_BOTTOM = 7
-
-The texture_progress fills from the center, expanding both towards the top and the bottom.
-
-FillMode FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE = 8
-
-Turns the node into a radial bar. The texture_progress fills radially from the center, expanding both clockwise and counterclockwise. See radial_center_offset, radial_initial_angle and radial_fill_degrees to control the way the bar fills up.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FILL_LEFT_TO_RIGHT {#FILL_LEFT_TO_RIGHT}
 
@@ -439,7 +422,7 @@ Turns the node into a radial bar. The texture_progress fills radially from the c
 FILL_LEFT_TO_RIGHT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture_progress fills from left to right.
 
 #### FILL_RIGHT_TO_LEFT {#FILL_RIGHT_TO_LEFT}
 
@@ -447,7 +430,7 @@ FILL_LEFT_TO_RIGHT = 0
 FILL_RIGHT_TO_LEFT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture_progress fills from right to left.
 
 #### FILL_TOP_TO_BOTTOM {#FILL_TOP_TO_BOTTOM}
 
@@ -455,7 +438,7 @@ FILL_RIGHT_TO_LEFT = 1
 FILL_TOP_TO_BOTTOM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture_progress fills from top to bottom.
 
 #### FILL_BOTTOM_TO_TOP {#FILL_BOTTOM_TO_TOP}
 
@@ -463,7 +446,7 @@ FILL_TOP_TO_BOTTOM = 2
 FILL_BOTTOM_TO_TOP = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture_progress fills from bottom to top.
 
 #### FILL_CLOCKWISE {#FILL_CLOCKWISE}
 
@@ -471,7 +454,7 @@ FILL_BOTTOM_TO_TOP = 3
 FILL_CLOCKWISE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Turns the node into a radial bar. The texture_progress fills clockwise. See radial_center_offset, radial_initial_angle and radial_fill_degrees to control the way the bar fills up.
 
 #### FILL_COUNTER_CLOCKWISE {#FILL_COUNTER_CLOCKWISE}
 
@@ -479,7 +462,7 @@ FILL_CLOCKWISE = 4
 FILL_COUNTER_CLOCKWISE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Turns the node into a radial bar. The texture_progress fills counterclockwise. See radial_center_offset, radial_initial_angle and radial_fill_degrees to control the way the bar fills up.
 
 #### FILL_BILINEAR_LEFT_AND_RIGHT {#FILL_BILINEAR_LEFT_AND_RIGHT}
 
@@ -487,7 +470,7 @@ FILL_COUNTER_CLOCKWISE = 5
 FILL_BILINEAR_LEFT_AND_RIGHT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture_progress fills from the center, expanding both towards the left and the right.
 
 #### FILL_BILINEAR_TOP_AND_BOTTOM {#FILL_BILINEAR_TOP_AND_BOTTOM}
 
@@ -495,7 +478,7 @@ FILL_BILINEAR_LEFT_AND_RIGHT = 6
 FILL_BILINEAR_TOP_AND_BOTTOM = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture_progress fills from the center, expanding both towards the top and the bottom.
 
 #### FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE {#FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE}
 
@@ -503,4 +486,6 @@ FILL_BILINEAR_TOP_AND_BOTTOM = 7
 FILL_CLOCKWISE_AND_COUNTER_CLOCKWISE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Turns the node into a radial bar. The texture_progress fills radially from the center, expanding both clockwise and counterclockwise. See radial_center_offset, radial_initial_angle and radial_fill_degrees to control the way the bar fills up.
+
+---

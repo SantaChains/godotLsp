@@ -650,7 +650,12 @@ The copyright string in the asset header of the glTF file. This is set during im
 glb_data: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_glb_data(value: PackedByteArray)
+- PackedByteArray get_glb_data()
+
+The binary buffer attached to a .glb file.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### use_named_skin_binds {#use_named_skin_binds}
 
@@ -753,7 +758,12 @@ The file name associated with this glTF data. If it ends with .gltf, this is tex
 root_nodes: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_root_nodes(value: PackedInt32Array)
+- PackedInt32Array get_root_nodes()
+
+The root nodes of the glTF file. Typically, a glTF file will only have one scene, and therefore one root node. However, a glTF file may have multiple scenes and therefore multiple root nodes, which will be generated as siblings of each other and as children of the root node of the generated Godot scene.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.
 
 ### textures {#textures}
 
@@ -897,25 +907,7 @@ handle_binary_image: int
 enum HandleBinaryImageMode { HANDLE_BINARY_IMAGE_MODE_DISCARD_TEXTURES = 0, HANDLE_BINARY_IMAGE_MODE_EXTRACT_TEXTURES = 1, HANDLE_BINARY_IMAGE_MODE_EMBED_AS_BASISU = 2, HANDLE_BINARY_IMAGE_MODE_EMBED_AS_UNCOMPRESSED = 3 }
 ```
 
-HandleBinaryImageMode HANDLE_BINARY_IMAGE_MODE_DISCARD_TEXTURES = 0
-
-When importing a glTF file with embedded binary images, discards all images and uses untextured materials in their place. Images stored as separate files in the res:// folder are not affected by this; those will be used as Godot imported them.
-
-HandleBinaryImageMode HANDLE_BINARY_IMAGE_MODE_EXTRACT_TEXTURES = 1
-
-When importing a glTF file with embedded binary images, extracts them and saves them to their own files. This allows the image to be imported by Godot's image importer, which can then have their import options customized by the user, including optionally compressing the image to VRAM texture formats.
-
-This will save the images's bytes exactly as-is, without recompression. For image formats supplied by glTF extensions, the file will have a filename ending with the file extension supplied by GLTFDocumentExtension._get_image_file_extension() of the extension class.
-
-Note: This option is editor-only. At runtime, this acts the same as HANDLE_BINARY_IMAGE_MODE_EMBED_AS_UNCOMPRESSED.
-
-HandleBinaryImageMode HANDLE_BINARY_IMAGE_MODE_EMBED_AS_BASISU = 2
-
-When importing a glTF file with embedded binary images, embeds textures VRAM compressed with Basis Universal into the generated scene. Images stored as separate files in the res:// folder are not affected by this; those will be used as Godot imported them.
-
-HandleBinaryImageMode HANDLE_BINARY_IMAGE_MODE_EMBED_AS_UNCOMPRESSED = 3
-
-When importing a glTF file with embedded binary images, embeds textures compressed losslessly into the generated scene. Images stored as separate files in the res:// folder are not affected by this; those will be used as Godot imported them.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HANDLE_BINARY_IMAGE_MODE_DISCARD_TEXTURES {#HANDLE_BINARY_IMAGE_MODE_DISCARD_TEXTURES}
 
@@ -923,7 +915,7 @@ When importing a glTF file with embedded binary images, embeds textures compress
 HANDLE_BINARY_IMAGE_MODE_DISCARD_TEXTURES = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When importing a glTF file with embedded binary images, discards all images and uses untextured materials in their place. Images stored as separate files in the res:// folder are not affected by this; those will be used as Godot imported them.
 
 #### HANDLE_BINARY_IMAGE_MODE_EXTRACT_TEXTURES {#HANDLE_BINARY_IMAGE_MODE_EXTRACT_TEXTURES}
 
@@ -931,7 +923,11 @@ HANDLE_BINARY_IMAGE_MODE_DISCARD_TEXTURES = 0
 HANDLE_BINARY_IMAGE_MODE_EXTRACT_TEXTURES = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When importing a glTF file with embedded binary images, extracts them and saves them to their own files. This allows the image to be imported by Godot's image importer, which can then have their import options customized by the user, including optionally compressing the image to VRAM texture formats.
+
+This will save the images's bytes exactly as-is, without recompression. For image formats supplied by glTF extensions, the file will have a filename ending with the file extension supplied by GLTFDocumentExtension._get_image_file_extension() of the extension class.
+
+Note: This option is editor-only. At runtime, this acts the same as HANDLE_BINARY_IMAGE_MODE_EMBED_AS_UNCOMPRESSED.
 
 #### HANDLE_BINARY_IMAGE_MODE_EMBED_AS_BASISU {#HANDLE_BINARY_IMAGE_MODE_EMBED_AS_BASISU}
 
@@ -939,7 +935,7 @@ HANDLE_BINARY_IMAGE_MODE_EXTRACT_TEXTURES = 1
 HANDLE_BINARY_IMAGE_MODE_EMBED_AS_BASISU = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When importing a glTF file with embedded binary images, embeds textures VRAM compressed with Basis Universal into the generated scene. Images stored as separate files in the res:// folder are not affected by this; those will be used as Godot imported them.
 
 #### HANDLE_BINARY_IMAGE_MODE_EMBED_AS_UNCOMPRESSED {#HANDLE_BINARY_IMAGE_MODE_EMBED_AS_UNCOMPRESSED}
 
@@ -947,7 +943,9 @@ HANDLE_BINARY_IMAGE_MODE_EMBED_AS_BASISU = 2
 HANDLE_BINARY_IMAGE_MODE_EMBED_AS_UNCOMPRESSED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When importing a glTF file with embedded binary images, embeds textures compressed losslessly into the generated scene. Images stored as separate files in the res:// folder are not affected by this; those will be used as Godot imported them.
+
+---
 
 ## 常量
 

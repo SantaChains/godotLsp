@@ -190,21 +190,7 @@ Emitted when the profile of our tracker changes.
 enum TrackerHand { TRACKER_HAND_UNKNOWN = 0, TRACKER_HAND_LEFT = 1, TRACKER_HAND_RIGHT = 2, TRACKER_HAND_MAX = 3 }
 ```
 
-TrackerHand TRACKER_HAND_UNKNOWN = 0
-
-The hand this tracker is held in is unknown or not applicable.
-
-TrackerHand TRACKER_HAND_LEFT = 1
-
-This tracker is the left hand controller.
-
-TrackerHand TRACKER_HAND_RIGHT = 2
-
-This tracker is the right hand controller.
-
-TrackerHand TRACKER_HAND_MAX = 3
-
-Represents the size of the TrackerHand enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TRACKER_HAND_UNKNOWN {#TRACKER_HAND_UNKNOWN}
 
@@ -212,7 +198,7 @@ Represents the size of the TrackerHand enum.
 TRACKER_HAND_UNKNOWN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The hand this tracker is held in is unknown or not applicable.
 
 #### TRACKER_HAND_LEFT {#TRACKER_HAND_LEFT}
 
@@ -220,7 +206,7 @@ TRACKER_HAND_UNKNOWN = 0
 TRACKER_HAND_LEFT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This tracker is the left hand controller.
 
 #### TRACKER_HAND_RIGHT {#TRACKER_HAND_RIGHT}
 
@@ -228,7 +214,7 @@ TRACKER_HAND_LEFT = 1
 TRACKER_HAND_RIGHT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This tracker is the right hand controller.
 
 #### TRACKER_HAND_MAX {#TRACKER_HAND_MAX}
 
@@ -236,4 +222,6 @@ TRACKER_HAND_RIGHT = 2
 TRACKER_HAND_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the TrackerHand enum.
+
+---

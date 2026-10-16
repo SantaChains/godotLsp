@@ -352,7 +352,10 @@ If true, this raycast will not report collisions with its parent node. This prop
 target_position: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_position(value: Vector3)
+- Vector3 get_target_position()
+
+The ray's destination point, relative to this raycast's Node3D.position.
 
 ### collision_mask {#collision_mask}
 
@@ -415,7 +418,12 @@ If true, collisions with PhysicsBody3Ds will be reported.
 debug_shape_custom_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_debug_shape_custom_color(value: Color)
+- Color get_debug_shape_custom_color()
+
+The custom color to use to draw the shape in the editor and at run-time if Visible Collision Shapes is enabled in the Debug menu. This color will be highlighted at run-time if the RayCast3D is colliding with something.
+
+If set to Color(0.0, 0.0, 0.0) (by default), the color set in ProjectSettings.debug/shapes/collision/shape_color is used.
 
 ### debug_shape_thickness {#debug_shape_thickness}
 

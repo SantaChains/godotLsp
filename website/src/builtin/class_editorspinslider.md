@@ -284,17 +284,7 @@ Emitted when the value form loses focus.
 enum ControlState { CONTROL_STATE_DEFAULT = 0, CONTROL_STATE_PREFER_SLIDER = 1, CONTROL_STATE_HIDE = 2 }
 ```
 
-ControlState CONTROL_STATE_DEFAULT = 0
-
-The type of control used will depend on the value of editing_integer. Up-down arrows if true, a slider if false.
-
-ControlState CONTROL_STATE_PREFER_SLIDER = 1
-
-A slider will always be used, even if editing_integer is enabled.
-
-ControlState CONTROL_STATE_HIDE = 2
-
-Neither the up-down arrows nor the slider will be shown.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CONTROL_STATE_DEFAULT {#CONTROL_STATE_DEFAULT}
 
@@ -302,7 +292,7 @@ Neither the up-down arrows nor the slider will be shown.
 CONTROL_STATE_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The type of control used will depend on the value of editing_integer. Up-down arrows if true, a slider if false.
 
 #### CONTROL_STATE_PREFER_SLIDER {#CONTROL_STATE_PREFER_SLIDER}
 
@@ -310,7 +300,7 @@ CONTROL_STATE_DEFAULT = 0
 CONTROL_STATE_PREFER_SLIDER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A slider will always be used, even if editing_integer is enabled.
 
 #### CONTROL_STATE_HIDE {#CONTROL_STATE_HIDE}
 
@@ -318,4 +308,6 @@ CONTROL_STATE_PREFER_SLIDER = 1
 CONTROL_STATE_HIDE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neither the up-down arrows nor the slider will be shown.
+
+---

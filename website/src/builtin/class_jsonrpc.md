@@ -97,25 +97,7 @@ Registers a callback for the given method name.
 enum ErrorCode { PARSE_ERROR = -32700, INVALID_REQUEST = -32600, METHOD_NOT_FOUND = -32601, INVALID_PARAMS = -32602, INTERNAL_ERROR = -32603 }
 ```
 
-ErrorCode PARSE_ERROR = -32700
-
-The request could not be parsed as it was not valid by JSON standard (JSON.parse() failed).
-
-ErrorCode INVALID_REQUEST = -32600
-
-A method call was requested but the request's format is not valid.
-
-ErrorCode METHOD_NOT_FOUND = -32601
-
-A method call was requested but no function of that name existed in the JSONRPC subclass.
-
-ErrorCode INVALID_PARAMS = -32602
-
-A method call was requested but the given method parameters are not valid. Not used by the built-in JSONRPC.
-
-ErrorCode INTERNAL_ERROR = -32603
-
-An internal error occurred while processing the request. Not used by the built-in JSONRPC.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PARSE_ERROR {#PARSE_ERROR}
 
@@ -123,7 +105,7 @@ An internal error occurred while processing the request. Not used by the built-i
 PARSE_ERROR = -32700
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The request could not be parsed as it was not valid by JSON standard (JSON.parse() failed).
 
 #### INVALID_REQUEST {#INVALID_REQUEST}
 
@@ -131,7 +113,7 @@ PARSE_ERROR = -32700
 INVALID_REQUEST = -32600
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A method call was requested but the request's format is not valid.
 
 #### METHOD_NOT_FOUND {#METHOD_NOT_FOUND}
 
@@ -139,7 +121,7 @@ INVALID_REQUEST = -32600
 METHOD_NOT_FOUND = -32601
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A method call was requested but no function of that name existed in the JSONRPC subclass.
 
 #### INVALID_PARAMS {#INVALID_PARAMS}
 
@@ -147,7 +129,7 @@ METHOD_NOT_FOUND = -32601
 INVALID_PARAMS = -32602
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A method call was requested but the given method parameters are not valid. Not used by the built-in JSONRPC.
 
 #### INTERNAL_ERROR {#INTERNAL_ERROR}
 
@@ -155,4 +137,6 @@ INVALID_PARAMS = -32602
 INTERNAL_ERROR = -32603
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An internal error occurred while processing the request. Not used by the built-in JSONRPC.
+
+---

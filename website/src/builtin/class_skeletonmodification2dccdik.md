@@ -188,7 +188,10 @@ void set_tip_node(tip_nodepath: NodePath)
 target_nodepath: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_node(value: NodePath)
+- NodePath get_target_node()
+
+The NodePath to the node that is the target for the CCDIK modification. This node is what the CCDIK chain will attempt to rotate the bone chain to.
 
 ### tip_nodepath {#tip_nodepath}
 
@@ -196,7 +199,10 @@ target_nodepath: NodePath
 tip_nodepath: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tip_node(value: NodePath)
+- NodePath get_tip_node()
+
+The end position of the CCDIK chain. Typically, this should be a child of a Bone2D node attached to the final Bone2D in the CCDIK chain.
 
 ### ccdik_data_chain_length {#ccdik_data_chain_length}
 

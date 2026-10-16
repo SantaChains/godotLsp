@@ -68,7 +68,10 @@ void set_editor_only(enabled: bool)
 border_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_border_color(value: Color)
+- Color get_border_color()
+
+Sets the border color of the ReferenceRect.
 
 ### border_width {#border_width}
 

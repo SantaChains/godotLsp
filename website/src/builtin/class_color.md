@@ -574,7 +574,587 @@ The OKHSL lightness of this color, on the range 0 to 1.
 const ALICE_BLUE = Color(0.9411765, 0.972549, 1, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Alice blue color.
+
+ANTIQUE_WHITE = Color(0.98039216, 0.92156863, 0.84313726, 1) 
+
+Antique white color.
+
+AQUA = Color(0, 1, 1, 1) 
+
+Aqua color.
+
+AQUAMARINE = Color(0.49803922, 1, 0.83137256, 1) 
+
+Aquamarine color.
+
+AZURE = Color(0.9411765, 1, 1, 1) 
+
+Azure color.
+
+BEIGE = Color(0.9607843, 0.9607843, 0.8627451, 1) 
+
+Beige color.
+
+BISQUE = Color(1, 0.89411765, 0.76862746, 1) 
+
+Bisque color.
+
+BLACK = Color(0, 0, 0, 1) 
+
+Black color. In GDScript, this is the default value of any color.
+
+BLANCHED_ALMOND = Color(1, 0.92156863, 0.8039216, 1) 
+
+Blanched almond color.
+
+BLUE = Color(0, 0, 1, 1) 
+
+Blue color.
+
+BLUE_VIOLET = Color(0.5411765, 0.16862746, 0.8862745, 1) 
+
+Blue violet color.
+
+BROWN = Color(0.64705884, 0.16470589, 0.16470589, 1) 
+
+Brown color.
+
+BURLYWOOD = Color(0.87058824, 0.72156864, 0.5294118, 1) 
+
+Burlywood color.
+
+CADET_BLUE = Color(0.37254903, 0.61960787, 0.627451, 1) 
+
+Cadet blue color.
+
+CHARTREUSE = Color(0.49803922, 1, 0, 1) 
+
+Chartreuse color.
+
+CHOCOLATE = Color(0.8235294, 0.4117647, 0.11764706, 1) 
+
+Chocolate color.
+
+CORAL = Color(1, 0.49803922, 0.3137255, 1) 
+
+Coral color.
+
+CORNFLOWER_BLUE = Color(0.39215687, 0.58431375, 0.92941177, 1) 
+
+Cornflower blue color.
+
+CORNSILK = Color(1, 0.972549, 0.8627451, 1) 
+
+Cornsilk color.
+
+CRIMSON = Color(0.8627451, 0.078431375, 0.23529412, 1) 
+
+Crimson color.
+
+CYAN = Color(0, 1, 1, 1) 
+
+Cyan color.
+
+DARK_BLUE = Color(0, 0, 0.54509807, 1) 
+
+Dark blue color.
+
+DARK_CYAN = Color(0, 0.54509807, 0.54509807, 1) 
+
+Dark cyan color.
+
+DARK_GOLDENROD = Color(0.72156864, 0.5254902, 0.043137256, 1) 
+
+Dark goldenrod color.
+
+DARK_GRAY = Color(0.6627451, 0.6627451, 0.6627451, 1) 
+
+Dark gray color.
+
+DARK_GREEN = Color(0, 0.39215687, 0, 1) 
+
+Dark green color.
+
+DARK_KHAKI = Color(0.7411765, 0.7176471, 0.41960785, 1) 
+
+Dark khaki color.
+
+DARK_MAGENTA = Color(0.54509807, 0, 0.54509807, 1) 
+
+Dark magenta color.
+
+DARK_OLIVE_GREEN = Color(0.33333334, 0.41960785, 0.18431373, 1) 
+
+Dark olive green color.
+
+DARK_ORANGE = Color(1, 0.54901963, 0, 1) 
+
+Dark orange color.
+
+DARK_ORCHID = Color(0.6, 0.19607843, 0.8, 1) 
+
+Dark orchid color.
+
+DARK_RED = Color(0.54509807, 0, 0, 1) 
+
+Dark red color.
+
+DARK_SALMON = Color(0.9137255, 0.5882353, 0.47843137, 1) 
+
+Dark salmon color.
+
+DARK_SEA_GREEN = Color(0.56078434, 0.7372549, 0.56078434, 1) 
+
+Dark sea green color.
+
+DARK_SLATE_BLUE = Color(0.28235295, 0.23921569, 0.54509807, 1) 
+
+Dark slate blue color.
+
+DARK_SLATE_GRAY = Color(0.18431373, 0.30980393, 0.30980393, 1) 
+
+Dark slate gray color.
+
+DARK_TURQUOISE = Color(0, 0.80784315, 0.81960785, 1) 
+
+Dark turquoise color.
+
+DARK_VIOLET = Color(0.5803922, 0, 0.827451, 1) 
+
+Dark violet color.
+
+DEEP_PINK = Color(1, 0.078431375, 0.5764706, 1) 
+
+Deep pink color.
+
+DEEP_SKY_BLUE = Color(0, 0.7490196, 1, 1) 
+
+Deep sky blue color.
+
+DIM_GRAY = Color(0.4117647, 0.4117647, 0.4117647, 1) 
+
+Dim gray color.
+
+DODGER_BLUE = Color(0.11764706, 0.5647059, 1, 1) 
+
+Dodger blue color.
+
+FIREBRICK = Color(0.69803923, 0.13333334, 0.13333334, 1) 
+
+Firebrick color.
+
+FLORAL_WHITE = Color(1, 0.98039216, 0.9411765, 1) 
+
+Floral white color.
+
+FOREST_GREEN = Color(0.13333334, 0.54509807, 0.13333334, 1) 
+
+Forest green color.
+
+FUCHSIA = Color(1, 0, 1, 1) 
+
+Fuchsia color.
+
+GAINSBORO = Color(0.8627451, 0.8627451, 0.8627451, 1) 
+
+Gainsboro color.
+
+GHOST_WHITE = Color(0.972549, 0.972549, 1, 1) 
+
+Ghost white color.
+
+GOLD = Color(1, 0.84313726, 0, 1) 
+
+Gold color.
+
+GOLDENROD = Color(0.85490197, 0.64705884, 0.1254902, 1) 
+
+Goldenrod color.
+
+GRAY = Color(0.74509805, 0.74509805, 0.74509805, 1) 
+
+Gray color.
+
+GREEN = Color(0, 1, 0, 1) 
+
+Green color.
+
+GREEN_YELLOW = Color(0.6784314, 1, 0.18431373, 1) 
+
+Green yellow color.
+
+HONEYDEW = Color(0.9411765, 1, 0.9411765, 1) 
+
+Honeydew color.
+
+HOT_PINK = Color(1, 0.4117647, 0.7058824, 1) 
+
+Hot pink color.
+
+INDIAN_RED = Color(0.8039216, 0.36078432, 0.36078432, 1) 
+
+Indian red color.
+
+INDIGO = Color(0.29411766, 0, 0.50980395, 1) 
+
+Indigo color.
+
+IVORY = Color(1, 1, 0.9411765, 1) 
+
+Ivory color.
+
+KHAKI = Color(0.9411765, 0.9019608, 0.54901963, 1) 
+
+Khaki color.
+
+LAVENDER = Color(0.9019608, 0.9019608, 0.98039216, 1) 
+
+Lavender color.
+
+LAVENDER_BLUSH = Color(1, 0.9411765, 0.9607843, 1) 
+
+Lavender blush color.
+
+LAWN_GREEN = Color(0.4862745, 0.9882353, 0, 1) 
+
+Lawn green color.
+
+LEMON_CHIFFON = Color(1, 0.98039216, 0.8039216, 1) 
+
+Lemon chiffon color.
+
+LIGHT_BLUE = Color(0.6784314, 0.84705883, 0.9019608, 1) 
+
+Light blue color.
+
+LIGHT_CORAL = Color(0.9411765, 0.5019608, 0.5019608, 1) 
+
+Light coral color.
+
+LIGHT_CYAN = Color(0.8784314, 1, 1, 1) 
+
+Light cyan color.
+
+LIGHT_GOLDENROD = Color(0.98039216, 0.98039216, 0.8235294, 1) 
+
+Light goldenrod color.
+
+LIGHT_GRAY = Color(0.827451, 0.827451, 0.827451, 1) 
+
+Light gray color.
+
+LIGHT_GREEN = Color(0.5647059, 0.93333334, 0.5647059, 1) 
+
+Light green color.
+
+LIGHT_PINK = Color(1, 0.7137255, 0.75686276, 1) 
+
+Light pink color.
+
+LIGHT_SALMON = Color(1, 0.627451, 0.47843137, 1) 
+
+Light salmon color.
+
+LIGHT_SEA_GREEN = Color(0.1254902, 0.69803923, 0.6666667, 1) 
+
+Light sea green color.
+
+LIGHT_SKY_BLUE = Color(0.5294118, 0.80784315, 0.98039216, 1) 
+
+Light sky blue color.
+
+LIGHT_SLATE_GRAY = Color(0.46666667, 0.53333336, 0.6, 1) 
+
+Light slate gray color.
+
+LIGHT_STEEL_BLUE = Color(0.6901961, 0.76862746, 0.87058824, 1) 
+
+Light steel blue color.
+
+LIGHT_YELLOW = Color(1, 1, 0.8784314, 1) 
+
+Light yellow color.
+
+LIME = Color(0, 1, 0, 1) 
+
+Lime color.
+
+LIME_GREEN = Color(0.19607843, 0.8039216, 0.19607843, 1) 
+
+Lime green color.
+
+LINEN = Color(0.98039216, 0.9411765, 0.9019608, 1) 
+
+Linen color.
+
+MAGENTA = Color(1, 0, 1, 1) 
+
+Magenta color.
+
+MAROON = Color(0.6901961, 0.1882353, 0.3764706, 1) 
+
+Maroon color.
+
+MEDIUM_AQUAMARINE = Color(0.4, 0.8039216, 0.6666667, 1) 
+
+Medium aquamarine color.
+
+MEDIUM_BLUE = Color(0, 0, 0.8039216, 1) 
+
+Medium blue color.
+
+MEDIUM_ORCHID = Color(0.7294118, 0.33333334, 0.827451, 1) 
+
+Medium orchid color.
+
+MEDIUM_PURPLE = Color(0.5764706, 0.4392157, 0.85882354, 1) 
+
+Medium purple color.
+
+MEDIUM_SEA_GREEN = Color(0.23529412, 0.7019608, 0.44313726, 1) 
+
+Medium sea green color.
+
+MEDIUM_SLATE_BLUE = Color(0.48235294, 0.40784314, 0.93333334, 1) 
+
+Medium slate blue color.
+
+MEDIUM_SPRING_GREEN = Color(0, 0.98039216, 0.6039216, 1) 
+
+Medium spring green color.
+
+MEDIUM_TURQUOISE = Color(0.28235295, 0.81960785, 0.8, 1) 
+
+Medium turquoise color.
+
+MEDIUM_VIOLET_RED = Color(0.78039217, 0.08235294, 0.52156866, 1) 
+
+Medium violet red color.
+
+MIDNIGHT_BLUE = Color(0.09803922, 0.09803922, 0.4392157, 1) 
+
+Midnight blue color.
+
+MINT_CREAM = Color(0.9607843, 1, 0.98039216, 1) 
+
+Mint cream color.
+
+MISTY_ROSE = Color(1, 0.89411765, 0.88235295, 1) 
+
+Misty rose color.
+
+MOCCASIN = Color(1, 0.89411765, 0.70980394, 1) 
+
+Moccasin color.
+
+NAVAJO_WHITE = Color(1, 0.87058824, 0.6784314, 1) 
+
+Navajo white color.
+
+NAVY_BLUE = Color(0, 0, 0.5019608, 1) 
+
+Navy blue color.
+
+OLD_LACE = Color(0.99215686, 0.9607843, 0.9019608, 1) 
+
+Old lace color.
+
+OLIVE = Color(0.5019608, 0.5019608, 0, 1) 
+
+Olive color.
+
+OLIVE_DRAB = Color(0.41960785, 0.5568628, 0.13725491, 1) 
+
+Olive drab color.
+
+ORANGE = Color(1, 0.64705884, 0, 1) 
+
+Orange color.
+
+ORANGE_RED = Color(1, 0.27058825, 0, 1) 
+
+Orange red color.
+
+ORCHID = Color(0.85490197, 0.4392157, 0.8392157, 1) 
+
+Orchid color.
+
+PALE_GOLDENROD = Color(0.93333334, 0.9098039, 0.6666667, 1) 
+
+Pale goldenrod color.
+
+PALE_GREEN = Color(0.59607846, 0.9843137, 0.59607846, 1) 
+
+Pale green color.
+
+PALE_TURQUOISE = Color(0.6862745, 0.93333334, 0.93333334, 1) 
+
+Pale turquoise color.
+
+PALE_VIOLET_RED = Color(0.85882354, 0.4392157, 0.5764706, 1) 
+
+Pale violet red color.
+
+PAPAYA_WHIP = Color(1, 0.9372549, 0.8352941, 1) 
+
+Papaya whip color.
+
+PEACH_PUFF = Color(1, 0.85490197, 0.7254902, 1) 
+
+Peach puff color.
+
+PERU = Color(0.8039216, 0.52156866, 0.24705882, 1) 
+
+Peru color.
+
+PINK = Color(1, 0.7529412, 0.79607844, 1) 
+
+Pink color.
+
+PLUM = Color(0.8666667, 0.627451, 0.8666667, 1) 
+
+Plum color.
+
+POWDER_BLUE = Color(0.6901961, 0.8784314, 0.9019608, 1) 
+
+Powder blue color.
+
+PURPLE = Color(0.627451, 0.1254902, 0.9411765, 1) 
+
+Purple color.
+
+REBECCA_PURPLE = Color(0.4, 0.2, 0.6, 1) 
+
+Rebecca purple color.
+
+RED = Color(1, 0, 0, 1) 
+
+Red color.
+
+ROSY_BROWN = Color(0.7372549, 0.56078434, 0.56078434, 1) 
+
+Rosy brown color.
+
+ROYAL_BLUE = Color(0.25490198, 0.4117647, 0.88235295, 1) 
+
+Royal blue color.
+
+SADDLE_BROWN = Color(0.54509807, 0.27058825, 0.07450981, 1) 
+
+Saddle brown color.
+
+SALMON = Color(0.98039216, 0.5019608, 0.44705883, 1) 
+
+Salmon color.
+
+SANDY_BROWN = Color(0.95686275, 0.6431373, 0.3764706, 1) 
+
+Sandy brown color.
+
+SEA_GREEN = Color(0.18039216, 0.54509807, 0.34117648, 1) 
+
+Sea green color.
+
+SEASHELL = Color(1, 0.9607843, 0.93333334, 1) 
+
+Seashell color.
+
+SIENNA = Color(0.627451, 0.32156864, 0.1764706, 1) 
+
+Sienna color.
+
+SILVER = Color(0.7529412, 0.7529412, 0.7529412, 1) 
+
+Silver color.
+
+SKY_BLUE = Color(0.5294118, 0.80784315, 0.92156863, 1) 
+
+Sky blue color.
+
+SLATE_BLUE = Color(0.41568628, 0.3529412, 0.8039216, 1) 
+
+Slate blue color.
+
+SLATE_GRAY = Color(0.4392157, 0.5019608, 0.5647059, 1) 
+
+Slate gray color.
+
+SNOW = Color(1, 0.98039216, 0.98039216, 1) 
+
+Snow color.
+
+SPRING_GREEN = Color(0, 1, 0.49803922, 1) 
+
+Spring green color.
+
+STEEL_BLUE = Color(0.27450982, 0.50980395, 0.7058824, 1) 
+
+Steel blue color.
+
+TAN = Color(0.8235294, 0.7058824, 0.54901963, 1) 
+
+Tan color.
+
+TEAL = Color(0, 0.5019608, 0.5019608, 1) 
+
+Teal color.
+
+THISTLE = Color(0.84705883, 0.7490196, 0.84705883, 1) 
+
+Thistle color.
+
+TOMATO = Color(1, 0.3882353, 0.2784314, 1) 
+
+Tomato color.
+
+TRANSPARENT = Color(1, 1, 1, 0) 
+
+Transparent color (white with zero alpha).
+
+TURQUOISE = Color(0.2509804, 0.8784314, 0.8156863, 1) 
+
+Turquoise color.
+
+VIOLET = Color(0.93333334, 0.50980395, 0.93333334, 1) 
+
+Violet color.
+
+WEB_GRAY = Color(0.5019608, 0.5019608, 0.5019608, 1) 
+
+Web gray color.
+
+WEB_GREEN = Color(0, 0.5019608, 0, 1) 
+
+Web green color.
+
+WEB_MAROON = Color(0.5019608, 0, 0, 1) 
+
+Web maroon color.
+
+WEB_PURPLE = Color(0.5019608, 0, 0.5019608, 1) 
+
+Web purple color.
+
+WHEAT = Color(0.9607843, 0.87058824, 0.7019608, 1) 
+
+Wheat color.
+
+WHITE = Color(1, 1, 1, 1) 
+
+White color.
+
+WHITE_SMOKE = Color(0.9607843, 0.9607843, 0.9607843, 1) 
+
+White smoke color.
+
+YELLOW = Color(1, 1, 0, 1) 
+
+Yellow color.
+
+YELLOW_GREEN = Color(0.6039216, 0.8039216, 0.19607843, 1) 
+
+Yellow green color.
 
 ### ANTIQUE_WHITE {#ANTIQUE_WHITE}
 

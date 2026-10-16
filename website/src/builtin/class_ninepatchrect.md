@@ -138,7 +138,10 @@ If true, draw the panel's center. Else, only draw the 9-slice's borders.
 region_rect: Rect2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_region_rect(value: Rect2)
+- Rect2 get_region_rect()
+
+Rectangular region of the texture to sample from. If you're working with an atlas, use this property to define the area the 9-slice should use. All other properties are relative to this one. If the rect is empty, NinePatchRect will use the whole texture.
 
 ### patch_margin_left {#patch_margin_left}
 
@@ -224,17 +227,7 @@ Emitted when the node's texture changes.
 enum AxisStretchMode { AXIS_STRETCH_MODE_STRETCH = 0, AXIS_STRETCH_MODE_TILE = 1, AXIS_STRETCH_MODE_TILE_FIT = 2 }
 ```
 
-AxisStretchMode AXIS_STRETCH_MODE_STRETCH = 0
-
-Stretches the center texture across the NinePatchRect. This may cause the texture to be distorted.
-
-AxisStretchMode AXIS_STRETCH_MODE_TILE = 1
-
-Repeats the center texture across the NinePatchRect. This won't cause any visible distortion. The texture must be seamless for this to work without displaying artifacts between edges.
-
-AxisStretchMode AXIS_STRETCH_MODE_TILE_FIT = 2
-
-Repeats the center texture across the NinePatchRect, but will also stretch the texture to make sure each tile is visible in full. This may cause the texture to be distorted, but less than AXIS_STRETCH_MODE_STRETCH. The texture must be seamless for this to work without displaying artifacts between edges.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AXIS_STRETCH_MODE_STRETCH {#AXIS_STRETCH_MODE_STRETCH}
 
@@ -242,7 +235,7 @@ Repeats the center texture across the NinePatchRect, but will also stretch the t
 AXIS_STRETCH_MODE_STRETCH = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stretches the center texture across the NinePatchRect. This may cause the texture to be distorted.
 
 #### AXIS_STRETCH_MODE_TILE {#AXIS_STRETCH_MODE_TILE}
 
@@ -250,7 +243,7 @@ AXIS_STRETCH_MODE_STRETCH = 0
 AXIS_STRETCH_MODE_TILE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Repeats the center texture across the NinePatchRect. This won't cause any visible distortion. The texture must be seamless for this to work without displaying artifacts between edges.
 
 #### AXIS_STRETCH_MODE_TILE_FIT {#AXIS_STRETCH_MODE_TILE_FIT}
 
@@ -258,4 +251,6 @@ AXIS_STRETCH_MODE_TILE = 1
 AXIS_STRETCH_MODE_TILE_FIT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Repeats the center texture across the NinePatchRect, but will also stretch the texture to make sure each tile is visible in full. This may cause the texture to be distorted, but less than AXIS_STRETCH_MODE_STRETCH. The texture must be seamless for this to work without displaying artifacts between edges.
+
+---

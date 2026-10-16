@@ -49,25 +49,7 @@ A function to be applied to the scalar.
 enum Function { FUNC_ABS = 0, FUNC_NEGATE = 1, FUNC_SIGN = 2, FUNC_BITWISE_NOT = 3, FUNC_MAX = 4 }
 ```
 
-Function FUNC_ABS = 0
-
-Returns the absolute value of the parameter. Translates to abs(x) in the Godot Shader Language.
-
-Function FUNC_NEGATE = 1
-
-Negates the x using -(x).
-
-Function FUNC_SIGN = 2
-
-Extracts the sign of the parameter. Translates to sign(x) in the Godot Shader Language.
-
-Function FUNC_BITWISE_NOT = 3
-
-Returns the result of bitwise NOT operation on the integer. Translates to ~a in the Godot Shader Language.
-
-Function FUNC_MAX = 4
-
-Represents the size of the Function enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FUNC_ABS {#FUNC_ABS}
 
@@ -75,7 +57,7 @@ Represents the size of the Function enum.
 FUNC_ABS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the absolute value of the parameter. Translates to abs(x) in the Godot Shader Language.
 
 #### FUNC_NEGATE {#FUNC_NEGATE}
 
@@ -83,7 +65,7 @@ FUNC_ABS = 0
 FUNC_NEGATE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Negates the x using -(x).
 
 #### FUNC_SIGN {#FUNC_SIGN}
 
@@ -91,7 +73,7 @@ FUNC_NEGATE = 1
 FUNC_SIGN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Extracts the sign of the parameter. Translates to sign(x) in the Godot Shader Language.
 
 #### FUNC_BITWISE_NOT {#FUNC_BITWISE_NOT}
 
@@ -99,7 +81,7 @@ FUNC_SIGN = 2
 FUNC_BITWISE_NOT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the result of bitwise NOT operation on the integer. Translates to ~a in the Godot Shader Language.
 
 #### FUNC_MAX {#FUNC_MAX}
 
@@ -107,4 +89,6 @@ FUNC_BITWISE_NOT = 3
 FUNC_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Function enum.
+
+---

@@ -325,45 +325,7 @@ The size of the buffer used and maximum bytes to read per iteration. See read_re
 enum Method { METHOD_GET = 0, METHOD_HEAD = 1, METHOD_POST = 2, METHOD_PUT = 3, METHOD_DELETE = 4, METHOD_OPTIONS = 5, METHOD_TRACE = 6, METHOD_CONNECT = 7, METHOD_PATCH = 8, METHOD_MAX = 9 }
 ```
 
-Method METHOD_GET = 0
-
-HTTP GET method. The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
-
-Method METHOD_HEAD = 1
-
-HTTP HEAD method. The HEAD method asks for a response identical to that of a GET request, but without the response body. This is useful to request metadata like HTTP headers or to check if a resource exists.
-
-Method METHOD_POST = 2
-
-HTTP POST method. The POST method is used to submit an entity to the specified resource, often causing a change in state or side effects on the server. This is often used for forms and submitting data or uploading files.
-
-Method METHOD_PUT = 3
-
-HTTP PUT method. The PUT method asks to replace all current representations of the target resource with the request payload. (You can think of POST as "create or update" and PUT as "update", although many services tend to not make a clear distinction or change their meaning).
-
-Method METHOD_DELETE = 4
-
-HTTP DELETE method. The DELETE method requests to delete the specified resource.
-
-Method METHOD_OPTIONS = 5
-
-HTTP OPTIONS method. The OPTIONS method asks for a description of the communication options for the target resource. Rarely used.
-
-Method METHOD_TRACE = 6
-
-HTTP TRACE method. The TRACE method performs a message loop-back test along the path to the target resource. Returns the entire HTTP request received in the response body. Rarely used.
-
-Method METHOD_CONNECT = 7
-
-HTTP CONNECT method. The CONNECT method establishes a tunnel to the server identified by the target resource. Rarely used.
-
-Method METHOD_PATCH = 8
-
-HTTP PATCH method. The PATCH method is used to apply partial modifications to a resource.
-
-Method METHOD_MAX = 9
-
-Represents the size of the Method enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### METHOD_GET {#METHOD_GET}
 
@@ -371,7 +333,7 @@ Represents the size of the Method enum.
 METHOD_GET = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP GET method. The GET method requests a representation of the specified resource. Requests using GET should only retrieve data.
 
 #### METHOD_HEAD {#METHOD_HEAD}
 
@@ -379,7 +341,7 @@ METHOD_GET = 0
 METHOD_HEAD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP HEAD method. The HEAD method asks for a response identical to that of a GET request, but without the response body. This is useful to request metadata like HTTP headers or to check if a resource exists.
 
 #### METHOD_POST {#METHOD_POST}
 
@@ -387,7 +349,7 @@ METHOD_HEAD = 1
 METHOD_POST = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP POST method. The POST method is used to submit an entity to the specified resource, often causing a change in state or side effects on the server. This is often used for forms and submitting data or uploading files.
 
 #### METHOD_PUT {#METHOD_PUT}
 
@@ -395,7 +357,7 @@ METHOD_POST = 2
 METHOD_PUT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP PUT method. The PUT method asks to replace all current representations of the target resource with the request payload. (You can think of POST as "create or update" and PUT as "update", although many services tend to not make a clear distinction or change their meaning).
 
 #### METHOD_DELETE {#METHOD_DELETE}
 
@@ -403,7 +365,7 @@ METHOD_PUT = 3
 METHOD_DELETE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP DELETE method. The DELETE method requests to delete the specified resource.
 
 #### METHOD_OPTIONS {#METHOD_OPTIONS}
 
@@ -411,7 +373,7 @@ METHOD_DELETE = 4
 METHOD_OPTIONS = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP OPTIONS method. The OPTIONS method asks for a description of the communication options for the target resource. Rarely used.
 
 #### METHOD_TRACE {#METHOD_TRACE}
 
@@ -419,7 +381,7 @@ METHOD_OPTIONS = 5
 METHOD_TRACE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP TRACE method. The TRACE method performs a message loop-back test along the path to the target resource. Returns the entire HTTP request received in the response body. Rarely used.
 
 #### METHOD_CONNECT {#METHOD_CONNECT}
 
@@ -427,7 +389,7 @@ METHOD_TRACE = 6
 METHOD_CONNECT = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP CONNECT method. The CONNECT method establishes a tunnel to the server identified by the target resource. Rarely used.
 
 #### METHOD_PATCH {#METHOD_PATCH}
 
@@ -435,7 +397,7 @@ METHOD_CONNECT = 7
 METHOD_PATCH = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP PATCH method. The PATCH method is used to apply partial modifications to a resource.
 
 #### METHOD_MAX {#METHOD_MAX}
 
@@ -443,7 +405,9 @@ METHOD_PATCH = 8
 METHOD_MAX = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Method enum.
+
+---
 
 ### Status {#enum-Status}
 
@@ -451,45 +415,7 @@ METHOD_MAX = 9
 enum Status { STATUS_DISCONNECTED = 0, STATUS_RESOLVING = 1, STATUS_CANT_RESOLVE = 2, STATUS_CONNECTING = 3, STATUS_CANT_CONNECT = 4, STATUS_CONNECTED = 5, STATUS_REQUESTING = 6, STATUS_BODY = 7, STATUS_CONNECTION_ERROR = 8, STATUS_TLS_HANDSHAKE_ERROR = 9 }
 ```
 
-Status STATUS_DISCONNECTED = 0
-
-Status: Disconnected from the server.
-
-Status STATUS_RESOLVING = 1
-
-Status: Currently resolving the hostname for the given URL into an IP.
-
-Status STATUS_CANT_RESOLVE = 2
-
-Status: DNS failure: Can't resolve the hostname for the given URL.
-
-Status STATUS_CONNECTING = 3
-
-Status: Currently connecting to server.
-
-Status STATUS_CANT_CONNECT = 4
-
-Status: Can't connect to the server.
-
-Status STATUS_CONNECTED = 5
-
-Status: Connection established.
-
-Status STATUS_REQUESTING = 6
-
-Status: Currently sending request.
-
-Status STATUS_BODY = 7
-
-Status: HTTP body received.
-
-Status STATUS_CONNECTION_ERROR = 8
-
-Status: Error in HTTP connection.
-
-Status STATUS_TLS_HANDSHAKE_ERROR = 9
-
-Status: Error in TLS handshake.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STATUS_DISCONNECTED {#STATUS_DISCONNECTED}
 
@@ -497,7 +423,7 @@ Status: Error in TLS handshake.
 STATUS_DISCONNECTED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Status: Disconnected from the server.
 
 #### STATUS_RESOLVING {#STATUS_RESOLVING}
 
@@ -505,7 +431,7 @@ STATUS_DISCONNECTED = 0
 STATUS_RESOLVING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Status: Currently resolving the hostname for the given URL into an IP.
 
 #### STATUS_CANT_RESOLVE {#STATUS_CANT_RESOLVE}
 
@@ -513,7 +439,7 @@ STATUS_RESOLVING = 1
 STATUS_CANT_RESOLVE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Status: DNS failure: Can't resolve the hostname for the given URL.
 
 #### STATUS_CONNECTING {#STATUS_CONNECTING}
 
@@ -521,7 +447,7 @@ STATUS_CANT_RESOLVE = 2
 STATUS_CONNECTING = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Status: Currently connecting to server.
 
 #### STATUS_CANT_CONNECT {#STATUS_CANT_CONNECT}
 
@@ -529,7 +455,7 @@ STATUS_CONNECTING = 3
 STATUS_CANT_CONNECT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Status: Can't connect to the server.
 
 #### STATUS_CONNECTED {#STATUS_CONNECTED}
 
@@ -537,7 +463,7 @@ STATUS_CANT_CONNECT = 4
 STATUS_CONNECTED = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Status: Connection established.
 
 #### STATUS_REQUESTING {#STATUS_REQUESTING}
 
@@ -545,7 +471,7 @@ STATUS_CONNECTED = 5
 STATUS_REQUESTING = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Status: Currently sending request.
 
 #### STATUS_BODY {#STATUS_BODY}
 
@@ -553,7 +479,7 @@ STATUS_REQUESTING = 6
 STATUS_BODY = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Status: HTTP body received.
 
 #### STATUS_CONNECTION_ERROR {#STATUS_CONNECTION_ERROR}
 
@@ -561,7 +487,7 @@ STATUS_BODY = 7
 STATUS_CONNECTION_ERROR = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Status: Error in HTTP connection.
 
 #### STATUS_TLS_HANDSHAKE_ERROR {#STATUS_TLS_HANDSHAKE_ERROR}
 
@@ -569,7 +495,9 @@ STATUS_CONNECTION_ERROR = 8
 STATUS_TLS_HANDSHAKE_ERROR = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Status: Error in TLS handshake.
+
+---
 
 ### ResponseCode {#enum-ResponseCode}
 
@@ -577,19 +505,37 @@ STATUS_TLS_HANDSHAKE_ERROR = 9
 enum ResponseCode { RESPONSE_CONTINUE = 100, RESPONSE_SWITCHING_PROTOCOLS = 101, RESPONSE_PROCESSING = 102, RESPONSE_OK = 200, RESPONSE_CREATED = 201, RESPONSE_ACCEPTED = 202, RESPONSE_NON_AUTHORITATIVE_INFORMATION = 203, RESPONSE_NO_CONTENT = 204, RESPONSE_RESET_CONTENT = 205, RESPONSE_PARTIAL_CONTENT = 206, RESPONSE_MULTI_STATUS = 207, RESPONSE_ALREADY_REPORTED = 208, RESPONSE_IM_USED = 226, RESPONSE_MULTIPLE_CHOICES = 300, RESPONSE_MOVED_PERMANENTLY = 301, RESPONSE_FOUND = 302, RESPONSE_SEE_OTHER = 303, RESPONSE_NOT_MODIFIED = 304, RESPONSE_USE_PROXY = 305, RESPONSE_SWITCH_PROXY = 306, RESPONSE_TEMPORARY_REDIRECT = 307, RESPONSE_PERMANENT_REDIRECT = 308, RESPONSE_BAD_REQUEST = 400, RESPONSE_UNAUTHORIZED = 401, RESPONSE_PAYMENT_REQUIRED = 402, RESPONSE_FORBIDDEN = 403, RESPONSE_NOT_FOUND = 404, RESPONSE_METHOD_NOT_ALLOWED = 405, RESPONSE_NOT_ACCEPTABLE = 406, RESPONSE_PROXY_AUTHENTICATION_REQUIRED = 407, RESPONSE_REQUEST_TIMEOUT = 408, RESPONSE_CONFLICT = 409, RESPONSE_GONE = 410, RESPONSE_LENGTH_REQUIRED = 411, RESPONSE_PRECONDITION_FAILED = 412, RESPONSE_REQUEST_ENTITY_TOO_LARGE = 413, RESPONSE_REQUEST_URI_TOO_LONG = 414, RESPONSE_UNSUPPORTED_MEDIA_TYPE = 415, RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE = 416, RESPONSE_EXPECTATION_FAILED = 417, RESPONSE_IM_A_TEAPOT = 418, RESPONSE_MISDIRECTED_REQUEST = 421, RESPONSE_UNPROCESSABLE_ENTITY = 422, RESPONSE_LOCKED = 423, RESPONSE_FAILED_DEPENDENCY = 424, RESPONSE_UPGRADE_REQUIRED = 426, RESPONSE_PRECONDITION_REQUIRED = 428, RESPONSE_TOO_MANY_REQUESTS = 429, RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE = 431, RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS = 451, RESPONSE_INTERNAL_SERVER_ERROR = 500, RESPONSE_NOT_IMPLEMENTED = 501, RESPONSE_BAD_GATEWAY = 502, RESPONSE_SERVICE_UNAVAILABLE = 503, RESPONSE_GATEWAY_TIMEOUT = 504, RESPONSE_HTTP_VERSION_NOT_SUPPORTED = 505, RESPONSE_VARIANT_ALSO_NEGOTIATES = 506, RESPONSE_INSUFFICIENT_STORAGE = 507, RESPONSE_LOOP_DETECTED = 508, RESPONSE_NOT_EXTENDED = 510, RESPONSE_NETWORK_AUTH_REQUIRED = 511 }
 ```
 
-ResponseCode RESPONSE_CONTINUE = 100
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### RESPONSE_CONTINUE {#RESPONSE_CONTINUE}
+
+```gdscript
+RESPONSE_CONTINUE = 100
+```
 
 HTTP status code 100 Continue. Interim response that indicates everything so far is OK and that the client should continue with the request (or ignore this status if already finished).
 
-ResponseCode RESPONSE_SWITCHING_PROTOCOLS = 101
+#### RESPONSE_SWITCHING_PROTOCOLS {#RESPONSE_SWITCHING_PROTOCOLS}
+
+```gdscript
+RESPONSE_SWITCHING_PROTOCOLS = 101
+```
 
 HTTP status code 101 Switching Protocol. Sent in response to an Upgrade request header by the client. Indicates the protocol the server is switching to.
 
-ResponseCode RESPONSE_PROCESSING = 102
+#### RESPONSE_PROCESSING {#RESPONSE_PROCESSING}
+
+```gdscript
+RESPONSE_PROCESSING = 102
+```
 
 HTTP status code 102 Processing (WebDAV). Indicates that the server has received and is processing the request, but no response is available yet.
 
-ResponseCode RESPONSE_OK = 200
+#### RESPONSE_OK {#RESPONSE_OK}
+
+```gdscript
+RESPONSE_OK = 200
+```
 
 HTTP status code 200 OK. The request has succeeded. Default response for successful requests. Meaning varies depending on the request:
 
@@ -598,277 +544,13 @@ HTTP status code 200 OK. The request has succeeded. Default response for success
 - METHOD_POST: The resource describing the result of the action is transmitted in the message body.
 - METHOD_TRACE: The message body contains the request message as received by the server.
 
-ResponseCode RESPONSE_CREATED = 201
-
-HTTP status code 201 Created. The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a PUT request.
-
-ResponseCode RESPONSE_ACCEPTED = 202
-
-HTTP status code 202 Accepted. The request has been received but not yet acted upon. It is non-committal, meaning that there is no way in HTTP to later send an asynchronous response indicating the outcome of processing the request. It is intended for cases where another process or server handles the request, or for batch processing.
-
-ResponseCode RESPONSE_NON_AUTHORITATIVE_INFORMATION = 203
-
-HTTP status code 203 Non-Authoritative Information. This response code means returned meta-information set is not exact set as available from the origin server, but collected from a local or a third party copy. Except this condition, 200 OK response should be preferred instead of this response.
-
-ResponseCode RESPONSE_NO_CONTENT = 204
-
-HTTP status code 204 No Content. There is no content to send for this request, but the headers may be useful. The user-agent may update its cached headers for this resource with the new ones.
-
-ResponseCode RESPONSE_RESET_CONTENT = 205
-
-HTTP status code 205 Reset Content. The server has fulfilled the request and desires that the client resets the "document view" that caused the request to be sent to its original state as received from the origin server.
-
-ResponseCode RESPONSE_PARTIAL_CONTENT = 206
-
-HTTP status code 206 Partial Content. This response code is used because of a range header sent by the client to separate download into multiple streams.
-
-ResponseCode RESPONSE_MULTI_STATUS = 207
-
-HTTP status code 207 Multi-Status (WebDAV). A Multi-Status response conveys information about multiple resources in situations where multiple status codes might be appropriate.
-
-ResponseCode RESPONSE_ALREADY_REPORTED = 208
-
-HTTP status code 208 Already Reported (WebDAV). Used inside a DAV: propstat response element to avoid enumerating the internal members of multiple bindings to the same collection repeatedly.
-
-ResponseCode RESPONSE_IM_USED = 226
-
-HTTP status code 226 IM Used (WebDAV). The server has fulfilled a GET request for the resource, and the response is a representation of the result of one or more instance-manipulations applied to the current instance.
-
-ResponseCode RESPONSE_MULTIPLE_CHOICES = 300
-
-HTTP status code 300 Multiple Choice. The request has more than one possible responses and there is no standardized way to choose one of the responses. User-agent or user should choose one of them.
-
-ResponseCode RESPONSE_MOVED_PERMANENTLY = 301
-
-HTTP status code 301 Moved Permanently. Redirection. This response code means the URI of requested resource has been changed. The new URI is usually included in the response.
-
-ResponseCode RESPONSE_FOUND = 302
-
-HTTP status code 302 Found. Temporary redirection. This response code means the URI of requested resource has been changed temporarily. New changes in the URI might be made in the future. Therefore, this same URI should be used by the client in future requests.
-
-ResponseCode RESPONSE_SEE_OTHER = 303
-
-HTTP status code 303 See Other. The server is redirecting the user agent to a different resource, as indicated by a URI in the Location header field, which is intended to provide an indirect response to the original request.
-
-ResponseCode RESPONSE_NOT_MODIFIED = 304
-
-HTTP status code 304 Not Modified. A conditional GET or HEAD request has been received and would have resulted in a 200 OK response if it were not for the fact that the condition evaluated to false.
-
-ResponseCode RESPONSE_USE_PROXY = 305
-
-Deprecated: Many clients ignore this response code for security reasons. It is also deprecated by the HTTP standard.
-
-HTTP status code 305 Use Proxy.
-
-ResponseCode RESPONSE_SWITCH_PROXY = 306
-
-Deprecated: Many clients ignore this response code for security reasons. It is also deprecated by the HTTP standard.
-
-HTTP status code 306 Switch Proxy.
-
-ResponseCode RESPONSE_TEMPORARY_REDIRECT = 307
-
-HTTP status code 307 Temporary Redirect. The target resource resides temporarily under a different URI and the user agent MUST NOT change the request method if it performs an automatic redirection to that URI.
-
-ResponseCode RESPONSE_PERMANENT_REDIRECT = 308
-
-HTTP status code 308 Permanent Redirect. The target resource has been assigned a new permanent URI and any future references to this resource ought to use one of the enclosed URIs.
-
-ResponseCode RESPONSE_BAD_REQUEST = 400
-
-HTTP status code 400 Bad Request. The request was invalid. The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, invalid request contents, or deceptive request routing).
-
-ResponseCode RESPONSE_UNAUTHORIZED = 401
-
-HTTP status code 401 Unauthorized. Credentials required. The request has not been applied because it lacks valid authentication credentials for the target resource.
-
-ResponseCode RESPONSE_PAYMENT_REQUIRED = 402
-
-HTTP status code 402 Payment Required. This response code is reserved for future use. Initial aim for creating this code was using it for digital payment systems, however this is not currently used.
-
-ResponseCode RESPONSE_FORBIDDEN = 403
-
-HTTP status code 403 Forbidden. The client does not have access rights to the content, i.e. they are unauthorized, so server is rejecting to give proper response. Unlike 401, the client's identity is known to the server.
-
-ResponseCode RESPONSE_NOT_FOUND = 404
-
-HTTP status code 404 Not Found. The server can not find requested resource. Either the URL is not recognized or the endpoint is valid but the resource itself does not exist. May also be sent instead of 403 to hide existence of a resource if the client is not authorized.
-
-ResponseCode RESPONSE_METHOD_NOT_ALLOWED = 405
-
-HTTP status code 405 Method Not Allowed. The request's HTTP method is known by the server but has been disabled and cannot be used. For example, an API may forbid DELETE-ing a resource. The two mandatory methods, GET and HEAD, must never be disabled and should not return this error code.
-
-ResponseCode RESPONSE_NOT_ACCEPTABLE = 406
-
-HTTP status code 406 Not Acceptable. The target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request. Used when negotiation content.
-
-ResponseCode RESPONSE_PROXY_AUTHENTICATION_REQUIRED = 407
-
-HTTP status code 407 Proxy Authentication Required. Similar to 401 Unauthorized, but it indicates that the client needs to authenticate itself in order to use a proxy.
-
-ResponseCode RESPONSE_REQUEST_TIMEOUT = 408
-
-HTTP status code 408 Request Timeout. The server did not receive a complete request message within the time that it was prepared to wait.
-
-ResponseCode RESPONSE_CONFLICT = 409
-
-HTTP status code 409 Conflict. The request could not be completed due to a conflict with the current state of the target resource. This code is used in situations where the user might be able to resolve the conflict and resubmit the request.
-
-ResponseCode RESPONSE_GONE = 410
-
-HTTP status code 410 Gone. The target resource is no longer available at the origin server and this condition is likely permanent.
-
-ResponseCode RESPONSE_LENGTH_REQUIRED = 411
-
-HTTP status code 411 Length Required. The server refuses to accept the request without a defined Content-Length header.
-
-ResponseCode RESPONSE_PRECONDITION_FAILED = 412
-
-HTTP status code 412 Precondition Failed. One or more conditions given in the request header fields evaluated to false when tested on the server.
-
-ResponseCode RESPONSE_REQUEST_ENTITY_TOO_LARGE = 413
-
-HTTP status code 413 Entity Too Large. The server is refusing to process a request because the request payload is larger than the server is willing or able to process.
-
-ResponseCode RESPONSE_REQUEST_URI_TOO_LONG = 414
-
-HTTP status code 414 Request-URI Too Long. The server is refusing to service the request because the request-target is longer than the server is willing to interpret.
-
-ResponseCode RESPONSE_UNSUPPORTED_MEDIA_TYPE = 415
-
-HTTP status code 415 Unsupported Media Type. The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource.
-
-ResponseCode RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE = 416
-
-HTTP status code 416 Requested Range Not Satisfiable. None of the ranges in the request's Range header field overlap the current extent of the selected resource or the set of ranges requested has been rejected due to invalid ranges or an excessive request of small or overlapping ranges.
-
-ResponseCode RESPONSE_EXPECTATION_FAILED = 417
-
-HTTP status code 417 Expectation Failed. The expectation given in the request's Expect header field could not be met by at least one of the inbound servers.
-
-ResponseCode RESPONSE_IM_A_TEAPOT = 418
-
-HTTP status code 418 I'm A Teapot. Any attempt to brew coffee with a teapot should result in the error code "418 I'm a teapot". The resulting entity body MAY be short and stout.
-
-ResponseCode RESPONSE_MISDIRECTED_REQUEST = 421
-
-HTTP status code 421 Misdirected Request. The request was directed at a server that is not able to produce a response. This can be sent by a server that is not configured to produce responses for the combination of scheme and authority that are included in the request URI.
-
-ResponseCode RESPONSE_UNPROCESSABLE_ENTITY = 422
-
-HTTP status code 422 Unprocessable Entity (WebDAV). The server understands the content type of the request entity (hence a 415 Unsupported Media Type status code is inappropriate), and the syntax of the request entity is correct (thus a 400 Bad Request status code is inappropriate) but was unable to process the contained instructions.
-
-ResponseCode RESPONSE_LOCKED = 423
-
-HTTP status code 423 Locked (WebDAV). The source or destination resource of a method is locked.
-
-ResponseCode RESPONSE_FAILED_DEPENDENCY = 424
-
-HTTP status code 424 Failed Dependency (WebDAV). The method could not be performed on the resource because the requested action depended on another action and that action failed.
-
-ResponseCode RESPONSE_UPGRADE_REQUIRED = 426
-
-HTTP status code 426 Upgrade Required. The server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol.
-
-ResponseCode RESPONSE_PRECONDITION_REQUIRED = 428
-
-HTTP status code 428 Precondition Required. The origin server requires the request to be conditional.
-
-ResponseCode RESPONSE_TOO_MANY_REQUESTS = 429
-
-HTTP status code 429 Too Many Requests. The user has sent too many requests in a given amount of time (see "rate limiting"). Back off and increase time between requests or try again later.
-
-ResponseCode RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE = 431
-
-HTTP status code 431 Request Header Fields Too Large. The server is unwilling to process the request because its header fields are too large. The request MAY be resubmitted after reducing the size of the request header fields.
-
-ResponseCode RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS = 451
-
-HTTP status code 451 Response Unavailable For Legal Reasons. The server is denying access to the resource as a consequence of a legal demand.
-
-ResponseCode RESPONSE_INTERNAL_SERVER_ERROR = 500
-
-HTTP status code 500 Internal Server Error. The server encountered an unexpected condition that prevented it from fulfilling the request.
-
-ResponseCode RESPONSE_NOT_IMPLEMENTED = 501
-
-HTTP status code 501 Not Implemented. The server does not support the functionality required to fulfill the request.
-
-ResponseCode RESPONSE_BAD_GATEWAY = 502
-
-HTTP status code 502 Bad Gateway. The server, while acting as a gateway or proxy, received an invalid response from an inbound server it accessed while attempting to fulfill the request. Usually returned by load balancers or proxies.
-
-ResponseCode RESPONSE_SERVICE_UNAVAILABLE = 503
-
-HTTP status code 503 Service Unavailable. The server is currently unable to handle the request due to a temporary overload or scheduled maintenance, which will likely be alleviated after some delay. Try again later.
-
-ResponseCode RESPONSE_GATEWAY_TIMEOUT = 504
-
-HTTP status code 504 Gateway Timeout. The server, while acting as a gateway or proxy, did not receive a timely response from an upstream server it needed to access in order to complete the request. Usually returned by load balancers or proxies.
-
-ResponseCode RESPONSE_HTTP_VERSION_NOT_SUPPORTED = 505
-
-HTTP status code 505 HTTP Version Not Supported. The server does not support, or refuses to support, the major version of HTTP that was used in the request message.
-
-ResponseCode RESPONSE_VARIANT_ALSO_NEGOTIATES = 506
-
-HTTP status code 506 Variant Also Negotiates. The server has an internal configuration error: the chosen variant resource is configured to engage in transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.
-
-ResponseCode RESPONSE_INSUFFICIENT_STORAGE = 507
-
-HTTP status code 507 Insufficient Storage. The method could not be performed on the resource because the server is unable to store the representation needed to successfully complete the request.
-
-ResponseCode RESPONSE_LOOP_DETECTED = 508
-
-HTTP status code 508 Loop Detected. The server terminated an operation because it encountered an infinite loop while processing a request with "Depth: infinity". This status indicates that the entire operation failed.
-
-ResponseCode RESPONSE_NOT_EXTENDED = 510
-
-HTTP status code 510 Not Extended. The policy for accessing the resource has not been met in the request. The server should send back all the information necessary for the client to issue an extended request.
-
-ResponseCode RESPONSE_NETWORK_AUTH_REQUIRED = 511
-
-HTTP status code 511 Network Authentication Required. The client needs to authenticate to gain network access.
-
-#### RESPONSE_CONTINUE {#RESPONSE_CONTINUE}
-
-```gdscript
-RESPONSE_CONTINUE = 100
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### RESPONSE_SWITCHING_PROTOCOLS {#RESPONSE_SWITCHING_PROTOCOLS}
-
-```gdscript
-RESPONSE_SWITCHING_PROTOCOLS = 101
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### RESPONSE_PROCESSING {#RESPONSE_PROCESSING}
-
-```gdscript
-RESPONSE_PROCESSING = 102
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### RESPONSE_OK {#RESPONSE_OK}
-
-```gdscript
-RESPONSE_OK = 200
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### RESPONSE_CREATED {#RESPONSE_CREATED}
 
 ```gdscript
 RESPONSE_CREATED = 201
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 201 Created. The request has succeeded and a new resource has been created as a result of it. This is typically the response sent after a PUT request.
 
 #### RESPONSE_ACCEPTED {#RESPONSE_ACCEPTED}
 
@@ -876,7 +558,7 @@ RESPONSE_CREATED = 201
 RESPONSE_ACCEPTED = 202
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 202 Accepted. The request has been received but not yet acted upon. It is non-committal, meaning that there is no way in HTTP to later send an asynchronous response indicating the outcome of processing the request. It is intended for cases where another process or server handles the request, or for batch processing.
 
 #### RESPONSE_NON_AUTHORITATIVE_INFORMATION {#RESPONSE_NON_AUTHORITATIVE_INFORMATION}
 
@@ -884,7 +566,7 @@ RESPONSE_ACCEPTED = 202
 RESPONSE_NON_AUTHORITATIVE_INFORMATION = 203
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 203 Non-Authoritative Information. This response code means returned meta-information set is not exact set as available from the origin server, but collected from a local or a third party copy. Except this condition, 200 OK response should be preferred instead of this response.
 
 #### RESPONSE_NO_CONTENT {#RESPONSE_NO_CONTENT}
 
@@ -892,7 +574,7 @@ RESPONSE_NON_AUTHORITATIVE_INFORMATION = 203
 RESPONSE_NO_CONTENT = 204
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 204 No Content. There is no content to send for this request, but the headers may be useful. The user-agent may update its cached headers for this resource with the new ones.
 
 #### RESPONSE_RESET_CONTENT {#RESPONSE_RESET_CONTENT}
 
@@ -900,7 +582,7 @@ RESPONSE_NO_CONTENT = 204
 RESPONSE_RESET_CONTENT = 205
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 205 Reset Content. The server has fulfilled the request and desires that the client resets the "document view" that caused the request to be sent to its original state as received from the origin server.
 
 #### RESPONSE_PARTIAL_CONTENT {#RESPONSE_PARTIAL_CONTENT}
 
@@ -908,7 +590,7 @@ RESPONSE_RESET_CONTENT = 205
 RESPONSE_PARTIAL_CONTENT = 206
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 206 Partial Content. This response code is used because of a range header sent by the client to separate download into multiple streams.
 
 #### RESPONSE_MULTI_STATUS {#RESPONSE_MULTI_STATUS}
 
@@ -916,7 +598,7 @@ RESPONSE_PARTIAL_CONTENT = 206
 RESPONSE_MULTI_STATUS = 207
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 207 Multi-Status (WebDAV). A Multi-Status response conveys information about multiple resources in situations where multiple status codes might be appropriate.
 
 #### RESPONSE_ALREADY_REPORTED {#RESPONSE_ALREADY_REPORTED}
 
@@ -924,7 +606,7 @@ RESPONSE_MULTI_STATUS = 207
 RESPONSE_ALREADY_REPORTED = 208
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 208 Already Reported (WebDAV). Used inside a DAV: propstat response element to avoid enumerating the internal members of multiple bindings to the same collection repeatedly.
 
 #### RESPONSE_IM_USED {#RESPONSE_IM_USED}
 
@@ -932,7 +614,7 @@ RESPONSE_ALREADY_REPORTED = 208
 RESPONSE_IM_USED = 226
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 226 IM Used (WebDAV). The server has fulfilled a GET request for the resource, and the response is a representation of the result of one or more instance-manipulations applied to the current instance.
 
 #### RESPONSE_MULTIPLE_CHOICES {#RESPONSE_MULTIPLE_CHOICES}
 
@@ -940,7 +622,7 @@ RESPONSE_IM_USED = 226
 RESPONSE_MULTIPLE_CHOICES = 300
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 300 Multiple Choice. The request has more than one possible responses and there is no standardized way to choose one of the responses. User-agent or user should choose one of them.
 
 #### RESPONSE_MOVED_PERMANENTLY {#RESPONSE_MOVED_PERMANENTLY}
 
@@ -948,7 +630,7 @@ RESPONSE_MULTIPLE_CHOICES = 300
 RESPONSE_MOVED_PERMANENTLY = 301
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 301 Moved Permanently. Redirection. This response code means the URI of requested resource has been changed. The new URI is usually included in the response.
 
 #### RESPONSE_FOUND {#RESPONSE_FOUND}
 
@@ -956,7 +638,7 @@ RESPONSE_MOVED_PERMANENTLY = 301
 RESPONSE_FOUND = 302
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 302 Found. Temporary redirection. This response code means the URI of requested resource has been changed temporarily. New changes in the URI might be made in the future. Therefore, this same URI should be used by the client in future requests.
 
 #### RESPONSE_SEE_OTHER {#RESPONSE_SEE_OTHER}
 
@@ -964,7 +646,7 @@ RESPONSE_FOUND = 302
 RESPONSE_SEE_OTHER = 303
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 303 See Other. The server is redirecting the user agent to a different resource, as indicated by a URI in the Location header field, which is intended to provide an indirect response to the original request.
 
 #### RESPONSE_NOT_MODIFIED {#RESPONSE_NOT_MODIFIED}
 
@@ -972,7 +654,7 @@ RESPONSE_SEE_OTHER = 303
 RESPONSE_NOT_MODIFIED = 304
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 304 Not Modified. A conditional GET or HEAD request has been received and would have resulted in a 200 OK response if it were not for the fact that the condition evaluated to false.
 
 #### RESPONSE_USE_PROXY {#RESPONSE_USE_PROXY}
 
@@ -980,7 +662,9 @@ RESPONSE_NOT_MODIFIED = 304
 RESPONSE_USE_PROXY = 305
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Many clients ignore this response code for security reasons. It is also deprecated by the HTTP standard.
+
+HTTP status code 305 Use Proxy.
 
 #### RESPONSE_SWITCH_PROXY {#RESPONSE_SWITCH_PROXY}
 
@@ -988,7 +672,9 @@ RESPONSE_USE_PROXY = 305
 RESPONSE_SWITCH_PROXY = 306
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Many clients ignore this response code for security reasons. It is also deprecated by the HTTP standard.
+
+HTTP status code 306 Switch Proxy.
 
 #### RESPONSE_TEMPORARY_REDIRECT {#RESPONSE_TEMPORARY_REDIRECT}
 
@@ -996,7 +682,7 @@ RESPONSE_SWITCH_PROXY = 306
 RESPONSE_TEMPORARY_REDIRECT = 307
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 307 Temporary Redirect. The target resource resides temporarily under a different URI and the user agent MUST NOT change the request method if it performs an automatic redirection to that URI.
 
 #### RESPONSE_PERMANENT_REDIRECT {#RESPONSE_PERMANENT_REDIRECT}
 
@@ -1004,7 +690,7 @@ RESPONSE_TEMPORARY_REDIRECT = 307
 RESPONSE_PERMANENT_REDIRECT = 308
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 308 Permanent Redirect. The target resource has been assigned a new permanent URI and any future references to this resource ought to use one of the enclosed URIs.
 
 #### RESPONSE_BAD_REQUEST {#RESPONSE_BAD_REQUEST}
 
@@ -1012,7 +698,7 @@ RESPONSE_PERMANENT_REDIRECT = 308
 RESPONSE_BAD_REQUEST = 400
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 400 Bad Request. The request was invalid. The server cannot or will not process the request due to something that is perceived to be a client error (e.g., malformed request syntax, invalid request message framing, invalid request contents, or deceptive request routing).
 
 #### RESPONSE_UNAUTHORIZED {#RESPONSE_UNAUTHORIZED}
 
@@ -1020,7 +706,7 @@ RESPONSE_BAD_REQUEST = 400
 RESPONSE_UNAUTHORIZED = 401
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 401 Unauthorized. Credentials required. The request has not been applied because it lacks valid authentication credentials for the target resource.
 
 #### RESPONSE_PAYMENT_REQUIRED {#RESPONSE_PAYMENT_REQUIRED}
 
@@ -1028,7 +714,7 @@ RESPONSE_UNAUTHORIZED = 401
 RESPONSE_PAYMENT_REQUIRED = 402
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 402 Payment Required. This response code is reserved for future use. Initial aim for creating this code was using it for digital payment systems, however this is not currently used.
 
 #### RESPONSE_FORBIDDEN {#RESPONSE_FORBIDDEN}
 
@@ -1036,7 +722,7 @@ RESPONSE_PAYMENT_REQUIRED = 402
 RESPONSE_FORBIDDEN = 403
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 403 Forbidden. The client does not have access rights to the content, i.e. they are unauthorized, so server is rejecting to give proper response. Unlike 401, the client's identity is known to the server.
 
 #### RESPONSE_NOT_FOUND {#RESPONSE_NOT_FOUND}
 
@@ -1044,7 +730,7 @@ RESPONSE_FORBIDDEN = 403
 RESPONSE_NOT_FOUND = 404
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 404 Not Found. The server can not find requested resource. Either the URL is not recognized or the endpoint is valid but the resource itself does not exist. May also be sent instead of 403 to hide existence of a resource if the client is not authorized.
 
 #### RESPONSE_METHOD_NOT_ALLOWED {#RESPONSE_METHOD_NOT_ALLOWED}
 
@@ -1052,7 +738,7 @@ RESPONSE_NOT_FOUND = 404
 RESPONSE_METHOD_NOT_ALLOWED = 405
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 405 Method Not Allowed. The request's HTTP method is known by the server but has been disabled and cannot be used. For example, an API may forbid DELETE-ing a resource. The two mandatory methods, GET and HEAD, must never be disabled and should not return this error code.
 
 #### RESPONSE_NOT_ACCEPTABLE {#RESPONSE_NOT_ACCEPTABLE}
 
@@ -1060,7 +746,7 @@ RESPONSE_METHOD_NOT_ALLOWED = 405
 RESPONSE_NOT_ACCEPTABLE = 406
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 406 Not Acceptable. The target resource does not have a current representation that would be acceptable to the user agent, according to the proactive negotiation header fields received in the request. Used when negotiation content.
 
 #### RESPONSE_PROXY_AUTHENTICATION_REQUIRED {#RESPONSE_PROXY_AUTHENTICATION_REQUIRED}
 
@@ -1068,7 +754,7 @@ RESPONSE_NOT_ACCEPTABLE = 406
 RESPONSE_PROXY_AUTHENTICATION_REQUIRED = 407
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 407 Proxy Authentication Required. Similar to 401 Unauthorized, but it indicates that the client needs to authenticate itself in order to use a proxy.
 
 #### RESPONSE_REQUEST_TIMEOUT {#RESPONSE_REQUEST_TIMEOUT}
 
@@ -1076,7 +762,7 @@ RESPONSE_PROXY_AUTHENTICATION_REQUIRED = 407
 RESPONSE_REQUEST_TIMEOUT = 408
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 408 Request Timeout. The server did not receive a complete request message within the time that it was prepared to wait.
 
 #### RESPONSE_CONFLICT {#RESPONSE_CONFLICT}
 
@@ -1084,7 +770,7 @@ RESPONSE_REQUEST_TIMEOUT = 408
 RESPONSE_CONFLICT = 409
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 409 Conflict. The request could not be completed due to a conflict with the current state of the target resource. This code is used in situations where the user might be able to resolve the conflict and resubmit the request.
 
 #### RESPONSE_GONE {#RESPONSE_GONE}
 
@@ -1092,7 +778,7 @@ RESPONSE_CONFLICT = 409
 RESPONSE_GONE = 410
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 410 Gone. The target resource is no longer available at the origin server and this condition is likely permanent.
 
 #### RESPONSE_LENGTH_REQUIRED {#RESPONSE_LENGTH_REQUIRED}
 
@@ -1100,7 +786,7 @@ RESPONSE_GONE = 410
 RESPONSE_LENGTH_REQUIRED = 411
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 411 Length Required. The server refuses to accept the request without a defined Content-Length header.
 
 #### RESPONSE_PRECONDITION_FAILED {#RESPONSE_PRECONDITION_FAILED}
 
@@ -1108,7 +794,7 @@ RESPONSE_LENGTH_REQUIRED = 411
 RESPONSE_PRECONDITION_FAILED = 412
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 412 Precondition Failed. One or more conditions given in the request header fields evaluated to false when tested on the server.
 
 #### RESPONSE_REQUEST_ENTITY_TOO_LARGE {#RESPONSE_REQUEST_ENTITY_TOO_LARGE}
 
@@ -1116,7 +802,7 @@ RESPONSE_PRECONDITION_FAILED = 412
 RESPONSE_REQUEST_ENTITY_TOO_LARGE = 413
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 413 Entity Too Large. The server is refusing to process a request because the request payload is larger than the server is willing or able to process.
 
 #### RESPONSE_REQUEST_URI_TOO_LONG {#RESPONSE_REQUEST_URI_TOO_LONG}
 
@@ -1124,7 +810,7 @@ RESPONSE_REQUEST_ENTITY_TOO_LARGE = 413
 RESPONSE_REQUEST_URI_TOO_LONG = 414
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 414 Request-URI Too Long. The server is refusing to service the request because the request-target is longer than the server is willing to interpret.
 
 #### RESPONSE_UNSUPPORTED_MEDIA_TYPE {#RESPONSE_UNSUPPORTED_MEDIA_TYPE}
 
@@ -1132,7 +818,7 @@ RESPONSE_REQUEST_URI_TOO_LONG = 414
 RESPONSE_UNSUPPORTED_MEDIA_TYPE = 415
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 415 Unsupported Media Type. The origin server is refusing to service the request because the payload is in a format not supported by this method on the target resource.
 
 #### RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE {#RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE}
 
@@ -1140,7 +826,7 @@ RESPONSE_UNSUPPORTED_MEDIA_TYPE = 415
 RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE = 416
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 416 Requested Range Not Satisfiable. None of the ranges in the request's Range header field overlap the current extent of the selected resource or the set of ranges requested has been rejected due to invalid ranges or an excessive request of small or overlapping ranges.
 
 #### RESPONSE_EXPECTATION_FAILED {#RESPONSE_EXPECTATION_FAILED}
 
@@ -1148,7 +834,7 @@ RESPONSE_REQUESTED_RANGE_NOT_SATISFIABLE = 416
 RESPONSE_EXPECTATION_FAILED = 417
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 417 Expectation Failed. The expectation given in the request's Expect header field could not be met by at least one of the inbound servers.
 
 #### RESPONSE_IM_A_TEAPOT {#RESPONSE_IM_A_TEAPOT}
 
@@ -1156,7 +842,7 @@ RESPONSE_EXPECTATION_FAILED = 417
 RESPONSE_IM_A_TEAPOT = 418
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 418 I'm A Teapot. Any attempt to brew coffee with a teapot should result in the error code "418 I'm a teapot". The resulting entity body MAY be short and stout.
 
 #### RESPONSE_MISDIRECTED_REQUEST {#RESPONSE_MISDIRECTED_REQUEST}
 
@@ -1164,7 +850,7 @@ RESPONSE_IM_A_TEAPOT = 418
 RESPONSE_MISDIRECTED_REQUEST = 421
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 421 Misdirected Request. The request was directed at a server that is not able to produce a response. This can be sent by a server that is not configured to produce responses for the combination of scheme and authority that are included in the request URI.
 
 #### RESPONSE_UNPROCESSABLE_ENTITY {#RESPONSE_UNPROCESSABLE_ENTITY}
 
@@ -1172,7 +858,7 @@ RESPONSE_MISDIRECTED_REQUEST = 421
 RESPONSE_UNPROCESSABLE_ENTITY = 422
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 422 Unprocessable Entity (WebDAV). The server understands the content type of the request entity (hence a 415 Unsupported Media Type status code is inappropriate), and the syntax of the request entity is correct (thus a 400 Bad Request status code is inappropriate) but was unable to process the contained instructions.
 
 #### RESPONSE_LOCKED {#RESPONSE_LOCKED}
 
@@ -1180,7 +866,7 @@ RESPONSE_UNPROCESSABLE_ENTITY = 422
 RESPONSE_LOCKED = 423
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 423 Locked (WebDAV). The source or destination resource of a method is locked.
 
 #### RESPONSE_FAILED_DEPENDENCY {#RESPONSE_FAILED_DEPENDENCY}
 
@@ -1188,7 +874,7 @@ RESPONSE_LOCKED = 423
 RESPONSE_FAILED_DEPENDENCY = 424
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 424 Failed Dependency (WebDAV). The method could not be performed on the resource because the requested action depended on another action and that action failed.
 
 #### RESPONSE_UPGRADE_REQUIRED {#RESPONSE_UPGRADE_REQUIRED}
 
@@ -1196,7 +882,7 @@ RESPONSE_FAILED_DEPENDENCY = 424
 RESPONSE_UPGRADE_REQUIRED = 426
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 426 Upgrade Required. The server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol.
 
 #### RESPONSE_PRECONDITION_REQUIRED {#RESPONSE_PRECONDITION_REQUIRED}
 
@@ -1204,7 +890,7 @@ RESPONSE_UPGRADE_REQUIRED = 426
 RESPONSE_PRECONDITION_REQUIRED = 428
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 428 Precondition Required. The origin server requires the request to be conditional.
 
 #### RESPONSE_TOO_MANY_REQUESTS {#RESPONSE_TOO_MANY_REQUESTS}
 
@@ -1212,7 +898,7 @@ RESPONSE_PRECONDITION_REQUIRED = 428
 RESPONSE_TOO_MANY_REQUESTS = 429
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 429 Too Many Requests. The user has sent too many requests in a given amount of time (see "rate limiting"). Back off and increase time between requests or try again later.
 
 #### RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE {#RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE}
 
@@ -1220,7 +906,7 @@ RESPONSE_TOO_MANY_REQUESTS = 429
 RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE = 431
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 431 Request Header Fields Too Large. The server is unwilling to process the request because its header fields are too large. The request MAY be resubmitted after reducing the size of the request header fields.
 
 #### RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS {#RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS}
 
@@ -1228,7 +914,7 @@ RESPONSE_REQUEST_HEADER_FIELDS_TOO_LARGE = 431
 RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS = 451
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 451 Response Unavailable For Legal Reasons. The server is denying access to the resource as a consequence of a legal demand.
 
 #### RESPONSE_INTERNAL_SERVER_ERROR {#RESPONSE_INTERNAL_SERVER_ERROR}
 
@@ -1236,7 +922,7 @@ RESPONSE_UNAVAILABLE_FOR_LEGAL_REASONS = 451
 RESPONSE_INTERNAL_SERVER_ERROR = 500
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 500 Internal Server Error. The server encountered an unexpected condition that prevented it from fulfilling the request.
 
 #### RESPONSE_NOT_IMPLEMENTED {#RESPONSE_NOT_IMPLEMENTED}
 
@@ -1244,7 +930,7 @@ RESPONSE_INTERNAL_SERVER_ERROR = 500
 RESPONSE_NOT_IMPLEMENTED = 501
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 501 Not Implemented. The server does not support the functionality required to fulfill the request.
 
 #### RESPONSE_BAD_GATEWAY {#RESPONSE_BAD_GATEWAY}
 
@@ -1252,7 +938,7 @@ RESPONSE_NOT_IMPLEMENTED = 501
 RESPONSE_BAD_GATEWAY = 502
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 502 Bad Gateway. The server, while acting as a gateway or proxy, received an invalid response from an inbound server it accessed while attempting to fulfill the request. Usually returned by load balancers or proxies.
 
 #### RESPONSE_SERVICE_UNAVAILABLE {#RESPONSE_SERVICE_UNAVAILABLE}
 
@@ -1260,7 +946,7 @@ RESPONSE_BAD_GATEWAY = 502
 RESPONSE_SERVICE_UNAVAILABLE = 503
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 503 Service Unavailable. The server is currently unable to handle the request due to a temporary overload or scheduled maintenance, which will likely be alleviated after some delay. Try again later.
 
 #### RESPONSE_GATEWAY_TIMEOUT {#RESPONSE_GATEWAY_TIMEOUT}
 
@@ -1268,7 +954,7 @@ RESPONSE_SERVICE_UNAVAILABLE = 503
 RESPONSE_GATEWAY_TIMEOUT = 504
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 504 Gateway Timeout. The server, while acting as a gateway or proxy, did not receive a timely response from an upstream server it needed to access in order to complete the request. Usually returned by load balancers or proxies.
 
 #### RESPONSE_HTTP_VERSION_NOT_SUPPORTED {#RESPONSE_HTTP_VERSION_NOT_SUPPORTED}
 
@@ -1276,7 +962,7 @@ RESPONSE_GATEWAY_TIMEOUT = 504
 RESPONSE_HTTP_VERSION_NOT_SUPPORTED = 505
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 505 HTTP Version Not Supported. The server does not support, or refuses to support, the major version of HTTP that was used in the request message.
 
 #### RESPONSE_VARIANT_ALSO_NEGOTIATES {#RESPONSE_VARIANT_ALSO_NEGOTIATES}
 
@@ -1284,7 +970,7 @@ RESPONSE_HTTP_VERSION_NOT_SUPPORTED = 505
 RESPONSE_VARIANT_ALSO_NEGOTIATES = 506
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 506 Variant Also Negotiates. The server has an internal configuration error: the chosen variant resource is configured to engage in transparent content negotiation itself, and is therefore not a proper end point in the negotiation process.
 
 #### RESPONSE_INSUFFICIENT_STORAGE {#RESPONSE_INSUFFICIENT_STORAGE}
 
@@ -1292,7 +978,7 @@ RESPONSE_VARIANT_ALSO_NEGOTIATES = 506
 RESPONSE_INSUFFICIENT_STORAGE = 507
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 507 Insufficient Storage. The method could not be performed on the resource because the server is unable to store the representation needed to successfully complete the request.
 
 #### RESPONSE_LOOP_DETECTED {#RESPONSE_LOOP_DETECTED}
 
@@ -1300,7 +986,7 @@ RESPONSE_INSUFFICIENT_STORAGE = 507
 RESPONSE_LOOP_DETECTED = 508
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 508 Loop Detected. The server terminated an operation because it encountered an infinite loop while processing a request with "Depth: infinity". This status indicates that the entire operation failed.
 
 #### RESPONSE_NOT_EXTENDED {#RESPONSE_NOT_EXTENDED}
 
@@ -1308,7 +994,7 @@ RESPONSE_LOOP_DETECTED = 508
 RESPONSE_NOT_EXTENDED = 510
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 510 Not Extended. The policy for accessing the resource has not been met in the request. The server should send back all the information necessary for the client to issue an extended request.
 
 #### RESPONSE_NETWORK_AUTH_REQUIRED {#RESPONSE_NETWORK_AUTH_REQUIRED}
 
@@ -1316,4 +1002,6 @@ RESPONSE_NOT_EXTENDED = 510
 RESPONSE_NETWORK_AUTH_REQUIRED = 511
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP status code 511 Network Authentication Required. The client needs to authenticate to gain network access.
+
+---

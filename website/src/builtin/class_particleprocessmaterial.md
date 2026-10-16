@@ -1020,7 +1020,10 @@ Note: This has no effect when GPUParticles3D.local_coords is true, since particl
 emission_shape_offset: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_emission_shape_offset(value: Vector3)
+- Vector3 get_emission_shape_offset()
+
+The offset for the emission_shape, in local space.
 
 ### emission_shape_scale {#emission_shape_scale}
 
@@ -1028,7 +1031,10 @@ emission_shape_offset: Vector3
 emission_shape_scale: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_emission_shape_scale(value: Vector3)
+- Vector3 get_emission_shape_scale()
+
+The scale of the emission_shape, in local space.
 
 ### emission_shape {#emission_shape}
 
@@ -1261,7 +1267,10 @@ Percentage of the velocity of the respective GPUParticles2D or GPUParticles3D in
 velocity_pivot: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_velocity_pivot(value: Vector3)
+- Vector3 get_velocity_pivot()
+
+A pivot point used to calculate radial and orbital velocity of particles.
 
 ### direction {#direction}
 
@@ -1269,7 +1278,10 @@ velocity_pivot: Vector3
 direction: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_direction(value: Vector3)
+- Vector3 get_direction()
+
+Unit vector specifying the particles' emission direction.
 
 ### spread {#spread}
 
@@ -1570,7 +1582,10 @@ Rotation velocity curve over lifetime, per-axis. Enable use_rotation_velocity_3d
 gravity: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_gravity(value: Vector3)
+- Vector3 get_gravity()
+
+Gravity applied to every particle.
 
 ### linear_accel {#linear_accel}
 
@@ -1876,7 +1891,12 @@ Either a CurveTexture or a CurveXYZTexture that scales each particle based on it
 color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_color(value: Color)
+- Color get_color()
+
+Each particle's initial color. If the GPUParticles2D's texture is defined, it will be multiplied by this color.
+
+Note: color multiplies the particle mesh's vertex colors. To have a visible effect on a BaseMaterial3D, BaseMaterial3D.vertex_color_use_as_albedo must be true. For a ShaderMaterial, ALBEDO *= COLOR.rgb; must be inserted in the shader's fragment() function. Otherwise, color will have no visible effect.
 
 ### color_ramp {#color_ramp}
 
@@ -2098,7 +2118,12 @@ A small scale will result in smaller features with more detail while a high scal
 turbulence_noise_speed: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_turbulence_noise_speed(value: Vector3)
+- Vector3 get_turbulence_noise_speed()
+
+A scrolling velocity for the turbulence field. This sets a directional trend for the pattern to move in over time.
+
+The default value of Vector3(0, 0, 0) turns off the scrolling.
 
 ### turbulence_noise_speed_random {#turbulence_noise_speed_random}
 
@@ -2334,81 +2359,7 @@ Note: This signal is only emitted inside the editor for performance reasons.
 enum Parameter { PARAM_INITIAL_LINEAR_VELOCITY = 0, PARAM_ANGULAR_VELOCITY = 1, PARAM_ORBIT_VELOCITY = 2, PARAM_LINEAR_ACCEL = 3, PARAM_RADIAL_ACCEL = 4, PARAM_TANGENTIAL_ACCEL = 5, PARAM_DAMPING = 6, PARAM_ANGLE = 7, PARAM_SCALE = 8, PARAM_HUE_VARIATION = 9, PARAM_ANIM_SPEED = 10, PARAM_ANIM_OFFSET = 11, PARAM_RADIAL_VELOCITY = 15, PARAM_DIRECTIONAL_VELOCITY = 16, PARAM_SCALE_OVER_VELOCITY = 17, PARAM_MAX = 18, PARAM_TURB_VEL_INFLUENCE = 13, PARAM_TURB_INIT_DISPLACEMENT = 14, PARAM_TURB_INFLUENCE_OVER_LIFE = 12 }
 ```
 
-Parameter PARAM_INITIAL_LINEAR_VELOCITY = 0
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set initial velocity properties.
-
-Parameter PARAM_ANGULAR_VELOCITY = 1
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set angular velocity properties.
-
-Parameter PARAM_ORBIT_VELOCITY = 2
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set orbital velocity properties.
-
-Parameter PARAM_LINEAR_ACCEL = 3
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set linear acceleration properties.
-
-Parameter PARAM_RADIAL_ACCEL = 4
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set radial acceleration properties.
-
-Parameter PARAM_TANGENTIAL_ACCEL = 5
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set tangential acceleration properties.
-
-Parameter PARAM_DAMPING = 6
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set damping properties.
-
-Parameter PARAM_ANGLE = 7
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set angle properties.
-
-Parameter PARAM_SCALE = 8
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set scale properties.
-
-Parameter PARAM_HUE_VARIATION = 9
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set hue variation properties.
-
-Parameter PARAM_ANIM_SPEED = 10
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set animation speed properties.
-
-Parameter PARAM_ANIM_OFFSET = 11
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set animation offset properties.
-
-Parameter PARAM_RADIAL_VELOCITY = 15
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set radial velocity properties.
-
-Parameter PARAM_DIRECTIONAL_VELOCITY = 16
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set directional velocity properties.
-
-Parameter PARAM_SCALE_OVER_VELOCITY = 17
-
-Use with set_param_min(), set_param_max(), and set_param_texture() to set scale over velocity properties.
-
-Parameter PARAM_MAX = 18
-
-Represents the size of the Parameter enum.
-
-Parameter PARAM_TURB_VEL_INFLUENCE = 13
-
-Use with set_param_min() and set_param_max() to set the turbulence minimum und maximum influence on each particles velocity.
-
-Parameter PARAM_TURB_INIT_DISPLACEMENT = 14
-
-Use with set_param_min() and set_param_max() to set the turbulence minimum and maximum displacement of the particles spawn position.
-
-Parameter PARAM_TURB_INFLUENCE_OVER_LIFE = 12
-
-Use with set_param_texture() to set the turbulence influence over the particles life time.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PARAM_INITIAL_LINEAR_VELOCITY {#PARAM_INITIAL_LINEAR_VELOCITY}
 
@@ -2416,7 +2367,7 @@ Use with set_param_texture() to set the turbulence influence over the particles 
 PARAM_INITIAL_LINEAR_VELOCITY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set initial velocity properties.
 
 #### PARAM_ANGULAR_VELOCITY {#PARAM_ANGULAR_VELOCITY}
 
@@ -2424,7 +2375,7 @@ PARAM_INITIAL_LINEAR_VELOCITY = 0
 PARAM_ANGULAR_VELOCITY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set angular velocity properties.
 
 #### PARAM_ORBIT_VELOCITY {#PARAM_ORBIT_VELOCITY}
 
@@ -2432,7 +2383,7 @@ PARAM_ANGULAR_VELOCITY = 1
 PARAM_ORBIT_VELOCITY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set orbital velocity properties.
 
 #### PARAM_LINEAR_ACCEL {#PARAM_LINEAR_ACCEL}
 
@@ -2440,7 +2391,7 @@ PARAM_ORBIT_VELOCITY = 2
 PARAM_LINEAR_ACCEL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set linear acceleration properties.
 
 #### PARAM_RADIAL_ACCEL {#PARAM_RADIAL_ACCEL}
 
@@ -2448,7 +2399,7 @@ PARAM_LINEAR_ACCEL = 3
 PARAM_RADIAL_ACCEL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set radial acceleration properties.
 
 #### PARAM_TANGENTIAL_ACCEL {#PARAM_TANGENTIAL_ACCEL}
 
@@ -2456,7 +2407,7 @@ PARAM_RADIAL_ACCEL = 4
 PARAM_TANGENTIAL_ACCEL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set tangential acceleration properties.
 
 #### PARAM_DAMPING {#PARAM_DAMPING}
 
@@ -2464,7 +2415,7 @@ PARAM_TANGENTIAL_ACCEL = 5
 PARAM_DAMPING = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set damping properties.
 
 #### PARAM_ANGLE {#PARAM_ANGLE}
 
@@ -2472,7 +2423,7 @@ PARAM_DAMPING = 6
 PARAM_ANGLE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set angle properties.
 
 #### PARAM_SCALE {#PARAM_SCALE}
 
@@ -2480,7 +2431,7 @@ PARAM_ANGLE = 7
 PARAM_SCALE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set scale properties.
 
 #### PARAM_HUE_VARIATION {#PARAM_HUE_VARIATION}
 
@@ -2488,7 +2439,7 @@ PARAM_SCALE = 8
 PARAM_HUE_VARIATION = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set hue variation properties.
 
 #### PARAM_ANIM_SPEED {#PARAM_ANIM_SPEED}
 
@@ -2496,7 +2447,7 @@ PARAM_HUE_VARIATION = 9
 PARAM_ANIM_SPEED = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set animation speed properties.
 
 #### PARAM_ANIM_OFFSET {#PARAM_ANIM_OFFSET}
 
@@ -2504,7 +2455,7 @@ PARAM_ANIM_SPEED = 10
 PARAM_ANIM_OFFSET = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set animation offset properties.
 
 #### PARAM_RADIAL_VELOCITY {#PARAM_RADIAL_VELOCITY}
 
@@ -2512,7 +2463,7 @@ PARAM_ANIM_OFFSET = 11
 PARAM_RADIAL_VELOCITY = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set radial velocity properties.
 
 #### PARAM_DIRECTIONAL_VELOCITY {#PARAM_DIRECTIONAL_VELOCITY}
 
@@ -2520,7 +2471,7 @@ PARAM_RADIAL_VELOCITY = 15
 PARAM_DIRECTIONAL_VELOCITY = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set directional velocity properties.
 
 #### PARAM_SCALE_OVER_VELOCITY {#PARAM_SCALE_OVER_VELOCITY}
 
@@ -2528,7 +2479,7 @@ PARAM_DIRECTIONAL_VELOCITY = 16
 PARAM_SCALE_OVER_VELOCITY = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_texture() to set scale over velocity properties.
 
 #### PARAM_MAX {#PARAM_MAX}
 
@@ -2536,7 +2487,7 @@ PARAM_SCALE_OVER_VELOCITY = 17
 PARAM_MAX = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Parameter enum.
 
 #### PARAM_TURB_VEL_INFLUENCE {#PARAM_TURB_VEL_INFLUENCE}
 
@@ -2544,7 +2495,7 @@ PARAM_MAX = 18
 PARAM_TURB_VEL_INFLUENCE = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min() and set_param_max() to set the turbulence minimum und maximum influence on each particles velocity.
 
 #### PARAM_TURB_INIT_DISPLACEMENT {#PARAM_TURB_INIT_DISPLACEMENT}
 
@@ -2552,7 +2503,7 @@ PARAM_TURB_VEL_INFLUENCE = 13
 PARAM_TURB_INIT_DISPLACEMENT = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min() and set_param_max() to set the turbulence minimum and maximum displacement of the particles spawn position.
 
 #### PARAM_TURB_INFLUENCE_OVER_LIFE {#PARAM_TURB_INFLUENCE_OVER_LIFE}
 
@@ -2560,7 +2511,9 @@ PARAM_TURB_INIT_DISPLACEMENT = 14
 PARAM_TURB_INFLUENCE_OVER_LIFE = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_texture() to set the turbulence influence over the particles life time.
+
+---
 
 ### ParticleFlags {#enum-ParticleFlags}
 
@@ -2568,29 +2521,7 @@ PARAM_TURB_INFLUENCE_OVER_LIFE = 12
 enum ParticleFlags { PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY = 0, PARTICLE_FLAG_ROTATE_Y = 1, PARTICLE_FLAG_DISABLE_Z = 2, PARTICLE_FLAG_DAMPING_AS_FRICTION = 3, PARTICLE_FLAG_INHERIT_EMITTER_SCALE = 4, PARTICLE_FLAG_MAX = 5 }
 ```
 
-ParticleFlags PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY = 0
-
-Use with set_particle_flag() to set particle_flag_align_y.
-
-ParticleFlags PARTICLE_FLAG_ROTATE_Y = 1
-
-Use with set_particle_flag() to set particle_flag_rotate_y.
-
-ParticleFlags PARTICLE_FLAG_DISABLE_Z = 2
-
-Use with set_particle_flag() to set particle_flag_disable_z.
-
-ParticleFlags PARTICLE_FLAG_DAMPING_AS_FRICTION = 3
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-ParticleFlags PARTICLE_FLAG_INHERIT_EMITTER_SCALE = 4
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-ParticleFlags PARTICLE_FLAG_MAX = 5
-
-Represents the size of the ParticleFlags enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY {#PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY}
 
@@ -2598,7 +2529,7 @@ Represents the size of the ParticleFlags enum.
 PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_particle_flag() to set particle_flag_align_y.
 
 #### PARTICLE_FLAG_ROTATE_Y {#PARTICLE_FLAG_ROTATE_Y}
 
@@ -2606,7 +2537,7 @@ PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY = 0
 PARTICLE_FLAG_ROTATE_Y = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_particle_flag() to set particle_flag_rotate_y.
 
 #### PARTICLE_FLAG_DISABLE_Z {#PARTICLE_FLAG_DISABLE_Z}
 
@@ -2614,7 +2545,7 @@ PARTICLE_FLAG_ROTATE_Y = 1
 PARTICLE_FLAG_DISABLE_Z = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_particle_flag() to set particle_flag_disable_z.
 
 #### PARTICLE_FLAG_DAMPING_AS_FRICTION {#PARTICLE_FLAG_DAMPING_AS_FRICTION}
 
@@ -2622,7 +2553,7 @@ PARTICLE_FLAG_DISABLE_Z = 2
 PARTICLE_FLAG_DAMPING_AS_FRICTION = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### PARTICLE_FLAG_INHERIT_EMITTER_SCALE {#PARTICLE_FLAG_INHERIT_EMITTER_SCALE}
 
@@ -2630,7 +2561,7 @@ PARTICLE_FLAG_DAMPING_AS_FRICTION = 3
 PARTICLE_FLAG_INHERIT_EMITTER_SCALE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### PARTICLE_FLAG_MAX {#PARTICLE_FLAG_MAX}
 
@@ -2638,7 +2569,9 @@ PARTICLE_FLAG_INHERIT_EMITTER_SCALE = 4
 PARTICLE_FLAG_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the ParticleFlags enum.
+
+---
 
 ### EmissionShape {#enum-EmissionShape}
 
@@ -2646,37 +2579,7 @@ PARTICLE_FLAG_MAX = 5
 enum EmissionShape { EMISSION_SHAPE_POINT = 0, EMISSION_SHAPE_SPHERE = 1, EMISSION_SHAPE_SPHERE_SURFACE = 2, EMISSION_SHAPE_BOX = 3, EMISSION_SHAPE_POINTS = 4, EMISSION_SHAPE_DIRECTED_POINTS = 5, EMISSION_SHAPE_RING = 6, EMISSION_SHAPE_MAX = 7 }
 ```
 
-EmissionShape EMISSION_SHAPE_POINT = 0
-
-All particles will be emitted from a single point.
-
-EmissionShape EMISSION_SHAPE_SPHERE = 1
-
-Particles will be emitted in the volume of a sphere.
-
-EmissionShape EMISSION_SHAPE_SPHERE_SURFACE = 2
-
-Particles will be emitted on the surface of a sphere.
-
-EmissionShape EMISSION_SHAPE_BOX = 3
-
-Particles will be emitted in the volume of a box.
-
-EmissionShape EMISSION_SHAPE_POINTS = 4
-
-Particles will be emitted at a position determined by sampling a random point on the emission_point_texture. Particle color will be modulated by emission_color_texture.
-
-EmissionShape EMISSION_SHAPE_DIRECTED_POINTS = 5
-
-Particles will be emitted at a position determined by sampling a random point on the emission_point_texture. Particle velocity and rotation will be set based on emission_normal_texture. Particle color will be modulated by emission_color_texture.
-
-EmissionShape EMISSION_SHAPE_RING = 6
-
-Particles will be emitted in a ring or cylinder.
-
-EmissionShape EMISSION_SHAPE_MAX = 7
-
-Represents the size of the EmissionShape enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EMISSION_SHAPE_POINT {#EMISSION_SHAPE_POINT}
 
@@ -2684,7 +2587,7 @@ Represents the size of the EmissionShape enum.
 EMISSION_SHAPE_POINT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+All particles will be emitted from a single point.
 
 #### EMISSION_SHAPE_SPHERE {#EMISSION_SHAPE_SPHERE}
 
@@ -2692,7 +2595,7 @@ EMISSION_SHAPE_POINT = 0
 EMISSION_SHAPE_SPHERE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted in the volume of a sphere.
 
 #### EMISSION_SHAPE_SPHERE_SURFACE {#EMISSION_SHAPE_SPHERE_SURFACE}
 
@@ -2700,7 +2603,7 @@ EMISSION_SHAPE_SPHERE = 1
 EMISSION_SHAPE_SPHERE_SURFACE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted on the surface of a sphere.
 
 #### EMISSION_SHAPE_BOX {#EMISSION_SHAPE_BOX}
 
@@ -2708,7 +2611,7 @@ EMISSION_SHAPE_SPHERE_SURFACE = 2
 EMISSION_SHAPE_BOX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted in the volume of a box.
 
 #### EMISSION_SHAPE_POINTS {#EMISSION_SHAPE_POINTS}
 
@@ -2716,7 +2619,7 @@ EMISSION_SHAPE_BOX = 3
 EMISSION_SHAPE_POINTS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted at a position determined by sampling a random point on the emission_point_texture. Particle color will be modulated by emission_color_texture.
 
 #### EMISSION_SHAPE_DIRECTED_POINTS {#EMISSION_SHAPE_DIRECTED_POINTS}
 
@@ -2724,7 +2627,7 @@ EMISSION_SHAPE_POINTS = 4
 EMISSION_SHAPE_DIRECTED_POINTS = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted at a position determined by sampling a random point on the emission_point_texture. Particle velocity and rotation will be set based on emission_normal_texture. Particle color will be modulated by emission_color_texture.
 
 #### EMISSION_SHAPE_RING {#EMISSION_SHAPE_RING}
 
@@ -2732,7 +2635,7 @@ EMISSION_SHAPE_DIRECTED_POINTS = 5
 EMISSION_SHAPE_RING = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted in a ring or cylinder.
 
 #### EMISSION_SHAPE_MAX {#EMISSION_SHAPE_MAX}
 
@@ -2740,7 +2643,9 @@ EMISSION_SHAPE_RING = 6
 EMISSION_SHAPE_MAX = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the EmissionShape enum.
+
+---
 
 ### SubEmitterMode {#enum-SubEmitterMode}
 
@@ -2748,29 +2653,7 @@ EMISSION_SHAPE_MAX = 7
 enum SubEmitterMode { SUB_EMITTER_DISABLED = 0, SUB_EMITTER_CONSTANT = 1, SUB_EMITTER_AT_END = 2, SUB_EMITTER_AT_COLLISION = 3, SUB_EMITTER_AT_START = 4, SUB_EMITTER_MAX = 5 }
 ```
 
-SubEmitterMode SUB_EMITTER_DISABLED = 0
-
-The subemitter is disabled.
-
-SubEmitterMode SUB_EMITTER_CONSTANT = 1
-
-The submitter is emitted on the constant interval defined by sub_emitter_frequency.
-
-SubEmitterMode SUB_EMITTER_AT_END = 2
-
-The subemitter is emitted at the end of the particle's lifetime.
-
-SubEmitterMode SUB_EMITTER_AT_COLLISION = 3
-
-The subemitter is emitted when the particle collides.
-
-SubEmitterMode SUB_EMITTER_AT_START = 4
-
-The subemitter is emitted when the particle spawns.
-
-SubEmitterMode SUB_EMITTER_MAX = 5
-
-Represents the size of the SubEmitterMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SUB_EMITTER_DISABLED {#SUB_EMITTER_DISABLED}
 
@@ -2778,7 +2661,7 @@ Represents the size of the SubEmitterMode enum.
 SUB_EMITTER_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The subemitter is disabled.
 
 #### SUB_EMITTER_CONSTANT {#SUB_EMITTER_CONSTANT}
 
@@ -2786,7 +2669,7 @@ SUB_EMITTER_DISABLED = 0
 SUB_EMITTER_CONSTANT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The submitter is emitted on the constant interval defined by sub_emitter_frequency.
 
 #### SUB_EMITTER_AT_END {#SUB_EMITTER_AT_END}
 
@@ -2794,7 +2677,7 @@ SUB_EMITTER_CONSTANT = 1
 SUB_EMITTER_AT_END = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The subemitter is emitted at the end of the particle's lifetime.
 
 #### SUB_EMITTER_AT_COLLISION {#SUB_EMITTER_AT_COLLISION}
 
@@ -2802,7 +2685,7 @@ SUB_EMITTER_AT_END = 2
 SUB_EMITTER_AT_COLLISION = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The subemitter is emitted when the particle collides.
 
 #### SUB_EMITTER_AT_START {#SUB_EMITTER_AT_START}
 
@@ -2810,7 +2693,7 @@ SUB_EMITTER_AT_COLLISION = 3
 SUB_EMITTER_AT_START = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The subemitter is emitted when the particle spawns.
 
 #### SUB_EMITTER_MAX {#SUB_EMITTER_MAX}
 
@@ -2818,7 +2701,9 @@ SUB_EMITTER_AT_START = 4
 SUB_EMITTER_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the SubEmitterMode enum.
+
+---
 
 ### CollisionMode {#enum-CollisionMode}
 
@@ -2826,21 +2711,7 @@ SUB_EMITTER_MAX = 5
 enum CollisionMode { COLLISION_DISABLED = 0, COLLISION_RIGID = 1, COLLISION_HIDE_ON_CONTACT = 2, COLLISION_MAX = 3 }
 ```
 
-CollisionMode COLLISION_DISABLED = 0
-
-No collision for particles. Particles will go through GPUParticlesCollision3D nodes.
-
-CollisionMode COLLISION_RIGID = 1
-
-RigidBody3D-style collision for particles using GPUParticlesCollision3D nodes.
-
-CollisionMode COLLISION_HIDE_ON_CONTACT = 2
-
-Hide particles instantly when colliding with a GPUParticlesCollision3D node. This can be combined with a subemitter that uses the COLLISION_RIGID collision mode to "replace" the parent particle with the subemitter on impact.
-
-CollisionMode COLLISION_MAX = 3
-
-Represents the size of the CollisionMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### COLLISION_DISABLED {#COLLISION_DISABLED}
 
@@ -2848,7 +2719,7 @@ Represents the size of the CollisionMode enum.
 COLLISION_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No collision for particles. Particles will go through GPUParticlesCollision3D nodes.
 
 #### COLLISION_RIGID {#COLLISION_RIGID}
 
@@ -2856,7 +2727,7 @@ COLLISION_DISABLED = 0
 COLLISION_RIGID = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+RigidBody3D-style collision for particles using GPUParticlesCollision3D nodes.
 
 #### COLLISION_HIDE_ON_CONTACT {#COLLISION_HIDE_ON_CONTACT}
 
@@ -2864,7 +2735,7 @@ COLLISION_RIGID = 1
 COLLISION_HIDE_ON_CONTACT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hide particles instantly when colliding with a GPUParticlesCollision3D node. This can be combined with a subemitter that uses the COLLISION_RIGID collision mode to "replace" the parent particle with the subemitter on impact.
 
 #### COLLISION_MAX {#COLLISION_MAX}
 
@@ -2872,4 +2743,6 @@ COLLISION_HIDE_ON_CONTACT = 2
 COLLISION_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the CollisionMode enum.
+
+---

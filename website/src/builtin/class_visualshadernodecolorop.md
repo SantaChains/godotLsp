@@ -49,7 +49,13 @@ An operator to be applied to the inputs.
 enum Operator { OP_SCREEN = 0, OP_DIFFERENCE = 1, OP_DARKEN = 2, OP_LIGHTEN = 3, OP_OVERLAY = 4, OP_DODGE = 5, OP_BURN = 6, OP_SOFT_LIGHT = 7, OP_HARD_LIGHT = 8, OP_MAX = 9 }
 ```
 
-Operator OP_SCREEN = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### OP_SCREEN {#OP_SCREEN}
+
+```gdscript
+OP_SCREEN = 0
+```
 
 Produce a screen effect with the following formula:
 
@@ -57,7 +63,11 @@ Produce a screen effect with the following formula:
 result = vec3(1.0) - (vec3(1.0) - a) * (vec3(1.0) - b);
 ```
 
-Operator OP_DIFFERENCE = 1
+#### OP_DIFFERENCE {#OP_DIFFERENCE}
+
+```gdscript
+OP_DIFFERENCE = 1
+```
 
 Produce a difference effect with the following formula:
 
@@ -65,7 +75,11 @@ Produce a difference effect with the following formula:
 result = abs(a - b);
 ```
 
-Operator OP_DARKEN = 2
+#### OP_DARKEN {#OP_DARKEN}
+
+```gdscript
+OP_DARKEN = 2
+```
 
 Produce a darken effect with the following formula:
 
@@ -73,7 +87,11 @@ Produce a darken effect with the following formula:
 result = min(a, b);
 ```
 
-Operator OP_LIGHTEN = 3
+#### OP_LIGHTEN {#OP_LIGHTEN}
+
+```gdscript
+OP_LIGHTEN = 3
+```
 
 Produce a lighten effect with the following formula:
 
@@ -81,7 +99,11 @@ Produce a lighten effect with the following formula:
 result = max(a, b);
 ```
 
-Operator OP_OVERLAY = 4
+#### OP_OVERLAY {#OP_OVERLAY}
+
+```gdscript
+OP_OVERLAY = 4
+```
 
 Produce an overlay effect with the following formula:
 
@@ -97,7 +119,11 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
-Operator OP_DODGE = 5
+#### OP_DODGE {#OP_DODGE}
+
+```gdscript
+OP_DODGE = 5
+```
 
 Produce a dodge effect with the following formula:
 
@@ -105,7 +131,11 @@ Produce a dodge effect with the following formula:
 result = a / (vec3(1.0) - b);
 ```
 
-Operator OP_BURN = 6
+#### OP_BURN {#OP_BURN}
+
+```gdscript
+OP_BURN = 6
+```
 
 Produce a burn effect with the following formula:
 
@@ -113,7 +143,11 @@ Produce a burn effect with the following formula:
 result = vec3(1.0) - (vec3(1.0) - a) / b;
 ```
 
-Operator OP_SOFT_LIGHT = 7
+#### OP_SOFT_LIGHT {#OP_SOFT_LIGHT}
+
+```gdscript
+OP_SOFT_LIGHT = 7
+```
 
 Produce a soft light effect with the following formula:
 
@@ -129,7 +163,11 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
-Operator OP_HARD_LIGHT = 8
+#### OP_HARD_LIGHT {#OP_HARD_LIGHT}
+
+```gdscript
+OP_HARD_LIGHT = 8
+```
 
 Produce a hard light effect with the following formula:
 
@@ -145,86 +183,12 @@ for (int i = 0; i < 3; i++) {
 }
 ```
 
-Operator OP_MAX = 9
-
-Represents the size of the Operator enum.
-
-#### OP_SCREEN {#OP_SCREEN}
-
-```gdscript
-OP_SCREEN = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### OP_DIFFERENCE {#OP_DIFFERENCE}
-
-```gdscript
-OP_DIFFERENCE = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### OP_DARKEN {#OP_DARKEN}
-
-```gdscript
-OP_DARKEN = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### OP_LIGHTEN {#OP_LIGHTEN}
-
-```gdscript
-OP_LIGHTEN = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### OP_OVERLAY {#OP_OVERLAY}
-
-```gdscript
-OP_OVERLAY = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### OP_DODGE {#OP_DODGE}
-
-```gdscript
-OP_DODGE = 5
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### OP_BURN {#OP_BURN}
-
-```gdscript
-OP_BURN = 6
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### OP_SOFT_LIGHT {#OP_SOFT_LIGHT}
-
-```gdscript
-OP_SOFT_LIGHT = 7
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### OP_HARD_LIGHT {#OP_HARD_LIGHT}
-
-```gdscript
-OP_HARD_LIGHT = 8
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### OP_MAX {#OP_MAX}
 
 ```gdscript
 OP_MAX = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Operator enum.
+
+---

@@ -126,7 +126,10 @@ void set_thickness(thickness: float)
 size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3)
+- Vector3 get_size()
+
+The collision SDF's size in 3D units. To improve SDF quality, the size should be set as small as possible while covering the parts of the scene you need.
 
 ### resolution {#resolution}
 
@@ -180,33 +183,7 @@ The 3D texture representing the signed distance field.
 enum Resolution { RESOLUTION_16 = 0, RESOLUTION_32 = 1, RESOLUTION_64 = 2, RESOLUTION_128 = 3, RESOLUTION_256 = 4, RESOLUTION_512 = 5, RESOLUTION_MAX = 6 }
 ```
 
-Resolution RESOLUTION_16 = 0
-
-Bake a 16×16×16 signed distance field. This is the fastest option, but also the least precise.
-
-Resolution RESOLUTION_32 = 1
-
-Bake a 32×32×32 signed distance field.
-
-Resolution RESOLUTION_64 = 2
-
-Bake a 64×64×64 signed distance field.
-
-Resolution RESOLUTION_128 = 3
-
-Bake a 128×128×128 signed distance field.
-
-Resolution RESOLUTION_256 = 4
-
-Bake a 256×256×256 signed distance field.
-
-Resolution RESOLUTION_512 = 5
-
-Bake a 512×512×512 signed distance field. This is the slowest option, but also the most precise.
-
-Resolution RESOLUTION_MAX = 6
-
-Represents the size of the Resolution enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RESOLUTION_16 {#RESOLUTION_16}
 
@@ -214,7 +191,7 @@ Represents the size of the Resolution enum.
 RESOLUTION_16 = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bake a 16×16×16 signed distance field. This is the fastest option, but also the least precise.
 
 #### RESOLUTION_32 {#RESOLUTION_32}
 
@@ -222,7 +199,7 @@ RESOLUTION_16 = 0
 RESOLUTION_32 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bake a 32×32×32 signed distance field.
 
 #### RESOLUTION_64 {#RESOLUTION_64}
 
@@ -230,7 +207,7 @@ RESOLUTION_32 = 1
 RESOLUTION_64 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bake a 64×64×64 signed distance field.
 
 #### RESOLUTION_128 {#RESOLUTION_128}
 
@@ -238,7 +215,7 @@ RESOLUTION_64 = 2
 RESOLUTION_128 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bake a 128×128×128 signed distance field.
 
 #### RESOLUTION_256 {#RESOLUTION_256}
 
@@ -246,7 +223,7 @@ RESOLUTION_128 = 3
 RESOLUTION_256 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bake a 256×256×256 signed distance field.
 
 #### RESOLUTION_512 {#RESOLUTION_512}
 
@@ -254,7 +231,7 @@ RESOLUTION_256 = 4
 RESOLUTION_512 = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bake a 512×512×512 signed distance field. This is the slowest option, but also the most precise.
 
 #### RESOLUTION_MAX {#RESOLUTION_MAX}
 
@@ -262,4 +239,6 @@ RESOLUTION_512 = 5
 RESOLUTION_MAX = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Resolution enum.
+
+---

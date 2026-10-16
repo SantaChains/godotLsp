@@ -224,4 +224,9 @@ The Skin to be used by this instance.
 skeleton: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_skeleton_path(value: NodePath)
+- NodePath get_skeleton_path()
+
+NodePath to the Skeleton3D associated with the instance.
+
+Note: The default value of this property has changed in Godot 4.6. Enable ProjectSettings.animation/compatibility/default_parent_skeleton_in_mesh_instance_3d if the old behavior is needed for compatibility.

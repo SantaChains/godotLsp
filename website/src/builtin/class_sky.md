@@ -105,37 +105,7 @@ Note: Some hardware will have trouble with higher radiance sizes, especially RAD
 enum RadianceSize { RADIANCE_SIZE_32 = 0, RADIANCE_SIZE_64 = 1, RADIANCE_SIZE_128 = 2, RADIANCE_SIZE_256 = 3, RADIANCE_SIZE_512 = 4, RADIANCE_SIZE_1024 = 5, RADIANCE_SIZE_2048 = 6, RADIANCE_SIZE_MAX = 7 }
 ```
 
-RadianceSize RADIANCE_SIZE_32 = 0
-
-Radiance texture size is 32×32 pixels.
-
-RadianceSize RADIANCE_SIZE_64 = 1
-
-Radiance texture size is 64×64 pixels.
-
-RadianceSize RADIANCE_SIZE_128 = 2
-
-Radiance texture size is 128×128 pixels.
-
-RadianceSize RADIANCE_SIZE_256 = 3
-
-Radiance texture size is 256×256 pixels.
-
-RadianceSize RADIANCE_SIZE_512 = 4
-
-Radiance texture size is 512×512 pixels.
-
-RadianceSize RADIANCE_SIZE_1024 = 5
-
-Radiance texture size is 1024×1024 pixels.
-
-RadianceSize RADIANCE_SIZE_2048 = 6
-
-Radiance texture size is 2048×2048 pixels.
-
-RadianceSize RADIANCE_SIZE_MAX = 7
-
-Represents the size of the RadianceSize enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RADIANCE_SIZE_32 {#RADIANCE_SIZE_32}
 
@@ -143,7 +113,7 @@ Represents the size of the RadianceSize enum.
 RADIANCE_SIZE_32 = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Radiance texture size is 32×32 pixels.
 
 #### RADIANCE_SIZE_64 {#RADIANCE_SIZE_64}
 
@@ -151,7 +121,7 @@ RADIANCE_SIZE_32 = 0
 RADIANCE_SIZE_64 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Radiance texture size is 64×64 pixels.
 
 #### RADIANCE_SIZE_128 {#RADIANCE_SIZE_128}
 
@@ -159,7 +129,7 @@ RADIANCE_SIZE_64 = 1
 RADIANCE_SIZE_128 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Radiance texture size is 128×128 pixels.
 
 #### RADIANCE_SIZE_256 {#RADIANCE_SIZE_256}
 
@@ -167,7 +137,7 @@ RADIANCE_SIZE_128 = 2
 RADIANCE_SIZE_256 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Radiance texture size is 256×256 pixels.
 
 #### RADIANCE_SIZE_512 {#RADIANCE_SIZE_512}
 
@@ -175,7 +145,7 @@ RADIANCE_SIZE_256 = 3
 RADIANCE_SIZE_512 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Radiance texture size is 512×512 pixels.
 
 #### RADIANCE_SIZE_1024 {#RADIANCE_SIZE_1024}
 
@@ -183,7 +153,7 @@ RADIANCE_SIZE_512 = 4
 RADIANCE_SIZE_1024 = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Radiance texture size is 1024×1024 pixels.
 
 #### RADIANCE_SIZE_2048 {#RADIANCE_SIZE_2048}
 
@@ -191,7 +161,7 @@ RADIANCE_SIZE_1024 = 5
 RADIANCE_SIZE_2048 = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Radiance texture size is 2048×2048 pixels.
 
 #### RADIANCE_SIZE_MAX {#RADIANCE_SIZE_MAX}
 
@@ -199,7 +169,9 @@ RADIANCE_SIZE_2048 = 6
 RADIANCE_SIZE_MAX = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the RadianceSize enum.
+
+---
 
 ### ProcessMode {#enum-ProcessMode}
 
@@ -207,23 +179,7 @@ RADIANCE_SIZE_MAX = 7
 enum ProcessMode { PROCESS_MODE_AUTOMATIC = 0, PROCESS_MODE_QUALITY = 1, PROCESS_MODE_INCREMENTAL = 2, PROCESS_MODE_REALTIME = 3 }
 ```
 
-ProcessMode PROCESS_MODE_AUTOMATIC = 0
-
-Automatically selects the appropriate process mode based on your sky shader. If your shader uses TIME or POSITION, this will use PROCESS_MODE_REALTIME. If your shader uses any of the LIGHT_* variables or any custom uniforms, this uses PROCESS_MODE_INCREMENTAL. Otherwise, this defaults to PROCESS_MODE_QUALITY.
-
-ProcessMode PROCESS_MODE_QUALITY = 1
-
-Uses high quality importance sampling to process the radiance map. In general, this results in much higher quality than PROCESS_MODE_REALTIME but takes much longer to generate. This should not be used if you plan on changing the sky at runtime. If you are finding that the reflection is not blurry enough and is showing sparkles or fireflies, try increasing ProjectSettings.rendering/reflections/sky_reflections/ggx_samples.
-
-ProcessMode PROCESS_MODE_INCREMENTAL = 2
-
-Uses the same high quality importance sampling to process the radiance map as PROCESS_MODE_QUALITY, but updates over several frames. The number of frames is determined by ProjectSettings.rendering/reflections/sky_reflections/roughness_layers. Use this when you need highest quality radiance maps, but have a sky that updates slowly.
-
-ProcessMode PROCESS_MODE_REALTIME = 3
-
-Uses the fast filtering algorithm to process the radiance map. In general this results in lower quality, but substantially faster run times. If you need better quality, but still need to update the sky every frame, consider turning on ProjectSettings.rendering/reflections/sky_reflections/fast_filter_high_quality.
-
-Note: The fast filtering algorithm is limited to 256×256 cubemaps, so radiance_size must be set to RADIANCE_SIZE_256. Otherwise, a warning is printed and the overridden radiance size is ignored.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PROCESS_MODE_AUTOMATIC {#PROCESS_MODE_AUTOMATIC}
 
@@ -231,7 +187,7 @@ Note: The fast filtering algorithm is limited to 256×256 cubemaps, so radiance_
 PROCESS_MODE_AUTOMATIC = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatically selects the appropriate process mode based on your sky shader. If your shader uses TIME or POSITION, this will use PROCESS_MODE_REALTIME. If your shader uses any of the LIGHT_* variables or any custom uniforms, this uses PROCESS_MODE_INCREMENTAL. Otherwise, this defaults to PROCESS_MODE_QUALITY.
 
 #### PROCESS_MODE_QUALITY {#PROCESS_MODE_QUALITY}
 
@@ -239,7 +195,7 @@ PROCESS_MODE_AUTOMATIC = 0
 PROCESS_MODE_QUALITY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses high quality importance sampling to process the radiance map. In general, this results in much higher quality than PROCESS_MODE_REALTIME but takes much longer to generate. This should not be used if you plan on changing the sky at runtime. If you are finding that the reflection is not blurry enough and is showing sparkles or fireflies, try increasing ProjectSettings.rendering/reflections/sky_reflections/ggx_samples.
 
 #### PROCESS_MODE_INCREMENTAL {#PROCESS_MODE_INCREMENTAL}
 
@@ -247,7 +203,7 @@ PROCESS_MODE_QUALITY = 1
 PROCESS_MODE_INCREMENTAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses the same high quality importance sampling to process the radiance map as PROCESS_MODE_QUALITY, but updates over several frames. The number of frames is determined by ProjectSettings.rendering/reflections/sky_reflections/roughness_layers. Use this when you need highest quality radiance maps, but have a sky that updates slowly.
 
 #### PROCESS_MODE_REALTIME {#PROCESS_MODE_REALTIME}
 
@@ -255,4 +211,8 @@ PROCESS_MODE_INCREMENTAL = 2
 PROCESS_MODE_REALTIME = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses the fast filtering algorithm to process the radiance map. In general this results in lower quality, but substantially faster run times. If you need better quality, but still need to update the sky every frame, consider turning on ProjectSettings.rendering/reflections/sky_reflections/fast_filter_high_quality.
+
+Note: The fast filtering algorithm is limited to 256×256 cubemaps, so radiance_size must be set to RADIANCE_SIZE_256. Otherwise, a warning is printed and the overridden radiance size is ignored.
+
+---

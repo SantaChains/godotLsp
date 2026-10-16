@@ -103,25 +103,7 @@ Sets the level of precision to use for the derivative function. When using the C
 enum OpType { OP_TYPE_SCALAR = 0, OP_TYPE_VECTOR_2D = 1, OP_TYPE_VECTOR_3D = 2, OP_TYPE_VECTOR_4D = 3, OP_TYPE_MAX = 4 }
 ```
 
-OpType OP_TYPE_SCALAR = 0
-
-A floating-point scalar.
-
-OpType OP_TYPE_VECTOR_2D = 1
-
-A 2D vector type.
-
-OpType OP_TYPE_VECTOR_3D = 2
-
-A 3D vector type.
-
-OpType OP_TYPE_VECTOR_4D = 3
-
-A 4D vector type.
-
-OpType OP_TYPE_MAX = 4
-
-Represents the size of the OpType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OP_TYPE_SCALAR {#OP_TYPE_SCALAR}
 
@@ -129,7 +111,7 @@ Represents the size of the OpType enum.
 OP_TYPE_SCALAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A floating-point scalar.
 
 #### OP_TYPE_VECTOR_2D {#OP_TYPE_VECTOR_2D}
 
@@ -137,7 +119,7 @@ OP_TYPE_SCALAR = 0
 OP_TYPE_VECTOR_2D = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 2D vector type.
 
 #### OP_TYPE_VECTOR_3D {#OP_TYPE_VECTOR_3D}
 
@@ -145,7 +127,7 @@ OP_TYPE_VECTOR_2D = 1
 OP_TYPE_VECTOR_3D = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 3D vector type.
 
 #### OP_TYPE_VECTOR_4D {#OP_TYPE_VECTOR_4D}
 
@@ -153,7 +135,7 @@ OP_TYPE_VECTOR_3D = 2
 OP_TYPE_VECTOR_4D = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 4D vector type.
 
 #### OP_TYPE_MAX {#OP_TYPE_MAX}
 
@@ -161,7 +143,9 @@ OP_TYPE_VECTOR_4D = 3
 OP_TYPE_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the OpType enum.
+
+---
 
 ### Function {#enum-Function}
 
@@ -169,21 +153,7 @@ OP_TYPE_MAX = 4
 enum Function { FUNC_SUM = 0, FUNC_X = 1, FUNC_Y = 2, FUNC_MAX = 3 }
 ```
 
-Function FUNC_SUM = 0
-
-Sum of absolute derivative in x and y.
-
-Function FUNC_X = 1
-
-Derivative in x using local differencing.
-
-Function FUNC_Y = 2
-
-Derivative in y using local differencing.
-
-Function FUNC_MAX = 3
-
-Represents the size of the Function enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FUNC_SUM {#FUNC_SUM}
 
@@ -191,7 +161,7 @@ Represents the size of the Function enum.
 FUNC_SUM = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sum of absolute derivative in x and y.
 
 #### FUNC_X {#FUNC_X}
 
@@ -199,7 +169,7 @@ FUNC_SUM = 0
 FUNC_X = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Derivative in x using local differencing.
 
 #### FUNC_Y {#FUNC_Y}
 
@@ -207,7 +177,7 @@ FUNC_X = 1
 FUNC_Y = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Derivative in y using local differencing.
 
 #### FUNC_MAX {#FUNC_MAX}
 
@@ -215,7 +185,9 @@ FUNC_Y = 2
 FUNC_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Function enum.
+
+---
 
 ### Precision {#enum-Precision}
 
@@ -223,21 +195,7 @@ FUNC_MAX = 3
 enum Precision { PRECISION_NONE = 0, PRECISION_COARSE = 1, PRECISION_FINE = 2, PRECISION_MAX = 3 }
 ```
 
-Precision PRECISION_NONE = 0
-
-No precision is specified, the GPU driver is allowed to use whatever level of precision it chooses. This is the default option and is equivalent to using dFdx() or dFdy() in text shaders.
-
-Precision PRECISION_COARSE = 1
-
-The derivative will be calculated using the current fragment's neighbors (which may not include the current fragment). This tends to be faster than using PRECISION_FINE, but may not be suitable when more precision is needed. This is equivalent to using dFdxCoarse() or dFdyCoarse() in text shaders.
-
-Precision PRECISION_FINE = 2
-
-The derivative will be calculated using the current fragment and its immediate neighbors. This tends to be slower than using PRECISION_COARSE, but may be necessary when more precision is needed. This is equivalent to using dFdxFine() or dFdyFine() in text shaders.
-
-Precision PRECISION_MAX = 3
-
-Represents the size of the Precision enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PRECISION_NONE {#PRECISION_NONE}
 
@@ -245,7 +203,7 @@ Represents the size of the Precision enum.
 PRECISION_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No precision is specified, the GPU driver is allowed to use whatever level of precision it chooses. This is the default option and is equivalent to using dFdx() or dFdy() in text shaders.
 
 #### PRECISION_COARSE {#PRECISION_COARSE}
 
@@ -253,7 +211,7 @@ PRECISION_NONE = 0
 PRECISION_COARSE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The derivative will be calculated using the current fragment's neighbors (which may not include the current fragment). This tends to be faster than using PRECISION_FINE, but may not be suitable when more precision is needed. This is equivalent to using dFdxCoarse() or dFdyCoarse() in text shaders.
 
 #### PRECISION_FINE {#PRECISION_FINE}
 
@@ -261,7 +219,7 @@ PRECISION_COARSE = 1
 PRECISION_FINE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The derivative will be calculated using the current fragment and its immediate neighbors. This tends to be slower than using PRECISION_COARSE, but may be necessary when more precision is needed. This is equivalent to using dFdxFine() or dFdyFine() in text shaders.
 
 #### PRECISION_MAX {#PRECISION_MAX}
 
@@ -269,4 +227,6 @@ PRECISION_FINE = 2
 PRECISION_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Precision enum.
+
+---

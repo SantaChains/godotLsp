@@ -422,29 +422,7 @@ Note: This signal is only emitted on Android or iOS, or on desktop/web platforms
 enum ScrollMode { SCROLL_MODE_DISABLED = 0, SCROLL_MODE_AUTO = 1, SCROLL_MODE_SHOW_ALWAYS = 2, SCROLL_MODE_SHOW_NEVER = 3, SCROLL_MODE_RESERVE = 4, SCROLL_MODE_MAXIMIZE_FIRST = 5 }
 ```
 
-ScrollMode SCROLL_MODE_DISABLED = 0
-
-Scrolling disabled, scrollbar will be invisible.
-
-ScrollMode SCROLL_MODE_AUTO = 1
-
-Scrolling enabled, scrollbar will be visible only if necessary, i.e. container's content is bigger than the container.
-
-ScrollMode SCROLL_MODE_SHOW_ALWAYS = 2
-
-Scrolling enabled, scrollbar will be always visible.
-
-ScrollMode SCROLL_MODE_SHOW_NEVER = 3
-
-Scrolling enabled, scrollbar will be hidden.
-
-ScrollMode SCROLL_MODE_RESERVE = 4
-
-Combines SCROLL_MODE_AUTO and SCROLL_MODE_SHOW_ALWAYS. The scrollbar is only visible if necessary, but the content size is adjusted as if it was always visible. It's useful for ensuring that content size stays the same regardless if the scrollbar is visible.
-
-ScrollMode SCROLL_MODE_MAXIMIZE_FIRST = 5
-
-Behaves like SCROLL_MODE_AUTO, but makes the ScrollContainer report a minimum size based on its content (limited by Control.custom_maximum_size when set on the corresponding axis). This allows it to grow first and only start scrolling once constrained.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCROLL_MODE_DISABLED {#SCROLL_MODE_DISABLED}
 
@@ -452,7 +430,7 @@ Behaves like SCROLL_MODE_AUTO, but makes the ScrollContainer report a minimum si
 SCROLL_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scrolling disabled, scrollbar will be invisible.
 
 #### SCROLL_MODE_AUTO {#SCROLL_MODE_AUTO}
 
@@ -460,7 +438,7 @@ SCROLL_MODE_DISABLED = 0
 SCROLL_MODE_AUTO = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scrolling enabled, scrollbar will be visible only if necessary, i.e. container's content is bigger than the container.
 
 #### SCROLL_MODE_SHOW_ALWAYS {#SCROLL_MODE_SHOW_ALWAYS}
 
@@ -468,7 +446,7 @@ SCROLL_MODE_AUTO = 1
 SCROLL_MODE_SHOW_ALWAYS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scrolling enabled, scrollbar will be always visible.
 
 #### SCROLL_MODE_SHOW_NEVER {#SCROLL_MODE_SHOW_NEVER}
 
@@ -476,7 +454,7 @@ SCROLL_MODE_SHOW_ALWAYS = 2
 SCROLL_MODE_SHOW_NEVER = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scrolling enabled, scrollbar will be hidden.
 
 #### SCROLL_MODE_RESERVE {#SCROLL_MODE_RESERVE}
 
@@ -484,7 +462,7 @@ SCROLL_MODE_SHOW_NEVER = 3
 SCROLL_MODE_RESERVE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Combines SCROLL_MODE_AUTO and SCROLL_MODE_SHOW_ALWAYS. The scrollbar is only visible if necessary, but the content size is adjusted as if it was always visible. It's useful for ensuring that content size stays the same regardless if the scrollbar is visible.
 
 #### SCROLL_MODE_MAXIMIZE_FIRST {#SCROLL_MODE_MAXIMIZE_FIRST}
 
@@ -492,7 +470,9 @@ SCROLL_MODE_RESERVE = 4
 SCROLL_MODE_MAXIMIZE_FIRST = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Behaves like SCROLL_MODE_AUTO, but makes the ScrollContainer report a minimum size based on its content (limited by Control.custom_maximum_size when set on the corresponding axis). This allows it to grow first and only start scrolling once constrained.
+
+---
 
 ### ScrollHintMode {#enum-ScrollHintMode}
 
@@ -500,21 +480,7 @@ SCROLL_MODE_MAXIMIZE_FIRST = 5
 enum ScrollHintMode { SCROLL_HINT_MODE_DISABLED = 0, SCROLL_HINT_MODE_ALL = 1, SCROLL_HINT_MODE_TOP_AND_LEFT = 2, SCROLL_HINT_MODE_BOTTOM_AND_RIGHT = 3 }
 ```
 
-ScrollHintMode SCROLL_HINT_MODE_DISABLED = 0
-
-Scroll hints will never be shown.
-
-ScrollHintMode SCROLL_HINT_MODE_ALL = 1
-
-Scroll hints will be shown at the top and bottom (if vertical), or left and right (if horizontal).
-
-ScrollHintMode SCROLL_HINT_MODE_TOP_AND_LEFT = 2
-
-Scroll hints will be shown at the top (if vertical), or the left (if horizontal).
-
-ScrollHintMode SCROLL_HINT_MODE_BOTTOM_AND_RIGHT = 3
-
-Scroll hints will be shown at the bottom (if horizontal), or the right (if horizontal).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCROLL_HINT_MODE_DISABLED {#SCROLL_HINT_MODE_DISABLED}
 
@@ -522,7 +488,7 @@ Scroll hints will be shown at the bottom (if horizontal), or the right (if horiz
 SCROLL_HINT_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll hints will never be shown.
 
 #### SCROLL_HINT_MODE_ALL {#SCROLL_HINT_MODE_ALL}
 
@@ -530,7 +496,7 @@ SCROLL_HINT_MODE_DISABLED = 0
 SCROLL_HINT_MODE_ALL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll hints will be shown at the top and bottom (if vertical), or left and right (if horizontal).
 
 #### SCROLL_HINT_MODE_TOP_AND_LEFT {#SCROLL_HINT_MODE_TOP_AND_LEFT}
 
@@ -538,7 +504,7 @@ SCROLL_HINT_MODE_ALL = 1
 SCROLL_HINT_MODE_TOP_AND_LEFT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll hints will be shown at the top (if vertical), or the left (if horizontal).
 
 #### SCROLL_HINT_MODE_BOTTOM_AND_RIGHT {#SCROLL_HINT_MODE_BOTTOM_AND_RIGHT}
 
@@ -546,4 +512,6 @@ SCROLL_HINT_MODE_TOP_AND_LEFT = 2
 SCROLL_HINT_MODE_BOTTOM_AND_RIGHT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll hints will be shown at the bottom (if horizontal), or the right (if horizontal).
+
+---

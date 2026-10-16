@@ -175,7 +175,10 @@ The drag event index in the case of a multi-drag event.
 tilt: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tilt(value: Vector2)
+- Vector2 get_tilt()
+
+Represents the angles of tilt of the pen. Positive X-coordinate value indicates a tilt to the right. Positive Y-coordinate value indicates a tilt toward the user. Ranges from -1.0 to 1.0 for both axes.
 
 ### pressure {#pressure}
 
@@ -205,7 +208,10 @@ Returns true when using the eraser end of a stylus pen.
 position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_position(value: Vector2)
+- Vector2 get_position()
+
+The drag position in the viewport the node is in, using the coordinate system of this viewport.
 
 ### relative {#relative}
 
@@ -213,7 +219,12 @@ position: Vector2
 relative: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_relative(value: Vector2)
+- Vector2 get_relative()
+
+The drag position relative to the previous position (position at the last frame).
+
+Note: relative is automatically scaled according to the content scale factor, which is defined by the project's stretch mode settings. This means touch sensitivity will appear different depending on resolution when using relative in a script that handles touch aiming. To avoid this, use screen_relative instead.
 
 ### screen_relative {#screen_relative}
 
@@ -221,7 +232,10 @@ relative: Vector2
 screen_relative: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_screen_relative(value: Vector2)
+- Vector2 get_screen_relative()
+
+The unscaled drag position relative to the previous position in screen coordinates (position at the last frame). This position is not scaled according to the content scale factor or calls to InputEvent.xformed_by(). This should be preferred over relative for touch aiming regardless of the project's stretch mode.
 
 ### velocity {#velocity}
 
@@ -229,7 +243,12 @@ screen_relative: Vector2
 velocity: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_velocity(value: Vector2)
+- Vector2 get_velocity()
+
+The drag velocity.
+
+Note: velocity is automatically scaled according to the content scale factor, which is defined by the project's stretch mode settings. This means touch sensitivity will appear different depending on resolution when using velocity in a script that handles touch aiming. To avoid this, use screen_velocity instead.
 
 ### screen_velocity {#screen_velocity}
 
@@ -237,4 +256,7 @@ velocity: Vector2
 screen_velocity: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_screen_velocity(value: Vector2)
+- Vector2 get_screen_velocity()
+
+The unscaled drag velocity in pixels per second in screen coordinates. This velocity is not scaled according to the content scale factor or calls to InputEvent.xformed_by(). This should be preferred over velocity for touch aiming regardless of the project's stretch mode.

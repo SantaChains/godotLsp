@@ -86,17 +86,7 @@ Can't be changed when using HBoxContainer and VBoxContainer.
 enum AlignmentMode { ALIGNMENT_BEGIN = 0, ALIGNMENT_CENTER = 1, ALIGNMENT_END = 2 }
 ```
 
-AlignmentMode ALIGNMENT_BEGIN = 0
-
-The child controls will be arranged at the beginning of the container, i.e. top if orientation is vertical, left if orientation is horizontal (right for RTL layout).
-
-AlignmentMode ALIGNMENT_CENTER = 1
-
-The child controls will be centered in the container.
-
-AlignmentMode ALIGNMENT_END = 2
-
-The child controls will be arranged at the end of the container, i.e. bottom if orientation is vertical, right if orientation is horizontal (left for RTL layout).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ALIGNMENT_BEGIN {#ALIGNMENT_BEGIN}
 
@@ -104,7 +94,7 @@ The child controls will be arranged at the end of the container, i.e. bottom if 
 ALIGNMENT_BEGIN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The child controls will be arranged at the beginning of the container, i.e. top if orientation is vertical, left if orientation is horizontal (right for RTL layout).
 
 #### ALIGNMENT_CENTER {#ALIGNMENT_CENTER}
 
@@ -112,7 +102,7 @@ ALIGNMENT_BEGIN = 0
 ALIGNMENT_CENTER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The child controls will be centered in the container.
 
 #### ALIGNMENT_END {#ALIGNMENT_END}
 
@@ -120,4 +110,6 @@ ALIGNMENT_CENTER = 1
 ALIGNMENT_END = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The child controls will be arranged at the end of the container, i.e. bottom if orientation is vertical, right if orientation is horizontal (left for RTL layout).
+
+---

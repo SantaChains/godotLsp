@@ -626,17 +626,7 @@ Emitted when the value of show_rest_only changes.
 enum ModifierCallbackModeProcess { MODIFIER_CALLBACK_MODE_PROCESS_PHYSICS = 0, MODIFIER_CALLBACK_MODE_PROCESS_IDLE = 1, MODIFIER_CALLBACK_MODE_PROCESS_MANUAL = 2 }
 ```
 
-ModifierCallbackModeProcess MODIFIER_CALLBACK_MODE_PROCESS_PHYSICS = 0
-
-Set a flag to process modification during physics frames (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS).
-
-ModifierCallbackModeProcess MODIFIER_CALLBACK_MODE_PROCESS_IDLE = 1
-
-Set a flag to process modification during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS).
-
-ModifierCallbackModeProcess MODIFIER_CALLBACK_MODE_PROCESS_MANUAL = 2
-
-Do not process modification. Use advance() to process the modification manually.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MODIFIER_CALLBACK_MODE_PROCESS_PHYSICS {#MODIFIER_CALLBACK_MODE_PROCESS_PHYSICS}
 
@@ -644,7 +634,7 @@ Do not process modification. Use advance() to process the modification manually.
 MODIFIER_CALLBACK_MODE_PROCESS_PHYSICS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Set a flag to process modification during physics frames (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS).
 
 #### MODIFIER_CALLBACK_MODE_PROCESS_IDLE {#MODIFIER_CALLBACK_MODE_PROCESS_IDLE}
 
@@ -652,7 +642,7 @@ MODIFIER_CALLBACK_MODE_PROCESS_PHYSICS = 0
 MODIFIER_CALLBACK_MODE_PROCESS_IDLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Set a flag to process modification during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS).
 
 #### MODIFIER_CALLBACK_MODE_PROCESS_MANUAL {#MODIFIER_CALLBACK_MODE_PROCESS_MANUAL}
 
@@ -660,7 +650,9 @@ MODIFIER_CALLBACK_MODE_PROCESS_IDLE = 1
 MODIFIER_CALLBACK_MODE_PROCESS_MANUAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not process modification. Use advance() to process the modification manually.
+
+---
 
 ## 常量
 

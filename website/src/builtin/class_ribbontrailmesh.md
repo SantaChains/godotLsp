@@ -186,13 +186,7 @@ Determines the size of the ribbon along its length. The size of a particular sec
 enum Shape { SHAPE_FLAT = 0, SHAPE_CROSS = 1 }
 ```
 
-Shape SHAPE_FLAT = 0
-
-Gives the mesh a single flat face.
-
-Shape SHAPE_CROSS = 1
-
-Gives the mesh two perpendicular flat faces, making a cross shape.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHAPE_FLAT {#SHAPE_FLAT}
 
@@ -200,7 +194,7 @@ Gives the mesh two perpendicular flat faces, making a cross shape.
 SHAPE_FLAT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Gives the mesh a single flat face.
 
 #### SHAPE_CROSS {#SHAPE_CROSS}
 
@@ -208,4 +202,6 @@ SHAPE_FLAT = 0
 SHAPE_CROSS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Gives the mesh two perpendicular flat faces, making a cross shape.
+
+---

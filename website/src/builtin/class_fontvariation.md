@@ -241,7 +241,12 @@ Note: Emboldened fonts might have self-intersecting outlines, which will prevent
 variation_transform: Transform2D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_variation_transform(value: Transform2D)
+- Transform2D get_variation_transform()
+
+2D transform, applied to the font outlines, can be used for slanting, flipping and rotating glyphs.
+
+For example, to simulate italic typeface by slanting, apply the following transform Transform2D(1.0, slant, 0.0, 1.0, 0.0, 0.0).
 
 ### opentype_features {#opentype_features}
 
@@ -326,4 +331,9 @@ A palette index.
 palette_custom_colors: PackedColorArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_palette_custom_colors(value: PackedColorArray)
+- PackedColorArray get_palette_custom_colors()
+
+An array of colors to override predefined palette. Use Color(0, 0, 0, 0), to keep predefined palette color at specific position.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedColorArray for more details.

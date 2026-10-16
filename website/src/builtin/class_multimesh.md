@@ -321,7 +321,10 @@ If true, the MultiMesh will use custom data (see set_instance_custom_data()). Ca
 custom_aabb: AABB
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_custom_aabb(value: AABB)
+- AABB get_custom_aabb()
+
+Custom AABB for this MultiMesh resource. Setting this manually prevents costly runtime AABB recalculations.
 
 ### instance_count {#instance_count}
 
@@ -366,7 +369,12 @@ The looks of the individual instances can be modified using set_instance_color()
 buffer: PackedFloat32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_buffer(value: PackedFloat32Array)
+- PackedFloat32Array get_buffer()
+
+There is currently no description for this property. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedFloat32Array for more details.
 
 ### transform_array {#transform_array}
 
@@ -439,13 +447,7 @@ Note: Fast quality does not equate to low quality. Except in the special cases m
 enum TransformFormat { TRANSFORM_2D = 0, TRANSFORM_3D = 1 }
 ```
 
-TransformFormat TRANSFORM_2D = 0
-
-Use this when using 2D transforms.
-
-TransformFormat TRANSFORM_3D = 1
-
-Use this when using 3D transforms.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TRANSFORM_2D {#TRANSFORM_2D}
 
@@ -453,7 +455,7 @@ Use this when using 3D transforms.
 TRANSFORM_2D = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use this when using 2D transforms.
 
 #### TRANSFORM_3D {#TRANSFORM_3D}
 
@@ -461,7 +463,9 @@ TRANSFORM_2D = 0
 TRANSFORM_3D = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use this when using 3D transforms.
+
+---
 
 ### PhysicsInterpolationQuality {#enum-PhysicsInterpolationQuality}
 
@@ -469,13 +473,7 @@ TRANSFORM_3D = 1
 enum PhysicsInterpolationQuality { INTERP_QUALITY_FAST = 0, INTERP_QUALITY_HIGH = 1 }
 ```
 
-PhysicsInterpolationQuality INTERP_QUALITY_FAST = 0
-
-Always interpolate using Basis lerping, which can produce warping artifacts in some situations.
-
-PhysicsInterpolationQuality INTERP_QUALITY_HIGH = 1
-
-Attempt to interpolate using Basis slerping (spherical linear interpolation) where possible, otherwise fall back to lerping.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### INTERP_QUALITY_FAST {#INTERP_QUALITY_FAST}
 
@@ -483,7 +481,7 @@ Attempt to interpolate using Basis slerping (spherical linear interpolation) whe
 INTERP_QUALITY_FAST = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always interpolate using Basis lerping, which can produce warping artifacts in some situations.
 
 #### INTERP_QUALITY_HIGH {#INTERP_QUALITY_HIGH}
 
@@ -491,4 +489,6 @@ INTERP_QUALITY_FAST = 0
 INTERP_QUALITY_HIGH = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Attempt to interpolate using Basis slerping (spherical linear interpolation) where possible, otherwise fall back to lerping.
+
+---

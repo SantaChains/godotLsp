@@ -519,45 +519,7 @@ Note: This signal will not be emitted during application startup and application
 enum SessionState { SESSION_STATE_UNKNOWN = 0, SESSION_STATE_IDLE = 1, SESSION_STATE_READY = 2, SESSION_STATE_SYNCHRONIZED = 3, SESSION_STATE_VISIBLE = 4, SESSION_STATE_FOCUSED = 5, SESSION_STATE_STOPPING = 6, SESSION_STATE_LOSS_PENDING = 7, SESSION_STATE_EXITING = 8 }
 ```
 
-SessionState SESSION_STATE_UNKNOWN = 0
-
-The state of the session is unknown, we haven't tried setting up OpenXR yet.
-
-SessionState SESSION_STATE_IDLE = 1
-
-The initial state after the OpenXR session is created or after the session is destroyed.
-
-SessionState SESSION_STATE_READY = 2
-
-OpenXR is ready to begin our session. session_begun is emitted when we change to this state.
-
-SessionState SESSION_STATE_SYNCHRONIZED = 3
-
-The application has synched its frame loop with the runtime but we're not rendering anything. session_synchronized is emitted when we change to this state.
-
-SessionState SESSION_STATE_VISIBLE = 4
-
-The application has synched its frame loop with the runtime and we're rendering output to the user, however we receive no user input. session_visible is emitted when we change to this state.
-
-Note: This is the current state just before we get the focused state, whenever the user opens a system menu, switches to another application, or takes off their headset.
-
-SessionState SESSION_STATE_FOCUSED = 5
-
-The application has synched its frame loop with the runtime, we're rendering output to the user and we're receiving XR input. session_focussed is emitted when we change to this state.
-
-Note: This is the state OpenXR will be in when the user can fully interact with your game.
-
-SessionState SESSION_STATE_STOPPING = 6
-
-Our session is being stopped. session_stopping is emitted when we change to this state.
-
-SessionState SESSION_STATE_LOSS_PENDING = 7
-
-The session is about to be lost. session_loss_pending is emitted when we change to this state.
-
-SessionState SESSION_STATE_EXITING = 8
-
-The OpenXR instance is about to be destroyed and we're exiting. instance_exiting is emitted when we change to this state.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SESSION_STATE_UNKNOWN {#SESSION_STATE_UNKNOWN}
 
@@ -565,7 +527,7 @@ The OpenXR instance is about to be destroyed and we're exiting. instance_exiting
 SESSION_STATE_UNKNOWN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The state of the session is unknown, we haven't tried setting up OpenXR yet.
 
 #### SESSION_STATE_IDLE {#SESSION_STATE_IDLE}
 
@@ -573,7 +535,7 @@ SESSION_STATE_UNKNOWN = 0
 SESSION_STATE_IDLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The initial state after the OpenXR session is created or after the session is destroyed.
 
 #### SESSION_STATE_READY {#SESSION_STATE_READY}
 
@@ -581,7 +543,7 @@ SESSION_STATE_IDLE = 1
 SESSION_STATE_READY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenXR is ready to begin our session. session_begun is emitted when we change to this state.
 
 #### SESSION_STATE_SYNCHRONIZED {#SESSION_STATE_SYNCHRONIZED}
 
@@ -589,7 +551,7 @@ SESSION_STATE_READY = 2
 SESSION_STATE_SYNCHRONIZED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The application has synched its frame loop with the runtime but we're not rendering anything. session_synchronized is emitted when we change to this state.
 
 #### SESSION_STATE_VISIBLE {#SESSION_STATE_VISIBLE}
 
@@ -597,7 +559,9 @@ SESSION_STATE_SYNCHRONIZED = 3
 SESSION_STATE_VISIBLE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The application has synched its frame loop with the runtime and we're rendering output to the user, however we receive no user input. session_visible is emitted when we change to this state.
+
+Note: This is the current state just before we get the focused state, whenever the user opens a system menu, switches to another application, or takes off their headset.
 
 #### SESSION_STATE_FOCUSED {#SESSION_STATE_FOCUSED}
 
@@ -605,7 +569,9 @@ SESSION_STATE_VISIBLE = 4
 SESSION_STATE_FOCUSED = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The application has synched its frame loop with the runtime, we're rendering output to the user and we're receiving XR input. session_focussed is emitted when we change to this state.
+
+Note: This is the state OpenXR will be in when the user can fully interact with your game.
 
 #### SESSION_STATE_STOPPING {#SESSION_STATE_STOPPING}
 
@@ -613,7 +579,7 @@ SESSION_STATE_FOCUSED = 5
 SESSION_STATE_STOPPING = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Our session is being stopped. session_stopping is emitted when we change to this state.
 
 #### SESSION_STATE_LOSS_PENDING {#SESSION_STATE_LOSS_PENDING}
 
@@ -621,7 +587,7 @@ SESSION_STATE_STOPPING = 6
 SESSION_STATE_LOSS_PENDING = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The session is about to be lost. session_loss_pending is emitted when we change to this state.
 
 #### SESSION_STATE_EXITING {#SESSION_STATE_EXITING}
 
@@ -629,7 +595,9 @@ SESSION_STATE_LOSS_PENDING = 7
 SESSION_STATE_EXITING = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The OpenXR instance is about to be destroyed and we're exiting. instance_exiting is emitted when we change to this state.
+
+---
 
 ### Hand {#enum-Hand}
 
@@ -637,17 +605,7 @@ SESSION_STATE_EXITING = 8
 enum Hand { HAND_LEFT = 0, HAND_RIGHT = 1, HAND_MAX = 2 }
 ```
 
-Hand HAND_LEFT = 0
-
-Left hand.
-
-Hand HAND_RIGHT = 1
-
-Right hand.
-
-Hand HAND_MAX = 2
-
-Maximum value for the hand enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HAND_LEFT {#HAND_LEFT}
 
@@ -655,7 +613,7 @@ Maximum value for the hand enum.
 HAND_LEFT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Left hand.
 
 #### HAND_RIGHT {#HAND_RIGHT}
 
@@ -663,7 +621,7 @@ HAND_LEFT = 0
 HAND_RIGHT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Right hand.
 
 #### HAND_MAX {#HAND_MAX}
 
@@ -671,7 +629,9 @@ HAND_RIGHT = 1
 HAND_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum value for the hand enum.
+
+---
 
 ### HandMotionRange {#enum-HandMotionRange}
 
@@ -679,17 +639,7 @@ HAND_MAX = 2
 enum HandMotionRange { HAND_MOTION_RANGE_UNOBSTRUCTED = 0, HAND_MOTION_RANGE_CONFORM_TO_CONTROLLER = 1, HAND_MOTION_RANGE_MAX = 2 }
 ```
 
-HandMotionRange HAND_MOTION_RANGE_UNOBSTRUCTED = 0
-
-Full hand range, if user closes their hands, we make a full fist.
-
-HandMotionRange HAND_MOTION_RANGE_CONFORM_TO_CONTROLLER = 1
-
-Conform to controller, if user closes their hands, the tracked data conforms to the shape of the controller.
-
-HandMotionRange HAND_MOTION_RANGE_MAX = 2
-
-Maximum value for the motion range enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HAND_MOTION_RANGE_UNOBSTRUCTED {#HAND_MOTION_RANGE_UNOBSTRUCTED}
 
@@ -697,7 +647,7 @@ Maximum value for the motion range enum.
 HAND_MOTION_RANGE_UNOBSTRUCTED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Full hand range, if user closes their hands, we make a full fist.
 
 #### HAND_MOTION_RANGE_CONFORM_TO_CONTROLLER {#HAND_MOTION_RANGE_CONFORM_TO_CONTROLLER}
 
@@ -705,7 +655,7 @@ HAND_MOTION_RANGE_UNOBSTRUCTED = 0
 HAND_MOTION_RANGE_CONFORM_TO_CONTROLLER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Conform to controller, if user closes their hands, the tracked data conforms to the shape of the controller.
 
 #### HAND_MOTION_RANGE_MAX {#HAND_MOTION_RANGE_MAX}
 
@@ -713,7 +663,9 @@ HAND_MOTION_RANGE_CONFORM_TO_CONTROLLER = 1
 HAND_MOTION_RANGE_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum value for the motion range enum.
+
+---
 
 ### HandTrackedSource {#enum-HandTrackedSource}
 
@@ -721,21 +673,7 @@ HAND_MOTION_RANGE_MAX = 2
 enum HandTrackedSource { HAND_TRACKED_SOURCE_UNKNOWN = 0, HAND_TRACKED_SOURCE_UNOBSTRUCTED = 1, HAND_TRACKED_SOURCE_CONTROLLER = 2, HAND_TRACKED_SOURCE_MAX = 3 }
 ```
 
-HandTrackedSource HAND_TRACKED_SOURCE_UNKNOWN = 0
-
-The source of hand tracking data is unknown (the extension is likely unsupported).
-
-HandTrackedSource HAND_TRACKED_SOURCE_UNOBSTRUCTED = 1
-
-The source of hand tracking is unobstructed, this means that an accurate method of hand tracking is used, e.g. optical hand tracking, data gloves, etc.
-
-HandTrackedSource HAND_TRACKED_SOURCE_CONTROLLER = 2
-
-The source of hand tracking is a controller, bone positions are inferred from controller inputs.
-
-HandTrackedSource HAND_TRACKED_SOURCE_MAX = 3
-
-Represents the size of the HandTrackedSource enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HAND_TRACKED_SOURCE_UNKNOWN {#HAND_TRACKED_SOURCE_UNKNOWN}
 
@@ -743,7 +681,7 @@ Represents the size of the HandTrackedSource enum.
 HAND_TRACKED_SOURCE_UNKNOWN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The source of hand tracking data is unknown (the extension is likely unsupported).
 
 #### HAND_TRACKED_SOURCE_UNOBSTRUCTED {#HAND_TRACKED_SOURCE_UNOBSTRUCTED}
 
@@ -751,7 +689,7 @@ HAND_TRACKED_SOURCE_UNKNOWN = 0
 HAND_TRACKED_SOURCE_UNOBSTRUCTED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The source of hand tracking is unobstructed, this means that an accurate method of hand tracking is used, e.g. optical hand tracking, data gloves, etc.
 
 #### HAND_TRACKED_SOURCE_CONTROLLER {#HAND_TRACKED_SOURCE_CONTROLLER}
 
@@ -759,7 +697,7 @@ HAND_TRACKED_SOURCE_UNOBSTRUCTED = 1
 HAND_TRACKED_SOURCE_CONTROLLER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The source of hand tracking is a controller, bone positions are inferred from controller inputs.
 
 #### HAND_TRACKED_SOURCE_MAX {#HAND_TRACKED_SOURCE_MAX}
 
@@ -767,7 +705,9 @@ HAND_TRACKED_SOURCE_CONTROLLER = 2
 HAND_TRACKED_SOURCE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the HandTrackedSource enum.
+
+---
 
 ### HandJoints {#enum-HandJoints}
 
@@ -775,113 +715,7 @@ HAND_TRACKED_SOURCE_MAX = 3
 enum HandJoints { HAND_JOINT_PALM = 0, HAND_JOINT_WRIST = 1, HAND_JOINT_THUMB_METACARPAL = 2, HAND_JOINT_THUMB_PROXIMAL = 3, HAND_JOINT_THUMB_DISTAL = 4, HAND_JOINT_THUMB_TIP = 5, HAND_JOINT_INDEX_METACARPAL = 6, HAND_JOINT_INDEX_PROXIMAL = 7, HAND_JOINT_INDEX_INTERMEDIATE = 8, HAND_JOINT_INDEX_DISTAL = 9, HAND_JOINT_INDEX_TIP = 10, HAND_JOINT_MIDDLE_METACARPAL = 11, HAND_JOINT_MIDDLE_PROXIMAL = 12, HAND_JOINT_MIDDLE_INTERMEDIATE = 13, HAND_JOINT_MIDDLE_DISTAL = 14, HAND_JOINT_MIDDLE_TIP = 15, HAND_JOINT_RING_METACARPAL = 16, HAND_JOINT_RING_PROXIMAL = 17, HAND_JOINT_RING_INTERMEDIATE = 18, HAND_JOINT_RING_DISTAL = 19, HAND_JOINT_RING_TIP = 20, HAND_JOINT_LITTLE_METACARPAL = 21, HAND_JOINT_LITTLE_PROXIMAL = 22, HAND_JOINT_LITTLE_INTERMEDIATE = 23, HAND_JOINT_LITTLE_DISTAL = 24, HAND_JOINT_LITTLE_TIP = 25, HAND_JOINT_MAX = 26 }
 ```
 
-HandJoints HAND_JOINT_PALM = 0
-
-Palm joint.
-
-HandJoints HAND_JOINT_WRIST = 1
-
-Wrist joint.
-
-HandJoints HAND_JOINT_THUMB_METACARPAL = 2
-
-Thumb metacarpal joint.
-
-HandJoints HAND_JOINT_THUMB_PROXIMAL = 3
-
-Thumb proximal joint.
-
-HandJoints HAND_JOINT_THUMB_DISTAL = 4
-
-Thumb distal joint.
-
-HandJoints HAND_JOINT_THUMB_TIP = 5
-
-Thumb tip joint.
-
-HandJoints HAND_JOINT_INDEX_METACARPAL = 6
-
-Index finger metacarpal joint.
-
-HandJoints HAND_JOINT_INDEX_PROXIMAL = 7
-
-Index finger phalanx proximal joint.
-
-HandJoints HAND_JOINT_INDEX_INTERMEDIATE = 8
-
-Index finger phalanx intermediate joint.
-
-HandJoints HAND_JOINT_INDEX_DISTAL = 9
-
-Index finger phalanx distal joint.
-
-HandJoints HAND_JOINT_INDEX_TIP = 10
-
-Index finger tip joint.
-
-HandJoints HAND_JOINT_MIDDLE_METACARPAL = 11
-
-Middle finger metacarpal joint.
-
-HandJoints HAND_JOINT_MIDDLE_PROXIMAL = 12
-
-Middle finger phalanx proximal joint.
-
-HandJoints HAND_JOINT_MIDDLE_INTERMEDIATE = 13
-
-Middle finger phalanx intermediate joint.
-
-HandJoints HAND_JOINT_MIDDLE_DISTAL = 14
-
-Middle finger phalanx distal joint.
-
-HandJoints HAND_JOINT_MIDDLE_TIP = 15
-
-Middle finger tip joint.
-
-HandJoints HAND_JOINT_RING_METACARPAL = 16
-
-Ring finger metacarpal joint.
-
-HandJoints HAND_JOINT_RING_PROXIMAL = 17
-
-Ring finger phalanx proximal joint.
-
-HandJoints HAND_JOINT_RING_INTERMEDIATE = 18
-
-Ring finger phalanx intermediate joint.
-
-HandJoints HAND_JOINT_RING_DISTAL = 19
-
-Ring finger phalanx distal joint.
-
-HandJoints HAND_JOINT_RING_TIP = 20
-
-Ring finger tip joint.
-
-HandJoints HAND_JOINT_LITTLE_METACARPAL = 21
-
-Pinky finger metacarpal joint.
-
-HandJoints HAND_JOINT_LITTLE_PROXIMAL = 22
-
-Pinky finger phalanx proximal joint.
-
-HandJoints HAND_JOINT_LITTLE_INTERMEDIATE = 23
-
-Pinky finger phalanx intermediate joint.
-
-HandJoints HAND_JOINT_LITTLE_DISTAL = 24
-
-Pinky finger phalanx distal joint.
-
-HandJoints HAND_JOINT_LITTLE_TIP = 25
-
-Pinky finger tip joint.
-
-HandJoints HAND_JOINT_MAX = 26
-
-Represents the size of the HandJoints enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HAND_JOINT_PALM {#HAND_JOINT_PALM}
 
@@ -889,7 +723,7 @@ Represents the size of the HandJoints enum.
 HAND_JOINT_PALM = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Palm joint.
 
 #### HAND_JOINT_WRIST {#HAND_JOINT_WRIST}
 
@@ -897,7 +731,7 @@ HAND_JOINT_PALM = 0
 HAND_JOINT_WRIST = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Wrist joint.
 
 #### HAND_JOINT_THUMB_METACARPAL {#HAND_JOINT_THUMB_METACARPAL}
 
@@ -905,7 +739,7 @@ HAND_JOINT_WRIST = 1
 HAND_JOINT_THUMB_METACARPAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Thumb metacarpal joint.
 
 #### HAND_JOINT_THUMB_PROXIMAL {#HAND_JOINT_THUMB_PROXIMAL}
 
@@ -913,7 +747,7 @@ HAND_JOINT_THUMB_METACARPAL = 2
 HAND_JOINT_THUMB_PROXIMAL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Thumb proximal joint.
 
 #### HAND_JOINT_THUMB_DISTAL {#HAND_JOINT_THUMB_DISTAL}
 
@@ -921,7 +755,7 @@ HAND_JOINT_THUMB_PROXIMAL = 3
 HAND_JOINT_THUMB_DISTAL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Thumb distal joint.
 
 #### HAND_JOINT_THUMB_TIP {#HAND_JOINT_THUMB_TIP}
 
@@ -929,7 +763,7 @@ HAND_JOINT_THUMB_DISTAL = 4
 HAND_JOINT_THUMB_TIP = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Thumb tip joint.
 
 #### HAND_JOINT_INDEX_METACARPAL {#HAND_JOINT_INDEX_METACARPAL}
 
@@ -937,7 +771,7 @@ HAND_JOINT_THUMB_TIP = 5
 HAND_JOINT_INDEX_METACARPAL = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Index finger metacarpal joint.
 
 #### HAND_JOINT_INDEX_PROXIMAL {#HAND_JOINT_INDEX_PROXIMAL}
 
@@ -945,7 +779,7 @@ HAND_JOINT_INDEX_METACARPAL = 6
 HAND_JOINT_INDEX_PROXIMAL = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Index finger phalanx proximal joint.
 
 #### HAND_JOINT_INDEX_INTERMEDIATE {#HAND_JOINT_INDEX_INTERMEDIATE}
 
@@ -953,7 +787,7 @@ HAND_JOINT_INDEX_PROXIMAL = 7
 HAND_JOINT_INDEX_INTERMEDIATE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Index finger phalanx intermediate joint.
 
 #### HAND_JOINT_INDEX_DISTAL {#HAND_JOINT_INDEX_DISTAL}
 
@@ -961,7 +795,7 @@ HAND_JOINT_INDEX_INTERMEDIATE = 8
 HAND_JOINT_INDEX_DISTAL = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Index finger phalanx distal joint.
 
 #### HAND_JOINT_INDEX_TIP {#HAND_JOINT_INDEX_TIP}
 
@@ -969,7 +803,7 @@ HAND_JOINT_INDEX_DISTAL = 9
 HAND_JOINT_INDEX_TIP = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Index finger tip joint.
 
 #### HAND_JOINT_MIDDLE_METACARPAL {#HAND_JOINT_MIDDLE_METACARPAL}
 
@@ -977,7 +811,7 @@ HAND_JOINT_INDEX_TIP = 10
 HAND_JOINT_MIDDLE_METACARPAL = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Middle finger metacarpal joint.
 
 #### HAND_JOINT_MIDDLE_PROXIMAL {#HAND_JOINT_MIDDLE_PROXIMAL}
 
@@ -985,7 +819,7 @@ HAND_JOINT_MIDDLE_METACARPAL = 11
 HAND_JOINT_MIDDLE_PROXIMAL = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Middle finger phalanx proximal joint.
 
 #### HAND_JOINT_MIDDLE_INTERMEDIATE {#HAND_JOINT_MIDDLE_INTERMEDIATE}
 
@@ -993,7 +827,7 @@ HAND_JOINT_MIDDLE_PROXIMAL = 12
 HAND_JOINT_MIDDLE_INTERMEDIATE = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Middle finger phalanx intermediate joint.
 
 #### HAND_JOINT_MIDDLE_DISTAL {#HAND_JOINT_MIDDLE_DISTAL}
 
@@ -1001,7 +835,7 @@ HAND_JOINT_MIDDLE_INTERMEDIATE = 13
 HAND_JOINT_MIDDLE_DISTAL = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Middle finger phalanx distal joint.
 
 #### HAND_JOINT_MIDDLE_TIP {#HAND_JOINT_MIDDLE_TIP}
 
@@ -1009,7 +843,7 @@ HAND_JOINT_MIDDLE_DISTAL = 14
 HAND_JOINT_MIDDLE_TIP = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Middle finger tip joint.
 
 #### HAND_JOINT_RING_METACARPAL {#HAND_JOINT_RING_METACARPAL}
 
@@ -1017,7 +851,7 @@ HAND_JOINT_MIDDLE_TIP = 15
 HAND_JOINT_RING_METACARPAL = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ring finger metacarpal joint.
 
 #### HAND_JOINT_RING_PROXIMAL {#HAND_JOINT_RING_PROXIMAL}
 
@@ -1025,7 +859,7 @@ HAND_JOINT_RING_METACARPAL = 16
 HAND_JOINT_RING_PROXIMAL = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ring finger phalanx proximal joint.
 
 #### HAND_JOINT_RING_INTERMEDIATE {#HAND_JOINT_RING_INTERMEDIATE}
 
@@ -1033,7 +867,7 @@ HAND_JOINT_RING_PROXIMAL = 17
 HAND_JOINT_RING_INTERMEDIATE = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ring finger phalanx intermediate joint.
 
 #### HAND_JOINT_RING_DISTAL {#HAND_JOINT_RING_DISTAL}
 
@@ -1041,7 +875,7 @@ HAND_JOINT_RING_INTERMEDIATE = 18
 HAND_JOINT_RING_DISTAL = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ring finger phalanx distal joint.
 
 #### HAND_JOINT_RING_TIP {#HAND_JOINT_RING_TIP}
 
@@ -1049,7 +883,7 @@ HAND_JOINT_RING_DISTAL = 19
 HAND_JOINT_RING_TIP = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ring finger tip joint.
 
 #### HAND_JOINT_LITTLE_METACARPAL {#HAND_JOINT_LITTLE_METACARPAL}
 
@@ -1057,7 +891,7 @@ HAND_JOINT_RING_TIP = 20
 HAND_JOINT_LITTLE_METACARPAL = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pinky finger metacarpal joint.
 
 #### HAND_JOINT_LITTLE_PROXIMAL {#HAND_JOINT_LITTLE_PROXIMAL}
 
@@ -1065,7 +899,7 @@ HAND_JOINT_LITTLE_METACARPAL = 21
 HAND_JOINT_LITTLE_PROXIMAL = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pinky finger phalanx proximal joint.
 
 #### HAND_JOINT_LITTLE_INTERMEDIATE {#HAND_JOINT_LITTLE_INTERMEDIATE}
 
@@ -1073,7 +907,7 @@ HAND_JOINT_LITTLE_PROXIMAL = 22
 HAND_JOINT_LITTLE_INTERMEDIATE = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pinky finger phalanx intermediate joint.
 
 #### HAND_JOINT_LITTLE_DISTAL {#HAND_JOINT_LITTLE_DISTAL}
 
@@ -1081,7 +915,7 @@ HAND_JOINT_LITTLE_INTERMEDIATE = 23
 HAND_JOINT_LITTLE_DISTAL = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pinky finger phalanx distal joint.
 
 #### HAND_JOINT_LITTLE_TIP {#HAND_JOINT_LITTLE_TIP}
 
@@ -1089,7 +923,7 @@ HAND_JOINT_LITTLE_DISTAL = 24
 HAND_JOINT_LITTLE_TIP = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pinky finger tip joint.
 
 #### HAND_JOINT_MAX {#HAND_JOINT_MAX}
 
@@ -1097,7 +931,9 @@ HAND_JOINT_LITTLE_TIP = 25
 HAND_JOINT_MAX = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the HandJoints enum.
+
+---
 
 ### PerfSettingsLevel {#enum-PerfSettingsLevel}
 
@@ -1105,21 +941,7 @@ HAND_JOINT_MAX = 26
 enum PerfSettingsLevel { PERF_SETTINGS_LEVEL_POWER_SAVINGS = 0, PERF_SETTINGS_LEVEL_SUSTAINED_LOW = 1, PERF_SETTINGS_LEVEL_SUSTAINED_HIGH = 2, PERF_SETTINGS_LEVEL_BOOST = 3 }
 ```
 
-PerfSettingsLevel PERF_SETTINGS_LEVEL_POWER_SAVINGS = 0
-
-The application has entered a non-XR section (head-locked / static screen), during which power savings are to be prioritized.
-
-PerfSettingsLevel PERF_SETTINGS_LEVEL_SUSTAINED_LOW = 1
-
-The application has entered a low and stable complexity section, during which reducing power is more important than occasional late rendering frames.
-
-PerfSettingsLevel PERF_SETTINGS_LEVEL_SUSTAINED_HIGH = 2
-
-The application has entered a high or dynamic complexity section, during which the XR Runtime strives for consistent XR compositing and frame rendering within a thermally sustainable range.
-
-PerfSettingsLevel PERF_SETTINGS_LEVEL_BOOST = 3
-
-The application has entered a section with very high complexity, during which the XR Runtime is allowed to step up beyond the thermally sustainable range.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PERF_SETTINGS_LEVEL_POWER_SAVINGS {#PERF_SETTINGS_LEVEL_POWER_SAVINGS}
 
@@ -1127,7 +949,7 @@ The application has entered a section with very high complexity, during which th
 PERF_SETTINGS_LEVEL_POWER_SAVINGS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The application has entered a non-XR section (head-locked / static screen), during which power savings are to be prioritized.
 
 #### PERF_SETTINGS_LEVEL_SUSTAINED_LOW {#PERF_SETTINGS_LEVEL_SUSTAINED_LOW}
 
@@ -1135,7 +957,7 @@ PERF_SETTINGS_LEVEL_POWER_SAVINGS = 0
 PERF_SETTINGS_LEVEL_SUSTAINED_LOW = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The application has entered a low and stable complexity section, during which reducing power is more important than occasional late rendering frames.
 
 #### PERF_SETTINGS_LEVEL_SUSTAINED_HIGH {#PERF_SETTINGS_LEVEL_SUSTAINED_HIGH}
 
@@ -1143,7 +965,7 @@ PERF_SETTINGS_LEVEL_SUSTAINED_LOW = 1
 PERF_SETTINGS_LEVEL_SUSTAINED_HIGH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The application has entered a high or dynamic complexity section, during which the XR Runtime strives for consistent XR compositing and frame rendering within a thermally sustainable range.
 
 #### PERF_SETTINGS_LEVEL_BOOST {#PERF_SETTINGS_LEVEL_BOOST}
 
@@ -1151,7 +973,9 @@ PERF_SETTINGS_LEVEL_SUSTAINED_HIGH = 2
 PERF_SETTINGS_LEVEL_BOOST = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The application has entered a section with very high complexity, during which the XR Runtime is allowed to step up beyond the thermally sustainable range.
+
+---
 
 ### PerfSettingsSubDomain {#enum-PerfSettingsSubDomain}
 
@@ -1159,17 +983,7 @@ PERF_SETTINGS_LEVEL_BOOST = 3
 enum PerfSettingsSubDomain { PERF_SETTINGS_SUB_DOMAIN_COMPOSITING = 0, PERF_SETTINGS_SUB_DOMAIN_RENDERING = 1, PERF_SETTINGS_SUB_DOMAIN_THERMAL = 2 }
 ```
 
-PerfSettingsSubDomain PERF_SETTINGS_SUB_DOMAIN_COMPOSITING = 0
-
-The compositing performance within the runtime has reached a new level.
-
-PerfSettingsSubDomain PERF_SETTINGS_SUB_DOMAIN_RENDERING = 1
-
-The application rendering performance has reached a new level.
-
-PerfSettingsSubDomain PERF_SETTINGS_SUB_DOMAIN_THERMAL = 2
-
-The temperature of the device has reached a new level.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PERF_SETTINGS_SUB_DOMAIN_COMPOSITING {#PERF_SETTINGS_SUB_DOMAIN_COMPOSITING}
 
@@ -1177,7 +991,7 @@ The temperature of the device has reached a new level.
 PERF_SETTINGS_SUB_DOMAIN_COMPOSITING = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The compositing performance within the runtime has reached a new level.
 
 #### PERF_SETTINGS_SUB_DOMAIN_RENDERING {#PERF_SETTINGS_SUB_DOMAIN_RENDERING}
 
@@ -1185,7 +999,7 @@ PERF_SETTINGS_SUB_DOMAIN_COMPOSITING = 0
 PERF_SETTINGS_SUB_DOMAIN_RENDERING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The application rendering performance has reached a new level.
 
 #### PERF_SETTINGS_SUB_DOMAIN_THERMAL {#PERF_SETTINGS_SUB_DOMAIN_THERMAL}
 
@@ -1193,7 +1007,9 @@ PERF_SETTINGS_SUB_DOMAIN_RENDERING = 1
 PERF_SETTINGS_SUB_DOMAIN_THERMAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The temperature of the device has reached a new level.
+
+---
 
 ### PerfSettingsNotificationLevel {#enum-PerfSettingsNotificationLevel}
 
@@ -1201,17 +1017,7 @@ PERF_SETTINGS_SUB_DOMAIN_THERMAL = 2
 enum PerfSettingsNotificationLevel { PERF_SETTINGS_NOTIF_LEVEL_NORMAL = 0, PERF_SETTINGS_NOTIF_LEVEL_WARNING = 1, PERF_SETTINGS_NOTIF_LEVEL_IMPAIRED = 2 }
 ```
 
-PerfSettingsNotificationLevel PERF_SETTINGS_NOTIF_LEVEL_NORMAL = 0
-
-The sub-domain has reached a level where no further actions other than currently applied are necessary.
-
-PerfSettingsNotificationLevel PERF_SETTINGS_NOTIF_LEVEL_WARNING = 1
-
-The sub-domain has reached an early warning level where the application should start proactive mitigation actions.
-
-PerfSettingsNotificationLevel PERF_SETTINGS_NOTIF_LEVEL_IMPAIRED = 2
-
-The sub-domain has reached a critical level where the application should start drastic mitigation actions.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PERF_SETTINGS_NOTIF_LEVEL_NORMAL {#PERF_SETTINGS_NOTIF_LEVEL_NORMAL}
 
@@ -1219,7 +1025,7 @@ The sub-domain has reached a critical level where the application should start d
 PERF_SETTINGS_NOTIF_LEVEL_NORMAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The sub-domain has reached a level where no further actions other than currently applied are necessary.
 
 #### PERF_SETTINGS_NOTIF_LEVEL_WARNING {#PERF_SETTINGS_NOTIF_LEVEL_WARNING}
 
@@ -1227,7 +1033,7 @@ PERF_SETTINGS_NOTIF_LEVEL_NORMAL = 0
 PERF_SETTINGS_NOTIF_LEVEL_WARNING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The sub-domain has reached an early warning level where the application should start proactive mitigation actions.
 
 #### PERF_SETTINGS_NOTIF_LEVEL_IMPAIRED {#PERF_SETTINGS_NOTIF_LEVEL_IMPAIRED}
 
@@ -1235,7 +1041,11 @@ PERF_SETTINGS_NOTIF_LEVEL_WARNING = 1
 PERF_SETTINGS_NOTIF_LEVEL_IMPAIRED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The sub-domain has reached a critical level where the application should start drastic mitigation actions.
+
+---
+
+flags HandJointFlags:
 
 ### HandJointFlags {#enum-HandJointFlags}
 
@@ -1251,7 +1061,7 @@ enum HandJointFlags（位标志） { HAND_JOINT_NONE = 0, HAND_JOINT_ORIENTATION
 HAND_JOINT_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No flags are set.
 
 #### HAND_JOINT_ORIENTATION_VALID {#HAND_JOINT_ORIENTATION_VALID}
 
@@ -1259,7 +1069,7 @@ HAND_JOINT_NONE = 0
 HAND_JOINT_ORIENTATION_VALID = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, the orientation data is valid, otherwise, the orientation data is unreliable and should not be used.
 
 #### HAND_JOINT_ORIENTATION_TRACKED {#HAND_JOINT_ORIENTATION_TRACKED}
 
@@ -1267,7 +1077,7 @@ HAND_JOINT_ORIENTATION_VALID = 1
 HAND_JOINT_ORIENTATION_TRACKED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, the orientation data comes from tracking data, otherwise, the orientation data contains predicted data.
 
 #### HAND_JOINT_POSITION_VALID {#HAND_JOINT_POSITION_VALID}
 
@@ -1275,7 +1085,7 @@ HAND_JOINT_ORIENTATION_TRACKED = 2
 HAND_JOINT_POSITION_VALID = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, the positional data is valid, otherwise, the positional data is unreliable and should not be used.
 
 #### HAND_JOINT_POSITION_TRACKED {#HAND_JOINT_POSITION_TRACKED}
 
@@ -1283,7 +1093,7 @@ HAND_JOINT_POSITION_VALID = 4
 HAND_JOINT_POSITION_TRACKED = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, the positional data comes from tracking data, otherwise, the positional data contains predicted data.
 
 #### HAND_JOINT_LINEAR_VELOCITY_VALID {#HAND_JOINT_LINEAR_VELOCITY_VALID}
 
@@ -1291,7 +1101,7 @@ HAND_JOINT_POSITION_TRACKED = 8
 HAND_JOINT_LINEAR_VELOCITY_VALID = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, our linear velocity data is valid, otherwise, the linear velocity data is unreliable and should not be used.
 
 #### HAND_JOINT_ANGULAR_VELOCITY_VALID {#HAND_JOINT_ANGULAR_VELOCITY_VALID}
 
@@ -1299,4 +1109,6 @@ HAND_JOINT_LINEAR_VELOCITY_VALID = 16
 HAND_JOINT_ANGULAR_VELOCITY_VALID = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, our angular velocity data is valid, otherwise, the angular velocity data is unreliable and should not be used.
+
+---

@@ -76,25 +76,7 @@ If true, the shader will keep the scale set for the mesh. Otherwise, the scale i
 enum BillboardType { BILLBOARD_TYPE_DISABLED = 0, BILLBOARD_TYPE_ENABLED = 1, BILLBOARD_TYPE_FIXED_Y = 2, BILLBOARD_TYPE_PARTICLES = 3, BILLBOARD_TYPE_MAX = 4 }
 ```
 
-BillboardType BILLBOARD_TYPE_DISABLED = 0
-
-Billboarding is disabled and the node does nothing.
-
-BillboardType BILLBOARD_TYPE_ENABLED = 1
-
-A standard billboarding algorithm is enabled.
-
-BillboardType BILLBOARD_TYPE_FIXED_Y = 2
-
-A billboarding algorithm to rotate around Y-axis is enabled.
-
-BillboardType BILLBOARD_TYPE_PARTICLES = 3
-
-A billboarding algorithm designed to use on particles is enabled.
-
-BillboardType BILLBOARD_TYPE_MAX = 4
-
-Represents the size of the BillboardType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BILLBOARD_TYPE_DISABLED {#BILLBOARD_TYPE_DISABLED}
 
@@ -102,7 +84,7 @@ Represents the size of the BillboardType enum.
 BILLBOARD_TYPE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Billboarding is disabled and the node does nothing.
 
 #### BILLBOARD_TYPE_ENABLED {#BILLBOARD_TYPE_ENABLED}
 
@@ -110,7 +92,7 @@ BILLBOARD_TYPE_DISABLED = 0
 BILLBOARD_TYPE_ENABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A standard billboarding algorithm is enabled.
 
 #### BILLBOARD_TYPE_FIXED_Y {#BILLBOARD_TYPE_FIXED_Y}
 
@@ -118,7 +100,7 @@ BILLBOARD_TYPE_ENABLED = 1
 BILLBOARD_TYPE_FIXED_Y = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A billboarding algorithm to rotate around Y-axis is enabled.
 
 #### BILLBOARD_TYPE_PARTICLES {#BILLBOARD_TYPE_PARTICLES}
 
@@ -126,7 +108,7 @@ BILLBOARD_TYPE_FIXED_Y = 2
 BILLBOARD_TYPE_PARTICLES = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A billboarding algorithm designed to use on particles is enabled.
 
 #### BILLBOARD_TYPE_MAX {#BILLBOARD_TYPE_MAX}
 
@@ -134,4 +116,6 @@ BILLBOARD_TYPE_PARTICLES = 3
 BILLBOARD_TYPE_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the BillboardType enum.
+
+---

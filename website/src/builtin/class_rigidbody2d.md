@@ -574,7 +574,12 @@ Defines the way the body's center of mass is set.
 center_of_mass: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_center_of_mass(value: Vector2)
+- Vector2 get_center_of_mass()
+
+The body's custom center of mass, relative to the body's origin position, when center_of_mass_mode is set to CENTER_OF_MASS_MODE_CUSTOM. This is the balanced point of the body, where applied forces only cause linear acceleration. Applying forces outside of the center of mass causes angular acceleration.
+
+When center_of_mass_mode is set to CENTER_OF_MASS_MODE_AUTO (default value), the center of mass is automatically determined, but this does not update the value of center_of_mass.
 
 ### inertia {#inertia}
 
@@ -728,7 +733,10 @@ Note: The number of contacts is different from the number of collisions. Collisi
 linear_velocity: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_linear_velocity(value: Vector2)
+- Vector2 get_linear_velocity()
+
+The body's linear velocity in pixels per second. Can be used sporadically, but don't set this every frame, because physics may run in another thread and runs at a different granularity. Use _integrate_forces() as your process loop for precise control of the body state.
 
 ### linear_damp_mode {#linear_damp_mode}
 
@@ -795,7 +803,12 @@ See ProjectSettings.physics/2d/default_angular_damp for more details about dampi
 constant_force: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_constant_force(value: Vector2)
+- Vector2 get_constant_force()
+
+The body's total constant positional forces applied during each physics update.
+
+See add_constant_force() and add_constant_central_force().
 
 ### constant_torque {#constant_torque}
 
@@ -882,13 +895,7 @@ Note: Changing the value sleeping will not trigger this signal. It is only emitt
 enum FreezeMode { FREEZE_MODE_STATIC = 0, FREEZE_MODE_KINEMATIC = 1 }
 ```
 
-FreezeMode FREEZE_MODE_STATIC = 0
-
-Static body freeze mode (default). The body is not affected by gravity and forces. It can be only moved by user code and doesn't collide with other bodies along its path.
-
-FreezeMode FREEZE_MODE_KINEMATIC = 1
-
-Kinematic body freeze mode. Similar to FREEZE_MODE_STATIC, but collides with other bodies along its path when moved. Useful for a frozen body that needs to be animated.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FREEZE_MODE_STATIC {#FREEZE_MODE_STATIC}
 
@@ -896,7 +903,7 @@ Kinematic body freeze mode. Similar to FREEZE_MODE_STATIC, but collides with oth
 FREEZE_MODE_STATIC = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Static body freeze mode (default). The body is not affected by gravity and forces. It can be only moved by user code and doesn't collide with other bodies along its path.
 
 #### FREEZE_MODE_KINEMATIC {#FREEZE_MODE_KINEMATIC}
 
@@ -904,7 +911,9 @@ FREEZE_MODE_STATIC = 0
 FREEZE_MODE_KINEMATIC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Kinematic body freeze mode. Similar to FREEZE_MODE_STATIC, but collides with other bodies along its path when moved. Useful for a frozen body that needs to be animated.
+
+---
 
 ### CenterOfMassMode {#enum-CenterOfMassMode}
 
@@ -912,13 +921,7 @@ FREEZE_MODE_KINEMATIC = 1
 enum CenterOfMassMode { CENTER_OF_MASS_MODE_AUTO = 0, CENTER_OF_MASS_MODE_CUSTOM = 1 }
 ```
 
-CenterOfMassMode CENTER_OF_MASS_MODE_AUTO = 0
-
-In this mode, the body's center of mass is calculated automatically based on its shapes. This assumes that the shapes' origins are also their center of mass.
-
-CenterOfMassMode CENTER_OF_MASS_MODE_CUSTOM = 1
-
-In this mode, the body's center of mass is set through center_of_mass. Defaults to the body's origin position.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CENTER_OF_MASS_MODE_AUTO {#CENTER_OF_MASS_MODE_AUTO}
 
@@ -926,7 +929,7 @@ In this mode, the body's center of mass is set through center_of_mass. Defaults 
 CENTER_OF_MASS_MODE_AUTO = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+In this mode, the body's center of mass is calculated automatically based on its shapes. This assumes that the shapes' origins are also their center of mass.
 
 #### CENTER_OF_MASS_MODE_CUSTOM {#CENTER_OF_MASS_MODE_CUSTOM}
 
@@ -934,7 +937,9 @@ CENTER_OF_MASS_MODE_AUTO = 0
 CENTER_OF_MASS_MODE_CUSTOM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+In this mode, the body's center of mass is set through center_of_mass. Defaults to the body's origin position.
+
+---
 
 ### DampMode {#enum-DampMode}
 
@@ -942,13 +947,7 @@ CENTER_OF_MASS_MODE_CUSTOM = 1
 enum DampMode { DAMP_MODE_COMBINE = 0, DAMP_MODE_REPLACE = 1 }
 ```
 
-DampMode DAMP_MODE_COMBINE = 0
-
-In this mode, the body's damping value is added to any value set in areas or the default value.
-
-DampMode DAMP_MODE_REPLACE = 1
-
-In this mode, the body's damping value replaces any value set in areas or the default value.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DAMP_MODE_COMBINE {#DAMP_MODE_COMBINE}
 
@@ -956,7 +955,7 @@ In this mode, the body's damping value replaces any value set in areas or the de
 DAMP_MODE_COMBINE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+In this mode, the body's damping value is added to any value set in areas or the default value.
 
 #### DAMP_MODE_REPLACE {#DAMP_MODE_REPLACE}
 
@@ -964,7 +963,9 @@ DAMP_MODE_COMBINE = 0
 DAMP_MODE_REPLACE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+In this mode, the body's damping value replaces any value set in areas or the default value.
+
+---
 
 ### CCDMode {#enum-CCDMode}
 
@@ -972,17 +973,7 @@ DAMP_MODE_REPLACE = 1
 enum CCDMode { CCD_MODE_DISABLED = 0, CCD_MODE_CAST_RAY = 1, CCD_MODE_CAST_SHAPE = 2 }
 ```
 
-CCDMode CCD_MODE_DISABLED = 0
-
-Continuous collision detection disabled. This is the fastest way to detect body collisions, but can miss small, fast-moving objects.
-
-CCDMode CCD_MODE_CAST_RAY = 1
-
-Continuous collision detection enabled using raycasting. This is faster than shapecasting but less precise.
-
-CCDMode CCD_MODE_CAST_SHAPE = 2
-
-Continuous collision detection enabled using shapecasting. This is the slowest CCD method and the most precise.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CCD_MODE_DISABLED {#CCD_MODE_DISABLED}
 
@@ -990,7 +981,7 @@ Continuous collision detection enabled using shapecasting. This is the slowest C
 CCD_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Continuous collision detection disabled. This is the fastest way to detect body collisions, but can miss small, fast-moving objects.
 
 #### CCD_MODE_CAST_RAY {#CCD_MODE_CAST_RAY}
 
@@ -998,7 +989,7 @@ CCD_MODE_DISABLED = 0
 CCD_MODE_CAST_RAY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Continuous collision detection enabled using raycasting. This is faster than shapecasting but less precise.
 
 #### CCD_MODE_CAST_SHAPE {#CCD_MODE_CAST_SHAPE}
 
@@ -1006,4 +997,6 @@ CCD_MODE_CAST_RAY = 1
 CCD_MODE_CAST_SHAPE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Continuous collision detection enabled using shapecasting. This is the slowest CCD method and the most precise.
+
+---

@@ -298,7 +298,12 @@ void set_width(width: float)
 points: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_points(value: PackedVector2Array)
+- PackedVector2Array get_points()
+
+The points of the polyline, interpreted in local 2D coordinates. Segments are drawn between the adjacent points in this array.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.
 
 ### closed {#closed}
 
@@ -343,7 +348,10 @@ The polyline's width curve. The width of the polyline over its length will be eq
 default_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_default_color(value: Color)
+- Color get_default_color()
+
+The color of the polyline. Will not be used if a gradient is set.
 
 ### gradient {#gradient}
 
@@ -454,17 +462,7 @@ Note: Line2D is not accelerated by batching when being anti-aliased.
 enum LineJointMode { LINE_JOINT_SHARP = 0, LINE_JOINT_BEVEL = 1, LINE_JOINT_ROUND = 2 }
 ```
 
-LineJointMode LINE_JOINT_SHARP = 0
-
-Makes the polyline's joints pointy, connecting the sides of the two segments by extending them until they intersect. If the rotation of a joint is too big (based on sharp_limit), the joint falls back to LINE_JOINT_BEVEL to prevent very long miters.
-
-LineJointMode LINE_JOINT_BEVEL = 1
-
-Makes the polyline's joints bevelled/chamfered, connecting the sides of the two segments with a simple line.
-
-LineJointMode LINE_JOINT_ROUND = 2
-
-Makes the polyline's joints rounded, connecting the sides of the two segments with an arc. The detail of this arc depends on round_precision.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LINE_JOINT_SHARP {#LINE_JOINT_SHARP}
 
@@ -472,7 +470,7 @@ Makes the polyline's joints rounded, connecting the sides of the two segments wi
 LINE_JOINT_SHARP = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the polyline's joints pointy, connecting the sides of the two segments by extending them until they intersect. If the rotation of a joint is too big (based on sharp_limit), the joint falls back to LINE_JOINT_BEVEL to prevent very long miters.
 
 #### LINE_JOINT_BEVEL {#LINE_JOINT_BEVEL}
 
@@ -480,7 +478,7 @@ LINE_JOINT_SHARP = 0
 LINE_JOINT_BEVEL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the polyline's joints bevelled/chamfered, connecting the sides of the two segments with a simple line.
 
 #### LINE_JOINT_ROUND {#LINE_JOINT_ROUND}
 
@@ -488,7 +486,9 @@ LINE_JOINT_BEVEL = 1
 LINE_JOINT_ROUND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the polyline's joints rounded, connecting the sides of the two segments with an arc. The detail of this arc depends on round_precision.
+
+---
 
 ### LineCapMode {#enum-LineCapMode}
 
@@ -496,17 +496,7 @@ LINE_JOINT_ROUND = 2
 enum LineCapMode { LINE_CAP_NONE = 0, LINE_CAP_BOX = 1, LINE_CAP_ROUND = 2 }
 ```
 
-LineCapMode LINE_CAP_NONE = 0
-
-Draws no line cap.
-
-LineCapMode LINE_CAP_BOX = 1
-
-Draws the line cap as a box, slightly extending the first/last segment.
-
-LineCapMode LINE_CAP_ROUND = 2
-
-Draws the line cap as a semicircle attached to the first/last segment.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LINE_CAP_NONE {#LINE_CAP_NONE}
 
@@ -514,7 +504,7 @@ Draws the line cap as a semicircle attached to the first/last segment.
 LINE_CAP_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws no line cap.
 
 #### LINE_CAP_BOX {#LINE_CAP_BOX}
 
@@ -522,7 +512,7 @@ LINE_CAP_NONE = 0
 LINE_CAP_BOX = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the line cap as a box, slightly extending the first/last segment.
 
 #### LINE_CAP_ROUND {#LINE_CAP_ROUND}
 
@@ -530,7 +520,9 @@ LINE_CAP_BOX = 1
 LINE_CAP_ROUND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the line cap as a semicircle attached to the first/last segment.
+
+---
 
 ### LineTextureMode {#enum-LineTextureMode}
 
@@ -538,17 +530,7 @@ LINE_CAP_ROUND = 2
 enum LineTextureMode { LINE_TEXTURE_NONE = 0, LINE_TEXTURE_TILE = 1, LINE_TEXTURE_STRETCH = 2 }
 ```
 
-LineTextureMode LINE_TEXTURE_NONE = 0
-
-Takes the left pixels of the texture and renders them over the whole polyline.
-
-LineTextureMode LINE_TEXTURE_TILE = 1
-
-Tiles the texture over the polyline. CanvasItem.texture_repeat of the Line2D node must be CanvasItem.TEXTURE_REPEAT_ENABLED or CanvasItem.TEXTURE_REPEAT_MIRROR for it to work properly.
-
-LineTextureMode LINE_TEXTURE_STRETCH = 2
-
-Stretches the texture across the polyline. CanvasItem.texture_repeat of the Line2D node must be CanvasItem.TEXTURE_REPEAT_DISABLED for best results.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LINE_TEXTURE_NONE {#LINE_TEXTURE_NONE}
 
@@ -556,7 +538,7 @@ Stretches the texture across the polyline. CanvasItem.texture_repeat of the Line
 LINE_TEXTURE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Takes the left pixels of the texture and renders them over the whole polyline.
 
 #### LINE_TEXTURE_TILE {#LINE_TEXTURE_TILE}
 
@@ -564,7 +546,7 @@ LINE_TEXTURE_NONE = 0
 LINE_TEXTURE_TILE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tiles the texture over the polyline. CanvasItem.texture_repeat of the Line2D node must be CanvasItem.TEXTURE_REPEAT_ENABLED or CanvasItem.TEXTURE_REPEAT_MIRROR for it to work properly.
 
 #### LINE_TEXTURE_STRETCH {#LINE_TEXTURE_STRETCH}
 
@@ -572,4 +554,6 @@ LINE_TEXTURE_TILE = 1
 LINE_TEXTURE_STRETCH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stretches the texture across the polyline. CanvasItem.texture_repeat of the Line2D node must be CanvasItem.TEXTURE_REPEAT_DISABLED for best results.
+
+---

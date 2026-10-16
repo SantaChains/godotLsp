@@ -54,7 +54,12 @@ Sets the compilation error message for the given shader stage to compile_error. 
 bytecode_vertex: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stage_bytecode(stage: ShaderStage, bytecode: PackedByteArray)
+- PackedByteArray get_stage_bytecode(stage: ShaderStage) const
+
+The SPIR-V bytecode for the vertex shader stage.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### bytecode_fragment {#bytecode_fragment}
 
@@ -62,7 +67,12 @@ bytecode_vertex: PackedByteArray
 bytecode_fragment: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stage_bytecode(stage: ShaderStage, bytecode: PackedByteArray)
+- PackedByteArray get_stage_bytecode(stage: ShaderStage) const
+
+The SPIR-V bytecode for the fragment shader stage.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### bytecode_tesselation_control {#bytecode_tesselation_control}
 
@@ -70,7 +80,12 @@ bytecode_fragment: PackedByteArray
 bytecode_tesselation_control: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stage_bytecode(stage: ShaderStage, bytecode: PackedByteArray)
+- PackedByteArray get_stage_bytecode(stage: ShaderStage) const
+
+The SPIR-V bytecode for the tessellation control shader stage.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### bytecode_tesselation_evaluation {#bytecode_tesselation_evaluation}
 
@@ -78,7 +93,12 @@ bytecode_tesselation_control: PackedByteArray
 bytecode_tesselation_evaluation: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stage_bytecode(stage: ShaderStage, bytecode: PackedByteArray)
+- PackedByteArray get_stage_bytecode(stage: ShaderStage) const
+
+The SPIR-V bytecode for the tessellation evaluation shader stage.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### bytecode_compute {#bytecode_compute}
 
@@ -86,7 +106,12 @@ bytecode_tesselation_evaluation: PackedByteArray
 bytecode_compute: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stage_bytecode(stage: ShaderStage, bytecode: PackedByteArray)
+- PackedByteArray get_stage_bytecode(stage: ShaderStage) const
+
+The SPIR-V bytecode for the compute shader stage.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### bytecode_raygen {#bytecode_raygen}
 
@@ -94,7 +119,12 @@ bytecode_compute: PackedByteArray
 bytecode_raygen: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stage_bytecode(stage: ShaderStage, bytecode: PackedByteArray)
+- PackedByteArray get_stage_bytecode(stage: ShaderStage) const
+
+The SPIR-V bytecode for the ray generation shader stage.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### bytecode_any_hit {#bytecode_any_hit}
 
@@ -102,7 +132,12 @@ bytecode_raygen: PackedByteArray
 bytecode_any_hit: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stage_bytecode(stage: ShaderStage, bytecode: PackedByteArray)
+- PackedByteArray get_stage_bytecode(stage: ShaderStage) const
+
+The SPIR-V bytecode for the any hit shader stage.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### bytecode_closest_hit {#bytecode_closest_hit}
 
@@ -110,7 +145,12 @@ bytecode_any_hit: PackedByteArray
 bytecode_closest_hit: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stage_bytecode(stage: ShaderStage, bytecode: PackedByteArray)
+- PackedByteArray get_stage_bytecode(stage: ShaderStage) const
+
+The SPIR-V bytecode for the closest hit shader stage.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### bytecode_miss {#bytecode_miss}
 
@@ -118,7 +158,12 @@ bytecode_closest_hit: PackedByteArray
 bytecode_miss: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stage_bytecode(stage: ShaderStage, bytecode: PackedByteArray)
+- PackedByteArray get_stage_bytecode(stage: ShaderStage) const
+
+The SPIR-V bytecode for the miss shader stage.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### bytecode_intersection {#bytecode_intersection}
 
@@ -126,7 +171,12 @@ bytecode_miss: PackedByteArray
 bytecode_intersection: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stage_bytecode(stage: ShaderStage, bytecode: PackedByteArray)
+- PackedByteArray get_stage_bytecode(stage: ShaderStage) const
+
+The SPIR-V bytecode for the intersection shader stage.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### compile_error_vertex {#compile_error_vertex}
 

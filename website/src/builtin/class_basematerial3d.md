@@ -1460,7 +1460,12 @@ Note: Only effective when using the Forward+ and Mobile rendering methods, not C
 albedo_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_albedo(value: Color)
+- Color get_albedo()
+
+The material's base color.
+
+Note: If detail_enabled is true and a detail_albedo texture is specified, albedo_color will not modulate the detail texture. This can be used to color partial areas of a material by not specifying an albedo texture and using a transparent detail_albedo texture instead.
 
 ### albedo_texture {#albedo_texture}
 
@@ -1606,7 +1611,10 @@ If true, the body emits light. Emitting light makes the object appear brighter. 
 emission: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_emission(value: Color)
+- Color get_emission()
+
+The emitted light's color. See emission_enabled.
 
 ### emission_energy_multiplier {#emission_energy_multiplier}
 
@@ -2092,7 +2100,10 @@ If true, enables subsurface scattering transmittance. Only effective if subsurf_
 subsurf_scatter_transmittance_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_transmittance_color(value: Color)
+- Color get_transmittance_color()
+
+The color to multiply the subsurface scattering transmittance effect with. Ignored if subsurf_scatter_skin_mode is true.
 
 ### subsurf_scatter_transmittance_texture {#subsurf_scatter_transmittance_texture}
 
@@ -2144,7 +2155,10 @@ If true, the backlight effect is enabled. See also subsurf_scatter_transmittance
 backlight: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_backlight(value: Color)
+- Color get_backlight()
+
+The color used by the backlight effect. Represents the light passing through an object.
 
 ### backlight_texture {#backlight_texture}
 
@@ -2279,7 +2293,10 @@ Note: Godot expects the normal map to use X+, Y+, and Z+ coordinates. See this p
 uv1_scale: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_uv1_scale(value: Vector3)
+- Vector3 get_uv1_scale()
+
+How much to scale the UV coordinates. This is multiplied by UV in the vertex function. The Z component is used when uv1_triplanar is enabled, but it is not used anywhere else.
 
 ### uv1_offset {#uv1_offset}
 
@@ -2287,7 +2304,10 @@ uv1_scale: Vector3
 uv1_offset: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_uv1_offset(value: Vector3)
+- Vector3 get_uv1_offset()
+
+How much to offset the UV coordinates. This amount will be added to UV in the vertex function. This can be used to offset a texture. The Z component is used when uv1_triplanar is enabled, but it is not used anywhere else.
 
 ### uv1_triplanar {#uv1_triplanar}
 
@@ -2330,7 +2350,10 @@ If true, triplanar mapping for UV is calculated in world space rather than objec
 uv2_scale: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_uv2_scale(value: Vector3)
+- Vector3 get_uv2_scale()
+
+How much to scale the UV2 coordinates. This is multiplied by UV2 in the vertex function. The Z component is used when uv2_triplanar is enabled, but it is not used anywhere else.
 
 ### uv2_offset {#uv2_offset}
 
@@ -2338,7 +2361,10 @@ uv2_scale: Vector3
 uv2_offset: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_uv2_offset(value: Vector3)
+- Vector3 get_uv2_offset()
+
+How much to offset the UV2 coordinates. This amount will be added to UV2 in the vertex function. This can be used to offset a texture. The Z component is used when uv2_triplanar is enabled, but it is not used anywhere else.
 
 ### uv2_triplanar {#uv2_triplanar}
 
@@ -2733,7 +2759,12 @@ The stencil reference value (0-255). Typically a power of 2.
 stencil_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_stencil_effect_color(value: Color)
+- Color get_stencil_effect_color()
+
+Experimental: May be affected by future rendering pipeline changes.
+
+The primary color of the stencil effect.
 
 ### stencil_outline_thickness {#stencil_outline_thickness}
 
@@ -2756,85 +2787,7 @@ The outline thickness for STENCIL_MODE_OUTLINE.
 enum TextureParam { TEXTURE_ALBEDO = 0, TEXTURE_METALLIC = 1, TEXTURE_ROUGHNESS = 2, TEXTURE_EMISSION = 3, TEXTURE_NORMAL = 4, TEXTURE_BENT_NORMAL = 18, TEXTURE_RIM = 5, TEXTURE_CLEARCOAT = 6, TEXTURE_FLOWMAP = 7, TEXTURE_AMBIENT_OCCLUSION = 8, TEXTURE_HEIGHTMAP = 9, TEXTURE_SUBSURFACE_SCATTERING = 10, TEXTURE_SUBSURFACE_TRANSMITTANCE = 11, TEXTURE_BACKLIGHT = 12, TEXTURE_REFRACTION = 13, TEXTURE_DETAIL_MASK = 14, TEXTURE_DETAIL_ALBEDO = 15, TEXTURE_DETAIL_NORMAL = 16, TEXTURE_ORM = 17, TEXTURE_MAX = 19 }
 ```
 
-TextureParam TEXTURE_ALBEDO = 0
-
-Texture specifying per-pixel color.
-
-TextureParam TEXTURE_METALLIC = 1
-
-Texture specifying per-pixel metallic value.
-
-TextureParam TEXTURE_ROUGHNESS = 2
-
-Texture specifying per-pixel roughness value.
-
-TextureParam TEXTURE_EMISSION = 3
-
-Texture specifying per-pixel emission color.
-
-TextureParam TEXTURE_NORMAL = 4
-
-Texture specifying per-pixel normal vector.
-
-TextureParam TEXTURE_BENT_NORMAL = 18
-
-Texture specifying per-pixel bent normal vector.
-
-TextureParam TEXTURE_RIM = 5
-
-Texture specifying per-pixel rim value.
-
-TextureParam TEXTURE_CLEARCOAT = 6
-
-Texture specifying per-pixel clearcoat value.
-
-TextureParam TEXTURE_FLOWMAP = 7
-
-Texture specifying per-pixel flowmap direction for use with anisotropy.
-
-TextureParam TEXTURE_AMBIENT_OCCLUSION = 8
-
-Texture specifying per-pixel ambient occlusion value.
-
-TextureParam TEXTURE_HEIGHTMAP = 9
-
-Texture specifying per-pixel height.
-
-TextureParam TEXTURE_SUBSURFACE_SCATTERING = 10
-
-Texture specifying per-pixel subsurface scattering.
-
-TextureParam TEXTURE_SUBSURFACE_TRANSMITTANCE = 11
-
-Texture specifying per-pixel transmittance for subsurface scattering.
-
-TextureParam TEXTURE_BACKLIGHT = 12
-
-Texture specifying per-pixel backlight color.
-
-TextureParam TEXTURE_REFRACTION = 13
-
-Texture specifying per-pixel refraction strength.
-
-TextureParam TEXTURE_DETAIL_MASK = 14
-
-Texture specifying per-pixel detail mask blending value.
-
-TextureParam TEXTURE_DETAIL_ALBEDO = 15
-
-Texture specifying per-pixel detail color.
-
-TextureParam TEXTURE_DETAIL_NORMAL = 16
-
-Texture specifying per-pixel detail normal.
-
-TextureParam TEXTURE_ORM = 17
-
-Texture holding ambient occlusion, roughness, and metallic.
-
-TextureParam TEXTURE_MAX = 19
-
-Represents the size of the TextureParam enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TEXTURE_ALBEDO {#TEXTURE_ALBEDO}
 
@@ -2842,7 +2795,7 @@ Represents the size of the TextureParam enum.
 TEXTURE_ALBEDO = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel color.
 
 #### TEXTURE_METALLIC {#TEXTURE_METALLIC}
 
@@ -2850,7 +2803,7 @@ TEXTURE_ALBEDO = 0
 TEXTURE_METALLIC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel metallic value.
 
 #### TEXTURE_ROUGHNESS {#TEXTURE_ROUGHNESS}
 
@@ -2858,7 +2811,7 @@ TEXTURE_METALLIC = 1
 TEXTURE_ROUGHNESS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel roughness value.
 
 #### TEXTURE_EMISSION {#TEXTURE_EMISSION}
 
@@ -2866,7 +2819,7 @@ TEXTURE_ROUGHNESS = 2
 TEXTURE_EMISSION = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel emission color.
 
 #### TEXTURE_NORMAL {#TEXTURE_NORMAL}
 
@@ -2874,7 +2827,7 @@ TEXTURE_EMISSION = 3
 TEXTURE_NORMAL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel normal vector.
 
 #### TEXTURE_BENT_NORMAL {#TEXTURE_BENT_NORMAL}
 
@@ -2882,7 +2835,7 @@ TEXTURE_NORMAL = 4
 TEXTURE_BENT_NORMAL = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel bent normal vector.
 
 #### TEXTURE_RIM {#TEXTURE_RIM}
 
@@ -2890,7 +2843,7 @@ TEXTURE_BENT_NORMAL = 18
 TEXTURE_RIM = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel rim value.
 
 #### TEXTURE_CLEARCOAT {#TEXTURE_CLEARCOAT}
 
@@ -2898,7 +2851,7 @@ TEXTURE_RIM = 5
 TEXTURE_CLEARCOAT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel clearcoat value.
 
 #### TEXTURE_FLOWMAP {#TEXTURE_FLOWMAP}
 
@@ -2906,7 +2859,7 @@ TEXTURE_CLEARCOAT = 6
 TEXTURE_FLOWMAP = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel flowmap direction for use with anisotropy.
 
 #### TEXTURE_AMBIENT_OCCLUSION {#TEXTURE_AMBIENT_OCCLUSION}
 
@@ -2914,7 +2867,7 @@ TEXTURE_FLOWMAP = 7
 TEXTURE_AMBIENT_OCCLUSION = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel ambient occlusion value.
 
 #### TEXTURE_HEIGHTMAP {#TEXTURE_HEIGHTMAP}
 
@@ -2922,7 +2875,7 @@ TEXTURE_AMBIENT_OCCLUSION = 8
 TEXTURE_HEIGHTMAP = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel height.
 
 #### TEXTURE_SUBSURFACE_SCATTERING {#TEXTURE_SUBSURFACE_SCATTERING}
 
@@ -2930,7 +2883,7 @@ TEXTURE_HEIGHTMAP = 9
 TEXTURE_SUBSURFACE_SCATTERING = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel subsurface scattering.
 
 #### TEXTURE_SUBSURFACE_TRANSMITTANCE {#TEXTURE_SUBSURFACE_TRANSMITTANCE}
 
@@ -2938,7 +2891,7 @@ TEXTURE_SUBSURFACE_SCATTERING = 10
 TEXTURE_SUBSURFACE_TRANSMITTANCE = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel transmittance for subsurface scattering.
 
 #### TEXTURE_BACKLIGHT {#TEXTURE_BACKLIGHT}
 
@@ -2946,7 +2899,7 @@ TEXTURE_SUBSURFACE_TRANSMITTANCE = 11
 TEXTURE_BACKLIGHT = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel backlight color.
 
 #### TEXTURE_REFRACTION {#TEXTURE_REFRACTION}
 
@@ -2954,7 +2907,7 @@ TEXTURE_BACKLIGHT = 12
 TEXTURE_REFRACTION = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel refraction strength.
 
 #### TEXTURE_DETAIL_MASK {#TEXTURE_DETAIL_MASK}
 
@@ -2962,7 +2915,7 @@ TEXTURE_REFRACTION = 13
 TEXTURE_DETAIL_MASK = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel detail mask blending value.
 
 #### TEXTURE_DETAIL_ALBEDO {#TEXTURE_DETAIL_ALBEDO}
 
@@ -2970,7 +2923,7 @@ TEXTURE_DETAIL_MASK = 14
 TEXTURE_DETAIL_ALBEDO = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel detail color.
 
 #### TEXTURE_DETAIL_NORMAL {#TEXTURE_DETAIL_NORMAL}
 
@@ -2978,7 +2931,7 @@ TEXTURE_DETAIL_ALBEDO = 15
 TEXTURE_DETAIL_NORMAL = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture specifying per-pixel detail normal.
 
 #### TEXTURE_ORM {#TEXTURE_ORM}
 
@@ -2986,7 +2939,7 @@ TEXTURE_DETAIL_NORMAL = 16
 TEXTURE_ORM = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture holding ambient occlusion, roughness, and metallic.
 
 #### TEXTURE_MAX {#TEXTURE_MAX}
 
@@ -2994,7 +2947,9 @@ TEXTURE_ORM = 17
 TEXTURE_MAX = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the TextureParam enum.
+
+---
 
 ### TextureFilter {#enum-TextureFilter}
 
@@ -3002,33 +2957,7 @@ TEXTURE_MAX = 19
 enum TextureFilter { TEXTURE_FILTER_NEAREST = 0, TEXTURE_FILTER_LINEAR = 1, TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 2, TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 3, TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC = 4, TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC = 5, TEXTURE_FILTER_MAX = 6 }
 ```
 
-TextureFilter TEXTURE_FILTER_NEAREST = 0
-
-The texture filter reads from the nearest pixel only. This makes the texture look pixelated from up close, and grainy from a distance (due to mipmaps not being sampled).
-
-TextureFilter TEXTURE_FILTER_LINEAR = 1
-
-The texture filter blends between the nearest 4 pixels. This makes the texture look smooth from up close, and grainy from a distance (due to mipmaps not being sampled).
-
-TextureFilter TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 2
-
-The texture filter reads from the nearest pixel and blends between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look pixelated from up close, and smooth from a distance.
-
-TextureFilter TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 3
-
-The texture filter blends between the nearest 4 pixels and between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look smooth from up close, and smooth from a distance.
-
-TextureFilter TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC = 4
-
-The texture filter reads from the nearest pixel and blends between 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true) based on the angle between the surface and the camera view. This makes the texture look pixelated from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level.
-
-TextureFilter TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC = 5
-
-The texture filter blends between the nearest 4 pixels and blends between 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true) based on the angle between the surface and the camera view. This makes the texture look smooth from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level.
-
-TextureFilter TEXTURE_FILTER_MAX = 6
-
-Represents the size of the TextureFilter enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TEXTURE_FILTER_NEAREST {#TEXTURE_FILTER_NEAREST}
 
@@ -3036,7 +2965,7 @@ Represents the size of the TextureFilter enum.
 TEXTURE_FILTER_NEAREST = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter reads from the nearest pixel only. This makes the texture look pixelated from up close, and grainy from a distance (due to mipmaps not being sampled).
 
 #### TEXTURE_FILTER_LINEAR {#TEXTURE_FILTER_LINEAR}
 
@@ -3044,7 +2973,7 @@ TEXTURE_FILTER_NEAREST = 0
 TEXTURE_FILTER_LINEAR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter blends between the nearest 4 pixels. This makes the texture look smooth from up close, and grainy from a distance (due to mipmaps not being sampled).
 
 #### TEXTURE_FILTER_NEAREST_WITH_MIPMAPS {#TEXTURE_FILTER_NEAREST_WITH_MIPMAPS}
 
@@ -3052,7 +2981,7 @@ TEXTURE_FILTER_LINEAR = 1
 TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter reads from the nearest pixel and blends between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look pixelated from up close, and smooth from a distance.
 
 #### TEXTURE_FILTER_LINEAR_WITH_MIPMAPS {#TEXTURE_FILTER_LINEAR_WITH_MIPMAPS}
 
@@ -3060,7 +2989,7 @@ TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 2
 TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter blends between the nearest 4 pixels and between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look smooth from up close, and smooth from a distance.
 
 #### TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC {#TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC}
 
@@ -3068,7 +2997,7 @@ TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 3
 TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter reads from the nearest pixel and blends between 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true) based on the angle between the surface and the camera view. This makes the texture look pixelated from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level.
 
 #### TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC {#TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC}
 
@@ -3076,7 +3005,7 @@ TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC = 4
 TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter blends between the nearest 4 pixels and blends between 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true) based on the angle between the surface and the camera view. This makes the texture look smooth from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level.
 
 #### TEXTURE_FILTER_MAX {#TEXTURE_FILTER_MAX}
 
@@ -3084,7 +3013,9 @@ TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC = 5
 TEXTURE_FILTER_MAX = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the TextureFilter enum.
+
+---
 
 ### DetailUV {#enum-DetailUV}
 
@@ -3092,13 +3023,7 @@ TEXTURE_FILTER_MAX = 6
 enum DetailUV { DETAIL_UV_1 = 0, DETAIL_UV_2 = 1 }
 ```
 
-DetailUV DETAIL_UV_1 = 0
-
-Use UV with the detail texture.
-
-DetailUV DETAIL_UV_2 = 1
-
-Use UV2 with the detail texture.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DETAIL_UV_1 {#DETAIL_UV_1}
 
@@ -3106,7 +3031,7 @@ Use UV2 with the detail texture.
 DETAIL_UV_1 = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use UV with the detail texture.
 
 #### DETAIL_UV_2 {#DETAIL_UV_2}
 
@@ -3114,7 +3039,9 @@ DETAIL_UV_1 = 0
 DETAIL_UV_2 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use UV2 with the detail texture.
+
+---
 
 ### Transparency {#enum-Transparency}
 
@@ -3122,29 +3049,7 @@ DETAIL_UV_2 = 1
 enum Transparency { TRANSPARENCY_DISABLED = 0, TRANSPARENCY_ALPHA = 1, TRANSPARENCY_ALPHA_SCISSOR = 2, TRANSPARENCY_ALPHA_HASH = 3, TRANSPARENCY_ALPHA_DEPTH_PRE_PASS = 4, TRANSPARENCY_MAX = 5 }
 ```
 
-Transparency TRANSPARENCY_DISABLED = 0
-
-The material will not use transparency. This is the fastest to render.
-
-Transparency TRANSPARENCY_ALPHA = 1
-
-The material will use the texture's alpha values for transparency. This is the slowest to render, and disables shadow casting.
-
-Transparency TRANSPARENCY_ALPHA_SCISSOR = 2
-
-The material will cut off all values below a threshold, the rest will remain opaque. The opaque portions will be rendered in the depth prepass. This is faster to render than alpha blending, but slower than opaque rendering. This also supports casting shadows.
-
-Transparency TRANSPARENCY_ALPHA_HASH = 3
-
-The material will cut off all values below a spatially-deterministic threshold, the rest will remain opaque. This is faster to render than alpha blending, but slower than opaque rendering. This also supports casting shadows. Alpha hashing is suited for hair rendering.
-
-Transparency TRANSPARENCY_ALPHA_DEPTH_PRE_PASS = 4
-
-The material will use the texture's alpha value for transparency, but will discard fragments with an alpha of less than 0.99 during the depth prepass and fragments with an alpha less than 0.1 during the shadow pass. This also supports casting shadows.
-
-Transparency TRANSPARENCY_MAX = 5
-
-Represents the size of the Transparency enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TRANSPARENCY_DISABLED {#TRANSPARENCY_DISABLED}
 
@@ -3152,7 +3057,7 @@ Represents the size of the Transparency enum.
 TRANSPARENCY_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The material will not use transparency. This is the fastest to render.
 
 #### TRANSPARENCY_ALPHA {#TRANSPARENCY_ALPHA}
 
@@ -3160,7 +3065,7 @@ TRANSPARENCY_DISABLED = 0
 TRANSPARENCY_ALPHA = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The material will use the texture's alpha values for transparency. This is the slowest to render, and disables shadow casting.
 
 #### TRANSPARENCY_ALPHA_SCISSOR {#TRANSPARENCY_ALPHA_SCISSOR}
 
@@ -3168,7 +3073,7 @@ TRANSPARENCY_ALPHA = 1
 TRANSPARENCY_ALPHA_SCISSOR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The material will cut off all values below a threshold, the rest will remain opaque. The opaque portions will be rendered in the depth prepass. This is faster to render than alpha blending, but slower than opaque rendering. This also supports casting shadows.
 
 #### TRANSPARENCY_ALPHA_HASH {#TRANSPARENCY_ALPHA_HASH}
 
@@ -3176,7 +3081,7 @@ TRANSPARENCY_ALPHA_SCISSOR = 2
 TRANSPARENCY_ALPHA_HASH = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The material will cut off all values below a spatially-deterministic threshold, the rest will remain opaque. This is faster to render than alpha blending, but slower than opaque rendering. This also supports casting shadows. Alpha hashing is suited for hair rendering.
 
 #### TRANSPARENCY_ALPHA_DEPTH_PRE_PASS {#TRANSPARENCY_ALPHA_DEPTH_PRE_PASS}
 
@@ -3184,7 +3089,7 @@ TRANSPARENCY_ALPHA_HASH = 3
 TRANSPARENCY_ALPHA_DEPTH_PRE_PASS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The material will use the texture's alpha value for transparency, but will discard fragments with an alpha of less than 0.99 during the depth prepass and fragments with an alpha less than 0.1 during the shadow pass. This also supports casting shadows.
 
 #### TRANSPARENCY_MAX {#TRANSPARENCY_MAX}
 
@@ -3192,7 +3097,9 @@ TRANSPARENCY_ALPHA_DEPTH_PRE_PASS = 4
 TRANSPARENCY_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Transparency enum.
+
+---
 
 ### ShadingMode {#enum-ShadingMode}
 
@@ -3200,21 +3107,7 @@ TRANSPARENCY_MAX = 5
 enum ShadingMode { SHADING_MODE_UNSHADED = 0, SHADING_MODE_PER_PIXEL = 1, SHADING_MODE_PER_VERTEX = 2, SHADING_MODE_MAX = 3 }
 ```
 
-ShadingMode SHADING_MODE_UNSHADED = 0
-
-The object will not receive shadows. This is the fastest to render, but it disables all interactions with lights.
-
-ShadingMode SHADING_MODE_PER_PIXEL = 1
-
-The object will be shaded per pixel. Useful for realistic shading effects.
-
-ShadingMode SHADING_MODE_PER_VERTEX = 2
-
-The object will be shaded per vertex. Useful when you want cheaper shaders and do not care about visual quality.
-
-ShadingMode SHADING_MODE_MAX = 3
-
-Represents the size of the ShadingMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHADING_MODE_UNSHADED {#SHADING_MODE_UNSHADED}
 
@@ -3222,7 +3115,7 @@ Represents the size of the ShadingMode enum.
 SHADING_MODE_UNSHADED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The object will not receive shadows. This is the fastest to render, but it disables all interactions with lights.
 
 #### SHADING_MODE_PER_PIXEL {#SHADING_MODE_PER_PIXEL}
 
@@ -3230,7 +3123,7 @@ SHADING_MODE_UNSHADED = 0
 SHADING_MODE_PER_PIXEL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The object will be shaded per pixel. Useful for realistic shading effects.
 
 #### SHADING_MODE_PER_VERTEX {#SHADING_MODE_PER_VERTEX}
 
@@ -3238,7 +3131,7 @@ SHADING_MODE_PER_PIXEL = 1
 SHADING_MODE_PER_VERTEX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The object will be shaded per vertex. Useful when you want cheaper shaders and do not care about visual quality.
 
 #### SHADING_MODE_MAX {#SHADING_MODE_MAX}
 
@@ -3246,7 +3139,9 @@ SHADING_MODE_PER_VERTEX = 2
 SHADING_MODE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the ShadingMode enum.
+
+---
 
 ### Feature {#enum-Feature}
 
@@ -3254,61 +3149,7 @@ SHADING_MODE_MAX = 3
 enum Feature { FEATURE_EMISSION = 0, FEATURE_NORMAL_MAPPING = 1, FEATURE_RIM = 2, FEATURE_CLEARCOAT = 3, FEATURE_ANISOTROPY = 4, FEATURE_AMBIENT_OCCLUSION = 5, FEATURE_HEIGHT_MAPPING = 6, FEATURE_SUBSURFACE_SCATTERING = 7, FEATURE_SUBSURFACE_TRANSMITTANCE = 8, FEATURE_BACKLIGHT = 9, FEATURE_REFRACTION = 10, FEATURE_DETAIL = 11, FEATURE_BENT_NORMAL_MAPPING = 12, FEATURE_MAX = 13 }
 ```
 
-Feature FEATURE_EMISSION = 0
-
-Constant for setting emission_enabled.
-
-Feature FEATURE_NORMAL_MAPPING = 1
-
-Constant for setting normal_enabled.
-
-Feature FEATURE_RIM = 2
-
-Constant for setting rim_enabled.
-
-Feature FEATURE_CLEARCOAT = 3
-
-Constant for setting clearcoat_enabled.
-
-Feature FEATURE_ANISOTROPY = 4
-
-Constant for setting anisotropy_enabled.
-
-Feature FEATURE_AMBIENT_OCCLUSION = 5
-
-Constant for setting ao_enabled.
-
-Feature FEATURE_HEIGHT_MAPPING = 6
-
-Constant for setting heightmap_enabled.
-
-Feature FEATURE_SUBSURFACE_SCATTERING = 7
-
-Constant for setting subsurf_scatter_enabled.
-
-Feature FEATURE_SUBSURFACE_TRANSMITTANCE = 8
-
-Constant for setting subsurf_scatter_transmittance_enabled.
-
-Feature FEATURE_BACKLIGHT = 9
-
-Constant for setting backlight_enabled.
-
-Feature FEATURE_REFRACTION = 10
-
-Constant for setting refraction_enabled.
-
-Feature FEATURE_DETAIL = 11
-
-Constant for setting detail_enabled.
-
-Feature FEATURE_BENT_NORMAL_MAPPING = 12
-
-Constant for setting bent_normal_enabled.
-
-Feature FEATURE_MAX = 13
-
-Represents the size of the Feature enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FEATURE_EMISSION {#FEATURE_EMISSION}
 
@@ -3316,7 +3157,7 @@ Represents the size of the Feature enum.
 FEATURE_EMISSION = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting emission_enabled.
 
 #### FEATURE_NORMAL_MAPPING {#FEATURE_NORMAL_MAPPING}
 
@@ -3324,7 +3165,7 @@ FEATURE_EMISSION = 0
 FEATURE_NORMAL_MAPPING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting normal_enabled.
 
 #### FEATURE_RIM {#FEATURE_RIM}
 
@@ -3332,7 +3173,7 @@ FEATURE_NORMAL_MAPPING = 1
 FEATURE_RIM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting rim_enabled.
 
 #### FEATURE_CLEARCOAT {#FEATURE_CLEARCOAT}
 
@@ -3340,7 +3181,7 @@ FEATURE_RIM = 2
 FEATURE_CLEARCOAT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting clearcoat_enabled.
 
 #### FEATURE_ANISOTROPY {#FEATURE_ANISOTROPY}
 
@@ -3348,7 +3189,7 @@ FEATURE_CLEARCOAT = 3
 FEATURE_ANISOTROPY = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting anisotropy_enabled.
 
 #### FEATURE_AMBIENT_OCCLUSION {#FEATURE_AMBIENT_OCCLUSION}
 
@@ -3356,7 +3197,7 @@ FEATURE_ANISOTROPY = 4
 FEATURE_AMBIENT_OCCLUSION = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting ao_enabled.
 
 #### FEATURE_HEIGHT_MAPPING {#FEATURE_HEIGHT_MAPPING}
 
@@ -3364,7 +3205,7 @@ FEATURE_AMBIENT_OCCLUSION = 5
 FEATURE_HEIGHT_MAPPING = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting heightmap_enabled.
 
 #### FEATURE_SUBSURFACE_SCATTERING {#FEATURE_SUBSURFACE_SCATTERING}
 
@@ -3372,7 +3213,7 @@ FEATURE_HEIGHT_MAPPING = 6
 FEATURE_SUBSURFACE_SCATTERING = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting subsurf_scatter_enabled.
 
 #### FEATURE_SUBSURFACE_TRANSMITTANCE {#FEATURE_SUBSURFACE_TRANSMITTANCE}
 
@@ -3380,7 +3221,7 @@ FEATURE_SUBSURFACE_SCATTERING = 7
 FEATURE_SUBSURFACE_TRANSMITTANCE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting subsurf_scatter_transmittance_enabled.
 
 #### FEATURE_BACKLIGHT {#FEATURE_BACKLIGHT}
 
@@ -3388,7 +3229,7 @@ FEATURE_SUBSURFACE_TRANSMITTANCE = 8
 FEATURE_BACKLIGHT = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting backlight_enabled.
 
 #### FEATURE_REFRACTION {#FEATURE_REFRACTION}
 
@@ -3396,7 +3237,7 @@ FEATURE_BACKLIGHT = 9
 FEATURE_REFRACTION = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting refraction_enabled.
 
 #### FEATURE_DETAIL {#FEATURE_DETAIL}
 
@@ -3404,7 +3245,7 @@ FEATURE_REFRACTION = 10
 FEATURE_DETAIL = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting detail_enabled.
 
 #### FEATURE_BENT_NORMAL_MAPPING {#FEATURE_BENT_NORMAL_MAPPING}
 
@@ -3412,7 +3253,7 @@ FEATURE_DETAIL = 11
 FEATURE_BENT_NORMAL_MAPPING = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for setting bent_normal_enabled.
 
 #### FEATURE_MAX {#FEATURE_MAX}
 
@@ -3420,7 +3261,9 @@ FEATURE_BENT_NORMAL_MAPPING = 12
 FEATURE_MAX = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Feature enum.
+
+---
 
 ### BlendMode {#enum-BlendMode}
 
@@ -3428,25 +3271,7 @@ FEATURE_MAX = 13
 enum BlendMode { BLEND_MODE_MIX = 0, BLEND_MODE_ADD = 1, BLEND_MODE_SUB = 2, BLEND_MODE_MUL = 3, BLEND_MODE_PREMULT_ALPHA = 4 }
 ```
 
-BlendMode BLEND_MODE_MIX = 0
-
-Default blend mode. The color of the object is blended over the background based on the object's alpha value.
-
-BlendMode BLEND_MODE_ADD = 1
-
-The color of the object is added to the background.
-
-BlendMode BLEND_MODE_SUB = 2
-
-The color of the object is subtracted from the background.
-
-BlendMode BLEND_MODE_MUL = 3
-
-The color of the object is multiplied by the background.
-
-BlendMode BLEND_MODE_PREMULT_ALPHA = 4
-
-The color of the object is added to the background and the alpha channel is used to mask out the background. This is effectively a hybrid of the blend mix and add modes, useful for effects like fire where you want the flame to add but the smoke to mix. By default, this works with unshaded materials using premultiplied textures. For shaded materials, use the PREMUL_ALPHA_FACTOR built-in so that lighting can be modulated as well.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BLEND_MODE_MIX {#BLEND_MODE_MIX}
 
@@ -3454,7 +3279,7 @@ The color of the object is added to the background and the alpha channel is used
 BLEND_MODE_MIX = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default blend mode. The color of the object is blended over the background based on the object's alpha value.
 
 #### BLEND_MODE_ADD {#BLEND_MODE_ADD}
 
@@ -3462,7 +3287,7 @@ BLEND_MODE_MIX = 0
 BLEND_MODE_ADD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The color of the object is added to the background.
 
 #### BLEND_MODE_SUB {#BLEND_MODE_SUB}
 
@@ -3470,7 +3295,7 @@ BLEND_MODE_ADD = 1
 BLEND_MODE_SUB = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The color of the object is subtracted from the background.
 
 #### BLEND_MODE_MUL {#BLEND_MODE_MUL}
 
@@ -3478,7 +3303,7 @@ BLEND_MODE_SUB = 2
 BLEND_MODE_MUL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The color of the object is multiplied by the background.
 
 #### BLEND_MODE_PREMULT_ALPHA {#BLEND_MODE_PREMULT_ALPHA}
 
@@ -3486,7 +3311,9 @@ BLEND_MODE_MUL = 3
 BLEND_MODE_PREMULT_ALPHA = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The color of the object is added to the background and the alpha channel is used to mask out the background. This is effectively a hybrid of the blend mix and add modes, useful for effects like fire where you want the flame to add but the smoke to mix. By default, this works with unshaded materials using premultiplied textures. For shaded materials, use the PREMUL_ALPHA_FACTOR built-in so that lighting can be modulated as well.
+
+---
 
 ### AlphaAntiAliasing {#enum-AlphaAntiAliasing}
 
@@ -3494,17 +3321,7 @@ BLEND_MODE_PREMULT_ALPHA = 4
 enum AlphaAntiAliasing { ALPHA_ANTIALIASING_OFF = 0, ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE = 1, ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE_AND_TO_ONE = 2 }
 ```
 
-AlphaAntiAliasing ALPHA_ANTIALIASING_OFF = 0
-
-Disables Alpha AntiAliasing for the material.
-
-AlphaAntiAliasing ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE = 1
-
-Enables AlphaToCoverage. Alpha values in the material are passed to the AntiAliasing sample mask.
-
-AlphaAntiAliasing ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE_AND_TO_ONE = 2
-
-Enables AlphaToCoverage and forces all non-zero alpha values to 1. Alpha values in the material are passed to the AntiAliasing sample mask.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ALPHA_ANTIALIASING_OFF {#ALPHA_ANTIALIASING_OFF}
 
@@ -3512,7 +3329,7 @@ Enables AlphaToCoverage and forces all non-zero alpha values to 1. Alpha values 
 ALPHA_ANTIALIASING_OFF = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables Alpha AntiAliasing for the material.
 
 #### ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE {#ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE}
 
@@ -3520,7 +3337,7 @@ ALPHA_ANTIALIASING_OFF = 0
 ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables AlphaToCoverage. Alpha values in the material are passed to the AntiAliasing sample mask.
 
 #### ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE_AND_TO_ONE {#ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE_AND_TO_ONE}
 
@@ -3528,7 +3345,9 @@ ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE = 1
 ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE_AND_TO_ONE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables AlphaToCoverage and forces all non-zero alpha values to 1. Alpha values in the material are passed to the AntiAliasing sample mask.
+
+---
 
 ### DepthDrawMode {#enum-DepthDrawMode}
 
@@ -3536,19 +3355,7 @@ ALPHA_ANTIALIASING_ALPHA_TO_COVERAGE_AND_TO_ONE = 2
 enum DepthDrawMode { DEPTH_DRAW_OPAQUE_ONLY = 0, DEPTH_DRAW_ALWAYS = 1, DEPTH_DRAW_DISABLED = 2 }
 ```
 
-DepthDrawMode DEPTH_DRAW_OPAQUE_ONLY = 0
-
-Default depth draw mode. Depth is drawn only for opaque objects during the opaque prepass (if any) and during the opaque pass.
-
-DepthDrawMode DEPTH_DRAW_ALWAYS = 1
-
-Objects will write to depth during the opaque and the transparent passes. Transparent objects that are close to the camera may obscure other transparent objects behind them.
-
-Note: This does not influence whether transparent objects are included in the depth prepass or not. For that, see Transparency.
-
-DepthDrawMode DEPTH_DRAW_DISABLED = 2
-
-Objects will not write their depth to the depth buffer, even during the depth prepass (if enabled).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DEPTH_DRAW_OPAQUE_ONLY {#DEPTH_DRAW_OPAQUE_ONLY}
 
@@ -3556,7 +3363,7 @@ Objects will not write their depth to the depth buffer, even during the depth pr
 DEPTH_DRAW_OPAQUE_ONLY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default depth draw mode. Depth is drawn only for opaque objects during the opaque prepass (if any) and during the opaque pass.
 
 #### DEPTH_DRAW_ALWAYS {#DEPTH_DRAW_ALWAYS}
 
@@ -3564,7 +3371,9 @@ DEPTH_DRAW_OPAQUE_ONLY = 0
 DEPTH_DRAW_ALWAYS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Objects will write to depth during the opaque and the transparent passes. Transparent objects that are close to the camera may obscure other transparent objects behind them.
+
+Note: This does not influence whether transparent objects are included in the depth prepass or not. For that, see Transparency.
 
 #### DEPTH_DRAW_DISABLED {#DEPTH_DRAW_DISABLED}
 
@@ -3572,7 +3381,9 @@ DEPTH_DRAW_ALWAYS = 1
 DEPTH_DRAW_DISABLED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Objects will not write their depth to the depth buffer, even during the depth prepass (if enabled).
+
+---
 
 ### DepthTest {#enum-DepthTest}
 
@@ -3580,13 +3391,7 @@ DEPTH_DRAW_DISABLED = 2
 enum DepthTest { DEPTH_TEST_DEFAULT = 0, DEPTH_TEST_INVERTED = 1 }
 ```
 
-DepthTest DEPTH_TEST_DEFAULT = 0
-
-Depth test will discard the pixel if it is behind other pixels.
-
-DepthTest DEPTH_TEST_INVERTED = 1
-
-Depth test will discard the pixel if it is in front of other pixels. Useful for stencil effects.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DEPTH_TEST_DEFAULT {#DEPTH_TEST_DEFAULT}
 
@@ -3594,7 +3399,7 @@ Depth test will discard the pixel if it is in front of other pixels. Useful for 
 DEPTH_TEST_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Depth test will discard the pixel if it is behind other pixels.
 
 #### DEPTH_TEST_INVERTED {#DEPTH_TEST_INVERTED}
 
@@ -3602,7 +3407,9 @@ DEPTH_TEST_DEFAULT = 0
 DEPTH_TEST_INVERTED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Depth test will discard the pixel if it is in front of other pixels. Useful for stencil effects.
+
+---
 
 ### CullMode {#enum-CullMode}
 
@@ -3610,17 +3417,7 @@ DEPTH_TEST_INVERTED = 1
 enum CullMode { CULL_BACK = 0, CULL_FRONT = 1, CULL_DISABLED = 2 }
 ```
 
-CullMode CULL_BACK = 0
-
-Default cull mode. The back of the object is culled when not visible. Back face triangles will be culled when facing the camera. This results in only the front side of triangles being drawn. For closed-surface meshes, this means that only the exterior of the mesh will be visible.
-
-CullMode CULL_FRONT = 1
-
-Front face triangles will be culled when facing the camera. This results in only the back side of triangles being drawn. For closed-surface meshes, this means that the interior of the mesh will be drawn instead of the exterior.
-
-CullMode CULL_DISABLED = 2
-
-No face culling is performed; both the front face and back face will be visible.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CULL_BACK {#CULL_BACK}
 
@@ -3628,7 +3425,7 @@ No face culling is performed; both the front face and back face will be visible.
 CULL_BACK = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default cull mode. The back of the object is culled when not visible. Back face triangles will be culled when facing the camera. This results in only the front side of triangles being drawn. For closed-surface meshes, this means that only the exterior of the mesh will be visible.
 
 #### CULL_FRONT {#CULL_FRONT}
 
@@ -3636,7 +3433,7 @@ CULL_BACK = 0
 CULL_FRONT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Front face triangles will be culled when facing the camera. This results in only the back side of triangles being drawn. For closed-surface meshes, this means that the interior of the mesh will be drawn instead of the exterior.
 
 #### CULL_DISABLED {#CULL_DISABLED}
 
@@ -3644,7 +3441,9 @@ CULL_FRONT = 1
 CULL_DISABLED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No face culling is performed; both the front face and back face will be visible.
+
+---
 
 ### Flags {#enum-Flags}
 
@@ -3652,111 +3451,7 @@ CULL_DISABLED = 2
 enum Flags { FLAG_DISABLE_DEPTH_TEST = 0, FLAG_ALBEDO_FROM_VERTEX_COLOR = 1, FLAG_SRGB_VERTEX_COLOR = 2, FLAG_USE_POINT_SIZE = 3, FLAG_FIXED_SIZE = 4, FLAG_BILLBOARD_KEEP_SCALE = 5, FLAG_UV1_USE_TRIPLANAR = 6, FLAG_UV2_USE_TRIPLANAR = 7, FLAG_UV1_USE_WORLD_TRIPLANAR = 8, FLAG_UV2_USE_WORLD_TRIPLANAR = 9, FLAG_AO_ON_UV2 = 10, FLAG_EMISSION_ON_UV2 = 11, FLAG_ALBEDO_TEXTURE_FORCE_SRGB = 12, FLAG_DONT_RECEIVE_SHADOWS = 13, FLAG_DISABLE_AMBIENT_LIGHT = 14, FLAG_USE_SHADOW_TO_OPACITY = 15, FLAG_USE_TEXTURE_REPEAT = 16, FLAG_INVERT_HEIGHTMAP = 17, FLAG_SUBSURFACE_MODE_SKIN = 18, FLAG_PARTICLE_TRAILS_MODE = 19, FLAG_ALBEDO_TEXTURE_MSDF = 20, FLAG_DISABLE_FOG = 21, FLAG_DISABLE_SPECULAR_OCCLUSION = 22, FLAG_USE_Z_CLIP_SCALE = 23, FLAG_USE_FOV_OVERRIDE = 24, FLAG_MAX = 25 }
 ```
 
-Flags FLAG_DISABLE_DEPTH_TEST = 0
-
-Disables the depth test, so this object is drawn on top of all others drawn before it. This puts the object in the transparent draw pass where it is sorted based on distance to camera. Objects drawn after it in the draw order may cover it. This also disables writing to depth.
-
-Flags FLAG_ALBEDO_FROM_VERTEX_COLOR = 1
-
-Set ALBEDO to the per-vertex color specified in the mesh.
-
-Flags FLAG_SRGB_VERTEX_COLOR = 2
-
-Vertex colors are considered to be stored in nonlinear sRGB encoding and are converted to linear encoding during rendering. See also vertex_color_is_srgb.
-
-Note: Only effective when using the Forward+ and Mobile rendering methods.
-
-Flags FLAG_USE_POINT_SIZE = 3
-
-Uses point size to alter the size of primitive points. Also changes the albedo texture lookup to use POINT_COORD instead of UV.
-
-Flags FLAG_FIXED_SIZE = 4
-
-Object is scaled by depth so that it always appears the same size on screen.
-
-Flags FLAG_BILLBOARD_KEEP_SCALE = 5
-
-Shader will keep the scale set for the mesh. Otherwise the scale is lost when billboarding. Only applies when billboard_mode is BILLBOARD_ENABLED.
-
-Flags FLAG_UV1_USE_TRIPLANAR = 6
-
-Use triplanar texture lookup for all texture lookups that would normally use UV.
-
-Flags FLAG_UV2_USE_TRIPLANAR = 7
-
-Use triplanar texture lookup for all texture lookups that would normally use UV2.
-
-Flags FLAG_UV1_USE_WORLD_TRIPLANAR = 8
-
-Use triplanar texture lookup for all texture lookups that would normally use UV.
-
-Flags FLAG_UV2_USE_WORLD_TRIPLANAR = 9
-
-Use triplanar texture lookup for all texture lookups that would normally use UV2.
-
-Flags FLAG_AO_ON_UV2 = 10
-
-Use UV2 coordinates to look up from the ao_texture.
-
-Flags FLAG_EMISSION_ON_UV2 = 11
-
-Use UV2 coordinates to look up from the emission_texture.
-
-Flags FLAG_ALBEDO_TEXTURE_FORCE_SRGB = 12
-
-Forces the shader to convert albedo from nonlinear sRGB encoding to linear encoding. See also albedo_texture_force_srgb.
-
-Flags FLAG_DONT_RECEIVE_SHADOWS = 13
-
-Disables receiving shadows from other objects.
-
-Flags FLAG_DISABLE_AMBIENT_LIGHT = 14
-
-Disables receiving ambient light.
-
-Flags FLAG_USE_SHADOW_TO_OPACITY = 15
-
-Enables the shadow to opacity feature.
-
-Flags FLAG_USE_TEXTURE_REPEAT = 16
-
-Enables the texture to repeat when UV coordinates are outside the 0-1 range. If using one of the linear filtering modes, this can result in artifacts at the edges of a texture when the sampler filters across the edges of the texture.
-
-Flags FLAG_INVERT_HEIGHTMAP = 17
-
-Invert values read from a depth texture to convert them to height values (heightmap).
-
-Flags FLAG_SUBSURFACE_MODE_SKIN = 18
-
-Enables the skin mode for subsurface scattering which is used to improve the look of subsurface scattering when used for human skin.
-
-Flags FLAG_PARTICLE_TRAILS_MODE = 19
-
-Enables parts of the shader required for GPUParticles3D trails to function. This also requires using a mesh with appropriate skinning, such as RibbonTrailMesh or TubeTrailMesh. Enabling this feature outside of materials used in GPUParticles3D meshes will break material rendering.
-
-Flags FLAG_ALBEDO_TEXTURE_MSDF = 20
-
-Enables multichannel signed distance field rendering shader.
-
-Flags FLAG_DISABLE_FOG = 21
-
-Disables receiving depth-based or volumetric fog.
-
-Flags FLAG_DISABLE_SPECULAR_OCCLUSION = 22
-
-Disables specular occlusion.
-
-Flags FLAG_USE_Z_CLIP_SCALE = 23
-
-Enables using z_clip_scale.
-
-Flags FLAG_USE_FOV_OVERRIDE = 24
-
-Enables using fov_override.
-
-Flags FLAG_MAX = 25
-
-Represents the size of the Flags enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FLAG_DISABLE_DEPTH_TEST {#FLAG_DISABLE_DEPTH_TEST}
 
@@ -3764,7 +3459,7 @@ Represents the size of the Flags enum.
 FLAG_DISABLE_DEPTH_TEST = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables the depth test, so this object is drawn on top of all others drawn before it. This puts the object in the transparent draw pass where it is sorted based on distance to camera. Objects drawn after it in the draw order may cover it. This also disables writing to depth.
 
 #### FLAG_ALBEDO_FROM_VERTEX_COLOR {#FLAG_ALBEDO_FROM_VERTEX_COLOR}
 
@@ -3772,7 +3467,7 @@ FLAG_DISABLE_DEPTH_TEST = 0
 FLAG_ALBEDO_FROM_VERTEX_COLOR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Set ALBEDO to the per-vertex color specified in the mesh.
 
 #### FLAG_SRGB_VERTEX_COLOR {#FLAG_SRGB_VERTEX_COLOR}
 
@@ -3780,7 +3475,9 @@ FLAG_ALBEDO_FROM_VERTEX_COLOR = 1
 FLAG_SRGB_VERTEX_COLOR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Vertex colors are considered to be stored in nonlinear sRGB encoding and are converted to linear encoding during rendering. See also vertex_color_is_srgb.
+
+Note: Only effective when using the Forward+ and Mobile rendering methods.
 
 #### FLAG_USE_POINT_SIZE {#FLAG_USE_POINT_SIZE}
 
@@ -3788,7 +3485,7 @@ FLAG_SRGB_VERTEX_COLOR = 2
 FLAG_USE_POINT_SIZE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses point size to alter the size of primitive points. Also changes the albedo texture lookup to use POINT_COORD instead of UV.
 
 #### FLAG_FIXED_SIZE {#FLAG_FIXED_SIZE}
 
@@ -3796,7 +3493,7 @@ FLAG_USE_POINT_SIZE = 3
 FLAG_FIXED_SIZE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Object is scaled by depth so that it always appears the same size on screen.
 
 #### FLAG_BILLBOARD_KEEP_SCALE {#FLAG_BILLBOARD_KEEP_SCALE}
 
@@ -3804,7 +3501,7 @@ FLAG_FIXED_SIZE = 4
 FLAG_BILLBOARD_KEEP_SCALE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Shader will keep the scale set for the mesh. Otherwise the scale is lost when billboarding. Only applies when billboard_mode is BILLBOARD_ENABLED.
 
 #### FLAG_UV1_USE_TRIPLANAR {#FLAG_UV1_USE_TRIPLANAR}
 
@@ -3812,7 +3509,7 @@ FLAG_BILLBOARD_KEEP_SCALE = 5
 FLAG_UV1_USE_TRIPLANAR = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use triplanar texture lookup for all texture lookups that would normally use UV.
 
 #### FLAG_UV2_USE_TRIPLANAR {#FLAG_UV2_USE_TRIPLANAR}
 
@@ -3820,7 +3517,7 @@ FLAG_UV1_USE_TRIPLANAR = 6
 FLAG_UV2_USE_TRIPLANAR = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use triplanar texture lookup for all texture lookups that would normally use UV2.
 
 #### FLAG_UV1_USE_WORLD_TRIPLANAR {#FLAG_UV1_USE_WORLD_TRIPLANAR}
 
@@ -3828,7 +3525,7 @@ FLAG_UV2_USE_TRIPLANAR = 7
 FLAG_UV1_USE_WORLD_TRIPLANAR = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use triplanar texture lookup for all texture lookups that would normally use UV.
 
 #### FLAG_UV2_USE_WORLD_TRIPLANAR {#FLAG_UV2_USE_WORLD_TRIPLANAR}
 
@@ -3836,7 +3533,7 @@ FLAG_UV1_USE_WORLD_TRIPLANAR = 8
 FLAG_UV2_USE_WORLD_TRIPLANAR = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use triplanar texture lookup for all texture lookups that would normally use UV2.
 
 #### FLAG_AO_ON_UV2 {#FLAG_AO_ON_UV2}
 
@@ -3844,7 +3541,7 @@ FLAG_UV2_USE_WORLD_TRIPLANAR = 9
 FLAG_AO_ON_UV2 = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use UV2 coordinates to look up from the ao_texture.
 
 #### FLAG_EMISSION_ON_UV2 {#FLAG_EMISSION_ON_UV2}
 
@@ -3852,7 +3549,7 @@ FLAG_AO_ON_UV2 = 10
 FLAG_EMISSION_ON_UV2 = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use UV2 coordinates to look up from the emission_texture.
 
 #### FLAG_ALBEDO_TEXTURE_FORCE_SRGB {#FLAG_ALBEDO_TEXTURE_FORCE_SRGB}
 
@@ -3860,7 +3557,7 @@ FLAG_EMISSION_ON_UV2 = 11
 FLAG_ALBEDO_TEXTURE_FORCE_SRGB = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Forces the shader to convert albedo from nonlinear sRGB encoding to linear encoding. See also albedo_texture_force_srgb.
 
 #### FLAG_DONT_RECEIVE_SHADOWS {#FLAG_DONT_RECEIVE_SHADOWS}
 
@@ -3868,7 +3565,7 @@ FLAG_ALBEDO_TEXTURE_FORCE_SRGB = 12
 FLAG_DONT_RECEIVE_SHADOWS = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables receiving shadows from other objects.
 
 #### FLAG_DISABLE_AMBIENT_LIGHT {#FLAG_DISABLE_AMBIENT_LIGHT}
 
@@ -3876,7 +3573,7 @@ FLAG_DONT_RECEIVE_SHADOWS = 13
 FLAG_DISABLE_AMBIENT_LIGHT = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables receiving ambient light.
 
 #### FLAG_USE_SHADOW_TO_OPACITY {#FLAG_USE_SHADOW_TO_OPACITY}
 
@@ -3884,7 +3581,7 @@ FLAG_DISABLE_AMBIENT_LIGHT = 14
 FLAG_USE_SHADOW_TO_OPACITY = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables the shadow to opacity feature.
 
 #### FLAG_USE_TEXTURE_REPEAT {#FLAG_USE_TEXTURE_REPEAT}
 
@@ -3892,7 +3589,7 @@ FLAG_USE_SHADOW_TO_OPACITY = 15
 FLAG_USE_TEXTURE_REPEAT = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables the texture to repeat when UV coordinates are outside the 0-1 range. If using one of the linear filtering modes, this can result in artifacts at the edges of a texture when the sampler filters across the edges of the texture.
 
 #### FLAG_INVERT_HEIGHTMAP {#FLAG_INVERT_HEIGHTMAP}
 
@@ -3900,7 +3597,7 @@ FLAG_USE_TEXTURE_REPEAT = 16
 FLAG_INVERT_HEIGHTMAP = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invert values read from a depth texture to convert them to height values (heightmap).
 
 #### FLAG_SUBSURFACE_MODE_SKIN {#FLAG_SUBSURFACE_MODE_SKIN}
 
@@ -3908,7 +3605,7 @@ FLAG_INVERT_HEIGHTMAP = 17
 FLAG_SUBSURFACE_MODE_SKIN = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables the skin mode for subsurface scattering which is used to improve the look of subsurface scattering when used for human skin.
 
 #### FLAG_PARTICLE_TRAILS_MODE {#FLAG_PARTICLE_TRAILS_MODE}
 
@@ -3916,7 +3613,7 @@ FLAG_SUBSURFACE_MODE_SKIN = 18
 FLAG_PARTICLE_TRAILS_MODE = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables parts of the shader required for GPUParticles3D trails to function. This also requires using a mesh with appropriate skinning, such as RibbonTrailMesh or TubeTrailMesh. Enabling this feature outside of materials used in GPUParticles3D meshes will break material rendering.
 
 #### FLAG_ALBEDO_TEXTURE_MSDF {#FLAG_ALBEDO_TEXTURE_MSDF}
 
@@ -3924,7 +3621,7 @@ FLAG_PARTICLE_TRAILS_MODE = 19
 FLAG_ALBEDO_TEXTURE_MSDF = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables multichannel signed distance field rendering shader.
 
 #### FLAG_DISABLE_FOG {#FLAG_DISABLE_FOG}
 
@@ -3932,7 +3629,7 @@ FLAG_ALBEDO_TEXTURE_MSDF = 20
 FLAG_DISABLE_FOG = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables receiving depth-based or volumetric fog.
 
 #### FLAG_DISABLE_SPECULAR_OCCLUSION {#FLAG_DISABLE_SPECULAR_OCCLUSION}
 
@@ -3940,7 +3637,7 @@ FLAG_DISABLE_FOG = 21
 FLAG_DISABLE_SPECULAR_OCCLUSION = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables specular occlusion.
 
 #### FLAG_USE_Z_CLIP_SCALE {#FLAG_USE_Z_CLIP_SCALE}
 
@@ -3948,7 +3645,7 @@ FLAG_DISABLE_SPECULAR_OCCLUSION = 22
 FLAG_USE_Z_CLIP_SCALE = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables using z_clip_scale.
 
 #### FLAG_USE_FOV_OVERRIDE {#FLAG_USE_FOV_OVERRIDE}
 
@@ -3956,7 +3653,7 @@ FLAG_USE_Z_CLIP_SCALE = 23
 FLAG_USE_FOV_OVERRIDE = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables using fov_override.
 
 #### FLAG_MAX {#FLAG_MAX}
 
@@ -3964,7 +3661,9 @@ FLAG_USE_FOV_OVERRIDE = 24
 FLAG_MAX = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Flags enum.
+
+---
 
 ### DiffuseMode {#enum-DiffuseMode}
 
@@ -3972,21 +3671,7 @@ FLAG_MAX = 25
 enum DiffuseMode { DIFFUSE_BURLEY = 0, DIFFUSE_LAMBERT = 1, DIFFUSE_LAMBERT_WRAP = 2, DIFFUSE_TOON = 3 }
 ```
 
-DiffuseMode DIFFUSE_BURLEY = 0
-
-Default diffuse scattering algorithm.
-
-DiffuseMode DIFFUSE_LAMBERT = 1
-
-Diffuse scattering ignores roughness.
-
-DiffuseMode DIFFUSE_LAMBERT_WRAP = 2
-
-Extends Lambert to cover more than 90 degrees when roughness increases.
-
-DiffuseMode DIFFUSE_TOON = 3
-
-Uses a hard cut for lighting, with smoothing affected by roughness.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DIFFUSE_BURLEY {#DIFFUSE_BURLEY}
 
@@ -3994,7 +3679,7 @@ Uses a hard cut for lighting, with smoothing affected by roughness.
 DIFFUSE_BURLEY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default diffuse scattering algorithm.
 
 #### DIFFUSE_LAMBERT {#DIFFUSE_LAMBERT}
 
@@ -4002,7 +3687,7 @@ DIFFUSE_BURLEY = 0
 DIFFUSE_LAMBERT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Diffuse scattering ignores roughness.
 
 #### DIFFUSE_LAMBERT_WRAP {#DIFFUSE_LAMBERT_WRAP}
 
@@ -4010,7 +3695,7 @@ DIFFUSE_LAMBERT = 1
 DIFFUSE_LAMBERT_WRAP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Extends Lambert to cover more than 90 degrees when roughness increases.
 
 #### DIFFUSE_TOON {#DIFFUSE_TOON}
 
@@ -4018,7 +3703,9 @@ DIFFUSE_LAMBERT_WRAP = 2
 DIFFUSE_TOON = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses a hard cut for lighting, with smoothing affected by roughness.
+
+---
 
 ### SpecularMode {#enum-SpecularMode}
 
@@ -4026,21 +3713,7 @@ DIFFUSE_TOON = 3
 enum SpecularMode { SPECULAR_SCHLICK_GGX = 0, SPECULAR_TOON = 1, SPECULAR_DISABLED = 2 }
 ```
 
-SpecularMode SPECULAR_SCHLICK_GGX = 0
-
-Default specular blob.
-
-Note: Forward+ uses multiscattering for more accurate reflections, although the impact of multiscattering is more noticeable on rough metallic surfaces than on smooth, non-metallic surfaces.
-
-Note: Mobile and Compatibility don't perform multiscattering for performance reasons. Instead, they perform single scattering, which means rough metallic surfaces may look slightly darker than intended.
-
-SpecularMode SPECULAR_TOON = 1
-
-Toon blob which changes size based on roughness.
-
-SpecularMode SPECULAR_DISABLED = 2
-
-No specular blob. This is slightly faster to render than other specular modes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SPECULAR_SCHLICK_GGX {#SPECULAR_SCHLICK_GGX}
 
@@ -4048,7 +3721,11 @@ No specular blob. This is slightly faster to render than other specular modes.
 SPECULAR_SCHLICK_GGX = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default specular blob.
+
+Note: Forward+ uses multiscattering for more accurate reflections, although the impact of multiscattering is more noticeable on rough metallic surfaces than on smooth, non-metallic surfaces.
+
+Note: Mobile and Compatibility don't perform multiscattering for performance reasons. Instead, they perform single scattering, which means rough metallic surfaces may look slightly darker than intended.
 
 #### SPECULAR_TOON {#SPECULAR_TOON}
 
@@ -4056,7 +3733,7 @@ SPECULAR_SCHLICK_GGX = 0
 SPECULAR_TOON = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Toon blob which changes size based on roughness.
 
 #### SPECULAR_DISABLED {#SPECULAR_DISABLED}
 
@@ -4064,7 +3741,9 @@ SPECULAR_TOON = 1
 SPECULAR_DISABLED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No specular blob. This is slightly faster to render than other specular modes.
+
+---
 
 ### BillboardMode {#enum-BillboardMode}
 
@@ -4072,23 +3751,7 @@ SPECULAR_DISABLED = 2
 enum BillboardMode { BILLBOARD_DISABLED = 0, BILLBOARD_ENABLED = 1, BILLBOARD_FIXED_Y = 2, BILLBOARD_PARTICLES = 3 }
 ```
 
-BillboardMode BILLBOARD_DISABLED = 0
-
-Billboard mode is disabled.
-
-BillboardMode BILLBOARD_ENABLED = 1
-
-The object's Z axis will always face the camera.
-
-BillboardMode BILLBOARD_FIXED_Y = 2
-
-The object's X axis will always face the camera.
-
-BillboardMode BILLBOARD_PARTICLES = 3
-
-Used for particle systems when assigned to GPUParticles3D and CPUParticles3D nodes (flipbook animation). Enables particles_anim_* properties.
-
-The ParticleProcessMaterial.anim_speed_min or CPUParticles3D.anim_speed_min should also be set to a value bigger than zero for the animation to play.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BILLBOARD_DISABLED {#BILLBOARD_DISABLED}
 
@@ -4096,7 +3759,7 @@ The ParticleProcessMaterial.anim_speed_min or CPUParticles3D.anim_speed_min shou
 BILLBOARD_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Billboard mode is disabled.
 
 #### BILLBOARD_ENABLED {#BILLBOARD_ENABLED}
 
@@ -4104,7 +3767,7 @@ BILLBOARD_DISABLED = 0
 BILLBOARD_ENABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The object's Z axis will always face the camera.
 
 #### BILLBOARD_FIXED_Y {#BILLBOARD_FIXED_Y}
 
@@ -4112,7 +3775,7 @@ BILLBOARD_ENABLED = 1
 BILLBOARD_FIXED_Y = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The object's X axis will always face the camera.
 
 #### BILLBOARD_PARTICLES {#BILLBOARD_PARTICLES}
 
@@ -4120,7 +3783,11 @@ BILLBOARD_FIXED_Y = 2
 BILLBOARD_PARTICLES = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used for particle systems when assigned to GPUParticles3D and CPUParticles3D nodes (flipbook animation). Enables particles_anim_* properties.
+
+The ParticleProcessMaterial.anim_speed_min or CPUParticles3D.anim_speed_min should also be set to a value bigger than zero for the animation to play.
+
+---
 
 ### TextureChannel {#enum-TextureChannel}
 
@@ -4128,25 +3795,7 @@ BILLBOARD_PARTICLES = 3
 enum TextureChannel { TEXTURE_CHANNEL_RED = 0, TEXTURE_CHANNEL_GREEN = 1, TEXTURE_CHANNEL_BLUE = 2, TEXTURE_CHANNEL_ALPHA = 3, TEXTURE_CHANNEL_GRAYSCALE = 4 }
 ```
 
-TextureChannel TEXTURE_CHANNEL_RED = 0
-
-Used to read from the red channel of a texture.
-
-TextureChannel TEXTURE_CHANNEL_GREEN = 1
-
-Used to read from the green channel of a texture.
-
-TextureChannel TEXTURE_CHANNEL_BLUE = 2
-
-Used to read from the blue channel of a texture.
-
-TextureChannel TEXTURE_CHANNEL_ALPHA = 3
-
-Used to read from the alpha channel of a texture.
-
-TextureChannel TEXTURE_CHANNEL_GRAYSCALE = 4
-
-Used to read from the linear (non-perceptual) average of the red, green and blue channels of a texture.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TEXTURE_CHANNEL_RED {#TEXTURE_CHANNEL_RED}
 
@@ -4154,7 +3803,7 @@ Used to read from the linear (non-perceptual) average of the red, green and blue
 TEXTURE_CHANNEL_RED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used to read from the red channel of a texture.
 
 #### TEXTURE_CHANNEL_GREEN {#TEXTURE_CHANNEL_GREEN}
 
@@ -4162,7 +3811,7 @@ TEXTURE_CHANNEL_RED = 0
 TEXTURE_CHANNEL_GREEN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used to read from the green channel of a texture.
 
 #### TEXTURE_CHANNEL_BLUE {#TEXTURE_CHANNEL_BLUE}
 
@@ -4170,7 +3819,7 @@ TEXTURE_CHANNEL_GREEN = 1
 TEXTURE_CHANNEL_BLUE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used to read from the blue channel of a texture.
 
 #### TEXTURE_CHANNEL_ALPHA {#TEXTURE_CHANNEL_ALPHA}
 
@@ -4178,7 +3827,7 @@ TEXTURE_CHANNEL_BLUE = 2
 TEXTURE_CHANNEL_ALPHA = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used to read from the alpha channel of a texture.
 
 #### TEXTURE_CHANNEL_GRAYSCALE {#TEXTURE_CHANNEL_GRAYSCALE}
 
@@ -4186,7 +3835,9 @@ TEXTURE_CHANNEL_ALPHA = 3
 TEXTURE_CHANNEL_GRAYSCALE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used to read from the linear (non-perceptual) average of the red, green and blue channels of a texture.
+
+---
 
 ### EmissionOperator {#enum-EmissionOperator}
 
@@ -4194,13 +3845,7 @@ TEXTURE_CHANNEL_GRAYSCALE = 4
 enum EmissionOperator { EMISSION_OP_ADD = 0, EMISSION_OP_MULTIPLY = 1 }
 ```
 
-EmissionOperator EMISSION_OP_ADD = 0
-
-Adds the emission color to the color from the emission texture.
-
-EmissionOperator EMISSION_OP_MULTIPLY = 1
-
-Multiplies the emission color by the color from the emission texture.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EMISSION_OP_ADD {#EMISSION_OP_ADD}
 
@@ -4208,7 +3853,7 @@ Multiplies the emission color by the color from the emission texture.
 EMISSION_OP_ADD = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adds the emission color to the color from the emission texture.
 
 #### EMISSION_OP_MULTIPLY {#EMISSION_OP_MULTIPLY}
 
@@ -4216,7 +3861,9 @@ EMISSION_OP_ADD = 0
 EMISSION_OP_MULTIPLY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiplies the emission color by the color from the emission texture.
+
+---
 
 ### DistanceFadeMode {#enum-DistanceFadeMode}
 
@@ -4224,21 +3871,7 @@ EMISSION_OP_MULTIPLY = 1
 enum DistanceFadeMode { DISTANCE_FADE_DISABLED = 0, DISTANCE_FADE_PIXEL_ALPHA = 1, DISTANCE_FADE_PIXEL_DITHER = 2, DISTANCE_FADE_OBJECT_DITHER = 3 }
 ```
 
-DistanceFadeMode DISTANCE_FADE_DISABLED = 0
-
-Do not use distance fade.
-
-DistanceFadeMode DISTANCE_FADE_PIXEL_ALPHA = 1
-
-Smoothly fades the object out based on each pixel's distance from the camera using the alpha channel.
-
-DistanceFadeMode DISTANCE_FADE_PIXEL_DITHER = 2
-
-Smoothly fades the object out based on each pixel's distance from the camera using a dithering approach. Dithering discards pixels based on a set pattern to smoothly fade without enabling transparency. On certain hardware, this can be faster than DISTANCE_FADE_PIXEL_ALPHA.
-
-DistanceFadeMode DISTANCE_FADE_OBJECT_DITHER = 3
-
-Smoothly fades the object out based on the object's distance from the camera using a dithering approach. Dithering discards pixels based on a set pattern to smoothly fade without enabling transparency. On certain hardware, this can be faster than DISTANCE_FADE_PIXEL_ALPHA and DISTANCE_FADE_PIXEL_DITHER.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DISTANCE_FADE_DISABLED {#DISTANCE_FADE_DISABLED}
 
@@ -4246,7 +3879,7 @@ Smoothly fades the object out based on the object's distance from the camera usi
 DISTANCE_FADE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not use distance fade.
 
 #### DISTANCE_FADE_PIXEL_ALPHA {#DISTANCE_FADE_PIXEL_ALPHA}
 
@@ -4254,7 +3887,7 @@ DISTANCE_FADE_DISABLED = 0
 DISTANCE_FADE_PIXEL_ALPHA = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Smoothly fades the object out based on each pixel's distance from the camera using the alpha channel.
 
 #### DISTANCE_FADE_PIXEL_DITHER {#DISTANCE_FADE_PIXEL_DITHER}
 
@@ -4262,7 +3895,7 @@ DISTANCE_FADE_PIXEL_ALPHA = 1
 DISTANCE_FADE_PIXEL_DITHER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Smoothly fades the object out based on each pixel's distance from the camera using a dithering approach. Dithering discards pixels based on a set pattern to smoothly fade without enabling transparency. On certain hardware, this can be faster than DISTANCE_FADE_PIXEL_ALPHA.
 
 #### DISTANCE_FADE_OBJECT_DITHER {#DISTANCE_FADE_OBJECT_DITHER}
 
@@ -4270,7 +3903,9 @@ DISTANCE_FADE_PIXEL_DITHER = 2
 DISTANCE_FADE_OBJECT_DITHER = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Smoothly fades the object out based on the object's distance from the camera using a dithering approach. Dithering discards pixels based on a set pattern to smoothly fade without enabling transparency. On certain hardware, this can be faster than DISTANCE_FADE_PIXEL_ALPHA and DISTANCE_FADE_PIXEL_DITHER.
+
+---
 
 ### StencilMode {#enum-StencilMode}
 
@@ -4278,25 +3913,7 @@ DISTANCE_FADE_OBJECT_DITHER = 3
 enum StencilMode { STENCIL_MODE_DISABLED = 0, STENCIL_MODE_OUTLINE = 1, STENCIL_MODE_XRAY = 2, STENCIL_MODE_CUSTOM = 3 }
 ```
 
-StencilMode STENCIL_MODE_DISABLED = 0
-
-Disables stencil operations.
-
-StencilMode STENCIL_MODE_OUTLINE = 1
-
-Stencil preset which applies an outline to the object.
-
-Note: Requires a Material.next_pass material which will be automatically applied. Any manual changes made to Material.next_pass will be lost when the stencil properties are modified or the scene is reloaded. To safely apply a Material.next_pass material on a material that uses stencil presets, use GeometryInstance3D.material_overlay instead.
-
-StencilMode STENCIL_MODE_XRAY = 2
-
-Stencil preset which shows a silhouette of the object behind walls.
-
-Note: Requires a Material.next_pass material which will be automatically applied. Any manual changes made to Material.next_pass will be lost when the stencil properties are modified or the scene is reloaded. To safely apply a Material.next_pass material on a material that uses stencil presets, use GeometryInstance3D.material_overlay instead.
-
-StencilMode STENCIL_MODE_CUSTOM = 3
-
-Enables stencil operations without a preset.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STENCIL_MODE_DISABLED {#STENCIL_MODE_DISABLED}
 
@@ -4304,7 +3921,7 @@ Enables stencil operations without a preset.
 STENCIL_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables stencil operations.
 
 #### STENCIL_MODE_OUTLINE {#STENCIL_MODE_OUTLINE}
 
@@ -4312,7 +3929,9 @@ STENCIL_MODE_DISABLED = 0
 STENCIL_MODE_OUTLINE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stencil preset which applies an outline to the object.
+
+Note: Requires a Material.next_pass material which will be automatically applied. Any manual changes made to Material.next_pass will be lost when the stencil properties are modified or the scene is reloaded. To safely apply a Material.next_pass material on a material that uses stencil presets, use GeometryInstance3D.material_overlay instead.
 
 #### STENCIL_MODE_XRAY {#STENCIL_MODE_XRAY}
 
@@ -4320,7 +3939,9 @@ STENCIL_MODE_OUTLINE = 1
 STENCIL_MODE_XRAY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stencil preset which shows a silhouette of the object behind walls.
+
+Note: Requires a Material.next_pass material which will be automatically applied. Any manual changes made to Material.next_pass will be lost when the stencil properties are modified or the scene is reloaded. To safely apply a Material.next_pass material on a material that uses stencil presets, use GeometryInstance3D.material_overlay instead.
 
 #### STENCIL_MODE_CUSTOM {#STENCIL_MODE_CUSTOM}
 
@@ -4328,7 +3949,9 @@ STENCIL_MODE_XRAY = 2
 STENCIL_MODE_CUSTOM = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables stencil operations without a preset.
+
+---
 
 ### StencilFlags {#enum-StencilFlags}
 
@@ -4336,17 +3959,7 @@ STENCIL_MODE_CUSTOM = 3
 enum StencilFlags { STENCIL_FLAG_READ = 1, STENCIL_FLAG_WRITE = 2, STENCIL_FLAG_WRITE_DEPTH_FAIL = 4 }
 ```
 
-StencilFlags STENCIL_FLAG_READ = 1
-
-The material will only be rendered where it passes a stencil comparison with existing stencil buffer values.
-
-StencilFlags STENCIL_FLAG_WRITE = 2
-
-The material will write the reference value to the stencil buffer where it passes the depth test.
-
-StencilFlags STENCIL_FLAG_WRITE_DEPTH_FAIL = 4
-
-The material will write the reference value to the stencil buffer where it fails the depth test.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STENCIL_FLAG_READ {#STENCIL_FLAG_READ}
 
@@ -4354,7 +3967,7 @@ The material will write the reference value to the stencil buffer where it fails
 STENCIL_FLAG_READ = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The material will only be rendered where it passes a stencil comparison with existing stencil buffer values.
 
 #### STENCIL_FLAG_WRITE {#STENCIL_FLAG_WRITE}
 
@@ -4362,7 +3975,7 @@ STENCIL_FLAG_READ = 1
 STENCIL_FLAG_WRITE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The material will write the reference value to the stencil buffer where it passes the depth test.
 
 #### STENCIL_FLAG_WRITE_DEPTH_FAIL {#STENCIL_FLAG_WRITE_DEPTH_FAIL}
 
@@ -4370,7 +3983,9 @@ STENCIL_FLAG_WRITE = 2
 STENCIL_FLAG_WRITE_DEPTH_FAIL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The material will write the reference value to the stencil buffer where it fails the depth test.
+
+---
 
 ### StencilCompare {#enum-StencilCompare}
 
@@ -4378,33 +3993,7 @@ STENCIL_FLAG_WRITE_DEPTH_FAIL = 4
 enum StencilCompare { STENCIL_COMPARE_ALWAYS = 0, STENCIL_COMPARE_LESS = 1, STENCIL_COMPARE_EQUAL = 2, STENCIL_COMPARE_LESS_OR_EQUAL = 3, STENCIL_COMPARE_GREATER = 4, STENCIL_COMPARE_NOT_EQUAL = 5, STENCIL_COMPARE_GREATER_OR_EQUAL = 6 }
 ```
 
-StencilCompare STENCIL_COMPARE_ALWAYS = 0
-
-Always passes the stencil test.
-
-StencilCompare STENCIL_COMPARE_LESS = 1
-
-Passes the stencil test when the reference value is less than the existing stencil value.
-
-StencilCompare STENCIL_COMPARE_EQUAL = 2
-
-Passes the stencil test when the reference value is equal to the existing stencil value.
-
-StencilCompare STENCIL_COMPARE_LESS_OR_EQUAL = 3
-
-Passes the stencil test when the reference value is less than or equal to the existing stencil value.
-
-StencilCompare STENCIL_COMPARE_GREATER = 4
-
-Passes the stencil test when the reference value is greater than the existing stencil value.
-
-StencilCompare STENCIL_COMPARE_NOT_EQUAL = 5
-
-Passes the stencil test when the reference value is not equal to the existing stencil value.
-
-StencilCompare STENCIL_COMPARE_GREATER_OR_EQUAL = 6
-
-Passes the stencil test when the reference value is greater than or equal to the existing stencil value.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STENCIL_COMPARE_ALWAYS {#STENCIL_COMPARE_ALWAYS}
 
@@ -4412,7 +4001,7 @@ Passes the stencil test when the reference value is greater than or equal to the
 STENCIL_COMPARE_ALWAYS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always passes the stencil test.
 
 #### STENCIL_COMPARE_LESS {#STENCIL_COMPARE_LESS}
 
@@ -4420,7 +4009,7 @@ STENCIL_COMPARE_ALWAYS = 0
 STENCIL_COMPARE_LESS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Passes the stencil test when the reference value is less than the existing stencil value.
 
 #### STENCIL_COMPARE_EQUAL {#STENCIL_COMPARE_EQUAL}
 
@@ -4428,7 +4017,7 @@ STENCIL_COMPARE_LESS = 1
 STENCIL_COMPARE_EQUAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Passes the stencil test when the reference value is equal to the existing stencil value.
 
 #### STENCIL_COMPARE_LESS_OR_EQUAL {#STENCIL_COMPARE_LESS_OR_EQUAL}
 
@@ -4436,7 +4025,7 @@ STENCIL_COMPARE_EQUAL = 2
 STENCIL_COMPARE_LESS_OR_EQUAL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Passes the stencil test when the reference value is less than or equal to the existing stencil value.
 
 #### STENCIL_COMPARE_GREATER {#STENCIL_COMPARE_GREATER}
 
@@ -4444,7 +4033,7 @@ STENCIL_COMPARE_LESS_OR_EQUAL = 3
 STENCIL_COMPARE_GREATER = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Passes the stencil test when the reference value is greater than the existing stencil value.
 
 #### STENCIL_COMPARE_NOT_EQUAL {#STENCIL_COMPARE_NOT_EQUAL}
 
@@ -4452,7 +4041,7 @@ STENCIL_COMPARE_GREATER = 4
 STENCIL_COMPARE_NOT_EQUAL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Passes the stencil test when the reference value is not equal to the existing stencil value.
 
 #### STENCIL_COMPARE_GREATER_OR_EQUAL {#STENCIL_COMPARE_GREATER_OR_EQUAL}
 
@@ -4460,4 +4049,6 @@ STENCIL_COMPARE_NOT_EQUAL = 5
 STENCIL_COMPARE_GREATER_OR_EQUAL = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Passes the stencil test when the reference value is greater than or equal to the existing stencil value.
+
+---

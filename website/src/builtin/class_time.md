@@ -243,53 +243,7 @@ Note: Unlike other methods that use integer timestamps, this method returns the 
 enum Month { MONTH_JANUARY = 1, MONTH_FEBRUARY = 2, MONTH_MARCH = 3, MONTH_APRIL = 4, MONTH_MAY = 5, MONTH_JUNE = 6, MONTH_JULY = 7, MONTH_AUGUST = 8, MONTH_SEPTEMBER = 9, MONTH_OCTOBER = 10, MONTH_NOVEMBER = 11, MONTH_DECEMBER = 12 }
 ```
 
-Month MONTH_JANUARY = 1
-
-The month of January, represented numerically as 01.
-
-Month MONTH_FEBRUARY = 2
-
-The month of February, represented numerically as 02.
-
-Month MONTH_MARCH = 3
-
-The month of March, represented numerically as 03.
-
-Month MONTH_APRIL = 4
-
-The month of April, represented numerically as 04.
-
-Month MONTH_MAY = 5
-
-The month of May, represented numerically as 05.
-
-Month MONTH_JUNE = 6
-
-The month of June, represented numerically as 06.
-
-Month MONTH_JULY = 7
-
-The month of July, represented numerically as 07.
-
-Month MONTH_AUGUST = 8
-
-The month of August, represented numerically as 08.
-
-Month MONTH_SEPTEMBER = 9
-
-The month of September, represented numerically as 09.
-
-Month MONTH_OCTOBER = 10
-
-The month of October, represented numerically as 10.
-
-Month MONTH_NOVEMBER = 11
-
-The month of November, represented numerically as 11.
-
-Month MONTH_DECEMBER = 12
-
-The month of December, represented numerically as 12.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MONTH_JANUARY {#MONTH_JANUARY}
 
@@ -297,7 +251,7 @@ The month of December, represented numerically as 12.
 MONTH_JANUARY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of January, represented numerically as 01.
 
 #### MONTH_FEBRUARY {#MONTH_FEBRUARY}
 
@@ -305,7 +259,7 @@ MONTH_JANUARY = 1
 MONTH_FEBRUARY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of February, represented numerically as 02.
 
 #### MONTH_MARCH {#MONTH_MARCH}
 
@@ -313,7 +267,7 @@ MONTH_FEBRUARY = 2
 MONTH_MARCH = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of March, represented numerically as 03.
 
 #### MONTH_APRIL {#MONTH_APRIL}
 
@@ -321,7 +275,7 @@ MONTH_MARCH = 3
 MONTH_APRIL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of April, represented numerically as 04.
 
 #### MONTH_MAY {#MONTH_MAY}
 
@@ -329,7 +283,7 @@ MONTH_APRIL = 4
 MONTH_MAY = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of May, represented numerically as 05.
 
 #### MONTH_JUNE {#MONTH_JUNE}
 
@@ -337,7 +291,7 @@ MONTH_MAY = 5
 MONTH_JUNE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of June, represented numerically as 06.
 
 #### MONTH_JULY {#MONTH_JULY}
 
@@ -345,7 +299,7 @@ MONTH_JUNE = 6
 MONTH_JULY = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of July, represented numerically as 07.
 
 #### MONTH_AUGUST {#MONTH_AUGUST}
 
@@ -353,7 +307,7 @@ MONTH_JULY = 7
 MONTH_AUGUST = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of August, represented numerically as 08.
 
 #### MONTH_SEPTEMBER {#MONTH_SEPTEMBER}
 
@@ -361,7 +315,7 @@ MONTH_AUGUST = 8
 MONTH_SEPTEMBER = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of September, represented numerically as 09.
 
 #### MONTH_OCTOBER {#MONTH_OCTOBER}
 
@@ -369,7 +323,7 @@ MONTH_SEPTEMBER = 9
 MONTH_OCTOBER = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of October, represented numerically as 10.
 
 #### MONTH_NOVEMBER {#MONTH_NOVEMBER}
 
@@ -377,7 +331,7 @@ MONTH_OCTOBER = 10
 MONTH_NOVEMBER = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of November, represented numerically as 11.
 
 #### MONTH_DECEMBER {#MONTH_DECEMBER}
 
@@ -385,7 +339,9 @@ MONTH_NOVEMBER = 11
 MONTH_DECEMBER = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The month of December, represented numerically as 12.
+
+---
 
 ### Weekday {#enum-Weekday}
 
@@ -393,33 +349,7 @@ MONTH_DECEMBER = 12
 enum Weekday { WEEKDAY_SUNDAY = 0, WEEKDAY_MONDAY = 1, WEEKDAY_TUESDAY = 2, WEEKDAY_WEDNESDAY = 3, WEEKDAY_THURSDAY = 4, WEEKDAY_FRIDAY = 5, WEEKDAY_SATURDAY = 6 }
 ```
 
-Weekday WEEKDAY_SUNDAY = 0
-
-The day of the week Sunday, represented numerically as 0.
-
-Weekday WEEKDAY_MONDAY = 1
-
-The day of the week Monday, represented numerically as 1.
-
-Weekday WEEKDAY_TUESDAY = 2
-
-The day of the week Tuesday, represented numerically as 2.
-
-Weekday WEEKDAY_WEDNESDAY = 3
-
-The day of the week Wednesday, represented numerically as 3.
-
-Weekday WEEKDAY_THURSDAY = 4
-
-The day of the week Thursday, represented numerically as 4.
-
-Weekday WEEKDAY_FRIDAY = 5
-
-The day of the week Friday, represented numerically as 5.
-
-Weekday WEEKDAY_SATURDAY = 6
-
-The day of the week Saturday, represented numerically as 6.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### WEEKDAY_SUNDAY {#WEEKDAY_SUNDAY}
 
@@ -427,7 +357,7 @@ The day of the week Saturday, represented numerically as 6.
 WEEKDAY_SUNDAY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The day of the week Sunday, represented numerically as 0.
 
 #### WEEKDAY_MONDAY {#WEEKDAY_MONDAY}
 
@@ -435,7 +365,7 @@ WEEKDAY_SUNDAY = 0
 WEEKDAY_MONDAY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The day of the week Monday, represented numerically as 1.
 
 #### WEEKDAY_TUESDAY {#WEEKDAY_TUESDAY}
 
@@ -443,7 +373,7 @@ WEEKDAY_MONDAY = 1
 WEEKDAY_TUESDAY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The day of the week Tuesday, represented numerically as 2.
 
 #### WEEKDAY_WEDNESDAY {#WEEKDAY_WEDNESDAY}
 
@@ -451,7 +381,7 @@ WEEKDAY_TUESDAY = 2
 WEEKDAY_WEDNESDAY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The day of the week Wednesday, represented numerically as 3.
 
 #### WEEKDAY_THURSDAY {#WEEKDAY_THURSDAY}
 
@@ -459,7 +389,7 @@ WEEKDAY_WEDNESDAY = 3
 WEEKDAY_THURSDAY = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The day of the week Thursday, represented numerically as 4.
 
 #### WEEKDAY_FRIDAY {#WEEKDAY_FRIDAY}
 
@@ -467,7 +397,7 @@ WEEKDAY_THURSDAY = 4
 WEEKDAY_FRIDAY = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The day of the week Friday, represented numerically as 5.
 
 #### WEEKDAY_SATURDAY {#WEEKDAY_SATURDAY}
 
@@ -475,4 +405,6 @@ WEEKDAY_FRIDAY = 5
 WEEKDAY_SATURDAY = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The day of the week Saturday, represented numerically as 6.
+
+---

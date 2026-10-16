@@ -1460,7 +1460,12 @@ Line fill alignment rules.
 tab_stops: PackedFloat32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tab_stops(value: PackedFloat32Array)
+- PackedFloat32Array get_tab_stops()
+
+Aligns text to the given tab-stops.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedFloat32Array for more details.
 
 ### custom_effects {#custom_effects}
 
@@ -1691,21 +1696,7 @@ Note: This can happen before the text is processed for drawing. Scrolling values
 enum ListType { LIST_NUMBERS = 0, LIST_LETTERS = 1, LIST_ROMAN = 2, LIST_DOTS = 3 }
 ```
 
-ListType LIST_NUMBERS = 0
-
-Each list item has a number marker.
-
-ListType LIST_LETTERS = 1
-
-Each list item has a letter marker.
-
-ListType LIST_ROMAN = 2
-
-Each list item has a roman number marker.
-
-ListType LIST_DOTS = 3
-
-Each list item has a filled circle marker.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LIST_NUMBERS {#LIST_NUMBERS}
 
@@ -1713,7 +1704,7 @@ Each list item has a filled circle marker.
 LIST_NUMBERS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Each list item has a number marker.
 
 #### LIST_LETTERS {#LIST_LETTERS}
 
@@ -1721,7 +1712,7 @@ LIST_NUMBERS = 0
 LIST_LETTERS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Each list item has a letter marker.
 
 #### LIST_ROMAN {#LIST_ROMAN}
 
@@ -1729,7 +1720,7 @@ LIST_LETTERS = 1
 LIST_ROMAN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Each list item has a roman number marker.
 
 #### LIST_DOTS {#LIST_DOTS}
 
@@ -1737,7 +1728,9 @@ LIST_ROMAN = 2
 LIST_DOTS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Each list item has a filled circle marker.
+
+---
 
 ### MenuItems {#enum-MenuItems}
 
@@ -1745,17 +1738,7 @@ LIST_DOTS = 3
 enum MenuItems { MENU_COPY = 0, MENU_SELECT_ALL = 1, MENU_MAX = 2 }
 ```
 
-MenuItems MENU_COPY = 0
-
-Copies the selected text.
-
-MenuItems MENU_SELECT_ALL = 1
-
-Selects the whole RichTextLabel text.
-
-MenuItems MENU_MAX = 2
-
-Represents the size of the MenuItems enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MENU_COPY {#MENU_COPY}
 
@@ -1763,7 +1746,7 @@ Represents the size of the MenuItems enum.
 MENU_COPY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Copies the selected text.
 
 #### MENU_SELECT_ALL {#MENU_SELECT_ALL}
 
@@ -1771,7 +1754,7 @@ MENU_COPY = 0
 MENU_SELECT_ALL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Selects the whole RichTextLabel text.
 
 #### MENU_MAX {#MENU_MAX}
 
@@ -1779,7 +1762,9 @@ MENU_SELECT_ALL = 1
 MENU_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the MenuItems enum.
+
+---
 
 ### MetaUnderline {#enum-MetaUnderline}
 
@@ -1787,17 +1772,7 @@ MENU_MAX = 2
 enum MetaUnderline { META_UNDERLINE_NEVER = 0, META_UNDERLINE_ALWAYS = 1, META_UNDERLINE_ON_HOVER = 2 }
 ```
 
-MetaUnderline META_UNDERLINE_NEVER = 0
-
-Meta tag does not display an underline, even if meta_underlined is true.
-
-MetaUnderline META_UNDERLINE_ALWAYS = 1
-
-If meta_underlined is true, meta tag always display an underline.
-
-MetaUnderline META_UNDERLINE_ON_HOVER = 2
-
-If meta_underlined is true, meta tag display an underline when the mouse cursor is over it.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### META_UNDERLINE_NEVER {#META_UNDERLINE_NEVER}
 
@@ -1805,7 +1780,7 @@ If meta_underlined is true, meta tag display an underline when the mouse cursor 
 META_UNDERLINE_NEVER = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Meta tag does not display an underline, even if meta_underlined is true.
 
 #### META_UNDERLINE_ALWAYS {#META_UNDERLINE_ALWAYS}
 
@@ -1813,7 +1788,7 @@ META_UNDERLINE_NEVER = 0
 META_UNDERLINE_ALWAYS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If meta_underlined is true, meta tag always display an underline.
 
 #### META_UNDERLINE_ON_HOVER {#META_UNDERLINE_ON_HOVER}
 
@@ -1821,7 +1796,11 @@ META_UNDERLINE_ALWAYS = 1
 META_UNDERLINE_ON_HOVER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If meta_underlined is true, meta tag display an underline when the mouse cursor is over it.
+
+---
+
+flags ImageUpdateMask:
 
 ### ImageUpdateMask {#enum-ImageUpdateMask}
 
@@ -1837,7 +1816,7 @@ enum ImageUpdateMask（位标志） { UPDATE_TEXTURE = 1, UPDATE_SIZE = 2, UPDAT
 UPDATE_TEXTURE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If this bit is set, update_image() changes image texture.
 
 #### UPDATE_SIZE {#UPDATE_SIZE}
 
@@ -1845,7 +1824,7 @@ UPDATE_TEXTURE = 1
 UPDATE_SIZE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If this bit is set, update_image() changes image size.
 
 #### UPDATE_COLOR {#UPDATE_COLOR}
 
@@ -1853,7 +1832,7 @@ UPDATE_SIZE = 2
 UPDATE_COLOR = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If this bit is set, update_image() changes image color.
 
 #### UPDATE_ALIGNMENT {#UPDATE_ALIGNMENT}
 
@@ -1861,7 +1840,7 @@ UPDATE_COLOR = 4
 UPDATE_ALIGNMENT = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If this bit is set, update_image() changes image inline alignment.
 
 #### UPDATE_REGION {#UPDATE_REGION}
 
@@ -1869,7 +1848,7 @@ UPDATE_ALIGNMENT = 8
 UPDATE_REGION = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If this bit is set, update_image() changes image texture region.
 
 #### UPDATE_PAD {#UPDATE_PAD}
 
@@ -1877,7 +1856,7 @@ UPDATE_REGION = 16
 UPDATE_PAD = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If this bit is set, update_image() changes image padding.
 
 #### UPDATE_TOOLTIP {#UPDATE_TOOLTIP}
 
@@ -1885,7 +1864,7 @@ UPDATE_PAD = 32
 UPDATE_TOOLTIP = 64
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If this bit is set, update_image() changes image tooltip.
 
 #### UPDATE_WIDTH_UNIT {#UPDATE_WIDTH_UNIT}
 
@@ -1893,7 +1872,9 @@ UPDATE_TOOLTIP = 64
 UPDATE_WIDTH_UNIT = 128
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If this bit is set, update_image() changes the units used to calculate image size.
+
+---
 
 ### ImageUnit {#enum-ImageUnit}
 
@@ -1901,17 +1882,7 @@ UPDATE_WIDTH_UNIT = 128
 enum ImageUnit { IMAGE_UNIT_PIXEL = 0, IMAGE_UNIT_PERCENT = 1, IMAGE_UNIT_EM = 2 }
 ```
 
-ImageUnit IMAGE_UNIT_PIXEL = 0
-
-Images drawn with this unit will be in pixels.
-
-ImageUnit IMAGE_UNIT_PERCENT = 1
-
-Images drawn with this unit will be in percentages of the control width.
-
-ImageUnit IMAGE_UNIT_EM = 2
-
-Images drawn with this unit will be in percentages of the surrounding font size.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### IMAGE_UNIT_PIXEL {#IMAGE_UNIT_PIXEL}
 
@@ -1919,7 +1890,7 @@ Images drawn with this unit will be in percentages of the surrounding font size.
 IMAGE_UNIT_PIXEL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Images drawn with this unit will be in pixels.
 
 #### IMAGE_UNIT_PERCENT {#IMAGE_UNIT_PERCENT}
 
@@ -1927,7 +1898,7 @@ IMAGE_UNIT_PIXEL = 0
 IMAGE_UNIT_PERCENT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Images drawn with this unit will be in percentages of the control width.
 
 #### IMAGE_UNIT_EM {#IMAGE_UNIT_EM}
 
@@ -1935,4 +1906,6 @@ IMAGE_UNIT_PERCENT = 1
 IMAGE_UNIT_EM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Images drawn with this unit will be in percentages of the surrounding font size.
+
+---

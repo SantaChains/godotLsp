@@ -164,7 +164,12 @@ Converts this GLTFLight instance into a Godot Light3D node.
 color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_color(value: Color)
+- Color get_color()
+
+The Color of the light in linear space. Defaults to white. A black color causes the light to have no effect.
+
+This value is linear to match glTF, but will be converted to nonlinear sRGB when creating a Godot Light3D node upon import, or converted to linear when exporting a Godot Light3D to glTF.
 
 ### intensity {#intensity}
 

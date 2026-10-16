@@ -28,21 +28,7 @@ Returns the plane alignment for the parent entity at this index.
 enum PlaneAlignment { PLANE_ALIGNMENT_HORIZONTAL_UPWARD = 0, PLANE_ALIGNMENT_HORIZONTAL_DOWNWARD = 1, PLANE_ALIGNMENT_VERTICAL = 2, PLANE_ALIGNMENT_ARBITRARY = 3 }
 ```
 
-PlaneAlignment PLANE_ALIGNMENT_HORIZONTAL_UPWARD = 0
-
-Plane is facing upward.
-
-PlaneAlignment PLANE_ALIGNMENT_HORIZONTAL_DOWNWARD = 1
-
-Plane is facing downwards.
-
-PlaneAlignment PLANE_ALIGNMENT_VERTICAL = 2
-
-Plane is vertically aligned.
-
-PlaneAlignment PLANE_ALIGNMENT_ARBITRARY = 3
-
-Plane has an arbitrary alignment.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PLANE_ALIGNMENT_HORIZONTAL_UPWARD {#PLANE_ALIGNMENT_HORIZONTAL_UPWARD}
 
@@ -50,7 +36,7 @@ Plane has an arbitrary alignment.
 PLANE_ALIGNMENT_HORIZONTAL_UPWARD = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plane is facing upward.
 
 #### PLANE_ALIGNMENT_HORIZONTAL_DOWNWARD {#PLANE_ALIGNMENT_HORIZONTAL_DOWNWARD}
 
@@ -58,7 +44,7 @@ PLANE_ALIGNMENT_HORIZONTAL_UPWARD = 0
 PLANE_ALIGNMENT_HORIZONTAL_DOWNWARD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plane is facing downwards.
 
 #### PLANE_ALIGNMENT_VERTICAL {#PLANE_ALIGNMENT_VERTICAL}
 
@@ -66,7 +52,7 @@ PLANE_ALIGNMENT_HORIZONTAL_DOWNWARD = 1
 PLANE_ALIGNMENT_VERTICAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plane is vertically aligned.
 
 #### PLANE_ALIGNMENT_ARBITRARY {#PLANE_ALIGNMENT_ARBITRARY}
 
@@ -74,4 +60,6 @@ PLANE_ALIGNMENT_VERTICAL = 2
 PLANE_ALIGNMENT_ARBITRARY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plane has an arbitrary alignment.
+
+---

@@ -92,7 +92,10 @@ void set_node_b(node: NodePath)
 node_a: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_node_a(value: NodePath)
+- NodePath get_node_a()
+
+Path to the first body (A) attached to the joint. The node must inherit PhysicsBody2D.
 
 ### node_b {#node_b}
 
@@ -100,7 +103,10 @@ node_a: NodePath
 node_b: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_node_b(value: NodePath)
+- NodePath get_node_b()
+
+Path to the second body (B) attached to the joint. The node must inherit PhysicsBody2D.
 
 ### bias {#bias}
 

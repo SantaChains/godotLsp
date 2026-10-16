@@ -692,21 +692,7 @@ Emitted when the audio stops playing.
 enum AttenuationModel { ATTENUATION_INVERSE_DISTANCE = 0, ATTENUATION_INVERSE_SQUARE_DISTANCE = 1, ATTENUATION_LOGARITHMIC = 2, ATTENUATION_DISABLED = 3 }
 ```
 
-AttenuationModel ATTENUATION_INVERSE_DISTANCE = 0
-
-Attenuation of loudness according to linear distance.
-
-AttenuationModel ATTENUATION_INVERSE_SQUARE_DISTANCE = 1
-
-Attenuation of loudness according to squared distance.
-
-AttenuationModel ATTENUATION_LOGARITHMIC = 2
-
-Attenuation of loudness according to logarithmic distance.
-
-AttenuationModel ATTENUATION_DISABLED = 3
-
-No attenuation of loudness according to distance. The sound will still be heard positionally, unlike an AudioStreamPlayer. ATTENUATION_DISABLED can be combined with a max_distance value greater than 0.0 to achieve linear attenuation clamped to a sphere of a defined size.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ATTENUATION_INVERSE_DISTANCE {#ATTENUATION_INVERSE_DISTANCE}
 
@@ -714,7 +700,7 @@ No attenuation of loudness according to distance. The sound will still be heard 
 ATTENUATION_INVERSE_DISTANCE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Attenuation of loudness according to linear distance.
 
 #### ATTENUATION_INVERSE_SQUARE_DISTANCE {#ATTENUATION_INVERSE_SQUARE_DISTANCE}
 
@@ -722,7 +708,7 @@ ATTENUATION_INVERSE_DISTANCE = 0
 ATTENUATION_INVERSE_SQUARE_DISTANCE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Attenuation of loudness according to squared distance.
 
 #### ATTENUATION_LOGARITHMIC {#ATTENUATION_LOGARITHMIC}
 
@@ -730,7 +716,7 @@ ATTENUATION_INVERSE_SQUARE_DISTANCE = 1
 ATTENUATION_LOGARITHMIC = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Attenuation of loudness according to logarithmic distance.
 
 #### ATTENUATION_DISABLED {#ATTENUATION_DISABLED}
 
@@ -738,7 +724,9 @@ ATTENUATION_LOGARITHMIC = 2
 ATTENUATION_DISABLED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No attenuation of loudness according to distance. The sound will still be heard positionally, unlike an AudioStreamPlayer. ATTENUATION_DISABLED can be combined with a max_distance value greater than 0.0 to achieve linear attenuation clamped to a sphere of a defined size.
+
+---
 
 ### DopplerTracking {#enum-DopplerTracking}
 
@@ -746,17 +734,7 @@ ATTENUATION_DISABLED = 3
 enum DopplerTracking { DOPPLER_TRACKING_DISABLED = 0, DOPPLER_TRACKING_IDLE_STEP = 1, DOPPLER_TRACKING_PHYSICS_STEP = 2 }
 ```
 
-DopplerTracking DOPPLER_TRACKING_DISABLED = 0
-
-Disables doppler tracking.
-
-DopplerTracking DOPPLER_TRACKING_IDLE_STEP = 1
-
-Executes doppler tracking during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS).
-
-DopplerTracking DOPPLER_TRACKING_PHYSICS_STEP = 2
-
-Executes doppler tracking during physics frames (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DOPPLER_TRACKING_DISABLED {#DOPPLER_TRACKING_DISABLED}
 
@@ -764,7 +742,7 @@ Executes doppler tracking during physics frames (see Node.NOTIFICATION_INTERNAL_
 DOPPLER_TRACKING_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables doppler tracking.
 
 #### DOPPLER_TRACKING_IDLE_STEP {#DOPPLER_TRACKING_IDLE_STEP}
 
@@ -772,7 +750,7 @@ DOPPLER_TRACKING_DISABLED = 0
 DOPPLER_TRACKING_IDLE_STEP = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Executes doppler tracking during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS).
 
 #### DOPPLER_TRACKING_PHYSICS_STEP {#DOPPLER_TRACKING_PHYSICS_STEP}
 
@@ -780,4 +758,6 @@ DOPPLER_TRACKING_IDLE_STEP = 1
 DOPPLER_TRACKING_PHYSICS_STEP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Executes doppler tracking during physics frames (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS).
+
+---

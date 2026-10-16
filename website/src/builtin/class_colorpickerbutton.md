@@ -92,7 +92,10 @@ void set_pick_color(color: Color)
 color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_pick_color(value: Color)
+- Color get_pick_color()
+
+The currently selected color.
 
 ### edit_alpha {#edit_alpha}
 

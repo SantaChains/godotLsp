@@ -142,7 +142,10 @@ If true, the frame will be tinted with the color specified in tint_color.
 tint_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tint_color(value: Color)
+- Color get_tint_color()
+
+The color of the frame when tint_color_enabled is true.
 
 ### autoshrink {#autoshrink}
 
@@ -161,4 +164,9 @@ If true, the frame will automatically resize to enclose all attached nodes.
 attached_nodes: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_attached_nodes(value: PackedInt32Array)
+- PackedInt32Array get_attached_nodes()
+
+The list of nodes attached to the frame.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.

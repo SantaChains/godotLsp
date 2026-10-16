@@ -148,45 +148,7 @@ Represents the index of the frame this node is linked to. If set to -1 the node 
 enum PortType { PORT_TYPE_SCALAR = 0, PORT_TYPE_SCALAR_INT = 1, PORT_TYPE_SCALAR_UINT = 2, PORT_TYPE_VECTOR_2D = 3, PORT_TYPE_VECTOR_3D = 4, PORT_TYPE_VECTOR_4D = 5, PORT_TYPE_BOOLEAN = 6, PORT_TYPE_TRANSFORM = 7, PORT_TYPE_SAMPLER = 8, PORT_TYPE_MAX = 9 }
 ```
 
-PortType PORT_TYPE_SCALAR = 0
-
-Floating-point scalar. Translated to float type in shader code.
-
-PortType PORT_TYPE_SCALAR_INT = 1
-
-Integer scalar. Translated to int type in shader code.
-
-PortType PORT_TYPE_SCALAR_UINT = 2
-
-Unsigned integer scalar. Translated to uint type in shader code.
-
-PortType PORT_TYPE_VECTOR_2D = 3
-
-2D vector of floating-point values. Translated to vec2 type in shader code.
-
-PortType PORT_TYPE_VECTOR_3D = 4
-
-3D vector of floating-point values. Translated to vec3 type in shader code.
-
-PortType PORT_TYPE_VECTOR_4D = 5
-
-4D vector of floating-point values. Translated to vec4 type in shader code.
-
-PortType PORT_TYPE_BOOLEAN = 6
-
-Boolean type. Translated to bool type in shader code.
-
-PortType PORT_TYPE_TRANSFORM = 7
-
-Transform type. Translated to mat4 type in shader code.
-
-PortType PORT_TYPE_SAMPLER = 8
-
-Sampler type. Translated to reference of sampler uniform in shader code. Can only be used for input ports in non-uniform nodes.
-
-PortType PORT_TYPE_MAX = 9
-
-Represents the size of the PortType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PORT_TYPE_SCALAR {#PORT_TYPE_SCALAR}
 
@@ -194,7 +156,7 @@ Represents the size of the PortType enum.
 PORT_TYPE_SCALAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Floating-point scalar. Translated to float type in shader code.
 
 #### PORT_TYPE_SCALAR_INT {#PORT_TYPE_SCALAR_INT}
 
@@ -202,7 +164,7 @@ PORT_TYPE_SCALAR = 0
 PORT_TYPE_SCALAR_INT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Integer scalar. Translated to int type in shader code.
 
 #### PORT_TYPE_SCALAR_UINT {#PORT_TYPE_SCALAR_UINT}
 
@@ -210,7 +172,7 @@ PORT_TYPE_SCALAR_INT = 1
 PORT_TYPE_SCALAR_UINT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unsigned integer scalar. Translated to uint type in shader code.
 
 #### PORT_TYPE_VECTOR_2D {#PORT_TYPE_VECTOR_2D}
 
@@ -218,7 +180,7 @@ PORT_TYPE_SCALAR_UINT = 2
 PORT_TYPE_VECTOR_2D = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+2D vector of floating-point values. Translated to vec2 type in shader code.
 
 #### PORT_TYPE_VECTOR_3D {#PORT_TYPE_VECTOR_3D}
 
@@ -226,7 +188,7 @@ PORT_TYPE_VECTOR_2D = 3
 PORT_TYPE_VECTOR_3D = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+3D vector of floating-point values. Translated to vec3 type in shader code.
 
 #### PORT_TYPE_VECTOR_4D {#PORT_TYPE_VECTOR_4D}
 
@@ -234,7 +196,7 @@ PORT_TYPE_VECTOR_3D = 4
 PORT_TYPE_VECTOR_4D = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+4D vector of floating-point values. Translated to vec4 type in shader code.
 
 #### PORT_TYPE_BOOLEAN {#PORT_TYPE_BOOLEAN}
 
@@ -242,7 +204,7 @@ PORT_TYPE_VECTOR_4D = 5
 PORT_TYPE_BOOLEAN = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Boolean type. Translated to bool type in shader code.
 
 #### PORT_TYPE_TRANSFORM {#PORT_TYPE_TRANSFORM}
 
@@ -250,7 +212,7 @@ PORT_TYPE_BOOLEAN = 6
 PORT_TYPE_TRANSFORM = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Transform type. Translated to mat4 type in shader code.
 
 #### PORT_TYPE_SAMPLER {#PORT_TYPE_SAMPLER}
 
@@ -258,7 +220,7 @@ PORT_TYPE_TRANSFORM = 7
 PORT_TYPE_SAMPLER = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sampler type. Translated to reference of sampler uniform in shader code. Can only be used for input ports in non-uniform nodes.
 
 #### PORT_TYPE_MAX {#PORT_TYPE_MAX}
 
@@ -266,4 +228,6 @@ PORT_TYPE_SAMPLER = 8
 PORT_TYPE_MAX = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the PortType enum.
+
+---

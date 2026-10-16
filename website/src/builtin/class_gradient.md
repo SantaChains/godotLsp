@@ -184,7 +184,14 @@ Note: This setting has no effect when interpolation_mode is set to GRADIENT_INTE
 offsets: PackedFloat32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offsets(value: PackedFloat32Array)
+- PackedFloat32Array get_offsets()
+
+Gradient's offsets as a PackedFloat32Array.
+
+Note: Setting this property updates all offsets at once. To update any offset individually use set_offset().
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedFloat32Array for more details.
 
 ### colors {#colors}
 
@@ -192,7 +199,14 @@ offsets: PackedFloat32Array
 colors: PackedColorArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_colors(value: PackedColorArray)
+- PackedColorArray get_colors()
+
+Gradient's colors as a PackedColorArray.
+
+Note: Setting this property updates all colors at once. To update any color individually use set_color().
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedColorArray for more details.
 
 ## 枚举
 
@@ -202,17 +216,7 @@ colors: PackedColorArray
 enum InterpolationMode { GRADIENT_INTERPOLATE_LINEAR = 0, GRADIENT_INTERPOLATE_CONSTANT = 1, GRADIENT_INTERPOLATE_CUBIC = 2 }
 ```
 
-InterpolationMode GRADIENT_INTERPOLATE_LINEAR = 0
-
-Linear interpolation.
-
-InterpolationMode GRADIENT_INTERPOLATE_CONSTANT = 1
-
-Constant interpolation, color changes abruptly at each point and stays uniform between. This might cause visible aliasing when used for a gradient texture in some cases.
-
-InterpolationMode GRADIENT_INTERPOLATE_CUBIC = 2
-
-Cubic interpolation.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GRADIENT_INTERPOLATE_LINEAR {#GRADIENT_INTERPOLATE_LINEAR}
 
@@ -220,7 +224,7 @@ Cubic interpolation.
 GRADIENT_INTERPOLATE_LINEAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Linear interpolation.
 
 #### GRADIENT_INTERPOLATE_CONSTANT {#GRADIENT_INTERPOLATE_CONSTANT}
 
@@ -228,7 +232,7 @@ GRADIENT_INTERPOLATE_LINEAR = 0
 GRADIENT_INTERPOLATE_CONSTANT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant interpolation, color changes abruptly at each point and stays uniform between. This might cause visible aliasing when used for a gradient texture in some cases.
 
 #### GRADIENT_INTERPOLATE_CUBIC {#GRADIENT_INTERPOLATE_CUBIC}
 
@@ -236,7 +240,9 @@ GRADIENT_INTERPOLATE_CONSTANT = 1
 GRADIENT_INTERPOLATE_CUBIC = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cubic interpolation.
+
+---
 
 ### ColorSpace {#enum-ColorSpace}
 
@@ -244,17 +250,7 @@ GRADIENT_INTERPOLATE_CUBIC = 2
 enum ColorSpace { GRADIENT_COLOR_SPACE_SRGB = 0, GRADIENT_COLOR_SPACE_LINEAR_SRGB = 1, GRADIENT_COLOR_SPACE_OKLAB = 2 }
 ```
 
-ColorSpace GRADIENT_COLOR_SPACE_SRGB = 0
-
-sRGB color space.
-
-ColorSpace GRADIENT_COLOR_SPACE_LINEAR_SRGB = 1
-
-Linear sRGB color space.
-
-ColorSpace GRADIENT_COLOR_SPACE_OKLAB = 2
-
-Oklab [https://bottosson.github.io/posts/oklab/] color space. This color space provides a smooth and uniform-looking transition between colors.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GRADIENT_COLOR_SPACE_SRGB {#GRADIENT_COLOR_SPACE_SRGB}
 
@@ -262,7 +258,7 @@ Oklab [https://bottosson.github.io/posts/oklab/] color space. This color space p
 GRADIENT_COLOR_SPACE_SRGB = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+sRGB color space.
 
 #### GRADIENT_COLOR_SPACE_LINEAR_SRGB {#GRADIENT_COLOR_SPACE_LINEAR_SRGB}
 
@@ -270,7 +266,7 @@ GRADIENT_COLOR_SPACE_SRGB = 0
 GRADIENT_COLOR_SPACE_LINEAR_SRGB = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Linear sRGB color space.
 
 #### GRADIENT_COLOR_SPACE_OKLAB {#GRADIENT_COLOR_SPACE_OKLAB}
 
@@ -278,4 +274,6 @@ GRADIENT_COLOR_SPACE_LINEAR_SRGB = 1
 GRADIENT_COLOR_SPACE_OKLAB = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Oklab [https://bottosson.github.io/posts/oklab/] color space. This color space provides a smooth and uniform-looking transition between colors.
+
+---

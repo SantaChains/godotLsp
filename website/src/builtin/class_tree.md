@@ -986,23 +986,7 @@ Emitted when a left mouse button click does not select any item.
 enum SelectMode { SELECT_SINGLE = 0, SELECT_ROW = 1, SELECT_MULTI = 2 }
 ```
 
-SelectMode SELECT_SINGLE = 0
-
-Allows selection of a single cell at a time. From the perspective of items, only a single item is allowed to be selected. And there is only one column selected in the selected item.
-
-The focus cursor is always hidden in this mode, but it is positioned at the current selection, making the currently selected item the currently focused item.
-
-SelectMode SELECT_ROW = 1
-
-Allows selection of a single row at a time. From the perspective of items, only a single items is allowed to be selected. And all the columns are selected in the selected item.
-
-The focus cursor is always hidden in this mode, but it is positioned at the first column of the current selection, making the currently selected item the currently focused item.
-
-SelectMode SELECT_MULTI = 2
-
-Allows selection of multiple cells at the same time. From the perspective of items, multiple items are allowed to be selected. And there can be multiple columns selected in each selected item.
-
-The focus cursor is visible in this mode, the item or column under the cursor is not necessarily selected.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SELECT_SINGLE {#SELECT_SINGLE}
 
@@ -1010,7 +994,9 @@ The focus cursor is visible in this mode, the item or column under the cursor is
 SELECT_SINGLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows selection of a single cell at a time. From the perspective of items, only a single item is allowed to be selected. And there is only one column selected in the selected item.
+
+The focus cursor is always hidden in this mode, but it is positioned at the current selection, making the currently selected item the currently focused item.
 
 #### SELECT_ROW {#SELECT_ROW}
 
@@ -1018,7 +1004,9 @@ SELECT_SINGLE = 0
 SELECT_ROW = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows selection of a single row at a time. From the perspective of items, only a single items is allowed to be selected. And all the columns are selected in the selected item.
+
+The focus cursor is always hidden in this mode, but it is positioned at the first column of the current selection, making the currently selected item the currently focused item.
 
 #### SELECT_MULTI {#SELECT_MULTI}
 
@@ -1026,7 +1014,11 @@ SELECT_ROW = 1
 SELECT_MULTI = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows selection of multiple cells at the same time. From the perspective of items, multiple items are allowed to be selected. And there can be multiple columns selected in each selected item.
+
+The focus cursor is visible in this mode, the item or column under the cursor is not necessarily selected.
+
+---
 
 ### DropModeFlags {#enum-DropModeFlags}
 
@@ -1034,23 +1026,7 @@ SELECT_MULTI = 2
 enum DropModeFlags { DROP_MODE_DISABLED = 0, DROP_MODE_ON_ITEM = 1, DROP_MODE_INBETWEEN = 2 }
 ```
 
-DropModeFlags DROP_MODE_DISABLED = 0
-
-Disables all drop sections.
-
-Note: This is the default flag, it has no effect when combined with other flags.
-
-DropModeFlags DROP_MODE_ON_ITEM = 1
-
-Enables the "on item" drop section. This drop section covers the entire item.
-
-When combined with DROP_MODE_INBETWEEN, this drop section halves in height and stays centered vertically.
-
-DropModeFlags DROP_MODE_INBETWEEN = 2
-
-Enables "above item" and "below item" drop sections. The "above item" drop section covers the top half of the item, while the "below item" drop section covers the bottom half, and extends downward to the left of any children.
-
-When combined with DROP_MODE_ON_ITEM, these drop sections halve in height and stay at the top and bottom respectively.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DROP_MODE_DISABLED {#DROP_MODE_DISABLED}
 
@@ -1058,7 +1034,9 @@ When combined with DROP_MODE_ON_ITEM, these drop sections halve in height and st
 DROP_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables all drop sections.
+
+Note: This is the default flag, it has no effect when combined with other flags.
 
 #### DROP_MODE_ON_ITEM {#DROP_MODE_ON_ITEM}
 
@@ -1066,7 +1044,9 @@ DROP_MODE_DISABLED = 0
 DROP_MODE_ON_ITEM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables the "on item" drop section. This drop section covers the entire item.
+
+When combined with DROP_MODE_INBETWEEN, this drop section halves in height and stays centered vertically.
 
 #### DROP_MODE_INBETWEEN {#DROP_MODE_INBETWEEN}
 
@@ -1074,7 +1054,11 @@ DROP_MODE_ON_ITEM = 1
 DROP_MODE_INBETWEEN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables "above item" and "below item" drop sections. The "above item" drop section covers the top half of the item, while the "below item" drop section covers the bottom half, and extends downward to the left of any children.
+
+When combined with DROP_MODE_ON_ITEM, these drop sections halve in height and stay at the top and bottom respectively.
+
+---
 
 ### ScrollHintMode {#enum-ScrollHintMode}
 
@@ -1082,21 +1066,7 @@ DROP_MODE_INBETWEEN = 2
 enum ScrollHintMode { SCROLL_HINT_MODE_DISABLED = 0, SCROLL_HINT_MODE_BOTH = 1, SCROLL_HINT_MODE_TOP = 2, SCROLL_HINT_MODE_BOTTOM = 3 }
 ```
 
-ScrollHintMode SCROLL_HINT_MODE_DISABLED = 0
-
-Scroll hints will never be shown.
-
-ScrollHintMode SCROLL_HINT_MODE_BOTH = 1
-
-Scroll hints will be shown at the top and bottom.
-
-ScrollHintMode SCROLL_HINT_MODE_TOP = 2
-
-Only the top scroll hint will be shown.
-
-ScrollHintMode SCROLL_HINT_MODE_BOTTOM = 3
-
-Only the bottom scroll hint will be shown.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCROLL_HINT_MODE_DISABLED {#SCROLL_HINT_MODE_DISABLED}
 
@@ -1104,7 +1074,7 @@ Only the bottom scroll hint will be shown.
 SCROLL_HINT_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll hints will never be shown.
 
 #### SCROLL_HINT_MODE_BOTH {#SCROLL_HINT_MODE_BOTH}
 
@@ -1112,7 +1082,7 @@ SCROLL_HINT_MODE_DISABLED = 0
 SCROLL_HINT_MODE_BOTH = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll hints will be shown at the top and bottom.
 
 #### SCROLL_HINT_MODE_TOP {#SCROLL_HINT_MODE_TOP}
 
@@ -1120,7 +1090,7 @@ SCROLL_HINT_MODE_BOTH = 1
 SCROLL_HINT_MODE_TOP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only the top scroll hint will be shown.
 
 #### SCROLL_HINT_MODE_BOTTOM {#SCROLL_HINT_MODE_BOTTOM}
 
@@ -1128,4 +1098,6 @@ SCROLL_HINT_MODE_TOP = 2
 SCROLL_HINT_MODE_BOTTOM = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only the bottom scroll hint will be shown.
+
+---

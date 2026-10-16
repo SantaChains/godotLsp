@@ -65,7 +65,10 @@ A Curve3D describing the path.
 debug_custom_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_debug_custom_color(value: Color)
+- Color get_debug_custom_color()
+
+The custom color used to draw the path in the editor. If set to Color.BLACK (as by default), the color set in ProjectSettings.debug/shapes/paths/geometry_color is used.
 
 ## 信号
 

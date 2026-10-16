@@ -207,7 +207,10 @@ If true, the feed is active.
 feed_transform: Transform2D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_transform(value: Transform2D)
+- Transform2D get_transform()
+
+The transform applied to the camera's image.
 
 ### formats {#formats}
 
@@ -245,25 +248,7 @@ Emitted when the format has changed.
 enum FeedDataType { FEED_NOIMAGE = 0, FEED_RGB = 1, FEED_YCBCR = 2, FEED_YCBCR_SEP = 3, FEED_EXTERNAL = 4 }
 ```
 
-FeedDataType FEED_NOIMAGE = 0
-
-No image set for the feed.
-
-FeedDataType FEED_RGB = 1
-
-Feed supplies RGB images.
-
-FeedDataType FEED_YCBCR = 2
-
-Feed supplies YCbCr images that need to be converted to RGB.
-
-FeedDataType FEED_YCBCR_SEP = 3
-
-Feed supplies separate Y and CbCr images that need to be combined and converted to RGB.
-
-FeedDataType FEED_EXTERNAL = 4
-
-Feed supplies external image.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FEED_NOIMAGE {#FEED_NOIMAGE}
 
@@ -271,7 +256,7 @@ Feed supplies external image.
 FEED_NOIMAGE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No image set for the feed.
 
 #### FEED_RGB {#FEED_RGB}
 
@@ -279,7 +264,7 @@ FEED_NOIMAGE = 0
 FEED_RGB = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Feed supplies RGB images.
 
 #### FEED_YCBCR {#FEED_YCBCR}
 
@@ -287,7 +272,7 @@ FEED_RGB = 1
 FEED_YCBCR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Feed supplies YCbCr images that need to be converted to RGB.
 
 #### FEED_YCBCR_SEP {#FEED_YCBCR_SEP}
 
@@ -295,7 +280,7 @@ FEED_YCBCR = 2
 FEED_YCBCR_SEP = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Feed supplies separate Y and CbCr images that need to be combined and converted to RGB.
 
 #### FEED_EXTERNAL {#FEED_EXTERNAL}
 
@@ -303,7 +288,9 @@ FEED_YCBCR_SEP = 3
 FEED_EXTERNAL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Feed supplies external image.
+
+---
 
 ### FeedPosition {#enum-FeedPosition}
 
@@ -311,17 +298,7 @@ FEED_EXTERNAL = 4
 enum FeedPosition { FEED_UNSPECIFIED = 0, FEED_FRONT = 1, FEED_BACK = 2 }
 ```
 
-FeedPosition FEED_UNSPECIFIED = 0
-
-Unspecified position.
-
-FeedPosition FEED_FRONT = 1
-
-Camera is mounted at the front of the device.
-
-FeedPosition FEED_BACK = 2
-
-Camera is mounted at the back of the device.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FEED_UNSPECIFIED {#FEED_UNSPECIFIED}
 
@@ -329,7 +306,7 @@ Camera is mounted at the back of the device.
 FEED_UNSPECIFIED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unspecified position.
 
 #### FEED_FRONT {#FEED_FRONT}
 
@@ -337,7 +314,7 @@ FEED_UNSPECIFIED = 0
 FEED_FRONT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Camera is mounted at the front of the device.
 
 #### FEED_BACK {#FEED_BACK}
 
@@ -345,4 +322,6 @@ FEED_FRONT = 1
 FEED_BACK = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Camera is mounted at the back of the device.
+
+---

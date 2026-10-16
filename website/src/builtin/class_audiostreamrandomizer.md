@@ -217,17 +217,7 @@ The number of streams in the stream pool.
 enum PlaybackMode { PLAYBACK_RANDOM_NO_REPEATS = 0, PLAYBACK_RANDOM = 1, PLAYBACK_SEQUENTIAL = 2 }
 ```
 
-PlaybackMode PLAYBACK_RANDOM_NO_REPEATS = 0
-
-Pick a stream at random according to the probability weights chosen for each stream, but avoid playing the same stream twice in a row whenever possible. If only 1 sound is present in the pool, the same sound will always play, effectively allowing repeats to occur.
-
-PlaybackMode PLAYBACK_RANDOM = 1
-
-Pick a stream at random according to the probability weights chosen for each stream. If only 1 sound is present in the pool, the same sound will always play.
-
-PlaybackMode PLAYBACK_SEQUENTIAL = 2
-
-Play streams in the order they appear in the stream pool. If only 1 sound is present in the pool, the same sound will always play.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PLAYBACK_RANDOM_NO_REPEATS {#PLAYBACK_RANDOM_NO_REPEATS}
 
@@ -235,7 +225,7 @@ Play streams in the order they appear in the stream pool. If only 1 sound is pre
 PLAYBACK_RANDOM_NO_REPEATS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pick a stream at random according to the probability weights chosen for each stream, but avoid playing the same stream twice in a row whenever possible. If only 1 sound is present in the pool, the same sound will always play, effectively allowing repeats to occur.
 
 #### PLAYBACK_RANDOM {#PLAYBACK_RANDOM}
 
@@ -243,7 +233,7 @@ PLAYBACK_RANDOM_NO_REPEATS = 0
 PLAYBACK_RANDOM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pick a stream at random according to the probability weights chosen for each stream. If only 1 sound is present in the pool, the same sound will always play.
 
 #### PLAYBACK_SEQUENTIAL {#PLAYBACK_SEQUENTIAL}
 
@@ -251,4 +241,6 @@ PLAYBACK_RANDOM = 1
 PLAYBACK_SEQUENTIAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Play streams in the order they appear in the stream pool. If only 1 sound is present in the pool, the same sound will always play.
+
+---

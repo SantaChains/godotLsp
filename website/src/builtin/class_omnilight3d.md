@@ -83,13 +83,7 @@ There is currently no description for this property. Please help us by contribut
 enum ShadowMode { SHADOW_DUAL_PARABOLOID = 0, SHADOW_CUBE = 1 }
 ```
 
-ShadowMode SHADOW_DUAL_PARABOLOID = 0
-
-Shadows are rendered to a dual-paraboloid texture. Faster than SHADOW_CUBE, but lower-quality.
-
-ShadowMode SHADOW_CUBE = 1
-
-Shadows are rendered to a cubemap. Slower than SHADOW_DUAL_PARABOLOID, but higher-quality.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHADOW_DUAL_PARABOLOID {#SHADOW_DUAL_PARABOLOID}
 
@@ -97,7 +91,7 @@ Shadows are rendered to a cubemap. Slower than SHADOW_DUAL_PARABOLOID, but highe
 SHADOW_DUAL_PARABOLOID = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Shadows are rendered to a dual-paraboloid texture. Faster than SHADOW_CUBE, but lower-quality.
 
 #### SHADOW_CUBE {#SHADOW_CUBE}
 
@@ -105,4 +99,6 @@ SHADOW_DUAL_PARABOLOID = 0
 SHADOW_CUBE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Shadows are rendered to a cubemap. Slower than SHADOW_DUAL_PARABOLOID, but higher-quality.
+
+---

@@ -811,7 +811,10 @@ For all half-offset shapes (Isometric, Hexagonal and Half-Offset square), determ
 tile_size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tile_size(value: Vector2i)
+- Vector2i get_tile_size()
+
+The tile size, in pixels. For all tile shapes, this size corresponds to the encompassing rectangle of the tile shape. This is thus the minimal cell size required in an atlas.
 
 ### uv_clipping {#uv_clipping}
 
@@ -832,23 +835,7 @@ Enables/Disable uv clipping when rendering the tiles.
 enum TileShape { TILE_SHAPE_SQUARE = 0, TILE_SHAPE_ISOMETRIC = 1, TILE_SHAPE_HALF_OFFSET_SQUARE = 2, TILE_SHAPE_HEXAGON = 3 }
 ```
 
-TileShape TILE_SHAPE_SQUARE = 0
-
-Rectangular tile shape.
-
-TileShape TILE_SHAPE_ISOMETRIC = 1
-
-Diamond tile shape (for isometric look).
-
-Note: Isometric TileSet works best if all sibling TileMapLayers and their parent inheriting from Node2D have Y-sort enabled.
-
-TileShape TILE_SHAPE_HALF_OFFSET_SQUARE = 2
-
-Rectangular tile shape with one row/column out of two offset by half a tile.
-
-TileShape TILE_SHAPE_HEXAGON = 3
-
-Hexagonal tile shape.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TILE_SHAPE_SQUARE {#TILE_SHAPE_SQUARE}
 
@@ -856,7 +843,7 @@ Hexagonal tile shape.
 TILE_SHAPE_SQUARE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Rectangular tile shape.
 
 #### TILE_SHAPE_ISOMETRIC {#TILE_SHAPE_ISOMETRIC}
 
@@ -864,7 +851,9 @@ TILE_SHAPE_SQUARE = 0
 TILE_SHAPE_ISOMETRIC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Diamond tile shape (for isometric look).
+
+Note: Isometric TileSet works best if all sibling TileMapLayers and their parent inheriting from Node2D have Y-sort enabled.
 
 #### TILE_SHAPE_HALF_OFFSET_SQUARE {#TILE_SHAPE_HALF_OFFSET_SQUARE}
 
@@ -872,7 +861,7 @@ TILE_SHAPE_ISOMETRIC = 1
 TILE_SHAPE_HALF_OFFSET_SQUARE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Rectangular tile shape with one row/column out of two offset by half a tile.
 
 #### TILE_SHAPE_HEXAGON {#TILE_SHAPE_HEXAGON}
 
@@ -880,7 +869,9 @@ TILE_SHAPE_HALF_OFFSET_SQUARE = 2
 TILE_SHAPE_HEXAGON = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hexagonal tile shape.
+
+---
 
 ### TileLayout {#enum-TileLayout}
 
@@ -888,29 +879,7 @@ TILE_SHAPE_HEXAGON = 3
 enum TileLayout { TILE_LAYOUT_STACKED = 0, TILE_LAYOUT_STACKED_OFFSET = 1, TILE_LAYOUT_STAIRS_RIGHT = 2, TILE_LAYOUT_STAIRS_DOWN = 3, TILE_LAYOUT_DIAMOND_RIGHT = 4, TILE_LAYOUT_DIAMOND_DOWN = 5 }
 ```
 
-TileLayout TILE_LAYOUT_STACKED = 0
-
-Tile coordinates layout where both axis stay consistent with their respective local horizontal and vertical axis.
-
-TileLayout TILE_LAYOUT_STACKED_OFFSET = 1
-
-Same as TILE_LAYOUT_STACKED, but the first half-offset is negative instead of positive.
-
-TileLayout TILE_LAYOUT_STAIRS_RIGHT = 2
-
-Tile coordinates layout where the horizontal axis stay horizontal, and the vertical one goes down-right.
-
-TileLayout TILE_LAYOUT_STAIRS_DOWN = 3
-
-Tile coordinates layout where the vertical axis stay vertical, and the horizontal one goes down-right.
-
-TileLayout TILE_LAYOUT_DIAMOND_RIGHT = 4
-
-Tile coordinates layout where the horizontal axis goes up-right, and the vertical one goes down-right.
-
-TileLayout TILE_LAYOUT_DIAMOND_DOWN = 5
-
-Tile coordinates layout where the horizontal axis goes down-right, and the vertical one goes down-left.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TILE_LAYOUT_STACKED {#TILE_LAYOUT_STACKED}
 
@@ -918,7 +887,7 @@ Tile coordinates layout where the horizontal axis goes down-right, and the verti
 TILE_LAYOUT_STACKED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tile coordinates layout where both axis stay consistent with their respective local horizontal and vertical axis.
 
 #### TILE_LAYOUT_STACKED_OFFSET {#TILE_LAYOUT_STACKED_OFFSET}
 
@@ -926,7 +895,7 @@ TILE_LAYOUT_STACKED = 0
 TILE_LAYOUT_STACKED_OFFSET = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Same as TILE_LAYOUT_STACKED, but the first half-offset is negative instead of positive.
 
 #### TILE_LAYOUT_STAIRS_RIGHT {#TILE_LAYOUT_STAIRS_RIGHT}
 
@@ -934,7 +903,7 @@ TILE_LAYOUT_STACKED_OFFSET = 1
 TILE_LAYOUT_STAIRS_RIGHT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tile coordinates layout where the horizontal axis stay horizontal, and the vertical one goes down-right.
 
 #### TILE_LAYOUT_STAIRS_DOWN {#TILE_LAYOUT_STAIRS_DOWN}
 
@@ -942,7 +911,7 @@ TILE_LAYOUT_STAIRS_RIGHT = 2
 TILE_LAYOUT_STAIRS_DOWN = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tile coordinates layout where the vertical axis stay vertical, and the horizontal one goes down-right.
 
 #### TILE_LAYOUT_DIAMOND_RIGHT {#TILE_LAYOUT_DIAMOND_RIGHT}
 
@@ -950,7 +919,7 @@ TILE_LAYOUT_STAIRS_DOWN = 3
 TILE_LAYOUT_DIAMOND_RIGHT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tile coordinates layout where the horizontal axis goes up-right, and the vertical one goes down-right.
 
 #### TILE_LAYOUT_DIAMOND_DOWN {#TILE_LAYOUT_DIAMOND_DOWN}
 
@@ -958,7 +927,9 @@ TILE_LAYOUT_DIAMOND_RIGHT = 4
 TILE_LAYOUT_DIAMOND_DOWN = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tile coordinates layout where the horizontal axis goes down-right, and the vertical one goes down-left.
+
+---
 
 ### TileOffsetAxis {#enum-TileOffsetAxis}
 
@@ -966,13 +937,7 @@ TILE_LAYOUT_DIAMOND_DOWN = 5
 enum TileOffsetAxis { TILE_OFFSET_AXIS_HORIZONTAL = 0, TILE_OFFSET_AXIS_VERTICAL = 1 }
 ```
 
-TileOffsetAxis TILE_OFFSET_AXIS_HORIZONTAL = 0
-
-Horizontal half-offset.
-
-TileOffsetAxis TILE_OFFSET_AXIS_VERTICAL = 1
-
-Vertical half-offset.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TILE_OFFSET_AXIS_HORIZONTAL {#TILE_OFFSET_AXIS_HORIZONTAL}
 
@@ -980,7 +945,7 @@ Vertical half-offset.
 TILE_OFFSET_AXIS_HORIZONTAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Horizontal half-offset.
 
 #### TILE_OFFSET_AXIS_VERTICAL {#TILE_OFFSET_AXIS_VERTICAL}
 
@@ -988,7 +953,9 @@ TILE_OFFSET_AXIS_HORIZONTAL = 0
 TILE_OFFSET_AXIS_VERTICAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Vertical half-offset.
+
+---
 
 ### CellNeighbor {#enum-CellNeighbor}
 
@@ -996,69 +963,7 @@ TILE_OFFSET_AXIS_VERTICAL = 1
 enum CellNeighbor { CELL_NEIGHBOR_RIGHT_SIDE = 0, CELL_NEIGHBOR_RIGHT_CORNER = 1, CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE = 2, CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER = 3, CELL_NEIGHBOR_BOTTOM_SIDE = 4, CELL_NEIGHBOR_BOTTOM_CORNER = 5, CELL_NEIGHBOR_BOTTOM_LEFT_SIDE = 6, CELL_NEIGHBOR_BOTTOM_LEFT_CORNER = 7, CELL_NEIGHBOR_LEFT_SIDE = 8, CELL_NEIGHBOR_LEFT_CORNER = 9, CELL_NEIGHBOR_TOP_LEFT_SIDE = 10, CELL_NEIGHBOR_TOP_LEFT_CORNER = 11, CELL_NEIGHBOR_TOP_SIDE = 12, CELL_NEIGHBOR_TOP_CORNER = 13, CELL_NEIGHBOR_TOP_RIGHT_SIDE = 14, CELL_NEIGHBOR_TOP_RIGHT_CORNER = 15 }
 ```
 
-CellNeighbor CELL_NEIGHBOR_RIGHT_SIDE = 0
-
-Neighbor on the right side.
-
-CellNeighbor CELL_NEIGHBOR_RIGHT_CORNER = 1
-
-Neighbor in the right corner.
-
-CellNeighbor CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE = 2
-
-Neighbor on the bottom right side.
-
-CellNeighbor CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER = 3
-
-Neighbor in the bottom right corner.
-
-CellNeighbor CELL_NEIGHBOR_BOTTOM_SIDE = 4
-
-Neighbor on the bottom side.
-
-CellNeighbor CELL_NEIGHBOR_BOTTOM_CORNER = 5
-
-Neighbor in the bottom corner.
-
-CellNeighbor CELL_NEIGHBOR_BOTTOM_LEFT_SIDE = 6
-
-Neighbor on the bottom left side.
-
-CellNeighbor CELL_NEIGHBOR_BOTTOM_LEFT_CORNER = 7
-
-Neighbor in the bottom left corner.
-
-CellNeighbor CELL_NEIGHBOR_LEFT_SIDE = 8
-
-Neighbor on the left side.
-
-CellNeighbor CELL_NEIGHBOR_LEFT_CORNER = 9
-
-Neighbor in the left corner.
-
-CellNeighbor CELL_NEIGHBOR_TOP_LEFT_SIDE = 10
-
-Neighbor on the top left side.
-
-CellNeighbor CELL_NEIGHBOR_TOP_LEFT_CORNER = 11
-
-Neighbor in the top left corner.
-
-CellNeighbor CELL_NEIGHBOR_TOP_SIDE = 12
-
-Neighbor on the top side.
-
-CellNeighbor CELL_NEIGHBOR_TOP_CORNER = 13
-
-Neighbor in the top corner.
-
-CellNeighbor CELL_NEIGHBOR_TOP_RIGHT_SIDE = 14
-
-Neighbor on the top right side.
-
-CellNeighbor CELL_NEIGHBOR_TOP_RIGHT_CORNER = 15
-
-Neighbor in the top right corner.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CELL_NEIGHBOR_RIGHT_SIDE {#CELL_NEIGHBOR_RIGHT_SIDE}
 
@@ -1066,7 +971,7 @@ Neighbor in the top right corner.
 CELL_NEIGHBOR_RIGHT_SIDE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor on the right side.
 
 #### CELL_NEIGHBOR_RIGHT_CORNER {#CELL_NEIGHBOR_RIGHT_CORNER}
 
@@ -1074,7 +979,7 @@ CELL_NEIGHBOR_RIGHT_SIDE = 0
 CELL_NEIGHBOR_RIGHT_CORNER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor in the right corner.
 
 #### CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE {#CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE}
 
@@ -1082,7 +987,7 @@ CELL_NEIGHBOR_RIGHT_CORNER = 1
 CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor on the bottom right side.
 
 #### CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER {#CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER}
 
@@ -1090,7 +995,7 @@ CELL_NEIGHBOR_BOTTOM_RIGHT_SIDE = 2
 CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor in the bottom right corner.
 
 #### CELL_NEIGHBOR_BOTTOM_SIDE {#CELL_NEIGHBOR_BOTTOM_SIDE}
 
@@ -1098,7 +1003,7 @@ CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER = 3
 CELL_NEIGHBOR_BOTTOM_SIDE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor on the bottom side.
 
 #### CELL_NEIGHBOR_BOTTOM_CORNER {#CELL_NEIGHBOR_BOTTOM_CORNER}
 
@@ -1106,7 +1011,7 @@ CELL_NEIGHBOR_BOTTOM_SIDE = 4
 CELL_NEIGHBOR_BOTTOM_CORNER = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor in the bottom corner.
 
 #### CELL_NEIGHBOR_BOTTOM_LEFT_SIDE {#CELL_NEIGHBOR_BOTTOM_LEFT_SIDE}
 
@@ -1114,7 +1019,7 @@ CELL_NEIGHBOR_BOTTOM_CORNER = 5
 CELL_NEIGHBOR_BOTTOM_LEFT_SIDE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor on the bottom left side.
 
 #### CELL_NEIGHBOR_BOTTOM_LEFT_CORNER {#CELL_NEIGHBOR_BOTTOM_LEFT_CORNER}
 
@@ -1122,7 +1027,7 @@ CELL_NEIGHBOR_BOTTOM_LEFT_SIDE = 6
 CELL_NEIGHBOR_BOTTOM_LEFT_CORNER = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor in the bottom left corner.
 
 #### CELL_NEIGHBOR_LEFT_SIDE {#CELL_NEIGHBOR_LEFT_SIDE}
 
@@ -1130,7 +1035,7 @@ CELL_NEIGHBOR_BOTTOM_LEFT_CORNER = 7
 CELL_NEIGHBOR_LEFT_SIDE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor on the left side.
 
 #### CELL_NEIGHBOR_LEFT_CORNER {#CELL_NEIGHBOR_LEFT_CORNER}
 
@@ -1138,7 +1043,7 @@ CELL_NEIGHBOR_LEFT_SIDE = 8
 CELL_NEIGHBOR_LEFT_CORNER = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor in the left corner.
 
 #### CELL_NEIGHBOR_TOP_LEFT_SIDE {#CELL_NEIGHBOR_TOP_LEFT_SIDE}
 
@@ -1146,7 +1051,7 @@ CELL_NEIGHBOR_LEFT_CORNER = 9
 CELL_NEIGHBOR_TOP_LEFT_SIDE = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor on the top left side.
 
 #### CELL_NEIGHBOR_TOP_LEFT_CORNER {#CELL_NEIGHBOR_TOP_LEFT_CORNER}
 
@@ -1154,7 +1059,7 @@ CELL_NEIGHBOR_TOP_LEFT_SIDE = 10
 CELL_NEIGHBOR_TOP_LEFT_CORNER = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor in the top left corner.
 
 #### CELL_NEIGHBOR_TOP_SIDE {#CELL_NEIGHBOR_TOP_SIDE}
 
@@ -1162,7 +1067,7 @@ CELL_NEIGHBOR_TOP_LEFT_CORNER = 11
 CELL_NEIGHBOR_TOP_SIDE = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor on the top side.
 
 #### CELL_NEIGHBOR_TOP_CORNER {#CELL_NEIGHBOR_TOP_CORNER}
 
@@ -1170,7 +1075,7 @@ CELL_NEIGHBOR_TOP_SIDE = 12
 CELL_NEIGHBOR_TOP_CORNER = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor in the top corner.
 
 #### CELL_NEIGHBOR_TOP_RIGHT_SIDE {#CELL_NEIGHBOR_TOP_RIGHT_SIDE}
 
@@ -1178,7 +1083,7 @@ CELL_NEIGHBOR_TOP_CORNER = 13
 CELL_NEIGHBOR_TOP_RIGHT_SIDE = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor on the top right side.
 
 #### CELL_NEIGHBOR_TOP_RIGHT_CORNER {#CELL_NEIGHBOR_TOP_RIGHT_CORNER}
 
@@ -1186,7 +1091,9 @@ CELL_NEIGHBOR_TOP_RIGHT_SIDE = 14
 CELL_NEIGHBOR_TOP_RIGHT_CORNER = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neighbor in the top right corner.
+
+---
 
 ### TerrainMode {#enum-TerrainMode}
 
@@ -1194,17 +1101,7 @@ CELL_NEIGHBOR_TOP_RIGHT_CORNER = 15
 enum TerrainMode { TERRAIN_MODE_MATCH_CORNERS_AND_SIDES = 0, TERRAIN_MODE_MATCH_CORNERS = 1, TERRAIN_MODE_MATCH_SIDES = 2 }
 ```
 
-TerrainMode TERRAIN_MODE_MATCH_CORNERS_AND_SIDES = 0
-
-Requires both corners and side to match with neighboring tiles' terrains.
-
-TerrainMode TERRAIN_MODE_MATCH_CORNERS = 1
-
-Requires corners to match with neighboring tiles' terrains.
-
-TerrainMode TERRAIN_MODE_MATCH_SIDES = 2
-
-Requires sides to match with neighboring tiles' terrains.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TERRAIN_MODE_MATCH_CORNERS_AND_SIDES {#TERRAIN_MODE_MATCH_CORNERS_AND_SIDES}
 
@@ -1212,7 +1109,7 @@ Requires sides to match with neighboring tiles' terrains.
 TERRAIN_MODE_MATCH_CORNERS_AND_SIDES = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Requires both corners and side to match with neighboring tiles' terrains.
 
 #### TERRAIN_MODE_MATCH_CORNERS {#TERRAIN_MODE_MATCH_CORNERS}
 
@@ -1220,7 +1117,7 @@ TERRAIN_MODE_MATCH_CORNERS_AND_SIDES = 0
 TERRAIN_MODE_MATCH_CORNERS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Requires corners to match with neighboring tiles' terrains.
 
 #### TERRAIN_MODE_MATCH_SIDES {#TERRAIN_MODE_MATCH_SIDES}
 
@@ -1228,4 +1125,6 @@ TERRAIN_MODE_MATCH_CORNERS = 1
 TERRAIN_MODE_MATCH_SIDES = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Requires sides to match with neighboring tiles' terrains.
+
+---

@@ -100,7 +100,10 @@ void set_vertical(vertical: bool)
 color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_color(value: Color)
+- Color get_color()
+
+The line's color.
 
 ### grow_begin {#grow_begin}
 

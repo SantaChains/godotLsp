@@ -530,7 +530,10 @@ void set_use_secondary_rotation(enabled: bool)
 target_node: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_node(value: NodePath)
+- NodePath get_target_node()
+
+The NodePath to the node that is the target for the look at modification. This node is what the modification will rotate the bone to.
 
 ### bone_name {#bone_name}
 
@@ -650,7 +653,12 @@ If origin_from is ORIGIN_FROM_EXTERNAL_NODE, the global position of the Node3D s
 origin_offset: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_origin_offset(value: Vector3)
+- Vector3 get_origin_offset()
+
+The offset of the bone pose origin. Matching the origins by offset is useful for cases where multiple bones must always face the same direction, such as the eyes.
+
+Note: This value indicates the local position of the object set in origin_from.
 
 ### origin_safe_margin {#origin_safe_margin}
 
@@ -871,21 +879,7 @@ The threshold to start damping for secondary_negative_limit_angle.
 enum OriginFrom { ORIGIN_FROM_SELF = 0, ORIGIN_FROM_SPECIFIC_BONE = 1, ORIGIN_FROM_EXTERNAL_NODE = 2 }
 ```
 
-OriginFrom ORIGIN_FROM_SELF = 0
-
-The bone rest position of the bone specified in bone is used as origin.
-
-OriginFrom ORIGIN_FROM_SPECIFIC_BONE = 1
-
-The bone global pose position of the bone specified in origin_bone is used as origin.
-
-Note: It is recommended that you select only the parent bone unless you are familiar with the bone processing process. The specified bone pose at the time the LookAtModifier3D is processed is used as a reference. In other words, if you specify a child bone and the LookAtModifier3D causes the child bone to move, the rendered result and direction will not match.
-
-OriginFrom ORIGIN_FROM_EXTERNAL_NODE = 2
-
-The global position of the Node3D specified in origin_external_node is used as origin.
-
-Note: Same as ORIGIN_FROM_SPECIFIC_BONE, when specifying a BoneAttachment3D with a child bone assigned, the rendered result and direction will not match.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ORIGIN_FROM_SELF {#ORIGIN_FROM_SELF}
 
@@ -893,7 +887,7 @@ Note: Same as ORIGIN_FROM_SPECIFIC_BONE, when specifying a BoneAttachment3D with
 ORIGIN_FROM_SELF = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The bone rest position of the bone specified in bone is used as origin.
 
 #### ORIGIN_FROM_SPECIFIC_BONE {#ORIGIN_FROM_SPECIFIC_BONE}
 
@@ -901,7 +895,9 @@ ORIGIN_FROM_SELF = 0
 ORIGIN_FROM_SPECIFIC_BONE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The bone global pose position of the bone specified in origin_bone is used as origin.
+
+Note: It is recommended that you select only the parent bone unless you are familiar with the bone processing process. The specified bone pose at the time the LookAtModifier3D is processed is used as a reference. In other words, if you specify a child bone and the LookAtModifier3D causes the child bone to move, the rendered result and direction will not match.
 
 #### ORIGIN_FROM_EXTERNAL_NODE {#ORIGIN_FROM_EXTERNAL_NODE}
 
@@ -909,4 +905,8 @@ ORIGIN_FROM_SPECIFIC_BONE = 1
 ORIGIN_FROM_EXTERNAL_NODE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The global position of the Node3D specified in origin_external_node is used as origin.
+
+Note: Same as ORIGIN_FROM_SPECIFIC_BONE, when specifying a BoneAttachment3D with a child bone assigned, the rendered result and direction will not match.
+
+---

@@ -1361,135 +1361,7 @@ Emitted when the LineEdit switches in or out of edit mode.
 enum MenuItems { MENU_CUT = 0, MENU_COPY = 1, MENU_PASTE = 2, MENU_CLEAR = 3, MENU_SELECT_ALL = 4, MENU_UNDO = 5, MENU_REDO = 6, MENU_SUBMENU_TEXT_DIR = 7, MENU_DIR_INHERITED = 8, MENU_DIR_AUTO = 9, MENU_DIR_LTR = 10, MENU_DIR_RTL = 11, MENU_DISPLAY_UCC = 12, MENU_SUBMENU_INSERT_UCC = 13, MENU_INSERT_LRM = 14, MENU_INSERT_RLM = 15, MENU_INSERT_LRE = 16, MENU_INSERT_RLE = 17, MENU_INSERT_LRO = 18, MENU_INSERT_RLO = 19, MENU_INSERT_PDF = 20, MENU_INSERT_ALM = 21, MENU_INSERT_LRI = 22, MENU_INSERT_RLI = 23, MENU_INSERT_FSI = 24, MENU_INSERT_PDI = 25, MENU_INSERT_ZWJ = 26, MENU_INSERT_ZWNJ = 27, MENU_INSERT_WJ = 28, MENU_INSERT_SHY = 29, MENU_EMOJI_AND_SYMBOL = 30, MENU_MAX = 31 }
 ```
 
-MenuItems MENU_CUT = 0
-
-Cuts (copies and clears) the selected text.
-
-MenuItems MENU_COPY = 1
-
-Copies the selected text.
-
-MenuItems MENU_PASTE = 2
-
-Pastes the clipboard text over the selected text (or at the caret's position).
-
-Non-printable escape characters are automatically stripped from the OS clipboard via String.strip_escapes().
-
-MenuItems MENU_CLEAR = 3
-
-Erases the whole LineEdit text.
-
-MenuItems MENU_SELECT_ALL = 4
-
-Selects the whole LineEdit text.
-
-MenuItems MENU_UNDO = 5
-
-Undoes the previous action.
-
-MenuItems MENU_REDO = 6
-
-Reverse the last undo action.
-
-MenuItems MENU_SUBMENU_TEXT_DIR = 7
-
-ID of "Text Writing Direction" submenu.
-
-MenuItems MENU_DIR_INHERITED = 8
-
-Sets text direction to inherited.
-
-MenuItems MENU_DIR_AUTO = 9
-
-Sets text direction to automatic.
-
-MenuItems MENU_DIR_LTR = 10
-
-Sets text direction to left-to-right.
-
-MenuItems MENU_DIR_RTL = 11
-
-Sets text direction to right-to-left.
-
-MenuItems MENU_DISPLAY_UCC = 12
-
-Toggles control character display.
-
-MenuItems MENU_SUBMENU_INSERT_UCC = 13
-
-ID of "Insert Control Character" submenu.
-
-MenuItems MENU_INSERT_LRM = 14
-
-Inserts left-to-right mark (LRM) character.
-
-MenuItems MENU_INSERT_RLM = 15
-
-Inserts right-to-left mark (RLM) character.
-
-MenuItems MENU_INSERT_LRE = 16
-
-Inserts start of left-to-right embedding (LRE) character.
-
-MenuItems MENU_INSERT_RLE = 17
-
-Inserts start of right-to-left embedding (RLE) character.
-
-MenuItems MENU_INSERT_LRO = 18
-
-Inserts start of left-to-right override (LRO) character.
-
-MenuItems MENU_INSERT_RLO = 19
-
-Inserts start of right-to-left override (RLO) character.
-
-MenuItems MENU_INSERT_PDF = 20
-
-Inserts pop direction formatting (PDF) character.
-
-MenuItems MENU_INSERT_ALM = 21
-
-Inserts Arabic letter mark (ALM) character.
-
-MenuItems MENU_INSERT_LRI = 22
-
-Inserts left-to-right isolate (LRI) character.
-
-MenuItems MENU_INSERT_RLI = 23
-
-Inserts right-to-left isolate (RLI) character.
-
-MenuItems MENU_INSERT_FSI = 24
-
-Inserts first strong isolate (FSI) character.
-
-MenuItems MENU_INSERT_PDI = 25
-
-Inserts pop direction isolate (PDI) character.
-
-MenuItems MENU_INSERT_ZWJ = 26
-
-Inserts zero width joiner (ZWJ) character.
-
-MenuItems MENU_INSERT_ZWNJ = 27
-
-Inserts zero width non-joiner (ZWNJ) character.
-
-MenuItems MENU_INSERT_WJ = 28
-
-Inserts word joiner (WJ) character.
-
-MenuItems MENU_INSERT_SHY = 29
-
-Inserts soft hyphen (SHY) character.
-
-MenuItems MENU_EMOJI_AND_SYMBOL = 30
-
-Opens system emoji and symbol picker.
-
-MenuItems MENU_MAX = 31
-
-Represents the size of the MenuItems enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MENU_CUT {#MENU_CUT}
 
@@ -1497,7 +1369,7 @@ Represents the size of the MenuItems enum.
 MENU_CUT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cuts (copies and clears) the selected text.
 
 #### MENU_COPY {#MENU_COPY}
 
@@ -1505,7 +1377,7 @@ MENU_CUT = 0
 MENU_COPY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Copies the selected text.
 
 #### MENU_PASTE {#MENU_PASTE}
 
@@ -1513,7 +1385,9 @@ MENU_COPY = 1
 MENU_PASTE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pastes the clipboard text over the selected text (or at the caret's position).
+
+Non-printable escape characters are automatically stripped from the OS clipboard via String.strip_escapes().
 
 #### MENU_CLEAR {#MENU_CLEAR}
 
@@ -1521,7 +1395,7 @@ MENU_PASTE = 2
 MENU_CLEAR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Erases the whole LineEdit text.
 
 #### MENU_SELECT_ALL {#MENU_SELECT_ALL}
 
@@ -1529,7 +1403,7 @@ MENU_CLEAR = 3
 MENU_SELECT_ALL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Selects the whole LineEdit text.
 
 #### MENU_UNDO {#MENU_UNDO}
 
@@ -1537,7 +1411,7 @@ MENU_SELECT_ALL = 4
 MENU_UNDO = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Undoes the previous action.
 
 #### MENU_REDO {#MENU_REDO}
 
@@ -1545,7 +1419,7 @@ MENU_UNDO = 5
 MENU_REDO = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Reverse the last undo action.
 
 #### MENU_SUBMENU_TEXT_DIR {#MENU_SUBMENU_TEXT_DIR}
 
@@ -1553,7 +1427,7 @@ MENU_REDO = 6
 MENU_SUBMENU_TEXT_DIR = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+ID of "Text Writing Direction" submenu.
 
 #### MENU_DIR_INHERITED {#MENU_DIR_INHERITED}
 
@@ -1561,7 +1435,7 @@ MENU_SUBMENU_TEXT_DIR = 7
 MENU_DIR_INHERITED = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets text direction to inherited.
 
 #### MENU_DIR_AUTO {#MENU_DIR_AUTO}
 
@@ -1569,7 +1443,7 @@ MENU_DIR_INHERITED = 8
 MENU_DIR_AUTO = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets text direction to automatic.
 
 #### MENU_DIR_LTR {#MENU_DIR_LTR}
 
@@ -1577,7 +1451,7 @@ MENU_DIR_AUTO = 9
 MENU_DIR_LTR = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets text direction to left-to-right.
 
 #### MENU_DIR_RTL {#MENU_DIR_RTL}
 
@@ -1585,7 +1459,7 @@ MENU_DIR_LTR = 10
 MENU_DIR_RTL = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets text direction to right-to-left.
 
 #### MENU_DISPLAY_UCC {#MENU_DISPLAY_UCC}
 
@@ -1593,7 +1467,7 @@ MENU_DIR_RTL = 11
 MENU_DISPLAY_UCC = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Toggles control character display.
 
 #### MENU_SUBMENU_INSERT_UCC {#MENU_SUBMENU_INSERT_UCC}
 
@@ -1601,7 +1475,7 @@ MENU_DISPLAY_UCC = 12
 MENU_SUBMENU_INSERT_UCC = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+ID of "Insert Control Character" submenu.
 
 #### MENU_INSERT_LRM {#MENU_INSERT_LRM}
 
@@ -1609,7 +1483,7 @@ MENU_SUBMENU_INSERT_UCC = 13
 MENU_INSERT_LRM = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts left-to-right mark (LRM) character.
 
 #### MENU_INSERT_RLM {#MENU_INSERT_RLM}
 
@@ -1617,7 +1491,7 @@ MENU_INSERT_LRM = 14
 MENU_INSERT_RLM = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts right-to-left mark (RLM) character.
 
 #### MENU_INSERT_LRE {#MENU_INSERT_LRE}
 
@@ -1625,7 +1499,7 @@ MENU_INSERT_RLM = 15
 MENU_INSERT_LRE = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts start of left-to-right embedding (LRE) character.
 
 #### MENU_INSERT_RLE {#MENU_INSERT_RLE}
 
@@ -1633,7 +1507,7 @@ MENU_INSERT_LRE = 16
 MENU_INSERT_RLE = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts start of right-to-left embedding (RLE) character.
 
 #### MENU_INSERT_LRO {#MENU_INSERT_LRO}
 
@@ -1641,7 +1515,7 @@ MENU_INSERT_RLE = 17
 MENU_INSERT_LRO = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts start of left-to-right override (LRO) character.
 
 #### MENU_INSERT_RLO {#MENU_INSERT_RLO}
 
@@ -1649,7 +1523,7 @@ MENU_INSERT_LRO = 18
 MENU_INSERT_RLO = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts start of right-to-left override (RLO) character.
 
 #### MENU_INSERT_PDF {#MENU_INSERT_PDF}
 
@@ -1657,7 +1531,7 @@ MENU_INSERT_RLO = 19
 MENU_INSERT_PDF = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts pop direction formatting (PDF) character.
 
 #### MENU_INSERT_ALM {#MENU_INSERT_ALM}
 
@@ -1665,7 +1539,7 @@ MENU_INSERT_PDF = 20
 MENU_INSERT_ALM = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts Arabic letter mark (ALM) character.
 
 #### MENU_INSERT_LRI {#MENU_INSERT_LRI}
 
@@ -1673,7 +1547,7 @@ MENU_INSERT_ALM = 21
 MENU_INSERT_LRI = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts left-to-right isolate (LRI) character.
 
 #### MENU_INSERT_RLI {#MENU_INSERT_RLI}
 
@@ -1681,7 +1555,7 @@ MENU_INSERT_LRI = 22
 MENU_INSERT_RLI = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts right-to-left isolate (RLI) character.
 
 #### MENU_INSERT_FSI {#MENU_INSERT_FSI}
 
@@ -1689,7 +1563,7 @@ MENU_INSERT_RLI = 23
 MENU_INSERT_FSI = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts first strong isolate (FSI) character.
 
 #### MENU_INSERT_PDI {#MENU_INSERT_PDI}
 
@@ -1697,7 +1571,7 @@ MENU_INSERT_FSI = 24
 MENU_INSERT_PDI = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts pop direction isolate (PDI) character.
 
 #### MENU_INSERT_ZWJ {#MENU_INSERT_ZWJ}
 
@@ -1705,7 +1579,7 @@ MENU_INSERT_PDI = 25
 MENU_INSERT_ZWJ = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts zero width joiner (ZWJ) character.
 
 #### MENU_INSERT_ZWNJ {#MENU_INSERT_ZWNJ}
 
@@ -1713,7 +1587,7 @@ MENU_INSERT_ZWJ = 26
 MENU_INSERT_ZWNJ = 27
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts zero width non-joiner (ZWNJ) character.
 
 #### MENU_INSERT_WJ {#MENU_INSERT_WJ}
 
@@ -1721,7 +1595,7 @@ MENU_INSERT_ZWNJ = 27
 MENU_INSERT_WJ = 28
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts word joiner (WJ) character.
 
 #### MENU_INSERT_SHY {#MENU_INSERT_SHY}
 
@@ -1729,7 +1603,7 @@ MENU_INSERT_WJ = 28
 MENU_INSERT_SHY = 29
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts soft hyphen (SHY) character.
 
 #### MENU_EMOJI_AND_SYMBOL {#MENU_EMOJI_AND_SYMBOL}
 
@@ -1737,7 +1611,7 @@ MENU_INSERT_SHY = 29
 MENU_EMOJI_AND_SYMBOL = 30
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Opens system emoji and symbol picker.
 
 #### MENU_MAX {#MENU_MAX}
 
@@ -1745,7 +1619,9 @@ MENU_EMOJI_AND_SYMBOL = 30
 MENU_MAX = 31
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the MenuItems enum.
+
+---
 
 ### VirtualKeyboardType {#enum-VirtualKeyboardType}
 
@@ -1753,39 +1629,7 @@ MENU_MAX = 31
 enum VirtualKeyboardType { KEYBOARD_TYPE_DEFAULT = 0, KEYBOARD_TYPE_MULTILINE = 1, KEYBOARD_TYPE_NUMBER = 2, KEYBOARD_TYPE_NUMBER_DECIMAL = 3, KEYBOARD_TYPE_PHONE = 4, KEYBOARD_TYPE_EMAIL_ADDRESS = 5, KEYBOARD_TYPE_PASSWORD = 6, KEYBOARD_TYPE_URL = 7 }
 ```
 
-VirtualKeyboardType KEYBOARD_TYPE_DEFAULT = 0
-
-Default text virtual keyboard.
-
-VirtualKeyboardType KEYBOARD_TYPE_MULTILINE = 1
-
-Multiline virtual keyboard.
-
-VirtualKeyboardType KEYBOARD_TYPE_NUMBER = 2
-
-Virtual number keypad, useful for PIN entry.
-
-VirtualKeyboardType KEYBOARD_TYPE_NUMBER_DECIMAL = 3
-
-Virtual number keypad, useful for entering fractional numbers.
-
-VirtualKeyboardType KEYBOARD_TYPE_PHONE = 4
-
-Virtual phone number keypad.
-
-VirtualKeyboardType KEYBOARD_TYPE_EMAIL_ADDRESS = 5
-
-Virtual keyboard with additional keys to assist with typing email addresses.
-
-VirtualKeyboardType KEYBOARD_TYPE_PASSWORD = 6
-
-Virtual keyboard for entering a password. On most platforms, this should disable autocomplete and autocapitalization.
-
-Note: This is not supported on Web. Instead, this behaves identically to KEYBOARD_TYPE_DEFAULT.
-
-VirtualKeyboardType KEYBOARD_TYPE_URL = 7
-
-Virtual keyboard with additional keys to assist with typing URLs.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### KEYBOARD_TYPE_DEFAULT {#KEYBOARD_TYPE_DEFAULT}
 
@@ -1793,7 +1637,7 @@ Virtual keyboard with additional keys to assist with typing URLs.
 KEYBOARD_TYPE_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default text virtual keyboard.
 
 #### KEYBOARD_TYPE_MULTILINE {#KEYBOARD_TYPE_MULTILINE}
 
@@ -1801,7 +1645,7 @@ KEYBOARD_TYPE_DEFAULT = 0
 KEYBOARD_TYPE_MULTILINE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiline virtual keyboard.
 
 #### KEYBOARD_TYPE_NUMBER {#KEYBOARD_TYPE_NUMBER}
 
@@ -1809,7 +1653,7 @@ KEYBOARD_TYPE_MULTILINE = 1
 KEYBOARD_TYPE_NUMBER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual number keypad, useful for PIN entry.
 
 #### KEYBOARD_TYPE_NUMBER_DECIMAL {#KEYBOARD_TYPE_NUMBER_DECIMAL}
 
@@ -1817,7 +1661,7 @@ KEYBOARD_TYPE_NUMBER = 2
 KEYBOARD_TYPE_NUMBER_DECIMAL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual number keypad, useful for entering fractional numbers.
 
 #### KEYBOARD_TYPE_PHONE {#KEYBOARD_TYPE_PHONE}
 
@@ -1825,7 +1669,7 @@ KEYBOARD_TYPE_NUMBER_DECIMAL = 3
 KEYBOARD_TYPE_PHONE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual phone number keypad.
 
 #### KEYBOARD_TYPE_EMAIL_ADDRESS {#KEYBOARD_TYPE_EMAIL_ADDRESS}
 
@@ -1833,7 +1677,7 @@ KEYBOARD_TYPE_PHONE = 4
 KEYBOARD_TYPE_EMAIL_ADDRESS = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual keyboard with additional keys to assist with typing email addresses.
 
 #### KEYBOARD_TYPE_PASSWORD {#KEYBOARD_TYPE_PASSWORD}
 
@@ -1841,7 +1685,9 @@ KEYBOARD_TYPE_EMAIL_ADDRESS = 5
 KEYBOARD_TYPE_PASSWORD = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual keyboard for entering a password. On most platforms, this should disable autocomplete and autocapitalization.
+
+Note: This is not supported on Web. Instead, this behaves identically to KEYBOARD_TYPE_DEFAULT.
 
 #### KEYBOARD_TYPE_URL {#KEYBOARD_TYPE_URL}
 
@@ -1849,7 +1695,9 @@ KEYBOARD_TYPE_PASSWORD = 6
 KEYBOARD_TYPE_URL = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual keyboard with additional keys to assist with typing URLs.
+
+---
 
 ### ExpandMode {#enum-ExpandMode}
 
@@ -1857,17 +1705,7 @@ KEYBOARD_TYPE_URL = 7
 enum ExpandMode { EXPAND_MODE_ORIGINAL_SIZE = 0, EXPAND_MODE_FIT_TO_TEXT = 1, EXPAND_MODE_FIT_TO_LINE_EDIT = 2 }
 ```
 
-ExpandMode EXPAND_MODE_ORIGINAL_SIZE = 0
-
-Use the original size for the right icon.
-
-ExpandMode EXPAND_MODE_FIT_TO_TEXT = 1
-
-Scale the right icon's size to match the size of the text.
-
-ExpandMode EXPAND_MODE_FIT_TO_LINE_EDIT = 2
-
-Scale the right icon to fit the LineEdit.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EXPAND_MODE_ORIGINAL_SIZE {#EXPAND_MODE_ORIGINAL_SIZE}
 
@@ -1875,7 +1713,7 @@ Scale the right icon to fit the LineEdit.
 EXPAND_MODE_ORIGINAL_SIZE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the original size for the right icon.
 
 #### EXPAND_MODE_FIT_TO_TEXT {#EXPAND_MODE_FIT_TO_TEXT}
 
@@ -1883,7 +1721,7 @@ EXPAND_MODE_ORIGINAL_SIZE = 0
 EXPAND_MODE_FIT_TO_TEXT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scale the right icon's size to match the size of the text.
 
 #### EXPAND_MODE_FIT_TO_LINE_EDIT {#EXPAND_MODE_FIT_TO_LINE_EDIT}
 
@@ -1891,4 +1729,6 @@ EXPAND_MODE_FIT_TO_TEXT = 1
 EXPAND_MODE_FIT_TO_LINE_EDIT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scale the right icon to fit the LineEdit.
+
+---

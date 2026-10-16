@@ -123,7 +123,12 @@ Number of times to subdivide the grid that the VoxelGI operates on. A higher num
 size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3)
+- Vector3 get_size()
+
+The size of the area covered by the VoxelGI. This must be 1.0 or greater on each axis.
+
+Note: If you make the size larger without increasing the number of subdivisions with subdiv, the size of each cell will increase and result in less detailed lighting.
 
 ### camera_attributes {#camera_attributes}
 
@@ -155,25 +160,7 @@ The VoxelGIData resource that holds the data for this VoxelGI.
 enum Subdiv { SUBDIV_64 = 0, SUBDIV_128 = 1, SUBDIV_256 = 2, SUBDIV_512 = 3, SUBDIV_MAX = 4 }
 ```
 
-Subdiv SUBDIV_64 = 0
-
-Use 64 subdivisions. This is the lowest quality setting, but the fastest. Use it if you can, but especially use it on lower-end hardware.
-
-Subdiv SUBDIV_128 = 1
-
-Use 128 subdivisions. This is the default quality setting.
-
-Subdiv SUBDIV_256 = 2
-
-Use 256 subdivisions.
-
-Subdiv SUBDIV_512 = 3
-
-Use 512 subdivisions. This is the highest quality setting, but the slowest. On lower-end hardware, this could cause the GPU to stall.
-
-Subdiv SUBDIV_MAX = 4
-
-Represents the size of the Subdiv enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SUBDIV_64 {#SUBDIV_64}
 
@@ -181,7 +168,7 @@ Represents the size of the Subdiv enum.
 SUBDIV_64 = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 64 subdivisions. This is the lowest quality setting, but the fastest. Use it if you can, but especially use it on lower-end hardware.
 
 #### SUBDIV_128 {#SUBDIV_128}
 
@@ -189,7 +176,7 @@ SUBDIV_64 = 0
 SUBDIV_128 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 128 subdivisions. This is the default quality setting.
 
 #### SUBDIV_256 {#SUBDIV_256}
 
@@ -197,7 +184,7 @@ SUBDIV_128 = 1
 SUBDIV_256 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 256 subdivisions.
 
 #### SUBDIV_512 {#SUBDIV_512}
 
@@ -205,7 +192,7 @@ SUBDIV_256 = 2
 SUBDIV_512 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 512 subdivisions. This is the highest quality setting, but the slowest. On lower-end hardware, this could cause the GPU to stall.
 
 #### SUBDIV_MAX {#SUBDIV_MAX}
 
@@ -213,4 +200,6 @@ SUBDIV_512 = 3
 SUBDIV_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Subdiv enum.
+
+---

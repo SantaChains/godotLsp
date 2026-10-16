@@ -304,7 +304,10 @@ void set_use_gravity(use_gravity: bool)
 target_nodepath: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_node(value: NodePath)
+- NodePath get_target_node()
+
+The NodePath to the node that is the target for the Jiggle modification. This node is what the Jiggle chain will attempt to rotate the bone chain to.
 
 ### jiggle_data_chain_length {#jiggle_data_chain_length}
 
@@ -367,4 +370,7 @@ Whether the gravity vector, gravity, should be applied to the Jiggle joints, ass
 gravity: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_gravity(value: Vector2)
+- Vector2 get_gravity()
+
+The default amount of gravity applied to the Jiggle joints, if they are not overridden.

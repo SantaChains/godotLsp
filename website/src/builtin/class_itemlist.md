@@ -929,7 +929,12 @@ The scale of icon applied after fixed_icon_size and transposing takes effect.
 fixed_icon_size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_fixed_icon_size(value: Vector2i)
+- Vector2i get_fixed_icon_size()
+
+The size all icons will be adjusted to.
+
+If either X or Y component is not greater than zero, icon size won't be affected.
 
 ## 信号
 
@@ -987,13 +992,7 @@ Emitted when specified list item is activated via double-clicking or by pressing
 enum IconMode { ICON_MODE_TOP = 0, ICON_MODE_LEFT = 1 }
 ```
 
-IconMode ICON_MODE_TOP = 0
-
-Icon is drawn above the text.
-
-IconMode ICON_MODE_LEFT = 1
-
-Icon is drawn to the left of the text.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ICON_MODE_TOP {#ICON_MODE_TOP}
 
@@ -1001,7 +1000,7 @@ Icon is drawn to the left of the text.
 ICON_MODE_TOP = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Icon is drawn above the text.
 
 #### ICON_MODE_LEFT {#ICON_MODE_LEFT}
 
@@ -1009,7 +1008,9 @@ ICON_MODE_TOP = 0
 ICON_MODE_LEFT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Icon is drawn to the left of the text.
+
+---
 
 ### SelectMode {#enum-SelectMode}
 
@@ -1017,17 +1018,7 @@ ICON_MODE_LEFT = 1
 enum SelectMode { SELECT_SINGLE = 0, SELECT_MULTI = 1, SELECT_TOGGLE = 2 }
 ```
 
-SelectMode SELECT_SINGLE = 0
-
-Only allow selecting a single item.
-
-SelectMode SELECT_MULTI = 1
-
-Allows selecting multiple items by holding Ctrl or Shift.
-
-SelectMode SELECT_TOGGLE = 2
-
-Allows selecting multiple items by toggling them on and off.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SELECT_SINGLE {#SELECT_SINGLE}
 
@@ -1035,7 +1026,7 @@ Allows selecting multiple items by toggling them on and off.
 SELECT_SINGLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only allow selecting a single item.
 
 #### SELECT_MULTI {#SELECT_MULTI}
 
@@ -1043,7 +1034,7 @@ SELECT_SINGLE = 0
 SELECT_MULTI = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows selecting multiple items by holding Ctrl or Shift.
 
 #### SELECT_TOGGLE {#SELECT_TOGGLE}
 
@@ -1051,7 +1042,9 @@ SELECT_MULTI = 1
 SELECT_TOGGLE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows selecting multiple items by toggling them on and off.
+
+---
 
 ### ScrollHintMode {#enum-ScrollHintMode}
 
@@ -1059,21 +1052,7 @@ SELECT_TOGGLE = 2
 enum ScrollHintMode { SCROLL_HINT_MODE_DISABLED = 0, SCROLL_HINT_MODE_BOTH = 1, SCROLL_HINT_MODE_TOP = 2, SCROLL_HINT_MODE_BOTTOM = 3 }
 ```
 
-ScrollHintMode SCROLL_HINT_MODE_DISABLED = 0
-
-Scroll hints will never be shown.
-
-ScrollHintMode SCROLL_HINT_MODE_BOTH = 1
-
-Scroll hints will be shown at the top and bottom.
-
-ScrollHintMode SCROLL_HINT_MODE_TOP = 2
-
-Only the top scroll hint will be shown.
-
-ScrollHintMode SCROLL_HINT_MODE_BOTTOM = 3
-
-Only the bottom scroll hint will be shown.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCROLL_HINT_MODE_DISABLED {#SCROLL_HINT_MODE_DISABLED}
 
@@ -1081,7 +1060,7 @@ Only the bottom scroll hint will be shown.
 SCROLL_HINT_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll hints will never be shown.
 
 #### SCROLL_HINT_MODE_BOTH {#SCROLL_HINT_MODE_BOTH}
 
@@ -1089,7 +1068,7 @@ SCROLL_HINT_MODE_DISABLED = 0
 SCROLL_HINT_MODE_BOTH = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll hints will be shown at the top and bottom.
 
 #### SCROLL_HINT_MODE_TOP {#SCROLL_HINT_MODE_TOP}
 
@@ -1097,7 +1076,7 @@ SCROLL_HINT_MODE_BOTH = 1
 SCROLL_HINT_MODE_TOP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only the top scroll hint will be shown.
 
 #### SCROLL_HINT_MODE_BOTTOM {#SCROLL_HINT_MODE_BOTTOM}
 
@@ -1105,4 +1084,6 @@ SCROLL_HINT_MODE_TOP = 2
 SCROLL_HINT_MODE_BOTTOM = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only the bottom scroll hint will be shown.
+
+---

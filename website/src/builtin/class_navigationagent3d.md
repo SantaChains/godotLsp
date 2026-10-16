@@ -716,7 +716,10 @@ Replaces the internal velocity in the collision avoidance simulation with veloci
 target_position: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_position(value: Vector3)
+- Vector3 get_target_position()
+
+If set, a new navigation path from the current agent position to the target_position is requested from the NavigationServer.
 
 ### path_desired_distance {#path_desired_distance}
 
@@ -897,7 +900,10 @@ If true the agent is registered for an RVO avoidance callback on the NavigationS
 velocity: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_velocity(value: Vector3)
+- Vector3 get_velocity()
+
+Sets the new wanted velocity for the agent. The avoidance simulation will try to fulfill this velocity if possible but will modify it to avoid collision with other agents and obstacles. When an agent is teleported to a new position, use set_velocity_forced() as well to reset the internal simulation velocity.
 
 ### height {#height}
 
@@ -1063,7 +1069,10 @@ If true uses the defined debug_path_custom_color for this agent instead of globa
 debug_path_custom_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_debug_path_custom_color(value: Color)
+- Color get_debug_path_custom_color()
+
+If debug_use_custom is true uses this color for this agent instead of global color.
 
 ### debug_path_custom_point_size {#debug_path_custom_point_size}
 

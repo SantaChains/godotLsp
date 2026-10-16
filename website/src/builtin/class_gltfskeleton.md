@@ -100,7 +100,12 @@ There is currently no description for this method. Please help us by contributin
 joints: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_joints(value: PackedInt32Array)
+- PackedInt32Array get_joints()
+
+There is currently no description for this property. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.
 
 ### roots {#roots}
 
@@ -108,7 +113,12 @@ joints: PackedInt32Array
 roots: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_roots(value: PackedInt32Array)
+- PackedInt32Array get_roots()
+
+There is currently no description for this property. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.
 
 ### unique_names {#unique_names}
 

@@ -1541,7 +1541,10 @@ The background mode.
 background_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_bg_color(value: Color)
+- Color get_bg_color()
+
+The Color displayed for clear areas of the scene. Only effective when using the BG_COLOR background mode.
 
 ### background_energy_multiplier {#background_energy_multiplier}
 
@@ -1615,7 +1618,10 @@ If set to a value greater than 0.0, overrides the field of view to use for sky r
 sky_rotation: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_sky_rotation(value: Vector3)
+- Vector3 get_sky_rotation()
+
+The rotation to use for sky rendering.
 
 ### ambient_light_source {#ambient_light_source}
 
@@ -1634,7 +1640,10 @@ The ambient light source to use for rendering materials and global illumination.
 ambient_light_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_ambient_light_color(value: Color)
+- Color get_ambient_light_color()
+
+The ambient light's Color. Only effective if ambient_light_sky_contribution is lower than 1.0 (exclusive).
 
 ### ambient_light_sky_contribution {#ambient_light_sky_contribution}
 
@@ -2277,7 +2286,10 @@ The fog mode.
 fog_light_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_fog_light_color(value: Color)
+- Color get_fog_light_color()
+
+The fog's color.
 
 ### fog_light_energy {#fog_light_energy}
 
@@ -2433,7 +2445,10 @@ To make volumetric fog work as a volumetric lighting solution, set volumetric_fo
 volumetric_fog_albedo: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_volumetric_fog_albedo(value: Color)
+- Color get_volumetric_fog_albedo()
+
+The Color of the volumetric fog when interacting with lights. Mist and fog have an albedo close to Color(1, 1, 1, 1) while smoke has a darker albedo.
 
 ### volumetric_fog_emission {#volumetric_fog_emission}
 
@@ -2441,7 +2456,10 @@ volumetric_fog_albedo: Color
 volumetric_fog_emission: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_volumetric_fog_emission(value: Color)
+- Color get_volumetric_fog_emission()
+
+The emitted light from the volumetric fog. Even with emission, volumetric fog will not cast light onto other surfaces. Emission is useful to establish an ambient color. As the volumetric fog effect uses single-scattering only, fog tends to need a little bit of emission to soften the harsh shadows.
 
 ### volumetric_fog_emission_energy {#volumetric_fog_emission_energy}
 
@@ -2615,33 +2633,7 @@ Note: Color correction does not currently support HDR output due to only support
 enum BGMode { BG_CLEAR_COLOR = 0, BG_COLOR = 1, BG_SKY = 2, BG_CANVAS = 3, BG_KEEP = 4, BG_CAMERA_FEED = 5, BG_MAX = 6 }
 ```
 
-BGMode BG_CLEAR_COLOR = 0
-
-Clears the background using the clear color defined in ProjectSettings.rendering/environment/defaults/default_clear_color.
-
-BGMode BG_COLOR = 1
-
-Clears the background using a custom clear color.
-
-BGMode BG_SKY = 2
-
-Displays a user-defined sky in the background.
-
-BGMode BG_CANVAS = 3
-
-Displays a CanvasLayer in the background.
-
-BGMode BG_KEEP = 4
-
-Keeps on screen every pixel drawn in the background. This is the fastest background mode, but it can only be safely used in fully-interior scenes (no visible sky or sky reflections). If enabled in a scene where the background is visible, "ghost trail" artifacts will be visible when moving the camera.
-
-BGMode BG_CAMERA_FEED = 5
-
-Displays a camera feed in the background.
-
-BGMode BG_MAX = 6
-
-Represents the size of the BGMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BG_CLEAR_COLOR {#BG_CLEAR_COLOR}
 
@@ -2649,7 +2641,7 @@ Represents the size of the BGMode enum.
 BG_CLEAR_COLOR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Clears the background using the clear color defined in ProjectSettings.rendering/environment/defaults/default_clear_color.
 
 #### BG_COLOR {#BG_COLOR}
 
@@ -2657,7 +2649,7 @@ BG_CLEAR_COLOR = 0
 BG_COLOR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Clears the background using a custom clear color.
 
 #### BG_SKY {#BG_SKY}
 
@@ -2665,7 +2657,7 @@ BG_COLOR = 1
 BG_SKY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Displays a user-defined sky in the background.
 
 #### BG_CANVAS {#BG_CANVAS}
 
@@ -2673,7 +2665,7 @@ BG_SKY = 2
 BG_CANVAS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Displays a CanvasLayer in the background.
 
 #### BG_KEEP {#BG_KEEP}
 
@@ -2681,7 +2673,7 @@ BG_CANVAS = 3
 BG_KEEP = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Keeps on screen every pixel drawn in the background. This is the fastest background mode, but it can only be safely used in fully-interior scenes (no visible sky or sky reflections). If enabled in a scene where the background is visible, "ghost trail" artifacts will be visible when moving the camera.
 
 #### BG_CAMERA_FEED {#BG_CAMERA_FEED}
 
@@ -2689,7 +2681,7 @@ BG_KEEP = 4
 BG_CAMERA_FEED = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Displays a camera feed in the background.
 
 #### BG_MAX {#BG_MAX}
 
@@ -2697,7 +2689,9 @@ BG_CAMERA_FEED = 5
 BG_MAX = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the BGMode enum.
+
+---
 
 ### AmbientSource {#enum-AmbientSource}
 
@@ -2705,21 +2699,7 @@ BG_MAX = 6
 enum AmbientSource { AMBIENT_SOURCE_BG = 0, AMBIENT_SOURCE_DISABLED = 1, AMBIENT_SOURCE_COLOR = 2, AMBIENT_SOURCE_SKY = 3 }
 ```
 
-AmbientSource AMBIENT_SOURCE_BG = 0
-
-Gather ambient light from whichever source is specified as the background.
-
-AmbientSource AMBIENT_SOURCE_DISABLED = 1
-
-Disable ambient light. This provides a slight performance boost over AMBIENT_SOURCE_SKY.
-
-AmbientSource AMBIENT_SOURCE_COLOR = 2
-
-Specify a specific Color for ambient light. This provides a slight performance boost over AMBIENT_SOURCE_SKY.
-
-AmbientSource AMBIENT_SOURCE_SKY = 3
-
-Gather ambient light from the Sky regardless of what the background is.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AMBIENT_SOURCE_BG {#AMBIENT_SOURCE_BG}
 
@@ -2727,7 +2707,7 @@ Gather ambient light from the Sky regardless of what the background is.
 AMBIENT_SOURCE_BG = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Gather ambient light from whichever source is specified as the background.
 
 #### AMBIENT_SOURCE_DISABLED {#AMBIENT_SOURCE_DISABLED}
 
@@ -2735,7 +2715,7 @@ AMBIENT_SOURCE_BG = 0
 AMBIENT_SOURCE_DISABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disable ambient light. This provides a slight performance boost over AMBIENT_SOURCE_SKY.
 
 #### AMBIENT_SOURCE_COLOR {#AMBIENT_SOURCE_COLOR}
 
@@ -2743,7 +2723,7 @@ AMBIENT_SOURCE_DISABLED = 1
 AMBIENT_SOURCE_COLOR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Specify a specific Color for ambient light. This provides a slight performance boost over AMBIENT_SOURCE_SKY.
 
 #### AMBIENT_SOURCE_SKY {#AMBIENT_SOURCE_SKY}
 
@@ -2751,7 +2731,9 @@ AMBIENT_SOURCE_COLOR = 2
 AMBIENT_SOURCE_SKY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Gather ambient light from the Sky regardless of what the background is.
+
+---
 
 ### ReflectionSource {#enum-ReflectionSource}
 
@@ -2759,17 +2741,7 @@ AMBIENT_SOURCE_SKY = 3
 enum ReflectionSource { REFLECTION_SOURCE_BG = 0, REFLECTION_SOURCE_DISABLED = 1, REFLECTION_SOURCE_SKY = 2 }
 ```
 
-ReflectionSource REFLECTION_SOURCE_BG = 0
-
-Use the background for reflections.
-
-ReflectionSource REFLECTION_SOURCE_DISABLED = 1
-
-Disable reflections. This provides a slight performance boost over other options.
-
-ReflectionSource REFLECTION_SOURCE_SKY = 2
-
-Use the Sky for reflections regardless of what the background is.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### REFLECTION_SOURCE_BG {#REFLECTION_SOURCE_BG}
 
@@ -2777,7 +2749,7 @@ Use the Sky for reflections regardless of what the background is.
 REFLECTION_SOURCE_BG = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the background for reflections.
 
 #### REFLECTION_SOURCE_DISABLED {#REFLECTION_SOURCE_DISABLED}
 
@@ -2785,7 +2757,7 @@ REFLECTION_SOURCE_BG = 0
 REFLECTION_SOURCE_DISABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disable reflections. This provides a slight performance boost over other options.
 
 #### REFLECTION_SOURCE_SKY {#REFLECTION_SOURCE_SKY}
 
@@ -2793,7 +2765,9 @@ REFLECTION_SOURCE_DISABLED = 1
 REFLECTION_SOURCE_SKY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the Sky for reflections regardless of what the background is.
+
+---
 
 ### ToneMapper {#enum-ToneMapper}
 
@@ -2801,33 +2775,7 @@ REFLECTION_SOURCE_SKY = 2
 enum ToneMapper { TONE_MAPPER_LINEAR = 0, TONE_MAPPER_REINHARDT = 1, TONE_MAPPER_FILMIC = 2, TONE_MAPPER_ACES = 3, TONE_MAPPER_AGX = 4 }
 ```
 
-ToneMapper TONE_MAPPER_LINEAR = 0
-
-Does not modify color data, resulting in a linear tonemapping curve which unnaturally clips bright values, causing bright lighting to look blown out. The simplest and fastest tonemapper.
-
-ToneMapper TONE_MAPPER_REINHARDT = 1
-
-A simple tonemapping curve that rolls off bright values to prevent clipping. This results in an image that can appear dull and low contrast. Slower than TONE_MAPPER_LINEAR.
-
-Note: When tonemap_white is left at the default value of 1.0, TONE_MAPPER_REINHARDT produces an identical image to TONE_MAPPER_LINEAR.
-
-ToneMapper TONE_MAPPER_FILMIC = 2
-
-Uses a film-like tonemapping curve to prevent clipping of bright values and provide better contrast than TONE_MAPPER_REINHARDT. Slightly slower than TONE_MAPPER_REINHARDT.
-
-Note: This tonemapper does not support HDR output because it produces output in the SDR range. It is recommended to use a different tonemapper when rendering to an HDR screen.
-
-ToneMapper TONE_MAPPER_ACES = 3
-
-Uses a high-contrast film-like tonemapping curve and desaturates bright values for a more realistic appearance. Slightly slower than TONE_MAPPER_FILMIC.
-
-Note: This tonemapping operator is called "ACES Fitted" in Godot 3.x.
-
-Note: This tonemapper does not support HDR output because it produces output in the SDR range. It is recommended to use a different tonemapper when rendering to an HDR screen.
-
-ToneMapper TONE_MAPPER_AGX = 4
-
-Uses an adjustable film-like tonemapping curve and desaturates bright values for a more realistic appearance. Better than other tonemappers at maintaining the hue of colors as they become brighter. The slowest tonemapping option.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TONE_MAPPER_LINEAR {#TONE_MAPPER_LINEAR}
 
@@ -2835,7 +2783,7 @@ Uses an adjustable film-like tonemapping curve and desaturates bright values for
 TONE_MAPPER_LINEAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Does not modify color data, resulting in a linear tonemapping curve which unnaturally clips bright values, causing bright lighting to look blown out. The simplest and fastest tonemapper.
 
 #### TONE_MAPPER_REINHARDT {#TONE_MAPPER_REINHARDT}
 
@@ -2843,7 +2791,9 @@ TONE_MAPPER_LINEAR = 0
 TONE_MAPPER_REINHARDT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A simple tonemapping curve that rolls off bright values to prevent clipping. This results in an image that can appear dull and low contrast. Slower than TONE_MAPPER_LINEAR.
+
+Note: When tonemap_white is left at the default value of 1.0, TONE_MAPPER_REINHARDT produces an identical image to TONE_MAPPER_LINEAR.
 
 #### TONE_MAPPER_FILMIC {#TONE_MAPPER_FILMIC}
 
@@ -2851,7 +2801,9 @@ TONE_MAPPER_REINHARDT = 1
 TONE_MAPPER_FILMIC = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses a film-like tonemapping curve to prevent clipping of bright values and provide better contrast than TONE_MAPPER_REINHARDT. Slightly slower than TONE_MAPPER_REINHARDT.
+
+Note: This tonemapper does not support HDR output because it produces output in the SDR range. It is recommended to use a different tonemapper when rendering to an HDR screen.
 
 #### TONE_MAPPER_ACES {#TONE_MAPPER_ACES}
 
@@ -2859,7 +2811,11 @@ TONE_MAPPER_FILMIC = 2
 TONE_MAPPER_ACES = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses a high-contrast film-like tonemapping curve and desaturates bright values for a more realistic appearance. Slightly slower than TONE_MAPPER_FILMIC.
+
+Note: This tonemapping operator is called "ACES Fitted" in Godot 3.x.
+
+Note: This tonemapper does not support HDR output because it produces output in the SDR range. It is recommended to use a different tonemapper when rendering to an HDR screen.
 
 #### TONE_MAPPER_AGX {#TONE_MAPPER_AGX}
 
@@ -2867,7 +2823,9 @@ TONE_MAPPER_ACES = 3
 TONE_MAPPER_AGX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses an adjustable film-like tonemapping curve and desaturates bright values for a more realistic appearance. Better than other tonemappers at maintaining the hue of colors as they become brighter. The slowest tonemapping option.
+
+---
 
 ### GlowBlendMode {#enum-GlowBlendMode}
 
@@ -2875,27 +2833,7 @@ TONE_MAPPER_AGX = 4
 enum GlowBlendMode { GLOW_BLEND_MODE_ADDITIVE = 0, GLOW_BLEND_MODE_SCREEN = 1, GLOW_BLEND_MODE_SOFTLIGHT = 2, GLOW_BLEND_MODE_REPLACE = 3, GLOW_BLEND_MODE_MIX = 4 }
 ```
 
-GlowBlendMode GLOW_BLEND_MODE_ADDITIVE = 0
-
-Adds the glow effect to the scene.
-
-GlowBlendMode GLOW_BLEND_MODE_SCREEN = 1
-
-Adds the glow effect to the scene after modifying the glow influence based on the scene value; dark values will be highly influenced by glow and bright values will not be influenced by glow. This approach avoids bright values becoming overly bright from the glow effect. tonemap_white is used to determine the maximum scene value where the glow should have no influence. When tonemap_mode is set to TONE_MAPPER_LINEAR and Viewport.use_hdr_2d is true, the parent window's Window.get_output_max_linear_value() will be used as the maximum scene value.
-
-GlowBlendMode GLOW_BLEND_MODE_SOFTLIGHT = 2
-
-Adds the glow effect to the tonemapped image after modifying the glow influence based on the image value; dark values and bright values will not be influenced by glow and mid-range values will be highly influenced by glow. This approach avoids bright values becoming overly bright from the glow effect. The glow will have the largest influence on image values of 0.25 and will have no influence when applied to image values greater than 1.0.
-
-Note: This blend mode does not support HDR output because expects a maximum output value of 1.0. It is recommended to use a different blend mode when rendering to an HDR screen.
-
-GlowBlendMode GLOW_BLEND_MODE_REPLACE = 3
-
-Replaces all pixels' color by the glow effect. This can be used to simulate a full-screen blur effect by tweaking the glow parameters to match the original image's brightness or to preview glow configuration in the editor.
-
-GlowBlendMode GLOW_BLEND_MODE_MIX = 4
-
-Mixes the glow image with the scene image. Best used with glow_bloom to avoid darkening the scene.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GLOW_BLEND_MODE_ADDITIVE {#GLOW_BLEND_MODE_ADDITIVE}
 
@@ -2903,7 +2841,7 @@ Mixes the glow image with the scene image. Best used with glow_bloom to avoid da
 GLOW_BLEND_MODE_ADDITIVE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adds the glow effect to the scene.
 
 #### GLOW_BLEND_MODE_SCREEN {#GLOW_BLEND_MODE_SCREEN}
 
@@ -2911,7 +2849,7 @@ GLOW_BLEND_MODE_ADDITIVE = 0
 GLOW_BLEND_MODE_SCREEN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adds the glow effect to the scene after modifying the glow influence based on the scene value; dark values will be highly influenced by glow and bright values will not be influenced by glow. This approach avoids bright values becoming overly bright from the glow effect. tonemap_white is used to determine the maximum scene value where the glow should have no influence. When tonemap_mode is set to TONE_MAPPER_LINEAR and Viewport.use_hdr_2d is true, the parent window's Window.get_output_max_linear_value() will be used as the maximum scene value.
 
 #### GLOW_BLEND_MODE_SOFTLIGHT {#GLOW_BLEND_MODE_SOFTLIGHT}
 
@@ -2919,7 +2857,9 @@ GLOW_BLEND_MODE_SCREEN = 1
 GLOW_BLEND_MODE_SOFTLIGHT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adds the glow effect to the tonemapped image after modifying the glow influence based on the image value; dark values and bright values will not be influenced by glow and mid-range values will be highly influenced by glow. This approach avoids bright values becoming overly bright from the glow effect. The glow will have the largest influence on image values of 0.25 and will have no influence when applied to image values greater than 1.0.
+
+Note: This blend mode does not support HDR output because expects a maximum output value of 1.0. It is recommended to use a different blend mode when rendering to an HDR screen.
 
 #### GLOW_BLEND_MODE_REPLACE {#GLOW_BLEND_MODE_REPLACE}
 
@@ -2927,7 +2867,7 @@ GLOW_BLEND_MODE_SOFTLIGHT = 2
 GLOW_BLEND_MODE_REPLACE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Replaces all pixels' color by the glow effect. This can be used to simulate a full-screen blur effect by tweaking the glow parameters to match the original image's brightness or to preview glow configuration in the editor.
 
 #### GLOW_BLEND_MODE_MIX {#GLOW_BLEND_MODE_MIX}
 
@@ -2935,7 +2875,9 @@ GLOW_BLEND_MODE_REPLACE = 3
 GLOW_BLEND_MODE_MIX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mixes the glow image with the scene image. Best used with glow_bloom to avoid darkening the scene.
+
+---
 
 ### FogMode {#enum-FogMode}
 
@@ -2943,13 +2885,7 @@ GLOW_BLEND_MODE_MIX = 4
 enum FogMode { FOG_MODE_EXPONENTIAL = 0, FOG_MODE_DEPTH = 1 }
 ```
 
-FogMode FOG_MODE_EXPONENTIAL = 0
-
-Use a physically-based fog model defined primarily by fog density.
-
-FogMode FOG_MODE_DEPTH = 1
-
-Use a simple fog model defined by start and end positions and a custom curve. While not physically accurate, this model can be useful when you need more artistic control.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FOG_MODE_EXPONENTIAL {#FOG_MODE_EXPONENTIAL}
 
@@ -2957,7 +2893,7 @@ Use a simple fog model defined by start and end positions and a custom curve. Wh
 FOG_MODE_EXPONENTIAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use a physically-based fog model defined primarily by fog density.
 
 #### FOG_MODE_DEPTH {#FOG_MODE_DEPTH}
 
@@ -2965,7 +2901,9 @@ FOG_MODE_EXPONENTIAL = 0
 FOG_MODE_DEPTH = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use a simple fog model defined by start and end positions and a custom curve. While not physically accurate, this model can be useful when you need more artistic control.
+
+---
 
 ### SDFGIYScale {#enum-SDFGIYScale}
 
@@ -2973,17 +2911,7 @@ FOG_MODE_DEPTH = 1
 enum SDFGIYScale { SDFGI_Y_SCALE_50_PERCENT = 0, SDFGI_Y_SCALE_75_PERCENT = 1, SDFGI_Y_SCALE_100_PERCENT = 2 }
 ```
 
-SDFGIYScale SDFGI_Y_SCALE_50_PERCENT = 0
-
-Use 50% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be twice as short as they are wide. This allows providing increased GI detail and reduced light leaking with thin floors and ceilings. This is usually the best choice for scenes that don't feature much verticality.
-
-SDFGIYScale SDFGI_Y_SCALE_75_PERCENT = 1
-
-Use 75% scale for SDFGI on the Y (vertical) axis. This is a balance between the 50% and 100% SDFGI Y scales.
-
-SDFGIYScale SDFGI_Y_SCALE_100_PERCENT = 2
-
-Use 100% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be as tall as they are wide. This is usually the best choice for highly vertical scenes. The downside is that light leaking may become more noticeable with thin floors and ceilings.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SDFGI_Y_SCALE_50_PERCENT {#SDFGI_Y_SCALE_50_PERCENT}
 
@@ -2991,7 +2919,7 @@ Use 100% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be as tall a
 SDFGI_Y_SCALE_50_PERCENT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 50% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be twice as short as they are wide. This allows providing increased GI detail and reduced light leaking with thin floors and ceilings. This is usually the best choice for scenes that don't feature much verticality.
 
 #### SDFGI_Y_SCALE_75_PERCENT {#SDFGI_Y_SCALE_75_PERCENT}
 
@@ -2999,7 +2927,7 @@ SDFGI_Y_SCALE_50_PERCENT = 0
 SDFGI_Y_SCALE_75_PERCENT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 75% scale for SDFGI on the Y (vertical) axis. This is a balance between the 50% and 100% SDFGI Y scales.
 
 #### SDFGI_Y_SCALE_100_PERCENT {#SDFGI_Y_SCALE_100_PERCENT}
 
@@ -3007,4 +2935,6 @@ SDFGI_Y_SCALE_75_PERCENT = 1
 SDFGI_Y_SCALE_100_PERCENT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 100% scale for SDFGI on the Y (vertical) axis. SDFGI cells will be as tall as they are wide. This is usually the best choice for highly vertical scenes. The downside is that light leaking may become more noticeable with thin floors and ceilings.
+
+---

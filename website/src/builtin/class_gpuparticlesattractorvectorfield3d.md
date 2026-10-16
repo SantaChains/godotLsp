@@ -58,7 +58,10 @@ void set_texture(texture: Texture3D)
 size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3)
+- Vector3 get_size()
+
+The size of the vector field box in 3D units.
 
 ### texture {#texture}
 

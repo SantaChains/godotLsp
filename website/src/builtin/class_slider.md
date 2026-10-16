@@ -175,21 +175,7 @@ Emitted when the grabber stops being dragged. If value_changed is true, Range.va
 enum TickPosition { TICK_POSITION_BOTTOM_RIGHT = 0, TICK_POSITION_TOP_LEFT = 1, TICK_POSITION_BOTH = 2, TICK_POSITION_CENTER = 3 }
 ```
 
-TickPosition TICK_POSITION_BOTTOM_RIGHT = 0
-
-Places the ticks at the bottom of the HSlider, or right of the VSlider.
-
-TickPosition TICK_POSITION_TOP_LEFT = 1
-
-Places the ticks at the top of the HSlider, or left of the VSlider.
-
-TickPosition TICK_POSITION_BOTH = 2
-
-Places the ticks at the both sides of the slider.
-
-TickPosition TICK_POSITION_CENTER = 3
-
-Places the ticks at the center of the slider.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TICK_POSITION_BOTTOM_RIGHT {#TICK_POSITION_BOTTOM_RIGHT}
 
@@ -197,7 +183,7 @@ Places the ticks at the center of the slider.
 TICK_POSITION_BOTTOM_RIGHT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Places the ticks at the bottom of the HSlider, or right of the VSlider.
 
 #### TICK_POSITION_TOP_LEFT {#TICK_POSITION_TOP_LEFT}
 
@@ -205,7 +191,7 @@ TICK_POSITION_BOTTOM_RIGHT = 0
 TICK_POSITION_TOP_LEFT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Places the ticks at the top of the HSlider, or left of the VSlider.
 
 #### TICK_POSITION_BOTH {#TICK_POSITION_BOTH}
 
@@ -213,7 +199,7 @@ TICK_POSITION_TOP_LEFT = 1
 TICK_POSITION_BOTH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Places the ticks at the both sides of the slider.
 
 #### TICK_POSITION_CENTER {#TICK_POSITION_CENTER}
 
@@ -221,4 +207,6 @@ TICK_POSITION_BOTH = 2
 TICK_POSITION_CENTER = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Places the ticks at the center of the slider.
+
+---

@@ -206,7 +206,10 @@ The mass of the physics body, in kilograms. This is only used when the body type
 linear_velocity: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_linear_velocity(value: Vector3)
+- Vector3 get_linear_velocity()
+
+The linear velocity of the physics body, in meters per second. This is only used when the body type is "rigid" or "vehicle".
 
 ### angular_velocity {#angular_velocity}
 
@@ -214,7 +217,10 @@ linear_velocity: Vector3
 angular_velocity: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_angular_velocity(value: Vector3)
+- Vector3 get_angular_velocity()
+
+The angular velocity of the physics body, in radians per second. This is only used when the body type is "rigid" or "vehicle".
 
 ### center_of_mass {#center_of_mass}
 
@@ -222,7 +228,10 @@ angular_velocity: Vector3
 center_of_mass: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_center_of_mass(value: Vector3)
+- Vector3 get_center_of_mass()
+
+The center of mass of the body, in meters. This is in local space relative to the body. By default, the center of the mass is the body's origin.
 
 ### inertia_diagonal {#inertia_diagonal}
 
@@ -230,7 +239,12 @@ center_of_mass: Vector3
 inertia_diagonal: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_inertia_diagonal(value: Vector3)
+- Vector3 get_inertia_diagonal()
+
+The inertia strength of the physics body, in kilogram meter squared (kg⋅m²). This represents the inertia around the principle axes, the diagonal of the inertia tensor matrix. This is only used when the body type is "rigid" or "vehicle".
+
+When converted to a Godot RigidBody3D node, if this value is zero, then the inertia will be calculated automatically.
 
 ### inertia_orientation {#inertia_orientation}
 
@@ -238,7 +252,10 @@ inertia_diagonal: Vector3
 inertia_orientation: Quaternion
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_inertia_orientation(value: Quaternion)
+- Quaternion get_inertia_orientation()
+
+The inertia orientation of the physics body. This defines the rotation of the inertia's principle axes relative to the object's local axes. This is only used when the body type is "rigid" or "vehicle" and inertia_diagonal is set to a non-zero value.
 
 ### inertia_tensor {#inertia_tensor}
 
@@ -246,4 +263,11 @@ inertia_orientation: Quaternion
 inertia_tensor: Basis
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_inertia_tensor(value: Basis)
+- Basis get_inertia_tensor()
+
+Deprecated: This property may be changed or removed in future versions.
+
+The inertia tensor of the physics body, in kilogram meter squared (kg⋅m²). This is only used when the body type is "rigid" or "vehicle".
+
+When converted to a Godot RigidBody3D node, if this value is zero, then the inertia will be calculated automatically.

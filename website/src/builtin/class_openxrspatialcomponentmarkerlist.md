@@ -44,29 +44,7 @@ Returns the marker type for the marker at this index.
 enum MarkerType { MARKER_TYPE_UNKNOWN = 0, MARKER_TYPE_QRCODE = 1, MARKER_TYPE_MICRO_QRCODE = 2, MARKER_TYPE_ARUCO = 3, MARKER_TYPE_APRIL_TAG = 4, MARKER_TYPE_MAX = 5 }
 ```
 
-MarkerType MARKER_TYPE_UNKNOWN = 0
-
-Unknown or unset marker type.
-
-MarkerType MARKER_TYPE_QRCODE = 1
-
-Marker based on a QR code.
-
-MarkerType MARKER_TYPE_MICRO_QRCODE = 2
-
-Marker based on a micro QR code.
-
-MarkerType MARKER_TYPE_ARUCO = 3
-
-Marker based on an Aruco code.
-
-MarkerType MARKER_TYPE_APRIL_TAG = 4
-
-Marker based on an April Tag.
-
-MarkerType MARKER_TYPE_MAX = 5
-
-Maximum value for this enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MARKER_TYPE_UNKNOWN {#MARKER_TYPE_UNKNOWN}
 
@@ -74,7 +52,7 @@ Maximum value for this enum.
 MARKER_TYPE_UNKNOWN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unknown or unset marker type.
 
 #### MARKER_TYPE_QRCODE {#MARKER_TYPE_QRCODE}
 
@@ -82,7 +60,7 @@ MARKER_TYPE_UNKNOWN = 0
 MARKER_TYPE_QRCODE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marker based on a QR code.
 
 #### MARKER_TYPE_MICRO_QRCODE {#MARKER_TYPE_MICRO_QRCODE}
 
@@ -90,7 +68,7 @@ MARKER_TYPE_QRCODE = 1
 MARKER_TYPE_MICRO_QRCODE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marker based on a micro QR code.
 
 #### MARKER_TYPE_ARUCO {#MARKER_TYPE_ARUCO}
 
@@ -98,7 +76,7 @@ MARKER_TYPE_MICRO_QRCODE = 2
 MARKER_TYPE_ARUCO = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marker based on an Aruco code.
 
 #### MARKER_TYPE_APRIL_TAG {#MARKER_TYPE_APRIL_TAG}
 
@@ -106,7 +84,7 @@ MARKER_TYPE_ARUCO = 3
 MARKER_TYPE_APRIL_TAG = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marker based on an April Tag.
 
 #### MARKER_TYPE_MAX {#MARKER_TYPE_MAX}
 
@@ -114,4 +92,6 @@ MARKER_TYPE_APRIL_TAG = 4
 MARKER_TYPE_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum value for this enum.
+
+---

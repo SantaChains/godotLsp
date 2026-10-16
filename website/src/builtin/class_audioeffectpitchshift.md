@@ -103,29 +103,7 @@ The size of the Fast Fourier transform [https://en.wikipedia.org/wiki/Fast_Fouri
 enum FFTSize { FFT_SIZE_256 = 0, FFT_SIZE_512 = 1, FFT_SIZE_1024 = 2, FFT_SIZE_2048 = 3, FFT_SIZE_4096 = 4, FFT_SIZE_MAX = 5 }
 ```
 
-FFTSize FFT_SIZE_256 = 0
-
-Use a buffer of 256 samples for the Fast Fourier transform. Lowest latency, but least stable over time.
-
-FFTSize FFT_SIZE_512 = 1
-
-Use a buffer of 512 samples for the Fast Fourier transform. Low latency, but less stable over time.
-
-FFTSize FFT_SIZE_1024 = 2
-
-Use a buffer of 1024 samples for the Fast Fourier transform. This is a compromise between latency and stability over time.
-
-FFTSize FFT_SIZE_2048 = 3
-
-Use a buffer of 2048 samples for the Fast Fourier transform. High latency, but stable over time.
-
-FFTSize FFT_SIZE_4096 = 4
-
-Use a buffer of 4096 samples for the Fast Fourier transform. Highest latency, but most stable over time.
-
-FFTSize FFT_SIZE_MAX = 5
-
-Represents the size of the FFTSize enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FFT_SIZE_256 {#FFT_SIZE_256}
 
@@ -133,7 +111,7 @@ Represents the size of the FFTSize enum.
 FFT_SIZE_256 = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use a buffer of 256 samples for the Fast Fourier transform. Lowest latency, but least stable over time.
 
 #### FFT_SIZE_512 {#FFT_SIZE_512}
 
@@ -141,7 +119,7 @@ FFT_SIZE_256 = 0
 FFT_SIZE_512 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use a buffer of 512 samples for the Fast Fourier transform. Low latency, but less stable over time.
 
 #### FFT_SIZE_1024 {#FFT_SIZE_1024}
 
@@ -149,7 +127,7 @@ FFT_SIZE_512 = 1
 FFT_SIZE_1024 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use a buffer of 1024 samples for the Fast Fourier transform. This is a compromise between latency and stability over time.
 
 #### FFT_SIZE_2048 {#FFT_SIZE_2048}
 
@@ -157,7 +135,7 @@ FFT_SIZE_1024 = 2
 FFT_SIZE_2048 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use a buffer of 2048 samples for the Fast Fourier transform. High latency, but stable over time.
 
 #### FFT_SIZE_4096 {#FFT_SIZE_4096}
 
@@ -165,7 +143,7 @@ FFT_SIZE_2048 = 3
 FFT_SIZE_4096 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use a buffer of 4096 samples for the Fast Fourier transform. Highest latency, but most stable over time.
 
 #### FFT_SIZE_MAX {#FFT_SIZE_MAX}
 
@@ -173,4 +151,6 @@ FFT_SIZE_4096 = 4
 FFT_SIZE_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the FFTSize enum.
+
+---

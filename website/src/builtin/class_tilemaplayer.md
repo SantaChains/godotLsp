@@ -552,7 +552,12 @@ Warning: Updating the TileMapLayer is computationally expensive and may impact p
 tile_map_data: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tile_map_data_from_array(value: PackedByteArray)
+- PackedByteArray get_tile_map_data_as_array()
+
+The raw tile map data as a byte array.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### enabled {#enabled}
 
@@ -714,17 +719,7 @@ Note: This signal may be emitted very often when batch-modifying a TileMapLayer.
 enum DebugVisibilityMode { DEBUG_VISIBILITY_MODE_DEFAULT = 0, DEBUG_VISIBILITY_MODE_FORCE_HIDE = 2, DEBUG_VISIBILITY_MODE_FORCE_SHOW = 1 }
 ```
 
-DebugVisibilityMode DEBUG_VISIBILITY_MODE_DEFAULT = 0
-
-Hide the collisions or navigation debug shapes in the editor, and use the debug settings to determine their visibility in game (i.e. SceneTree.debug_collisions_hint or SceneTree.debug_navigation_hint).
-
-DebugVisibilityMode DEBUG_VISIBILITY_MODE_FORCE_HIDE = 2
-
-Always hide the collisions or navigation debug shapes.
-
-DebugVisibilityMode DEBUG_VISIBILITY_MODE_FORCE_SHOW = 1
-
-Always show the collisions or navigation debug shapes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DEBUG_VISIBILITY_MODE_DEFAULT {#DEBUG_VISIBILITY_MODE_DEFAULT}
 
@@ -732,7 +727,7 @@ Always show the collisions or navigation debug shapes.
 DEBUG_VISIBILITY_MODE_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hide the collisions or navigation debug shapes in the editor, and use the debug settings to determine their visibility in game (i.e. SceneTree.debug_collisions_hint or SceneTree.debug_navigation_hint).
 
 #### DEBUG_VISIBILITY_MODE_FORCE_HIDE {#DEBUG_VISIBILITY_MODE_FORCE_HIDE}
 
@@ -740,7 +735,7 @@ DEBUG_VISIBILITY_MODE_DEFAULT = 0
 DEBUG_VISIBILITY_MODE_FORCE_HIDE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always hide the collisions or navigation debug shapes.
 
 #### DEBUG_VISIBILITY_MODE_FORCE_SHOW {#DEBUG_VISIBILITY_MODE_FORCE_SHOW}
 
@@ -748,4 +743,6 @@ DEBUG_VISIBILITY_MODE_FORCE_HIDE = 2
 DEBUG_VISIBILITY_MODE_FORCE_SHOW = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always show the collisions or navigation debug shapes.
+
+---

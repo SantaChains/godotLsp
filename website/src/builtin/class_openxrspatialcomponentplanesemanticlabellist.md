@@ -28,25 +28,7 @@ Returns the plane semantic label for the parent entity at this index.
 enum PlaneSemanticLabel { PLANE_SEMANTIC_LABEL_UNCATEGORIZED = 1, PLANE_SEMANTIC_LABEL_FLOOR = 2, PLANE_SEMANTIC_LABEL_WALL = 3, PLANE_SEMANTIC_LABEL_CEILING = 4, PLANE_SEMANTIC_LABEL_TABLE = 5 }
 ```
 
-PlaneSemanticLabel PLANE_SEMANTIC_LABEL_UNCATEGORIZED = 1
-
-Uncategorized plane.
-
-PlaneSemanticLabel PLANE_SEMANTIC_LABEL_FLOOR = 2
-
-Plane represents a floor.
-
-PlaneSemanticLabel PLANE_SEMANTIC_LABEL_WALL = 3
-
-Plane represents a wall.
-
-PlaneSemanticLabel PLANE_SEMANTIC_LABEL_CEILING = 4
-
-Plane represents a ceiling.
-
-PlaneSemanticLabel PLANE_SEMANTIC_LABEL_TABLE = 5
-
-Plane represents the surface of a table.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PLANE_SEMANTIC_LABEL_UNCATEGORIZED {#PLANE_SEMANTIC_LABEL_UNCATEGORIZED}
 
@@ -54,7 +36,7 @@ Plane represents the surface of a table.
 PLANE_SEMANTIC_LABEL_UNCATEGORIZED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uncategorized plane.
 
 #### PLANE_SEMANTIC_LABEL_FLOOR {#PLANE_SEMANTIC_LABEL_FLOOR}
 
@@ -62,7 +44,7 @@ PLANE_SEMANTIC_LABEL_UNCATEGORIZED = 1
 PLANE_SEMANTIC_LABEL_FLOOR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plane represents a floor.
 
 #### PLANE_SEMANTIC_LABEL_WALL {#PLANE_SEMANTIC_LABEL_WALL}
 
@@ -70,7 +52,7 @@ PLANE_SEMANTIC_LABEL_FLOOR = 2
 PLANE_SEMANTIC_LABEL_WALL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plane represents a wall.
 
 #### PLANE_SEMANTIC_LABEL_CEILING {#PLANE_SEMANTIC_LABEL_CEILING}
 
@@ -78,7 +60,7 @@ PLANE_SEMANTIC_LABEL_WALL = 3
 PLANE_SEMANTIC_LABEL_CEILING = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plane represents a ceiling.
 
 #### PLANE_SEMANTIC_LABEL_TABLE {#PLANE_SEMANTIC_LABEL_TABLE}
 
@@ -86,4 +68,6 @@ PLANE_SEMANTIC_LABEL_CEILING = 4
 PLANE_SEMANTIC_LABEL_TABLE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plane represents the surface of a table.
+
+---

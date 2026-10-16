@@ -85,7 +85,10 @@ If a material is assigned to this property, it will be used instead of any other
 constant_linear_velocity: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_constant_linear_velocity(value: Vector2)
+- Vector2 get_constant_linear_velocity()
+
+The body's constant linear velocity. This does not move the body, but affects touching bodies, as if it were moving.
 
 ### constant_angular_velocity {#constant_angular_velocity}
 

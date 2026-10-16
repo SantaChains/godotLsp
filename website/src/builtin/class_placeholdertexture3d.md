@@ -41,4 +41,7 @@ void set_size(size: Vector3i)
 size: Vector3i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3i)
+- Vector3i get_size()
+
+The texture's size (in pixels).

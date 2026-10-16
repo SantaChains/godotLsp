@@ -40,4 +40,7 @@ void set_size(size: Vector3)
 size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3)
+- Vector3 get_size()
+
+The attractor box's size in 3D units.

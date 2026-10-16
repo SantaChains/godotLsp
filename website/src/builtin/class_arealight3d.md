@@ -117,7 +117,10 @@ Defines whether the energy is normalized (divided) by the surface area of the li
 area_size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_area_size(value: Vector2)
+- Vector2 get_area_size()
+
+The extents (width and height) of the area in meters.
 
 ### area_texture {#area_texture}
 

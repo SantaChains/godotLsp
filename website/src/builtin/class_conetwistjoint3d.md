@@ -103,7 +103,13 @@ Defines, how fast the swing- and twist-speed-difference on both sides gets synce
 enum Param { PARAM_SWING_SPAN = 0, PARAM_TWIST_SPAN = 1, PARAM_BIAS = 2, PARAM_SOFTNESS = 3, PARAM_RELAXATION = 4, PARAM_MAX = 5 }
 ```
 
-Param PARAM_SWING_SPAN = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### PARAM_SWING_SPAN {#PARAM_SWING_SPAN}
+
+```gdscript
+PARAM_SWING_SPAN = 0
+```
 
 Swing is rotation from side to side, around the axis perpendicular to the twist axis.
 
@@ -113,45 +119,15 @@ Could be defined as looseness in the ConeTwistJoint3D.
 
 If below 0.05, this behavior is locked.
 
-Param PARAM_TWIST_SPAN = 1
-
-Twist is the rotation around the twist axis, this value defined how far the joint can twist.
-
-Twist is locked if below 0.05.
-
-Param PARAM_BIAS = 2
-
-The speed with which the swing or twist will take place.
-
-The higher, the faster.
-
-Param PARAM_SOFTNESS = 3
-
-The ease with which the joint starts to twist. If it's too low, it takes more force to start twisting the joint.
-
-Param PARAM_RELAXATION = 4
-
-Defines, how fast the swing- and twist-speed-difference on both sides gets synced.
-
-Param PARAM_MAX = 5
-
-Represents the size of the Param enum.
-
-#### PARAM_SWING_SPAN {#PARAM_SWING_SPAN}
-
-```gdscript
-PARAM_SWING_SPAN = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### PARAM_TWIST_SPAN {#PARAM_TWIST_SPAN}
 
 ```gdscript
 PARAM_TWIST_SPAN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Twist is the rotation around the twist axis, this value defined how far the joint can twist.
+
+Twist is locked if below 0.05.
 
 #### PARAM_BIAS {#PARAM_BIAS}
 
@@ -159,7 +135,9 @@ PARAM_TWIST_SPAN = 1
 PARAM_BIAS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The speed with which the swing or twist will take place.
+
+The higher, the faster.
 
 #### PARAM_SOFTNESS {#PARAM_SOFTNESS}
 
@@ -167,7 +145,7 @@ PARAM_BIAS = 2
 PARAM_SOFTNESS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The ease with which the joint starts to twist. If it's too low, it takes more force to start twisting the joint.
 
 #### PARAM_RELAXATION {#PARAM_RELAXATION}
 
@@ -175,7 +153,7 @@ PARAM_SOFTNESS = 3
 PARAM_RELAXATION = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Defines, how fast the swing- and twist-speed-difference on both sides gets synced.
 
 #### PARAM_MAX {#PARAM_MAX}
 
@@ -183,4 +161,6 @@ PARAM_RELAXATION = 4
 PARAM_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Param enum.
+
+---

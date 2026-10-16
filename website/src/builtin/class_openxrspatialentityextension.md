@@ -252,29 +252,7 @@ Emitted when OpenXR recommends running a discovery query because entities manage
 enum Capability { CAPABILITY_PLANE_TRACKING = 1000741000, CAPABILITY_MARKER_TRACKING_QR_CODE = 1000743000, CAPABILITY_MARKER_TRACKING_MICRO_QR_CODE = 1000743001, CAPABILITY_MARKER_TRACKING_ARUCO_MARKER = 1000743002, CAPABILITY_MARKER_TRACKING_APRIL_TAG = 1000743003, CAPABILITY_ANCHOR = 1000762000 }
 ```
 
-Capability CAPABILITY_PLANE_TRACKING = 1000741000
-
-Plane tracking capability.
-
-Capability CAPABILITY_MARKER_TRACKING_QR_CODE = 1000743000
-
-QR code based marker tracking capability.
-
-Capability CAPABILITY_MARKER_TRACKING_MICRO_QR_CODE = 1000743001
-
-Micro QR code based marker tracking capability.
-
-Capability CAPABILITY_MARKER_TRACKING_ARUCO_MARKER = 1000743002
-
-Aruco marker based marker tracking capability.
-
-Capability CAPABILITY_MARKER_TRACKING_APRIL_TAG = 1000743003
-
-April tag based marker tracking capability.
-
-Capability CAPABILITY_ANCHOR = 1000762000
-
-Anchor capability.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CAPABILITY_PLANE_TRACKING {#CAPABILITY_PLANE_TRACKING}
 
@@ -282,7 +260,7 @@ Anchor capability.
 CAPABILITY_PLANE_TRACKING = 1000741000
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Plane tracking capability.
 
 #### CAPABILITY_MARKER_TRACKING_QR_CODE {#CAPABILITY_MARKER_TRACKING_QR_CODE}
 
@@ -290,7 +268,7 @@ CAPABILITY_PLANE_TRACKING = 1000741000
 CAPABILITY_MARKER_TRACKING_QR_CODE = 1000743000
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+QR code based marker tracking capability.
 
 #### CAPABILITY_MARKER_TRACKING_MICRO_QR_CODE {#CAPABILITY_MARKER_TRACKING_MICRO_QR_CODE}
 
@@ -298,7 +276,7 @@ CAPABILITY_MARKER_TRACKING_QR_CODE = 1000743000
 CAPABILITY_MARKER_TRACKING_MICRO_QR_CODE = 1000743001
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Micro QR code based marker tracking capability.
 
 #### CAPABILITY_MARKER_TRACKING_ARUCO_MARKER {#CAPABILITY_MARKER_TRACKING_ARUCO_MARKER}
 
@@ -306,7 +284,7 @@ CAPABILITY_MARKER_TRACKING_MICRO_QR_CODE = 1000743001
 CAPABILITY_MARKER_TRACKING_ARUCO_MARKER = 1000743002
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Aruco marker based marker tracking capability.
 
 #### CAPABILITY_MARKER_TRACKING_APRIL_TAG {#CAPABILITY_MARKER_TRACKING_APRIL_TAG}
 
@@ -314,7 +292,7 @@ CAPABILITY_MARKER_TRACKING_ARUCO_MARKER = 1000743002
 CAPABILITY_MARKER_TRACKING_APRIL_TAG = 1000743003
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+April tag based marker tracking capability.
 
 #### CAPABILITY_ANCHOR {#CAPABILITY_ANCHOR}
 
@@ -322,7 +300,9 @@ CAPABILITY_MARKER_TRACKING_APRIL_TAG = 1000743003
 CAPABILITY_ANCHOR = 1000762000
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Anchor capability.
+
+---
 
 ### ComponentType {#enum-ComponentType}
 
@@ -330,49 +310,7 @@ CAPABILITY_ANCHOR = 1000762000
 enum ComponentType { COMPONENT_TYPE_BOUNDED_2D = 1, COMPONENT_TYPE_BOUNDED_3D = 2, COMPONENT_TYPE_PARENT = 3, COMPONENT_TYPE_MESH_3D = 4, COMPONENT_TYPE_PLANE_ALIGNMENT = 1000741000, COMPONENT_TYPE_MESH_2D = 1000741001, COMPONENT_TYPE_POLYGON_2D = 1000741002, COMPONENT_TYPE_PLANE_SEMANTIC_LABEL = 1000741003, COMPONENT_TYPE_MARKER = 1000743000, COMPONENT_TYPE_ANCHOR = 1000762000, COMPONENT_TYPE_PERSISTENCE = 1000763000 }
 ```
 
-ComponentType COMPONENT_TYPE_BOUNDED_2D = 1
-
-Component that provides the 2D bounds for a spatial entity. The corresponding list structure is XrSpatialComponentBounded2DListEXT; the corresponding data structure is XrSpatialBounded2DDataEXT.
-
-ComponentType COMPONENT_TYPE_BOUNDED_3D = 2
-
-Component that provides the 3D bounds for a spatial entity. The corresponding list structure is XrSpatialComponentBounded3DListEXT; the corresponding data structure is XrBoxf.
-
-ComponentType COMPONENT_TYPE_PARENT = 3
-
-Component that provides the XrSpatialEntityIdEXT of the parent for a spatial entity. The corresponding list structure is XrSpatialComponentParentListEXT; the corresponding data structure is XrSpatialEntityIdEXT.
-
-ComponentType COMPONENT_TYPE_MESH_3D = 4
-
-Component that provides a 3D mesh for a spatial entity. The corresponding list structure is XrSpatialComponentMesh3DListEXT; the corresponding data structure is XrSpatialMeshDataEXT.
-
-ComponentType COMPONENT_TYPE_PLANE_ALIGNMENT = 1000741000
-
-Component that provides the plane alignment enum for a spatial entity. The corresponding list structure is XrSpatialComponentPlaneAlignmentListEXT; the corresponding data structure is XrSpatialPlaneAlignmentEXT (Added by the XR_EXT_spatial_plane_tracking extension).
-
-ComponentType COMPONENT_TYPE_MESH_2D = 1000741001
-
-Component that provides a 2D mesh for a spatial entity. The corresponding list structure is XrSpatialComponentMesh2DListEXT; the corresponding data structure is XrSpatialMeshDataEXT (Added by the XR_EXT_spatial_plane_tracking extension).
-
-ComponentType COMPONENT_TYPE_POLYGON_2D = 1000741002
-
-Component that provides a 2D boundary polygon for a spatial entity. The corresponding list structure is XrSpatialComponentPolygon2DListEXT; the corresponding data structure is XrSpatialPolygon2DDataEXT (Added by the XR_EXT_spatial_plane_tracking extension).
-
-ComponentType COMPONENT_TYPE_PLANE_SEMANTIC_LABEL = 1000741003
-
-Component that provides a semantic label for a plane. The corresponding list structure is XrSpatialComponentPlaneSemanticLabelListEXT; the corresponding data structure is XrSpatialPlaneSemanticLabelEXT (Added by the XR_EXT_spatial_plane_tracking extension).
-
-ComponentType COMPONENT_TYPE_MARKER = 1000743000
-
-A component describing the marker type, ID and location. The corresponding list structure is XrSpatialComponentMarkerListEXT; the corresponding data structure is XrSpatialMarkerDataEXT (Added by the XR_EXT_spatial_marker_tracking extension).
-
-ComponentType COMPONENT_TYPE_ANCHOR = 1000762000
-
-Component that provides the location for an anchor. The corresponding list structure is XrSpatialComponentAnchorListEXT; the corresponding data structure is XrPosef (Added by the XR_EXT_spatial_anchor extension).
-
-ComponentType COMPONENT_TYPE_PERSISTENCE = 1000763000
-
-Component that provides the persisted UUID for a spatial entity. The corresponding list structure is XrSpatialComponentPersistenceListEXT; the corresponding data structure is [code]XrSpatialPersistenceDataEXT (Added by the XR_EXT_spatial_persistence extension).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### COMPONENT_TYPE_BOUNDED_2D {#COMPONENT_TYPE_BOUNDED_2D}
 
@@ -380,7 +318,7 @@ Component that provides the persisted UUID for a spatial entity. The correspondi
 COMPONENT_TYPE_BOUNDED_2D = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Component that provides the 2D bounds for a spatial entity. The corresponding list structure is XrSpatialComponentBounded2DListEXT; the corresponding data structure is XrSpatialBounded2DDataEXT.
 
 #### COMPONENT_TYPE_BOUNDED_3D {#COMPONENT_TYPE_BOUNDED_3D}
 
@@ -388,7 +326,7 @@ COMPONENT_TYPE_BOUNDED_2D = 1
 COMPONENT_TYPE_BOUNDED_3D = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Component that provides the 3D bounds for a spatial entity. The corresponding list structure is XrSpatialComponentBounded3DListEXT; the corresponding data structure is XrBoxf.
 
 #### COMPONENT_TYPE_PARENT {#COMPONENT_TYPE_PARENT}
 
@@ -396,7 +334,7 @@ COMPONENT_TYPE_BOUNDED_3D = 2
 COMPONENT_TYPE_PARENT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Component that provides the XrSpatialEntityIdEXT of the parent for a spatial entity. The corresponding list structure is XrSpatialComponentParentListEXT; the corresponding data structure is XrSpatialEntityIdEXT.
 
 #### COMPONENT_TYPE_MESH_3D {#COMPONENT_TYPE_MESH_3D}
 
@@ -404,7 +342,7 @@ COMPONENT_TYPE_PARENT = 3
 COMPONENT_TYPE_MESH_3D = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Component that provides a 3D mesh for a spatial entity. The corresponding list structure is XrSpatialComponentMesh3DListEXT; the corresponding data structure is XrSpatialMeshDataEXT.
 
 #### COMPONENT_TYPE_PLANE_ALIGNMENT {#COMPONENT_TYPE_PLANE_ALIGNMENT}
 
@@ -412,7 +350,7 @@ COMPONENT_TYPE_MESH_3D = 4
 COMPONENT_TYPE_PLANE_ALIGNMENT = 1000741000
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Component that provides the plane alignment enum for a spatial entity. The corresponding list structure is XrSpatialComponentPlaneAlignmentListEXT; the corresponding data structure is XrSpatialPlaneAlignmentEXT (Added by the XR_EXT_spatial_plane_tracking extension).
 
 #### COMPONENT_TYPE_MESH_2D {#COMPONENT_TYPE_MESH_2D}
 
@@ -420,7 +358,7 @@ COMPONENT_TYPE_PLANE_ALIGNMENT = 1000741000
 COMPONENT_TYPE_MESH_2D = 1000741001
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Component that provides a 2D mesh for a spatial entity. The corresponding list structure is XrSpatialComponentMesh2DListEXT; the corresponding data structure is XrSpatialMeshDataEXT (Added by the XR_EXT_spatial_plane_tracking extension).
 
 #### COMPONENT_TYPE_POLYGON_2D {#COMPONENT_TYPE_POLYGON_2D}
 
@@ -428,7 +366,7 @@ COMPONENT_TYPE_MESH_2D = 1000741001
 COMPONENT_TYPE_POLYGON_2D = 1000741002
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Component that provides a 2D boundary polygon for a spatial entity. The corresponding list structure is XrSpatialComponentPolygon2DListEXT; the corresponding data structure is XrSpatialPolygon2DDataEXT (Added by the XR_EXT_spatial_plane_tracking extension).
 
 #### COMPONENT_TYPE_PLANE_SEMANTIC_LABEL {#COMPONENT_TYPE_PLANE_SEMANTIC_LABEL}
 
@@ -436,7 +374,7 @@ COMPONENT_TYPE_POLYGON_2D = 1000741002
 COMPONENT_TYPE_PLANE_SEMANTIC_LABEL = 1000741003
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Component that provides a semantic label for a plane. The corresponding list structure is XrSpatialComponentPlaneSemanticLabelListEXT; the corresponding data structure is XrSpatialPlaneSemanticLabelEXT (Added by the XR_EXT_spatial_plane_tracking extension).
 
 #### COMPONENT_TYPE_MARKER {#COMPONENT_TYPE_MARKER}
 
@@ -444,7 +382,7 @@ COMPONENT_TYPE_PLANE_SEMANTIC_LABEL = 1000741003
 COMPONENT_TYPE_MARKER = 1000743000
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A component describing the marker type, ID and location. The corresponding list structure is XrSpatialComponentMarkerListEXT; the corresponding data structure is XrSpatialMarkerDataEXT (Added by the XR_EXT_spatial_marker_tracking extension).
 
 #### COMPONENT_TYPE_ANCHOR {#COMPONENT_TYPE_ANCHOR}
 
@@ -452,7 +390,7 @@ COMPONENT_TYPE_MARKER = 1000743000
 COMPONENT_TYPE_ANCHOR = 1000762000
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Component that provides the location for an anchor. The corresponding list structure is XrSpatialComponentAnchorListEXT; the corresponding data structure is XrPosef (Added by the XR_EXT_spatial_anchor extension).
 
 #### COMPONENT_TYPE_PERSISTENCE {#COMPONENT_TYPE_PERSISTENCE}
 
@@ -460,4 +398,6 @@ COMPONENT_TYPE_ANCHOR = 1000762000
 COMPONENT_TYPE_PERSISTENCE = 1000763000
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Component that provides the persisted UUID for a spatial entity. The corresponding list structure is XrSpatialComponentPersistenceListEXT; the corresponding data structure is [code]XrSpatialPersistenceDataEXT (Added by the XR_EXT_spatial_persistence extension).
+
+---

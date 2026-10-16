@@ -102,7 +102,10 @@ void set_zero_y(enable: bool)
 animation_path: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_animation_path(value: NodePath)
+- NodePath get_animation_path()
+
+Path to an AnimationMixer node to use as a basis for root motion.
 
 ### color {#color}
 
@@ -110,7 +113,10 @@ animation_path: NodePath
 color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_color(value: Color)
+- Color get_color()
+
+The grid's color.
 
 ### cell_size {#cell_size}
 

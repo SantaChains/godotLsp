@@ -96,21 +96,7 @@ Emitted when a render model child node is about to be removed from this node.
 enum RenderModelTracker { RENDER_MODEL_TRACKER_ANY = 0, RENDER_MODEL_TRACKER_NONE_SET = 1, RENDER_MODEL_TRACKER_LEFT_HAND = 2, RENDER_MODEL_TRACKER_RIGHT_HAND = 3 }
 ```
 
-RenderModelTracker RENDER_MODEL_TRACKER_ANY = 0
-
-All active render models are shown regardless of what tracker they relate to.
-
-RenderModelTracker RENDER_MODEL_TRACKER_NONE_SET = 1
-
-Only active render models are shown that are not related to any tracker we manage.
-
-RenderModelTracker RENDER_MODEL_TRACKER_LEFT_HAND = 2
-
-Only active render models are shown that are related to the left hand tracker.
-
-RenderModelTracker RENDER_MODEL_TRACKER_RIGHT_HAND = 3
-
-Only active render models are shown that are related to the right hand tracker.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RENDER_MODEL_TRACKER_ANY {#RENDER_MODEL_TRACKER_ANY}
 
@@ -118,7 +104,7 @@ Only active render models are shown that are related to the right hand tracker.
 RENDER_MODEL_TRACKER_ANY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+All active render models are shown regardless of what tracker they relate to.
 
 #### RENDER_MODEL_TRACKER_NONE_SET {#RENDER_MODEL_TRACKER_NONE_SET}
 
@@ -126,7 +112,7 @@ RENDER_MODEL_TRACKER_ANY = 0
 RENDER_MODEL_TRACKER_NONE_SET = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only active render models are shown that are not related to any tracker we manage.
 
 #### RENDER_MODEL_TRACKER_LEFT_HAND {#RENDER_MODEL_TRACKER_LEFT_HAND}
 
@@ -134,7 +120,7 @@ RENDER_MODEL_TRACKER_NONE_SET = 1
 RENDER_MODEL_TRACKER_LEFT_HAND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only active render models are shown that are related to the left hand tracker.
 
 #### RENDER_MODEL_TRACKER_RIGHT_HAND {#RENDER_MODEL_TRACKER_RIGHT_HAND}
 
@@ -142,4 +128,6 @@ RENDER_MODEL_TRACKER_LEFT_HAND = 2
 RENDER_MODEL_TRACKER_RIGHT_HAND = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only active render models are shown that are related to the right hand tracker.
+
+---

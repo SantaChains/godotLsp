@@ -352,17 +352,7 @@ Emitted by a newly duplicated resource with resource_local_to_scene set to true.
 enum DeepDuplicateMode { DEEP_DUPLICATE_NONE = 0, DEEP_DUPLICATE_INTERNAL = 1, DEEP_DUPLICATE_ALL = 2 }
 ```
 
-DeepDuplicateMode DEEP_DUPLICATE_NONE = 0
-
-No subresources at all are duplicated. This is useful even in a deep duplication to have all the arrays and dictionaries duplicated but still pointing to the original resources.
-
-DeepDuplicateMode DEEP_DUPLICATE_INTERNAL = 1
-
-Only subresources without a path or with a scene-local path will be duplicated.
-
-DeepDuplicateMode DEEP_DUPLICATE_ALL = 2
-
-Every subresource found will be duplicated, even if it has a non-local path. In other words, even potentially big resources stored separately will be duplicated.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DEEP_DUPLICATE_NONE {#DEEP_DUPLICATE_NONE}
 
@@ -370,7 +360,7 @@ Every subresource found will be duplicated, even if it has a non-local path. In 
 DEEP_DUPLICATE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No subresources at all are duplicated. This is useful even in a deep duplication to have all the arrays and dictionaries duplicated but still pointing to the original resources.
 
 #### DEEP_DUPLICATE_INTERNAL {#DEEP_DUPLICATE_INTERNAL}
 
@@ -378,7 +368,7 @@ DEEP_DUPLICATE_NONE = 0
 DEEP_DUPLICATE_INTERNAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only subresources without a path or with a scene-local path will be duplicated.
 
 #### DEEP_DUPLICATE_ALL {#DEEP_DUPLICATE_ALL}
 
@@ -386,4 +376,6 @@ DEEP_DUPLICATE_INTERNAL = 1
 DEEP_DUPLICATE_ALL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Every subresource found will be duplicated, even if it has a non-local path. In other words, even potentially big resources stored separately will be duplicated.
+
+---

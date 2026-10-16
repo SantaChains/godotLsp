@@ -286,13 +286,7 @@ Emitted when the container is folded/expanded.
 enum TitlePosition { POSITION_TOP = 0, POSITION_BOTTOM = 1 }
 ```
 
-TitlePosition POSITION_TOP = 0
-
-Makes the title appear at the top of the container.
-
-TitlePosition POSITION_BOTTOM = 1
-
-Makes the title appear at the bottom of the container. Also makes all StyleBoxes flipped vertically.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### POSITION_TOP {#POSITION_TOP}
 
@@ -300,7 +294,7 @@ Makes the title appear at the bottom of the container. Also makes all StyleBoxes
 POSITION_TOP = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the title appear at the top of the container.
 
 #### POSITION_BOTTOM {#POSITION_BOTTOM}
 
@@ -308,4 +302,6 @@ POSITION_TOP = 0
 POSITION_BOTTOM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the title appear at the bottom of the container. Also makes all StyleBoxes flipped vertically.
+
+---

@@ -296,33 +296,7 @@ If true, texture is flipped vertically.
 enum StretchMode { STRETCH_SCALE = 0, STRETCH_TILE = 1, STRETCH_KEEP = 2, STRETCH_KEEP_CENTERED = 3, STRETCH_KEEP_ASPECT = 4, STRETCH_KEEP_ASPECT_CENTERED = 5, STRETCH_KEEP_ASPECT_COVERED = 6 }
 ```
 
-StretchMode STRETCH_SCALE = 0
-
-Scale to fit the node's bounding rectangle.
-
-StretchMode STRETCH_TILE = 1
-
-Tile inside the node's bounding rectangle.
-
-StretchMode STRETCH_KEEP = 2
-
-The texture keeps its original size and stays in the bounding rectangle's top-left corner.
-
-StretchMode STRETCH_KEEP_CENTERED = 3
-
-The texture keeps its original size and stays centered in the node's bounding rectangle.
-
-StretchMode STRETCH_KEEP_ASPECT = 4
-
-Scale the texture to fit the node's bounding rectangle, but maintain the texture's aspect ratio.
-
-StretchMode STRETCH_KEEP_ASPECT_CENTERED = 5
-
-Scale the texture to fit the node's bounding rectangle, center it, and maintain its aspect ratio.
-
-StretchMode STRETCH_KEEP_ASPECT_COVERED = 6
-
-Scale the texture so that the shorter side fits the bounding rectangle. The other side clips to the node's limits.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STRETCH_SCALE {#STRETCH_SCALE}
 
@@ -330,7 +304,7 @@ Scale the texture so that the shorter side fits the bounding rectangle. The othe
 STRETCH_SCALE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scale to fit the node's bounding rectangle.
 
 #### STRETCH_TILE {#STRETCH_TILE}
 
@@ -338,7 +312,7 @@ STRETCH_SCALE = 0
 STRETCH_TILE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tile inside the node's bounding rectangle.
 
 #### STRETCH_KEEP {#STRETCH_KEEP}
 
@@ -346,7 +320,7 @@ STRETCH_TILE = 1
 STRETCH_KEEP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture keeps its original size and stays in the bounding rectangle's top-left corner.
 
 #### STRETCH_KEEP_CENTERED {#STRETCH_KEEP_CENTERED}
 
@@ -354,7 +328,7 @@ STRETCH_KEEP = 2
 STRETCH_KEEP_CENTERED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture keeps its original size and stays centered in the node's bounding rectangle.
 
 #### STRETCH_KEEP_ASPECT {#STRETCH_KEEP_ASPECT}
 
@@ -362,7 +336,7 @@ STRETCH_KEEP_CENTERED = 3
 STRETCH_KEEP_ASPECT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scale the texture to fit the node's bounding rectangle, but maintain the texture's aspect ratio.
 
 #### STRETCH_KEEP_ASPECT_CENTERED {#STRETCH_KEEP_ASPECT_CENTERED}
 
@@ -370,7 +344,7 @@ STRETCH_KEEP_ASPECT = 4
 STRETCH_KEEP_ASPECT_CENTERED = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scale the texture to fit the node's bounding rectangle, center it, and maintain its aspect ratio.
 
 #### STRETCH_KEEP_ASPECT_COVERED {#STRETCH_KEEP_ASPECT_COVERED}
 
@@ -378,4 +352,6 @@ STRETCH_KEEP_ASPECT_CENTERED = 5
 STRETCH_KEEP_ASPECT_COVERED = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scale the texture so that the shorter side fits the bounding rectangle. The other side clips to the node's limits.
+
+---

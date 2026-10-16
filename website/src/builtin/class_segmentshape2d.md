@@ -52,7 +52,10 @@ void set_b(b: Vector2)
 a: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_a(value: Vector2)
+- Vector2 get_a()
+
+The segment's first point position.
 
 ### b {#b}
 
@@ -60,4 +63,7 @@ a: Vector2
 b: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_b(value: Vector2)
+- Vector2 get_b()
+
+The segment's second point position.

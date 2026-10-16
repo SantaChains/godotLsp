@@ -183,7 +183,12 @@ There is currently no description for this property. Please help us by contribut
 joints_original: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_joints_original(value: PackedInt32Array)
+- PackedInt32Array get_joints_original()
+
+There is currently no description for this property. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.
 
 ### inverse_binds {#inverse_binds}
 
@@ -199,7 +204,12 @@ inverse_binds: Array
 joints: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_joints(value: PackedInt32Array)
+- PackedInt32Array get_joints()
+
+There is currently no description for this property. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.
 
 ### non_joints {#non_joints}
 
@@ -207,7 +217,12 @@ joints: PackedInt32Array
 non_joints: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_non_joints(value: PackedInt32Array)
+- PackedInt32Array get_non_joints()
+
+There is currently no description for this property. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.
 
 ### roots {#roots}
 
@@ -215,7 +230,12 @@ non_joints: PackedInt32Array
 roots: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_roots(value: PackedInt32Array)
+- PackedInt32Array get_roots()
+
+There is currently no description for this property. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.
 
 ### skeleton {#skeleton}
 

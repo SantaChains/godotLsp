@@ -111,7 +111,10 @@ Displacement of the upper edge along the X axis. 0.0 positions edge straight abo
 size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3)
+- Vector3 get_size()
+
+Size of the prism.
 
 ### subdivide_width {#subdivide_width}
 

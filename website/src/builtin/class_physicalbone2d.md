@@ -120,7 +120,10 @@ void set_simulate_physics(simulate_physics: bool)
 bone2d_nodepath: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_bone2d_nodepath(value: NodePath)
+- NodePath get_bone2d_nodepath()
+
+The NodePath to the Bone2D that this PhysicalBone2D should simulate.
 
 ### bone2d_index {#bone2d_index}
 

@@ -652,13 +652,7 @@ Emitted when the Tween has finished all tweening. Never emitted when the Tween i
 enum TweenProcessMode { TWEEN_PROCESS_PHYSICS = 0, TWEEN_PROCESS_IDLE = 1 }
 ```
 
-TweenProcessMode TWEEN_PROCESS_PHYSICS = 0
-
-The Tween updates after each physics frame (see Node._physics_process()).
-
-TweenProcessMode TWEEN_PROCESS_IDLE = 1
-
-The Tween updates after each process frame (see Node._process()).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TWEEN_PROCESS_PHYSICS {#TWEEN_PROCESS_PHYSICS}
 
@@ -666,7 +660,7 @@ The Tween updates after each process frame (see Node._process()).
 TWEEN_PROCESS_PHYSICS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Tween updates after each physics frame (see Node._physics_process()).
 
 #### TWEEN_PROCESS_IDLE {#TWEEN_PROCESS_IDLE}
 
@@ -674,7 +668,9 @@ TWEEN_PROCESS_PHYSICS = 0
 TWEEN_PROCESS_IDLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Tween updates after each process frame (see Node._process()).
+
+---
 
 ### TweenPauseMode {#enum-TweenPauseMode}
 
@@ -682,17 +678,7 @@ TWEEN_PROCESS_IDLE = 1
 enum TweenPauseMode { TWEEN_PAUSE_BOUND = 0, TWEEN_PAUSE_STOP = 1, TWEEN_PAUSE_PROCESS = 2 }
 ```
 
-TweenPauseMode TWEEN_PAUSE_BOUND = 0
-
-If the Tween has a bound node, it will process when that node can process (see Node.process_mode). Otherwise it's the same as TWEEN_PAUSE_STOP.
-
-TweenPauseMode TWEEN_PAUSE_STOP = 1
-
-If SceneTree is paused, the Tween will also pause.
-
-TweenPauseMode TWEEN_PAUSE_PROCESS = 2
-
-The Tween will process regardless of whether SceneTree is paused.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TWEEN_PAUSE_BOUND {#TWEEN_PAUSE_BOUND}
 
@@ -700,7 +686,7 @@ The Tween will process regardless of whether SceneTree is paused.
 TWEEN_PAUSE_BOUND = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If the Tween has a bound node, it will process when that node can process (see Node.process_mode). Otherwise it's the same as TWEEN_PAUSE_STOP.
 
 #### TWEEN_PAUSE_STOP {#TWEEN_PAUSE_STOP}
 
@@ -708,7 +694,7 @@ TWEEN_PAUSE_BOUND = 0
 TWEEN_PAUSE_STOP = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If SceneTree is paused, the Tween will also pause.
 
 #### TWEEN_PAUSE_PROCESS {#TWEEN_PAUSE_PROCESS}
 
@@ -716,7 +702,9 @@ TWEEN_PAUSE_STOP = 1
 TWEEN_PAUSE_PROCESS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Tween will process regardless of whether SceneTree is paused.
+
+---
 
 ### TransitionType {#enum-TransitionType}
 
@@ -724,53 +712,7 @@ TWEEN_PAUSE_PROCESS = 2
 enum TransitionType { TRANS_LINEAR = 0, TRANS_SINE = 1, TRANS_QUINT = 2, TRANS_QUART = 3, TRANS_QUAD = 4, TRANS_EXPO = 5, TRANS_ELASTIC = 6, TRANS_CUBIC = 7, TRANS_CIRC = 8, TRANS_BOUNCE = 9, TRANS_BACK = 10, TRANS_SPRING = 11 }
 ```
 
-TransitionType TRANS_LINEAR = 0
-
-The animation is interpolated linearly.
-
-TransitionType TRANS_SINE = 1
-
-The animation is interpolated using a sine function.
-
-TransitionType TRANS_QUINT = 2
-
-The animation is interpolated with a quintic (to the power of 5) function.
-
-TransitionType TRANS_QUART = 3
-
-The animation is interpolated with a quartic (to the power of 4) function.
-
-TransitionType TRANS_QUAD = 4
-
-The animation is interpolated with a quadratic (to the power of 2) function.
-
-TransitionType TRANS_EXPO = 5
-
-The animation is interpolated with an exponential (to the power of x) function.
-
-TransitionType TRANS_ELASTIC = 6
-
-The animation is interpolated with elasticity, wiggling around the edges.
-
-TransitionType TRANS_CUBIC = 7
-
-The animation is interpolated with a cubic (to the power of 3) function.
-
-TransitionType TRANS_CIRC = 8
-
-The animation is interpolated with a function using square roots.
-
-TransitionType TRANS_BOUNCE = 9
-
-The animation is interpolated by bouncing at the end.
-
-TransitionType TRANS_BACK = 10
-
-The animation is interpolated backing out at ends.
-
-TransitionType TRANS_SPRING = 11
-
-The animation is interpolated like a spring towards the end.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TRANS_LINEAR {#TRANS_LINEAR}
 
@@ -778,7 +720,7 @@ The animation is interpolated like a spring towards the end.
 TRANS_LINEAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated linearly.
 
 #### TRANS_SINE {#TRANS_SINE}
 
@@ -786,7 +728,7 @@ TRANS_LINEAR = 0
 TRANS_SINE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated using a sine function.
 
 #### TRANS_QUINT {#TRANS_QUINT}
 
@@ -794,7 +736,7 @@ TRANS_SINE = 1
 TRANS_QUINT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated with a quintic (to the power of 5) function.
 
 #### TRANS_QUART {#TRANS_QUART}
 
@@ -802,7 +744,7 @@ TRANS_QUINT = 2
 TRANS_QUART = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated with a quartic (to the power of 4) function.
 
 #### TRANS_QUAD {#TRANS_QUAD}
 
@@ -810,7 +752,7 @@ TRANS_QUART = 3
 TRANS_QUAD = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated with a quadratic (to the power of 2) function.
 
 #### TRANS_EXPO {#TRANS_EXPO}
 
@@ -818,7 +760,7 @@ TRANS_QUAD = 4
 TRANS_EXPO = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated with an exponential (to the power of x) function.
 
 #### TRANS_ELASTIC {#TRANS_ELASTIC}
 
@@ -826,7 +768,7 @@ TRANS_EXPO = 5
 TRANS_ELASTIC = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated with elasticity, wiggling around the edges.
 
 #### TRANS_CUBIC {#TRANS_CUBIC}
 
@@ -834,7 +776,7 @@ TRANS_ELASTIC = 6
 TRANS_CUBIC = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated with a cubic (to the power of 3) function.
 
 #### TRANS_CIRC {#TRANS_CIRC}
 
@@ -842,7 +784,7 @@ TRANS_CUBIC = 7
 TRANS_CIRC = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated with a function using square roots.
 
 #### TRANS_BOUNCE {#TRANS_BOUNCE}
 
@@ -850,7 +792,7 @@ TRANS_CIRC = 8
 TRANS_BOUNCE = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated by bouncing at the end.
 
 #### TRANS_BACK {#TRANS_BACK}
 
@@ -858,7 +800,7 @@ TRANS_BOUNCE = 9
 TRANS_BACK = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated backing out at ends.
 
 #### TRANS_SPRING {#TRANS_SPRING}
 
@@ -866,7 +808,9 @@ TRANS_BACK = 10
 TRANS_SPRING = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation is interpolated like a spring towards the end.
+
+---
 
 ### EaseType {#enum-EaseType}
 
@@ -874,21 +818,7 @@ TRANS_SPRING = 11
 enum EaseType { EASE_IN = 0, EASE_OUT = 1, EASE_IN_OUT = 2, EASE_OUT_IN = 3 }
 ```
 
-EaseType EASE_IN = 0
-
-The interpolation starts slowly and speeds up towards the end.
-
-EaseType EASE_OUT = 1
-
-The interpolation starts quickly and slows down towards the end.
-
-EaseType EASE_IN_OUT = 2
-
-A combination of EASE_IN and EASE_OUT. The interpolation is slowest at both ends.
-
-EaseType EASE_OUT_IN = 3
-
-A combination of EASE_IN and EASE_OUT. The interpolation is fastest at both ends.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EASE_IN {#EASE_IN}
 
@@ -896,7 +826,7 @@ A combination of EASE_IN and EASE_OUT. The interpolation is fastest at both ends
 EASE_IN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The interpolation starts slowly and speeds up towards the end.
 
 #### EASE_OUT {#EASE_OUT}
 
@@ -904,7 +834,7 @@ EASE_IN = 0
 EASE_OUT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The interpolation starts quickly and slows down towards the end.
 
 #### EASE_IN_OUT {#EASE_IN_OUT}
 
@@ -912,7 +842,7 @@ EASE_OUT = 1
 EASE_IN_OUT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A combination of EASE_IN and EASE_OUT. The interpolation is slowest at both ends.
 
 #### EASE_OUT_IN {#EASE_OUT_IN}
 
@@ -920,4 +850,6 @@ EASE_IN_OUT = 2
 EASE_OUT_IN = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A combination of EASE_IN and EASE_OUT. The interpolation is fastest at both ends.
+
+---

@@ -52,7 +52,10 @@ void set_normal(normal: Vector2)
 normal: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_normal(value: Vector2)
+- Vector2 get_normal()
+
+The line's normal, typically a unit vector. Its direction indicates the non-colliding half-plane. Can be of any length but zero. Defaults to Vector2.UP.
 
 ### distance {#distance}
 

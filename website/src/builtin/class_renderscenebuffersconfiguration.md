@@ -180,7 +180,10 @@ void set_view_count(view_count: int)
 render_target: RID
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_render_target(value: RID)
+- RID get_render_target()
+
+The render target associated with these buffer.
 
 ### internal_size {#internal_size}
 
@@ -188,7 +191,10 @@ render_target: RID
 internal_size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_internal_size(value: Vector2i)
+- Vector2i get_internal_size()
+
+The size of the 3D render buffer used for rendering.
 
 ### target_size {#target_size}
 
@@ -196,7 +202,10 @@ internal_size: Vector2i
 target_size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_size(value: Vector2i)
+- Vector2i get_target_size()
+
+The target (upscale) size if scaling is used.
 
 ### view_count {#view_count}
 

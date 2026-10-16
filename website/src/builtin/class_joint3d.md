@@ -92,7 +92,12 @@ void set_solver_priority(priority: int)
 node_a: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_node_a(value: NodePath)
+- NodePath get_node_a()
+
+Path to the first node (A) attached to the joint. The node must inherit PhysicsBody3D.
+
+If left empty and node_b is set, the body is attached to a fixed StaticBody3D without collision shapes.
 
 ### node_b {#node_b}
 
@@ -100,7 +105,12 @@ node_a: NodePath
 node_b: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_node_b(value: NodePath)
+- NodePath get_node_b()
+
+Path to the second node (B) attached to the joint. The node must inherit PhysicsBody3D.
+
+If left empty and node_a is set, the body is attached to a fixed StaticBody3D without collision shapes.
 
 ### solver_priority {#solver_priority}
 

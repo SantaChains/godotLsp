@@ -202,19 +202,7 @@ animations: Array
 enum LoopMode { LOOP_NONE = 0, LOOP_LINEAR = 1, LOOP_PINGPONG = 2 }
 ```
 
-LoopMode LOOP_NONE = 0
-
-The animation plays once and stops when it reaches the end, or the start if played in reverse.
-
-LoopMode LOOP_LINEAR = 1
-
-The animation restarts from the beginning when it reaches the end, or from the end if played in reverse, repeating continuously.
-
-LoopMode LOOP_PINGPONG = 2
-
-The animation alternates direction each time it reaches the end or start, playing forward and then in reverse repeatedly.
-
-Note: Both AnimatedSprite2D and AnimatedSprite3D play the first/last frame for its duration only once at each end of the animation loop (instead of twice, once per forward/backward animation direction).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LOOP_NONE {#LOOP_NONE}
 
@@ -222,7 +210,7 @@ Note: Both AnimatedSprite2D and AnimatedSprite3D play the first/last frame for i
 LOOP_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation plays once and stops when it reaches the end, or the start if played in reverse.
 
 #### LOOP_LINEAR {#LOOP_LINEAR}
 
@@ -230,7 +218,7 @@ LOOP_NONE = 0
 LOOP_LINEAR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation restarts from the beginning when it reaches the end, or from the end if played in reverse, repeating continuously.
 
 #### LOOP_PINGPONG {#LOOP_PINGPONG}
 
@@ -238,4 +226,8 @@ LOOP_LINEAR = 1
 LOOP_PINGPONG = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The animation alternates direction each time it reaches the end or start, playing forward and then in reverse repeatedly.
+
+Note: Both AnimatedSprite2D and AnimatedSprite3D play the first/last frame for its duration only once at each end of the animation loop (instead of twice, once per forward/backward animation direction).
+
+---

@@ -124,7 +124,10 @@ void set_update_mode(update_mode: GPUParticlesCollisionHeightField3D.UpdateMode)
 size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3)
+- Vector3 get_size()
+
+The collision heightmap's size in 3D units. To improve heightmap quality, size should be set as small as possible while covering the parts of the scene you need.
 
 ### resolution {#resolution}
 
@@ -184,33 +187,7 @@ To adjust heightfield_mask more easily using a script, use get_heightfield_mask_
 enum Resolution { RESOLUTION_256 = 0, RESOLUTION_512 = 1, RESOLUTION_1024 = 2, RESOLUTION_2048 = 3, RESOLUTION_4096 = 4, RESOLUTION_8192 = 5, RESOLUTION_MAX = 6 }
 ```
 
-Resolution RESOLUTION_256 = 0
-
-Generate a 256×256 heightmap. Intended for small-scale scenes, or larger scenes with no distant particles.
-
-Resolution RESOLUTION_512 = 1
-
-Generate a 512×512 heightmap. Intended for medium-scale scenes, or larger scenes with no distant particles.
-
-Resolution RESOLUTION_1024 = 2
-
-Generate a 1024×1024 heightmap. Intended for large scenes with distant particles.
-
-Resolution RESOLUTION_2048 = 3
-
-Generate a 2048×2048 heightmap. Intended for very large scenes with distant particles.
-
-Resolution RESOLUTION_4096 = 4
-
-Generate a 4096×4096 heightmap. Intended for huge scenes with distant particles.
-
-Resolution RESOLUTION_8192 = 5
-
-Generate a 8192×8192 heightmap. Intended for gigantic scenes with distant particles.
-
-Resolution RESOLUTION_MAX = 6
-
-Represents the size of the Resolution enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RESOLUTION_256 {#RESOLUTION_256}
 
@@ -218,7 +195,7 @@ Represents the size of the Resolution enum.
 RESOLUTION_256 = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Generate a 256×256 heightmap. Intended for small-scale scenes, or larger scenes with no distant particles.
 
 #### RESOLUTION_512 {#RESOLUTION_512}
 
@@ -226,7 +203,7 @@ RESOLUTION_256 = 0
 RESOLUTION_512 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Generate a 512×512 heightmap. Intended for medium-scale scenes, or larger scenes with no distant particles.
 
 #### RESOLUTION_1024 {#RESOLUTION_1024}
 
@@ -234,7 +211,7 @@ RESOLUTION_512 = 1
 RESOLUTION_1024 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Generate a 1024×1024 heightmap. Intended for large scenes with distant particles.
 
 #### RESOLUTION_2048 {#RESOLUTION_2048}
 
@@ -242,7 +219,7 @@ RESOLUTION_1024 = 2
 RESOLUTION_2048 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Generate a 2048×2048 heightmap. Intended for very large scenes with distant particles.
 
 #### RESOLUTION_4096 {#RESOLUTION_4096}
 
@@ -250,7 +227,7 @@ RESOLUTION_2048 = 3
 RESOLUTION_4096 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Generate a 4096×4096 heightmap. Intended for huge scenes with distant particles.
 
 #### RESOLUTION_8192 {#RESOLUTION_8192}
 
@@ -258,7 +235,7 @@ RESOLUTION_4096 = 4
 RESOLUTION_8192 = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Generate a 8192×8192 heightmap. Intended for gigantic scenes with distant particles.
 
 #### RESOLUTION_MAX {#RESOLUTION_MAX}
 
@@ -266,7 +243,9 @@ RESOLUTION_8192 = 5
 RESOLUTION_MAX = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Resolution enum.
+
+---
 
 ### UpdateMode {#enum-UpdateMode}
 
@@ -274,13 +253,7 @@ RESOLUTION_MAX = 6
 enum UpdateMode { UPDATE_MODE_WHEN_MOVED = 0, UPDATE_MODE_ALWAYS = 1 }
 ```
 
-UpdateMode UPDATE_MODE_WHEN_MOVED = 0
-
-Only update the heightmap when the GPUParticlesCollisionHeightField3D node is moved, or when the camera moves if follow_camera_enabled is true. An update can be forced by slightly moving the GPUParticlesCollisionHeightField3D in any direction, or by calling RenderingServer.particles_collision_height_field_update().
-
-UpdateMode UPDATE_MODE_ALWAYS = 1
-
-Update the heightmap every frame. This has a significant performance cost. This update should only be used when geometry that particles can collide with changes significantly during gameplay.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### UPDATE_MODE_WHEN_MOVED {#UPDATE_MODE_WHEN_MOVED}
 
@@ -288,7 +261,7 @@ Update the heightmap every frame. This has a significant performance cost. This 
 UPDATE_MODE_WHEN_MOVED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only update the heightmap when the GPUParticlesCollisionHeightField3D node is moved, or when the camera moves if follow_camera_enabled is true. An update can be forced by slightly moving the GPUParticlesCollisionHeightField3D in any direction, or by calling RenderingServer.particles_collision_height_field_update().
 
 #### UPDATE_MODE_ALWAYS {#UPDATE_MODE_ALWAYS}
 
@@ -296,4 +269,6 @@ UPDATE_MODE_WHEN_MOVED = 0
 UPDATE_MODE_ALWAYS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Update the heightmap every frame. This has a significant performance cost. This update should only be used when geometry that particles can collide with changes significantly during gameplay.
+
+---

@@ -176,7 +176,12 @@ The step between parameter's values. Forces the parameter to be a multiple of th
 enum_names: PackedStringArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_enum_names(value: PackedStringArray)
+- PackedStringArray get_enum_names()
+
+The names used for the enum select in the editor. hint must be HINT_ENUM for this to take effect.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedStringArray for more details.
 
 ### default_value_enabled {#default_value_enabled}
 
@@ -208,25 +213,7 @@ Default value of this parameter, which will be used if not set externally. defau
 enum Hint { HINT_NONE = 0, HINT_RANGE = 1, HINT_RANGE_STEP = 2, HINT_ENUM = 3, HINT_MAX = 4 }
 ```
 
-Hint HINT_NONE = 0
-
-The parameter will not constrain its value.
-
-Hint HINT_RANGE = 1
-
-The parameter's value must be within the specified min/max range.
-
-Hint HINT_RANGE_STEP = 2
-
-The parameter's value must be within the specified range, with the given step between values.
-
-Hint HINT_ENUM = 3
-
-The parameter uses an enum to associate preset values to names in the editor.
-
-Hint HINT_MAX = 4
-
-Represents the size of the Hint enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HINT_NONE {#HINT_NONE}
 
@@ -234,7 +221,7 @@ Represents the size of the Hint enum.
 HINT_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The parameter will not constrain its value.
 
 #### HINT_RANGE {#HINT_RANGE}
 
@@ -242,7 +229,7 @@ HINT_NONE = 0
 HINT_RANGE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The parameter's value must be within the specified min/max range.
 
 #### HINT_RANGE_STEP {#HINT_RANGE_STEP}
 
@@ -250,7 +237,7 @@ HINT_RANGE = 1
 HINT_RANGE_STEP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The parameter's value must be within the specified range, with the given step between values.
 
 #### HINT_ENUM {#HINT_ENUM}
 
@@ -258,7 +245,7 @@ HINT_RANGE_STEP = 2
 HINT_ENUM = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The parameter uses an enum to associate preset values to names in the editor.
 
 #### HINT_MAX {#HINT_MAX}
 
@@ -266,4 +253,6 @@ HINT_ENUM = 3
 HINT_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Hint enum.
+
+---

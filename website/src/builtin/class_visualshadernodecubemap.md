@@ -103,17 +103,7 @@ Defines the type of data provided by the source texture.
 enum Source { SOURCE_TEXTURE = 0, SOURCE_PORT = 1, SOURCE_MAX = 2 }
 ```
 
-Source SOURCE_TEXTURE = 0
-
-Use the Cubemap set via cube_map. If this is set to source, the samplerCube port is ignored.
-
-Source SOURCE_PORT = 1
-
-Use the Cubemap sampler reference passed via the samplerCube port. If this is set to source, the cube_map texture is ignored.
-
-Source SOURCE_MAX = 2
-
-Represents the size of the Source enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SOURCE_TEXTURE {#SOURCE_TEXTURE}
 
@@ -121,7 +111,7 @@ Represents the size of the Source enum.
 SOURCE_TEXTURE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the Cubemap set via cube_map. If this is set to source, the samplerCube port is ignored.
 
 #### SOURCE_PORT {#SOURCE_PORT}
 
@@ -129,7 +119,7 @@ SOURCE_TEXTURE = 0
 SOURCE_PORT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the Cubemap sampler reference passed via the samplerCube port. If this is set to source, the cube_map texture is ignored.
 
 #### SOURCE_MAX {#SOURCE_MAX}
 
@@ -137,7 +127,9 @@ SOURCE_PORT = 1
 SOURCE_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Source enum.
+
+---
 
 ### TextureType {#enum-TextureType}
 
@@ -145,21 +137,7 @@ SOURCE_MAX = 2
 enum TextureType { TYPE_DATA = 0, TYPE_COLOR = 1, TYPE_NORMAL_MAP = 2, TYPE_MAX = 3 }
 ```
 
-TextureType TYPE_DATA = 0
-
-No hints are added to the uniform declaration.
-
-TextureType TYPE_COLOR = 1
-
-Adds source_color as hint to the uniform declaration for proper conversion from nonlinear sRGB encoding to linear encoding.
-
-TextureType TYPE_NORMAL_MAP = 2
-
-Adds hint_normal as hint to the uniform declaration, which internally converts the texture for proper usage as normal map.
-
-TextureType TYPE_MAX = 3
-
-Represents the size of the TextureType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TYPE_DATA {#TYPE_DATA}
 
@@ -167,7 +145,7 @@ Represents the size of the TextureType enum.
 TYPE_DATA = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No hints are added to the uniform declaration.
 
 #### TYPE_COLOR {#TYPE_COLOR}
 
@@ -175,7 +153,7 @@ TYPE_DATA = 0
 TYPE_COLOR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adds source_color as hint to the uniform declaration for proper conversion from nonlinear sRGB encoding to linear encoding.
 
 #### TYPE_NORMAL_MAP {#TYPE_NORMAL_MAP}
 
@@ -183,7 +161,7 @@ TYPE_COLOR = 1
 TYPE_NORMAL_MAP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adds hint_normal as hint to the uniform declaration, which internally converts the texture for proper usage as normal map.
 
 #### TYPE_MAX {#TYPE_MAX}
 
@@ -191,4 +169,6 @@ TYPE_NORMAL_MAP = 2
 TYPE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the TextureType enum.
+
+---

@@ -108,7 +108,12 @@ void set_path_types(path_types: PackedInt32Array)
 path: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_path(value: PackedVector2Array)
+- PackedVector2Array get_path()
+
+The resulting path array from the navigation query. All path array positions are in global coordinates. Without customized query parameters this is the same path as returned by NavigationServer2D.map_get_path().
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.
 
 ### path_types {#path_types}
 
@@ -116,7 +121,12 @@ path: PackedVector2Array
 path_types: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_path_types(value: PackedInt32Array)
+- PackedInt32Array get_path_types()
+
+The type of navigation primitive (region or link) that each point of the path goes through.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.
 
 ### path_rids {#path_rids}
 
@@ -135,7 +145,12 @@ The RIDs of the regions and links that each point of the path goes through.
 path_owner_ids: PackedInt64Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_path_owner_ids(value: PackedInt64Array)
+- PackedInt64Array get_path_owner_ids()
+
+The ObjectIDs of the Objects which manage the regions and links each point of the path goes through.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt64Array for more details.
 
 ### path_length {#path_length}
 
@@ -156,13 +171,7 @@ Returns the length of the path.
 enum PathSegmentType { PATH_SEGMENT_TYPE_REGION = 0, PATH_SEGMENT_TYPE_LINK = 1 }
 ```
 
-PathSegmentType PATH_SEGMENT_TYPE_REGION = 0
-
-This segment of the path goes through a region.
-
-PathSegmentType PATH_SEGMENT_TYPE_LINK = 1
-
-This segment of the path goes through a link.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PATH_SEGMENT_TYPE_REGION {#PATH_SEGMENT_TYPE_REGION}
 
@@ -170,7 +179,7 @@ This segment of the path goes through a link.
 PATH_SEGMENT_TYPE_REGION = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This segment of the path goes through a region.
 
 #### PATH_SEGMENT_TYPE_LINK {#PATH_SEGMENT_TYPE_LINK}
 
@@ -178,4 +187,6 @@ PATH_SEGMENT_TYPE_REGION = 0
 PATH_SEGMENT_TYPE_LINK = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This segment of the path goes through a link.
+
+---

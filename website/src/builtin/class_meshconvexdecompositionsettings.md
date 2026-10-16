@@ -373,13 +373,7 @@ If true, projects output convex hull vertices onto the original source mesh to i
 enum Mode { CONVEX_DECOMPOSITION_MODE_VOXEL = 0, CONVEX_DECOMPOSITION_MODE_TETRAHEDRON = 1 }
 ```
 
-Mode CONVEX_DECOMPOSITION_MODE_VOXEL = 0
-
-Constant for voxel-based approximate convex decomposition.
-
-Mode CONVEX_DECOMPOSITION_MODE_TETRAHEDRON = 1
-
-Constant for tetrahedron-based approximate convex decomposition.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CONVEX_DECOMPOSITION_MODE_VOXEL {#CONVEX_DECOMPOSITION_MODE_VOXEL}
 
@@ -387,7 +381,7 @@ Constant for tetrahedron-based approximate convex decomposition.
 CONVEX_DECOMPOSITION_MODE_VOXEL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for voxel-based approximate convex decomposition.
 
 #### CONVEX_DECOMPOSITION_MODE_TETRAHEDRON {#CONVEX_DECOMPOSITION_MODE_TETRAHEDRON}
 
@@ -395,4 +389,6 @@ CONVEX_DECOMPOSITION_MODE_VOXEL = 0
 CONVEX_DECOMPOSITION_MODE_TETRAHEDRON = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for tetrahedron-based approximate convex decomposition.
+
+---

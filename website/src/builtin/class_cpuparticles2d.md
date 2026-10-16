@@ -923,7 +923,10 @@ Align Y axis of particle with the direction of its velocity.
 direction: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_direction(value: Vector2)
+- Vector2 get_direction()
+
+Unit vector specifying the particles' emission direction.
 
 ### spread {#spread}
 
@@ -942,7 +945,10 @@ Each particle's initial direction range from +spread to -spread degrees.
 gravity: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_gravity(value: Vector2)
+- Vector2 get_gravity()
+
+Gravity applied to every particle.
 
 ### initial_velocity_min {#initial_velocity_min}
 
@@ -1273,7 +1279,10 @@ split_scale must be enabled.
 color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_color(value: Color)
+- Color get_color()
+
+Each particle's initial color. If texture is defined, it will be multiplied by this color.
 
 ### color_ramp {#color_ramp}
 
@@ -1416,13 +1425,7 @@ Emitted when all active particles have finished processing. When one_shot is dis
 enum DrawOrder { DRAW_ORDER_INDEX = 0, DRAW_ORDER_LIFETIME = 1 }
 ```
 
-DrawOrder DRAW_ORDER_INDEX = 0
-
-Particles are drawn in the order emitted.
-
-DrawOrder DRAW_ORDER_LIFETIME = 1
-
-Particles are drawn in order of remaining lifetime. In other words, the particle with the highest lifetime is drawn at the front.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DRAW_ORDER_INDEX {#DRAW_ORDER_INDEX}
 
@@ -1430,7 +1433,7 @@ Particles are drawn in order of remaining lifetime. In other words, the particle
 DRAW_ORDER_INDEX = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles are drawn in the order emitted.
 
 #### DRAW_ORDER_LIFETIME {#DRAW_ORDER_LIFETIME}
 
@@ -1438,7 +1441,9 @@ DRAW_ORDER_INDEX = 0
 DRAW_ORDER_LIFETIME = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles are drawn in order of remaining lifetime. In other words, the particle with the highest lifetime is drawn at the front.
+
+---
 
 ### Parameter {#enum-Parameter}
 
@@ -1446,57 +1451,7 @@ DRAW_ORDER_LIFETIME = 1
 enum Parameter { PARAM_INITIAL_LINEAR_VELOCITY = 0, PARAM_ANGULAR_VELOCITY = 1, PARAM_ORBIT_VELOCITY = 2, PARAM_LINEAR_ACCEL = 3, PARAM_RADIAL_ACCEL = 4, PARAM_TANGENTIAL_ACCEL = 5, PARAM_DAMPING = 6, PARAM_ANGLE = 7, PARAM_SCALE = 8, PARAM_HUE_VARIATION = 9, PARAM_ANIM_SPEED = 10, PARAM_ANIM_OFFSET = 11, PARAM_MAX = 12 }
 ```
 
-Parameter PARAM_INITIAL_LINEAR_VELOCITY = 0
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set initial velocity properties.
-
-Parameter PARAM_ANGULAR_VELOCITY = 1
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set angular velocity properties.
-
-Parameter PARAM_ORBIT_VELOCITY = 2
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set orbital velocity properties.
-
-Parameter PARAM_LINEAR_ACCEL = 3
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set linear acceleration properties.
-
-Parameter PARAM_RADIAL_ACCEL = 4
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set radial acceleration properties.
-
-Parameter PARAM_TANGENTIAL_ACCEL = 5
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set tangential acceleration properties.
-
-Parameter PARAM_DAMPING = 6
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set damping properties.
-
-Parameter PARAM_ANGLE = 7
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set angle properties.
-
-Parameter PARAM_SCALE = 8
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set scale properties.
-
-Parameter PARAM_HUE_VARIATION = 9
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set hue variation properties.
-
-Parameter PARAM_ANIM_SPEED = 10
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set animation speed properties.
-
-Parameter PARAM_ANIM_OFFSET = 11
-
-Use with set_param_min(), set_param_max(), and set_param_curve() to set animation offset properties.
-
-Parameter PARAM_MAX = 12
-
-Represents the size of the Parameter enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PARAM_INITIAL_LINEAR_VELOCITY {#PARAM_INITIAL_LINEAR_VELOCITY}
 
@@ -1504,7 +1459,7 @@ Represents the size of the Parameter enum.
 PARAM_INITIAL_LINEAR_VELOCITY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set initial velocity properties.
 
 #### PARAM_ANGULAR_VELOCITY {#PARAM_ANGULAR_VELOCITY}
 
@@ -1512,7 +1467,7 @@ PARAM_INITIAL_LINEAR_VELOCITY = 0
 PARAM_ANGULAR_VELOCITY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set angular velocity properties.
 
 #### PARAM_ORBIT_VELOCITY {#PARAM_ORBIT_VELOCITY}
 
@@ -1520,7 +1475,7 @@ PARAM_ANGULAR_VELOCITY = 1
 PARAM_ORBIT_VELOCITY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set orbital velocity properties.
 
 #### PARAM_LINEAR_ACCEL {#PARAM_LINEAR_ACCEL}
 
@@ -1528,7 +1483,7 @@ PARAM_ORBIT_VELOCITY = 2
 PARAM_LINEAR_ACCEL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set linear acceleration properties.
 
 #### PARAM_RADIAL_ACCEL {#PARAM_RADIAL_ACCEL}
 
@@ -1536,7 +1491,7 @@ PARAM_LINEAR_ACCEL = 3
 PARAM_RADIAL_ACCEL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set radial acceleration properties.
 
 #### PARAM_TANGENTIAL_ACCEL {#PARAM_TANGENTIAL_ACCEL}
 
@@ -1544,7 +1499,7 @@ PARAM_RADIAL_ACCEL = 4
 PARAM_TANGENTIAL_ACCEL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set tangential acceleration properties.
 
 #### PARAM_DAMPING {#PARAM_DAMPING}
 
@@ -1552,7 +1507,7 @@ PARAM_TANGENTIAL_ACCEL = 5
 PARAM_DAMPING = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set damping properties.
 
 #### PARAM_ANGLE {#PARAM_ANGLE}
 
@@ -1560,7 +1515,7 @@ PARAM_DAMPING = 6
 PARAM_ANGLE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set angle properties.
 
 #### PARAM_SCALE {#PARAM_SCALE}
 
@@ -1568,7 +1523,7 @@ PARAM_ANGLE = 7
 PARAM_SCALE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set scale properties.
 
 #### PARAM_HUE_VARIATION {#PARAM_HUE_VARIATION}
 
@@ -1576,7 +1531,7 @@ PARAM_SCALE = 8
 PARAM_HUE_VARIATION = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set hue variation properties.
 
 #### PARAM_ANIM_SPEED {#PARAM_ANIM_SPEED}
 
@@ -1584,7 +1539,7 @@ PARAM_HUE_VARIATION = 9
 PARAM_ANIM_SPEED = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set animation speed properties.
 
 #### PARAM_ANIM_OFFSET {#PARAM_ANIM_OFFSET}
 
@@ -1592,7 +1547,7 @@ PARAM_ANIM_SPEED = 10
 PARAM_ANIM_OFFSET = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_param_min(), set_param_max(), and set_param_curve() to set animation offset properties.
 
 #### PARAM_MAX {#PARAM_MAX}
 
@@ -1600,7 +1555,9 @@ PARAM_ANIM_OFFSET = 11
 PARAM_MAX = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Parameter enum.
+
+---
 
 ### ParticleFlags {#enum-ParticleFlags}
 
@@ -1608,21 +1565,7 @@ PARAM_MAX = 12
 enum ParticleFlags { PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY = 0, PARTICLE_FLAG_ROTATE_Y = 1, PARTICLE_FLAG_DISABLE_Z = 2, PARTICLE_FLAG_MAX = 3 }
 ```
 
-ParticleFlags PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY = 0
-
-Use with set_particle_flag() to set particle_flag_align_y.
-
-ParticleFlags PARTICLE_FLAG_ROTATE_Y = 1
-
-Present for consistency with 3D particle nodes, not used in 2D.
-
-ParticleFlags PARTICLE_FLAG_DISABLE_Z = 2
-
-Present for consistency with 3D particle nodes, not used in 2D.
-
-ParticleFlags PARTICLE_FLAG_MAX = 3
-
-Represents the size of the ParticleFlags enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY {#PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY}
 
@@ -1630,7 +1573,7 @@ Represents the size of the ParticleFlags enum.
 PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use with set_particle_flag() to set particle_flag_align_y.
 
 #### PARTICLE_FLAG_ROTATE_Y {#PARTICLE_FLAG_ROTATE_Y}
 
@@ -1638,7 +1581,7 @@ PARTICLE_FLAG_ALIGN_Y_TO_VELOCITY = 0
 PARTICLE_FLAG_ROTATE_Y = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Present for consistency with 3D particle nodes, not used in 2D.
 
 #### PARTICLE_FLAG_DISABLE_Z {#PARTICLE_FLAG_DISABLE_Z}
 
@@ -1646,7 +1589,7 @@ PARTICLE_FLAG_ROTATE_Y = 1
 PARTICLE_FLAG_DISABLE_Z = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Present for consistency with 3D particle nodes, not used in 2D.
 
 #### PARTICLE_FLAG_MAX {#PARTICLE_FLAG_MAX}
 
@@ -1654,7 +1597,9 @@ PARTICLE_FLAG_DISABLE_Z = 2
 PARTICLE_FLAG_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the ParticleFlags enum.
+
+---
 
 ### EmissionShape {#enum-EmissionShape}
 
@@ -1662,37 +1607,7 @@ PARTICLE_FLAG_MAX = 3
 enum EmissionShape { EMISSION_SHAPE_POINT = 0, EMISSION_SHAPE_SPHERE = 1, EMISSION_SHAPE_SPHERE_SURFACE = 2, EMISSION_SHAPE_RECTANGLE = 3, EMISSION_SHAPE_POINTS = 4, EMISSION_SHAPE_DIRECTED_POINTS = 5, EMISSION_SHAPE_RING = 6, EMISSION_SHAPE_MAX = 7 }
 ```
 
-EmissionShape EMISSION_SHAPE_POINT = 0
-
-All particles will be emitted from a single point.
-
-EmissionShape EMISSION_SHAPE_SPHERE = 1
-
-Particles will be emitted in the volume of a sphere flattened to two dimensions.
-
-EmissionShape EMISSION_SHAPE_SPHERE_SURFACE = 2
-
-Particles will be emitted on the surface of a sphere flattened to two dimensions.
-
-EmissionShape EMISSION_SHAPE_RECTANGLE = 3
-
-Particles will be emitted in the area of a rectangle.
-
-EmissionShape EMISSION_SHAPE_POINTS = 4
-
-Particles will be emitted at a position chosen randomly among emission_points. Particle color will be modulated by emission_colors.
-
-EmissionShape EMISSION_SHAPE_DIRECTED_POINTS = 5
-
-Particles will be emitted at a position chosen randomly among emission_points. Particle velocity and rotation will be set based on emission_normals. Particle color will be modulated by emission_colors.
-
-EmissionShape EMISSION_SHAPE_RING = 6
-
-Particles will be emitted in the area of a ring parameterized by its outer and inner radius.
-
-EmissionShape EMISSION_SHAPE_MAX = 7
-
-Represents the size of the EmissionShape enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EMISSION_SHAPE_POINT {#EMISSION_SHAPE_POINT}
 
@@ -1700,7 +1615,7 @@ Represents the size of the EmissionShape enum.
 EMISSION_SHAPE_POINT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+All particles will be emitted from a single point.
 
 #### EMISSION_SHAPE_SPHERE {#EMISSION_SHAPE_SPHERE}
 
@@ -1708,7 +1623,7 @@ EMISSION_SHAPE_POINT = 0
 EMISSION_SHAPE_SPHERE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted in the volume of a sphere flattened to two dimensions.
 
 #### EMISSION_SHAPE_SPHERE_SURFACE {#EMISSION_SHAPE_SPHERE_SURFACE}
 
@@ -1716,7 +1631,7 @@ EMISSION_SHAPE_SPHERE = 1
 EMISSION_SHAPE_SPHERE_SURFACE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted on the surface of a sphere flattened to two dimensions.
 
 #### EMISSION_SHAPE_RECTANGLE {#EMISSION_SHAPE_RECTANGLE}
 
@@ -1724,7 +1639,7 @@ EMISSION_SHAPE_SPHERE_SURFACE = 2
 EMISSION_SHAPE_RECTANGLE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted in the area of a rectangle.
 
 #### EMISSION_SHAPE_POINTS {#EMISSION_SHAPE_POINTS}
 
@@ -1732,7 +1647,7 @@ EMISSION_SHAPE_RECTANGLE = 3
 EMISSION_SHAPE_POINTS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted at a position chosen randomly among emission_points. Particle color will be modulated by emission_colors.
 
 #### EMISSION_SHAPE_DIRECTED_POINTS {#EMISSION_SHAPE_DIRECTED_POINTS}
 
@@ -1740,7 +1655,7 @@ EMISSION_SHAPE_POINTS = 4
 EMISSION_SHAPE_DIRECTED_POINTS = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted at a position chosen randomly among emission_points. Particle velocity and rotation will be set based on emission_normals. Particle color will be modulated by emission_colors.
 
 #### EMISSION_SHAPE_RING {#EMISSION_SHAPE_RING}
 
@@ -1748,7 +1663,7 @@ EMISSION_SHAPE_DIRECTED_POINTS = 5
 EMISSION_SHAPE_RING = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles will be emitted in the area of a ring parameterized by its outer and inner radius.
 
 #### EMISSION_SHAPE_MAX {#EMISSION_SHAPE_MAX}
 
@@ -1756,4 +1671,6 @@ EMISSION_SHAPE_RING = 6
 EMISSION_SHAPE_MAX = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the EmissionShape enum.
+
+---

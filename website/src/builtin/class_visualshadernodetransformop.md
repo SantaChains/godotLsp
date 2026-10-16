@@ -49,45 +49,7 @@ The type of the operation to be performed on the transforms.
 enum Operator { OP_AxB = 0, OP_BxA = 1, OP_AxB_COMP = 2, OP_BxA_COMP = 3, OP_ADD = 4, OP_A_MINUS_B = 5, OP_B_MINUS_A = 6, OP_A_DIV_B = 7, OP_B_DIV_A = 8, OP_MAX = 9 }
 ```
 
-Operator OP_AxB = 0
-
-Multiplies transform a by the transform b.
-
-Operator OP_BxA = 1
-
-Multiplies transform b by the transform a.
-
-Operator OP_AxB_COMP = 2
-
-Performs a component-wise multiplication of transform a by the transform b.
-
-Operator OP_BxA_COMP = 3
-
-Performs a component-wise multiplication of transform b by the transform a.
-
-Operator OP_ADD = 4
-
-Adds two transforms.
-
-Operator OP_A_MINUS_B = 5
-
-Subtracts the transform a from the transform b.
-
-Operator OP_B_MINUS_A = 6
-
-Subtracts the transform b from the transform a.
-
-Operator OP_A_DIV_B = 7
-
-Divides the transform a by the transform b.
-
-Operator OP_B_DIV_A = 8
-
-Divides the transform b by the transform a.
-
-Operator OP_MAX = 9
-
-Represents the size of the Operator enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OP_AxB {#OP_AxB}
 
@@ -95,7 +57,7 @@ Represents the size of the Operator enum.
 OP_AxB = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiplies transform a by the transform b.
 
 #### OP_BxA {#OP_BxA}
 
@@ -103,7 +65,7 @@ OP_AxB = 0
 OP_BxA = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiplies transform b by the transform a.
 
 #### OP_AxB_COMP {#OP_AxB_COMP}
 
@@ -111,7 +73,7 @@ OP_BxA = 1
 OP_AxB_COMP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Performs a component-wise multiplication of transform a by the transform b.
 
 #### OP_BxA_COMP {#OP_BxA_COMP}
 
@@ -119,7 +81,7 @@ OP_AxB_COMP = 2
 OP_BxA_COMP = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Performs a component-wise multiplication of transform b by the transform a.
 
 #### OP_ADD {#OP_ADD}
 
@@ -127,7 +89,7 @@ OP_BxA_COMP = 3
 OP_ADD = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adds two transforms.
 
 #### OP_A_MINUS_B {#OP_A_MINUS_B}
 
@@ -135,7 +97,7 @@ OP_ADD = 4
 OP_A_MINUS_B = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Subtracts the transform a from the transform b.
 
 #### OP_B_MINUS_A {#OP_B_MINUS_A}
 
@@ -143,7 +105,7 @@ OP_A_MINUS_B = 5
 OP_B_MINUS_A = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Subtracts the transform b from the transform a.
 
 #### OP_A_DIV_B {#OP_A_DIV_B}
 
@@ -151,7 +113,7 @@ OP_B_MINUS_A = 6
 OP_A_DIV_B = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Divides the transform a by the transform b.
 
 #### OP_B_DIV_A {#OP_B_DIV_A}
 
@@ -159,7 +121,7 @@ OP_A_DIV_B = 7
 OP_B_DIV_A = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Divides the transform b by the transform a.
 
 #### OP_MAX {#OP_MAX}
 
@@ -167,4 +129,6 @@ OP_B_DIV_A = 8
 OP_MAX = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Operator enum.
+
+---

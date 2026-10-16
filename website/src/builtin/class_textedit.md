@@ -2810,133 +2810,7 @@ Emitted when a gutter is removed.
 enum MenuItems { MENU_CUT = 0, MENU_COPY = 1, MENU_PASTE = 2, MENU_CLEAR = 3, MENU_SELECT_ALL = 4, MENU_UNDO = 5, MENU_REDO = 6, MENU_SUBMENU_TEXT_DIR = 7, MENU_DIR_INHERITED = 8, MENU_DIR_AUTO = 9, MENU_DIR_LTR = 10, MENU_DIR_RTL = 11, MENU_DISPLAY_UCC = 12, MENU_SUBMENU_INSERT_UCC = 13, MENU_INSERT_LRM = 14, MENU_INSERT_RLM = 15, MENU_INSERT_LRE = 16, MENU_INSERT_RLE = 17, MENU_INSERT_LRO = 18, MENU_INSERT_RLO = 19, MENU_INSERT_PDF = 20, MENU_INSERT_ALM = 21, MENU_INSERT_LRI = 22, MENU_INSERT_RLI = 23, MENU_INSERT_FSI = 24, MENU_INSERT_PDI = 25, MENU_INSERT_ZWJ = 26, MENU_INSERT_ZWNJ = 27, MENU_INSERT_WJ = 28, MENU_INSERT_SHY = 29, MENU_EMOJI_AND_SYMBOL = 30, MENU_MAX = 31 }
 ```
 
-MenuItems MENU_CUT = 0
-
-Cuts (copies and clears) the selected text.
-
-MenuItems MENU_COPY = 1
-
-Copies the selected text.
-
-MenuItems MENU_PASTE = 2
-
-Pastes the clipboard text over the selected text (or at the cursor's position).
-
-MenuItems MENU_CLEAR = 3
-
-Erases the whole TextEdit text.
-
-MenuItems MENU_SELECT_ALL = 4
-
-Selects the whole TextEdit text.
-
-MenuItems MENU_UNDO = 5
-
-Undoes the previous action.
-
-MenuItems MENU_REDO = 6
-
-Redoes the previous action.
-
-MenuItems MENU_SUBMENU_TEXT_DIR = 7
-
-ID of "Text Writing Direction" submenu.
-
-MenuItems MENU_DIR_INHERITED = 8
-
-Sets text direction to inherited.
-
-MenuItems MENU_DIR_AUTO = 9
-
-Sets text direction to automatic.
-
-MenuItems MENU_DIR_LTR = 10
-
-Sets text direction to left-to-right.
-
-MenuItems MENU_DIR_RTL = 11
-
-Sets text direction to right-to-left.
-
-MenuItems MENU_DISPLAY_UCC = 12
-
-Toggles control character display.
-
-MenuItems MENU_SUBMENU_INSERT_UCC = 13
-
-ID of "Insert Control Character" submenu.
-
-MenuItems MENU_INSERT_LRM = 14
-
-Inserts left-to-right mark (LRM) character.
-
-MenuItems MENU_INSERT_RLM = 15
-
-Inserts right-to-left mark (RLM) character.
-
-MenuItems MENU_INSERT_LRE = 16
-
-Inserts start of left-to-right embedding (LRE) character.
-
-MenuItems MENU_INSERT_RLE = 17
-
-Inserts start of right-to-left embedding (RLE) character.
-
-MenuItems MENU_INSERT_LRO = 18
-
-Inserts start of left-to-right override (LRO) character.
-
-MenuItems MENU_INSERT_RLO = 19
-
-Inserts start of right-to-left override (RLO) character.
-
-MenuItems MENU_INSERT_PDF = 20
-
-Inserts pop direction formatting (PDF) character.
-
-MenuItems MENU_INSERT_ALM = 21
-
-Inserts Arabic letter mark (ALM) character.
-
-MenuItems MENU_INSERT_LRI = 22
-
-Inserts left-to-right isolate (LRI) character.
-
-MenuItems MENU_INSERT_RLI = 23
-
-Inserts right-to-left isolate (RLI) character.
-
-MenuItems MENU_INSERT_FSI = 24
-
-Inserts first strong isolate (FSI) character.
-
-MenuItems MENU_INSERT_PDI = 25
-
-Inserts pop direction isolate (PDI) character.
-
-MenuItems MENU_INSERT_ZWJ = 26
-
-Inserts zero width joiner (ZWJ) character.
-
-MenuItems MENU_INSERT_ZWNJ = 27
-
-Inserts zero width non-joiner (ZWNJ) character.
-
-MenuItems MENU_INSERT_WJ = 28
-
-Inserts word joiner (WJ) character.
-
-MenuItems MENU_INSERT_SHY = 29
-
-Inserts soft hyphen (SHY) character.
-
-MenuItems MENU_EMOJI_AND_SYMBOL = 30
-
-Opens system emoji and symbol picker.
-
-MenuItems MENU_MAX = 31
-
-Represents the size of the MenuItems enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MENU_CUT {#MENU_CUT}
 
@@ -2944,7 +2818,7 @@ Represents the size of the MenuItems enum.
 MENU_CUT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cuts (copies and clears) the selected text.
 
 #### MENU_COPY {#MENU_COPY}
 
@@ -2952,7 +2826,7 @@ MENU_CUT = 0
 MENU_COPY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Copies the selected text.
 
 #### MENU_PASTE {#MENU_PASTE}
 
@@ -2960,7 +2834,7 @@ MENU_COPY = 1
 MENU_PASTE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pastes the clipboard text over the selected text (or at the cursor's position).
 
 #### MENU_CLEAR {#MENU_CLEAR}
 
@@ -2968,7 +2842,7 @@ MENU_PASTE = 2
 MENU_CLEAR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Erases the whole TextEdit text.
 
 #### MENU_SELECT_ALL {#MENU_SELECT_ALL}
 
@@ -2976,7 +2850,7 @@ MENU_CLEAR = 3
 MENU_SELECT_ALL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Selects the whole TextEdit text.
 
 #### MENU_UNDO {#MENU_UNDO}
 
@@ -2984,7 +2858,7 @@ MENU_SELECT_ALL = 4
 MENU_UNDO = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Undoes the previous action.
 
 #### MENU_REDO {#MENU_REDO}
 
@@ -2992,7 +2866,7 @@ MENU_UNDO = 5
 MENU_REDO = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Redoes the previous action.
 
 #### MENU_SUBMENU_TEXT_DIR {#MENU_SUBMENU_TEXT_DIR}
 
@@ -3000,7 +2874,7 @@ MENU_REDO = 6
 MENU_SUBMENU_TEXT_DIR = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+ID of "Text Writing Direction" submenu.
 
 #### MENU_DIR_INHERITED {#MENU_DIR_INHERITED}
 
@@ -3008,7 +2882,7 @@ MENU_SUBMENU_TEXT_DIR = 7
 MENU_DIR_INHERITED = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets text direction to inherited.
 
 #### MENU_DIR_AUTO {#MENU_DIR_AUTO}
 
@@ -3016,7 +2890,7 @@ MENU_DIR_INHERITED = 8
 MENU_DIR_AUTO = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets text direction to automatic.
 
 #### MENU_DIR_LTR {#MENU_DIR_LTR}
 
@@ -3024,7 +2898,7 @@ MENU_DIR_AUTO = 9
 MENU_DIR_LTR = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets text direction to left-to-right.
 
 #### MENU_DIR_RTL {#MENU_DIR_RTL}
 
@@ -3032,7 +2906,7 @@ MENU_DIR_LTR = 10
 MENU_DIR_RTL = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets text direction to right-to-left.
 
 #### MENU_DISPLAY_UCC {#MENU_DISPLAY_UCC}
 
@@ -3040,7 +2914,7 @@ MENU_DIR_RTL = 11
 MENU_DISPLAY_UCC = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Toggles control character display.
 
 #### MENU_SUBMENU_INSERT_UCC {#MENU_SUBMENU_INSERT_UCC}
 
@@ -3048,7 +2922,7 @@ MENU_DISPLAY_UCC = 12
 MENU_SUBMENU_INSERT_UCC = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+ID of "Insert Control Character" submenu.
 
 #### MENU_INSERT_LRM {#MENU_INSERT_LRM}
 
@@ -3056,7 +2930,7 @@ MENU_SUBMENU_INSERT_UCC = 13
 MENU_INSERT_LRM = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts left-to-right mark (LRM) character.
 
 #### MENU_INSERT_RLM {#MENU_INSERT_RLM}
 
@@ -3064,7 +2938,7 @@ MENU_INSERT_LRM = 14
 MENU_INSERT_RLM = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts right-to-left mark (RLM) character.
 
 #### MENU_INSERT_LRE {#MENU_INSERT_LRE}
 
@@ -3072,7 +2946,7 @@ MENU_INSERT_RLM = 15
 MENU_INSERT_LRE = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts start of left-to-right embedding (LRE) character.
 
 #### MENU_INSERT_RLE {#MENU_INSERT_RLE}
 
@@ -3080,7 +2954,7 @@ MENU_INSERT_LRE = 16
 MENU_INSERT_RLE = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts start of right-to-left embedding (RLE) character.
 
 #### MENU_INSERT_LRO {#MENU_INSERT_LRO}
 
@@ -3088,7 +2962,7 @@ MENU_INSERT_RLE = 17
 MENU_INSERT_LRO = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts start of left-to-right override (LRO) character.
 
 #### MENU_INSERT_RLO {#MENU_INSERT_RLO}
 
@@ -3096,7 +2970,7 @@ MENU_INSERT_LRO = 18
 MENU_INSERT_RLO = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts start of right-to-left override (RLO) character.
 
 #### MENU_INSERT_PDF {#MENU_INSERT_PDF}
 
@@ -3104,7 +2978,7 @@ MENU_INSERT_RLO = 19
 MENU_INSERT_PDF = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts pop direction formatting (PDF) character.
 
 #### MENU_INSERT_ALM {#MENU_INSERT_ALM}
 
@@ -3112,7 +2986,7 @@ MENU_INSERT_PDF = 20
 MENU_INSERT_ALM = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts Arabic letter mark (ALM) character.
 
 #### MENU_INSERT_LRI {#MENU_INSERT_LRI}
 
@@ -3120,7 +2994,7 @@ MENU_INSERT_ALM = 21
 MENU_INSERT_LRI = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts left-to-right isolate (LRI) character.
 
 #### MENU_INSERT_RLI {#MENU_INSERT_RLI}
 
@@ -3128,7 +3002,7 @@ MENU_INSERT_LRI = 22
 MENU_INSERT_RLI = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts right-to-left isolate (RLI) character.
 
 #### MENU_INSERT_FSI {#MENU_INSERT_FSI}
 
@@ -3136,7 +3010,7 @@ MENU_INSERT_RLI = 23
 MENU_INSERT_FSI = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts first strong isolate (FSI) character.
 
 #### MENU_INSERT_PDI {#MENU_INSERT_PDI}
 
@@ -3144,7 +3018,7 @@ MENU_INSERT_FSI = 24
 MENU_INSERT_PDI = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts pop direction isolate (PDI) character.
 
 #### MENU_INSERT_ZWJ {#MENU_INSERT_ZWJ}
 
@@ -3152,7 +3026,7 @@ MENU_INSERT_PDI = 25
 MENU_INSERT_ZWJ = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts zero width joiner (ZWJ) character.
 
 #### MENU_INSERT_ZWNJ {#MENU_INSERT_ZWNJ}
 
@@ -3160,7 +3034,7 @@ MENU_INSERT_ZWJ = 26
 MENU_INSERT_ZWNJ = 27
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts zero width non-joiner (ZWNJ) character.
 
 #### MENU_INSERT_WJ {#MENU_INSERT_WJ}
 
@@ -3168,7 +3042,7 @@ MENU_INSERT_ZWNJ = 27
 MENU_INSERT_WJ = 28
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts word joiner (WJ) character.
 
 #### MENU_INSERT_SHY {#MENU_INSERT_SHY}
 
@@ -3176,7 +3050,7 @@ MENU_INSERT_WJ = 28
 MENU_INSERT_SHY = 29
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inserts soft hyphen (SHY) character.
 
 #### MENU_EMOJI_AND_SYMBOL {#MENU_EMOJI_AND_SYMBOL}
 
@@ -3184,7 +3058,7 @@ MENU_INSERT_SHY = 29
 MENU_EMOJI_AND_SYMBOL = 30
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Opens system emoji and symbol picker.
 
 #### MENU_MAX {#MENU_MAX}
 
@@ -3192,7 +3066,9 @@ MENU_EMOJI_AND_SYMBOL = 30
 MENU_MAX = 31
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the MenuItems enum.
+
+---
 
 ### EditAction {#enum-EditAction}
 
@@ -3200,21 +3076,7 @@ MENU_MAX = 31
 enum EditAction { ACTION_NONE = 0, ACTION_TYPING = 1, ACTION_BACKSPACE = 2, ACTION_DELETE = 3 }
 ```
 
-EditAction ACTION_NONE = 0
-
-No current action.
-
-EditAction ACTION_TYPING = 1
-
-A typing action.
-
-EditAction ACTION_BACKSPACE = 2
-
-A backwards delete action.
-
-EditAction ACTION_DELETE = 3
-
-A forward delete action.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ACTION_NONE {#ACTION_NONE}
 
@@ -3222,7 +3084,7 @@ A forward delete action.
 ACTION_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No current action.
 
 #### ACTION_TYPING {#ACTION_TYPING}
 
@@ -3230,7 +3092,7 @@ ACTION_NONE = 0
 ACTION_TYPING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A typing action.
 
 #### ACTION_BACKSPACE {#ACTION_BACKSPACE}
 
@@ -3238,7 +3100,7 @@ ACTION_TYPING = 1
 ACTION_BACKSPACE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A backwards delete action.
 
 #### ACTION_DELETE {#ACTION_DELETE}
 
@@ -3246,7 +3108,9 @@ ACTION_BACKSPACE = 2
 ACTION_DELETE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A forward delete action.
+
+---
 
 ### SearchFlags {#enum-SearchFlags}
 
@@ -3254,17 +3118,7 @@ ACTION_DELETE = 3
 enum SearchFlags { SEARCH_MATCH_CASE = 1, SEARCH_WHOLE_WORDS = 2, SEARCH_BACKWARDS = 4 }
 ```
 
-SearchFlags SEARCH_MATCH_CASE = 1
-
-Match case when searching.
-
-SearchFlags SEARCH_WHOLE_WORDS = 2
-
-Match whole words when searching.
-
-SearchFlags SEARCH_BACKWARDS = 4
-
-Search from end to beginning.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SEARCH_MATCH_CASE {#SEARCH_MATCH_CASE}
 
@@ -3272,7 +3126,7 @@ Search from end to beginning.
 SEARCH_MATCH_CASE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Match case when searching.
 
 #### SEARCH_WHOLE_WORDS {#SEARCH_WHOLE_WORDS}
 
@@ -3280,7 +3134,7 @@ SEARCH_MATCH_CASE = 1
 SEARCH_WHOLE_WORDS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Match whole words when searching.
 
 #### SEARCH_BACKWARDS {#SEARCH_BACKWARDS}
 
@@ -3288,7 +3142,9 @@ SEARCH_WHOLE_WORDS = 2
 SEARCH_BACKWARDS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Search from end to beginning.
+
+---
 
 ### CaretType {#enum-CaretType}
 
@@ -3296,13 +3152,7 @@ SEARCH_BACKWARDS = 4
 enum CaretType { CARET_TYPE_LINE = 0, CARET_TYPE_BLOCK = 1 }
 ```
 
-CaretType CARET_TYPE_LINE = 0
-
-Vertical line caret.
-
-CaretType CARET_TYPE_BLOCK = 1
-
-Block caret.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CARET_TYPE_LINE {#CARET_TYPE_LINE}
 
@@ -3310,7 +3160,7 @@ Block caret.
 CARET_TYPE_LINE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Vertical line caret.
 
 #### CARET_TYPE_BLOCK {#CARET_TYPE_BLOCK}
 
@@ -3318,7 +3168,9 @@ CARET_TYPE_LINE = 0
 CARET_TYPE_BLOCK = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Block caret.
+
+---
 
 ### SelectionMode {#enum-SelectionMode}
 
@@ -3326,25 +3178,7 @@ CARET_TYPE_BLOCK = 1
 enum SelectionMode { SELECTION_MODE_NONE = 0, SELECTION_MODE_SHIFT = 1, SELECTION_MODE_POINTER = 2, SELECTION_MODE_WORD = 3, SELECTION_MODE_LINE = 4 }
 ```
 
-SelectionMode SELECTION_MODE_NONE = 0
-
-Not selecting.
-
-SelectionMode SELECTION_MODE_SHIFT = 1
-
-Select as if shift is pressed.
-
-SelectionMode SELECTION_MODE_POINTER = 2
-
-Select single characters as if the user single clicked.
-
-SelectionMode SELECTION_MODE_WORD = 3
-
-Select whole words as if the user double clicked.
-
-SelectionMode SELECTION_MODE_LINE = 4
-
-Select whole lines as if the user triple clicked.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SELECTION_MODE_NONE {#SELECTION_MODE_NONE}
 
@@ -3352,7 +3186,7 @@ Select whole lines as if the user triple clicked.
 SELECTION_MODE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Not selecting.
 
 #### SELECTION_MODE_SHIFT {#SELECTION_MODE_SHIFT}
 
@@ -3360,7 +3194,7 @@ SELECTION_MODE_NONE = 0
 SELECTION_MODE_SHIFT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Select as if shift is pressed.
 
 #### SELECTION_MODE_POINTER {#SELECTION_MODE_POINTER}
 
@@ -3368,7 +3202,7 @@ SELECTION_MODE_SHIFT = 1
 SELECTION_MODE_POINTER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Select single characters as if the user single clicked.
 
 #### SELECTION_MODE_WORD {#SELECTION_MODE_WORD}
 
@@ -3376,7 +3210,7 @@ SELECTION_MODE_POINTER = 2
 SELECTION_MODE_WORD = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Select whole words as if the user double clicked.
 
 #### SELECTION_MODE_LINE {#SELECTION_MODE_LINE}
 
@@ -3384,7 +3218,9 @@ SELECTION_MODE_WORD = 3
 SELECTION_MODE_LINE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Select whole lines as if the user triple clicked.
+
+---
 
 ### LineWrappingMode {#enum-LineWrappingMode}
 
@@ -3392,13 +3228,7 @@ SELECTION_MODE_LINE = 4
 enum LineWrappingMode { LINE_WRAPPING_NONE = 0, LINE_WRAPPING_BOUNDARY = 1 }
 ```
 
-LineWrappingMode LINE_WRAPPING_NONE = 0
-
-Line wrapping is disabled.
-
-LineWrappingMode LINE_WRAPPING_BOUNDARY = 1
-
-Line wrapping occurs at the control boundary, beyond what would normally be visible.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LINE_WRAPPING_NONE {#LINE_WRAPPING_NONE}
 
@@ -3406,7 +3236,7 @@ Line wrapping occurs at the control boundary, beyond what would normally be visi
 LINE_WRAPPING_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Line wrapping is disabled.
 
 #### LINE_WRAPPING_BOUNDARY {#LINE_WRAPPING_BOUNDARY}
 
@@ -3414,7 +3244,9 @@ LINE_WRAPPING_NONE = 0
 LINE_WRAPPING_BOUNDARY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Line wrapping occurs at the control boundary, beyond what would normally be visible.
+
+---
 
 ### GutterType {#enum-GutterType}
 
@@ -3422,17 +3254,7 @@ LINE_WRAPPING_BOUNDARY = 1
 enum GutterType { GUTTER_TYPE_STRING = 0, GUTTER_TYPE_ICON = 1, GUTTER_TYPE_CUSTOM = 2 }
 ```
 
-GutterType GUTTER_TYPE_STRING = 0
-
-When a gutter is set to string using set_gutter_type(), it is used to contain text set via the set_line_gutter_text() method.
-
-GutterType GUTTER_TYPE_ICON = 1
-
-When a gutter is set to icon using set_gutter_type(), it is used to contain an icon set via the set_line_gutter_icon() method.
-
-GutterType GUTTER_TYPE_CUSTOM = 2
-
-When a gutter is set to custom using set_gutter_type(), it is used to contain custom visuals controlled by a callback method set via the set_gutter_custom_draw() method.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GUTTER_TYPE_STRING {#GUTTER_TYPE_STRING}
 
@@ -3440,7 +3262,7 @@ When a gutter is set to custom using set_gutter_type(), it is used to contain cu
 GUTTER_TYPE_STRING = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When a gutter is set to string using set_gutter_type(), it is used to contain text set via the set_line_gutter_text() method.
 
 #### GUTTER_TYPE_ICON {#GUTTER_TYPE_ICON}
 
@@ -3448,7 +3270,7 @@ GUTTER_TYPE_STRING = 0
 GUTTER_TYPE_ICON = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When a gutter is set to icon using set_gutter_type(), it is used to contain an icon set via the set_line_gutter_icon() method.
 
 #### GUTTER_TYPE_CUSTOM {#GUTTER_TYPE_CUSTOM}
 
@@ -3456,4 +3278,6 @@ GUTTER_TYPE_ICON = 1
 GUTTER_TYPE_CUSTOM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When a gutter is set to custom using set_gutter_type(), it is used to contain custom visuals controlled by a callback method set via the set_gutter_custom_draw() method.
+
+---

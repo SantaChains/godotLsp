@@ -317,7 +317,10 @@ How deep into the node hierarchy this node is. A root node will have a height of
 xform: Transform3D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_xform(value: Transform3D)
+- Transform3D get_xform()
+
+The transform of the glTF node relative to its parent. This property is usually unused since the position, rotation, and scale properties are preferred.
 
 ### mesh {#mesh}
 
@@ -369,7 +372,10 @@ If this glTF node has a skeleton, the index of the GLTFSkeleton in the GLTFState
 position: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_position(value: Vector3)
+- Vector3 get_position()
+
+The position of the glTF node relative to its parent.
 
 ### rotation {#rotation}
 
@@ -377,7 +383,10 @@ position: Vector3
 rotation: Quaternion
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_rotation(value: Quaternion)
+- Quaternion get_rotation()
+
+The rotation of the glTF node relative to its parent.
 
 ### scale {#scale}
 
@@ -385,7 +394,10 @@ rotation: Quaternion
 scale: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scale(value: Vector3)
+- Vector3 get_scale()
+
+The scale of the glTF node relative to its parent.
 
 ### children {#children}
 
@@ -393,7 +405,12 @@ scale: Vector3
 children: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_children(value: PackedInt32Array)
+- PackedInt32Array get_children()
+
+The indices of the child nodes in the GLTFState. If this glTF node has no children, this will be an empty array.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.
 
 ### light {#light}
 

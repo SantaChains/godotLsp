@@ -1342,45 +1342,7 @@ Emitted when avoidance debug settings are changed. Only available in debug build
 enum ProcessInfo { INFO_ACTIVE_MAPS = 0, INFO_REGION_COUNT = 1, INFO_AGENT_COUNT = 2, INFO_LINK_COUNT = 3, INFO_POLYGON_COUNT = 4, INFO_EDGE_COUNT = 5, INFO_EDGE_MERGE_COUNT = 6, INFO_EDGE_CONNECTION_COUNT = 7, INFO_EDGE_FREE_COUNT = 8, INFO_OBSTACLE_COUNT = 9 }
 ```
 
-ProcessInfo INFO_ACTIVE_MAPS = 0
-
-Constant to get the number of active navigation maps.
-
-ProcessInfo INFO_REGION_COUNT = 1
-
-Constant to get the number of active navigation regions.
-
-ProcessInfo INFO_AGENT_COUNT = 2
-
-Constant to get the number of active navigation agents processing avoidance.
-
-ProcessInfo INFO_LINK_COUNT = 3
-
-Constant to get the number of active navigation links.
-
-ProcessInfo INFO_POLYGON_COUNT = 4
-
-Constant to get the number of navigation mesh polygons.
-
-ProcessInfo INFO_EDGE_COUNT = 5
-
-Constant to get the number of navigation mesh polygon edges.
-
-ProcessInfo INFO_EDGE_MERGE_COUNT = 6
-
-Constant to get the number of navigation mesh polygon edges that were merged due to edge key overlap.
-
-ProcessInfo INFO_EDGE_CONNECTION_COUNT = 7
-
-Constant to get the number of navigation mesh polygon edges that are considered connected by edge proximity.
-
-ProcessInfo INFO_EDGE_FREE_COUNT = 8
-
-Constant to get the number of navigation mesh polygon edges that could not be merged but may be still connected by edge proximity or with links.
-
-ProcessInfo INFO_OBSTACLE_COUNT = 9
-
-Constant to get the number of active navigation obstacles.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### INFO_ACTIVE_MAPS {#INFO_ACTIVE_MAPS}
 
@@ -1388,7 +1350,7 @@ Constant to get the number of active navigation obstacles.
 INFO_ACTIVE_MAPS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of active navigation maps.
 
 #### INFO_REGION_COUNT {#INFO_REGION_COUNT}
 
@@ -1396,7 +1358,7 @@ INFO_ACTIVE_MAPS = 0
 INFO_REGION_COUNT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of active navigation regions.
 
 #### INFO_AGENT_COUNT {#INFO_AGENT_COUNT}
 
@@ -1404,7 +1366,7 @@ INFO_REGION_COUNT = 1
 INFO_AGENT_COUNT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of active navigation agents processing avoidance.
 
 #### INFO_LINK_COUNT {#INFO_LINK_COUNT}
 
@@ -1412,7 +1374,7 @@ INFO_AGENT_COUNT = 2
 INFO_LINK_COUNT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of active navigation links.
 
 #### INFO_POLYGON_COUNT {#INFO_POLYGON_COUNT}
 
@@ -1420,7 +1382,7 @@ INFO_LINK_COUNT = 3
 INFO_POLYGON_COUNT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of navigation mesh polygons.
 
 #### INFO_EDGE_COUNT {#INFO_EDGE_COUNT}
 
@@ -1428,7 +1390,7 @@ INFO_POLYGON_COUNT = 4
 INFO_EDGE_COUNT = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of navigation mesh polygon edges.
 
 #### INFO_EDGE_MERGE_COUNT {#INFO_EDGE_MERGE_COUNT}
 
@@ -1436,7 +1398,7 @@ INFO_EDGE_COUNT = 5
 INFO_EDGE_MERGE_COUNT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of navigation mesh polygon edges that were merged due to edge key overlap.
 
 #### INFO_EDGE_CONNECTION_COUNT {#INFO_EDGE_CONNECTION_COUNT}
 
@@ -1444,7 +1406,7 @@ INFO_EDGE_MERGE_COUNT = 6
 INFO_EDGE_CONNECTION_COUNT = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of navigation mesh polygon edges that are considered connected by edge proximity.
 
 #### INFO_EDGE_FREE_COUNT {#INFO_EDGE_FREE_COUNT}
 
@@ -1452,7 +1414,7 @@ INFO_EDGE_CONNECTION_COUNT = 7
 INFO_EDGE_FREE_COUNT = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of navigation mesh polygon edges that could not be merged but may be still connected by edge proximity or with links.
 
 #### INFO_OBSTACLE_COUNT {#INFO_OBSTACLE_COUNT}
 
@@ -1460,4 +1422,6 @@ INFO_EDGE_FREE_COUNT = 8
 INFO_OBSTACLE_COUNT = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of active navigation obstacles.
+
+---

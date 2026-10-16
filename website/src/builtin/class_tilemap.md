@@ -733,17 +733,7 @@ Emitted when the TileSet of this TileMap changes.
 enum VisibilityMode { VISIBILITY_MODE_DEFAULT = 0, VISIBILITY_MODE_FORCE_HIDE = 2, VISIBILITY_MODE_FORCE_SHOW = 1 }
 ```
 
-VisibilityMode VISIBILITY_MODE_DEFAULT = 0
-
-Use the debug settings to determine visibility.
-
-VisibilityMode VISIBILITY_MODE_FORCE_HIDE = 2
-
-Always hide.
-
-VisibilityMode VISIBILITY_MODE_FORCE_SHOW = 1
-
-Always show.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VISIBILITY_MODE_DEFAULT {#VISIBILITY_MODE_DEFAULT}
 
@@ -751,7 +741,7 @@ Always show.
 VISIBILITY_MODE_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the debug settings to determine visibility.
 
 #### VISIBILITY_MODE_FORCE_HIDE {#VISIBILITY_MODE_FORCE_HIDE}
 
@@ -759,7 +749,7 @@ VISIBILITY_MODE_DEFAULT = 0
 VISIBILITY_MODE_FORCE_HIDE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always hide.
 
 #### VISIBILITY_MODE_FORCE_SHOW {#VISIBILITY_MODE_FORCE_SHOW}
 
@@ -767,4 +757,6 @@ VISIBILITY_MODE_FORCE_HIDE = 2
 VISIBILITY_MODE_FORCE_SHOW = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always show.
+
+---

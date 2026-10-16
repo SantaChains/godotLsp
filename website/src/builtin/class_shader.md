@@ -101,29 +101,7 @@ Returns the shader's code as the user has written it, not the full generated cod
 enum Mode { MODE_SPATIAL = 0, MODE_CANVAS_ITEM = 1, MODE_PARTICLES = 2, MODE_SKY = 3, MODE_FOG = 4, MODE_TEXTURE_BLIT = 5 }
 ```
 
-Mode MODE_SPATIAL = 0
-
-Mode used to draw all 3D objects.
-
-Mode MODE_CANVAS_ITEM = 1
-
-Mode used to draw all 2D objects.
-
-Mode MODE_PARTICLES = 2
-
-Mode used to calculate particle information on a per-particle basis. Not used for drawing.
-
-Mode MODE_SKY = 3
-
-Mode used for drawing skies. Only works with shaders attached to Sky objects.
-
-Mode MODE_FOG = 4
-
-Mode used for setting the color and density of volumetric fog effect.
-
-Mode MODE_TEXTURE_BLIT = 5
-
-Mode used for drawing to DrawableTexture resources via blit calls.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MODE_SPATIAL {#MODE_SPATIAL}
 
@@ -131,7 +109,7 @@ Mode used for drawing to DrawableTexture resources via blit calls.
 MODE_SPATIAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mode used to draw all 3D objects.
 
 #### MODE_CANVAS_ITEM {#MODE_CANVAS_ITEM}
 
@@ -139,7 +117,7 @@ MODE_SPATIAL = 0
 MODE_CANVAS_ITEM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mode used to draw all 2D objects.
 
 #### MODE_PARTICLES {#MODE_PARTICLES}
 
@@ -147,7 +125,7 @@ MODE_CANVAS_ITEM = 1
 MODE_PARTICLES = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mode used to calculate particle information on a per-particle basis. Not used for drawing.
 
 #### MODE_SKY {#MODE_SKY}
 
@@ -155,7 +133,7 @@ MODE_PARTICLES = 2
 MODE_SKY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mode used for drawing skies. Only works with shaders attached to Sky objects.
 
 #### MODE_FOG {#MODE_FOG}
 
@@ -163,7 +141,7 @@ MODE_SKY = 3
 MODE_FOG = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mode used for setting the color and density of volumetric fog effect.
 
 #### MODE_TEXTURE_BLIT {#MODE_TEXTURE_BLIT}
 
@@ -171,4 +149,6 @@ MODE_FOG = 4
 MODE_TEXTURE_BLIT = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mode used for drawing to DrawableTexture resources via blit calls.
+
+---

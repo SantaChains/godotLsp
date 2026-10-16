@@ -355,17 +355,7 @@ The priority used to solve colliding when occurring penetration. Only effective 
 enum Operation { OPERATION_UNION = 0, OPERATION_INTERSECTION = 1, OPERATION_SUBTRACTION = 2 }
 ```
 
-Operation OPERATION_UNION = 0
-
-Geometry of both primitives is merged, intersecting geometry is removed.
-
-Operation OPERATION_INTERSECTION = 1
-
-Only intersecting geometry remains, the rest is removed.
-
-Operation OPERATION_SUBTRACTION = 2
-
-The second shape is subtracted from the first, leaving a dent with its shape.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OPERATION_UNION {#OPERATION_UNION}
 
@@ -373,7 +363,7 @@ The second shape is subtracted from the first, leaving a dent with its shape.
 OPERATION_UNION = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Geometry of both primitives is merged, intersecting geometry is removed.
 
 #### OPERATION_INTERSECTION {#OPERATION_INTERSECTION}
 
@@ -381,7 +371,7 @@ OPERATION_UNION = 0
 OPERATION_INTERSECTION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only intersecting geometry remains, the rest is removed.
 
 #### OPERATION_SUBTRACTION {#OPERATION_SUBTRACTION}
 
@@ -389,4 +379,6 @@ OPERATION_INTERSECTION = 1
 OPERATION_SUBTRACTION = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The second shape is subtracted from the first, leaving a dent with its shape.
+
+---

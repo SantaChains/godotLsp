@@ -3332,153 +3332,7 @@ Note: This method is implemented on Android and iOS.
 enum Feature { FEATURE_GLOBAL_MENU = 0, FEATURE_SUBWINDOWS = 1, FEATURE_TOUCHSCREEN = 2, FEATURE_MOUSE = 3, FEATURE_MOUSE_WARP = 4, FEATURE_CLIPBOARD = 5, FEATURE_VIRTUAL_KEYBOARD = 6, FEATURE_CURSOR_SHAPE = 7, FEATURE_CUSTOM_CURSOR_SHAPE = 8, FEATURE_NATIVE_DIALOG = 9, FEATURE_IME = 10, FEATURE_WINDOW_TRANSPARENCY = 11, FEATURE_HIDPI = 12, FEATURE_ICON = 13, FEATURE_NATIVE_ICON = 14, FEATURE_ORIENTATION = 15, FEATURE_SWAP_BUFFERS = 16, FEATURE_CLIPBOARD_PRIMARY = 18, FEATURE_TEXT_TO_SPEECH = 19, FEATURE_EXTEND_TO_TITLE = 20, FEATURE_SCREEN_CAPTURE = 21, FEATURE_STATUS_INDICATOR = 22, FEATURE_NATIVE_HELP = 23, FEATURE_NATIVE_DIALOG_INPUT = 24, FEATURE_NATIVE_DIALOG_FILE = 25, FEATURE_NATIVE_DIALOG_FILE_EXTRA = 26, FEATURE_WINDOW_DRAG = 27, FEATURE_SCREEN_EXCLUDE_FROM_CAPTURE = 28, FEATURE_WINDOW_EMBEDDING = 29, FEATURE_NATIVE_DIALOG_FILE_MIME = 30, FEATURE_EMOJI_AND_SYMBOL_PICKER = 31, FEATURE_NATIVE_COLOR_PICKER = 32, FEATURE_SELF_FITTING_WINDOWS = 33, FEATURE_ACCESSIBILITY_SCREEN_READER = 34, FEATURE_HDR_OUTPUT = 35, FEATURE_PIP_MODE = 36 }
 ```
 
-Feature FEATURE_GLOBAL_MENU = 0
-
-Deprecated: Use NativeMenu or PopupMenu instead.
-
-Display server supports global menu. This allows the application to display its menu items in the operating system's top bar. macOS
-
-Feature FEATURE_SUBWINDOWS = 1
-
-Display server supports multiple windows that can be moved outside of the main window. Windows, macOS, Linux (X11)
-
-Feature FEATURE_TOUCHSCREEN = 2
-
-Display server supports touchscreen input. Windows, Linux (X11/Wayland), Android, iOS, Web
-
-Feature FEATURE_MOUSE = 3
-
-Display server supports mouse input. Windows, macOS, Linux (X11/Wayland), Android, Web
-
-Feature FEATURE_MOUSE_WARP = 4
-
-Display server supports warping mouse coordinates to keep the mouse cursor constrained within an area, but looping when one of the edges is reached. Windows, macOS, Linux (X11/Wayland)
-
-Feature FEATURE_CLIPBOARD = 5
-
-Display server supports setting and getting clipboard data. See also FEATURE_CLIPBOARD_PRIMARY. Windows, macOS, Linux (X11/Wayland), Android, iOS, Web
-
-Feature FEATURE_VIRTUAL_KEYBOARD = 6
-
-Display server supports popping up a virtual keyboard when requested to input text without a physical keyboard. Android, iOS, Web
-
-Feature FEATURE_CURSOR_SHAPE = 7
-
-Display server supports setting the mouse cursor shape to be different from the default. Windows, macOS, Linux (X11/Wayland), Android, Web
-
-Feature FEATURE_CUSTOM_CURSOR_SHAPE = 8
-
-Display server supports setting the mouse cursor shape to a custom image. Windows, macOS, Linux (X11/Wayland), Web
-
-Feature FEATURE_NATIVE_DIALOG = 9
-
-Display server supports spawning text dialogs using the operating system's native look-and-feel. See dialog_show(). Windows, macOS
-
-Feature FEATURE_IME = 10
-
-Display server supports Input Method Editor [https://en.wikipedia.org/wiki/Input_method], which is commonly used for inputting Chinese/Japanese/Korean text. This is handled by the operating system, rather than by Godot. Windows, macOS, Linux (X11)
-
-Feature FEATURE_WINDOW_TRANSPARENCY = 11
-
-Display server supports windows can use per-pixel transparency to make windows behind them partially or fully visible. Windows, macOS, Linux (X11/Wayland), Android
-
-Feature FEATURE_HIDPI = 12
-
-Display server supports querying the operating system's display scale factor. This allows automatically detecting the hiDPI display reliably, instead of guessing based on the screen resolution and the display's reported DPI (which might be unreliable due to broken monitor EDID). Windows, Linux (Wayland), macOS
-
-Feature FEATURE_ICON = 13
-
-Display server supports changing the window icon (usually displayed in the top-left corner). Windows, macOS, Linux (X11/Wayland)
-
-Note: Use on Wayland requires the compositor to implement the xdg_toplevel_icon_v1 [https://wayland.app/protocols/xdg-toplevel-icon-v1#xdg_toplevel_icon_v1] protocol, which not all compositors do. See xdg_toplevel_icon_v1#compositor-support [https://wayland.app/protocols/xdg-toplevel-icon-v1#compositor-support] for more information on individual compositor support.
-
-Feature FEATURE_NATIVE_ICON = 14
-
-Display server supports changing the window icon (usually displayed in the top-left corner). Windows, macOS
-
-Feature FEATURE_ORIENTATION = 15
-
-Display server supports changing the screen orientation. Android, iOS
-
-Feature FEATURE_SWAP_BUFFERS = 16
-
-Display server supports V-Sync status can be changed from the default (which is forced to be enabled platforms not supporting this feature). Windows, macOS, Linux (X11/Wayland)
-
-Feature FEATURE_CLIPBOARD_PRIMARY = 18
-
-Display server supports Primary clipboard can be used. This is a different clipboard from FEATURE_CLIPBOARD. Linux (X11/Wayland)
-
-Feature FEATURE_TEXT_TO_SPEECH = 19
-
-Display server supports text-to-speech. See tts_* methods. Windows, macOS, Linux (X11/Wayland), Android, iOS, Web
-
-Feature FEATURE_EXTEND_TO_TITLE = 20
-
-Display server supports expanding window content to the title. See WINDOW_FLAG_EXTEND_TO_TITLE. macOS
-
-Feature FEATURE_SCREEN_CAPTURE = 21
-
-Display server supports reading screen pixels. See screen_get_pixel().
-
-Feature FEATURE_STATUS_INDICATOR = 22
-
-Display server supports application status indicators.
-
-Feature FEATURE_NATIVE_HELP = 23
-
-Display server supports native help system search callbacks. See help_set_search_callbacks().
-
-Feature FEATURE_NATIVE_DIALOG_INPUT = 24
-
-Display server supports spawning text input dialogs using the operating system's native look-and-feel. See dialog_input_text(). Windows, macOS
-
-Feature FEATURE_NATIVE_DIALOG_FILE = 25
-
-Display server supports spawning dialogs for selecting files or directories using the operating system's native look-and-feel. See file_dialog_show(). Windows, macOS, Linux (X11/Wayland), Android
-
-Feature FEATURE_NATIVE_DIALOG_FILE_EXTRA = 26
-
-The display server supports all features of FEATURE_NATIVE_DIALOG_FILE, with the added functionality of Options and native dialog file access to res:// and user:// paths. See file_dialog_show() and file_dialog_with_options_show(). Windows, macOS, Linux (X11/Wayland)
-
-Feature FEATURE_WINDOW_DRAG = 27
-
-The display server supports initiating window drag and resize operations on demand. See window_start_drag() and window_start_resize().
-
-Feature FEATURE_SCREEN_EXCLUDE_FROM_CAPTURE = 28
-
-Display server supports WINDOW_FLAG_EXCLUDE_FROM_CAPTURE window flag. Windows, macOS
-
-Feature FEATURE_WINDOW_EMBEDDING = 29
-
-Display server supports embedding a window from another process. Windows, Linux (X11), macOS
-
-Feature FEATURE_NATIVE_DIALOG_FILE_MIME = 30
-
-Native file selection dialog supports MIME types as filters.
-
-Feature FEATURE_EMOJI_AND_SYMBOL_PICKER = 31
-
-Display server supports system emoji and symbol picker. Windows, macOS
-
-Feature FEATURE_NATIVE_COLOR_PICKER = 32
-
-Display server supports native color picker. Linux (X11/Wayland)
-
-Feature FEATURE_SELF_FITTING_WINDOWS = 33
-
-Display server automatically fits popups according to the screen boundaries. Window nodes should not attempt to do that themselves.
-
-Feature FEATURE_ACCESSIBILITY_SCREEN_READER = 34
-
-Display server supports interaction with screen reader or Braille display. Linux (X11/Wayland), macOS, Windows
-
-Feature FEATURE_HDR_OUTPUT = 35
-
-Display server supports HDR output. Linux (Wayland), macOS, iOS, visionOS, Windows
-
-Feature FEATURE_PIP_MODE = 36
-
-Display server supports putting the application in picture-in-picture mode. Android
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FEATURE_GLOBAL_MENU {#FEATURE_GLOBAL_MENU}
 
@@ -3486,7 +3340,9 @@ Display server supports putting the application in picture-in-picture mode. Andr
 FEATURE_GLOBAL_MENU = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use NativeMenu or PopupMenu instead.
+
+Display server supports global menu. This allows the application to display its menu items in the operating system's top bar. macOS
 
 #### FEATURE_SUBWINDOWS {#FEATURE_SUBWINDOWS}
 
@@ -3494,7 +3350,7 @@ FEATURE_GLOBAL_MENU = 0
 FEATURE_SUBWINDOWS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports multiple windows that can be moved outside of the main window. Windows, macOS, Linux (X11)
 
 #### FEATURE_TOUCHSCREEN {#FEATURE_TOUCHSCREEN}
 
@@ -3502,7 +3358,7 @@ FEATURE_SUBWINDOWS = 1
 FEATURE_TOUCHSCREEN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports touchscreen input. Windows, Linux (X11/Wayland), Android, iOS, Web
 
 #### FEATURE_MOUSE {#FEATURE_MOUSE}
 
@@ -3510,7 +3366,7 @@ FEATURE_TOUCHSCREEN = 2
 FEATURE_MOUSE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports mouse input. Windows, macOS, Linux (X11/Wayland), Android, Web
 
 #### FEATURE_MOUSE_WARP {#FEATURE_MOUSE_WARP}
 
@@ -3518,7 +3374,7 @@ FEATURE_MOUSE = 3
 FEATURE_MOUSE_WARP = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports warping mouse coordinates to keep the mouse cursor constrained within an area, but looping when one of the edges is reached. Windows, macOS, Linux (X11/Wayland)
 
 #### FEATURE_CLIPBOARD {#FEATURE_CLIPBOARD}
 
@@ -3526,7 +3382,7 @@ FEATURE_MOUSE_WARP = 4
 FEATURE_CLIPBOARD = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports setting and getting clipboard data. See also FEATURE_CLIPBOARD_PRIMARY. Windows, macOS, Linux (X11/Wayland), Android, iOS, Web
 
 #### FEATURE_VIRTUAL_KEYBOARD {#FEATURE_VIRTUAL_KEYBOARD}
 
@@ -3534,7 +3390,7 @@ FEATURE_CLIPBOARD = 5
 FEATURE_VIRTUAL_KEYBOARD = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports popping up a virtual keyboard when requested to input text without a physical keyboard. Android, iOS, Web
 
 #### FEATURE_CURSOR_SHAPE {#FEATURE_CURSOR_SHAPE}
 
@@ -3542,7 +3398,7 @@ FEATURE_VIRTUAL_KEYBOARD = 6
 FEATURE_CURSOR_SHAPE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports setting the mouse cursor shape to be different from the default. Windows, macOS, Linux (X11/Wayland), Android, Web
 
 #### FEATURE_CUSTOM_CURSOR_SHAPE {#FEATURE_CUSTOM_CURSOR_SHAPE}
 
@@ -3550,7 +3406,7 @@ FEATURE_CURSOR_SHAPE = 7
 FEATURE_CUSTOM_CURSOR_SHAPE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports setting the mouse cursor shape to a custom image. Windows, macOS, Linux (X11/Wayland), Web
 
 #### FEATURE_NATIVE_DIALOG {#FEATURE_NATIVE_DIALOG}
 
@@ -3558,7 +3414,7 @@ FEATURE_CUSTOM_CURSOR_SHAPE = 8
 FEATURE_NATIVE_DIALOG = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports spawning text dialogs using the operating system's native look-and-feel. See dialog_show(). Windows, macOS
 
 #### FEATURE_IME {#FEATURE_IME}
 
@@ -3566,7 +3422,7 @@ FEATURE_NATIVE_DIALOG = 9
 FEATURE_IME = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports Input Method Editor [https://en.wikipedia.org/wiki/Input_method], which is commonly used for inputting Chinese/Japanese/Korean text. This is handled by the operating system, rather than by Godot. Windows, macOS, Linux (X11)
 
 #### FEATURE_WINDOW_TRANSPARENCY {#FEATURE_WINDOW_TRANSPARENCY}
 
@@ -3574,7 +3430,7 @@ FEATURE_IME = 10
 FEATURE_WINDOW_TRANSPARENCY = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports windows can use per-pixel transparency to make windows behind them partially or fully visible. Windows, macOS, Linux (X11/Wayland), Android
 
 #### FEATURE_HIDPI {#FEATURE_HIDPI}
 
@@ -3582,7 +3438,7 @@ FEATURE_WINDOW_TRANSPARENCY = 11
 FEATURE_HIDPI = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports querying the operating system's display scale factor. This allows automatically detecting the hiDPI display reliably, instead of guessing based on the screen resolution and the display's reported DPI (which might be unreliable due to broken monitor EDID). Windows, Linux (Wayland), macOS
 
 #### FEATURE_ICON {#FEATURE_ICON}
 
@@ -3590,7 +3446,9 @@ FEATURE_HIDPI = 12
 FEATURE_ICON = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports changing the window icon (usually displayed in the top-left corner). Windows, macOS, Linux (X11/Wayland)
+
+Note: Use on Wayland requires the compositor to implement the xdg_toplevel_icon_v1 [https://wayland.app/protocols/xdg-toplevel-icon-v1#xdg_toplevel_icon_v1] protocol, which not all compositors do. See xdg_toplevel_icon_v1#compositor-support [https://wayland.app/protocols/xdg-toplevel-icon-v1#compositor-support] for more information on individual compositor support.
 
 #### FEATURE_NATIVE_ICON {#FEATURE_NATIVE_ICON}
 
@@ -3598,7 +3456,7 @@ FEATURE_ICON = 13
 FEATURE_NATIVE_ICON = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports changing the window icon (usually displayed in the top-left corner). Windows, macOS
 
 #### FEATURE_ORIENTATION {#FEATURE_ORIENTATION}
 
@@ -3606,7 +3464,7 @@ FEATURE_NATIVE_ICON = 14
 FEATURE_ORIENTATION = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports changing the screen orientation. Android, iOS
 
 #### FEATURE_SWAP_BUFFERS {#FEATURE_SWAP_BUFFERS}
 
@@ -3614,7 +3472,7 @@ FEATURE_ORIENTATION = 15
 FEATURE_SWAP_BUFFERS = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports V-Sync status can be changed from the default (which is forced to be enabled platforms not supporting this feature). Windows, macOS, Linux (X11/Wayland)
 
 #### FEATURE_CLIPBOARD_PRIMARY {#FEATURE_CLIPBOARD_PRIMARY}
 
@@ -3622,7 +3480,7 @@ FEATURE_SWAP_BUFFERS = 16
 FEATURE_CLIPBOARD_PRIMARY = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports Primary clipboard can be used. This is a different clipboard from FEATURE_CLIPBOARD. Linux (X11/Wayland)
 
 #### FEATURE_TEXT_TO_SPEECH {#FEATURE_TEXT_TO_SPEECH}
 
@@ -3630,7 +3488,7 @@ FEATURE_CLIPBOARD_PRIMARY = 18
 FEATURE_TEXT_TO_SPEECH = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports text-to-speech. See tts_* methods. Windows, macOS, Linux (X11/Wayland), Android, iOS, Web
 
 #### FEATURE_EXTEND_TO_TITLE {#FEATURE_EXTEND_TO_TITLE}
 
@@ -3638,7 +3496,7 @@ FEATURE_TEXT_TO_SPEECH = 19
 FEATURE_EXTEND_TO_TITLE = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports expanding window content to the title. See WINDOW_FLAG_EXTEND_TO_TITLE. macOS
 
 #### FEATURE_SCREEN_CAPTURE {#FEATURE_SCREEN_CAPTURE}
 
@@ -3646,7 +3504,7 @@ FEATURE_EXTEND_TO_TITLE = 20
 FEATURE_SCREEN_CAPTURE = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports reading screen pixels. See screen_get_pixel().
 
 #### FEATURE_STATUS_INDICATOR {#FEATURE_STATUS_INDICATOR}
 
@@ -3654,7 +3512,7 @@ FEATURE_SCREEN_CAPTURE = 21
 FEATURE_STATUS_INDICATOR = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports application status indicators.
 
 #### FEATURE_NATIVE_HELP {#FEATURE_NATIVE_HELP}
 
@@ -3662,7 +3520,7 @@ FEATURE_STATUS_INDICATOR = 22
 FEATURE_NATIVE_HELP = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports native help system search callbacks. See help_set_search_callbacks().
 
 #### FEATURE_NATIVE_DIALOG_INPUT {#FEATURE_NATIVE_DIALOG_INPUT}
 
@@ -3670,7 +3528,7 @@ FEATURE_NATIVE_HELP = 23
 FEATURE_NATIVE_DIALOG_INPUT = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports spawning text input dialogs using the operating system's native look-and-feel. See dialog_input_text(). Windows, macOS
 
 #### FEATURE_NATIVE_DIALOG_FILE {#FEATURE_NATIVE_DIALOG_FILE}
 
@@ -3678,7 +3536,7 @@ FEATURE_NATIVE_DIALOG_INPUT = 24
 FEATURE_NATIVE_DIALOG_FILE = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports spawning dialogs for selecting files or directories using the operating system's native look-and-feel. See file_dialog_show(). Windows, macOS, Linux (X11/Wayland), Android
 
 #### FEATURE_NATIVE_DIALOG_FILE_EXTRA {#FEATURE_NATIVE_DIALOG_FILE_EXTRA}
 
@@ -3686,7 +3544,7 @@ FEATURE_NATIVE_DIALOG_FILE = 25
 FEATURE_NATIVE_DIALOG_FILE_EXTRA = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The display server supports all features of FEATURE_NATIVE_DIALOG_FILE, with the added functionality of Options and native dialog file access to res:// and user:// paths. See file_dialog_show() and file_dialog_with_options_show(). Windows, macOS, Linux (X11/Wayland)
 
 #### FEATURE_WINDOW_DRAG {#FEATURE_WINDOW_DRAG}
 
@@ -3694,7 +3552,7 @@ FEATURE_NATIVE_DIALOG_FILE_EXTRA = 26
 FEATURE_WINDOW_DRAG = 27
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The display server supports initiating window drag and resize operations on demand. See window_start_drag() and window_start_resize().
 
 #### FEATURE_SCREEN_EXCLUDE_FROM_CAPTURE {#FEATURE_SCREEN_EXCLUDE_FROM_CAPTURE}
 
@@ -3702,7 +3560,7 @@ FEATURE_WINDOW_DRAG = 27
 FEATURE_SCREEN_EXCLUDE_FROM_CAPTURE = 28
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports WINDOW_FLAG_EXCLUDE_FROM_CAPTURE window flag. Windows, macOS
 
 #### FEATURE_WINDOW_EMBEDDING {#FEATURE_WINDOW_EMBEDDING}
 
@@ -3710,7 +3568,7 @@ FEATURE_SCREEN_EXCLUDE_FROM_CAPTURE = 28
 FEATURE_WINDOW_EMBEDDING = 29
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports embedding a window from another process. Windows, Linux (X11), macOS
 
 #### FEATURE_NATIVE_DIALOG_FILE_MIME {#FEATURE_NATIVE_DIALOG_FILE_MIME}
 
@@ -3718,7 +3576,7 @@ FEATURE_WINDOW_EMBEDDING = 29
 FEATURE_NATIVE_DIALOG_FILE_MIME = 30
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Native file selection dialog supports MIME types as filters.
 
 #### FEATURE_EMOJI_AND_SYMBOL_PICKER {#FEATURE_EMOJI_AND_SYMBOL_PICKER}
 
@@ -3726,7 +3584,7 @@ FEATURE_NATIVE_DIALOG_FILE_MIME = 30
 FEATURE_EMOJI_AND_SYMBOL_PICKER = 31
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports system emoji and symbol picker. Windows, macOS
 
 #### FEATURE_NATIVE_COLOR_PICKER {#FEATURE_NATIVE_COLOR_PICKER}
 
@@ -3734,7 +3592,7 @@ FEATURE_EMOJI_AND_SYMBOL_PICKER = 31
 FEATURE_NATIVE_COLOR_PICKER = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports native color picker. Linux (X11/Wayland)
 
 #### FEATURE_SELF_FITTING_WINDOWS {#FEATURE_SELF_FITTING_WINDOWS}
 
@@ -3742,7 +3600,7 @@ FEATURE_NATIVE_COLOR_PICKER = 32
 FEATURE_SELF_FITTING_WINDOWS = 33
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server automatically fits popups according to the screen boundaries. Window nodes should not attempt to do that themselves.
 
 #### FEATURE_ACCESSIBILITY_SCREEN_READER {#FEATURE_ACCESSIBILITY_SCREEN_READER}
 
@@ -3750,7 +3608,7 @@ FEATURE_SELF_FITTING_WINDOWS = 33
 FEATURE_ACCESSIBILITY_SCREEN_READER = 34
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports interaction with screen reader or Braille display. Linux (X11/Wayland), macOS, Windows
 
 #### FEATURE_HDR_OUTPUT {#FEATURE_HDR_OUTPUT}
 
@@ -3758,7 +3616,7 @@ FEATURE_ACCESSIBILITY_SCREEN_READER = 34
 FEATURE_HDR_OUTPUT = 35
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports HDR output. Linux (Wayland), macOS, iOS, visionOS, Windows
 
 #### FEATURE_PIP_MODE {#FEATURE_PIP_MODE}
 
@@ -3766,7 +3624,9 @@ FEATURE_HDR_OUTPUT = 35
 FEATURE_PIP_MODE = 36
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Display server supports putting the application in picture-in-picture mode. Android
+
+---
 
 ### AccessibilityRole {#enum-AccessibilityRole}
 
@@ -3774,295 +3634,7 @@ FEATURE_PIP_MODE = 36
 enum AccessibilityRole { ROLE_UNKNOWN = 0, ROLE_DEFAULT_BUTTON = 1, ROLE_AUDIO = 2, ROLE_VIDEO = 3, ROLE_STATIC_TEXT = 4, ROLE_CONTAINER = 5, ROLE_PANEL = 6, ROLE_BUTTON = 7, ROLE_LINK = 8, ROLE_CHECK_BOX = 9, ROLE_RADIO_BUTTON = 10, ROLE_CHECK_BUTTON = 11, ROLE_SCROLL_BAR = 12, ROLE_SCROLL_VIEW = 13, ROLE_SPLITTER = 14, ROLE_SLIDER = 15, ROLE_SPIN_BUTTON = 16, ROLE_PROGRESS_INDICATOR = 17, ROLE_TEXT_FIELD = 18, ROLE_MULTILINE_TEXT_FIELD = 19, ROLE_COLOR_PICKER = 20, ROLE_TABLE = 21, ROLE_CELL = 22, ROLE_ROW = 23, ROLE_ROW_GROUP = 24, ROLE_ROW_HEADER = 25, ROLE_COLUMN_HEADER = 26, ROLE_TREE = 27, ROLE_TREE_ITEM = 28, ROLE_LIST = 29, ROLE_LIST_ITEM = 30, ROLE_LIST_BOX = 31, ROLE_LIST_BOX_OPTION = 32, ROLE_TAB_BAR = 33, ROLE_TAB = 34, ROLE_TAB_PANEL = 35, ROLE_MENU_BAR = 36, ROLE_MENU = 37, ROLE_MENU_ITEM = 38, ROLE_MENU_ITEM_CHECK_BOX = 39, ROLE_MENU_ITEM_RADIO = 40, ROLE_IMAGE = 41, ROLE_WINDOW = 42, ROLE_TITLE_BAR = 43, ROLE_DIALOG = 44, ROLE_TOOLTIP = 45, ROLE_REGION = 46, ROLE_TEXT_RUN = 47 }
 ```
 
-AccessibilityRole ROLE_UNKNOWN = 0
-
-Deprecated: Use AccessibilityServer instead.
-
-Unknown or custom role.
-
-AccessibilityRole ROLE_DEFAULT_BUTTON = 1
-
-Deprecated: Use AccessibilityServer instead.
-
-Default dialog button element.
-
-AccessibilityRole ROLE_AUDIO = 2
-
-Deprecated: Use AccessibilityServer instead.
-
-Audio player element.
-
-AccessibilityRole ROLE_VIDEO = 3
-
-Deprecated: Use AccessibilityServer instead.
-
-Video player element.
-
-AccessibilityRole ROLE_STATIC_TEXT = 4
-
-Deprecated: Use AccessibilityServer instead.
-
-Non-editable text label.
-
-AccessibilityRole ROLE_CONTAINER = 5
-
-Deprecated: Use AccessibilityServer instead.
-
-Container element. Elements with this role are used for internal structure and ignored by screen readers.
-
-AccessibilityRole ROLE_PANEL = 6
-
-Deprecated: Use AccessibilityServer instead.
-
-Panel container element.
-
-AccessibilityRole ROLE_BUTTON = 7
-
-Deprecated: Use AccessibilityServer instead.
-
-Button element.
-
-AccessibilityRole ROLE_LINK = 8
-
-Deprecated: Use AccessibilityServer instead.
-
-Link element.
-
-AccessibilityRole ROLE_CHECK_BOX = 9
-
-Deprecated: Use AccessibilityServer instead.
-
-Check box element.
-
-AccessibilityRole ROLE_RADIO_BUTTON = 10
-
-Deprecated: Use AccessibilityServer instead.
-
-Radio button element.
-
-AccessibilityRole ROLE_CHECK_BUTTON = 11
-
-Deprecated: Use AccessibilityServer instead.
-
-Check button element.
-
-AccessibilityRole ROLE_SCROLL_BAR = 12
-
-Deprecated: Use AccessibilityServer instead.
-
-Scroll bar element.
-
-AccessibilityRole ROLE_SCROLL_VIEW = 13
-
-Deprecated: Use AccessibilityServer instead.
-
-Scroll container element.
-
-AccessibilityRole ROLE_SPLITTER = 14
-
-Deprecated: Use AccessibilityServer instead.
-
-Container splitter handle element.
-
-AccessibilityRole ROLE_SLIDER = 15
-
-Deprecated: Use AccessibilityServer instead.
-
-Slider element.
-
-AccessibilityRole ROLE_SPIN_BUTTON = 16
-
-Deprecated: Use AccessibilityServer instead.
-
-Spin box element.
-
-AccessibilityRole ROLE_PROGRESS_INDICATOR = 17
-
-Deprecated: Use AccessibilityServer instead.
-
-Progress indicator element.
-
-AccessibilityRole ROLE_TEXT_FIELD = 18
-
-Deprecated: Use AccessibilityServer instead.
-
-Editable text field element.
-
-AccessibilityRole ROLE_MULTILINE_TEXT_FIELD = 19
-
-Deprecated: Use AccessibilityServer instead.
-
-Multiline editable text field element.
-
-AccessibilityRole ROLE_COLOR_PICKER = 20
-
-Deprecated: Use AccessibilityServer instead.
-
-Color picker element.
-
-AccessibilityRole ROLE_TABLE = 21
-
-Deprecated: Use AccessibilityServer instead.
-
-Table element.
-
-AccessibilityRole ROLE_CELL = 22
-
-Deprecated: Use AccessibilityServer instead.
-
-Table/tree cell element.
-
-AccessibilityRole ROLE_ROW = 23
-
-Deprecated: Use AccessibilityServer instead.
-
-Table/tree row element.
-
-AccessibilityRole ROLE_ROW_GROUP = 24
-
-Deprecated: Use AccessibilityServer instead.
-
-Table/tree row group element.
-
-AccessibilityRole ROLE_ROW_HEADER = 25
-
-Deprecated: Use AccessibilityServer instead.
-
-Table/tree row header element.
-
-AccessibilityRole ROLE_COLUMN_HEADER = 26
-
-Deprecated: Use AccessibilityServer instead.
-
-Table/tree column header element.
-
-AccessibilityRole ROLE_TREE = 27
-
-Deprecated: Use AccessibilityServer instead.
-
-Tree view element.
-
-AccessibilityRole ROLE_TREE_ITEM = 28
-
-Deprecated: Use AccessibilityServer instead.
-
-Tree view item element.
-
-AccessibilityRole ROLE_LIST = 29
-
-Deprecated: Use AccessibilityServer instead.
-
-List element.
-
-AccessibilityRole ROLE_LIST_ITEM = 30
-
-Deprecated: Use AccessibilityServer instead.
-
-List item element.
-
-AccessibilityRole ROLE_LIST_BOX = 31
-
-Deprecated: Use AccessibilityServer instead.
-
-List view element.
-
-AccessibilityRole ROLE_LIST_BOX_OPTION = 32
-
-Deprecated: Use AccessibilityServer instead.
-
-List view item element.
-
-AccessibilityRole ROLE_TAB_BAR = 33
-
-Deprecated: Use AccessibilityServer instead.
-
-Tab bar element.
-
-AccessibilityRole ROLE_TAB = 34
-
-Deprecated: Use AccessibilityServer instead.
-
-Tab bar item element.
-
-AccessibilityRole ROLE_TAB_PANEL = 35
-
-Deprecated: Use AccessibilityServer instead.
-
-Tab panel element.
-
-AccessibilityRole ROLE_MENU_BAR = 36
-
-Deprecated: Use AccessibilityServer instead.
-
-Menu bar element.
-
-AccessibilityRole ROLE_MENU = 37
-
-Deprecated: Use AccessibilityServer instead.
-
-Popup menu element.
-
-AccessibilityRole ROLE_MENU_ITEM = 38
-
-Deprecated: Use AccessibilityServer instead.
-
-Popup menu item element.
-
-AccessibilityRole ROLE_MENU_ITEM_CHECK_BOX = 39
-
-Deprecated: Use AccessibilityServer instead.
-
-Popup menu check button item element.
-
-AccessibilityRole ROLE_MENU_ITEM_RADIO = 40
-
-Deprecated: Use AccessibilityServer instead.
-
-Popup menu radio button item element.
-
-AccessibilityRole ROLE_IMAGE = 41
-
-Deprecated: Use AccessibilityServer instead.
-
-Image element.
-
-AccessibilityRole ROLE_WINDOW = 42
-
-Deprecated: Use AccessibilityServer instead.
-
-Window element.
-
-AccessibilityRole ROLE_TITLE_BAR = 43
-
-Deprecated: Use AccessibilityServer instead.
-
-Embedded window title bar element.
-
-AccessibilityRole ROLE_DIALOG = 44
-
-Deprecated: Use AccessibilityServer instead.
-
-Dialog window element.
-
-AccessibilityRole ROLE_TOOLTIP = 45
-
-Deprecated: Use AccessibilityServer instead.
-
-Tooltip element.
-
-AccessibilityRole ROLE_REGION = 46
-
-Deprecated: Use AccessibilityServer instead.
-
-Region/landmark element. Screen readers can navigate between regions using landmark navigation.
-
-AccessibilityRole ROLE_TEXT_RUN = 47
-
-Deprecated: Use AccessibilityServer instead.
-
-Unifor text run.
-
-Note: This role is used for internal text elements, and should not be assigned to nodes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ROLE_UNKNOWN {#ROLE_UNKNOWN}
 
@@ -4070,7 +3642,9 @@ Note: This role is used for internal text elements, and should not be assigned t
 ROLE_UNKNOWN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Unknown or custom role.
 
 #### ROLE_DEFAULT_BUTTON {#ROLE_DEFAULT_BUTTON}
 
@@ -4078,7 +3652,9 @@ ROLE_UNKNOWN = 0
 ROLE_DEFAULT_BUTTON = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Default dialog button element.
 
 #### ROLE_AUDIO {#ROLE_AUDIO}
 
@@ -4086,7 +3662,9 @@ ROLE_DEFAULT_BUTTON = 1
 ROLE_AUDIO = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Audio player element.
 
 #### ROLE_VIDEO {#ROLE_VIDEO}
 
@@ -4094,7 +3672,9 @@ ROLE_AUDIO = 2
 ROLE_VIDEO = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Video player element.
 
 #### ROLE_STATIC_TEXT {#ROLE_STATIC_TEXT}
 
@@ -4102,7 +3682,9 @@ ROLE_VIDEO = 3
 ROLE_STATIC_TEXT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Non-editable text label.
 
 #### ROLE_CONTAINER {#ROLE_CONTAINER}
 
@@ -4110,7 +3692,9 @@ ROLE_STATIC_TEXT = 4
 ROLE_CONTAINER = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Container element. Elements with this role are used for internal structure and ignored by screen readers.
 
 #### ROLE_PANEL {#ROLE_PANEL}
 
@@ -4118,7 +3702,9 @@ ROLE_CONTAINER = 5
 ROLE_PANEL = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Panel container element.
 
 #### ROLE_BUTTON {#ROLE_BUTTON}
 
@@ -4126,7 +3712,9 @@ ROLE_PANEL = 6
 ROLE_BUTTON = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Button element.
 
 #### ROLE_LINK {#ROLE_LINK}
 
@@ -4134,7 +3722,9 @@ ROLE_BUTTON = 7
 ROLE_LINK = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Link element.
 
 #### ROLE_CHECK_BOX {#ROLE_CHECK_BOX}
 
@@ -4142,7 +3732,9 @@ ROLE_LINK = 8
 ROLE_CHECK_BOX = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Check box element.
 
 #### ROLE_RADIO_BUTTON {#ROLE_RADIO_BUTTON}
 
@@ -4150,7 +3742,9 @@ ROLE_CHECK_BOX = 9
 ROLE_RADIO_BUTTON = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Radio button element.
 
 #### ROLE_CHECK_BUTTON {#ROLE_CHECK_BUTTON}
 
@@ -4158,7 +3752,9 @@ ROLE_RADIO_BUTTON = 10
 ROLE_CHECK_BUTTON = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Check button element.
 
 #### ROLE_SCROLL_BAR {#ROLE_SCROLL_BAR}
 
@@ -4166,7 +3762,9 @@ ROLE_CHECK_BUTTON = 11
 ROLE_SCROLL_BAR = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Scroll bar element.
 
 #### ROLE_SCROLL_VIEW {#ROLE_SCROLL_VIEW}
 
@@ -4174,7 +3772,9 @@ ROLE_SCROLL_BAR = 12
 ROLE_SCROLL_VIEW = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Scroll container element.
 
 #### ROLE_SPLITTER {#ROLE_SPLITTER}
 
@@ -4182,7 +3782,9 @@ ROLE_SCROLL_VIEW = 13
 ROLE_SPLITTER = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Container splitter handle element.
 
 #### ROLE_SLIDER {#ROLE_SLIDER}
 
@@ -4190,7 +3792,9 @@ ROLE_SPLITTER = 14
 ROLE_SLIDER = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Slider element.
 
 #### ROLE_SPIN_BUTTON {#ROLE_SPIN_BUTTON}
 
@@ -4198,7 +3802,9 @@ ROLE_SLIDER = 15
 ROLE_SPIN_BUTTON = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Spin box element.
 
 #### ROLE_PROGRESS_INDICATOR {#ROLE_PROGRESS_INDICATOR}
 
@@ -4206,7 +3812,9 @@ ROLE_SPIN_BUTTON = 16
 ROLE_PROGRESS_INDICATOR = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Progress indicator element.
 
 #### ROLE_TEXT_FIELD {#ROLE_TEXT_FIELD}
 
@@ -4214,7 +3822,9 @@ ROLE_PROGRESS_INDICATOR = 17
 ROLE_TEXT_FIELD = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Editable text field element.
 
 #### ROLE_MULTILINE_TEXT_FIELD {#ROLE_MULTILINE_TEXT_FIELD}
 
@@ -4222,7 +3832,9 @@ ROLE_TEXT_FIELD = 18
 ROLE_MULTILINE_TEXT_FIELD = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Multiline editable text field element.
 
 #### ROLE_COLOR_PICKER {#ROLE_COLOR_PICKER}
 
@@ -4230,7 +3842,9 @@ ROLE_MULTILINE_TEXT_FIELD = 19
 ROLE_COLOR_PICKER = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Color picker element.
 
 #### ROLE_TABLE {#ROLE_TABLE}
 
@@ -4238,7 +3852,9 @@ ROLE_COLOR_PICKER = 20
 ROLE_TABLE = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Table element.
 
 #### ROLE_CELL {#ROLE_CELL}
 
@@ -4246,7 +3862,9 @@ ROLE_TABLE = 21
 ROLE_CELL = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Table/tree cell element.
 
 #### ROLE_ROW {#ROLE_ROW}
 
@@ -4254,7 +3872,9 @@ ROLE_CELL = 22
 ROLE_ROW = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Table/tree row element.
 
 #### ROLE_ROW_GROUP {#ROLE_ROW_GROUP}
 
@@ -4262,7 +3882,9 @@ ROLE_ROW = 23
 ROLE_ROW_GROUP = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Table/tree row group element.
 
 #### ROLE_ROW_HEADER {#ROLE_ROW_HEADER}
 
@@ -4270,7 +3892,9 @@ ROLE_ROW_GROUP = 24
 ROLE_ROW_HEADER = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Table/tree row header element.
 
 #### ROLE_COLUMN_HEADER {#ROLE_COLUMN_HEADER}
 
@@ -4278,7 +3902,9 @@ ROLE_ROW_HEADER = 25
 ROLE_COLUMN_HEADER = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Table/tree column header element.
 
 #### ROLE_TREE {#ROLE_TREE}
 
@@ -4286,7 +3912,9 @@ ROLE_COLUMN_HEADER = 26
 ROLE_TREE = 27
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Tree view element.
 
 #### ROLE_TREE_ITEM {#ROLE_TREE_ITEM}
 
@@ -4294,7 +3922,9 @@ ROLE_TREE = 27
 ROLE_TREE_ITEM = 28
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Tree view item element.
 
 #### ROLE_LIST {#ROLE_LIST}
 
@@ -4302,7 +3932,9 @@ ROLE_TREE_ITEM = 28
 ROLE_LIST = 29
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+List element.
 
 #### ROLE_LIST_ITEM {#ROLE_LIST_ITEM}
 
@@ -4310,7 +3942,9 @@ ROLE_LIST = 29
 ROLE_LIST_ITEM = 30
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+List item element.
 
 #### ROLE_LIST_BOX {#ROLE_LIST_BOX}
 
@@ -4318,7 +3952,9 @@ ROLE_LIST_ITEM = 30
 ROLE_LIST_BOX = 31
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+List view element.
 
 #### ROLE_LIST_BOX_OPTION {#ROLE_LIST_BOX_OPTION}
 
@@ -4326,7 +3962,9 @@ ROLE_LIST_BOX = 31
 ROLE_LIST_BOX_OPTION = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+List view item element.
 
 #### ROLE_TAB_BAR {#ROLE_TAB_BAR}
 
@@ -4334,7 +3972,9 @@ ROLE_LIST_BOX_OPTION = 32
 ROLE_TAB_BAR = 33
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Tab bar element.
 
 #### ROLE_TAB {#ROLE_TAB}
 
@@ -4342,7 +3982,9 @@ ROLE_TAB_BAR = 33
 ROLE_TAB = 34
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Tab bar item element.
 
 #### ROLE_TAB_PANEL {#ROLE_TAB_PANEL}
 
@@ -4350,7 +3992,9 @@ ROLE_TAB = 34
 ROLE_TAB_PANEL = 35
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Tab panel element.
 
 #### ROLE_MENU_BAR {#ROLE_MENU_BAR}
 
@@ -4358,7 +4002,9 @@ ROLE_TAB_PANEL = 35
 ROLE_MENU_BAR = 36
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Menu bar element.
 
 #### ROLE_MENU {#ROLE_MENU}
 
@@ -4366,7 +4012,9 @@ ROLE_MENU_BAR = 36
 ROLE_MENU = 37
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Popup menu element.
 
 #### ROLE_MENU_ITEM {#ROLE_MENU_ITEM}
 
@@ -4374,7 +4022,9 @@ ROLE_MENU = 37
 ROLE_MENU_ITEM = 38
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Popup menu item element.
 
 #### ROLE_MENU_ITEM_CHECK_BOX {#ROLE_MENU_ITEM_CHECK_BOX}
 
@@ -4382,7 +4032,9 @@ ROLE_MENU_ITEM = 38
 ROLE_MENU_ITEM_CHECK_BOX = 39
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Popup menu check button item element.
 
 #### ROLE_MENU_ITEM_RADIO {#ROLE_MENU_ITEM_RADIO}
 
@@ -4390,7 +4042,9 @@ ROLE_MENU_ITEM_CHECK_BOX = 39
 ROLE_MENU_ITEM_RADIO = 40
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Popup menu radio button item element.
 
 #### ROLE_IMAGE {#ROLE_IMAGE}
 
@@ -4398,7 +4052,9 @@ ROLE_MENU_ITEM_RADIO = 40
 ROLE_IMAGE = 41
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Image element.
 
 #### ROLE_WINDOW {#ROLE_WINDOW}
 
@@ -4406,7 +4062,9 @@ ROLE_IMAGE = 41
 ROLE_WINDOW = 42
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Window element.
 
 #### ROLE_TITLE_BAR {#ROLE_TITLE_BAR}
 
@@ -4414,7 +4072,9 @@ ROLE_WINDOW = 42
 ROLE_TITLE_BAR = 43
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Embedded window title bar element.
 
 #### ROLE_DIALOG {#ROLE_DIALOG}
 
@@ -4422,7 +4082,9 @@ ROLE_TITLE_BAR = 43
 ROLE_DIALOG = 44
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Dialog window element.
 
 #### ROLE_TOOLTIP {#ROLE_TOOLTIP}
 
@@ -4430,7 +4092,9 @@ ROLE_DIALOG = 44
 ROLE_TOOLTIP = 45
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Tooltip element.
 
 #### ROLE_REGION {#ROLE_REGION}
 
@@ -4438,7 +4102,9 @@ ROLE_TOOLTIP = 45
 ROLE_REGION = 46
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Region/landmark element. Screen readers can navigate between regions using landmark navigation.
 
 #### ROLE_TEXT_RUN {#ROLE_TEXT_RUN}
 
@@ -4446,7 +4112,13 @@ ROLE_REGION = 46
 ROLE_TEXT_RUN = 47
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Unifor text run.
+
+Note: This role is used for internal text elements, and should not be assigned to nodes.
+
+---
 
 ### AccessibilityPopupType {#enum-AccessibilityPopupType}
 
@@ -4454,29 +4126,7 @@ ROLE_TEXT_RUN = 47
 enum AccessibilityPopupType { POPUP_MENU = 0, POPUP_LIST = 1, POPUP_TREE = 2, POPUP_DIALOG = 3 }
 ```
 
-AccessibilityPopupType POPUP_MENU = 0
-
-Deprecated: Use AccessibilityServer instead.
-
-Popup menu.
-
-AccessibilityPopupType POPUP_LIST = 1
-
-Deprecated: Use AccessibilityServer instead.
-
-Popup list.
-
-AccessibilityPopupType POPUP_TREE = 2
-
-Deprecated: Use AccessibilityServer instead.
-
-Popup tree view.
-
-AccessibilityPopupType POPUP_DIALOG = 3
-
-Deprecated: Use AccessibilityServer instead.
-
-Popup dialog.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### POPUP_MENU {#POPUP_MENU}
 
@@ -4484,7 +4134,9 @@ Popup dialog.
 POPUP_MENU = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Popup menu.
 
 #### POPUP_LIST {#POPUP_LIST}
 
@@ -4492,7 +4144,9 @@ POPUP_MENU = 0
 POPUP_LIST = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Popup list.
 
 #### POPUP_TREE {#POPUP_TREE}
 
@@ -4500,7 +4154,9 @@ POPUP_LIST = 1
 POPUP_TREE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Popup tree view.
 
 #### POPUP_DIALOG {#POPUP_DIALOG}
 
@@ -4508,7 +4164,11 @@ POPUP_TREE = 2
 POPUP_DIALOG = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Popup dialog.
+
+---
 
 ### AccessibilityFlags {#enum-AccessibilityFlags}
 
@@ -4516,65 +4176,7 @@ POPUP_DIALOG = 3
 enum AccessibilityFlags { FLAG_HIDDEN = 0, FLAG_MULTISELECTABLE = 1, FLAG_REQUIRED = 2, FLAG_VISITED = 3, FLAG_BUSY = 4, FLAG_MODAL = 5, FLAG_TOUCH_PASSTHROUGH = 6, FLAG_READONLY = 7, FLAG_DISABLED = 8, FLAG_CLIPS_CHILDREN = 9 }
 ```
 
-AccessibilityFlags FLAG_HIDDEN = 0
-
-Deprecated: Use AccessibilityServer instead.
-
-Element is hidden for accessibility tools.
-
-AccessibilityFlags FLAG_MULTISELECTABLE = 1
-
-Deprecated: Use AccessibilityServer instead.
-
-Element supports multiple item selection.
-
-AccessibilityFlags FLAG_REQUIRED = 2
-
-Deprecated: Use AccessibilityServer instead.
-
-Element require user input.
-
-AccessibilityFlags FLAG_VISITED = 3
-
-Deprecated: Use AccessibilityServer instead.
-
-Element is a visited link.
-
-AccessibilityFlags FLAG_BUSY = 4
-
-Deprecated: Use AccessibilityServer instead.
-
-Element content is not ready (e.g. loading).
-
-AccessibilityFlags FLAG_MODAL = 5
-
-Deprecated: Use AccessibilityServer instead.
-
-Element is modal window.
-
-AccessibilityFlags FLAG_TOUCH_PASSTHROUGH = 6
-
-Deprecated: Use AccessibilityServer instead.
-
-Element allows touches to be passed through when a screen reader is in touch exploration mode.
-
-AccessibilityFlags FLAG_READONLY = 7
-
-Deprecated: Use AccessibilityServer instead.
-
-Element is text field with selectable but read-only text.
-
-AccessibilityFlags FLAG_DISABLED = 8
-
-Deprecated: Use AccessibilityServer instead.
-
-Element is disabled.
-
-AccessibilityFlags FLAG_CLIPS_CHILDREN = 9
-
-Deprecated: Use AccessibilityServer instead.
-
-Element clips children.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FLAG_HIDDEN {#FLAG_HIDDEN}
 
@@ -4582,7 +4184,9 @@ Element clips children.
 FLAG_HIDDEN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Element is hidden for accessibility tools.
 
 #### FLAG_MULTISELECTABLE {#FLAG_MULTISELECTABLE}
 
@@ -4590,7 +4194,9 @@ FLAG_HIDDEN = 0
 FLAG_MULTISELECTABLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Element supports multiple item selection.
 
 #### FLAG_REQUIRED {#FLAG_REQUIRED}
 
@@ -4598,7 +4204,9 @@ FLAG_MULTISELECTABLE = 1
 FLAG_REQUIRED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Element require user input.
 
 #### FLAG_VISITED {#FLAG_VISITED}
 
@@ -4606,7 +4214,9 @@ FLAG_REQUIRED = 2
 FLAG_VISITED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Element is a visited link.
 
 #### FLAG_BUSY {#FLAG_BUSY}
 
@@ -4614,7 +4224,9 @@ FLAG_VISITED = 3
 FLAG_BUSY = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Element content is not ready (e.g. loading).
 
 #### FLAG_MODAL {#FLAG_MODAL}
 
@@ -4622,7 +4234,9 @@ FLAG_BUSY = 4
 FLAG_MODAL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Element is modal window.
 
 #### FLAG_TOUCH_PASSTHROUGH {#FLAG_TOUCH_PASSTHROUGH}
 
@@ -4630,7 +4244,9 @@ FLAG_MODAL = 5
 FLAG_TOUCH_PASSTHROUGH = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Element allows touches to be passed through when a screen reader is in touch exploration mode.
 
 #### FLAG_READONLY {#FLAG_READONLY}
 
@@ -4638,7 +4254,9 @@ FLAG_TOUCH_PASSTHROUGH = 6
 FLAG_READONLY = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Element is text field with selectable but read-only text.
 
 #### FLAG_DISABLED {#FLAG_DISABLED}
 
@@ -4646,7 +4264,9 @@ FLAG_READONLY = 7
 FLAG_DISABLED = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Element is disabled.
 
 #### FLAG_CLIPS_CHILDREN {#FLAG_CLIPS_CHILDREN}
 
@@ -4654,7 +4274,11 @@ FLAG_DISABLED = 8
 FLAG_CLIPS_CHILDREN = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Element clips children.
+
+---
 
 ### AccessibilityAction {#enum-AccessibilityAction}
 
@@ -4662,61 +4286,103 @@ FLAG_CLIPS_CHILDREN = 9
 enum AccessibilityAction { ACTION_CLICK = 0, ACTION_FOCUS = 1, ACTION_BLUR = 2, ACTION_COLLAPSE = 3, ACTION_EXPAND = 4, ACTION_DECREMENT = 5, ACTION_INCREMENT = 6, ACTION_HIDE_TOOLTIP = 7, ACTION_SHOW_TOOLTIP = 8, ACTION_SET_TEXT_SELECTION = 9, ACTION_REPLACE_SELECTED_TEXT = 10, ACTION_SCROLL_BACKWARD = 11, ACTION_SCROLL_DOWN = 12, ACTION_SCROLL_FORWARD = 13, ACTION_SCROLL_LEFT = 14, ACTION_SCROLL_RIGHT = 15, ACTION_SCROLL_UP = 16, ACTION_SCROLL_INTO_VIEW = 17, ACTION_SCROLL_TO_POINT = 18, ACTION_SET_SCROLL_OFFSET = 19, ACTION_SET_VALUE = 20, ACTION_SHOW_CONTEXT_MENU = 21, ACTION_CUSTOM = 22 }
 ```
 
-AccessibilityAction ACTION_CLICK = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### ACTION_CLICK {#ACTION_CLICK}
+
+```gdscript
+ACTION_CLICK = 0
+```
 
 Deprecated: Use AccessibilityServer instead.
 
 Single click action, callback argument is not set.
 
-AccessibilityAction ACTION_FOCUS = 1
+#### ACTION_FOCUS {#ACTION_FOCUS}
+
+```gdscript
+ACTION_FOCUS = 1
+```
 
 Deprecated: Use AccessibilityServer instead.
 
 Focus action, callback argument is not set.
 
-AccessibilityAction ACTION_BLUR = 2
+#### ACTION_BLUR {#ACTION_BLUR}
+
+```gdscript
+ACTION_BLUR = 2
+```
 
 Deprecated: Use AccessibilityServer instead.
 
 Blur action, callback argument is not set.
 
-AccessibilityAction ACTION_COLLAPSE = 3
+#### ACTION_COLLAPSE {#ACTION_COLLAPSE}
+
+```gdscript
+ACTION_COLLAPSE = 3
+```
 
 Deprecated: Use AccessibilityServer instead.
 
 Collapse action, callback argument is not set.
 
-AccessibilityAction ACTION_EXPAND = 4
+#### ACTION_EXPAND {#ACTION_EXPAND}
+
+```gdscript
+ACTION_EXPAND = 4
+```
 
 Deprecated: Use AccessibilityServer instead.
 
 Expand action, callback argument is not set.
 
-AccessibilityAction ACTION_DECREMENT = 5
+#### ACTION_DECREMENT {#ACTION_DECREMENT}
+
+```gdscript
+ACTION_DECREMENT = 5
+```
 
 Deprecated: Use AccessibilityServer instead.
 
 Decrement action, callback argument is not set.
 
-AccessibilityAction ACTION_INCREMENT = 6
+#### ACTION_INCREMENT {#ACTION_INCREMENT}
+
+```gdscript
+ACTION_INCREMENT = 6
+```
 
 Deprecated: Use AccessibilityServer instead.
 
 Increment action, callback argument is not set.
 
-AccessibilityAction ACTION_HIDE_TOOLTIP = 7
+#### ACTION_HIDE_TOOLTIP {#ACTION_HIDE_TOOLTIP}
+
+```gdscript
+ACTION_HIDE_TOOLTIP = 7
+```
 
 Deprecated: Use AccessibilityServer instead.
 
 Hide tooltip action, callback argument is not set.
 
-AccessibilityAction ACTION_SHOW_TOOLTIP = 8
+#### ACTION_SHOW_TOOLTIP {#ACTION_SHOW_TOOLTIP}
+
+```gdscript
+ACTION_SHOW_TOOLTIP = 8
+```
 
 Deprecated: Use AccessibilityServer instead.
 
 Show tooltip action, callback argument is not set.
 
-AccessibilityAction ACTION_SET_TEXT_SELECTION = 9
+#### ACTION_SET_TEXT_SELECTION {#ACTION_SET_TEXT_SELECTION}
+
+```gdscript
+ACTION_SET_TEXT_SELECTION = 9
+```
 
 Deprecated: Use AccessibilityServer instead.
 
@@ -4727,171 +4393,15 @@ Set text selection action, callback argument is set to Dictionary with the follo
 - "end_element" accessibility element of the selection end.
 - "end_char" character offset relative to the accessibility element of the selection end.
 
-AccessibilityAction ACTION_REPLACE_SELECTED_TEXT = 10
-
-Deprecated: Use AccessibilityServer instead.
-
-Replace text action, callback argument is set to String with the replacement text.
-
-AccessibilityAction ACTION_SCROLL_BACKWARD = 11
-
-Deprecated: Use AccessibilityServer instead.
-
-Scroll backward action, callback argument is not set.
-
-AccessibilityAction ACTION_SCROLL_DOWN = 12
-
-Deprecated: Use AccessibilityServer instead.
-
-Scroll down action, callback argument is set to AccessibilityScrollUnit.
-
-AccessibilityAction ACTION_SCROLL_FORWARD = 13
-
-Deprecated: Use AccessibilityServer instead.
-
-Scroll forward action, callback argument is not set.
-
-AccessibilityAction ACTION_SCROLL_LEFT = 14
-
-Deprecated: Use AccessibilityServer instead.
-
-Scroll left action, callback argument is set to AccessibilityScrollUnit.
-
-AccessibilityAction ACTION_SCROLL_RIGHT = 15
-
-Deprecated: Use AccessibilityServer instead.
-
-Scroll right action, callback argument is set to AccessibilityScrollUnit.
-
-AccessibilityAction ACTION_SCROLL_UP = 16
-
-Deprecated: Use AccessibilityServer instead.
-
-Scroll up action, callback argument is set to AccessibilityScrollUnit.
-
-AccessibilityAction ACTION_SCROLL_INTO_VIEW = 17
-
-Deprecated: Use AccessibilityServer instead.
-
-Scroll into view action, callback argument is set to AccessibilityScrollHint.
-
-AccessibilityAction ACTION_SCROLL_TO_POINT = 18
-
-Deprecated: Use AccessibilityServer instead.
-
-Scroll to point action, callback argument is set to Vector2 with the relative point coordinates.
-
-AccessibilityAction ACTION_SET_SCROLL_OFFSET = 19
-
-Deprecated: Use AccessibilityServer instead.
-
-Set scroll offset action, callback argument is set to Vector2 with the scroll offset.
-
-AccessibilityAction ACTION_SET_VALUE = 20
-
-Deprecated: Use AccessibilityServer instead.
-
-Set value action, callback argument is set to String or number with the new value.
-
-AccessibilityAction ACTION_SHOW_CONTEXT_MENU = 21
-
-Deprecated: Use AccessibilityServer instead.
-
-Show context menu action, callback argument is not set.
-
-AccessibilityAction ACTION_CUSTOM = 22
-
-Deprecated: Use AccessibilityServer instead.
-
-Custom action, callback argument is set to the integer action ID.
-
-#### ACTION_CLICK {#ACTION_CLICK}
-
-```gdscript
-ACTION_CLICK = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_FOCUS {#ACTION_FOCUS}
-
-```gdscript
-ACTION_FOCUS = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_BLUR {#ACTION_BLUR}
-
-```gdscript
-ACTION_BLUR = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_COLLAPSE {#ACTION_COLLAPSE}
-
-```gdscript
-ACTION_COLLAPSE = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_EXPAND {#ACTION_EXPAND}
-
-```gdscript
-ACTION_EXPAND = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_DECREMENT {#ACTION_DECREMENT}
-
-```gdscript
-ACTION_DECREMENT = 5
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_INCREMENT {#ACTION_INCREMENT}
-
-```gdscript
-ACTION_INCREMENT = 6
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_HIDE_TOOLTIP {#ACTION_HIDE_TOOLTIP}
-
-```gdscript
-ACTION_HIDE_TOOLTIP = 7
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_SHOW_TOOLTIP {#ACTION_SHOW_TOOLTIP}
-
-```gdscript
-ACTION_SHOW_TOOLTIP = 8
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_SET_TEXT_SELECTION {#ACTION_SET_TEXT_SELECTION}
-
-```gdscript
-ACTION_SET_TEXT_SELECTION = 9
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### ACTION_REPLACE_SELECTED_TEXT {#ACTION_REPLACE_SELECTED_TEXT}
 
 ```gdscript
 ACTION_REPLACE_SELECTED_TEXT = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Replace text action, callback argument is set to String with the replacement text.
 
 #### ACTION_SCROLL_BACKWARD {#ACTION_SCROLL_BACKWARD}
 
@@ -4899,7 +4409,9 @@ ACTION_REPLACE_SELECTED_TEXT = 10
 ACTION_SCROLL_BACKWARD = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Scroll backward action, callback argument is not set.
 
 #### ACTION_SCROLL_DOWN {#ACTION_SCROLL_DOWN}
 
@@ -4907,7 +4419,9 @@ ACTION_SCROLL_BACKWARD = 11
 ACTION_SCROLL_DOWN = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Scroll down action, callback argument is set to AccessibilityScrollUnit.
 
 #### ACTION_SCROLL_FORWARD {#ACTION_SCROLL_FORWARD}
 
@@ -4915,7 +4429,9 @@ ACTION_SCROLL_DOWN = 12
 ACTION_SCROLL_FORWARD = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Scroll forward action, callback argument is not set.
 
 #### ACTION_SCROLL_LEFT {#ACTION_SCROLL_LEFT}
 
@@ -4923,7 +4439,9 @@ ACTION_SCROLL_FORWARD = 13
 ACTION_SCROLL_LEFT = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Scroll left action, callback argument is set to AccessibilityScrollUnit.
 
 #### ACTION_SCROLL_RIGHT {#ACTION_SCROLL_RIGHT}
 
@@ -4931,7 +4449,9 @@ ACTION_SCROLL_LEFT = 14
 ACTION_SCROLL_RIGHT = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Scroll right action, callback argument is set to AccessibilityScrollUnit.
 
 #### ACTION_SCROLL_UP {#ACTION_SCROLL_UP}
 
@@ -4939,7 +4459,9 @@ ACTION_SCROLL_RIGHT = 15
 ACTION_SCROLL_UP = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Scroll up action, callback argument is set to AccessibilityScrollUnit.
 
 #### ACTION_SCROLL_INTO_VIEW {#ACTION_SCROLL_INTO_VIEW}
 
@@ -4947,7 +4469,9 @@ ACTION_SCROLL_UP = 16
 ACTION_SCROLL_INTO_VIEW = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Scroll into view action, callback argument is set to AccessibilityScrollHint.
 
 #### ACTION_SCROLL_TO_POINT {#ACTION_SCROLL_TO_POINT}
 
@@ -4955,7 +4479,9 @@ ACTION_SCROLL_INTO_VIEW = 17
 ACTION_SCROLL_TO_POINT = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Scroll to point action, callback argument is set to Vector2 with the relative point coordinates.
 
 #### ACTION_SET_SCROLL_OFFSET {#ACTION_SET_SCROLL_OFFSET}
 
@@ -4963,7 +4489,9 @@ ACTION_SCROLL_TO_POINT = 18
 ACTION_SET_SCROLL_OFFSET = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Set scroll offset action, callback argument is set to Vector2 with the scroll offset.
 
 #### ACTION_SET_VALUE {#ACTION_SET_VALUE}
 
@@ -4971,7 +4499,9 @@ ACTION_SET_SCROLL_OFFSET = 19
 ACTION_SET_VALUE = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Set value action, callback argument is set to String or number with the new value.
 
 #### ACTION_SHOW_CONTEXT_MENU {#ACTION_SHOW_CONTEXT_MENU}
 
@@ -4979,7 +4509,9 @@ ACTION_SET_VALUE = 20
 ACTION_SHOW_CONTEXT_MENU = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Show context menu action, callback argument is not set.
 
 #### ACTION_CUSTOM {#ACTION_CUSTOM}
 
@@ -4987,7 +4519,11 @@ ACTION_SHOW_CONTEXT_MENU = 21
 ACTION_CUSTOM = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Custom action, callback argument is set to the integer action ID.
+
+---
 
 ### AccessibilityLiveMode {#enum-AccessibilityLiveMode}
 
@@ -4995,23 +4531,7 @@ ACTION_CUSTOM = 22
 enum AccessibilityLiveMode { LIVE_OFF = 0, LIVE_POLITE = 1, LIVE_ASSERTIVE = 2 }
 ```
 
-AccessibilityLiveMode LIVE_OFF = 0
-
-Deprecated: Use AccessibilityServer instead.
-
-Indicates that updates to the live region should not be presented.
-
-AccessibilityLiveMode LIVE_POLITE = 1
-
-Deprecated: Use AccessibilityServer instead.
-
-Indicates that updates to the live region should be presented at the next opportunity (for example at the end of speaking the current sentence).
-
-AccessibilityLiveMode LIVE_ASSERTIVE = 2
-
-Deprecated: Use AccessibilityServer instead.
-
-Indicates that updates to the live region have the highest priority and should be presented immediately.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LIVE_OFF {#LIVE_OFF}
 
@@ -5019,7 +4539,9 @@ Indicates that updates to the live region have the highest priority and should b
 LIVE_OFF = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Indicates that updates to the live region should not be presented.
 
 #### LIVE_POLITE {#LIVE_POLITE}
 
@@ -5027,7 +4549,9 @@ LIVE_OFF = 0
 LIVE_POLITE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Indicates that updates to the live region should be presented at the next opportunity (for example at the end of speaking the current sentence).
 
 #### LIVE_ASSERTIVE {#LIVE_ASSERTIVE}
 
@@ -5035,7 +4559,11 @@ LIVE_POLITE = 1
 LIVE_ASSERTIVE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+Indicates that updates to the live region have the highest priority and should be presented immediately.
+
+---
 
 ### AccessibilityScrollUnit {#enum-AccessibilityScrollUnit}
 
@@ -5043,17 +4571,7 @@ LIVE_ASSERTIVE = 2
 enum AccessibilityScrollUnit { SCROLL_UNIT_ITEM = 0, SCROLL_UNIT_PAGE = 1 }
 ```
 
-AccessibilityScrollUnit SCROLL_UNIT_ITEM = 0
-
-Deprecated: Use AccessibilityServer instead.
-
-The amount by which to scroll. A single item of a list, line of text.
-
-AccessibilityScrollUnit SCROLL_UNIT_PAGE = 1
-
-Deprecated: Use AccessibilityServer instead.
-
-The amount by which to scroll. A single page.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCROLL_UNIT_ITEM {#SCROLL_UNIT_ITEM}
 
@@ -5061,7 +4579,9 @@ The amount by which to scroll. A single page.
 SCROLL_UNIT_ITEM = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+The amount by which to scroll. A single item of a list, line of text.
 
 #### SCROLL_UNIT_PAGE {#SCROLL_UNIT_PAGE}
 
@@ -5069,7 +4589,11 @@ SCROLL_UNIT_ITEM = 0
 SCROLL_UNIT_PAGE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+The amount by which to scroll. A single page.
+
+---
 
 ### AccessibilityScrollHint {#enum-AccessibilityScrollHint}
 
@@ -5077,41 +4601,7 @@ SCROLL_UNIT_PAGE = 1
 enum AccessibilityScrollHint { SCROLL_HINT_TOP_LEFT = 0, SCROLL_HINT_BOTTOM_RIGHT = 1, SCROLL_HINT_TOP_EDGE = 2, SCROLL_HINT_BOTTOM_EDGE = 3, SCROLL_HINT_LEFT_EDGE = 4, SCROLL_HINT_RIGHT_EDGE = 5 }
 ```
 
-AccessibilityScrollHint SCROLL_HINT_TOP_LEFT = 0
-
-Deprecated: Use AccessibilityServer instead.
-
-A preferred position for the node scrolled into view. Top-left edge of the scroll container.
-
-AccessibilityScrollHint SCROLL_HINT_BOTTOM_RIGHT = 1
-
-Deprecated: Use AccessibilityServer instead.
-
-A preferred position for the node scrolled into view. Bottom-right edge of the scroll container.
-
-AccessibilityScrollHint SCROLL_HINT_TOP_EDGE = 2
-
-Deprecated: Use AccessibilityServer instead.
-
-A preferred position for the node scrolled into view. Top edge of the scroll container.
-
-AccessibilityScrollHint SCROLL_HINT_BOTTOM_EDGE = 3
-
-Deprecated: Use AccessibilityServer instead.
-
-A preferred position for the node scrolled into view. Bottom edge of the scroll container.
-
-AccessibilityScrollHint SCROLL_HINT_LEFT_EDGE = 4
-
-Deprecated: Use AccessibilityServer instead.
-
-A preferred position for the node scrolled into view. Left edge of the scroll container.
-
-AccessibilityScrollHint SCROLL_HINT_RIGHT_EDGE = 5
-
-Deprecated: Use AccessibilityServer instead.
-
-A preferred position for the node scrolled into view. Right edge of the scroll container.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCROLL_HINT_TOP_LEFT {#SCROLL_HINT_TOP_LEFT}
 
@@ -5119,7 +4609,9 @@ A preferred position for the node scrolled into view. Right edge of the scroll c
 SCROLL_HINT_TOP_LEFT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+A preferred position for the node scrolled into view. Top-left edge of the scroll container.
 
 #### SCROLL_HINT_BOTTOM_RIGHT {#SCROLL_HINT_BOTTOM_RIGHT}
 
@@ -5127,7 +4619,9 @@ SCROLL_HINT_TOP_LEFT = 0
 SCROLL_HINT_BOTTOM_RIGHT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+A preferred position for the node scrolled into view. Bottom-right edge of the scroll container.
 
 #### SCROLL_HINT_TOP_EDGE {#SCROLL_HINT_TOP_EDGE}
 
@@ -5135,7 +4629,9 @@ SCROLL_HINT_BOTTOM_RIGHT = 1
 SCROLL_HINT_TOP_EDGE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+A preferred position for the node scrolled into view. Top edge of the scroll container.
 
 #### SCROLL_HINT_BOTTOM_EDGE {#SCROLL_HINT_BOTTOM_EDGE}
 
@@ -5143,7 +4639,9 @@ SCROLL_HINT_TOP_EDGE = 2
 SCROLL_HINT_BOTTOM_EDGE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+A preferred position for the node scrolled into view. Bottom edge of the scroll container.
 
 #### SCROLL_HINT_LEFT_EDGE {#SCROLL_HINT_LEFT_EDGE}
 
@@ -5151,7 +4649,9 @@ SCROLL_HINT_BOTTOM_EDGE = 3
 SCROLL_HINT_LEFT_EDGE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+A preferred position for the node scrolled into view. Left edge of the scroll container.
 
 #### SCROLL_HINT_RIGHT_EDGE {#SCROLL_HINT_RIGHT_EDGE}
 
@@ -5159,7 +4659,11 @@ SCROLL_HINT_LEFT_EDGE = 4
 SCROLL_HINT_RIGHT_EDGE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use AccessibilityServer instead.
+
+A preferred position for the node scrolled into view. Right edge of the scroll container.
+
+---
 
 ### MouseMode {#enum-MouseMode}
 
@@ -5167,31 +4671,7 @@ SCROLL_HINT_RIGHT_EDGE = 5
 enum MouseMode { MOUSE_MODE_VISIBLE = 0, MOUSE_MODE_HIDDEN = 1, MOUSE_MODE_CAPTURED = 2, MOUSE_MODE_CONFINED = 3, MOUSE_MODE_CONFINED_HIDDEN = 4, MOUSE_MODE_MAX = 5 }
 ```
 
-MouseMode MOUSE_MODE_VISIBLE = 0
-
-Makes the mouse cursor visible if it is hidden.
-
-MouseMode MOUSE_MODE_HIDDEN = 1
-
-Makes the mouse cursor hidden if it is visible.
-
-MouseMode MOUSE_MODE_CAPTURED = 2
-
-Captures the mouse. The mouse will be hidden and its position locked at the center of the window manager's window.
-
-Note: If you want to process the mouse's movement in this mode, you need to use InputEventMouseMotion.relative.
-
-MouseMode MOUSE_MODE_CONFINED = 3
-
-Confines the mouse cursor to the game window, and make it visible.
-
-MouseMode MOUSE_MODE_CONFINED_HIDDEN = 4
-
-Confines the mouse cursor to the game window, and make it hidden.
-
-MouseMode MOUSE_MODE_MAX = 5
-
-Max value of the MouseMode.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MOUSE_MODE_VISIBLE {#MOUSE_MODE_VISIBLE}
 
@@ -5199,7 +4679,7 @@ Max value of the MouseMode.
 MOUSE_MODE_VISIBLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the mouse cursor visible if it is hidden.
 
 #### MOUSE_MODE_HIDDEN {#MOUSE_MODE_HIDDEN}
 
@@ -5207,7 +4687,7 @@ MOUSE_MODE_VISIBLE = 0
 MOUSE_MODE_HIDDEN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the mouse cursor hidden if it is visible.
 
 #### MOUSE_MODE_CAPTURED {#MOUSE_MODE_CAPTURED}
 
@@ -5215,7 +4695,9 @@ MOUSE_MODE_HIDDEN = 1
 MOUSE_MODE_CAPTURED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Captures the mouse. The mouse will be hidden and its position locked at the center of the window manager's window.
+
+Note: If you want to process the mouse's movement in this mode, you need to use InputEventMouseMotion.relative.
 
 #### MOUSE_MODE_CONFINED {#MOUSE_MODE_CONFINED}
 
@@ -5223,7 +4705,7 @@ MOUSE_MODE_CAPTURED = 2
 MOUSE_MODE_CONFINED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Confines the mouse cursor to the game window, and make it visible.
 
 #### MOUSE_MODE_CONFINED_HIDDEN {#MOUSE_MODE_CONFINED_HIDDEN}
 
@@ -5231,7 +4713,7 @@ MOUSE_MODE_CONFINED = 3
 MOUSE_MODE_CONFINED_HIDDEN = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Confines the mouse cursor to the game window, and make it hidden.
 
 #### MOUSE_MODE_MAX {#MOUSE_MODE_MAX}
 
@@ -5239,7 +4721,9 @@ MOUSE_MODE_CONFINED_HIDDEN = 4
 MOUSE_MODE_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Max value of the MouseMode.
+
+---
 
 ### ScreenOrientation {#enum-ScreenOrientation}
 
@@ -5247,33 +4731,7 @@ MOUSE_MODE_MAX = 5
 enum ScreenOrientation { SCREEN_LANDSCAPE = 0, SCREEN_PORTRAIT = 1, SCREEN_REVERSE_LANDSCAPE = 2, SCREEN_REVERSE_PORTRAIT = 3, SCREEN_SENSOR_LANDSCAPE = 4, SCREEN_SENSOR_PORTRAIT = 5, SCREEN_SENSOR = 6 }
 ```
 
-ScreenOrientation SCREEN_LANDSCAPE = 0
-
-Default landscape orientation.
-
-ScreenOrientation SCREEN_PORTRAIT = 1
-
-Default portrait orientation.
-
-ScreenOrientation SCREEN_REVERSE_LANDSCAPE = 2
-
-Reverse landscape orientation (upside down).
-
-ScreenOrientation SCREEN_REVERSE_PORTRAIT = 3
-
-Reverse portrait orientation (upside down).
-
-ScreenOrientation SCREEN_SENSOR_LANDSCAPE = 4
-
-Automatic landscape orientation (default or reverse depending on sensor).
-
-ScreenOrientation SCREEN_SENSOR_PORTRAIT = 5
-
-Automatic portrait orientation (default or reverse depending on sensor).
-
-ScreenOrientation SCREEN_SENSOR = 6
-
-Automatic landscape or portrait orientation (default or reverse depending on sensor).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCREEN_LANDSCAPE {#SCREEN_LANDSCAPE}
 
@@ -5281,7 +4739,7 @@ Automatic landscape or portrait orientation (default or reverse depending on sen
 SCREEN_LANDSCAPE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default landscape orientation.
 
 #### SCREEN_PORTRAIT {#SCREEN_PORTRAIT}
 
@@ -5289,7 +4747,7 @@ SCREEN_LANDSCAPE = 0
 SCREEN_PORTRAIT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default portrait orientation.
 
 #### SCREEN_REVERSE_LANDSCAPE {#SCREEN_REVERSE_LANDSCAPE}
 
@@ -5297,7 +4755,7 @@ SCREEN_PORTRAIT = 1
 SCREEN_REVERSE_LANDSCAPE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Reverse landscape orientation (upside down).
 
 #### SCREEN_REVERSE_PORTRAIT {#SCREEN_REVERSE_PORTRAIT}
 
@@ -5305,7 +4763,7 @@ SCREEN_REVERSE_LANDSCAPE = 2
 SCREEN_REVERSE_PORTRAIT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Reverse portrait orientation (upside down).
 
 #### SCREEN_SENSOR_LANDSCAPE {#SCREEN_SENSOR_LANDSCAPE}
 
@@ -5313,7 +4771,7 @@ SCREEN_REVERSE_PORTRAIT = 3
 SCREEN_SENSOR_LANDSCAPE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatic landscape orientation (default or reverse depending on sensor).
 
 #### SCREEN_SENSOR_PORTRAIT {#SCREEN_SENSOR_PORTRAIT}
 
@@ -5321,7 +4779,7 @@ SCREEN_SENSOR_LANDSCAPE = 4
 SCREEN_SENSOR_PORTRAIT = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatic portrait orientation (default or reverse depending on sensor).
 
 #### SCREEN_SENSOR {#SCREEN_SENSOR}
 
@@ -5329,7 +4787,9 @@ SCREEN_SENSOR_PORTRAIT = 5
 SCREEN_SENSOR = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatic landscape or portrait orientation (default or reverse depending on sensor).
+
+---
 
 ### VirtualKeyboardType {#enum-VirtualKeyboardType}
 
@@ -5337,39 +4797,7 @@ SCREEN_SENSOR = 6
 enum VirtualKeyboardType { KEYBOARD_TYPE_DEFAULT = 0, KEYBOARD_TYPE_MULTILINE = 1, KEYBOARD_TYPE_NUMBER = 2, KEYBOARD_TYPE_NUMBER_DECIMAL = 3, KEYBOARD_TYPE_PHONE = 4, KEYBOARD_TYPE_EMAIL_ADDRESS = 5, KEYBOARD_TYPE_PASSWORD = 6, KEYBOARD_TYPE_URL = 7 }
 ```
 
-VirtualKeyboardType KEYBOARD_TYPE_DEFAULT = 0
-
-Default text virtual keyboard.
-
-VirtualKeyboardType KEYBOARD_TYPE_MULTILINE = 1
-
-Multiline virtual keyboard.
-
-VirtualKeyboardType KEYBOARD_TYPE_NUMBER = 2
-
-Virtual number keypad, useful for PIN entry.
-
-VirtualKeyboardType KEYBOARD_TYPE_NUMBER_DECIMAL = 3
-
-Virtual number keypad, useful for entering fractional numbers.
-
-VirtualKeyboardType KEYBOARD_TYPE_PHONE = 4
-
-Virtual phone number keypad.
-
-VirtualKeyboardType KEYBOARD_TYPE_EMAIL_ADDRESS = 5
-
-Virtual keyboard with additional keys to assist with typing email addresses.
-
-VirtualKeyboardType KEYBOARD_TYPE_PASSWORD = 6
-
-Virtual keyboard for entering a password. On most platforms, this should disable autocomplete and autocapitalization.
-
-Note: This is not supported on Web. Instead, this behaves identically to KEYBOARD_TYPE_DEFAULT.
-
-VirtualKeyboardType KEYBOARD_TYPE_URL = 7
-
-Virtual keyboard with additional keys to assist with typing URLs.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### KEYBOARD_TYPE_DEFAULT {#KEYBOARD_TYPE_DEFAULT}
 
@@ -5377,7 +4805,7 @@ Virtual keyboard with additional keys to assist with typing URLs.
 KEYBOARD_TYPE_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default text virtual keyboard.
 
 #### KEYBOARD_TYPE_MULTILINE {#KEYBOARD_TYPE_MULTILINE}
 
@@ -5385,7 +4813,7 @@ KEYBOARD_TYPE_DEFAULT = 0
 KEYBOARD_TYPE_MULTILINE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiline virtual keyboard.
 
 #### KEYBOARD_TYPE_NUMBER {#KEYBOARD_TYPE_NUMBER}
 
@@ -5393,7 +4821,7 @@ KEYBOARD_TYPE_MULTILINE = 1
 KEYBOARD_TYPE_NUMBER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual number keypad, useful for PIN entry.
 
 #### KEYBOARD_TYPE_NUMBER_DECIMAL {#KEYBOARD_TYPE_NUMBER_DECIMAL}
 
@@ -5401,7 +4829,7 @@ KEYBOARD_TYPE_NUMBER = 2
 KEYBOARD_TYPE_NUMBER_DECIMAL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual number keypad, useful for entering fractional numbers.
 
 #### KEYBOARD_TYPE_PHONE {#KEYBOARD_TYPE_PHONE}
 
@@ -5409,7 +4837,7 @@ KEYBOARD_TYPE_NUMBER_DECIMAL = 3
 KEYBOARD_TYPE_PHONE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual phone number keypad.
 
 #### KEYBOARD_TYPE_EMAIL_ADDRESS {#KEYBOARD_TYPE_EMAIL_ADDRESS}
 
@@ -5417,7 +4845,7 @@ KEYBOARD_TYPE_PHONE = 4
 KEYBOARD_TYPE_EMAIL_ADDRESS = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual keyboard with additional keys to assist with typing email addresses.
 
 #### KEYBOARD_TYPE_PASSWORD {#KEYBOARD_TYPE_PASSWORD}
 
@@ -5425,7 +4853,9 @@ KEYBOARD_TYPE_EMAIL_ADDRESS = 5
 KEYBOARD_TYPE_PASSWORD = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual keyboard for entering a password. On most platforms, this should disable autocomplete and autocapitalization.
+
+Note: This is not supported on Web. Instead, this behaves identically to KEYBOARD_TYPE_DEFAULT.
 
 #### KEYBOARD_TYPE_URL {#KEYBOARD_TYPE_URL}
 
@@ -5433,7 +4863,9 @@ KEYBOARD_TYPE_PASSWORD = 6
 KEYBOARD_TYPE_URL = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Virtual keyboard with additional keys to assist with typing URLs.
+
+---
 
 ### CursorShape {#enum-CursorShape}
 
@@ -5441,77 +4873,7 @@ KEYBOARD_TYPE_URL = 7
 enum CursorShape { CURSOR_ARROW = 0, CURSOR_IBEAM = 1, CURSOR_POINTING_HAND = 2, CURSOR_CROSS = 3, CURSOR_WAIT = 4, CURSOR_BUSY = 5, CURSOR_DRAG = 6, CURSOR_CAN_DROP = 7, CURSOR_FORBIDDEN = 8, CURSOR_VSIZE = 9, CURSOR_HSIZE = 10, CURSOR_BDIAGSIZE = 11, CURSOR_FDIAGSIZE = 12, CURSOR_MOVE = 13, CURSOR_VSPLIT = 14, CURSOR_HSPLIT = 15, CURSOR_HELP = 16, CURSOR_MAX = 17 }
 ```
 
-CursorShape CURSOR_ARROW = 0
-
-Arrow cursor shape. This is the default when not pointing anything that overrides the mouse cursor, such as a LineEdit or TextEdit.
-
-CursorShape CURSOR_IBEAM = 1
-
-I-beam cursor shape. This is used by default when hovering a control that accepts text input, such as LineEdit or TextEdit.
-
-CursorShape CURSOR_POINTING_HAND = 2
-
-Pointing hand cursor shape. This is used by default when hovering a LinkButton or a URL tag in a RichTextLabel.
-
-CursorShape CURSOR_CROSS = 3
-
-Crosshair cursor. This is intended to be displayed when the user needs precise aim over an element, such as a rectangle selection tool or a color picker.
-
-CursorShape CURSOR_WAIT = 4
-
-Wait cursor. On most cursor themes, this displays a spinning icon besides the arrow. Intended to be used for non-blocking operations (when the user can do something else at the moment). See also CURSOR_BUSY.
-
-CursorShape CURSOR_BUSY = 5
-
-Wait cursor. On most cursor themes, this replaces the arrow with a spinning icon. Intended to be used for blocking operations (when the user can't do anything else at the moment). See also CURSOR_WAIT.
-
-CursorShape CURSOR_DRAG = 6
-
-Dragging hand cursor. This is displayed during drag-and-drop operations. See also CURSOR_CAN_DROP.
-
-CursorShape CURSOR_CAN_DROP = 7
-
-"Can drop" cursor. This is displayed during drag-and-drop operations if hovering over a Control that can accept the drag-and-drop event. On most cursor themes, this displays a dragging hand with an arrow symbol besides it. See also CURSOR_DRAG.
-
-CursorShape CURSOR_FORBIDDEN = 8
-
-Forbidden cursor. This is displayed during drag-and-drop operations if the hovered Control can't accept the drag-and-drop event.
-
-CursorShape CURSOR_VSIZE = 9
-
-Vertical resize cursor. Intended to be displayed when the hovered Control can be vertically resized using the mouse. See also CURSOR_VSPLIT.
-
-CursorShape CURSOR_HSIZE = 10
-
-Horizontal resize cursor. Intended to be displayed when the hovered Control can be horizontally resized using the mouse. See also CURSOR_HSPLIT.
-
-CursorShape CURSOR_BDIAGSIZE = 11
-
-Secondary diagonal resize cursor (top-right/bottom-left). Intended to be displayed when the hovered Control can be resized on both axes at once using the mouse.
-
-CursorShape CURSOR_FDIAGSIZE = 12
-
-Main diagonal resize cursor (top-left/bottom-right). Intended to be displayed when the hovered Control can be resized on both axes at once using the mouse.
-
-CursorShape CURSOR_MOVE = 13
-
-Move cursor. Intended to be displayed when the hovered Control can be moved using the mouse.
-
-CursorShape CURSOR_VSPLIT = 14
-
-Vertical split cursor. This is displayed when hovering a Control with splits that can be vertically resized using the mouse, such as VSplitContainer. On some cursor themes, this cursor may have the same appearance as CURSOR_VSIZE.
-
-CursorShape CURSOR_HSPLIT = 15
-
-Horizontal split cursor. This is displayed when hovering a Control with splits that can be horizontally resized using the mouse, such as HSplitContainer. On some cursor themes, this cursor may have the same appearance as CURSOR_HSIZE.
-
-CursorShape CURSOR_HELP = 16
-
-Help cursor. On most cursor themes, this displays a question mark icon instead of the mouse cursor. Intended to be used when the user has requested help on the next element that will be clicked.
-
-CursorShape CURSOR_MAX = 17
-
-Represents the size of the CursorShape enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CURSOR_ARROW {#CURSOR_ARROW}
 
@@ -5519,7 +4881,7 @@ Represents the size of the CursorShape enum.
 CURSOR_ARROW = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Arrow cursor shape. This is the default when not pointing anything that overrides the mouse cursor, such as a LineEdit or TextEdit.
 
 #### CURSOR_IBEAM {#CURSOR_IBEAM}
 
@@ -5527,7 +4889,7 @@ CURSOR_ARROW = 0
 CURSOR_IBEAM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+I-beam cursor shape. This is used by default when hovering a control that accepts text input, such as LineEdit or TextEdit.
 
 #### CURSOR_POINTING_HAND {#CURSOR_POINTING_HAND}
 
@@ -5535,7 +4897,7 @@ CURSOR_IBEAM = 1
 CURSOR_POINTING_HAND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pointing hand cursor shape. This is used by default when hovering a LinkButton or a URL tag in a RichTextLabel.
 
 #### CURSOR_CROSS {#CURSOR_CROSS}
 
@@ -5543,7 +4905,7 @@ CURSOR_POINTING_HAND = 2
 CURSOR_CROSS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Crosshair cursor. This is intended to be displayed when the user needs precise aim over an element, such as a rectangle selection tool or a color picker.
 
 #### CURSOR_WAIT {#CURSOR_WAIT}
 
@@ -5551,7 +4913,7 @@ CURSOR_CROSS = 3
 CURSOR_WAIT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Wait cursor. On most cursor themes, this displays a spinning icon besides the arrow. Intended to be used for non-blocking operations (when the user can do something else at the moment). See also CURSOR_BUSY.
 
 #### CURSOR_BUSY {#CURSOR_BUSY}
 
@@ -5559,7 +4921,7 @@ CURSOR_WAIT = 4
 CURSOR_BUSY = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Wait cursor. On most cursor themes, this replaces the arrow with a spinning icon. Intended to be used for blocking operations (when the user can't do anything else at the moment). See also CURSOR_WAIT.
 
 #### CURSOR_DRAG {#CURSOR_DRAG}
 
@@ -5567,7 +4929,7 @@ CURSOR_BUSY = 5
 CURSOR_DRAG = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dragging hand cursor. This is displayed during drag-and-drop operations. See also CURSOR_CAN_DROP.
 
 #### CURSOR_CAN_DROP {#CURSOR_CAN_DROP}
 
@@ -5575,7 +4937,7 @@ CURSOR_DRAG = 6
 CURSOR_CAN_DROP = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+"Can drop" cursor. This is displayed during drag-and-drop operations if hovering over a Control that can accept the drag-and-drop event. On most cursor themes, this displays a dragging hand with an arrow symbol besides it. See also CURSOR_DRAG.
 
 #### CURSOR_FORBIDDEN {#CURSOR_FORBIDDEN}
 
@@ -5583,7 +4945,7 @@ CURSOR_CAN_DROP = 7
 CURSOR_FORBIDDEN = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Forbidden cursor. This is displayed during drag-and-drop operations if the hovered Control can't accept the drag-and-drop event.
 
 #### CURSOR_VSIZE {#CURSOR_VSIZE}
 
@@ -5591,7 +4953,7 @@ CURSOR_FORBIDDEN = 8
 CURSOR_VSIZE = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Vertical resize cursor. Intended to be displayed when the hovered Control can be vertically resized using the mouse. See also CURSOR_VSPLIT.
 
 #### CURSOR_HSIZE {#CURSOR_HSIZE}
 
@@ -5599,7 +4961,7 @@ CURSOR_VSIZE = 9
 CURSOR_HSIZE = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Horizontal resize cursor. Intended to be displayed when the hovered Control can be horizontally resized using the mouse. See also CURSOR_HSPLIT.
 
 #### CURSOR_BDIAGSIZE {#CURSOR_BDIAGSIZE}
 
@@ -5607,7 +4969,7 @@ CURSOR_HSIZE = 10
 CURSOR_BDIAGSIZE = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Secondary diagonal resize cursor (top-right/bottom-left). Intended to be displayed when the hovered Control can be resized on both axes at once using the mouse.
 
 #### CURSOR_FDIAGSIZE {#CURSOR_FDIAGSIZE}
 
@@ -5615,7 +4977,7 @@ CURSOR_BDIAGSIZE = 11
 CURSOR_FDIAGSIZE = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Main diagonal resize cursor (top-left/bottom-right). Intended to be displayed when the hovered Control can be resized on both axes at once using the mouse.
 
 #### CURSOR_MOVE {#CURSOR_MOVE}
 
@@ -5623,7 +4985,7 @@ CURSOR_FDIAGSIZE = 12
 CURSOR_MOVE = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Move cursor. Intended to be displayed when the hovered Control can be moved using the mouse.
 
 #### CURSOR_VSPLIT {#CURSOR_VSPLIT}
 
@@ -5631,7 +4993,7 @@ CURSOR_MOVE = 13
 CURSOR_VSPLIT = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Vertical split cursor. This is displayed when hovering a Control with splits that can be vertically resized using the mouse, such as VSplitContainer. On some cursor themes, this cursor may have the same appearance as CURSOR_VSIZE.
 
 #### CURSOR_HSPLIT {#CURSOR_HSPLIT}
 
@@ -5639,7 +5001,7 @@ CURSOR_VSPLIT = 14
 CURSOR_HSPLIT = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Horizontal split cursor. This is displayed when hovering a Control with splits that can be horizontally resized using the mouse, such as HSplitContainer. On some cursor themes, this cursor may have the same appearance as CURSOR_HSIZE.
 
 #### CURSOR_HELP {#CURSOR_HELP}
 
@@ -5647,7 +5009,7 @@ CURSOR_HSPLIT = 15
 CURSOR_HELP = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Help cursor. On most cursor themes, this displays a question mark icon instead of the mouse cursor. Intended to be used when the user has requested help on the next element that will be clicked.
 
 #### CURSOR_MAX {#CURSOR_MAX}
 
@@ -5655,7 +5017,9 @@ CURSOR_HELP = 16
 CURSOR_MAX = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the CursorShape enum.
+
+---
 
 ### FileDialogMode {#enum-FileDialogMode}
 
@@ -5663,25 +5027,7 @@ CURSOR_MAX = 17
 enum FileDialogMode { FILE_DIALOG_MODE_OPEN_FILE = 0, FILE_DIALOG_MODE_OPEN_FILES = 1, FILE_DIALOG_MODE_OPEN_DIR = 2, FILE_DIALOG_MODE_OPEN_ANY = 3, FILE_DIALOG_MODE_SAVE_FILE = 4 }
 ```
 
-FileDialogMode FILE_DIALOG_MODE_OPEN_FILE = 0
-
-The native file dialog allows selecting one, and only one file.
-
-FileDialogMode FILE_DIALOG_MODE_OPEN_FILES = 1
-
-The native file dialog allows selecting multiple files.
-
-FileDialogMode FILE_DIALOG_MODE_OPEN_DIR = 2
-
-The native file dialog only allows selecting a directory, disallowing the selection of any file.
-
-FileDialogMode FILE_DIALOG_MODE_OPEN_ANY = 3
-
-The native file dialog allows selecting one file or directory.
-
-FileDialogMode FILE_DIALOG_MODE_SAVE_FILE = 4
-
-The native file dialog will warn when a file exists.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FILE_DIALOG_MODE_OPEN_FILE {#FILE_DIALOG_MODE_OPEN_FILE}
 
@@ -5689,7 +5035,7 @@ The native file dialog will warn when a file exists.
 FILE_DIALOG_MODE_OPEN_FILE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The native file dialog allows selecting one, and only one file.
 
 #### FILE_DIALOG_MODE_OPEN_FILES {#FILE_DIALOG_MODE_OPEN_FILES}
 
@@ -5697,7 +5043,7 @@ FILE_DIALOG_MODE_OPEN_FILE = 0
 FILE_DIALOG_MODE_OPEN_FILES = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The native file dialog allows selecting multiple files.
 
 #### FILE_DIALOG_MODE_OPEN_DIR {#FILE_DIALOG_MODE_OPEN_DIR}
 
@@ -5705,7 +5051,7 @@ FILE_DIALOG_MODE_OPEN_FILES = 1
 FILE_DIALOG_MODE_OPEN_DIR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The native file dialog only allows selecting a directory, disallowing the selection of any file.
 
 #### FILE_DIALOG_MODE_OPEN_ANY {#FILE_DIALOG_MODE_OPEN_ANY}
 
@@ -5713,7 +5059,7 @@ FILE_DIALOG_MODE_OPEN_DIR = 2
 FILE_DIALOG_MODE_OPEN_ANY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The native file dialog allows selecting one file or directory.
 
 #### FILE_DIALOG_MODE_SAVE_FILE {#FILE_DIALOG_MODE_SAVE_FILE}
 
@@ -5721,7 +5067,9 @@ FILE_DIALOG_MODE_OPEN_ANY = 3
 FILE_DIALOG_MODE_SAVE_FILE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The native file dialog will warn when a file exists.
+
+---
 
 ### WindowMode {#enum-WindowMode}
 
@@ -5729,19 +5077,37 @@ FILE_DIALOG_MODE_SAVE_FILE = 4
 enum WindowMode { WINDOW_MODE_WINDOWED = 0, WINDOW_MODE_MINIMIZED = 1, WINDOW_MODE_MAXIMIZED = 2, WINDOW_MODE_FULLSCREEN = 3, WINDOW_MODE_EXCLUSIVE_FULLSCREEN = 4 }
 ```
 
-WindowMode WINDOW_MODE_WINDOWED = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### WINDOW_MODE_WINDOWED {#WINDOW_MODE_WINDOWED}
+
+```gdscript
+WINDOW_MODE_WINDOWED = 0
+```
 
 Windowed mode, i.e. Window doesn't occupy the whole screen (unless set to the size of the screen).
 
-WindowMode WINDOW_MODE_MINIMIZED = 1
+#### WINDOW_MODE_MINIMIZED {#WINDOW_MODE_MINIMIZED}
+
+```gdscript
+WINDOW_MODE_MINIMIZED = 1
+```
 
 Minimized window mode, i.e. Window is not visible and available on window manager's window list. Normally happens when the minimize button is pressed.
 
-WindowMode WINDOW_MODE_MAXIMIZED = 2
+#### WINDOW_MODE_MAXIMIZED {#WINDOW_MODE_MAXIMIZED}
+
+```gdscript
+WINDOW_MODE_MAXIMIZED = 2
+```
 
 Maximized window mode, i.e. Window will occupy whole screen area except task bar and still display its borders. Normally happens when the maximize button is pressed.
 
-WindowMode WINDOW_MODE_FULLSCREEN = 3
+#### WINDOW_MODE_FULLSCREEN {#WINDOW_MODE_FULLSCREEN}
+
+```gdscript
+WINDOW_MODE_FULLSCREEN = 3
+```
 
 Full screen mode with full multi-window support.
 
@@ -5753,7 +5119,11 @@ On macOS: A new desktop is used to display the running project.
 
 Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports multiple resolutions when enabling full screen mode.
 
-WindowMode WINDOW_MODE_EXCLUSIVE_FULLSCREEN = 4
+#### WINDOW_MODE_EXCLUSIVE_FULLSCREEN {#WINDOW_MODE_EXCLUSIVE_FULLSCREEN}
+
+```gdscript
+WINDOW_MODE_EXCLUSIVE_FULLSCREEN = 4
+```
 
 A single window full screen mode. This mode has less overhead, but only one window can be open on a given screen at a time (opening a child window or application switching will trigger a full screen transition).
 
@@ -5773,45 +5143,7 @@ On Linux (Wayland): Equivalent to WINDOW_MODE_FULLSCREEN.
 
 Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports multiple resolutions when enabling full screen mode.
 
-#### WINDOW_MODE_WINDOWED {#WINDOW_MODE_WINDOWED}
-
-```gdscript
-WINDOW_MODE_WINDOWED = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_MODE_MINIMIZED {#WINDOW_MODE_MINIMIZED}
-
-```gdscript
-WINDOW_MODE_MINIMIZED = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_MODE_MAXIMIZED {#WINDOW_MODE_MAXIMIZED}
-
-```gdscript
-WINDOW_MODE_MAXIMIZED = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_MODE_FULLSCREEN {#WINDOW_MODE_FULLSCREEN}
-
-```gdscript
-WINDOW_MODE_FULLSCREEN = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_MODE_EXCLUSIVE_FULLSCREEN {#WINDOW_MODE_EXCLUSIVE_FULLSCREEN}
-
-```gdscript
-WINDOW_MODE_EXCLUSIVE_FULLSCREEN = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+---
 
 ### ProgressState {#enum-ProgressState}
 
@@ -5819,31 +5151,7 @@ WINDOW_MODE_EXCLUSIVE_FULLSCREEN = 4
 enum ProgressState { PROGRESS_STATE_NOPROGRESS = 0, PROGRESS_STATE_INDETERMINATE = 1, PROGRESS_STATE_NORMAL = 2, PROGRESS_STATE_ERROR = 3, PROGRESS_STATE_PAUSED = 4 }
 ```
 
-ProgressState PROGRESS_STATE_NOPROGRESS = 0
-
-Stops displaying progress and returns the button to its normal state.
-
-ProgressState PROGRESS_STATE_INDETERMINATE = 1
-
-The progress indicator shows an indeterminate progress.
-
-On Windows, the progress indicator does not grow in size, but cycles repeatedly along the length of the taskbar button by default.
-
-ProgressState PROGRESS_STATE_NORMAL = 2
-
-The progress indicator shows progress normally.
-
-ProgressState PROGRESS_STATE_ERROR = 3
-
-The progress indicator shows that an error has occurred.
-
-On Windows, the progress indicator turns red by default to show that an error has occurred in one of the windows that is broadcasting progress.
-
-ProgressState PROGRESS_STATE_PAUSED = 4
-
-The progress indicator shows it was paused.
-
-On Windows, the progress indicator turns yellow by default to show that progress is currently stopped in one of the windows but can be resumed by the user.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PROGRESS_STATE_NOPROGRESS {#PROGRESS_STATE_NOPROGRESS}
 
@@ -5851,7 +5159,7 @@ On Windows, the progress indicator turns yellow by default to show that progress
 PROGRESS_STATE_NOPROGRESS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stops displaying progress and returns the button to its normal state.
 
 #### PROGRESS_STATE_INDETERMINATE {#PROGRESS_STATE_INDETERMINATE}
 
@@ -5859,7 +5167,9 @@ PROGRESS_STATE_NOPROGRESS = 0
 PROGRESS_STATE_INDETERMINATE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The progress indicator shows an indeterminate progress.
+
+On Windows, the progress indicator does not grow in size, but cycles repeatedly along the length of the taskbar button by default.
 
 #### PROGRESS_STATE_NORMAL {#PROGRESS_STATE_NORMAL}
 
@@ -5867,7 +5177,7 @@ PROGRESS_STATE_INDETERMINATE = 1
 PROGRESS_STATE_NORMAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The progress indicator shows progress normally.
 
 #### PROGRESS_STATE_ERROR {#PROGRESS_STATE_ERROR}
 
@@ -5875,7 +5185,9 @@ PROGRESS_STATE_NORMAL = 2
 PROGRESS_STATE_ERROR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The progress indicator shows that an error has occurred.
+
+On Windows, the progress indicator turns red by default to show that an error has occurred in one of the windows that is broadcasting progress.
 
 #### PROGRESS_STATE_PAUSED {#PROGRESS_STATE_PAUSED}
 
@@ -5883,7 +5195,11 @@ PROGRESS_STATE_ERROR = 3
 PROGRESS_STATE_PAUSED = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The progress indicator shows it was paused.
+
+On Windows, the progress indicator turns yellow by default to show that progress is currently stopped in one of the windows but can be resumed by the user.
+
+---
 
 ### WindowFlags {#enum-WindowFlags}
 
@@ -5891,25 +5207,43 @@ PROGRESS_STATE_PAUSED = 4
 enum WindowFlags { WINDOW_FLAG_RESIZE_DISABLED = 0, WINDOW_FLAG_BORDERLESS = 1, WINDOW_FLAG_ALWAYS_ON_TOP = 2, WINDOW_FLAG_TRANSPARENT = 3, WINDOW_FLAG_NO_FOCUS = 4, WINDOW_FLAG_POPUP = 5, WINDOW_FLAG_EXTEND_TO_TITLE = 6, WINDOW_FLAG_MOUSE_PASSTHROUGH = 7, WINDOW_FLAG_SHARP_CORNERS = 8, WINDOW_FLAG_EXCLUDE_FROM_CAPTURE = 9, WINDOW_FLAG_POPUP_WM_HINT = 10, WINDOW_FLAG_MINIMIZE_DISABLED = 11, WINDOW_FLAG_MAXIMIZE_DISABLED = 12, WINDOW_FLAG_MAX = 13 }
 ```
 
-WindowFlags WINDOW_FLAG_RESIZE_DISABLED = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### WINDOW_FLAG_RESIZE_DISABLED {#WINDOW_FLAG_RESIZE_DISABLED}
+
+```gdscript
+WINDOW_FLAG_RESIZE_DISABLED = 0
+```
 
 The window can't be resized by dragging its resize grip. It's still possible to resize the window using window_set_size(). This flag is ignored for full screen windows.
 
 Note: This flag is implemented on Linux (X11), macOS, and Windows.
 
-WindowFlags WINDOW_FLAG_BORDERLESS = 1
+#### WINDOW_FLAG_BORDERLESS {#WINDOW_FLAG_BORDERLESS}
+
+```gdscript
+WINDOW_FLAG_BORDERLESS = 1
+```
 
 The window do not have native title bar and other decorations. This flag is ignored for full-screen windows.
 
 Note: This flag is implemented on Linux (X11/Wayland), macOS, and Windows.
 
-WindowFlags WINDOW_FLAG_ALWAYS_ON_TOP = 2
+#### WINDOW_FLAG_ALWAYS_ON_TOP {#WINDOW_FLAG_ALWAYS_ON_TOP}
+
+```gdscript
+WINDOW_FLAG_ALWAYS_ON_TOP = 2
+```
 
 The window is floating on top of all other windows. This flag is ignored for full-screen windows.
 
 Note: This flag is implemented on Linux (X11), macOS, and Windows.
 
-WindowFlags WINDOW_FLAG_TRANSPARENT = 3
+#### WINDOW_FLAG_TRANSPARENT {#WINDOW_FLAG_TRANSPARENT}
+
+```gdscript
+WINDOW_FLAG_TRANSPARENT = 3
+```
 
 The window background can be transparent.
 
@@ -5919,19 +5253,31 @@ Note: Transparency support is implemented on Linux (X11/Wayland), macOS, and Win
 
 Note: Transparency support is implemented on Android, but can only be enabled via ProjectSettings.display/window/per_pixel_transparency/allowed. This flag has no effect on Android.
 
-WindowFlags WINDOW_FLAG_NO_FOCUS = 4
+#### WINDOW_FLAG_NO_FOCUS {#WINDOW_FLAG_NO_FOCUS}
+
+```gdscript
+WINDOW_FLAG_NO_FOCUS = 4
+```
 
 The window can't be focused. No-focus window will ignore all input, except mouse clicks.
 
 Note: This flag is implemented on Linux (X11), macOS, and Windows.
 
-WindowFlags WINDOW_FLAG_POPUP = 5
+#### WINDOW_FLAG_POPUP {#WINDOW_FLAG_POPUP}
+
+```gdscript
+WINDOW_FLAG_POPUP = 5
+```
 
 Window is part of menu or OptionButton dropdown. This flag can't be changed when the window is visible. An active popup window will exclusively receive all input, without stealing focus from its parent. Popup windows are automatically closed when uses click outside it, or when an application is switched. Popup window must have transient parent set (see window_set_transient()).
 
 Note: This flag is implemented on Linux (X11/Wayland), macOS, and Windows.
 
-WindowFlags WINDOW_FLAG_EXTEND_TO_TITLE = 6
+#### WINDOW_FLAG_EXTEND_TO_TITLE {#WINDOW_FLAG_EXTEND_TO_TITLE}
+
+```gdscript
+WINDOW_FLAG_EXTEND_TO_TITLE = 6
+```
 
 Window content is expanded to the full size of the window. Unlike borderless window, the frame is left intact and can be used to resize the window, title bar is transparent, but have minimize/maximize/close buttons.
 
@@ -5941,111 +5287,15 @@ Use window_get_safe_title_margins() to determine area under the title bar that i
 
 Note: This flag is implemented only on macOS.
 
-WindowFlags WINDOW_FLAG_MOUSE_PASSTHROUGH = 7
-
-All mouse events are passed to the underlying window of the same application.
-
-Note: This flag is implemented on Linux (X11), macOS, and Windows.
-
-WindowFlags WINDOW_FLAG_SHARP_CORNERS = 8
-
-Window style is overridden, forcing sharp corners.
-
-Note: This flag is implemented only on Windows (11).
-
-WindowFlags WINDOW_FLAG_EXCLUDE_FROM_CAPTURE = 9
-
-Window is excluded from screenshots taken by screen_get_image(), screen_get_image_rect(), and screen_get_pixel().
-
-Note: This flag is implemented on macOS and Windows (10, 20H1).
-
-Note: Setting this flag will prevent standard screenshot methods from capturing a window image, but does NOT guarantee that other apps won't be able to capture an image. It should not be used as a DRM or security measure.
-
-WindowFlags WINDOW_FLAG_POPUP_WM_HINT = 10
-
-Signals the window manager that this window is supposed to be an implementation-defined "popup" (usually a floating, borderless, untileable and immovable child window).
-
-Note: This flag is implemented on Linux (Wayland).
-
-WindowFlags WINDOW_FLAG_MINIMIZE_DISABLED = 11
-
-Window minimize button is disabled.
-
-Note: This flag is implemented on Linux (X11), macOS, and Windows.
-
-WindowFlags WINDOW_FLAG_MAXIMIZE_DISABLED = 12
-
-Window maximize button is disabled.
-
-Note: This flag is implemented on Linux (X11), macOS, and Windows.
-
-WindowFlags WINDOW_FLAG_MAX = 13
-
-Represents the size of the WindowFlags enum.
-
-#### WINDOW_FLAG_RESIZE_DISABLED {#WINDOW_FLAG_RESIZE_DISABLED}
-
-```gdscript
-WINDOW_FLAG_RESIZE_DISABLED = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_FLAG_BORDERLESS {#WINDOW_FLAG_BORDERLESS}
-
-```gdscript
-WINDOW_FLAG_BORDERLESS = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_FLAG_ALWAYS_ON_TOP {#WINDOW_FLAG_ALWAYS_ON_TOP}
-
-```gdscript
-WINDOW_FLAG_ALWAYS_ON_TOP = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_FLAG_TRANSPARENT {#WINDOW_FLAG_TRANSPARENT}
-
-```gdscript
-WINDOW_FLAG_TRANSPARENT = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_FLAG_NO_FOCUS {#WINDOW_FLAG_NO_FOCUS}
-
-```gdscript
-WINDOW_FLAG_NO_FOCUS = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_FLAG_POPUP {#WINDOW_FLAG_POPUP}
-
-```gdscript
-WINDOW_FLAG_POPUP = 5
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_FLAG_EXTEND_TO_TITLE {#WINDOW_FLAG_EXTEND_TO_TITLE}
-
-```gdscript
-WINDOW_FLAG_EXTEND_TO_TITLE = 6
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### WINDOW_FLAG_MOUSE_PASSTHROUGH {#WINDOW_FLAG_MOUSE_PASSTHROUGH}
 
 ```gdscript
 WINDOW_FLAG_MOUSE_PASSTHROUGH = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+All mouse events are passed to the underlying window of the same application.
+
+Note: This flag is implemented on Linux (X11), macOS, and Windows.
 
 #### WINDOW_FLAG_SHARP_CORNERS {#WINDOW_FLAG_SHARP_CORNERS}
 
@@ -6053,7 +5303,9 @@ WINDOW_FLAG_MOUSE_PASSTHROUGH = 7
 WINDOW_FLAG_SHARP_CORNERS = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Window style is overridden, forcing sharp corners.
+
+Note: This flag is implemented only on Windows (11).
 
 #### WINDOW_FLAG_EXCLUDE_FROM_CAPTURE {#WINDOW_FLAG_EXCLUDE_FROM_CAPTURE}
 
@@ -6061,7 +5313,11 @@ WINDOW_FLAG_SHARP_CORNERS = 8
 WINDOW_FLAG_EXCLUDE_FROM_CAPTURE = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Window is excluded from screenshots taken by screen_get_image(), screen_get_image_rect(), and screen_get_pixel().
+
+Note: This flag is implemented on macOS and Windows (10, 20H1).
+
+Note: Setting this flag will prevent standard screenshot methods from capturing a window image, but does NOT guarantee that other apps won't be able to capture an image. It should not be used as a DRM or security measure.
 
 #### WINDOW_FLAG_POPUP_WM_HINT {#WINDOW_FLAG_POPUP_WM_HINT}
 
@@ -6069,7 +5325,9 @@ WINDOW_FLAG_EXCLUDE_FROM_CAPTURE = 9
 WINDOW_FLAG_POPUP_WM_HINT = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Signals the window manager that this window is supposed to be an implementation-defined "popup" (usually a floating, borderless, untileable and immovable child window).
+
+Note: This flag is implemented on Linux (Wayland).
 
 #### WINDOW_FLAG_MINIMIZE_DISABLED {#WINDOW_FLAG_MINIMIZE_DISABLED}
 
@@ -6077,7 +5335,9 @@ WINDOW_FLAG_POPUP_WM_HINT = 10
 WINDOW_FLAG_MINIMIZE_DISABLED = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Window minimize button is disabled.
+
+Note: This flag is implemented on Linux (X11), macOS, and Windows.
 
 #### WINDOW_FLAG_MAXIMIZE_DISABLED {#WINDOW_FLAG_MAXIMIZE_DISABLED}
 
@@ -6085,7 +5345,9 @@ WINDOW_FLAG_MINIMIZE_DISABLED = 11
 WINDOW_FLAG_MAXIMIZE_DISABLED = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Window maximize button is disabled.
+
+Note: This flag is implemented on Linux (X11), macOS, and Windows.
 
 #### WINDOW_FLAG_MAX {#WINDOW_FLAG_MAX}
 
@@ -6093,7 +5355,9 @@ WINDOW_FLAG_MAXIMIZE_DISABLED = 12
 WINDOW_FLAG_MAX = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the WindowFlags enum.
+
+---
 
 ### WindowEvent {#enum-WindowEvent}
 
@@ -6101,55 +5365,7 @@ WINDOW_FLAG_MAX = 13
 enum WindowEvent { WINDOW_EVENT_MOUSE_ENTER = 0, WINDOW_EVENT_MOUSE_EXIT = 1, WINDOW_EVENT_FOCUS_IN = 2, WINDOW_EVENT_FOCUS_OUT = 3, WINDOW_EVENT_CLOSE_REQUEST = 4, WINDOW_EVENT_GO_BACK_REQUEST = 5, WINDOW_EVENT_DPI_CHANGE = 6, WINDOW_EVENT_TITLEBAR_CHANGE = 7, WINDOW_EVENT_FORCE_CLOSE = 8, WINDOW_EVENT_OUTPUT_MAX_LINEAR_VALUE_CHANGED = 9 }
 ```
 
-WindowEvent WINDOW_EVENT_MOUSE_ENTER = 0
-
-Sent when the mouse pointer enters the window.
-
-WindowEvent WINDOW_EVENT_MOUSE_EXIT = 1
-
-Sent when the mouse pointer exits the window.
-
-WindowEvent WINDOW_EVENT_FOCUS_IN = 2
-
-Sent when the window grabs focus.
-
-WindowEvent WINDOW_EVENT_FOCUS_OUT = 3
-
-Sent when the window loses focus.
-
-WindowEvent WINDOW_EVENT_CLOSE_REQUEST = 4
-
-Sent when the user has attempted to close the window (e.g. close button is pressed).
-
-WindowEvent WINDOW_EVENT_GO_BACK_REQUEST = 5
-
-Sent when the device "Back" button is pressed.
-
-Note: This event is implemented only on Android.
-
-WindowEvent WINDOW_EVENT_DPI_CHANGE = 6
-
-Sent when the window is moved to the display with different DPI, or display DPI is changed.
-
-Note: This flag is implemented only on macOS and Linux (Wayland).
-
-WindowEvent WINDOW_EVENT_TITLEBAR_CHANGE = 7
-
-Sent when the window title bar decoration is changed (e.g. WINDOW_FLAG_EXTEND_TO_TITLE is set or window entered/exited full screen mode).
-
-Note: This flag is implemented only on macOS.
-
-WindowEvent WINDOW_EVENT_FORCE_CLOSE = 8
-
-Sent when the window has been forcibly closed by the display server. The window will immediately hide and clean any internal rendering references.
-
-Note: This flag is implemented only on Linux (Wayland).
-
-WindowEvent WINDOW_EVENT_OUTPUT_MAX_LINEAR_VALUE_CHANGED = 9
-
-Sent when the output max linear value returned by Window.get_output_max_linear_value() has changed.
-
-This occurs when HDR output is enabled or disabled and when any HDR output luminance values of the window have changed, such as when the player adjusts their screen brightness setting or moves the window to a different screen.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### WINDOW_EVENT_MOUSE_ENTER {#WINDOW_EVENT_MOUSE_ENTER}
 
@@ -6157,7 +5373,7 @@ This occurs when HDR output is enabled or disabled and when any HDR output lumin
 WINDOW_EVENT_MOUSE_ENTER = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sent when the mouse pointer enters the window.
 
 #### WINDOW_EVENT_MOUSE_EXIT {#WINDOW_EVENT_MOUSE_EXIT}
 
@@ -6165,7 +5381,7 @@ WINDOW_EVENT_MOUSE_ENTER = 0
 WINDOW_EVENT_MOUSE_EXIT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sent when the mouse pointer exits the window.
 
 #### WINDOW_EVENT_FOCUS_IN {#WINDOW_EVENT_FOCUS_IN}
 
@@ -6173,7 +5389,7 @@ WINDOW_EVENT_MOUSE_EXIT = 1
 WINDOW_EVENT_FOCUS_IN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sent when the window grabs focus.
 
 #### WINDOW_EVENT_FOCUS_OUT {#WINDOW_EVENT_FOCUS_OUT}
 
@@ -6181,7 +5397,7 @@ WINDOW_EVENT_FOCUS_IN = 2
 WINDOW_EVENT_FOCUS_OUT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sent when the window loses focus.
 
 #### WINDOW_EVENT_CLOSE_REQUEST {#WINDOW_EVENT_CLOSE_REQUEST}
 
@@ -6189,7 +5405,7 @@ WINDOW_EVENT_FOCUS_OUT = 3
 WINDOW_EVENT_CLOSE_REQUEST = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sent when the user has attempted to close the window (e.g. close button is pressed).
 
 #### WINDOW_EVENT_GO_BACK_REQUEST {#WINDOW_EVENT_GO_BACK_REQUEST}
 
@@ -6197,7 +5413,9 @@ WINDOW_EVENT_CLOSE_REQUEST = 4
 WINDOW_EVENT_GO_BACK_REQUEST = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sent when the device "Back" button is pressed.
+
+Note: This event is implemented only on Android.
 
 #### WINDOW_EVENT_DPI_CHANGE {#WINDOW_EVENT_DPI_CHANGE}
 
@@ -6205,7 +5423,9 @@ WINDOW_EVENT_GO_BACK_REQUEST = 5
 WINDOW_EVENT_DPI_CHANGE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sent when the window is moved to the display with different DPI, or display DPI is changed.
+
+Note: This flag is implemented only on macOS and Linux (Wayland).
 
 #### WINDOW_EVENT_TITLEBAR_CHANGE {#WINDOW_EVENT_TITLEBAR_CHANGE}
 
@@ -6213,7 +5433,9 @@ WINDOW_EVENT_DPI_CHANGE = 6
 WINDOW_EVENT_TITLEBAR_CHANGE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sent when the window title bar decoration is changed (e.g. WINDOW_FLAG_EXTEND_TO_TITLE is set or window entered/exited full screen mode).
+
+Note: This flag is implemented only on macOS.
 
 #### WINDOW_EVENT_FORCE_CLOSE {#WINDOW_EVENT_FORCE_CLOSE}
 
@@ -6221,7 +5443,9 @@ WINDOW_EVENT_TITLEBAR_CHANGE = 7
 WINDOW_EVENT_FORCE_CLOSE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sent when the window has been forcibly closed by the display server. The window will immediately hide and clean any internal rendering references.
+
+Note: This flag is implemented only on Linux (Wayland).
 
 #### WINDOW_EVENT_OUTPUT_MAX_LINEAR_VALUE_CHANGED {#WINDOW_EVENT_OUTPUT_MAX_LINEAR_VALUE_CHANGED}
 
@@ -6229,7 +5453,11 @@ WINDOW_EVENT_FORCE_CLOSE = 8
 WINDOW_EVENT_OUTPUT_MAX_LINEAR_VALUE_CHANGED = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sent when the output max linear value returned by Window.get_output_max_linear_value() has changed.
+
+This occurs when HDR output is enabled or disabled and when any HDR output luminance values of the window have changed, such as when the player adjusts their screen brightness setting or moves the window to a different screen.
+
+---
 
 ### WindowResizeEdge {#enum-WindowResizeEdge}
 
@@ -6237,41 +5465,7 @@ WINDOW_EVENT_OUTPUT_MAX_LINEAR_VALUE_CHANGED = 9
 enum WindowResizeEdge { WINDOW_EDGE_TOP_LEFT = 0, WINDOW_EDGE_TOP = 1, WINDOW_EDGE_TOP_RIGHT = 2, WINDOW_EDGE_LEFT = 3, WINDOW_EDGE_RIGHT = 4, WINDOW_EDGE_BOTTOM_LEFT = 5, WINDOW_EDGE_BOTTOM = 6, WINDOW_EDGE_BOTTOM_RIGHT = 7, WINDOW_EDGE_MAX = 8 }
 ```
 
-WindowResizeEdge WINDOW_EDGE_TOP_LEFT = 0
-
-Top-left edge of a window.
-
-WindowResizeEdge WINDOW_EDGE_TOP = 1
-
-Top edge of a window.
-
-WindowResizeEdge WINDOW_EDGE_TOP_RIGHT = 2
-
-Top-right edge of a window.
-
-WindowResizeEdge WINDOW_EDGE_LEFT = 3
-
-Left edge of a window.
-
-WindowResizeEdge WINDOW_EDGE_RIGHT = 4
-
-Right edge of a window.
-
-WindowResizeEdge WINDOW_EDGE_BOTTOM_LEFT = 5
-
-Bottom-left edge of a window.
-
-WindowResizeEdge WINDOW_EDGE_BOTTOM = 6
-
-Bottom edge of a window.
-
-WindowResizeEdge WINDOW_EDGE_BOTTOM_RIGHT = 7
-
-Bottom-right edge of a window.
-
-WindowResizeEdge WINDOW_EDGE_MAX = 8
-
-Represents the size of the WindowResizeEdge enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### WINDOW_EDGE_TOP_LEFT {#WINDOW_EDGE_TOP_LEFT}
 
@@ -6279,7 +5473,7 @@ Represents the size of the WindowResizeEdge enum.
 WINDOW_EDGE_TOP_LEFT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Top-left edge of a window.
 
 #### WINDOW_EDGE_TOP {#WINDOW_EDGE_TOP}
 
@@ -6287,7 +5481,7 @@ WINDOW_EDGE_TOP_LEFT = 0
 WINDOW_EDGE_TOP = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Top edge of a window.
 
 #### WINDOW_EDGE_TOP_RIGHT {#WINDOW_EDGE_TOP_RIGHT}
 
@@ -6295,7 +5489,7 @@ WINDOW_EDGE_TOP = 1
 WINDOW_EDGE_TOP_RIGHT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Top-right edge of a window.
 
 #### WINDOW_EDGE_LEFT {#WINDOW_EDGE_LEFT}
 
@@ -6303,7 +5497,7 @@ WINDOW_EDGE_TOP_RIGHT = 2
 WINDOW_EDGE_LEFT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Left edge of a window.
 
 #### WINDOW_EDGE_RIGHT {#WINDOW_EDGE_RIGHT}
 
@@ -6311,7 +5505,7 @@ WINDOW_EDGE_LEFT = 3
 WINDOW_EDGE_RIGHT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Right edge of a window.
 
 #### WINDOW_EDGE_BOTTOM_LEFT {#WINDOW_EDGE_BOTTOM_LEFT}
 
@@ -6319,7 +5513,7 @@ WINDOW_EDGE_RIGHT = 4
 WINDOW_EDGE_BOTTOM_LEFT = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bottom-left edge of a window.
 
 #### WINDOW_EDGE_BOTTOM {#WINDOW_EDGE_BOTTOM}
 
@@ -6327,7 +5521,7 @@ WINDOW_EDGE_BOTTOM_LEFT = 5
 WINDOW_EDGE_BOTTOM = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bottom edge of a window.
 
 #### WINDOW_EDGE_BOTTOM_RIGHT {#WINDOW_EDGE_BOTTOM_RIGHT}
 
@@ -6335,7 +5529,7 @@ WINDOW_EDGE_BOTTOM = 6
 WINDOW_EDGE_BOTTOM_RIGHT = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bottom-right edge of a window.
 
 #### WINDOW_EDGE_MAX {#WINDOW_EDGE_MAX}
 
@@ -6343,7 +5537,9 @@ WINDOW_EDGE_BOTTOM_RIGHT = 7
 WINDOW_EDGE_MAX = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the WindowResizeEdge enum.
+
+---
 
 ### VSyncMode {#enum-VSyncMode}
 
@@ -6351,23 +5547,7 @@ WINDOW_EDGE_MAX = 8
 enum VSyncMode { VSYNC_DISABLED = 0, VSYNC_ENABLED = 1, VSYNC_ADAPTIVE = 2, VSYNC_MAILBOX = 3 }
 ```
 
-VSyncMode VSYNC_DISABLED = 0
-
-No vertical synchronization, which means the engine will display frames as fast as possible (tearing may be visible). Framerate is unlimited (regardless of Engine.max_fps).
-
-VSyncMode VSYNC_ENABLED = 1
-
-Default vertical synchronization mode, the image is displayed only on vertical blanking intervals (no tearing is visible). Framerate is limited by the monitor refresh rate (regardless of Engine.max_fps).
-
-VSyncMode VSYNC_ADAPTIVE = 2
-
-Behaves like VSYNC_DISABLED when the framerate drops below the screen's refresh rate to reduce stuttering (tearing may be visible). Otherwise, vertical synchronization is enabled to avoid tearing. Framerate is limited by the monitor refresh rate (regardless of Engine.max_fps). Behaves like VSYNC_ENABLED when using the Compatibility rendering method.
-
-VSyncMode VSYNC_MAILBOX = 3
-
-Displays the most recent image in the queue on vertical blanking intervals, while rendering to the other images (no tearing is visible). Framerate is unlimited (regardless of Engine.max_fps).
-
-Although not guaranteed, the images can be rendered as fast as possible, which may reduce input lag (also called "Fast" V-Sync mode). VSYNC_MAILBOX works best when at least twice as many frames as the display refresh rate are rendered. Behaves like VSYNC_ENABLED when using the Compatibility rendering method.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VSYNC_DISABLED {#VSYNC_DISABLED}
 
@@ -6375,7 +5555,7 @@ Although not guaranteed, the images can be rendered as fast as possible, which m
 VSYNC_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No vertical synchronization, which means the engine will display frames as fast as possible (tearing may be visible). Framerate is unlimited (regardless of Engine.max_fps).
 
 #### VSYNC_ENABLED {#VSYNC_ENABLED}
 
@@ -6383,7 +5563,7 @@ VSYNC_DISABLED = 0
 VSYNC_ENABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default vertical synchronization mode, the image is displayed only on vertical blanking intervals (no tearing is visible). Framerate is limited by the monitor refresh rate (regardless of Engine.max_fps).
 
 #### VSYNC_ADAPTIVE {#VSYNC_ADAPTIVE}
 
@@ -6391,7 +5571,7 @@ VSYNC_ENABLED = 1
 VSYNC_ADAPTIVE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Behaves like VSYNC_DISABLED when the framerate drops below the screen's refresh rate to reduce stuttering (tearing may be visible). Otherwise, vertical synchronization is enabled to avoid tearing. Framerate is limited by the monitor refresh rate (regardless of Engine.max_fps). Behaves like VSYNC_ENABLED when using the Compatibility rendering method.
 
 #### VSYNC_MAILBOX {#VSYNC_MAILBOX}
 
@@ -6399,7 +5579,11 @@ VSYNC_ADAPTIVE = 2
 VSYNC_MAILBOX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Displays the most recent image in the queue on vertical blanking intervals, while rendering to the other images (no tearing is visible). Framerate is unlimited (regardless of Engine.max_fps).
+
+Although not guaranteed, the images can be rendered as fast as possible, which may reduce input lag (also called "Fast" V-Sync mode). VSYNC_MAILBOX works best when at least twice as many frames as the display refresh rate are rendered. Behaves like VSYNC_ENABLED when using the Compatibility rendering method.
+
+---
 
 ### HandleType {#enum-HandleType}
 
@@ -6407,7 +5591,13 @@ VSYNC_MAILBOX = 3
 enum HandleType { DISPLAY_HANDLE = 0, WINDOW_HANDLE = 1, WINDOW_VIEW = 2, OPENGL_CONTEXT = 3, EGL_DISPLAY = 4, EGL_CONFIG = 5, GLX_VISUALID = 6, GLX_FBCONFIG = 7 }
 ```
 
-HandleType DISPLAY_HANDLE = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### DISPLAY_HANDLE {#DISPLAY_HANDLE}
+
+```gdscript
+DISPLAY_HANDLE = 0
+```
 
 Display handle:
 
@@ -6415,7 +5605,11 @@ Display handle:
 - Linux (Wayland): wl_display for the display.
 - Android: EGLDisplay for the display.
 
-HandleType WINDOW_HANDLE = 1
+#### WINDOW_HANDLE {#WINDOW_HANDLE}
+
+```gdscript
+WINDOW_HANDLE = 1
+```
 
 Window handle:
 
@@ -6426,7 +5620,11 @@ Window handle:
 - iOS: UIViewController* for the view controller.
 - Android: jObject for the activity.
 
-HandleType WINDOW_VIEW = 2
+#### WINDOW_VIEW {#WINDOW_VIEW}
+
+```gdscript
+WINDOW_VIEW = 2
+```
 
 Window view:
 
@@ -6434,7 +5632,11 @@ Window view:
 - macOS: NSView* for the window main view.
 - iOS: UIView* for the window main view.
 
-HandleType OPENGL_CONTEXT = 3
+#### OPENGL_CONTEXT {#OPENGL_CONTEXT}
+
+```gdscript
+OPENGL_CONTEXT = 3
+```
 
 OpenGL context (only with the Compatibility renderer):
 
@@ -6444,69 +5646,15 @@ OpenGL context (only with the Compatibility renderer):
 - macOS: NSOpenGLContext* for the window (native GL), or EGLContext for the window (ANGLE).
 - Android: EGLContext for the window.
 
-HandleType EGL_DISPLAY = 4
-
-- Windows: EGLDisplay for the window (ANGLE).
-- macOS: EGLDisplay for the window (ANGLE).
-- Linux (Wayland): EGLDisplay for the window.
-
-HandleType EGL_CONFIG = 5
-
-- Windows: EGLConfig for the window (ANGLE).
-- macOS: EGLConfig for the window (ANGLE).
-- Linux (Wayland): EGLConfig for the window.
-
-HandleType GLX_VISUALID = 6
-
-The GLX VisualID for the window.
-
-Note: Only available on Linux when using X11.
-
-HandleType GLX_FBCONFIG = 7
-
-The GLXFBConfig for the window.
-
-Note: Only available on Linux when using X11.
-
-#### DISPLAY_HANDLE {#DISPLAY_HANDLE}
-
-```gdscript
-DISPLAY_HANDLE = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_HANDLE {#WINDOW_HANDLE}
-
-```gdscript
-WINDOW_HANDLE = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### WINDOW_VIEW {#WINDOW_VIEW}
-
-```gdscript
-WINDOW_VIEW = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### OPENGL_CONTEXT {#OPENGL_CONTEXT}
-
-```gdscript
-OPENGL_CONTEXT = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### EGL_DISPLAY {#EGL_DISPLAY}
 
 ```gdscript
 EGL_DISPLAY = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- Windows: EGLDisplay for the window (ANGLE).
+- macOS: EGLDisplay for the window (ANGLE).
+- Linux (Wayland): EGLDisplay for the window.
 
 #### EGL_CONFIG {#EGL_CONFIG}
 
@@ -6514,7 +5662,9 @@ EGL_DISPLAY = 4
 EGL_CONFIG = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- Windows: EGLConfig for the window (ANGLE).
+- macOS: EGLConfig for the window (ANGLE).
+- Linux (Wayland): EGLConfig for the window.
 
 #### GLX_VISUALID {#GLX_VISUALID}
 
@@ -6522,7 +5672,9 @@ EGL_CONFIG = 5
 GLX_VISUALID = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The GLX VisualID for the window.
+
+Note: Only available on Linux when using X11.
 
 #### GLX_FBCONFIG {#GLX_FBCONFIG}
 
@@ -6530,7 +5682,11 @@ GLX_VISUALID = 6
 GLX_FBCONFIG = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The GLXFBConfig for the window.
+
+Note: Only available on Linux when using X11.
+
+---
 
 ### TTSUtteranceEvent {#enum-TTSUtteranceEvent}
 
@@ -6538,21 +5694,7 @@ GLX_FBCONFIG = 7
 enum TTSUtteranceEvent { TTS_UTTERANCE_STARTED = 0, TTS_UTTERANCE_ENDED = 1, TTS_UTTERANCE_CANCELED = 2, TTS_UTTERANCE_BOUNDARY = 3 }
 ```
 
-TTSUtteranceEvent TTS_UTTERANCE_STARTED = 0
-
-Utterance has begun to be spoken.
-
-TTSUtteranceEvent TTS_UTTERANCE_ENDED = 1
-
-Utterance was successfully finished.
-
-TTSUtteranceEvent TTS_UTTERANCE_CANCELED = 2
-
-Utterance was canceled, or TTS service was unable to process it.
-
-TTSUtteranceEvent TTS_UTTERANCE_BOUNDARY = 3
-
-Utterance reached a word or sentence boundary.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TTS_UTTERANCE_STARTED {#TTS_UTTERANCE_STARTED}
 
@@ -6560,7 +5702,7 @@ Utterance reached a word or sentence boundary.
 TTS_UTTERANCE_STARTED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Utterance has begun to be spoken.
 
 #### TTS_UTTERANCE_ENDED {#TTS_UTTERANCE_ENDED}
 
@@ -6568,7 +5710,7 @@ TTS_UTTERANCE_STARTED = 0
 TTS_UTTERANCE_ENDED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Utterance was successfully finished.
 
 #### TTS_UTTERANCE_CANCELED {#TTS_UTTERANCE_CANCELED}
 
@@ -6576,7 +5718,7 @@ TTS_UTTERANCE_ENDED = 1
 TTS_UTTERANCE_CANCELED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Utterance was canceled, or TTS service was unable to process it.
 
 #### TTS_UTTERANCE_BOUNDARY {#TTS_UTTERANCE_BOUNDARY}
 
@@ -6584,7 +5726,9 @@ TTS_UTTERANCE_CANCELED = 2
 TTS_UTTERANCE_BOUNDARY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Utterance reached a word or sentence boundary.
+
+---
 
 ## 常量
 

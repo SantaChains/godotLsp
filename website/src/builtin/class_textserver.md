@@ -2121,21 +2121,7 @@ Converts the given OpenType tag to the readable name of a feature, variation, sc
 enum FontAntialiasing { FONT_ANTIALIASING_NONE = 0, FONT_ANTIALIASING_GRAY = 1, FONT_ANTIALIASING_LCD = 2 }
 ```
 
-FontAntialiasing FONT_ANTIALIASING_NONE = 0
-
-Font glyphs are rasterized as 1-bit bitmaps.
-
-FontAntialiasing FONT_ANTIALIASING_GRAY = 1
-
-Font glyphs are rasterized as 8-bit grayscale anti-aliased bitmaps.
-
-FontAntialiasing FONT_ANTIALIASING_LCD = 2
-
-Font glyphs are rasterized for LCD screens.
-
-LCD subpixel layout is determined by the value of the ProjectSettings.gui/theme/lcd_subpixel_layout setting.
-
-LCD subpixel anti-aliasing mode is suitable only for rendering horizontal, unscaled text in 2D.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FONT_ANTIALIASING_NONE {#FONT_ANTIALIASING_NONE}
 
@@ -2143,7 +2129,7 @@ LCD subpixel anti-aliasing mode is suitable only for rendering horizontal, unsca
 FONT_ANTIALIASING_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Font glyphs are rasterized as 1-bit bitmaps.
 
 #### FONT_ANTIALIASING_GRAY {#FONT_ANTIALIASING_GRAY}
 
@@ -2151,7 +2137,7 @@ FONT_ANTIALIASING_NONE = 0
 FONT_ANTIALIASING_GRAY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Font glyphs are rasterized as 8-bit grayscale anti-aliased bitmaps.
 
 #### FONT_ANTIALIASING_LCD {#FONT_ANTIALIASING_LCD}
 
@@ -2159,7 +2145,13 @@ FONT_ANTIALIASING_GRAY = 1
 FONT_ANTIALIASING_LCD = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Font glyphs are rasterized for LCD screens.
+
+LCD subpixel layout is determined by the value of the ProjectSettings.gui/theme/lcd_subpixel_layout setting.
+
+LCD subpixel anti-aliasing mode is suitable only for rendering horizontal, unscaled text in 2D.
+
+---
 
 ### FontLCDSubpixelLayout {#enum-FontLCDSubpixelLayout}
 
@@ -2167,29 +2159,7 @@ FONT_ANTIALIASING_LCD = 2
 enum FontLCDSubpixelLayout { FONT_LCD_SUBPIXEL_LAYOUT_NONE = 0, FONT_LCD_SUBPIXEL_LAYOUT_HRGB = 1, FONT_LCD_SUBPIXEL_LAYOUT_HBGR = 2, FONT_LCD_SUBPIXEL_LAYOUT_VRGB = 3, FONT_LCD_SUBPIXEL_LAYOUT_VBGR = 4, FONT_LCD_SUBPIXEL_LAYOUT_MAX = 5 }
 ```
 
-FontLCDSubpixelLayout FONT_LCD_SUBPIXEL_LAYOUT_NONE = 0
-
-Unknown or unsupported subpixel layout, LCD subpixel antialiasing is disabled.
-
-FontLCDSubpixelLayout FONT_LCD_SUBPIXEL_LAYOUT_HRGB = 1
-
-Horizontal RGB subpixel layout.
-
-FontLCDSubpixelLayout FONT_LCD_SUBPIXEL_LAYOUT_HBGR = 2
-
-Horizontal BGR subpixel layout.
-
-FontLCDSubpixelLayout FONT_LCD_SUBPIXEL_LAYOUT_VRGB = 3
-
-Vertical RGB subpixel layout.
-
-FontLCDSubpixelLayout FONT_LCD_SUBPIXEL_LAYOUT_VBGR = 4
-
-Vertical BGR subpixel layout.
-
-FontLCDSubpixelLayout FONT_LCD_SUBPIXEL_LAYOUT_MAX = 5
-
-Represents the size of the FontLCDSubpixelLayout enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FONT_LCD_SUBPIXEL_LAYOUT_NONE {#FONT_LCD_SUBPIXEL_LAYOUT_NONE}
 
@@ -2197,7 +2167,7 @@ Represents the size of the FontLCDSubpixelLayout enum.
 FONT_LCD_SUBPIXEL_LAYOUT_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unknown or unsupported subpixel layout, LCD subpixel antialiasing is disabled.
 
 #### FONT_LCD_SUBPIXEL_LAYOUT_HRGB {#FONT_LCD_SUBPIXEL_LAYOUT_HRGB}
 
@@ -2205,7 +2175,7 @@ FONT_LCD_SUBPIXEL_LAYOUT_NONE = 0
 FONT_LCD_SUBPIXEL_LAYOUT_HRGB = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Horizontal RGB subpixel layout.
 
 #### FONT_LCD_SUBPIXEL_LAYOUT_HBGR {#FONT_LCD_SUBPIXEL_LAYOUT_HBGR}
 
@@ -2213,7 +2183,7 @@ FONT_LCD_SUBPIXEL_LAYOUT_HRGB = 1
 FONT_LCD_SUBPIXEL_LAYOUT_HBGR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Horizontal BGR subpixel layout.
 
 #### FONT_LCD_SUBPIXEL_LAYOUT_VRGB {#FONT_LCD_SUBPIXEL_LAYOUT_VRGB}
 
@@ -2221,7 +2191,7 @@ FONT_LCD_SUBPIXEL_LAYOUT_HBGR = 2
 FONT_LCD_SUBPIXEL_LAYOUT_VRGB = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Vertical RGB subpixel layout.
 
 #### FONT_LCD_SUBPIXEL_LAYOUT_VBGR {#FONT_LCD_SUBPIXEL_LAYOUT_VBGR}
 
@@ -2229,7 +2199,7 @@ FONT_LCD_SUBPIXEL_LAYOUT_VRGB = 3
 FONT_LCD_SUBPIXEL_LAYOUT_VBGR = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Vertical BGR subpixel layout.
 
 #### FONT_LCD_SUBPIXEL_LAYOUT_MAX {#FONT_LCD_SUBPIXEL_LAYOUT_MAX}
 
@@ -2237,7 +2207,9 @@ FONT_LCD_SUBPIXEL_LAYOUT_VBGR = 4
 FONT_LCD_SUBPIXEL_LAYOUT_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the FontLCDSubpixelLayout enum.
+
+---
 
 ### Direction {#enum-Direction}
 
@@ -2245,21 +2217,7 @@ FONT_LCD_SUBPIXEL_LAYOUT_MAX = 5
 enum Direction { DIRECTION_AUTO = 0, DIRECTION_LTR = 1, DIRECTION_RTL = 2, DIRECTION_INHERITED = 3 }
 ```
 
-Direction DIRECTION_AUTO = 0
-
-Text direction is determined based on contents and current locale.
-
-Direction DIRECTION_LTR = 1
-
-Text is written from left to right.
-
-Direction DIRECTION_RTL = 2
-
-Text is written from right to left.
-
-Direction DIRECTION_INHERITED = 3
-
-Text writing direction is the same as base string writing direction. Used for BiDi override only.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DIRECTION_AUTO {#DIRECTION_AUTO}
 
@@ -2267,7 +2225,7 @@ Text writing direction is the same as base string writing direction. Used for Bi
 DIRECTION_AUTO = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Text direction is determined based on contents and current locale.
 
 #### DIRECTION_LTR {#DIRECTION_LTR}
 
@@ -2275,7 +2233,7 @@ DIRECTION_AUTO = 0
 DIRECTION_LTR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Text is written from left to right.
 
 #### DIRECTION_RTL {#DIRECTION_RTL}
 
@@ -2283,7 +2241,7 @@ DIRECTION_LTR = 1
 DIRECTION_RTL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Text is written from right to left.
 
 #### DIRECTION_INHERITED {#DIRECTION_INHERITED}
 
@@ -2291,7 +2249,9 @@ DIRECTION_RTL = 2
 DIRECTION_INHERITED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Text writing direction is the same as base string writing direction. Used for BiDi override only.
+
+---
 
 ### Orientation {#enum-Orientation}
 
@@ -2299,15 +2259,7 @@ DIRECTION_INHERITED = 3
 enum Orientation { ORIENTATION_HORIZONTAL = 0, ORIENTATION_VERTICAL = 1 }
 ```
 
-Orientation ORIENTATION_HORIZONTAL = 0
-
-Text is written horizontally.
-
-Orientation ORIENTATION_VERTICAL = 1
-
-Left to right text is written vertically from top to bottom.
-
-Right to left text is written vertically from bottom to top.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ORIENTATION_HORIZONTAL {#ORIENTATION_HORIZONTAL}
 
@@ -2315,7 +2267,7 @@ Right to left text is written vertically from bottom to top.
 ORIENTATION_HORIZONTAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Text is written horizontally.
 
 #### ORIENTATION_VERTICAL {#ORIENTATION_VERTICAL}
 
@@ -2323,7 +2275,13 @@ ORIENTATION_HORIZONTAL = 0
 ORIENTATION_VERTICAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Left to right text is written vertically from top to bottom.
+
+Right to left text is written vertically from bottom to top.
+
+---
+
+flags JustificationFlag:
 
 ### JustificationFlag {#enum-JustificationFlag}
 
@@ -2339,7 +2297,7 @@ enum JustificationFlag（位标志） { JUSTIFICATION_NONE = 0, JUSTIFICATION_KA
 JUSTIFICATION_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not justify text.
 
 #### JUSTIFICATION_KASHIDA {#JUSTIFICATION_KASHIDA}
 
@@ -2347,7 +2305,7 @@ JUSTIFICATION_NONE = 0
 JUSTIFICATION_KASHIDA = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Justify text by adding and removing kashidas.
 
 #### JUSTIFICATION_WORD_BOUND {#JUSTIFICATION_WORD_BOUND}
 
@@ -2355,7 +2313,7 @@ JUSTIFICATION_KASHIDA = 1
 JUSTIFICATION_WORD_BOUND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Justify text by changing width of the spaces between the words.
 
 #### JUSTIFICATION_TRIM_EDGE_SPACES {#JUSTIFICATION_TRIM_EDGE_SPACES}
 
@@ -2363,7 +2321,7 @@ JUSTIFICATION_WORD_BOUND = 2
 JUSTIFICATION_TRIM_EDGE_SPACES = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Remove trailing and leading spaces from the justified text.
 
 #### JUSTIFICATION_AFTER_LAST_TAB {#JUSTIFICATION_AFTER_LAST_TAB}
 
@@ -2371,7 +2329,7 @@ JUSTIFICATION_TRIM_EDGE_SPACES = 4
 JUSTIFICATION_AFTER_LAST_TAB = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only apply justification to the part of the text after the last tab.
 
 #### JUSTIFICATION_CONSTRAIN_ELLIPSIS {#JUSTIFICATION_CONSTRAIN_ELLIPSIS}
 
@@ -2379,7 +2337,7 @@ JUSTIFICATION_AFTER_LAST_TAB = 8
 JUSTIFICATION_CONSTRAIN_ELLIPSIS = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Apply justification to the trimmed line with ellipsis.
 
 #### JUSTIFICATION_SKIP_LAST_LINE {#JUSTIFICATION_SKIP_LAST_LINE}
 
@@ -2387,7 +2345,7 @@ JUSTIFICATION_CONSTRAIN_ELLIPSIS = 16
 JUSTIFICATION_SKIP_LAST_LINE = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not apply justification to the last line of the paragraph.
 
 #### JUSTIFICATION_SKIP_LAST_LINE_WITH_VISIBLE_CHARS {#JUSTIFICATION_SKIP_LAST_LINE_WITH_VISIBLE_CHARS}
 
@@ -2395,7 +2353,7 @@ JUSTIFICATION_SKIP_LAST_LINE = 32
 JUSTIFICATION_SKIP_LAST_LINE_WITH_VISIBLE_CHARS = 64
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not apply justification to the last line of the paragraph with visible characters (takes precedence over JUSTIFICATION_SKIP_LAST_LINE).
 
 #### JUSTIFICATION_DO_NOT_SKIP_SINGLE_LINE {#JUSTIFICATION_DO_NOT_SKIP_SINGLE_LINE}
 
@@ -2403,7 +2361,9 @@ JUSTIFICATION_SKIP_LAST_LINE_WITH_VISIBLE_CHARS = 64
 JUSTIFICATION_DO_NOT_SKIP_SINGLE_LINE = 128
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always apply justification to the paragraphs with a single line (JUSTIFICATION_SKIP_LAST_LINE and JUSTIFICATION_SKIP_LAST_LINE_WITH_VISIBLE_CHARS are ignored).
+
+---
 
 ### AutowrapMode {#enum-AutowrapMode}
 
@@ -2411,21 +2371,7 @@ JUSTIFICATION_DO_NOT_SKIP_SINGLE_LINE = 128
 enum AutowrapMode { AUTOWRAP_OFF = 0, AUTOWRAP_ARBITRARY = 1, AUTOWRAP_WORD = 2, AUTOWRAP_WORD_SMART = 3 }
 ```
 
-AutowrapMode AUTOWRAP_OFF = 0
-
-Autowrap is disabled.
-
-AutowrapMode AUTOWRAP_ARBITRARY = 1
-
-Wraps the text inside the node's bounding rectangle by allowing to break lines at arbitrary positions, which is useful when very limited space is available.
-
-AutowrapMode AUTOWRAP_WORD = 2
-
-Wraps the text inside the node's bounding rectangle by soft-breaking between words.
-
-AutowrapMode AUTOWRAP_WORD_SMART = 3
-
-Behaves similarly to AUTOWRAP_WORD, but force-breaks a word if that single word does not fit in one line.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AUTOWRAP_OFF {#AUTOWRAP_OFF}
 
@@ -2433,7 +2379,7 @@ Behaves similarly to AUTOWRAP_WORD, but force-breaks a word if that single word 
 AUTOWRAP_OFF = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Autowrap is disabled.
 
 #### AUTOWRAP_ARBITRARY {#AUTOWRAP_ARBITRARY}
 
@@ -2441,7 +2387,7 @@ AUTOWRAP_OFF = 0
 AUTOWRAP_ARBITRARY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Wraps the text inside the node's bounding rectangle by allowing to break lines at arbitrary positions, which is useful when very limited space is available.
 
 #### AUTOWRAP_WORD {#AUTOWRAP_WORD}
 
@@ -2449,7 +2395,7 @@ AUTOWRAP_ARBITRARY = 1
 AUTOWRAP_WORD = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Wraps the text inside the node's bounding rectangle by soft-breaking between words.
 
 #### AUTOWRAP_WORD_SMART {#AUTOWRAP_WORD_SMART}
 
@@ -2457,7 +2403,11 @@ AUTOWRAP_WORD = 2
 AUTOWRAP_WORD_SMART = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Behaves similarly to AUTOWRAP_WORD, but force-breaks a word if that single word does not fit in one line.
+
+---
+
+flags LineBreakFlag:
 
 ### LineBreakFlag {#enum-LineBreakFlag}
 
@@ -2473,7 +2423,7 @@ enum LineBreakFlag（位标志） { BREAK_NONE = 0, BREAK_MANDATORY = 1, BREAK_W
 BREAK_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not break the line.
 
 #### BREAK_MANDATORY {#BREAK_MANDATORY}
 
@@ -2481,7 +2431,7 @@ BREAK_NONE = 0
 BREAK_MANDATORY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Break the line at the line mandatory break characters (e.g. "\n").
 
 #### BREAK_WORD_BOUND {#BREAK_WORD_BOUND}
 
@@ -2489,7 +2439,7 @@ BREAK_MANDATORY = 1
 BREAK_WORD_BOUND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Break the line between the words.
 
 #### BREAK_GRAPHEME_BOUND {#BREAK_GRAPHEME_BOUND}
 
@@ -2497,7 +2447,7 @@ BREAK_WORD_BOUND = 2
 BREAK_GRAPHEME_BOUND = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Break the line between any unconnected graphemes.
 
 #### BREAK_ADAPTIVE {#BREAK_ADAPTIVE}
 
@@ -2505,7 +2455,7 @@ BREAK_GRAPHEME_BOUND = 4
 BREAK_ADAPTIVE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Should be used only in conjunction with BREAK_WORD_BOUND, break the line between any unconnected graphemes, if it's impossible to break it between the words.
 
 #### BREAK_TRIM_EDGE_SPACES {#BREAK_TRIM_EDGE_SPACES}
 
@@ -2513,7 +2463,9 @@ BREAK_ADAPTIVE = 8
 BREAK_TRIM_EDGE_SPACES = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use BREAK_TRIM_START_EDGE_SPACES | BREAK_TRIM_END_EDGE_SPACES instead.
+
+Remove edge spaces from the broken line segments.
 
 #### BREAK_TRIM_INDENT {#BREAK_TRIM_INDENT}
 
@@ -2521,7 +2473,7 @@ BREAK_TRIM_EDGE_SPACES = 16
 BREAK_TRIM_INDENT = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Subtract first line indentation width from all lines after the first one.
 
 #### BREAK_TRIM_START_EDGE_SPACES {#BREAK_TRIM_START_EDGE_SPACES}
 
@@ -2529,7 +2481,9 @@ BREAK_TRIM_INDENT = 32
 BREAK_TRIM_START_EDGE_SPACES = 64
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Remove spaces and line break characters from the start of broken line segments.
+
+E.g, after line breaking, the second segment of the following text test  \n  next, is next if the flag is set, and ``  next`` if it is not.
 
 #### BREAK_TRIM_END_EDGE_SPACES {#BREAK_TRIM_END_EDGE_SPACES}
 
@@ -2537,7 +2491,11 @@ BREAK_TRIM_START_EDGE_SPACES = 64
 BREAK_TRIM_END_EDGE_SPACES = 128
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Remove spaces and line break characters from the end of broken line segments.
+
+E.g, after line breaking, the first segment of the following text test  \n  next, is test if the flag is set, and test  \n if it is not.
+
+---
 
 ### VisibleCharactersBehavior {#enum-VisibleCharactersBehavior}
 
@@ -2545,27 +2503,7 @@ BREAK_TRIM_END_EDGE_SPACES = 128
 enum VisibleCharactersBehavior { VC_CHARS_BEFORE_SHAPING = 0, VC_CHARS_AFTER_SHAPING = 1, VC_GLYPHS_AUTO = 2, VC_GLYPHS_LTR = 3, VC_GLYPHS_RTL = 4 }
 ```
 
-VisibleCharactersBehavior VC_CHARS_BEFORE_SHAPING = 0
-
-Trims text before the shaping. e.g, increasing Label.visible_characters or RichTextLabel.visible_characters value is visually identical to typing the text.
-
-Note: In this mode, trimmed text is not processed at all. It is not accounted for in line breaking and size calculations.
-
-VisibleCharactersBehavior VC_CHARS_AFTER_SHAPING = 1
-
-Displays glyphs that are mapped to the first Label.visible_characters or RichTextLabel.visible_characters characters from the beginning of the text.
-
-VisibleCharactersBehavior VC_GLYPHS_AUTO = 2
-
-Displays Label.visible_ratio or RichTextLabel.visible_ratio glyphs, starting from the left or from the right, depending on Control.layout_direction value.
-
-VisibleCharactersBehavior VC_GLYPHS_LTR = 3
-
-Displays Label.visible_ratio or RichTextLabel.visible_ratio glyphs, starting from the left.
-
-VisibleCharactersBehavior VC_GLYPHS_RTL = 4
-
-Displays Label.visible_ratio or RichTextLabel.visible_ratio glyphs, starting from the right.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VC_CHARS_BEFORE_SHAPING {#VC_CHARS_BEFORE_SHAPING}
 
@@ -2573,7 +2511,9 @@ Displays Label.visible_ratio or RichTextLabel.visible_ratio glyphs, starting fro
 VC_CHARS_BEFORE_SHAPING = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Trims text before the shaping. e.g, increasing Label.visible_characters or RichTextLabel.visible_characters value is visually identical to typing the text.
+
+Note: In this mode, trimmed text is not processed at all. It is not accounted for in line breaking and size calculations.
 
 #### VC_CHARS_AFTER_SHAPING {#VC_CHARS_AFTER_SHAPING}
 
@@ -2581,7 +2521,7 @@ VC_CHARS_BEFORE_SHAPING = 0
 VC_CHARS_AFTER_SHAPING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Displays glyphs that are mapped to the first Label.visible_characters or RichTextLabel.visible_characters characters from the beginning of the text.
 
 #### VC_GLYPHS_AUTO {#VC_GLYPHS_AUTO}
 
@@ -2589,7 +2529,7 @@ VC_CHARS_AFTER_SHAPING = 1
 VC_GLYPHS_AUTO = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Displays Label.visible_ratio or RichTextLabel.visible_ratio glyphs, starting from the left or from the right, depending on Control.layout_direction value.
 
 #### VC_GLYPHS_LTR {#VC_GLYPHS_LTR}
 
@@ -2597,7 +2537,7 @@ VC_GLYPHS_AUTO = 2
 VC_GLYPHS_LTR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Displays Label.visible_ratio or RichTextLabel.visible_ratio glyphs, starting from the left.
 
 #### VC_GLYPHS_RTL {#VC_GLYPHS_RTL}
 
@@ -2605,7 +2545,9 @@ VC_GLYPHS_LTR = 3
 VC_GLYPHS_RTL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Displays Label.visible_ratio or RichTextLabel.visible_ratio glyphs, starting from the right.
+
+---
 
 ### OverrunBehavior {#enum-OverrunBehavior}
 
@@ -2613,33 +2555,7 @@ VC_GLYPHS_RTL = 4
 enum OverrunBehavior { OVERRUN_NO_TRIMMING = 0, OVERRUN_TRIM_CHAR = 1, OVERRUN_TRIM_WORD = 2, OVERRUN_TRIM_ELLIPSIS = 3, OVERRUN_TRIM_WORD_ELLIPSIS = 4, OVERRUN_TRIM_ELLIPSIS_FORCE = 5, OVERRUN_TRIM_WORD_ELLIPSIS_FORCE = 6 }
 ```
 
-OverrunBehavior OVERRUN_NO_TRIMMING = 0
-
-No text trimming is performed.
-
-OverrunBehavior OVERRUN_TRIM_CHAR = 1
-
-Trims the text per character.
-
-OverrunBehavior OVERRUN_TRIM_WORD = 2
-
-Trims the text per word.
-
-OverrunBehavior OVERRUN_TRIM_ELLIPSIS = 3
-
-Trims the text per character and adds an ellipsis to indicate that parts are hidden if trimmed text is 6 characters or longer.
-
-OverrunBehavior OVERRUN_TRIM_WORD_ELLIPSIS = 4
-
-Trims the text per word and adds an ellipsis to indicate that parts are hidden if trimmed text is 6 characters or longer.
-
-OverrunBehavior OVERRUN_TRIM_ELLIPSIS_FORCE = 5
-
-Trims the text per character and adds an ellipsis to indicate that parts are hidden regardless of trimmed text length.
-
-OverrunBehavior OVERRUN_TRIM_WORD_ELLIPSIS_FORCE = 6
-
-Trims the text per word and adds an ellipsis to indicate that parts are hidden regardless of trimmed text length.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OVERRUN_NO_TRIMMING {#OVERRUN_NO_TRIMMING}
 
@@ -2647,7 +2563,7 @@ Trims the text per word and adds an ellipsis to indicate that parts are hidden r
 OVERRUN_NO_TRIMMING = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No text trimming is performed.
 
 #### OVERRUN_TRIM_CHAR {#OVERRUN_TRIM_CHAR}
 
@@ -2655,7 +2571,7 @@ OVERRUN_NO_TRIMMING = 0
 OVERRUN_TRIM_CHAR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Trims the text per character.
 
 #### OVERRUN_TRIM_WORD {#OVERRUN_TRIM_WORD}
 
@@ -2663,7 +2579,7 @@ OVERRUN_TRIM_CHAR = 1
 OVERRUN_TRIM_WORD = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Trims the text per word.
 
 #### OVERRUN_TRIM_ELLIPSIS {#OVERRUN_TRIM_ELLIPSIS}
 
@@ -2671,7 +2587,7 @@ OVERRUN_TRIM_WORD = 2
 OVERRUN_TRIM_ELLIPSIS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Trims the text per character and adds an ellipsis to indicate that parts are hidden if trimmed text is 6 characters or longer.
 
 #### OVERRUN_TRIM_WORD_ELLIPSIS {#OVERRUN_TRIM_WORD_ELLIPSIS}
 
@@ -2679,7 +2595,7 @@ OVERRUN_TRIM_ELLIPSIS = 3
 OVERRUN_TRIM_WORD_ELLIPSIS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Trims the text per word and adds an ellipsis to indicate that parts are hidden if trimmed text is 6 characters or longer.
 
 #### OVERRUN_TRIM_ELLIPSIS_FORCE {#OVERRUN_TRIM_ELLIPSIS_FORCE}
 
@@ -2687,7 +2603,7 @@ OVERRUN_TRIM_WORD_ELLIPSIS = 4
 OVERRUN_TRIM_ELLIPSIS_FORCE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Trims the text per character and adds an ellipsis to indicate that parts are hidden regardless of trimmed text length.
 
 #### OVERRUN_TRIM_WORD_ELLIPSIS_FORCE {#OVERRUN_TRIM_WORD_ELLIPSIS_FORCE}
 
@@ -2695,7 +2611,11 @@ OVERRUN_TRIM_ELLIPSIS_FORCE = 5
 OVERRUN_TRIM_WORD_ELLIPSIS_FORCE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Trims the text per word and adds an ellipsis to indicate that parts are hidden regardless of trimmed text length.
+
+---
+
+flags TextOverrunFlag:
 
 ### TextOverrunFlag {#enum-TextOverrunFlag}
 
@@ -2711,7 +2631,7 @@ enum TextOverrunFlag（位标志） { OVERRUN_NO_TRIM = 0, OVERRUN_TRIM = 1, OVE
 OVERRUN_NO_TRIM = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No trimming is performed.
 
 #### OVERRUN_TRIM {#OVERRUN_TRIM}
 
@@ -2719,7 +2639,7 @@ OVERRUN_NO_TRIM = 0
 OVERRUN_TRIM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Trims the text when it exceeds the given width.
 
 #### OVERRUN_TRIM_WORD_ONLY {#OVERRUN_TRIM_WORD_ONLY}
 
@@ -2727,7 +2647,7 @@ OVERRUN_TRIM = 1
 OVERRUN_TRIM_WORD_ONLY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Trims the text per word instead of per grapheme.
 
 #### OVERRUN_ADD_ELLIPSIS {#OVERRUN_ADD_ELLIPSIS}
 
@@ -2735,7 +2655,7 @@ OVERRUN_TRIM_WORD_ONLY = 2
 OVERRUN_ADD_ELLIPSIS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Determines whether an ellipsis should be added at the end of the text.
 
 #### OVERRUN_ENFORCE_ELLIPSIS {#OVERRUN_ENFORCE_ELLIPSIS}
 
@@ -2743,7 +2663,7 @@ OVERRUN_ADD_ELLIPSIS = 4
 OVERRUN_ENFORCE_ELLIPSIS = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Determines whether the ellipsis at the end of the text is enforced and may not be hidden.
 
 #### OVERRUN_JUSTIFICATION_AWARE {#OVERRUN_JUSTIFICATION_AWARE}
 
@@ -2751,7 +2671,7 @@ OVERRUN_ENFORCE_ELLIPSIS = 8
 OVERRUN_JUSTIFICATION_AWARE = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Accounts for the text being justified before attempting to trim it (see JustificationFlag).
 
 #### OVERRUN_SHORT_STRING_ELLIPSIS {#OVERRUN_SHORT_STRING_ELLIPSIS}
 
@@ -2759,7 +2679,11 @@ OVERRUN_JUSTIFICATION_AWARE = 16
 OVERRUN_SHORT_STRING_ELLIPSIS = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Determines whether the ellipsis should be added regardless of the string length, otherwise it is added only if the string is 6 characters or longer.
+
+---
+
+flags GraphemeFlag:
 
 ### GraphemeFlag {#enum-GraphemeFlag}
 
@@ -2775,7 +2699,7 @@ enum GraphemeFlag（位标志） { GRAPHEME_IS_VALID = 1, GRAPHEME_IS_RTL = 2, G
 GRAPHEME_IS_VALID = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is supported by the font, and can be drawn.
 
 #### GRAPHEME_IS_RTL {#GRAPHEME_IS_RTL}
 
@@ -2783,7 +2707,7 @@ GRAPHEME_IS_VALID = 1
 GRAPHEME_IS_RTL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is part of right-to-left or bottom-to-top run.
 
 #### GRAPHEME_IS_VIRTUAL {#GRAPHEME_IS_VIRTUAL}
 
@@ -2791,7 +2715,7 @@ GRAPHEME_IS_RTL = 2
 GRAPHEME_IS_VIRTUAL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is not part of source text, it was added by justification process.
 
 #### GRAPHEME_IS_SPACE {#GRAPHEME_IS_SPACE}
 
@@ -2799,7 +2723,7 @@ GRAPHEME_IS_VIRTUAL = 4
 GRAPHEME_IS_SPACE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is whitespace.
 
 #### GRAPHEME_IS_BREAK_HARD {#GRAPHEME_IS_BREAK_HARD}
 
@@ -2807,7 +2731,7 @@ GRAPHEME_IS_SPACE = 8
 GRAPHEME_IS_BREAK_HARD = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is mandatory break point (e.g. "\n").
 
 #### GRAPHEME_IS_BREAK_SOFT {#GRAPHEME_IS_BREAK_SOFT}
 
@@ -2815,7 +2739,7 @@ GRAPHEME_IS_BREAK_HARD = 16
 GRAPHEME_IS_BREAK_SOFT = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is optional break point (e.g. space).
 
 #### GRAPHEME_IS_TAB {#GRAPHEME_IS_TAB}
 
@@ -2823,7 +2747,7 @@ GRAPHEME_IS_BREAK_SOFT = 32
 GRAPHEME_IS_TAB = 64
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is the tabulation character.
 
 #### GRAPHEME_IS_ELONGATION {#GRAPHEME_IS_ELONGATION}
 
@@ -2831,7 +2755,7 @@ GRAPHEME_IS_TAB = 64
 GRAPHEME_IS_ELONGATION = 128
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is kashida.
 
 #### GRAPHEME_IS_PUNCTUATION {#GRAPHEME_IS_PUNCTUATION}
 
@@ -2839,7 +2763,7 @@ GRAPHEME_IS_ELONGATION = 128
 GRAPHEME_IS_PUNCTUATION = 256
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is punctuation character.
 
 #### GRAPHEME_IS_UNDERSCORE {#GRAPHEME_IS_UNDERSCORE}
 
@@ -2847,7 +2771,7 @@ GRAPHEME_IS_PUNCTUATION = 256
 GRAPHEME_IS_UNDERSCORE = 512
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is underscore character.
 
 #### GRAPHEME_IS_CONNECTED {#GRAPHEME_IS_CONNECTED}
 
@@ -2855,7 +2779,7 @@ GRAPHEME_IS_UNDERSCORE = 512
 GRAPHEME_IS_CONNECTED = 1024
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is connected to the previous grapheme. Breaking line before this grapheme is not safe.
 
 #### GRAPHEME_IS_SAFE_TO_INSERT_TATWEEL {#GRAPHEME_IS_SAFE_TO_INSERT_TATWEEL}
 
@@ -2863,7 +2787,7 @@ GRAPHEME_IS_CONNECTED = 1024
 GRAPHEME_IS_SAFE_TO_INSERT_TATWEEL = 2048
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+It is safe to insert a U+0640 before this grapheme for elongation.
 
 #### GRAPHEME_IS_EMBEDDED_OBJECT {#GRAPHEME_IS_EMBEDDED_OBJECT}
 
@@ -2871,7 +2795,7 @@ GRAPHEME_IS_SAFE_TO_INSERT_TATWEEL = 2048
 GRAPHEME_IS_EMBEDDED_OBJECT = 4096
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is an object replacement character for the embedded object.
 
 #### GRAPHEME_IS_SOFT_HYPHEN {#GRAPHEME_IS_SOFT_HYPHEN}
 
@@ -2879,7 +2803,9 @@ GRAPHEME_IS_EMBEDDED_OBJECT = 4096
 GRAPHEME_IS_SOFT_HYPHEN = 8192
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Grapheme is a soft hyphen.
+
+---
 
 ### Hinting {#enum-Hinting}
 
@@ -2887,19 +2813,7 @@ GRAPHEME_IS_SOFT_HYPHEN = 8192
 enum Hinting { HINTING_NONE = 0, HINTING_LIGHT = 1, HINTING_NORMAL = 2 }
 ```
 
-Hinting HINTING_NONE = 0
-
-Disables font hinting (smoother but less crisp).
-
-Hinting HINTING_LIGHT = 1
-
-Use the light font hinting mode.
-
-Hinting HINTING_NORMAL = 2
-
-Use the default font hinting mode (crisper but less smooth).
-
-Note: This hinting mode changes both horizontal and vertical glyph metrics. If applied to monospace font, some glyphs might have different width.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HINTING_NONE {#HINTING_NONE}
 
@@ -2907,7 +2821,7 @@ Note: This hinting mode changes both horizontal and vertical glyph metrics. If a
 HINTING_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables font hinting (smoother but less crisp).
 
 #### HINTING_LIGHT {#HINTING_LIGHT}
 
@@ -2915,7 +2829,7 @@ HINTING_NONE = 0
 HINTING_LIGHT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the light font hinting mode.
 
 #### HINTING_NORMAL {#HINTING_NORMAL}
 
@@ -2923,7 +2837,11 @@ HINTING_LIGHT = 1
 HINTING_NORMAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the default font hinting mode (crisper but less smooth).
+
+Note: This hinting mode changes both horizontal and vertical glyph metrics. If applied to monospace font, some glyphs might have different width.
+
+---
 
 ### SubpixelPositioning {#enum-SubpixelPositioning}
 
@@ -2931,33 +2849,7 @@ HINTING_NORMAL = 2
 enum SubpixelPositioning { SUBPIXEL_POSITIONING_DISABLED = 0, SUBPIXEL_POSITIONING_AUTO = 1, SUBPIXEL_POSITIONING_ONE_HALF = 2, SUBPIXEL_POSITIONING_ONE_QUARTER = 3, SUBPIXEL_POSITIONING_ONE_HALF_MAX_SIZE = 20, SUBPIXEL_POSITIONING_ONE_QUARTER_MAX_SIZE = 16 }
 ```
 
-SubpixelPositioning SUBPIXEL_POSITIONING_DISABLED = 0
-
-Glyph horizontal position is rounded to the whole pixel size, each glyph is rasterized once.
-
-SubpixelPositioning SUBPIXEL_POSITIONING_AUTO = 1
-
-Glyph horizontal position is rounded based on font size.
-
-- To one quarter of the pixel size if font size is smaller or equal to SUBPIXEL_POSITIONING_ONE_QUARTER_MAX_SIZE.
-- To one half of the pixel size if font size is smaller or equal to SUBPIXEL_POSITIONING_ONE_HALF_MAX_SIZE.
-- To the whole pixel size for larger fonts.
-
-SubpixelPositioning SUBPIXEL_POSITIONING_ONE_HALF = 2
-
-Glyph horizontal position is rounded to one half of the pixel size, each glyph is rasterized up to two times.
-
-SubpixelPositioning SUBPIXEL_POSITIONING_ONE_QUARTER = 3
-
-Glyph horizontal position is rounded to one quarter of the pixel size, each glyph is rasterized up to four times.
-
-SubpixelPositioning SUBPIXEL_POSITIONING_ONE_HALF_MAX_SIZE = 20
-
-Maximum font size which will use "one half of the pixel" subpixel positioning in SUBPIXEL_POSITIONING_AUTO mode.
-
-SubpixelPositioning SUBPIXEL_POSITIONING_ONE_QUARTER_MAX_SIZE = 16
-
-Maximum font size which will use "one quarter of the pixel" subpixel positioning in SUBPIXEL_POSITIONING_AUTO mode.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SUBPIXEL_POSITIONING_DISABLED {#SUBPIXEL_POSITIONING_DISABLED}
 
@@ -2965,7 +2857,7 @@ Maximum font size which will use "one quarter of the pixel" subpixel positioning
 SUBPIXEL_POSITIONING_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Glyph horizontal position is rounded to the whole pixel size, each glyph is rasterized once.
 
 #### SUBPIXEL_POSITIONING_AUTO {#SUBPIXEL_POSITIONING_AUTO}
 
@@ -2973,7 +2865,11 @@ SUBPIXEL_POSITIONING_DISABLED = 0
 SUBPIXEL_POSITIONING_AUTO = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Glyph horizontal position is rounded based on font size.
+
+- To one quarter of the pixel size if font size is smaller or equal to SUBPIXEL_POSITIONING_ONE_QUARTER_MAX_SIZE.
+- To one half of the pixel size if font size is smaller or equal to SUBPIXEL_POSITIONING_ONE_HALF_MAX_SIZE.
+- To the whole pixel size for larger fonts.
 
 #### SUBPIXEL_POSITIONING_ONE_HALF {#SUBPIXEL_POSITIONING_ONE_HALF}
 
@@ -2981,7 +2877,7 @@ SUBPIXEL_POSITIONING_AUTO = 1
 SUBPIXEL_POSITIONING_ONE_HALF = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Glyph horizontal position is rounded to one half of the pixel size, each glyph is rasterized up to two times.
 
 #### SUBPIXEL_POSITIONING_ONE_QUARTER {#SUBPIXEL_POSITIONING_ONE_QUARTER}
 
@@ -2989,7 +2885,7 @@ SUBPIXEL_POSITIONING_ONE_HALF = 2
 SUBPIXEL_POSITIONING_ONE_QUARTER = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Glyph horizontal position is rounded to one quarter of the pixel size, each glyph is rasterized up to four times.
 
 #### SUBPIXEL_POSITIONING_ONE_HALF_MAX_SIZE {#SUBPIXEL_POSITIONING_ONE_HALF_MAX_SIZE}
 
@@ -2997,7 +2893,7 @@ SUBPIXEL_POSITIONING_ONE_QUARTER = 3
 SUBPIXEL_POSITIONING_ONE_HALF_MAX_SIZE = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum font size which will use "one half of the pixel" subpixel positioning in SUBPIXEL_POSITIONING_AUTO mode.
 
 #### SUBPIXEL_POSITIONING_ONE_QUARTER_MAX_SIZE {#SUBPIXEL_POSITIONING_ONE_QUARTER_MAX_SIZE}
 
@@ -3005,7 +2901,9 @@ SUBPIXEL_POSITIONING_ONE_HALF_MAX_SIZE = 20
 SUBPIXEL_POSITIONING_ONE_QUARTER_MAX_SIZE = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum font size which will use "one quarter of the pixel" subpixel positioning in SUBPIXEL_POSITIONING_AUTO mode.
+
+---
 
 ### Feature {#enum-Feature}
 
@@ -3013,65 +2911,7 @@ SUBPIXEL_POSITIONING_ONE_QUARTER_MAX_SIZE = 16
 enum Feature { FEATURE_SIMPLE_LAYOUT = 1, FEATURE_BIDI_LAYOUT = 2, FEATURE_VERTICAL_LAYOUT = 4, FEATURE_SHAPING = 8, FEATURE_KASHIDA_JUSTIFICATION = 16, FEATURE_BREAK_ITERATORS = 32, FEATURE_FONT_BITMAP = 64, FEATURE_FONT_DYNAMIC = 128, FEATURE_FONT_MSDF = 256, FEATURE_FONT_SYSTEM = 512, FEATURE_FONT_VARIABLE = 1024, FEATURE_CONTEXT_SENSITIVE_CASE_CONVERSION = 2048, FEATURE_USE_SUPPORT_DATA = 4096, FEATURE_UNICODE_IDENTIFIERS = 8192, FEATURE_UNICODE_SECURITY = 16384 }
 ```
 
-Feature FEATURE_SIMPLE_LAYOUT = 1
-
-TextServer supports simple text layouts.
-
-Feature FEATURE_BIDI_LAYOUT = 2
-
-TextServer supports bidirectional text layouts.
-
-Feature FEATURE_VERTICAL_LAYOUT = 4
-
-TextServer supports vertical layouts.
-
-Feature FEATURE_SHAPING = 8
-
-TextServer supports complex text shaping.
-
-Feature FEATURE_KASHIDA_JUSTIFICATION = 16
-
-TextServer supports justification using kashidas.
-
-Feature FEATURE_BREAK_ITERATORS = 32
-
-TextServer supports complex line/word breaking rules (e.g. dictionary based).
-
-Feature FEATURE_FONT_BITMAP = 64
-
-TextServer supports loading bitmap fonts.
-
-Feature FEATURE_FONT_DYNAMIC = 128
-
-TextServer supports loading dynamic (TrueType, OpeType, etc.) fonts.
-
-Feature FEATURE_FONT_MSDF = 256
-
-TextServer supports multichannel signed distance field dynamic font rendering.
-
-Feature FEATURE_FONT_SYSTEM = 512
-
-TextServer supports loading system fonts.
-
-Feature FEATURE_FONT_VARIABLE = 1024
-
-TextServer supports variable fonts.
-
-Feature FEATURE_CONTEXT_SENSITIVE_CASE_CONVERSION = 2048
-
-TextServer supports locale dependent and context sensitive case conversion.
-
-Feature FEATURE_USE_SUPPORT_DATA = 4096
-
-TextServer require external data file for some features, see load_support_data().
-
-Feature FEATURE_UNICODE_IDENTIFIERS = 8192
-
-TextServer supports UAX #31 identifier validation, see is_valid_identifier().
-
-Feature FEATURE_UNICODE_SECURITY = 16384
-
-TextServer supports Unicode Technical Report #36 [https://unicode.org/reports/tr36/] and Unicode Technical Standard #39 [https://unicode.org/reports/tr39/] based spoof detection features.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FEATURE_SIMPLE_LAYOUT {#FEATURE_SIMPLE_LAYOUT}
 
@@ -3079,7 +2919,7 @@ TextServer supports Unicode Technical Report #36 [https://unicode.org/reports/tr
 FEATURE_SIMPLE_LAYOUT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports simple text layouts.
 
 #### FEATURE_BIDI_LAYOUT {#FEATURE_BIDI_LAYOUT}
 
@@ -3087,7 +2927,7 @@ FEATURE_SIMPLE_LAYOUT = 1
 FEATURE_BIDI_LAYOUT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports bidirectional text layouts.
 
 #### FEATURE_VERTICAL_LAYOUT {#FEATURE_VERTICAL_LAYOUT}
 
@@ -3095,7 +2935,7 @@ FEATURE_BIDI_LAYOUT = 2
 FEATURE_VERTICAL_LAYOUT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports vertical layouts.
 
 #### FEATURE_SHAPING {#FEATURE_SHAPING}
 
@@ -3103,7 +2943,7 @@ FEATURE_VERTICAL_LAYOUT = 4
 FEATURE_SHAPING = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports complex text shaping.
 
 #### FEATURE_KASHIDA_JUSTIFICATION {#FEATURE_KASHIDA_JUSTIFICATION}
 
@@ -3111,7 +2951,7 @@ FEATURE_SHAPING = 8
 FEATURE_KASHIDA_JUSTIFICATION = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports justification using kashidas.
 
 #### FEATURE_BREAK_ITERATORS {#FEATURE_BREAK_ITERATORS}
 
@@ -3119,7 +2959,7 @@ FEATURE_KASHIDA_JUSTIFICATION = 16
 FEATURE_BREAK_ITERATORS = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports complex line/word breaking rules (e.g. dictionary based).
 
 #### FEATURE_FONT_BITMAP {#FEATURE_FONT_BITMAP}
 
@@ -3127,7 +2967,7 @@ FEATURE_BREAK_ITERATORS = 32
 FEATURE_FONT_BITMAP = 64
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports loading bitmap fonts.
 
 #### FEATURE_FONT_DYNAMIC {#FEATURE_FONT_DYNAMIC}
 
@@ -3135,7 +2975,7 @@ FEATURE_FONT_BITMAP = 64
 FEATURE_FONT_DYNAMIC = 128
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports loading dynamic (TrueType, OpeType, etc.) fonts.
 
 #### FEATURE_FONT_MSDF {#FEATURE_FONT_MSDF}
 
@@ -3143,7 +2983,7 @@ FEATURE_FONT_DYNAMIC = 128
 FEATURE_FONT_MSDF = 256
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports multichannel signed distance field dynamic font rendering.
 
 #### FEATURE_FONT_SYSTEM {#FEATURE_FONT_SYSTEM}
 
@@ -3151,7 +2991,7 @@ FEATURE_FONT_MSDF = 256
 FEATURE_FONT_SYSTEM = 512
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports loading system fonts.
 
 #### FEATURE_FONT_VARIABLE {#FEATURE_FONT_VARIABLE}
 
@@ -3159,7 +2999,7 @@ FEATURE_FONT_SYSTEM = 512
 FEATURE_FONT_VARIABLE = 1024
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports variable fonts.
 
 #### FEATURE_CONTEXT_SENSITIVE_CASE_CONVERSION {#FEATURE_CONTEXT_SENSITIVE_CASE_CONVERSION}
 
@@ -3167,7 +3007,7 @@ FEATURE_FONT_VARIABLE = 1024
 FEATURE_CONTEXT_SENSITIVE_CASE_CONVERSION = 2048
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports locale dependent and context sensitive case conversion.
 
 #### FEATURE_USE_SUPPORT_DATA {#FEATURE_USE_SUPPORT_DATA}
 
@@ -3175,7 +3015,7 @@ FEATURE_CONTEXT_SENSITIVE_CASE_CONVERSION = 2048
 FEATURE_USE_SUPPORT_DATA = 4096
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer require external data file for some features, see load_support_data().
 
 #### FEATURE_UNICODE_IDENTIFIERS {#FEATURE_UNICODE_IDENTIFIERS}
 
@@ -3183,7 +3023,7 @@ FEATURE_USE_SUPPORT_DATA = 4096
 FEATURE_UNICODE_IDENTIFIERS = 8192
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports UAX #31 identifier validation, see is_valid_identifier().
 
 #### FEATURE_UNICODE_SECURITY {#FEATURE_UNICODE_SECURITY}
 
@@ -3191,7 +3031,9 @@ FEATURE_UNICODE_IDENTIFIERS = 8192
 FEATURE_UNICODE_SECURITY = 16384
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+TextServer supports Unicode Technical Report #36 [https://unicode.org/reports/tr36/] and Unicode Technical Standard #39 [https://unicode.org/reports/tr39/] based spoof detection features.
+
+---
 
 ### ContourPointTag {#enum-ContourPointTag}
 
@@ -3199,17 +3041,7 @@ FEATURE_UNICODE_SECURITY = 16384
 enum ContourPointTag { CONTOUR_CURVE_TAG_ON = 1, CONTOUR_CURVE_TAG_OFF_CONIC = 0, CONTOUR_CURVE_TAG_OFF_CUBIC = 2 }
 ```
 
-ContourPointTag CONTOUR_CURVE_TAG_ON = 1
-
-Contour point is on the curve.
-
-ContourPointTag CONTOUR_CURVE_TAG_OFF_CONIC = 0
-
-Contour point isn't on the curve, but serves as a control point for a conic (quadratic) Bézier arc.
-
-ContourPointTag CONTOUR_CURVE_TAG_OFF_CUBIC = 2
-
-Contour point isn't on the curve, but serves as a control point for a cubic Bézier arc.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CONTOUR_CURVE_TAG_ON {#CONTOUR_CURVE_TAG_ON}
 
@@ -3217,7 +3049,7 @@ Contour point isn't on the curve, but serves as a control point for a cubic Béz
 CONTOUR_CURVE_TAG_ON = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Contour point is on the curve.
 
 #### CONTOUR_CURVE_TAG_OFF_CONIC {#CONTOUR_CURVE_TAG_OFF_CONIC}
 
@@ -3225,7 +3057,7 @@ CONTOUR_CURVE_TAG_ON = 1
 CONTOUR_CURVE_TAG_OFF_CONIC = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Contour point isn't on the curve, but serves as a control point for a conic (quadratic) Bézier arc.
 
 #### CONTOUR_CURVE_TAG_OFF_CUBIC {#CONTOUR_CURVE_TAG_OFF_CUBIC}
 
@@ -3233,7 +3065,9 @@ CONTOUR_CURVE_TAG_OFF_CONIC = 0
 CONTOUR_CURVE_TAG_OFF_CUBIC = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Contour point isn't on the curve, but serves as a control point for a cubic Bézier arc.
+
+---
 
 ### SpacingType {#enum-SpacingType}
 
@@ -3241,25 +3075,7 @@ CONTOUR_CURVE_TAG_OFF_CUBIC = 2
 enum SpacingType { SPACING_GLYPH = 0, SPACING_SPACE = 1, SPACING_TOP = 2, SPACING_BOTTOM = 3, SPACING_MAX = 4 }
 ```
 
-SpacingType SPACING_GLYPH = 0
-
-Spacing for each glyph.
-
-SpacingType SPACING_SPACE = 1
-
-Spacing for the space character.
-
-SpacingType SPACING_TOP = 2
-
-Spacing at the top of the line.
-
-SpacingType SPACING_BOTTOM = 3
-
-Spacing at the bottom of the line.
-
-SpacingType SPACING_MAX = 4
-
-Represents the size of the SpacingType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SPACING_GLYPH {#SPACING_GLYPH}
 
@@ -3267,7 +3083,7 @@ Represents the size of the SpacingType enum.
 SPACING_GLYPH = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Spacing for each glyph.
 
 #### SPACING_SPACE {#SPACING_SPACE}
 
@@ -3275,7 +3091,7 @@ SPACING_GLYPH = 0
 SPACING_SPACE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Spacing for the space character.
 
 #### SPACING_TOP {#SPACING_TOP}
 
@@ -3283,7 +3099,7 @@ SPACING_SPACE = 1
 SPACING_TOP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Spacing at the top of the line.
 
 #### SPACING_BOTTOM {#SPACING_BOTTOM}
 
@@ -3291,7 +3107,7 @@ SPACING_TOP = 2
 SPACING_BOTTOM = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Spacing at the bottom of the line.
 
 #### SPACING_MAX {#SPACING_MAX}
 
@@ -3299,7 +3115,11 @@ SPACING_BOTTOM = 3
 SPACING_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the SpacingType enum.
+
+---
+
+flags FontStyle:
 
 ### FontStyle {#enum-FontStyle}
 
@@ -3315,7 +3135,7 @@ enum FontStyle（位标志） { FONT_BOLD = 1, FONT_ITALIC = 2, FONT_FIXED_WIDTH
 FONT_BOLD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Font is bold.
 
 #### FONT_ITALIC {#FONT_ITALIC}
 
@@ -3323,7 +3143,7 @@ FONT_BOLD = 1
 FONT_ITALIC = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Font is italic or oblique.
 
 #### FONT_FIXED_WIDTH {#FONT_FIXED_WIDTH}
 
@@ -3331,7 +3151,9 @@ FONT_ITALIC = 2
 FONT_FIXED_WIDTH = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Font has fixed-width characters (also known as monospace).
+
+---
 
 ### StructuredTextParser {#enum-StructuredTextParser}
 
@@ -3339,33 +3161,7 @@ FONT_FIXED_WIDTH = 4
 enum StructuredTextParser { STRUCTURED_TEXT_DEFAULT = 0, STRUCTURED_TEXT_URI = 1, STRUCTURED_TEXT_FILE = 2, STRUCTURED_TEXT_EMAIL = 3, STRUCTURED_TEXT_LIST = 4, STRUCTURED_TEXT_GDSCRIPT = 5, STRUCTURED_TEXT_CUSTOM = 6 }
 ```
 
-StructuredTextParser STRUCTURED_TEXT_DEFAULT = 0
-
-Use default Unicode BiDi algorithm.
-
-StructuredTextParser STRUCTURED_TEXT_URI = 1
-
-BiDi override for URI.
-
-StructuredTextParser STRUCTURED_TEXT_FILE = 2
-
-BiDi override for file path.
-
-StructuredTextParser STRUCTURED_TEXT_EMAIL = 3
-
-BiDi override for email.
-
-StructuredTextParser STRUCTURED_TEXT_LIST = 4
-
-BiDi override for lists. Structured text options: list separator String.
-
-StructuredTextParser STRUCTURED_TEXT_GDSCRIPT = 5
-
-BiDi override for GDScript.
-
-StructuredTextParser STRUCTURED_TEXT_CUSTOM = 6
-
-User defined structured text BiDi override function.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STRUCTURED_TEXT_DEFAULT {#STRUCTURED_TEXT_DEFAULT}
 
@@ -3373,7 +3169,7 @@ User defined structured text BiDi override function.
 STRUCTURED_TEXT_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use default Unicode BiDi algorithm.
 
 #### STRUCTURED_TEXT_URI {#STRUCTURED_TEXT_URI}
 
@@ -3381,7 +3177,7 @@ STRUCTURED_TEXT_DEFAULT = 0
 STRUCTURED_TEXT_URI = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+BiDi override for URI.
 
 #### STRUCTURED_TEXT_FILE {#STRUCTURED_TEXT_FILE}
 
@@ -3389,7 +3185,7 @@ STRUCTURED_TEXT_URI = 1
 STRUCTURED_TEXT_FILE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+BiDi override for file path.
 
 #### STRUCTURED_TEXT_EMAIL {#STRUCTURED_TEXT_EMAIL}
 
@@ -3397,7 +3193,7 @@ STRUCTURED_TEXT_FILE = 2
 STRUCTURED_TEXT_EMAIL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+BiDi override for email.
 
 #### STRUCTURED_TEXT_LIST {#STRUCTURED_TEXT_LIST}
 
@@ -3405,7 +3201,7 @@ STRUCTURED_TEXT_EMAIL = 3
 STRUCTURED_TEXT_LIST = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+BiDi override for lists. Structured text options: list separator String.
 
 #### STRUCTURED_TEXT_GDSCRIPT {#STRUCTURED_TEXT_GDSCRIPT}
 
@@ -3413,7 +3209,7 @@ STRUCTURED_TEXT_LIST = 4
 STRUCTURED_TEXT_GDSCRIPT = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+BiDi override for GDScript.
 
 #### STRUCTURED_TEXT_CUSTOM {#STRUCTURED_TEXT_CUSTOM}
 
@@ -3421,7 +3217,9 @@ STRUCTURED_TEXT_GDSCRIPT = 5
 STRUCTURED_TEXT_CUSTOM = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+User defined structured text BiDi override function.
+
+---
 
 ### FixedSizeScaleMode {#enum-FixedSizeScaleMode}
 
@@ -3429,17 +3227,7 @@ STRUCTURED_TEXT_CUSTOM = 6
 enum FixedSizeScaleMode { FIXED_SIZE_SCALE_DISABLE = 0, FIXED_SIZE_SCALE_INTEGER_ONLY = 1, FIXED_SIZE_SCALE_ENABLED = 2 }
 ```
 
-FixedSizeScaleMode FIXED_SIZE_SCALE_DISABLE = 0
-
-Bitmap font is not scaled.
-
-FixedSizeScaleMode FIXED_SIZE_SCALE_INTEGER_ONLY = 1
-
-Bitmap font is scaled to the closest integer multiple of the font's fixed size. This is the recommended option for pixel art fonts.
-
-FixedSizeScaleMode FIXED_SIZE_SCALE_ENABLED = 2
-
-Bitmap font is scaled to an arbitrary (fractional) size. This is the recommended option for non-pixel art fonts.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FIXED_SIZE_SCALE_DISABLE {#FIXED_SIZE_SCALE_DISABLE}
 
@@ -3447,7 +3235,7 @@ Bitmap font is scaled to an arbitrary (fractional) size. This is the recommended
 FIXED_SIZE_SCALE_DISABLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bitmap font is not scaled.
 
 #### FIXED_SIZE_SCALE_INTEGER_ONLY {#FIXED_SIZE_SCALE_INTEGER_ONLY}
 
@@ -3455,7 +3243,7 @@ FIXED_SIZE_SCALE_DISABLE = 0
 FIXED_SIZE_SCALE_INTEGER_ONLY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bitmap font is scaled to the closest integer multiple of the font's fixed size. This is the recommended option for pixel art fonts.
 
 #### FIXED_SIZE_SCALE_ENABLED {#FIXED_SIZE_SCALE_ENABLED}
 
@@ -3463,4 +3251,6 @@ FIXED_SIZE_SCALE_INTEGER_ONLY = 1
 FIXED_SIZE_SCALE_ENABLED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bitmap font is scaled to an arbitrary (fractional) size. This is the recommended option for non-pixel art fonts.
+
+---

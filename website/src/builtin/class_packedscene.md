@@ -116,27 +116,7 @@ Packs the path node, and all owned sub-nodes, into this PackedScene. Any existin
 enum GenEditState { GEN_EDIT_STATE_DISABLED = 0, GEN_EDIT_STATE_INSTANCE = 1, GEN_EDIT_STATE_MAIN = 2, GEN_EDIT_STATE_MAIN_INHERITED = 3 }
 ```
 
-GenEditState GEN_EDIT_STATE_DISABLED = 0
-
-If passed to instantiate(), blocks edits to the scene state.
-
-GenEditState GEN_EDIT_STATE_INSTANCE = 1
-
-If passed to instantiate(), provides local scene resources to the local scene.
-
-Note: Only available in editor builds.
-
-GenEditState GEN_EDIT_STATE_MAIN = 2
-
-If passed to instantiate(), provides local scene resources to the local scene. Only the main scene should receive the main edit state.
-
-Note: Only available in editor builds.
-
-GenEditState GEN_EDIT_STATE_MAIN_INHERITED = 3
-
-It's similar to GEN_EDIT_STATE_MAIN, but for the case where the scene is being instantiated to be the base of another one.
-
-Note: Only available in editor builds.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GEN_EDIT_STATE_DISABLED {#GEN_EDIT_STATE_DISABLED}
 
@@ -144,7 +124,7 @@ Note: Only available in editor builds.
 GEN_EDIT_STATE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If passed to instantiate(), blocks edits to the scene state.
 
 #### GEN_EDIT_STATE_INSTANCE {#GEN_EDIT_STATE_INSTANCE}
 
@@ -152,7 +132,9 @@ GEN_EDIT_STATE_DISABLED = 0
 GEN_EDIT_STATE_INSTANCE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If passed to instantiate(), provides local scene resources to the local scene.
+
+Note: Only available in editor builds.
 
 #### GEN_EDIT_STATE_MAIN {#GEN_EDIT_STATE_MAIN}
 
@@ -160,7 +142,9 @@ GEN_EDIT_STATE_INSTANCE = 1
 GEN_EDIT_STATE_MAIN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If passed to instantiate(), provides local scene resources to the local scene. Only the main scene should receive the main edit state.
+
+Note: Only available in editor builds.
 
 #### GEN_EDIT_STATE_MAIN_INHERITED {#GEN_EDIT_STATE_MAIN_INHERITED}
 
@@ -168,4 +152,8 @@ GEN_EDIT_STATE_MAIN = 2
 GEN_EDIT_STATE_MAIN_INHERITED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+It's similar to GEN_EDIT_STATE_MAIN, but for the case where the scene is being instantiated to be the base of another one.
+
+Note: Only available in editor builds.
+
+---

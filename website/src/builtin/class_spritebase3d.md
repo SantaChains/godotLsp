@@ -303,7 +303,12 @@ If true, texture will be centered.
 offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset(value: Vector2)
+- Vector2 get_offset()
+
+The texture's drawing offset.
+
+Note: When you increase offset.y in Sprite3D, the sprite moves upward in world space (i.e., +Y is up).
 
 ### flip_h {#flip_h}
 
@@ -333,7 +338,14 @@ If true, texture is flipped vertically.
 modulate: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_modulate(value: Color)
+- Color get_modulate()
+
+A color value used to multiply the texture's colors. Can be used for mood-coloring or to simulate the color of ambient light.
+
+Note: Unlike CanvasItem.modulate for 2D, colors with values above 1.0 (overbright) are not supported.
+
+Note: If a GeometryInstance3D.material_override is defined on the SpriteBase3D, the material override must be configured to take vertex colors into account for albedo. Otherwise, the color defined in modulate will be ignored. For a BaseMaterial3D, BaseMaterial3D.vertex_color_use_as_albedo must be true. For a ShaderMaterial, ALBEDO *= COLOR.rgb; must be inserted in the shader's fragment() function.
 
 ### pixel_size {#pixel_size}
 
@@ -516,29 +528,7 @@ Note: This only applies to sorting of transparent objects. This will not impact 
 enum DrawFlags { FLAG_TRANSPARENT = 0, FLAG_SHADED = 1, FLAG_DOUBLE_SIDED = 2, FLAG_DISABLE_DEPTH_TEST = 3, FLAG_FIXED_SIZE = 4, FLAG_MAX = 5 }
 ```
 
-DrawFlags FLAG_TRANSPARENT = 0
-
-If set, the texture's transparency and the opacity are used to make those parts of the sprite invisible.
-
-DrawFlags FLAG_SHADED = 1
-
-If set, lights in the environment affect the sprite.
-
-DrawFlags FLAG_DOUBLE_SIDED = 2
-
-If set, texture can be seen from the back as well. If not, the texture is invisible when looking at it from behind.
-
-DrawFlags FLAG_DISABLE_DEPTH_TEST = 3
-
-Disables the depth test, so this object is drawn on top of all others. However, objects drawn after it in the draw order may cover it.
-
-DrawFlags FLAG_FIXED_SIZE = 4
-
-Label is scaled by depth so that it always appears the same size on screen.
-
-DrawFlags FLAG_MAX = 5
-
-Represents the size of the DrawFlags enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FLAG_TRANSPARENT {#FLAG_TRANSPARENT}
 
@@ -546,7 +536,7 @@ Represents the size of the DrawFlags enum.
 FLAG_TRANSPARENT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, the texture's transparency and the opacity are used to make those parts of the sprite invisible.
 
 #### FLAG_SHADED {#FLAG_SHADED}
 
@@ -554,7 +544,7 @@ FLAG_TRANSPARENT = 0
 FLAG_SHADED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, lights in the environment affect the sprite.
 
 #### FLAG_DOUBLE_SIDED {#FLAG_DOUBLE_SIDED}
 
@@ -562,7 +552,7 @@ FLAG_SHADED = 1
 FLAG_DOUBLE_SIDED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, texture can be seen from the back as well. If not, the texture is invisible when looking at it from behind.
 
 #### FLAG_DISABLE_DEPTH_TEST {#FLAG_DISABLE_DEPTH_TEST}
 
@@ -570,7 +560,7 @@ FLAG_DOUBLE_SIDED = 2
 FLAG_DISABLE_DEPTH_TEST = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables the depth test, so this object is drawn on top of all others. However, objects drawn after it in the draw order may cover it.
 
 #### FLAG_FIXED_SIZE {#FLAG_FIXED_SIZE}
 
@@ -578,7 +568,7 @@ FLAG_DISABLE_DEPTH_TEST = 3
 FLAG_FIXED_SIZE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Label is scaled by depth so that it always appears the same size on screen.
 
 #### FLAG_MAX {#FLAG_MAX}
 
@@ -586,7 +576,9 @@ FLAG_FIXED_SIZE = 4
 FLAG_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the DrawFlags enum.
+
+---
 
 ### AlphaCutMode {#enum-AlphaCutMode}
 
@@ -594,21 +586,7 @@ FLAG_MAX = 5
 enum AlphaCutMode { ALPHA_CUT_DISABLED = 0, ALPHA_CUT_DISCARD = 1, ALPHA_CUT_OPAQUE_PREPASS = 2, ALPHA_CUT_HASH = 3 }
 ```
 
-AlphaCutMode ALPHA_CUT_DISABLED = 0
-
-This mode performs standard alpha blending. It can display translucent areas, but transparency sorting issues may be visible when multiple transparent materials are overlapping.
-
-AlphaCutMode ALPHA_CUT_DISCARD = 1
-
-This mode only allows fully transparent or fully opaque pixels. Harsh edges will be visible unless some form of screen-space antialiasing is enabled (see ProjectSettings.rendering/anti_aliasing/quality/screen_space_aa). On the bright side, this mode doesn't suffer from transparency sorting issues when multiple transparent materials are overlapping. This mode is also known as alpha testing or 1-bit transparency.
-
-AlphaCutMode ALPHA_CUT_OPAQUE_PREPASS = 2
-
-This mode draws fully opaque pixels in the depth prepass. This is slower than ALPHA_CUT_DISABLED or ALPHA_CUT_DISCARD, but it allows displaying translucent areas and smooth edges while using proper sorting.
-
-AlphaCutMode ALPHA_CUT_HASH = 3
-
-This mode draws cuts off all values below a spatially-deterministic threshold, the rest will remain opaque.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ALPHA_CUT_DISABLED {#ALPHA_CUT_DISABLED}
 
@@ -616,7 +594,7 @@ This mode draws cuts off all values below a spatially-deterministic threshold, t
 ALPHA_CUT_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This mode performs standard alpha blending. It can display translucent areas, but transparency sorting issues may be visible when multiple transparent materials are overlapping.
 
 #### ALPHA_CUT_DISCARD {#ALPHA_CUT_DISCARD}
 
@@ -624,7 +602,7 @@ ALPHA_CUT_DISABLED = 0
 ALPHA_CUT_DISCARD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This mode only allows fully transparent or fully opaque pixels. Harsh edges will be visible unless some form of screen-space antialiasing is enabled (see ProjectSettings.rendering/anti_aliasing/quality/screen_space_aa). On the bright side, this mode doesn't suffer from transparency sorting issues when multiple transparent materials are overlapping. This mode is also known as alpha testing or 1-bit transparency.
 
 #### ALPHA_CUT_OPAQUE_PREPASS {#ALPHA_CUT_OPAQUE_PREPASS}
 
@@ -632,7 +610,7 @@ ALPHA_CUT_DISCARD = 1
 ALPHA_CUT_OPAQUE_PREPASS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This mode draws fully opaque pixels in the depth prepass. This is slower than ALPHA_CUT_DISABLED or ALPHA_CUT_DISCARD, but it allows displaying translucent areas and smooth edges while using proper sorting.
 
 #### ALPHA_CUT_HASH {#ALPHA_CUT_HASH}
 
@@ -640,4 +618,6 @@ ALPHA_CUT_OPAQUE_PREPASS = 2
 ALPHA_CUT_HASH = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This mode draws cuts off all values below a spatially-deterministic threshold, the rest will remain opaque.
+
+---

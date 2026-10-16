@@ -136,7 +136,10 @@ void set_velocity(velocity: Vector2)
 tilt: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tilt(value: Vector2)
+- Vector2 get_tilt()
+
+Represents the angles of tilt of the pen. Positive X-coordinate value indicates a tilt to the right. Positive Y-coordinate value indicates a tilt toward the user. Ranges from -1.0 to 1.0 for both axes.
 
 ### pressure {#pressure}
 
@@ -168,7 +171,14 @@ Note: This property is implemented on Linux, macOS and Windows.
 relative: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_relative(value: Vector2)
+- Vector2 get_relative()
+
+The mouse position relative to the previous position (position at the last frame).
+
+Note: Since InputEventMouseMotion may only be emitted when the mouse moves, it is not possible to reliably detect when the mouse has stopped moving by checking this property. A separate, short timer may be necessary.
+
+Note: relative is automatically scaled according to the content scale factor, which is defined by the project's stretch mode settings. This means mouse sensitivity will appear different depending on resolution when using relative in a script that handles mouse aiming with the Input.MOUSE_MODE_CAPTURED mouse mode. To avoid this, use screen_relative instead.
 
 ### screen_relative {#screen_relative}
 
@@ -176,7 +186,14 @@ relative: Vector2
 screen_relative: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_screen_relative(value: Vector2)
+- Vector2 get_screen_relative()
+
+The unscaled mouse position relative to the previous position in the coordinate system of the screen (position at the last frame).
+
+Note: Since InputEventMouseMotion may only be emitted when the mouse moves, it is not possible to reliably detect when the mouse has stopped moving by checking this property. A separate, short timer may be necessary.
+
+Note: This coordinate is not scaled according to the content scale factor or calls to InputEvent.xformed_by(). This should be preferred over relative for mouse aiming when using the Input.MOUSE_MODE_CAPTURED mouse mode, regardless of the project's stretch mode.
 
 ### velocity {#velocity}
 
@@ -184,7 +201,14 @@ screen_relative: Vector2
 velocity: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_velocity(value: Vector2)
+- Vector2 get_velocity()
+
+The mouse velocity in pixels per second.
+
+Note: velocity is automatically scaled according to the content scale factor, which is defined by the project's stretch mode settings. That means mouse sensitivity may appear different depending on resolution.
+
+Note: In Input.MOUSE_MODE_CAPTURED mode, velocity returns (0, 0) because the mouse cursor is hidden and locked. Use screen_relative for mouse aiming using the Input.MOUSE_MODE_CAPTURED mouse mode.
 
 ### screen_velocity {#screen_velocity}
 
@@ -192,4 +216,9 @@ velocity: Vector2
 screen_velocity: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_screen_velocity(value: Vector2)
+- Vector2 get_screen_velocity()
+
+The unscaled mouse velocity in pixels per second in screen coordinates. This velocity is not scaled according to the content scale factor or calls to InputEvent.xformed_by().
+
+Note: In Input.MOUSE_MODE_CAPTURED mode, screen_velocity returns (0, 0) because the mouse cursor is hidden and locked. Use screen_relative for mouse aiming using the Input.MOUSE_MODE_CAPTURED mouse mode.

@@ -711,33 +711,7 @@ Values below 1 are invalid and can be used to unset the property. Use has_defaul
 enum DataType { DATA_TYPE_COLOR = 0, DATA_TYPE_CONSTANT = 1, DATA_TYPE_FONT = 2, DATA_TYPE_FONT_SIZE = 3, DATA_TYPE_ICON = 4, DATA_TYPE_STYLEBOX = 5, DATA_TYPE_MAX = 6 }
 ```
 
-DataType DATA_TYPE_COLOR = 0
-
-Theme's Color item type.
-
-DataType DATA_TYPE_CONSTANT = 1
-
-Theme's constant item type.
-
-DataType DATA_TYPE_FONT = 2
-
-Theme's Font item type.
-
-DataType DATA_TYPE_FONT_SIZE = 3
-
-Theme's font size item type.
-
-DataType DATA_TYPE_ICON = 4
-
-Theme's icon Texture2D item type.
-
-DataType DATA_TYPE_STYLEBOX = 5
-
-Theme's StyleBox item type.
-
-DataType DATA_TYPE_MAX = 6
-
-Maximum value for the DataType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DATA_TYPE_COLOR {#DATA_TYPE_COLOR}
 
@@ -745,7 +719,7 @@ Maximum value for the DataType enum.
 DATA_TYPE_COLOR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Theme's Color item type.
 
 #### DATA_TYPE_CONSTANT {#DATA_TYPE_CONSTANT}
 
@@ -753,7 +727,7 @@ DATA_TYPE_COLOR = 0
 DATA_TYPE_CONSTANT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Theme's constant item type.
 
 #### DATA_TYPE_FONT {#DATA_TYPE_FONT}
 
@@ -761,7 +735,7 @@ DATA_TYPE_CONSTANT = 1
 DATA_TYPE_FONT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Theme's Font item type.
 
 #### DATA_TYPE_FONT_SIZE {#DATA_TYPE_FONT_SIZE}
 
@@ -769,7 +743,7 @@ DATA_TYPE_FONT = 2
 DATA_TYPE_FONT_SIZE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Theme's font size item type.
 
 #### DATA_TYPE_ICON {#DATA_TYPE_ICON}
 
@@ -777,7 +751,7 @@ DATA_TYPE_FONT_SIZE = 3
 DATA_TYPE_ICON = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Theme's icon Texture2D item type.
 
 #### DATA_TYPE_STYLEBOX {#DATA_TYPE_STYLEBOX}
 
@@ -785,7 +759,7 @@ DATA_TYPE_ICON = 4
 DATA_TYPE_STYLEBOX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Theme's StyleBox item type.
 
 #### DATA_TYPE_MAX {#DATA_TYPE_MAX}
 
@@ -793,4 +767,6 @@ DATA_TYPE_STYLEBOX = 5
 DATA_TYPE_MAX = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum value for the DataType enum.
+
+---

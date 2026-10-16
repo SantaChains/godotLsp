@@ -276,29 +276,7 @@ Pops up an error message in the editor which is shown as coming from the underly
 enum ChangeType { CHANGE_TYPE_NEW = 0, CHANGE_TYPE_MODIFIED = 1, CHANGE_TYPE_RENAMED = 2, CHANGE_TYPE_DELETED = 3, CHANGE_TYPE_TYPECHANGE = 4, CHANGE_TYPE_UNMERGED = 5 }
 ```
 
-ChangeType CHANGE_TYPE_NEW = 0
-
-A new file has been added.
-
-ChangeType CHANGE_TYPE_MODIFIED = 1
-
-An earlier added file has been modified.
-
-ChangeType CHANGE_TYPE_RENAMED = 2
-
-An earlier added file has been renamed.
-
-ChangeType CHANGE_TYPE_DELETED = 3
-
-An earlier added file has been deleted.
-
-ChangeType CHANGE_TYPE_TYPECHANGE = 4
-
-An earlier added file has been typechanged.
-
-ChangeType CHANGE_TYPE_UNMERGED = 5
-
-A file is left unmerged.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CHANGE_TYPE_NEW {#CHANGE_TYPE_NEW}
 
@@ -306,7 +284,7 @@ A file is left unmerged.
 CHANGE_TYPE_NEW = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A new file has been added.
 
 #### CHANGE_TYPE_MODIFIED {#CHANGE_TYPE_MODIFIED}
 
@@ -314,7 +292,7 @@ CHANGE_TYPE_NEW = 0
 CHANGE_TYPE_MODIFIED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An earlier added file has been modified.
 
 #### CHANGE_TYPE_RENAMED {#CHANGE_TYPE_RENAMED}
 
@@ -322,7 +300,7 @@ CHANGE_TYPE_MODIFIED = 1
 CHANGE_TYPE_RENAMED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An earlier added file has been renamed.
 
 #### CHANGE_TYPE_DELETED {#CHANGE_TYPE_DELETED}
 
@@ -330,7 +308,7 @@ CHANGE_TYPE_RENAMED = 2
 CHANGE_TYPE_DELETED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An earlier added file has been deleted.
 
 #### CHANGE_TYPE_TYPECHANGE {#CHANGE_TYPE_TYPECHANGE}
 
@@ -338,7 +316,7 @@ CHANGE_TYPE_DELETED = 3
 CHANGE_TYPE_TYPECHANGE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An earlier added file has been typechanged.
 
 #### CHANGE_TYPE_UNMERGED {#CHANGE_TYPE_UNMERGED}
 
@@ -346,7 +324,9 @@ CHANGE_TYPE_TYPECHANGE = 4
 CHANGE_TYPE_UNMERGED = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A file is left unmerged.
+
+---
 
 ### TreeArea {#enum-TreeArea}
 
@@ -354,17 +334,7 @@ CHANGE_TYPE_UNMERGED = 5
 enum TreeArea { TREE_AREA_COMMIT = 0, TREE_AREA_STAGED = 1, TREE_AREA_UNSTAGED = 2 }
 ```
 
-TreeArea TREE_AREA_COMMIT = 0
-
-A commit is encountered from the commit area.
-
-TreeArea TREE_AREA_STAGED = 1
-
-A file is encountered from the staged area.
-
-TreeArea TREE_AREA_UNSTAGED = 2
-
-A file is encountered from the unstaged area.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TREE_AREA_COMMIT {#TREE_AREA_COMMIT}
 
@@ -372,7 +342,7 @@ A file is encountered from the unstaged area.
 TREE_AREA_COMMIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A commit is encountered from the commit area.
 
 #### TREE_AREA_STAGED {#TREE_AREA_STAGED}
 
@@ -380,7 +350,7 @@ TREE_AREA_COMMIT = 0
 TREE_AREA_STAGED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A file is encountered from the staged area.
 
 #### TREE_AREA_UNSTAGED {#TREE_AREA_UNSTAGED}
 
@@ -388,4 +358,6 @@ TREE_AREA_STAGED = 1
 TREE_AREA_UNSTAGED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A file is encountered from the unstaged area.
+
+---

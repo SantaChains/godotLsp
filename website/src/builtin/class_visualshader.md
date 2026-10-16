@@ -211,53 +211,7 @@ Deprecated.
 enum Type { TYPE_VERTEX = 0, TYPE_FRAGMENT = 1, TYPE_LIGHT = 2, TYPE_START = 3, TYPE_PROCESS = 4, TYPE_COLLIDE = 5, TYPE_START_CUSTOM = 6, TYPE_PROCESS_CUSTOM = 7, TYPE_SKY = 8, TYPE_FOG = 9, TYPE_TEXTURE_BLIT = 10, TYPE_MAX = 11 }
 ```
 
-Type TYPE_VERTEX = 0
-
-A vertex shader, operating on vertices.
-
-Type TYPE_FRAGMENT = 1
-
-A fragment shader, operating on fragments (pixels).
-
-Type TYPE_LIGHT = 2
-
-A shader for light calculations.
-
-Type TYPE_START = 3
-
-A function for the "start" stage of particle shader.
-
-Type TYPE_PROCESS = 4
-
-A function for the "process" stage of particle shader.
-
-Type TYPE_COLLIDE = 5
-
-A function for the "collide" stage (particle collision handler) of particle shader.
-
-Type TYPE_START_CUSTOM = 6
-
-A function for the "start" stage of particle shader, with customized output.
-
-Type TYPE_PROCESS_CUSTOM = 7
-
-A function for the "process" stage of particle shader, with customized output.
-
-Type TYPE_SKY = 8
-
-A shader for 3D environment's sky.
-
-Type TYPE_FOG = 9
-
-A compute shader that runs for each froxel of the volumetric fog map.
-
-Type TYPE_TEXTURE_BLIT = 10
-
-A shader used to process blit calls to a DrawableTexture.
-
-Type TYPE_MAX = 11
-
-Represents the size of the Type enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TYPE_VERTEX {#TYPE_VERTEX}
 
@@ -265,7 +219,7 @@ Represents the size of the Type enum.
 TYPE_VERTEX = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A vertex shader, operating on vertices.
 
 #### TYPE_FRAGMENT {#TYPE_FRAGMENT}
 
@@ -273,7 +227,7 @@ TYPE_VERTEX = 0
 TYPE_FRAGMENT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A fragment shader, operating on fragments (pixels).
 
 #### TYPE_LIGHT {#TYPE_LIGHT}
 
@@ -281,7 +235,7 @@ TYPE_FRAGMENT = 1
 TYPE_LIGHT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A shader for light calculations.
 
 #### TYPE_START {#TYPE_START}
 
@@ -289,7 +243,7 @@ TYPE_LIGHT = 2
 TYPE_START = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A function for the "start" stage of particle shader.
 
 #### TYPE_PROCESS {#TYPE_PROCESS}
 
@@ -297,7 +251,7 @@ TYPE_START = 3
 TYPE_PROCESS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A function for the "process" stage of particle shader.
 
 #### TYPE_COLLIDE {#TYPE_COLLIDE}
 
@@ -305,7 +259,7 @@ TYPE_PROCESS = 4
 TYPE_COLLIDE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A function for the "collide" stage (particle collision handler) of particle shader.
 
 #### TYPE_START_CUSTOM {#TYPE_START_CUSTOM}
 
@@ -313,7 +267,7 @@ TYPE_COLLIDE = 5
 TYPE_START_CUSTOM = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A function for the "start" stage of particle shader, with customized output.
 
 #### TYPE_PROCESS_CUSTOM {#TYPE_PROCESS_CUSTOM}
 
@@ -321,7 +275,7 @@ TYPE_START_CUSTOM = 6
 TYPE_PROCESS_CUSTOM = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A function for the "process" stage of particle shader, with customized output.
 
 #### TYPE_SKY {#TYPE_SKY}
 
@@ -329,7 +283,7 @@ TYPE_PROCESS_CUSTOM = 7
 TYPE_SKY = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A shader for 3D environment's sky.
 
 #### TYPE_FOG {#TYPE_FOG}
 
@@ -337,7 +291,7 @@ TYPE_SKY = 8
 TYPE_FOG = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A compute shader that runs for each froxel of the volumetric fog map.
 
 #### TYPE_TEXTURE_BLIT {#TYPE_TEXTURE_BLIT}
 
@@ -345,7 +299,7 @@ TYPE_FOG = 9
 TYPE_TEXTURE_BLIT = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A shader used to process blit calls to a DrawableTexture.
 
 #### TYPE_MAX {#TYPE_MAX}
 
@@ -353,7 +307,9 @@ TYPE_TEXTURE_BLIT = 10
 TYPE_MAX = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Type enum.
+
+---
 
 ### VaryingMode {#enum-VaryingMode}
 
@@ -361,17 +317,7 @@ TYPE_MAX = 11
 enum VaryingMode { VARYING_MODE_VERTEX_TO_FRAG_LIGHT = 0, VARYING_MODE_FRAG_TO_LIGHT = 1, VARYING_MODE_MAX = 2 }
 ```
 
-VaryingMode VARYING_MODE_VERTEX_TO_FRAG_LIGHT = 0
-
-Varying is passed from Vertex function to Fragment and Light functions.
-
-VaryingMode VARYING_MODE_FRAG_TO_LIGHT = 1
-
-Varying is passed from Fragment function to Light function.
-
-VaryingMode VARYING_MODE_MAX = 2
-
-Represents the size of the VaryingMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VARYING_MODE_VERTEX_TO_FRAG_LIGHT {#VARYING_MODE_VERTEX_TO_FRAG_LIGHT}
 
@@ -379,7 +325,7 @@ Represents the size of the VaryingMode enum.
 VARYING_MODE_VERTEX_TO_FRAG_LIGHT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Varying is passed from Vertex function to Fragment and Light functions.
 
 #### VARYING_MODE_FRAG_TO_LIGHT {#VARYING_MODE_FRAG_TO_LIGHT}
 
@@ -387,7 +333,7 @@ VARYING_MODE_VERTEX_TO_FRAG_LIGHT = 0
 VARYING_MODE_FRAG_TO_LIGHT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Varying is passed from Fragment function to Light function.
 
 #### VARYING_MODE_MAX {#VARYING_MODE_MAX}
 
@@ -395,7 +341,9 @@ VARYING_MODE_FRAG_TO_LIGHT = 1
 VARYING_MODE_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the VaryingMode enum.
+
+---
 
 ### VaryingType {#enum-VaryingType}
 
@@ -403,41 +351,7 @@ VARYING_MODE_MAX = 2
 enum VaryingType { VARYING_TYPE_FLOAT = 0, VARYING_TYPE_INT = 1, VARYING_TYPE_UINT = 2, VARYING_TYPE_VECTOR_2D = 3, VARYING_TYPE_VECTOR_3D = 4, VARYING_TYPE_VECTOR_4D = 5, VARYING_TYPE_BOOLEAN = 6, VARYING_TYPE_TRANSFORM = 7, VARYING_TYPE_MAX = 8 }
 ```
 
-VaryingType VARYING_TYPE_FLOAT = 0
-
-Varying is of type float.
-
-VaryingType VARYING_TYPE_INT = 1
-
-Varying is of type int.
-
-VaryingType VARYING_TYPE_UINT = 2
-
-Varying is of type unsigned int.
-
-VaryingType VARYING_TYPE_VECTOR_2D = 3
-
-Varying is of type Vector2.
-
-VaryingType VARYING_TYPE_VECTOR_3D = 4
-
-Varying is of type Vector3.
-
-VaryingType VARYING_TYPE_VECTOR_4D = 5
-
-Varying is of type Vector4.
-
-VaryingType VARYING_TYPE_BOOLEAN = 6
-
-Varying is of type bool.
-
-VaryingType VARYING_TYPE_TRANSFORM = 7
-
-Varying is of type Transform3D.
-
-VaryingType VARYING_TYPE_MAX = 8
-
-Represents the size of the VaryingType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VARYING_TYPE_FLOAT {#VARYING_TYPE_FLOAT}
 
@@ -445,7 +359,7 @@ Represents the size of the VaryingType enum.
 VARYING_TYPE_FLOAT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Varying is of type float.
 
 #### VARYING_TYPE_INT {#VARYING_TYPE_INT}
 
@@ -453,7 +367,7 @@ VARYING_TYPE_FLOAT = 0
 VARYING_TYPE_INT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Varying is of type int.
 
 #### VARYING_TYPE_UINT {#VARYING_TYPE_UINT}
 
@@ -461,7 +375,7 @@ VARYING_TYPE_INT = 1
 VARYING_TYPE_UINT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Varying is of type unsigned int.
 
 #### VARYING_TYPE_VECTOR_2D {#VARYING_TYPE_VECTOR_2D}
 
@@ -469,7 +383,7 @@ VARYING_TYPE_UINT = 2
 VARYING_TYPE_VECTOR_2D = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Varying is of type Vector2.
 
 #### VARYING_TYPE_VECTOR_3D {#VARYING_TYPE_VECTOR_3D}
 
@@ -477,7 +391,7 @@ VARYING_TYPE_VECTOR_2D = 3
 VARYING_TYPE_VECTOR_3D = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Varying is of type Vector3.
 
 #### VARYING_TYPE_VECTOR_4D {#VARYING_TYPE_VECTOR_4D}
 
@@ -485,7 +399,7 @@ VARYING_TYPE_VECTOR_3D = 4
 VARYING_TYPE_VECTOR_4D = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Varying is of type Vector4.
 
 #### VARYING_TYPE_BOOLEAN {#VARYING_TYPE_BOOLEAN}
 
@@ -493,7 +407,7 @@ VARYING_TYPE_VECTOR_4D = 5
 VARYING_TYPE_BOOLEAN = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Varying is of type bool.
 
 #### VARYING_TYPE_TRANSFORM {#VARYING_TYPE_TRANSFORM}
 
@@ -501,7 +415,7 @@ VARYING_TYPE_BOOLEAN = 6
 VARYING_TYPE_TRANSFORM = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Varying is of type Transform3D.
 
 #### VARYING_TYPE_MAX {#VARYING_TYPE_MAX}
 
@@ -509,7 +423,9 @@ VARYING_TYPE_TRANSFORM = 7
 VARYING_TYPE_MAX = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the VaryingType enum.
+
+---
 
 ## 常量
 

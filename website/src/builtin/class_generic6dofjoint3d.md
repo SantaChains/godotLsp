@@ -118,97 +118,7 @@ There is currently no description for this method. Please help us by contributin
 enum Param { PARAM_LINEAR_LOWER_LIMIT = 0, PARAM_LINEAR_UPPER_LIMIT = 1, PARAM_LINEAR_LIMIT_SOFTNESS = 2, PARAM_LINEAR_RESTITUTION = 3, PARAM_LINEAR_DAMPING = 4, PARAM_LINEAR_MOTOR_TARGET_VELOCITY = 5, PARAM_LINEAR_MOTOR_FORCE_LIMIT = 6, PARAM_LINEAR_SPRING_STIFFNESS = 7, PARAM_LINEAR_SPRING_DAMPING = 8, PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT = 9, PARAM_ANGULAR_LOWER_LIMIT = 10, PARAM_ANGULAR_UPPER_LIMIT = 11, PARAM_ANGULAR_LIMIT_SOFTNESS = 12, PARAM_ANGULAR_DAMPING = 13, PARAM_ANGULAR_RESTITUTION = 14, PARAM_ANGULAR_FORCE_LIMIT = 15, PARAM_ANGULAR_ERP = 16, PARAM_ANGULAR_MOTOR_TARGET_VELOCITY = 17, PARAM_ANGULAR_MOTOR_FORCE_LIMIT = 18, PARAM_ANGULAR_SPRING_STIFFNESS = 19, PARAM_ANGULAR_SPRING_DAMPING = 20, PARAM_ANGULAR_SPRING_EQUILIBRIUM_POINT = 21, PARAM_MAX = 22 }
 ```
 
-Param PARAM_LINEAR_LOWER_LIMIT = 0
-
-The minimum difference between the pivot points' axes.
-
-Param PARAM_LINEAR_UPPER_LIMIT = 1
-
-The maximum difference between the pivot points' axes.
-
-Param PARAM_LINEAR_LIMIT_SOFTNESS = 2
-
-A factor applied to the movement across the axes. The lower, the slower the movement.
-
-Param PARAM_LINEAR_RESTITUTION = 3
-
-The amount of restitution on the axes' movement. The lower, the more momentum gets lost.
-
-Param PARAM_LINEAR_DAMPING = 4
-
-The amount of damping that happens at the linear motion across the axes.
-
-Param PARAM_LINEAR_MOTOR_TARGET_VELOCITY = 5
-
-The velocity the linear motor will try to reach.
-
-Param PARAM_LINEAR_MOTOR_FORCE_LIMIT = 6
-
-The maximum force the linear motor will apply while trying to reach the velocity target.
-
-Param PARAM_LINEAR_SPRING_STIFFNESS = 7
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-Param PARAM_LINEAR_SPRING_DAMPING = 8
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-Param PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT = 9
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-Param PARAM_ANGULAR_LOWER_LIMIT = 10
-
-The minimum rotation in negative direction to break loose and rotate around the axes.
-
-Param PARAM_ANGULAR_UPPER_LIMIT = 11
-
-The minimum rotation in positive direction to break loose and rotate around the axes.
-
-Param PARAM_ANGULAR_LIMIT_SOFTNESS = 12
-
-The speed of all rotations across the axes.
-
-Param PARAM_ANGULAR_DAMPING = 13
-
-The amount of rotational damping across the axes. The lower, the more damping occurs.
-
-Param PARAM_ANGULAR_RESTITUTION = 14
-
-The amount of rotational restitution across the axes. The lower, the more restitution occurs.
-
-Param PARAM_ANGULAR_FORCE_LIMIT = 15
-
-The maximum amount of force that can occur, when rotating around the axes.
-
-Param PARAM_ANGULAR_ERP = 16
-
-When rotating across the axes, this error tolerance factor defines how much the correction gets slowed down. The lower, the slower.
-
-Param PARAM_ANGULAR_MOTOR_TARGET_VELOCITY = 17
-
-Target speed for the motor at the axes.
-
-Param PARAM_ANGULAR_MOTOR_FORCE_LIMIT = 18
-
-Maximum acceleration for the motor at the axes.
-
-Param PARAM_ANGULAR_SPRING_STIFFNESS = 19
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-Param PARAM_ANGULAR_SPRING_DAMPING = 20
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-Param PARAM_ANGULAR_SPRING_EQUILIBRIUM_POINT = 21
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-Param PARAM_MAX = 22
-
-Represents the size of the Param enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PARAM_LINEAR_LOWER_LIMIT {#PARAM_LINEAR_LOWER_LIMIT}
 
@@ -216,7 +126,7 @@ Represents the size of the Param enum.
 PARAM_LINEAR_LOWER_LIMIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The minimum difference between the pivot points' axes.
 
 #### PARAM_LINEAR_UPPER_LIMIT {#PARAM_LINEAR_UPPER_LIMIT}
 
@@ -224,7 +134,7 @@ PARAM_LINEAR_LOWER_LIMIT = 0
 PARAM_LINEAR_UPPER_LIMIT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The maximum difference between the pivot points' axes.
 
 #### PARAM_LINEAR_LIMIT_SOFTNESS {#PARAM_LINEAR_LIMIT_SOFTNESS}
 
@@ -232,7 +142,7 @@ PARAM_LINEAR_UPPER_LIMIT = 1
 PARAM_LINEAR_LIMIT_SOFTNESS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A factor applied to the movement across the axes. The lower, the slower the movement.
 
 #### PARAM_LINEAR_RESTITUTION {#PARAM_LINEAR_RESTITUTION}
 
@@ -240,7 +150,7 @@ PARAM_LINEAR_LIMIT_SOFTNESS = 2
 PARAM_LINEAR_RESTITUTION = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of restitution on the axes' movement. The lower, the more momentum gets lost.
 
 #### PARAM_LINEAR_DAMPING {#PARAM_LINEAR_DAMPING}
 
@@ -248,7 +158,7 @@ PARAM_LINEAR_RESTITUTION = 3
 PARAM_LINEAR_DAMPING = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of damping that happens at the linear motion across the axes.
 
 #### PARAM_LINEAR_MOTOR_TARGET_VELOCITY {#PARAM_LINEAR_MOTOR_TARGET_VELOCITY}
 
@@ -256,7 +166,7 @@ PARAM_LINEAR_DAMPING = 4
 PARAM_LINEAR_MOTOR_TARGET_VELOCITY = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The velocity the linear motor will try to reach.
 
 #### PARAM_LINEAR_MOTOR_FORCE_LIMIT {#PARAM_LINEAR_MOTOR_FORCE_LIMIT}
 
@@ -264,7 +174,7 @@ PARAM_LINEAR_MOTOR_TARGET_VELOCITY = 5
 PARAM_LINEAR_MOTOR_FORCE_LIMIT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The maximum force the linear motor will apply while trying to reach the velocity target.
 
 #### PARAM_LINEAR_SPRING_STIFFNESS {#PARAM_LINEAR_SPRING_STIFFNESS}
 
@@ -272,7 +182,7 @@ PARAM_LINEAR_MOTOR_FORCE_LIMIT = 6
 PARAM_LINEAR_SPRING_STIFFNESS = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### PARAM_LINEAR_SPRING_DAMPING {#PARAM_LINEAR_SPRING_DAMPING}
 
@@ -280,7 +190,7 @@ PARAM_LINEAR_SPRING_STIFFNESS = 7
 PARAM_LINEAR_SPRING_DAMPING = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT {#PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT}
 
@@ -288,7 +198,7 @@ PARAM_LINEAR_SPRING_DAMPING = 8
 PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### PARAM_ANGULAR_LOWER_LIMIT {#PARAM_ANGULAR_LOWER_LIMIT}
 
@@ -296,7 +206,7 @@ PARAM_LINEAR_SPRING_EQUILIBRIUM_POINT = 9
 PARAM_ANGULAR_LOWER_LIMIT = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The minimum rotation in negative direction to break loose and rotate around the axes.
 
 #### PARAM_ANGULAR_UPPER_LIMIT {#PARAM_ANGULAR_UPPER_LIMIT}
 
@@ -304,7 +214,7 @@ PARAM_ANGULAR_LOWER_LIMIT = 10
 PARAM_ANGULAR_UPPER_LIMIT = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The minimum rotation in positive direction to break loose and rotate around the axes.
 
 #### PARAM_ANGULAR_LIMIT_SOFTNESS {#PARAM_ANGULAR_LIMIT_SOFTNESS}
 
@@ -312,7 +222,7 @@ PARAM_ANGULAR_UPPER_LIMIT = 11
 PARAM_ANGULAR_LIMIT_SOFTNESS = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The speed of all rotations across the axes.
 
 #### PARAM_ANGULAR_DAMPING {#PARAM_ANGULAR_DAMPING}
 
@@ -320,7 +230,7 @@ PARAM_ANGULAR_LIMIT_SOFTNESS = 12
 PARAM_ANGULAR_DAMPING = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of rotational damping across the axes. The lower, the more damping occurs.
 
 #### PARAM_ANGULAR_RESTITUTION {#PARAM_ANGULAR_RESTITUTION}
 
@@ -328,7 +238,7 @@ PARAM_ANGULAR_DAMPING = 13
 PARAM_ANGULAR_RESTITUTION = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of rotational restitution across the axes. The lower, the more restitution occurs.
 
 #### PARAM_ANGULAR_FORCE_LIMIT {#PARAM_ANGULAR_FORCE_LIMIT}
 
@@ -336,7 +246,7 @@ PARAM_ANGULAR_RESTITUTION = 14
 PARAM_ANGULAR_FORCE_LIMIT = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The maximum amount of force that can occur, when rotating around the axes.
 
 #### PARAM_ANGULAR_ERP {#PARAM_ANGULAR_ERP}
 
@@ -344,7 +254,7 @@ PARAM_ANGULAR_FORCE_LIMIT = 15
 PARAM_ANGULAR_ERP = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When rotating across the axes, this error tolerance factor defines how much the correction gets slowed down. The lower, the slower.
 
 #### PARAM_ANGULAR_MOTOR_TARGET_VELOCITY {#PARAM_ANGULAR_MOTOR_TARGET_VELOCITY}
 
@@ -352,7 +262,7 @@ PARAM_ANGULAR_ERP = 16
 PARAM_ANGULAR_MOTOR_TARGET_VELOCITY = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Target speed for the motor at the axes.
 
 #### PARAM_ANGULAR_MOTOR_FORCE_LIMIT {#PARAM_ANGULAR_MOTOR_FORCE_LIMIT}
 
@@ -360,7 +270,7 @@ PARAM_ANGULAR_MOTOR_TARGET_VELOCITY = 17
 PARAM_ANGULAR_MOTOR_FORCE_LIMIT = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum acceleration for the motor at the axes.
 
 #### PARAM_ANGULAR_SPRING_STIFFNESS {#PARAM_ANGULAR_SPRING_STIFFNESS}
 
@@ -368,7 +278,7 @@ PARAM_ANGULAR_MOTOR_FORCE_LIMIT = 18
 PARAM_ANGULAR_SPRING_STIFFNESS = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### PARAM_ANGULAR_SPRING_DAMPING {#PARAM_ANGULAR_SPRING_DAMPING}
 
@@ -376,7 +286,7 @@ PARAM_ANGULAR_SPRING_STIFFNESS = 19
 PARAM_ANGULAR_SPRING_DAMPING = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### PARAM_ANGULAR_SPRING_EQUILIBRIUM_POINT {#PARAM_ANGULAR_SPRING_EQUILIBRIUM_POINT}
 
@@ -384,7 +294,7 @@ PARAM_ANGULAR_SPRING_DAMPING = 20
 PARAM_ANGULAR_SPRING_EQUILIBRIUM_POINT = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### PARAM_MAX {#PARAM_MAX}
 
@@ -392,7 +302,9 @@ PARAM_ANGULAR_SPRING_EQUILIBRIUM_POINT = 21
 PARAM_MAX = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Param enum.
+
+---
 
 ### Flag {#enum-Flag}
 
@@ -400,33 +312,7 @@ PARAM_MAX = 22
 enum Flag { FLAG_ENABLE_LINEAR_LIMIT = 0, FLAG_ENABLE_ANGULAR_LIMIT = 1, FLAG_ENABLE_LINEAR_SPRING = 3, FLAG_ENABLE_ANGULAR_SPRING = 2, FLAG_ENABLE_MOTOR = 4, FLAG_ENABLE_LINEAR_MOTOR = 5, FLAG_MAX = 6 }
 ```
 
-Flag FLAG_ENABLE_LINEAR_LIMIT = 0
-
-If enabled, linear motion is possible within the given limits.
-
-Flag FLAG_ENABLE_ANGULAR_LIMIT = 1
-
-If enabled, rotational motion is possible within the given limits.
-
-Flag FLAG_ENABLE_LINEAR_SPRING = 3
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-Flag FLAG_ENABLE_ANGULAR_SPRING = 2
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-Flag FLAG_ENABLE_MOTOR = 4
-
-If enabled, there is a rotational motor across these axes.
-
-Flag FLAG_ENABLE_LINEAR_MOTOR = 5
-
-If enabled, there is a linear motor across these axes.
-
-Flag FLAG_MAX = 6
-
-Represents the size of the Flag enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FLAG_ENABLE_LINEAR_LIMIT {#FLAG_ENABLE_LINEAR_LIMIT}
 
@@ -434,7 +320,7 @@ Represents the size of the Flag enum.
 FLAG_ENABLE_LINEAR_LIMIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, linear motion is possible within the given limits.
 
 #### FLAG_ENABLE_ANGULAR_LIMIT {#FLAG_ENABLE_ANGULAR_LIMIT}
 
@@ -442,7 +328,7 @@ FLAG_ENABLE_LINEAR_LIMIT = 0
 FLAG_ENABLE_ANGULAR_LIMIT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, rotational motion is possible within the given limits.
 
 #### FLAG_ENABLE_LINEAR_SPRING {#FLAG_ENABLE_LINEAR_SPRING}
 
@@ -450,7 +336,7 @@ FLAG_ENABLE_ANGULAR_LIMIT = 1
 FLAG_ENABLE_LINEAR_SPRING = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### FLAG_ENABLE_ANGULAR_SPRING {#FLAG_ENABLE_ANGULAR_SPRING}
 
@@ -458,7 +344,7 @@ FLAG_ENABLE_LINEAR_SPRING = 3
 FLAG_ENABLE_ANGULAR_SPRING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### FLAG_ENABLE_MOTOR {#FLAG_ENABLE_MOTOR}
 
@@ -466,7 +352,7 @@ FLAG_ENABLE_ANGULAR_SPRING = 2
 FLAG_ENABLE_MOTOR = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, there is a rotational motor across these axes.
 
 #### FLAG_ENABLE_LINEAR_MOTOR {#FLAG_ENABLE_LINEAR_MOTOR}
 
@@ -474,7 +360,7 @@ FLAG_ENABLE_MOTOR = 4
 FLAG_ENABLE_LINEAR_MOTOR = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, there is a linear motor across these axes.
 
 #### FLAG_MAX {#FLAG_MAX}
 
@@ -482,4 +368,6 @@ FLAG_ENABLE_LINEAR_MOTOR = 5
 FLAG_MAX = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Flag enum.
+
+---

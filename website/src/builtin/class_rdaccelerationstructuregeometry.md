@@ -177,7 +177,10 @@ Flags for the geometry.
 vertex_buffer: RID
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_vertex_buffer(value: RID)
+- RID get_vertex_buffer()
+
+Buffer containing vertices.
 
 ### vertex_offset {#vertex_offset}
 
@@ -229,7 +232,10 @@ Format of the vertices in vertex_buffer.
 index_buffer: RID
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_index_buffer(value: RID)
+- RID get_index_buffer()
+
+Buffer containing vertex indices. If null, triangles are non-indexed.
 
 ### index_offset {#index_offset}
 

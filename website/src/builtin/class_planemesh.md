@@ -102,7 +102,10 @@ void set_subdivide_width(subdivide: int)
 size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector2)
+- Vector2 get_size()
+
+Size of the generated plane.
 
 ### subdivide_width {#subdivide_width}
 
@@ -132,7 +135,10 @@ Number of subdivision along the Z axis.
 center_offset: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_center_offset(value: Vector3)
+- Vector3 get_center_offset()
+
+Offset of the generated plane. Useful for particles.
 
 ### orientation {#orientation}
 
@@ -153,17 +159,7 @@ Direction that the PlaneMesh is facing.
 enum Orientation { FACE_X = 0, FACE_Y = 1, FACE_Z = 2 }
 ```
 
-Orientation FACE_X = 0
-
-PlaneMesh will face the positive X-axis.
-
-Orientation FACE_Y = 1
-
-PlaneMesh will face the positive Y-axis. This matches the behavior of the PlaneMesh in Godot 3.x.
-
-Orientation FACE_Z = 2
-
-PlaneMesh will face the positive Z-axis. This matches the behavior of the QuadMesh in Godot 3.x.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FACE_X {#FACE_X}
 
@@ -171,7 +167,7 @@ PlaneMesh will face the positive Z-axis. This matches the behavior of the QuadMe
 FACE_X = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PlaneMesh will face the positive X-axis.
 
 #### FACE_Y {#FACE_Y}
 
@@ -179,7 +175,7 @@ FACE_X = 0
 FACE_Y = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PlaneMesh will face the positive Y-axis. This matches the behavior of the PlaneMesh in Godot 3.x.
 
 #### FACE_Z {#FACE_Z}
 
@@ -187,4 +183,6 @@ FACE_Y = 1
 FACE_Z = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PlaneMesh will face the positive Z-axis. This matches the behavior of the QuadMesh in Godot 3.x.
+
+---

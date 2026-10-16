@@ -9,6 +9,7 @@
   - website/src/builtin/class_<slug>.md   每类一页，成员锚点显式 {#id} 锁定
   - website/src/SUMMARY.md                仅重写 BUILTIN 标记区间（按首字母分组）
   - website/src/builtin/index.md          仅重写 BUILTIN 标记区间（类目录）
+  - crates/godotlsp/src/hoverdata.json    LSP hover 描述层（同一解析器派生，紧凑摘要）
 
 锚点契约（与内核 doclinks.rs 一致，cargo test 防漂移）：
   类页   /builtin/class_<小写去@>.html
@@ -85,28 +86,82 @@ def split_blocks(text: str) -> dict[str, str]:
     return out
 
 
-def parse_entries(body: str) -> dict[str, str]:
-    """'## X Descriptions'/'## Signals' 区块 → {成员名: 描述正文}。
+def parse_entries_full(body: str) -> dict[str, tuple[str, str]]:
+    """'## X Descriptions' 区块 → {成员名: (签名行, 描述正文)}。
 
-    格式（godot-docs 提取语料，全站同构）：成员以签名行开头，成员之间 '---' 分隔。
+    与 parse_entries 同一解析（防漂移：hover 数据不得另写解析器），
+    额外保留签名行供 @GDScript 内建函数渲染（api json 无该伪类）。
     """
-    entries: dict[str, str] = {}
+    entries: dict[str, tuple[str, str]] = {}
     for chunk in re.split(r"^---\s*$", body, flags=re.M):
         chunk = chunk.strip()
         if not chunk:
             continue
         lines = chunk.split("\n")
         first = lines[0].strip()
-        m = re.search(r"(\w+)\s*\(", first)
+        # 判定优先级：带 = 的「类型 名字 = 值」（属性/常量）> 函数签名（名字后跟括号）>
+        # 裸「类型 名字」（无默认值属性）。函数形态不能先判——
+        # `Vector2 position = Vector2(0, 0)` 的默认值括号会把名字误判成类型（W3 遗留 bug）。
+        m = re.match(r"^(?:[\w:\[\]\.]+\s+)?([A-Za-z_]\w*)\s*=", first)
+        if not m:
+            m = re.search(r"(\w+)\s*\(", first)
+        if not m:
+            m = re.match(r"^(?:[\w:\[\]\.]+\s+)?([A-Za-z_]\w*)\s*$", first)
         name = m.group(1) if m else None
-        if not name:
-            m2 = re.match(r"^(?:[\w:\[\]\.]+\s+)?(\w+)\s*(?:=|$)", first)
-            name = m2.group(1) if m2 else None
         if not name:
             continue
         desc = "\n".join(lines[1:]).strip()
-        entries.setdefault(name, desc)
+        entries.setdefault(name, (first, desc))
     return entries
+
+
+def parse_entries(body: str) -> dict[str, str]:
+    """parse_entries_full 的描述投影（网站页渲染用，签名来自 api json）。"""
+    return {name: desc for name, (_sig, desc) in parse_entries_full(body).items()}
+
+
+def empty_docs() -> dict:
+    return {"brief": "", "description": "", "methods": {}, "methods_full": {},
+            "properties": {}, "signals": {}, "enums": {}, "enums_tree": {},
+            "constants": {}, "constants_full": {}, "annotations": {}, "annotations_full": {}}
+
+
+def parse_enum_entries(body: str) -> dict[str, dict[str, str]]:
+    """Enumerations 区块 → {枚举名: {枚举值名: 描述}}。
+
+    该区块与 Descriptions 不同构：**空行分隔、无 ---**（`enum Key` 头 + `Key KEY_LEFT = 0`
+    值行 + 描述段落），parse_entries 对其失效（W3 遗留缺口：全站枚举值描述从未被提取）。
+    """
+    out: dict[str, dict[str, str]] = {}
+    header_re = re.compile(r"^enum\s+(\w+)\s*$")
+    value_re = re.compile(r"^(?:[\w:\[\]\.]+\s+)?([A-Z]\w*)\s*=\s*\S")
+    cur_enum: str | None = None
+    last_key: str | None = None
+    buf: list[str] = []
+
+    def emit() -> None:
+        nonlocal last_key, buf
+        if cur_enum is not None and last_key is not None:
+            text = "\n".join(buf).strip()
+            if text and last_key not in out[cur_enum]:
+                out[cur_enum][last_key] = text
+        buf = []
+
+    for line in body.splitlines():
+        mh = header_re.match(line)
+        mv = value_re.match(line)
+        if mh:
+            emit()
+            cur_enum = mh.group(1)
+            out.setdefault(cur_enum, {})
+            last_key = cur_enum  # 枚举级描述（若有）挂在枚举名上
+        elif mv:
+            emit()
+            last_key = mv.group(1)
+        else:
+            buf.append(line)
+    emit()
+    return out
 
 
 def class_docs(file: Path) -> dict:
@@ -115,14 +170,30 @@ def class_docs(file: Path) -> dict:
     desc = blocks.get("Description", "")
     # Description 取首段为 brief
     brief = desc.split("\n\n")[0].replace("\n", " ").strip() if desc else ""
+    full_methods = parse_entries_full(blocks.get("Method Descriptions", ""))
+    full_consts = parse_entries_full(blocks.get("Constants", ""))
+    full_annos = parse_entries_full(blocks.get("Annotations", ""))
+    enum_tree = parse_enum_entries(blocks.get("Enumerations", ""))
+    # 扁平投影（页面/hover 渲染按名查）：枚举名 → 枚举级描述；枚举值名 → 值描述
+    enums_flat: dict[str, str] = {}
+    for ename, vals in enum_tree.items():
+        enums_flat[ename] = vals.get(ename, "")
+        for vname, vdesc in vals.items():
+            if vname != ename:
+                enums_flat[vname] = vdesc
     return {
         "brief": brief,
         "description": desc,
-        "methods": parse_entries(blocks.get("Method Descriptions", "")),
+        "methods_full": full_methods,
+        "methods": {k: v[1] for k, v in full_methods.items()},
         "properties": parse_entries(blocks.get("Property Descriptions", "")),
         "signals": parse_entries(blocks.get("Signals", "")),
-        "enums": parse_entries(blocks.get("Enumerations", "")),
-        "constants": parse_entries(blocks.get("Constants", "")),
+        "enums_tree": enum_tree,
+        "enums": enums_flat,
+        "constants_full": full_consts,
+        "constants": {k: v[1] for k, v in full_consts.items()},
+        "annotations_full": full_annos,
+        "annotations": {k: v[1] for k, v in full_annos.items()},
     }
 
 
@@ -179,6 +250,28 @@ def md_desc(desc: str) -> str:
     if not desc:
         return "> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。"
     return desc
+
+
+HOVER_DESC_CAP = 400
+
+
+def hover_para(desc: str) -> str:
+    """gdd 描述 → hover 摘要：首个实质段落（跳过 setter/getter 弹点与代码块），限长截断。"""
+    if not desc:
+        return ""
+    for para in desc.split("\n\n"):
+        lines = [ln for ln in para.splitlines() if ln.strip()]
+        if not lines:
+            continue
+        # 跳过纯 bullet 段（属性 setter/getter 列表）与代码块
+        if all(ln.lstrip().startswith(("- ", "```")) for ln in lines):
+            continue
+        text = " ".join(ln.strip() for ln in lines if not ln.lstrip().startswith("```"))
+        text = text.strip()
+        if len(text) > HOVER_DESC_CAP:
+            text = text[: HOVER_DESC_CAP - 1].rstrip() + "…"
+        return text
+    return ""
 
 
 def member_section(title: str, anchor_prefix: str | None, rows: list[str]) -> str:
@@ -284,6 +377,75 @@ def gen_class_page(name: str, cls: dict, kind: str, docs: dict, api: dict, inh_l
             L.append(f"```gdscript\nconst {cn} = {cv}\n```")
             L.append("")
             L.append(md_desc(docs["constants"].get(cn, "")))
+            L.append("")
+
+    return "\n".join(L).rstrip() + "\n"
+
+
+def strip_call(sig: str) -> str:
+    """`@export()` → `@export`；`@export_category(name: String)` 原样。"""
+    return sig[:-2] if sig.endswith("()") else sig
+
+
+def gen_gdscript_page(docs: dict) -> str:
+    """@GDScript 全量页（api json 无此伪类，签名/描述全部来自语料）：
+    内建函数（len/preload/range/…）+ 常量（PI/TAU/…）+ 注解（@export/…）。
+    锚点契约：函数/常量 #<原名>，注解 #annotation-<名>（hover 链接同源）。
+    """
+    L: list[str] = []
+    L.append("# @GDScript")
+    L.append("")
+    if docs["brief"]:
+        L.append(f"> {docs['brief']}")
+        L.append("")
+        L.append("<details><summary>官方英文描述（中文精译进行中）</summary>")
+        L.append("")
+        L.append(docs["description"])
+        L.append("")
+        L.append("</details>")
+        L.append("")
+
+    if docs["methods_full"]:
+        L.append("## 内建函数")
+        L.append("")
+        for name in sorted(docs["methods_full"], key=str.lower):
+            sig, desc = docs["methods_full"][name]
+            L.append(f"### {name} {{#{name}}}")
+            L.append("")
+            L.append("```gdscript")
+            L.append(sig)
+            L.append("```")
+            L.append("")
+            L.append(md_desc(desc))
+            L.append("")
+
+    if docs["constants_full"]:
+        L.append("## 常量")
+        L.append("")
+        for name in sorted(docs["constants_full"], key=str.lower):
+            sig, desc = docs["constants_full"][name]
+            L.append(f"### {name} {{#{name}}}")
+            L.append("")
+            L.append("```gdscript")
+            L.append(f"const {sig}")
+            L.append("```")
+            L.append("")
+            L.append(md_desc(desc))
+            L.append("")
+
+    if docs["annotations_full"]:
+        L.append("## 注解")
+        L.append("")
+        for name in sorted(docs["annotations_full"], key=str.lower):
+            sig, desc = docs["annotations_full"][name]
+            disp = strip_call(sig)
+            L.append(f"### {disp} {{#annotation-{name}}}")
+            L.append("")
+            L.append("```gdscript")
+            L.append(disp)
+            L.append("```")
+            L.append("")
+            L.append(md_desc(desc))
             L.append("")
 
     return "\n".join(L).rstrip() + "\n"
@@ -407,6 +569,49 @@ def rewrite_between(path: Path, new_block: str) -> bool:
     return False
 
 
+# ───────────────────────── hover 描述层（LSP 消费端） ─────────────────────────
+
+HOVERDATA = ROOT / "crates/godotlsp/src/hoverdata.json"
+
+
+def build_hoverdata(entries: dict, docs_idx: dict) -> dict:
+    """派生 LSP hover 描述层（与网站页同源同解析器——约束：LSP 渲染层不得自带描述文本）。
+
+    结构：
+      c  类 brief：{类名: 首段}
+      m  成员描述：{"<类名>.<成员>": 首段}（方法/属性/信号/枚举/枚举值/常量；@GlobalScope 用类名键）
+      f  @GDScript 内建函数：{名: {"s": 语料签名行, "d": 摘要}}
+      a  注解：{名(去@): 摘要}
+    """
+    c: dict[str, str] = {}
+    m: dict[str, str] = {}
+    f: dict[str, dict[str, str]] = {}
+    a: dict[str, str] = {}
+    for name in entries:
+        docs_file = docs_idx.get(name)
+        docs = class_docs(docs_file) if docs_file else empty_docs()
+        c[name] = docs["brief"]
+        if name == "@GDScript":
+            for n, (sig, desc) in docs["methods_full"].items():
+                f[n] = {"s": sig, "d": hover_para(desc)}
+            for n, (sig, desc) in docs["constants_full"].items():
+                m[f"@GDScript.{n}"] = hover_para(desc)
+            for n, (sig, desc) in docs["annotations_full"].items():
+                a[n] = hover_para(desc)
+            continue
+        for member, desc in docs["methods"].items():
+            m[f"{name}.{member}"] = hover_para(desc)
+        for member, desc in docs["properties"].items():
+            m[f"{name}.{member}"] = hover_para(desc)
+        for member, desc in docs["signals"].items():
+            m[f"{name}.{member}"] = hover_para(desc)
+        for member, desc in docs["enums"].items():  # 枚举名与枚举值都在 Enumerations 区块
+            m[f"{name}.{member}"] = hover_para(desc)
+        for member, desc in docs["constants"].items():
+            m[f"{name}.{member}"] = hover_para(desc)
+    return {"c": c, "m": m, "f": f, "a": a}
+
+
 # ───────────────────────── 主流程 ─────────────────────────
 
 def collect() -> tuple[dict[str, dict], dict[str, dict]]:
@@ -447,25 +652,18 @@ def main() -> int:
 
     api = json.loads(API_JSON.read_text(encoding="utf-8"))
     gs_docs_file = docs_idx.get("@GlobalScope")
-    gs_docs = class_docs(gs_docs_file) if gs_docs_file else {"brief": "", "description": "", "methods": {}, "properties": {}, "signals": {}, "enums": {}, "constants": {}}
+    gs_docs = class_docs(gs_docs_file) if gs_docs_file else empty_docs()
 
     all_names = sorted(entries, key=str.lower)
     written = 0
     for name in all_names:
         e = entries[name]
         docs_file = docs_idx.get(name)
-        docs = class_docs(docs_file) if docs_file else {"brief": "", "description": "", "methods": {}, "properties": {}, "signals": {}, "enums": {}, "constants": {}}
+        docs = class_docs(docs_file) if docs_file else empty_docs()
         if e["kind"] == "global_scope":
             content = gen_global_scope_page(api, gs_docs)
         elif e["kind"] == "gdscript":
-            brief = docs["brief"]
-            content = (
-                f"# @GDScript\n\n"
-                + (f"> {brief}\n\n" if brief else "")
-                + "GDScript 语法级全局：内建函数（`print`/`range`/`preload`/…）与常量（`PI`/`TAU`/…）。\n"
-                "完整成员清单见语法篇；此处骨架保证链接契约完备。\n\n"
-                + (f"<details><summary>官方英文描述</summary>\n\n{docs['description']}\n\n</details>\n" if docs["description"] else "")
-            )
+            content = gen_gdscript_page(docs)
         else:
             cls = e["cls"]
             if not cls:
@@ -485,8 +683,18 @@ def main() -> int:
         rewrite_between(SUMMARY, gen_summary_builtin(all_names))
         rewrite_between(BUILTIN_DIR / "index.md", gen_builtin_index(all_names))
 
+    # LSP hover 描述层（与网站同源同解析器）
+    hover = build_hoverdata(entries, docs_idx)
+    hover_text = json.dumps(hover, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    if check:
+        if not HOVERDATA.exists() or HOVERDATA.read_text(encoding="utf-8") != hover_text:
+            print("DRIFT: hoverdata.json")
+            return 1
+    else:
+        HOVERDATA.write_text(hover_text, encoding="utf-8", newline="\n")
+
     mode = "check" if check else "generate"
-    print(f"{mode}: {written} class pages, {len(all_names)} entries")
+    print(f"{mode}: {written} class pages, {len(all_names)} entries, hover members {len(hover['m'])} + fns {len(hover['f'])} + annos {len(hover['a'])}")
     return 0
 
 

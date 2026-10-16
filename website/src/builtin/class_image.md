@@ -740,7 +740,7 @@ Note: The 8-bit formats required by this method are not suitable for storing lin
 data: Dictionary
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Holds all the image's color data in a given format. See Format constants.
 
 ## 枚举
 
@@ -750,239 +750,7 @@ data: Dictionary
 enum Format { FORMAT_L8 = 0, FORMAT_LA8 = 1, FORMAT_R8 = 2, FORMAT_RG8 = 3, FORMAT_RGB8 = 4, FORMAT_RGBA8 = 5, FORMAT_RGBA4444 = 6, FORMAT_RGB565 = 7, FORMAT_RF = 8, FORMAT_RGF = 9, FORMAT_RGBF = 10, FORMAT_RGBAF = 11, FORMAT_RH = 12, FORMAT_RGH = 13, FORMAT_RGBH = 14, FORMAT_RGBAH = 15, FORMAT_RGBE9995 = 16, FORMAT_DXT1 = 17, FORMAT_DXT3 = 18, FORMAT_DXT5 = 19, FORMAT_RGTC_R = 20, FORMAT_RGTC_RG = 21, FORMAT_BPTC_RGBA = 22, FORMAT_BPTC_RGBF = 23, FORMAT_BPTC_RGBFU = 24, FORMAT_ETC = 25, FORMAT_ETC2_R11 = 26, FORMAT_ETC2_R11S = 27, FORMAT_ETC2_RG11 = 28, FORMAT_ETC2_RG11S = 29, FORMAT_ETC2_RGB8 = 30, FORMAT_ETC2_RGBA8 = 31, FORMAT_ETC2_RGB8A1 = 32, FORMAT_ETC2_RA_AS_RG = 33, FORMAT_DXT5_RA_AS_RG = 34, FORMAT_ASTC_4x4 = 35, FORMAT_ASTC_4x4_HDR = 36, FORMAT_ASTC_8x8 = 37, FORMAT_ASTC_8x8_HDR = 38, FORMAT_R16 = 39, FORMAT_RG16 = 40, FORMAT_RGB16 = 41, FORMAT_RGBA16 = 42, FORMAT_R16I = 43, FORMAT_RG16I = 44, FORMAT_RGB16I = 45, FORMAT_RGBA16I = 46, FORMAT_MAX = 47 }
 ```
 
-Format FORMAT_L8 = 0
-
-Texture format with a single 8-bit depth representing luminance.
-
-Format FORMAT_LA8 = 1
-
-OpenGL texture format with two values, luminance and alpha each stored with 8 bits.
-
-Format FORMAT_R8 = 2
-
-OpenGL texture format RED with a single component and a bitdepth of 8.
-
-Format FORMAT_RG8 = 3
-
-OpenGL texture format RG with two components and a bitdepth of 8 for each.
-
-Format FORMAT_RGB8 = 4
-
-OpenGL texture format RGB with three components, each with a bitdepth of 8.
-
-Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
-
-Format FORMAT_RGBA8 = 5
-
-OpenGL texture format RGBA with four components, each with a bitdepth of 8.
-
-Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
-
-Format FORMAT_RGBA4444 = 6
-
-OpenGL texture format RGBA with four components, each with a bitdepth of 4.
-
-Format FORMAT_RGB565 = 7
-
-OpenGL texture format RGB with three components. Red and blue have a bitdepth of 5, and green has a bitdepth of 6.
-
-Format FORMAT_RF = 8
-
-OpenGL texture format GL_R32F where there's one component, a 32-bit floating-point value.
-
-Format FORMAT_RGF = 9
-
-OpenGL texture format GL_RG32F where there are two components, each a 32-bit floating-point values.
-
-Format FORMAT_RGBF = 10
-
-OpenGL texture format GL_RGB32F where there are three components, each a 32-bit floating-point values.
-
-Format FORMAT_RGBAF = 11
-
-OpenGL texture format GL_RGBA32F where there are four components, each a 32-bit floating-point values.
-
-Format FORMAT_RH = 12
-
-OpenGL texture format GL_R16F where there's one component, a 16-bit "half-precision" floating-point value.
-
-Format FORMAT_RGH = 13
-
-OpenGL texture format GL_RG16F where there are two components, each a 16-bit "half-precision" floating-point value.
-
-Format FORMAT_RGBH = 14
-
-OpenGL texture format GL_RGB16F where there are three components, each a 16-bit "half-precision" floating-point value.
-
-Format FORMAT_RGBAH = 15
-
-OpenGL texture format GL_RGBA16F where there are four components, each a 16-bit "half-precision" floating-point value.
-
-Format FORMAT_RGBE9995 = 16
-
-A special OpenGL texture format where the three color components have 9 bits of precision and all three share a single 5-bit exponent.
-
-Format FORMAT_DXT1 = 17
-
-The S3TC [https://en.wikipedia.org/wiki/S3_Texture_Compression] texture format that uses Block Compression 1, and is the smallest variation of S3TC, only providing 1 bit of alpha and color data being premultiplied with alpha.
-
-Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
-
-Format FORMAT_DXT3 = 18
-
-The S3TC [https://en.wikipedia.org/wiki/S3_Texture_Compression] texture format that uses Block Compression 2, and color data is interpreted as not having been premultiplied by alpha. Well suited for images with sharp alpha transitions between translucent and opaque areas.
-
-Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
-
-Format FORMAT_DXT5 = 19
-
-The S3TC [https://en.wikipedia.org/wiki/S3_Texture_Compression] texture format also known as Block Compression 3 or BC3 that contains 64 bits of alpha channel data followed by 64 bits of DXT1-encoded color data. Color data is not premultiplied by alpha, same as DXT3. DXT5 generally produces superior results for transparent gradients compared to DXT3.
-
-Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
-
-Format FORMAT_RGTC_R = 20
-
-Texture format that uses Red Green Texture Compression [https://www.khronos.org/opengl/wiki/Red_Green_Texture_Compression], normalizing the red channel data using the same compression algorithm that DXT5 uses for the alpha channel.
-
-Format FORMAT_RGTC_RG = 21
-
-Texture format that uses Red Green Texture Compression [https://www.khronos.org/opengl/wiki/Red_Green_Texture_Compression], normalizing the red and green channel data using the same compression algorithm that DXT5 uses for the alpha channel.
-
-Format FORMAT_BPTC_RGBA = 22
-
-Texture format that uses BPTC [https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression] compression with unsigned normalized RGBA components.
-
-Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
-
-Format FORMAT_BPTC_RGBF = 23
-
-Texture format that uses BPTC [https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression] compression with signed floating-point RGB components.
-
-Format FORMAT_BPTC_RGBFU = 24
-
-Texture format that uses BPTC [https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression] compression with unsigned floating-point RGB components.
-
-Format FORMAT_ETC = 25
-
-Ericsson Texture Compression format 1 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC1], also referred to as "ETC1", and is part of the OpenGL ES graphics standard. This format cannot store an alpha channel.
-
-Format FORMAT_ETC2_R11 = 26
-
-Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (R11_EAC variant), which provides one channel of unsigned data.
-
-Format FORMAT_ETC2_R11S = 27
-
-Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (SIGNED_R11_EAC variant), which provides one channel of signed data.
-
-Format FORMAT_ETC2_RG11 = 28
-
-Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (RG11_EAC variant), which provides two channels of unsigned data.
-
-Format FORMAT_ETC2_RG11S = 29
-
-Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (SIGNED_RG11_EAC variant), which provides two channels of signed data.
-
-Format FORMAT_ETC2_RGB8 = 30
-
-Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (RGB8 variant), which is a follow-up of ETC1 and compresses RGB888 data.
-
-Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
-
-Format FORMAT_ETC2_RGBA8 = 31
-
-Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (RGBA8variant), which compresses RGBA8888 data with full alpha support.
-
-Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
-
-Format FORMAT_ETC2_RGB8A1 = 32
-
-Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (RGB8_PUNCHTHROUGH_ALPHA1 variant), which compresses RGBA data to make alpha either fully transparent or fully opaque.
-
-Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
-
-Format FORMAT_ETC2_RA_AS_RG = 33
-
-Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (RGBA8 variant), which compresses RA data and interprets it as two channels (red and green). See also FORMAT_ETC2_RGBA8.
-
-Format FORMAT_DXT5_RA_AS_RG = 34
-
-The S3TC [https://en.wikipedia.org/wiki/S3_Texture_Compression] texture format also known as Block Compression 3 or BC3, which compresses RA data and interprets it as two channels (red and green). See also FORMAT_DXT5.
-
-Format FORMAT_ASTC_4x4 = 35
-
-Adaptive Scalable Texture Compression [https://en.wikipedia.org/wiki/Adaptive_scalable_texture_compression]. This implements the 4×4 (high quality) mode.
-
-Format FORMAT_ASTC_4x4_HDR = 36
-
-Same format as FORMAT_ASTC_4x4, but with the hint to let the GPU know it is used for HDR.
-
-Format FORMAT_ASTC_8x8 = 37
-
-Adaptive Scalable Texture Compression [https://en.wikipedia.org/wiki/Adaptive_scalable_texture_compression]. This implements the 8×8 (low quality) mode.
-
-Format FORMAT_ASTC_8x8_HDR = 38
-
-Same format as FORMAT_ASTC_8x8, but with the hint to let the GPU know it is used for HDR.
-
-Format FORMAT_R16 = 39
-
-OpenGL texture format GL_R16 where there's one component, a 16-bit unsigned normalized integer value. Since the value is normalized, each component is clamped between 0.0 and 1.0 (inclusive).
-
-Note: Due to limited hardware support, it is mainly recommended to be used on desktop or console devices. It may be unsupported on mobile or web, and will consequently be converted to FORMAT_RF.
-
-Format FORMAT_RG16 = 40
-
-OpenGL texture format GL_RG16 where there are two components, each a 16-bit unsigned normalized integer value. Since the value is normalized, each component is clamped between 0.0 and 1.0 (inclusive).
-
-Note: Due to limited hardware support, it is mainly recommended to be used on desktop or console devices. It may be unsupported on mobile or web, and will consequently be converted to FORMAT_RGF.
-
-Format FORMAT_RGB16 = 41
-
-OpenGL texture format GL_RGB16 where there are three components, each a 16-bit unsigned normalized integer value. Since the value is normalized, each component is clamped between 0.0 and 1.0 (inclusive).
-
-Note: Due to limited hardware support, it is mainly recommended to be used on desktop or console devices. It may be unsupported on mobile or web, and will consequently be converted to FORMAT_RGBF.
-
-Format FORMAT_RGBA16 = 42
-
-OpenGL texture format GL_RGBA16 where there are four components, each a 16-bit unsigned normalized integer value. Since the value is normalized, each component is clamped between 0.0 and 1.0 (inclusive).
-
-Note: Due to limited hardware support, it is mainly recommended to be used on desktop or console devices. It may be unsupported on mobile or web, and will consequently be converted to FORMAT_RGBAF.
-
-Format FORMAT_R16I = 43
-
-OpenGL texture format GL_R16UI where there's one component, a 16-bit unsigned integer value. Each component is clamped between 0 and 65535 (inclusive).
-
-Note: When used in a shader, the texture requires usage of usampler samplers. Additionally, it only supports nearest-neighbor filtering under the Compatibility renderer.
-
-Note: When sampling using get_pixel(), returned Colors have to be divided by 65535 to get the correct color value.
-
-Format FORMAT_RG16I = 44
-
-OpenGL texture format GL_RG16UI where there are two components, each a 16-bit unsigned integer value. Each component is clamped between 0 and 65535 (inclusive).
-
-Note: When used in a shader, the texture requires usage of usampler samplers. Additionally, it only supports nearest-neighbor filtering under the Compatibility renderer.
-
-Note: When sampling using get_pixel(), returned Colors have to be divided by 65535 to get the correct color value.
-
-Format FORMAT_RGB16I = 45
-
-OpenGL texture format GL_RGB16UI where there are three components, each a 16-bit unsigned integer value. Each component is clamped between 0 and 65535 (inclusive).
-
-Note: When used in a shader, the texture requires usage of usampler samplers. Additionally, it only supports nearest-neighbor filtering under the Compatibility renderer.
-
-Note: When sampling using get_pixel(), returned Colors have to be divided by 65535 to get the correct color value.
-
-Format FORMAT_RGBA16I = 46
-
-OpenGL texture format GL_RGBA16UI where there are four components, each a 16-bit unsigned integer value. Each component is clamped between 0 and 65535 (inclusive).
-
-Note: When used in a shader, the texture requires usage of usampler samplers. Additionally, it only supports nearest-neighbor filtering under the Compatibility renderer.
-
-Note: When sampling using get_pixel(), returned Colors have to be divided by 65535 to get the correct color value.
-
-Format FORMAT_MAX = 47
-
-Represents the size of the Format enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FORMAT_L8 {#FORMAT_L8}
 
@@ -990,7 +758,7 @@ Represents the size of the Format enum.
 FORMAT_L8 = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture format with a single 8-bit depth representing luminance.
 
 #### FORMAT_LA8 {#FORMAT_LA8}
 
@@ -998,7 +766,7 @@ FORMAT_L8 = 0
 FORMAT_LA8 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format with two values, luminance and alpha each stored with 8 bits.
 
 #### FORMAT_R8 {#FORMAT_R8}
 
@@ -1006,7 +774,7 @@ FORMAT_LA8 = 1
 FORMAT_R8 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format RED with a single component and a bitdepth of 8.
 
 #### FORMAT_RG8 {#FORMAT_RG8}
 
@@ -1014,7 +782,7 @@ FORMAT_R8 = 2
 FORMAT_RG8 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format RG with two components and a bitdepth of 8 for each.
 
 #### FORMAT_RGB8 {#FORMAT_RGB8}
 
@@ -1022,7 +790,9 @@ FORMAT_RG8 = 3
 FORMAT_RGB8 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format RGB with three components, each with a bitdepth of 8.
+
+Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
 
 #### FORMAT_RGBA8 {#FORMAT_RGBA8}
 
@@ -1030,7 +800,9 @@ FORMAT_RGB8 = 4
 FORMAT_RGBA8 = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format RGBA with four components, each with a bitdepth of 8.
+
+Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
 
 #### FORMAT_RGBA4444 {#FORMAT_RGBA4444}
 
@@ -1038,7 +810,7 @@ FORMAT_RGBA8 = 5
 FORMAT_RGBA4444 = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format RGBA with four components, each with a bitdepth of 4.
 
 #### FORMAT_RGB565 {#FORMAT_RGB565}
 
@@ -1046,7 +818,7 @@ FORMAT_RGBA4444 = 6
 FORMAT_RGB565 = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format RGB with three components. Red and blue have a bitdepth of 5, and green has a bitdepth of 6.
 
 #### FORMAT_RF {#FORMAT_RF}
 
@@ -1054,7 +826,7 @@ FORMAT_RGB565 = 7
 FORMAT_RF = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_R32F where there's one component, a 32-bit floating-point value.
 
 #### FORMAT_RGF {#FORMAT_RGF}
 
@@ -1062,7 +834,7 @@ FORMAT_RF = 8
 FORMAT_RGF = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RG32F where there are two components, each a 32-bit floating-point values.
 
 #### FORMAT_RGBF {#FORMAT_RGBF}
 
@@ -1070,7 +842,7 @@ FORMAT_RGF = 9
 FORMAT_RGBF = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RGB32F where there are three components, each a 32-bit floating-point values.
 
 #### FORMAT_RGBAF {#FORMAT_RGBAF}
 
@@ -1078,7 +850,7 @@ FORMAT_RGBF = 10
 FORMAT_RGBAF = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RGBA32F where there are four components, each a 32-bit floating-point values.
 
 #### FORMAT_RH {#FORMAT_RH}
 
@@ -1086,7 +858,7 @@ FORMAT_RGBAF = 11
 FORMAT_RH = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_R16F where there's one component, a 16-bit "half-precision" floating-point value.
 
 #### FORMAT_RGH {#FORMAT_RGH}
 
@@ -1094,7 +866,7 @@ FORMAT_RH = 12
 FORMAT_RGH = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RG16F where there are two components, each a 16-bit "half-precision" floating-point value.
 
 #### FORMAT_RGBH {#FORMAT_RGBH}
 
@@ -1102,7 +874,7 @@ FORMAT_RGH = 13
 FORMAT_RGBH = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RGB16F where there are three components, each a 16-bit "half-precision" floating-point value.
 
 #### FORMAT_RGBAH {#FORMAT_RGBAH}
 
@@ -1110,7 +882,7 @@ FORMAT_RGBH = 14
 FORMAT_RGBAH = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RGBA16F where there are four components, each a 16-bit "half-precision" floating-point value.
 
 #### FORMAT_RGBE9995 {#FORMAT_RGBE9995}
 
@@ -1118,7 +890,7 @@ FORMAT_RGBAH = 15
 FORMAT_RGBE9995 = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A special OpenGL texture format where the three color components have 9 bits of precision and all three share a single 5-bit exponent.
 
 #### FORMAT_DXT1 {#FORMAT_DXT1}
 
@@ -1126,7 +898,9 @@ FORMAT_RGBE9995 = 16
 FORMAT_DXT1 = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The S3TC [https://en.wikipedia.org/wiki/S3_Texture_Compression] texture format that uses Block Compression 1, and is the smallest variation of S3TC, only providing 1 bit of alpha and color data being premultiplied with alpha.
+
+Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
 
 #### FORMAT_DXT3 {#FORMAT_DXT3}
 
@@ -1134,7 +908,9 @@ FORMAT_DXT1 = 17
 FORMAT_DXT3 = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The S3TC [https://en.wikipedia.org/wiki/S3_Texture_Compression] texture format that uses Block Compression 2, and color data is interpreted as not having been premultiplied by alpha. Well suited for images with sharp alpha transitions between translucent and opaque areas.
+
+Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
 
 #### FORMAT_DXT5 {#FORMAT_DXT5}
 
@@ -1142,7 +918,9 @@ FORMAT_DXT3 = 18
 FORMAT_DXT5 = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The S3TC [https://en.wikipedia.org/wiki/S3_Texture_Compression] texture format also known as Block Compression 3 or BC3 that contains 64 bits of alpha channel data followed by 64 bits of DXT1-encoded color data. Color data is not premultiplied by alpha, same as DXT3. DXT5 generally produces superior results for transparent gradients compared to DXT3.
+
+Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
 
 #### FORMAT_RGTC_R {#FORMAT_RGTC_R}
 
@@ -1150,7 +928,7 @@ FORMAT_DXT5 = 19
 FORMAT_RGTC_R = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture format that uses Red Green Texture Compression [https://www.khronos.org/opengl/wiki/Red_Green_Texture_Compression], normalizing the red channel data using the same compression algorithm that DXT5 uses for the alpha channel.
 
 #### FORMAT_RGTC_RG {#FORMAT_RGTC_RG}
 
@@ -1158,7 +936,7 @@ FORMAT_RGTC_R = 20
 FORMAT_RGTC_RG = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture format that uses Red Green Texture Compression [https://www.khronos.org/opengl/wiki/Red_Green_Texture_Compression], normalizing the red and green channel data using the same compression algorithm that DXT5 uses for the alpha channel.
 
 #### FORMAT_BPTC_RGBA {#FORMAT_BPTC_RGBA}
 
@@ -1166,7 +944,9 @@ FORMAT_RGTC_RG = 21
 FORMAT_BPTC_RGBA = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture format that uses BPTC [https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression] compression with unsigned normalized RGBA components.
+
+Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
 
 #### FORMAT_BPTC_RGBF {#FORMAT_BPTC_RGBF}
 
@@ -1174,7 +954,7 @@ FORMAT_BPTC_RGBA = 22
 FORMAT_BPTC_RGBF = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture format that uses BPTC [https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression] compression with signed floating-point RGB components.
 
 #### FORMAT_BPTC_RGBFU {#FORMAT_BPTC_RGBFU}
 
@@ -1182,7 +962,7 @@ FORMAT_BPTC_RGBF = 23
 FORMAT_BPTC_RGBFU = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture format that uses BPTC [https://www.khronos.org/opengl/wiki/BPTC_Texture_Compression] compression with unsigned floating-point RGB components.
 
 #### FORMAT_ETC {#FORMAT_ETC}
 
@@ -1190,7 +970,7 @@ FORMAT_BPTC_RGBFU = 24
 FORMAT_ETC = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ericsson Texture Compression format 1 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC1], also referred to as "ETC1", and is part of the OpenGL ES graphics standard. This format cannot store an alpha channel.
 
 #### FORMAT_ETC2_R11 {#FORMAT_ETC2_R11}
 
@@ -1198,7 +978,7 @@ FORMAT_ETC = 25
 FORMAT_ETC2_R11 = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (R11_EAC variant), which provides one channel of unsigned data.
 
 #### FORMAT_ETC2_R11S {#FORMAT_ETC2_R11S}
 
@@ -1206,7 +986,7 @@ FORMAT_ETC2_R11 = 26
 FORMAT_ETC2_R11S = 27
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (SIGNED_R11_EAC variant), which provides one channel of signed data.
 
 #### FORMAT_ETC2_RG11 {#FORMAT_ETC2_RG11}
 
@@ -1214,7 +994,7 @@ FORMAT_ETC2_R11S = 27
 FORMAT_ETC2_RG11 = 28
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (RG11_EAC variant), which provides two channels of unsigned data.
 
 #### FORMAT_ETC2_RG11S {#FORMAT_ETC2_RG11S}
 
@@ -1222,7 +1002,7 @@ FORMAT_ETC2_RG11 = 28
 FORMAT_ETC2_RG11S = 29
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (SIGNED_RG11_EAC variant), which provides two channels of signed data.
 
 #### FORMAT_ETC2_RGB8 {#FORMAT_ETC2_RGB8}
 
@@ -1230,7 +1010,9 @@ FORMAT_ETC2_RG11S = 29
 FORMAT_ETC2_RGB8 = 30
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (RGB8 variant), which is a follow-up of ETC1 and compresses RGB888 data.
+
+Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
 
 #### FORMAT_ETC2_RGBA8 {#FORMAT_ETC2_RGBA8}
 
@@ -1238,7 +1020,9 @@ FORMAT_ETC2_RGB8 = 30
 FORMAT_ETC2_RGBA8 = 31
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (RGBA8variant), which compresses RGBA8888 data with full alpha support.
+
+Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
 
 #### FORMAT_ETC2_RGB8A1 {#FORMAT_ETC2_RGB8A1}
 
@@ -1246,7 +1030,9 @@ FORMAT_ETC2_RGBA8 = 31
 FORMAT_ETC2_RGB8A1 = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (RGB8_PUNCHTHROUGH_ALPHA1 variant), which compresses RGBA data to make alpha either fully transparent or fully opaque.
+
+Note: When creating an ImageTexture, a nonlinear sRGB to linear encoding conversion is performed.
 
 #### FORMAT_ETC2_RA_AS_RG {#FORMAT_ETC2_RA_AS_RG}
 
@@ -1254,7 +1040,7 @@ FORMAT_ETC2_RGB8A1 = 32
 FORMAT_ETC2_RA_AS_RG = 33
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ericsson Texture Compression format 2 [https://en.wikipedia.org/wiki/Ericsson_Texture_Compression#ETC2_and_EAC] (RGBA8 variant), which compresses RA data and interprets it as two channels (red and green). See also FORMAT_ETC2_RGBA8.
 
 #### FORMAT_DXT5_RA_AS_RG {#FORMAT_DXT5_RA_AS_RG}
 
@@ -1262,7 +1048,7 @@ FORMAT_ETC2_RA_AS_RG = 33
 FORMAT_DXT5_RA_AS_RG = 34
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The S3TC [https://en.wikipedia.org/wiki/S3_Texture_Compression] texture format also known as Block Compression 3 or BC3, which compresses RA data and interprets it as two channels (red and green). See also FORMAT_DXT5.
 
 #### FORMAT_ASTC_4x4 {#FORMAT_ASTC_4x4}
 
@@ -1270,7 +1056,7 @@ FORMAT_DXT5_RA_AS_RG = 34
 FORMAT_ASTC_4x4 = 35
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adaptive Scalable Texture Compression [https://en.wikipedia.org/wiki/Adaptive_scalable_texture_compression]. This implements the 4×4 (high quality) mode.
 
 #### FORMAT_ASTC_4x4_HDR {#FORMAT_ASTC_4x4_HDR}
 
@@ -1278,7 +1064,7 @@ FORMAT_ASTC_4x4 = 35
 FORMAT_ASTC_4x4_HDR = 36
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Same format as FORMAT_ASTC_4x4, but with the hint to let the GPU know it is used for HDR.
 
 #### FORMAT_ASTC_8x8 {#FORMAT_ASTC_8x8}
 
@@ -1286,7 +1072,7 @@ FORMAT_ASTC_4x4_HDR = 36
 FORMAT_ASTC_8x8 = 37
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Adaptive Scalable Texture Compression [https://en.wikipedia.org/wiki/Adaptive_scalable_texture_compression]. This implements the 8×8 (low quality) mode.
 
 #### FORMAT_ASTC_8x8_HDR {#FORMAT_ASTC_8x8_HDR}
 
@@ -1294,7 +1080,7 @@ FORMAT_ASTC_8x8 = 37
 FORMAT_ASTC_8x8_HDR = 38
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Same format as FORMAT_ASTC_8x8, but with the hint to let the GPU know it is used for HDR.
 
 #### FORMAT_R16 {#FORMAT_R16}
 
@@ -1302,7 +1088,9 @@ FORMAT_ASTC_8x8_HDR = 38
 FORMAT_R16 = 39
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_R16 where there's one component, a 16-bit unsigned normalized integer value. Since the value is normalized, each component is clamped between 0.0 and 1.0 (inclusive).
+
+Note: Due to limited hardware support, it is mainly recommended to be used on desktop or console devices. It may be unsupported on mobile or web, and will consequently be converted to FORMAT_RF.
 
 #### FORMAT_RG16 {#FORMAT_RG16}
 
@@ -1310,7 +1098,9 @@ FORMAT_R16 = 39
 FORMAT_RG16 = 40
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RG16 where there are two components, each a 16-bit unsigned normalized integer value. Since the value is normalized, each component is clamped between 0.0 and 1.0 (inclusive).
+
+Note: Due to limited hardware support, it is mainly recommended to be used on desktop or console devices. It may be unsupported on mobile or web, and will consequently be converted to FORMAT_RGF.
 
 #### FORMAT_RGB16 {#FORMAT_RGB16}
 
@@ -1318,7 +1108,9 @@ FORMAT_RG16 = 40
 FORMAT_RGB16 = 41
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RGB16 where there are three components, each a 16-bit unsigned normalized integer value. Since the value is normalized, each component is clamped between 0.0 and 1.0 (inclusive).
+
+Note: Due to limited hardware support, it is mainly recommended to be used on desktop or console devices. It may be unsupported on mobile or web, and will consequently be converted to FORMAT_RGBF.
 
 #### FORMAT_RGBA16 {#FORMAT_RGBA16}
 
@@ -1326,7 +1118,9 @@ FORMAT_RGB16 = 41
 FORMAT_RGBA16 = 42
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RGBA16 where there are four components, each a 16-bit unsigned normalized integer value. Since the value is normalized, each component is clamped between 0.0 and 1.0 (inclusive).
+
+Note: Due to limited hardware support, it is mainly recommended to be used on desktop or console devices. It may be unsupported on mobile or web, and will consequently be converted to FORMAT_RGBAF.
 
 #### FORMAT_R16I {#FORMAT_R16I}
 
@@ -1334,7 +1128,11 @@ FORMAT_RGBA16 = 42
 FORMAT_R16I = 43
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_R16UI where there's one component, a 16-bit unsigned integer value. Each component is clamped between 0 and 65535 (inclusive).
+
+Note: When used in a shader, the texture requires usage of usampler samplers. Additionally, it only supports nearest-neighbor filtering under the Compatibility renderer.
+
+Note: When sampling using get_pixel(), returned Colors have to be divided by 65535 to get the correct color value.
 
 #### FORMAT_RG16I {#FORMAT_RG16I}
 
@@ -1342,7 +1140,11 @@ FORMAT_R16I = 43
 FORMAT_RG16I = 44
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RG16UI where there are two components, each a 16-bit unsigned integer value. Each component is clamped between 0 and 65535 (inclusive).
+
+Note: When used in a shader, the texture requires usage of usampler samplers. Additionally, it only supports nearest-neighbor filtering under the Compatibility renderer.
+
+Note: When sampling using get_pixel(), returned Colors have to be divided by 65535 to get the correct color value.
 
 #### FORMAT_RGB16I {#FORMAT_RGB16I}
 
@@ -1350,7 +1152,11 @@ FORMAT_RG16I = 44
 FORMAT_RGB16I = 45
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RGB16UI where there are three components, each a 16-bit unsigned integer value. Each component is clamped between 0 and 65535 (inclusive).
+
+Note: When used in a shader, the texture requires usage of usampler samplers. Additionally, it only supports nearest-neighbor filtering under the Compatibility renderer.
+
+Note: When sampling using get_pixel(), returned Colors have to be divided by 65535 to get the correct color value.
 
 #### FORMAT_RGBA16I {#FORMAT_RGBA16I}
 
@@ -1358,7 +1164,11 @@ FORMAT_RGB16I = 45
 FORMAT_RGBA16I = 46
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RGBA16UI where there are four components, each a 16-bit unsigned integer value. Each component is clamped between 0 and 65535 (inclusive).
+
+Note: When used in a shader, the texture requires usage of usampler samplers. Additionally, it only supports nearest-neighbor filtering under the Compatibility renderer.
+
+Note: When sampling using get_pixel(), returned Colors have to be divided by 65535 to get the correct color value.
 
 #### FORMAT_MAX {#FORMAT_MAX}
 
@@ -1366,7 +1176,9 @@ FORMAT_RGBA16I = 46
 FORMAT_MAX = 47
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Format enum.
+
+---
 
 ### Interpolation {#enum-Interpolation}
 
@@ -1374,19 +1186,37 @@ FORMAT_MAX = 47
 enum Interpolation { INTERPOLATE_NEAREST = 0, INTERPOLATE_BILINEAR = 1, INTERPOLATE_CUBIC = 2, INTERPOLATE_TRILINEAR = 3, INTERPOLATE_LANCZOS = 4 }
 ```
 
-Interpolation INTERPOLATE_NEAREST = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### INTERPOLATE_NEAREST {#INTERPOLATE_NEAREST}
+
+```gdscript
+INTERPOLATE_NEAREST = 0
+```
 
 Performs nearest-neighbor interpolation. If the image is resized, it will be pixelated.
 
-Interpolation INTERPOLATE_BILINEAR = 1
+#### INTERPOLATE_BILINEAR {#INTERPOLATE_BILINEAR}
+
+```gdscript
+INTERPOLATE_BILINEAR = 1
+```
 
 Performs bilinear interpolation. If the image is resized, it will be blurry. This mode is faster than INTERPOLATE_CUBIC, but it results in lower quality.
 
-Interpolation INTERPOLATE_CUBIC = 2
+#### INTERPOLATE_CUBIC {#INTERPOLATE_CUBIC}
+
+```gdscript
+INTERPOLATE_CUBIC = 2
+```
 
 Performs cubic interpolation. If the image is resized, it will be blurry. This mode often gives better results compared to INTERPOLATE_BILINEAR, at the cost of being slower.
 
-Interpolation INTERPOLATE_TRILINEAR = 3
+#### INTERPOLATE_TRILINEAR {#INTERPOLATE_TRILINEAR}
+
+```gdscript
+INTERPOLATE_TRILINEAR = 3
+```
 
 Performs bilinear separately on the two most-suited mipmap levels, then linearly interpolates between them.
 
@@ -1398,49 +1228,15 @@ Note: If you intend to scale multiple copies of the original image, it's better 
 
 On the other hand, if the image already has mipmaps, they will be used, and a new set will be generated for the resulting image.
 
-Interpolation INTERPOLATE_LANCZOS = 4
-
-Performs Lanczos interpolation. This is the slowest image resizing mode, but it typically gives the best results, especially when downscaling images.
-
-#### INTERPOLATE_NEAREST {#INTERPOLATE_NEAREST}
-
-```gdscript
-INTERPOLATE_NEAREST = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### INTERPOLATE_BILINEAR {#INTERPOLATE_BILINEAR}
-
-```gdscript
-INTERPOLATE_BILINEAR = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### INTERPOLATE_CUBIC {#INTERPOLATE_CUBIC}
-
-```gdscript
-INTERPOLATE_CUBIC = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### INTERPOLATE_TRILINEAR {#INTERPOLATE_TRILINEAR}
-
-```gdscript
-INTERPOLATE_TRILINEAR = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### INTERPOLATE_LANCZOS {#INTERPOLATE_LANCZOS}
 
 ```gdscript
 INTERPOLATE_LANCZOS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Performs Lanczos interpolation. This is the slowest image resizing mode, but it typically gives the best results, especially when downscaling images.
+
+---
 
 ### AlphaMode {#enum-AlphaMode}
 
@@ -1448,17 +1244,7 @@ INTERPOLATE_LANCZOS = 4
 enum AlphaMode { ALPHA_NONE = 0, ALPHA_BIT = 1, ALPHA_BLEND = 2 }
 ```
 
-AlphaMode ALPHA_NONE = 0
-
-Image is fully opaque. It does not store alpha data.
-
-AlphaMode ALPHA_BIT = 1
-
-Image stores either fully opaque or fully transparent pixels. Also known as punchthrough alpha.
-
-AlphaMode ALPHA_BLEND = 2
-
-Image stores alpha data with values varying between 0.0 and 1.0.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ALPHA_NONE {#ALPHA_NONE}
 
@@ -1466,7 +1252,7 @@ Image stores alpha data with values varying between 0.0 and 1.0.
 ALPHA_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Image is fully opaque. It does not store alpha data.
 
 #### ALPHA_BIT {#ALPHA_BIT}
 
@@ -1474,7 +1260,7 @@ ALPHA_NONE = 0
 ALPHA_BIT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Image stores either fully opaque or fully transparent pixels. Also known as punchthrough alpha.
 
 #### ALPHA_BLEND {#ALPHA_BLEND}
 
@@ -1482,7 +1268,9 @@ ALPHA_BIT = 1
 ALPHA_BLEND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Image stores alpha data with values varying between 0.0 and 1.0.
+
+---
 
 ### CompressMode {#enum-CompressMode}
 
@@ -1490,29 +1278,7 @@ ALPHA_BLEND = 2
 enum CompressMode { COMPRESS_S3TC = 0, COMPRESS_ETC = 1, COMPRESS_ETC2 = 2, COMPRESS_BPTC = 3, COMPRESS_ASTC = 4, COMPRESS_MAX = 5 }
 ```
 
-CompressMode COMPRESS_S3TC = 0
-
-Use S3TC compression.
-
-CompressMode COMPRESS_ETC = 1
-
-Use ETC compression.
-
-CompressMode COMPRESS_ETC2 = 2
-
-Use ETC2 compression.
-
-CompressMode COMPRESS_BPTC = 3
-
-Use BPTC compression.
-
-CompressMode COMPRESS_ASTC = 4
-
-Use ASTC compression.
-
-CompressMode COMPRESS_MAX = 5
-
-Represents the size of the CompressMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### COMPRESS_S3TC {#COMPRESS_S3TC}
 
@@ -1520,7 +1286,7 @@ Represents the size of the CompressMode enum.
 COMPRESS_S3TC = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use S3TC compression.
 
 #### COMPRESS_ETC {#COMPRESS_ETC}
 
@@ -1528,7 +1294,7 @@ COMPRESS_S3TC = 0
 COMPRESS_ETC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use ETC compression.
 
 #### COMPRESS_ETC2 {#COMPRESS_ETC2}
 
@@ -1536,7 +1302,7 @@ COMPRESS_ETC = 1
 COMPRESS_ETC2 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use ETC2 compression.
 
 #### COMPRESS_BPTC {#COMPRESS_BPTC}
 
@@ -1544,7 +1310,7 @@ COMPRESS_ETC2 = 2
 COMPRESS_BPTC = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use BPTC compression.
 
 #### COMPRESS_ASTC {#COMPRESS_ASTC}
 
@@ -1552,7 +1318,7 @@ COMPRESS_BPTC = 3
 COMPRESS_ASTC = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use ASTC compression.
 
 #### COMPRESS_MAX {#COMPRESS_MAX}
 
@@ -1560,7 +1326,9 @@ COMPRESS_ASTC = 4
 COMPRESS_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the CompressMode enum.
+
+---
 
 ### UsedChannels {#enum-UsedChannels}
 
@@ -1568,29 +1336,7 @@ COMPRESS_MAX = 5
 enum UsedChannels { USED_CHANNELS_L = 0, USED_CHANNELS_LA = 1, USED_CHANNELS_R = 2, USED_CHANNELS_RG = 3, USED_CHANNELS_RGB = 4, USED_CHANNELS_RGBA = 5 }
 ```
 
-UsedChannels USED_CHANNELS_L = 0
-
-The image only uses one channel for luminance (grayscale).
-
-UsedChannels USED_CHANNELS_LA = 1
-
-The image uses two channels for luminance and alpha, respectively.
-
-UsedChannels USED_CHANNELS_R = 2
-
-The image only uses the red channel.
-
-UsedChannels USED_CHANNELS_RG = 3
-
-The image uses two channels for red and green.
-
-UsedChannels USED_CHANNELS_RGB = 4
-
-The image uses three channels for red, green, and blue.
-
-UsedChannels USED_CHANNELS_RGBA = 5
-
-The image uses four channels for red, green, blue, and alpha.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### USED_CHANNELS_L {#USED_CHANNELS_L}
 
@@ -1598,7 +1344,7 @@ The image uses four channels for red, green, blue, and alpha.
 USED_CHANNELS_L = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The image only uses one channel for luminance (grayscale).
 
 #### USED_CHANNELS_LA {#USED_CHANNELS_LA}
 
@@ -1606,7 +1352,7 @@ USED_CHANNELS_L = 0
 USED_CHANNELS_LA = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The image uses two channels for luminance and alpha, respectively.
 
 #### USED_CHANNELS_R {#USED_CHANNELS_R}
 
@@ -1614,7 +1360,7 @@ USED_CHANNELS_LA = 1
 USED_CHANNELS_R = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The image only uses the red channel.
 
 #### USED_CHANNELS_RG {#USED_CHANNELS_RG}
 
@@ -1622,7 +1368,7 @@ USED_CHANNELS_R = 2
 USED_CHANNELS_RG = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The image uses two channels for red and green.
 
 #### USED_CHANNELS_RGB {#USED_CHANNELS_RGB}
 
@@ -1630,7 +1376,7 @@ USED_CHANNELS_RG = 3
 USED_CHANNELS_RGB = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The image uses three channels for red, green, and blue.
 
 #### USED_CHANNELS_RGBA {#USED_CHANNELS_RGBA}
 
@@ -1638,7 +1384,9 @@ USED_CHANNELS_RGB = 4
 USED_CHANNELS_RGBA = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The image uses four channels for red, green, blue, and alpha.
+
+---
 
 ### CompressSource {#enum-CompressSource}
 
@@ -1646,17 +1394,7 @@ USED_CHANNELS_RGBA = 5
 enum CompressSource { COMPRESS_SOURCE_GENERIC = 0, COMPRESS_SOURCE_SRGB = 1, COMPRESS_SOURCE_NORMAL = 2 }
 ```
 
-CompressSource COMPRESS_SOURCE_GENERIC = 0
-
-Source texture (before compression) is a regular texture. Default for all textures.
-
-CompressSource COMPRESS_SOURCE_SRGB = 1
-
-Source texture (before compression) uses nonlinear sRGB encoding.
-
-CompressSource COMPRESS_SOURCE_NORMAL = 2
-
-Source texture (before compression) is a normal texture (e.g. it can be compressed into two channels).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### COMPRESS_SOURCE_GENERIC {#COMPRESS_SOURCE_GENERIC}
 
@@ -1664,7 +1402,7 @@ Source texture (before compression) is a normal texture (e.g. it can be compress
 COMPRESS_SOURCE_GENERIC = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Source texture (before compression) is a regular texture. Default for all textures.
 
 #### COMPRESS_SOURCE_SRGB {#COMPRESS_SOURCE_SRGB}
 
@@ -1672,7 +1410,7 @@ COMPRESS_SOURCE_GENERIC = 0
 COMPRESS_SOURCE_SRGB = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Source texture (before compression) uses nonlinear sRGB encoding.
 
 #### COMPRESS_SOURCE_NORMAL {#COMPRESS_SOURCE_NORMAL}
 
@@ -1680,7 +1418,9 @@ COMPRESS_SOURCE_SRGB = 1
 COMPRESS_SOURCE_NORMAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Source texture (before compression) is a normal texture (e.g. it can be compressed into two channels).
+
+---
 
 ### ASTCFormat {#enum-ASTCFormat}
 
@@ -1688,13 +1428,7 @@ COMPRESS_SOURCE_NORMAL = 2
 enum ASTCFormat { ASTC_FORMAT_4x4 = 0, ASTC_FORMAT_8x8 = 1 }
 ```
 
-ASTCFormat ASTC_FORMAT_4x4 = 0
-
-Hint to indicate that the high quality 4×4 ASTC compression format should be used.
-
-ASTCFormat ASTC_FORMAT_8x8 = 1
-
-Hint to indicate that the low quality 8×8 ASTC compression format should be used.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ASTC_FORMAT_4x4 {#ASTC_FORMAT_4x4}
 
@@ -1702,7 +1436,7 @@ Hint to indicate that the low quality 8×8 ASTC compression format should be use
 ASTC_FORMAT_4x4 = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hint to indicate that the high quality 4×4 ASTC compression format should be used.
 
 #### ASTC_FORMAT_8x8 {#ASTC_FORMAT_8x8}
 
@@ -1710,7 +1444,9 @@ ASTC_FORMAT_4x4 = 0
 ASTC_FORMAT_8x8 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hint to indicate that the low quality 8×8 ASTC compression format should be used.
+
+---
 
 ## 常量
 

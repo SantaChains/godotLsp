@@ -183,7 +183,10 @@ If true, the tint color will be used to tint the frame.
 tint_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_tint_color(value: Color)
+- Color get_tint_color()
+
+The color of the frame when tint_color_enabled is true.
 
 ## 信号
 

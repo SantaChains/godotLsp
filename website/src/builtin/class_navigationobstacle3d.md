@@ -230,7 +230,12 @@ Sets the obstacle height used in 2D avoidance. 2D avoidance using agent's ignore
 vertices: PackedVector3Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_vertices(value: PackedVector3Array)
+- PackedVector3Array get_vertices()
+
+The outline vertices of the obstacle. If the vertices are winded in clockwise order agents will be pushed in by the obstacle, else they will be pushed out. Outlines can not be crossed or overlap. Should the vertices using obstacle be warped to a new position agent's can not predict this movement and may get trapped inside the obstacle.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector3Array for more details.
 
 ### affect_navigation_mesh {#affect_navigation_mesh}
 
@@ -275,7 +280,10 @@ If true the obstacle affects avoidance using agents.
 velocity: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_velocity(value: Vector3)
+- Vector3 get_velocity()
+
+Sets the wanted velocity for the obstacle so other agent's can better predict the obstacle if it is moved with a velocity regularly (every frame) instead of warped to a new position. Does only affect avoidance for the obstacles radius. Does nothing for the obstacles static vertices.
 
 ### avoidance_layers {#avoidance_layers}
 

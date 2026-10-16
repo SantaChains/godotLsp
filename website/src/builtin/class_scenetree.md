@@ -708,23 +708,7 @@ Emitted immediately before Node._physics_process() is called on every node in th
 enum GroupCallFlags { GROUP_CALL_DEFAULT = 0, GROUP_CALL_REVERSE = 1, GROUP_CALL_DEFERRED = 2, GROUP_CALL_UNIQUE = 4 }
 ```
 
-GroupCallFlags GROUP_CALL_DEFAULT = 0
-
-Call nodes within a group with no special behavior (default).
-
-GroupCallFlags GROUP_CALL_REVERSE = 1
-
-Call nodes within a group in reverse tree hierarchy order (all nested children are called before their respective parent nodes).
-
-GroupCallFlags GROUP_CALL_DEFERRED = 2
-
-Call nodes within a group at the end of the current frame (can be either process or physics frame), similar to Object.call_deferred().
-
-GroupCallFlags GROUP_CALL_UNIQUE = 4
-
-Call nodes within a group only once, even if the call is executed many times in the same frame. Must be combined with GROUP_CALL_DEFERRED to work.
-
-Note: Different arguments are not taken into account. Therefore, when the same call is executed with different arguments, only the first call will be performed.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GROUP_CALL_DEFAULT {#GROUP_CALL_DEFAULT}
 
@@ -732,7 +716,7 @@ Note: Different arguments are not taken into account. Therefore, when the same c
 GROUP_CALL_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Call nodes within a group with no special behavior (default).
 
 #### GROUP_CALL_REVERSE {#GROUP_CALL_REVERSE}
 
@@ -740,7 +724,7 @@ GROUP_CALL_DEFAULT = 0
 GROUP_CALL_REVERSE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Call nodes within a group in reverse tree hierarchy order (all nested children are called before their respective parent nodes).
 
 #### GROUP_CALL_DEFERRED {#GROUP_CALL_DEFERRED}
 
@@ -748,7 +732,7 @@ GROUP_CALL_REVERSE = 1
 GROUP_CALL_DEFERRED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Call nodes within a group at the end of the current frame (can be either process or physics frame), similar to Object.call_deferred().
 
 #### GROUP_CALL_UNIQUE {#GROUP_CALL_UNIQUE}
 
@@ -756,4 +740,8 @@ GROUP_CALL_DEFERRED = 2
 GROUP_CALL_UNIQUE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Call nodes within a group only once, even if the call is executed many times in the same frame. Must be combined with GROUP_CALL_DEFERRED to work.
+
+Note: Different arguments are not taken into account. Therefore, when the same call is executed with different arguments, only the first call will be performed.
+
+---

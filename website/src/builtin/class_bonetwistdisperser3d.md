@@ -338,19 +338,7 @@ The number of settings.
 enum DisperseMode { DISPERSE_MODE_EVEN = 0, DISPERSE_MODE_WEIGHTED = 1, DISPERSE_MODE_CUSTOM = 2 }
 ```
 
-DisperseMode DISPERSE_MODE_EVEN = 0
-
-Assign amounts so that they monotonically increase from 0.0 to 1.0, ensuring all weights are equal. For example, with five joints, the amounts would be 0.2, 0.4, 0.6, 0.8, and 1.0 starting from the root bone.
-
-DisperseMode DISPERSE_MODE_WEIGHTED = 1
-
-Assign amounts so that they monotonically increase from 0.0 to 1.0, based on the length of the bones between joint segments. See also set_weight_position().
-
-DisperseMode DISPERSE_MODE_CUSTOM = 2
-
-You can assign arbitrary amounts to the joint list. See also set_joint_twist_amount().
-
-When is_end_bone_extended() is false, a child of the reference bone exists solely to determine the twist axis, so its custom amount has absolutely no effect at all.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DISPERSE_MODE_EVEN {#DISPERSE_MODE_EVEN}
 
@@ -358,7 +346,7 @@ When is_end_bone_extended() is false, a child of the reference bone exists solel
 DISPERSE_MODE_EVEN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Assign amounts so that they monotonically increase from 0.0 to 1.0, ensuring all weights are equal. For example, with five joints, the amounts would be 0.2, 0.4, 0.6, 0.8, and 1.0 starting from the root bone.
 
 #### DISPERSE_MODE_WEIGHTED {#DISPERSE_MODE_WEIGHTED}
 
@@ -366,7 +354,7 @@ DISPERSE_MODE_EVEN = 0
 DISPERSE_MODE_WEIGHTED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Assign amounts so that they monotonically increase from 0.0 to 1.0, based on the length of the bones between joint segments. See also set_weight_position().
 
 #### DISPERSE_MODE_CUSTOM {#DISPERSE_MODE_CUSTOM}
 
@@ -374,4 +362,8 @@ DISPERSE_MODE_WEIGHTED = 1
 DISPERSE_MODE_CUSTOM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+You can assign arbitrary amounts to the joint list. See also set_joint_twist_amount().
+
+When is_end_bone_extended() is false, a child of the reference bone exists solely to determine the twist axis, so its custom amount has absolutely no effect at all.
+
+---

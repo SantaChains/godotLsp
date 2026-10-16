@@ -328,17 +328,7 @@ Note: This signal is not connected directly to editor to simplify the reference,
 enum TailDirection { TAIL_DIRECTION_AVERAGE_CHILDREN = 0, TAIL_DIRECTION_SPECIFIC_CHILD = 1, TAIL_DIRECTION_END = 2 }
 ```
 
-TailDirection TAIL_DIRECTION_AVERAGE_CHILDREN = 0
-
-Direction to the average coordinates of bone children.
-
-TailDirection TAIL_DIRECTION_SPECIFIC_CHILD = 1
-
-Direction to the coordinates of specified bone child.
-
-TailDirection TAIL_DIRECTION_END = 2
-
-Direction is not calculated.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TAIL_DIRECTION_AVERAGE_CHILDREN {#TAIL_DIRECTION_AVERAGE_CHILDREN}
 
@@ -346,7 +336,7 @@ Direction is not calculated.
 TAIL_DIRECTION_AVERAGE_CHILDREN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Direction to the average coordinates of bone children.
 
 #### TAIL_DIRECTION_SPECIFIC_CHILD {#TAIL_DIRECTION_SPECIFIC_CHILD}
 
@@ -354,7 +344,7 @@ TAIL_DIRECTION_AVERAGE_CHILDREN = 0
 TAIL_DIRECTION_SPECIFIC_CHILD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Direction to the coordinates of specified bone child.
 
 #### TAIL_DIRECTION_END {#TAIL_DIRECTION_END}
 
@@ -362,4 +352,6 @@ TAIL_DIRECTION_SPECIFIC_CHILD = 1
 TAIL_DIRECTION_END = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Direction is not calculated.
+
+---

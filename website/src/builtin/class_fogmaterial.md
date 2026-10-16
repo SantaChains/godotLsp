@@ -131,7 +131,10 @@ Note: Due to limited precision, density values between -0.001 and 0.001 (exclusi
 albedo: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_albedo(value: Color)
+- Color get_albedo()
+
+The single-scattering Color of the FogVolume. Internally, albedo is converted into single-scattering, which is additively blended with other FogVolumes and the Environment.volumetric_fog_albedo.
 
 ### emission {#emission}
 
@@ -139,7 +142,10 @@ albedo: Color
 emission: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_emission(value: Color)
+- Color get_emission()
+
+The Color of the light emitted by the FogVolume. Emitted light will not cast light or shadows on other objects, but can be useful for modulating the Color of the FogVolume independently from light sources.
 
 ### height_falloff {#height_falloff}
 

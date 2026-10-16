@@ -106,7 +106,12 @@ Status indicator icon.
 menu: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_menu(value: NodePath)
+- NodePath get_menu()
+
+Status indicator native popup menu. If this is set, the pressed signal is not emitted.
+
+Note: Native popup is only supported if NativeMenu supports NativeMenu.FEATURE_POPUP_MENU feature.
 
 ### visible {#visible}
 

@@ -252,7 +252,10 @@ void set_symbol_color(color: Color)
 number_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_number_color(value: Color)
+- Color get_number_color()
+
+Sets the color for numbers.
 
 ### symbol_color {#symbol_color}
 
@@ -260,7 +263,10 @@ number_color: Color
 symbol_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_symbol_color(value: Color)
+- Color get_symbol_color()
+
+Sets the color for symbols.
 
 ### function_color {#function_color}
 
@@ -268,7 +274,10 @@ symbol_color: Color
 function_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_function_color(value: Color)
+- Color get_function_color()
+
+Sets color for functions. A function is a non-keyword string followed by a '('.
 
 ### member_variable_color {#member_variable_color}
 
@@ -276,7 +285,10 @@ function_color: Color
 member_variable_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_member_variable_color(value: Color)
+- Color get_member_variable_color()
+
+Sets color for member variables. A member variable is non-keyword, non-function string proceeded with a '.'.
 
 ### keyword_colors {#keyword_colors}
 

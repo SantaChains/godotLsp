@@ -515,7 +515,14 @@ Note: This property is ignored by native file dialogs.
 filters: PackedStringArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_filters(value: PackedStringArray)
+- PackedStringArray get_filters()
+
+The available file type filters. Each filter string in the array should be formatted like this: *.png,*.jpg,*.jpeg;Image Files;image/png,image/jpeg. The description text of the filter is optional and can be omitted. Both file extensions and MIME type should be always set.
+
+Note: Embedded file dialogs and Windows file dialogs support only file extensions, while Android, Linux, and macOS file dialogs also support MIME types.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedStringArray for more details.
 
 ### filename_filter {#filename_filter}
 
@@ -751,25 +758,7 @@ Emitted when the filter for file names changes.
 enum FileMode { FILE_MODE_OPEN_FILE = 0, FILE_MODE_OPEN_FILES = 1, FILE_MODE_OPEN_DIR = 2, FILE_MODE_OPEN_ANY = 3, FILE_MODE_SAVE_FILE = 4 }
 ```
 
-FileMode FILE_MODE_OPEN_FILE = 0
-
-The dialog allows selecting one, and only one file.
-
-FileMode FILE_MODE_OPEN_FILES = 1
-
-The dialog allows selecting multiple files.
-
-FileMode FILE_MODE_OPEN_DIR = 2
-
-The dialog only allows selecting a directory, disallowing the selection of any file.
-
-FileMode FILE_MODE_OPEN_ANY = 3
-
-The dialog allows selecting one file or directory.
-
-FileMode FILE_MODE_SAVE_FILE = 4
-
-The dialog will warn when a file exists.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FILE_MODE_OPEN_FILE {#FILE_MODE_OPEN_FILE}
 
@@ -777,7 +766,7 @@ The dialog will warn when a file exists.
 FILE_MODE_OPEN_FILE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dialog allows selecting one, and only one file.
 
 #### FILE_MODE_OPEN_FILES {#FILE_MODE_OPEN_FILES}
 
@@ -785,7 +774,7 @@ FILE_MODE_OPEN_FILE = 0
 FILE_MODE_OPEN_FILES = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dialog allows selecting multiple files.
 
 #### FILE_MODE_OPEN_DIR {#FILE_MODE_OPEN_DIR}
 
@@ -793,7 +782,7 @@ FILE_MODE_OPEN_FILES = 1
 FILE_MODE_OPEN_DIR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dialog only allows selecting a directory, disallowing the selection of any file.
 
 #### FILE_MODE_OPEN_ANY {#FILE_MODE_OPEN_ANY}
 
@@ -801,7 +790,7 @@ FILE_MODE_OPEN_DIR = 2
 FILE_MODE_OPEN_ANY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dialog allows selecting one file or directory.
 
 #### FILE_MODE_SAVE_FILE {#FILE_MODE_SAVE_FILE}
 
@@ -809,7 +798,9 @@ FILE_MODE_OPEN_ANY = 3
 FILE_MODE_SAVE_FILE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dialog will warn when a file exists.
+
+---
 
 ### Access {#enum-Access}
 
@@ -817,17 +808,7 @@ FILE_MODE_SAVE_FILE = 4
 enum Access { ACCESS_RESOURCES = 0, ACCESS_USERDATA = 1, ACCESS_FILESYSTEM = 2 }
 ```
 
-Access ACCESS_RESOURCES = 0
-
-The dialog only allows accessing files under the Resource path (res://).
-
-Access ACCESS_USERDATA = 1
-
-The dialog only allows accessing files under user data path (user://).
-
-Access ACCESS_FILESYSTEM = 2
-
-The dialog allows accessing files on the whole file system.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ACCESS_RESOURCES {#ACCESS_RESOURCES}
 
@@ -835,7 +816,7 @@ The dialog allows accessing files on the whole file system.
 ACCESS_RESOURCES = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dialog only allows accessing files under the Resource path (res://).
 
 #### ACCESS_USERDATA {#ACCESS_USERDATA}
 
@@ -843,7 +824,7 @@ ACCESS_RESOURCES = 0
 ACCESS_USERDATA = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dialog only allows accessing files under user data path (user://).
 
 #### ACCESS_FILESYSTEM {#ACCESS_FILESYSTEM}
 
@@ -851,7 +832,9 @@ ACCESS_USERDATA = 1
 ACCESS_FILESYSTEM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dialog allows accessing files on the whole file system.
+
+---
 
 ### DisplayMode {#enum-DisplayMode}
 
@@ -859,13 +842,7 @@ ACCESS_FILESYSTEM = 2
 enum DisplayMode { DISPLAY_THUMBNAILS = 0, DISPLAY_LIST = 1 }
 ```
 
-DisplayMode DISPLAY_THUMBNAILS = 0
-
-The dialog displays files as a grid of thumbnails. Use thumbnail_size to adjust their size.
-
-DisplayMode DISPLAY_LIST = 1
-
-The dialog displays files as a list of filenames.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DISPLAY_THUMBNAILS {#DISPLAY_THUMBNAILS}
 
@@ -873,7 +850,7 @@ The dialog displays files as a list of filenames.
 DISPLAY_THUMBNAILS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dialog displays files as a grid of thumbnails. Use thumbnail_size to adjust their size.
 
 #### DISPLAY_LIST {#DISPLAY_LIST}
 
@@ -881,7 +858,9 @@ DISPLAY_THUMBNAILS = 0
 DISPLAY_LIST = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dialog displays files as a list of filenames.
+
+---
 
 ### Customization {#enum-Customization}
 
@@ -889,59 +868,7 @@ DISPLAY_LIST = 1
 enum Customization { CUSTOMIZATION_HIDDEN_FILES = 0, CUSTOMIZATION_CREATE_FOLDER = 1, CUSTOMIZATION_FILE_FILTER = 2, CUSTOMIZATION_FILE_SORT = 3, CUSTOMIZATION_FAVORITES = 4, CUSTOMIZATION_RECENT = 5, CUSTOMIZATION_LAYOUT = 6, CUSTOMIZATION_OVERWRITE_WARNING = 7, CUSTOMIZATION_DELETE = 8 }
 ```
 
-Customization CUSTOMIZATION_HIDDEN_FILES = 0
-
-Toggles visibility of the favorite button, and the favorite list on the left side of the dialog.
-
-Equivalent to hidden_files_toggle_enabled.
-
-Customization CUSTOMIZATION_CREATE_FOLDER = 1
-
-If enabled, shows the button for creating new directories (when using FILE_MODE_OPEN_DIR, FILE_MODE_OPEN_ANY, or FILE_MODE_SAVE_FILE).
-
-Equivalent to folder_creation_enabled.
-
-Customization CUSTOMIZATION_FILE_FILTER = 2
-
-If enabled, shows the toggle file filter button.
-
-Equivalent to file_filter_toggle_enabled.
-
-Customization CUSTOMIZATION_FILE_SORT = 3
-
-If enabled, shows the file sorting options button.
-
-Equivalent to file_sort_options_enabled.
-
-Customization CUSTOMIZATION_FAVORITES = 4
-
-If enabled, shows the toggle favorite button and favorite list on the left side of the dialog.
-
-Equivalent to favorites_enabled.
-
-Customization CUSTOMIZATION_RECENT = 5
-
-If enabled, shows the recent directories list on the left side of the dialog.
-
-Equivalent to recent_list_enabled.
-
-Customization CUSTOMIZATION_LAYOUT = 6
-
-If enabled, shows the layout switch buttons (list/thumbnails).
-
-Equivalent to layout_toggle_enabled.
-
-Customization CUSTOMIZATION_OVERWRITE_WARNING = 7
-
-If enabled, the FileDialog will warn the user before overwriting files in save mode.
-
-Equivalent to overwrite_warning_enabled.
-
-Customization CUSTOMIZATION_DELETE = 8
-
-If enabled, the context menu will show the "Delete" option, which allows moving files and folders to trash.
-
-Equivalent to deleting_enabled.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CUSTOMIZATION_HIDDEN_FILES {#CUSTOMIZATION_HIDDEN_FILES}
 
@@ -949,7 +876,9 @@ Equivalent to deleting_enabled.
 CUSTOMIZATION_HIDDEN_FILES = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Toggles visibility of the favorite button, and the favorite list on the left side of the dialog.
+
+Equivalent to hidden_files_toggle_enabled.
 
 #### CUSTOMIZATION_CREATE_FOLDER {#CUSTOMIZATION_CREATE_FOLDER}
 
@@ -957,7 +886,9 @@ CUSTOMIZATION_HIDDEN_FILES = 0
 CUSTOMIZATION_CREATE_FOLDER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, shows the button for creating new directories (when using FILE_MODE_OPEN_DIR, FILE_MODE_OPEN_ANY, or FILE_MODE_SAVE_FILE).
+
+Equivalent to folder_creation_enabled.
 
 #### CUSTOMIZATION_FILE_FILTER {#CUSTOMIZATION_FILE_FILTER}
 
@@ -965,7 +896,9 @@ CUSTOMIZATION_CREATE_FOLDER = 1
 CUSTOMIZATION_FILE_FILTER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, shows the toggle file filter button.
+
+Equivalent to file_filter_toggle_enabled.
 
 #### CUSTOMIZATION_FILE_SORT {#CUSTOMIZATION_FILE_SORT}
 
@@ -973,7 +906,9 @@ CUSTOMIZATION_FILE_FILTER = 2
 CUSTOMIZATION_FILE_SORT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, shows the file sorting options button.
+
+Equivalent to file_sort_options_enabled.
 
 #### CUSTOMIZATION_FAVORITES {#CUSTOMIZATION_FAVORITES}
 
@@ -981,7 +916,9 @@ CUSTOMIZATION_FILE_SORT = 3
 CUSTOMIZATION_FAVORITES = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, shows the toggle favorite button and favorite list on the left side of the dialog.
+
+Equivalent to favorites_enabled.
 
 #### CUSTOMIZATION_RECENT {#CUSTOMIZATION_RECENT}
 
@@ -989,7 +926,9 @@ CUSTOMIZATION_FAVORITES = 4
 CUSTOMIZATION_RECENT = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, shows the recent directories list on the left side of the dialog.
+
+Equivalent to recent_list_enabled.
 
 #### CUSTOMIZATION_LAYOUT {#CUSTOMIZATION_LAYOUT}
 
@@ -997,7 +936,9 @@ CUSTOMIZATION_RECENT = 5
 CUSTOMIZATION_LAYOUT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, shows the layout switch buttons (list/thumbnails).
+
+Equivalent to layout_toggle_enabled.
 
 #### CUSTOMIZATION_OVERWRITE_WARNING {#CUSTOMIZATION_OVERWRITE_WARNING}
 
@@ -1005,7 +946,9 @@ CUSTOMIZATION_LAYOUT = 6
 CUSTOMIZATION_OVERWRITE_WARNING = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, the FileDialog will warn the user before overwriting files in save mode.
+
+Equivalent to overwrite_warning_enabled.
 
 #### CUSTOMIZATION_DELETE {#CUSTOMIZATION_DELETE}
 
@@ -1013,4 +956,8 @@ CUSTOMIZATION_OVERWRITE_WARNING = 7
 CUSTOMIZATION_DELETE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, the context menu will show the "Delete" option, which allows moving files and folders to trash.
+
+Equivalent to deleting_enabled.
+
+---

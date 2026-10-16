@@ -49,25 +49,7 @@ The multiplication type to be performed.
 enum Operator { OP_AxB = 0, OP_BxA = 1, OP_3x3_AxB = 2, OP_3x3_BxA = 3, OP_MAX = 4 }
 ```
 
-Operator OP_AxB = 0
-
-Multiplies transform a by the vector b.
-
-Operator OP_BxA = 1
-
-Multiplies vector b by the transform a.
-
-Operator OP_3x3_AxB = 2
-
-Multiplies transform a by the vector b, skipping the last row and column of the transform.
-
-Operator OP_3x3_BxA = 3
-
-Multiplies vector b by the transform a, skipping the last row and column of the transform.
-
-Operator OP_MAX = 4
-
-Represents the size of the Operator enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OP_AxB {#OP_AxB}
 
@@ -75,7 +57,7 @@ Represents the size of the Operator enum.
 OP_AxB = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiplies transform a by the vector b.
 
 #### OP_BxA {#OP_BxA}
 
@@ -83,7 +65,7 @@ OP_AxB = 0
 OP_BxA = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiplies vector b by the transform a.
 
 #### OP_3x3_AxB {#OP_3x3_AxB}
 
@@ -91,7 +73,7 @@ OP_BxA = 1
 OP_3x3_AxB = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiplies transform a by the vector b, skipping the last row and column of the transform.
 
 #### OP_3x3_BxA {#OP_3x3_BxA}
 
@@ -99,7 +81,7 @@ OP_3x3_AxB = 2
 OP_3x3_BxA = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiplies vector b by the transform a, skipping the last row and column of the transform.
 
 #### OP_MAX {#OP_MAX}
 
@@ -107,4 +89,6 @@ OP_3x3_BxA = 3
 OP_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Operator enum.
+
+---

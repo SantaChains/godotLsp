@@ -533,7 +533,12 @@ Note: Reducing the amount_ratio has no performance benefit, since resources need
 sub_emitter: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_sub_emitter(value: NodePath)
+- NodePath get_sub_emitter()
+
+Path to another GPUParticles2D node that will be used as a subemitter (see ParticleProcessMaterial.sub_emitter_mode). Subemitters can be used to achieve effects such as fireworks, sparks on collision, bubbles popping into water drops, and more.
+
+Note: When sub_emitter is set, the target GPUParticles2D node will no longer emit particles on its own.
 
 ### texture {#texture}
 
@@ -703,7 +708,12 @@ Note: Particles always have a spherical collision shape.
 visibility_rect: Rect2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_visibility_rect(value: Rect2)
+- Rect2 get_visibility_rect()
+
+The Rect2 that determines the node's region which needs to be visible on screen for the particle system to be active.
+
+Grow the rect if particles suddenly appear/disappear when the node enters/exits the screen. The Rect2 can be grown via code or with the Particles → Generate Visibility Rect editor tool.
 
 ### local_coords {#local_coords}
 
@@ -806,17 +816,7 @@ Note: For one_shot emitters, due to the particles being computed on the GPU, the
 enum DrawOrder { DRAW_ORDER_INDEX = 0, DRAW_ORDER_LIFETIME = 1, DRAW_ORDER_REVERSE_LIFETIME = 2 }
 ```
 
-DrawOrder DRAW_ORDER_INDEX = 0
-
-Particles are drawn in the order emitted.
-
-DrawOrder DRAW_ORDER_LIFETIME = 1
-
-Particles are drawn in order of remaining lifetime. In other words, the particle with the highest lifetime is drawn at the front.
-
-DrawOrder DRAW_ORDER_REVERSE_LIFETIME = 2
-
-Particles are drawn in reverse order of remaining lifetime. In other words, the particle with the lowest lifetime is drawn at the front.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DRAW_ORDER_INDEX {#DRAW_ORDER_INDEX}
 
@@ -824,7 +824,7 @@ Particles are drawn in reverse order of remaining lifetime. In other words, the 
 DRAW_ORDER_INDEX = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles are drawn in the order emitted.
 
 #### DRAW_ORDER_LIFETIME {#DRAW_ORDER_LIFETIME}
 
@@ -832,7 +832,7 @@ DRAW_ORDER_INDEX = 0
 DRAW_ORDER_LIFETIME = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles are drawn in order of remaining lifetime. In other words, the particle with the highest lifetime is drawn at the front.
 
 #### DRAW_ORDER_REVERSE_LIFETIME {#DRAW_ORDER_REVERSE_LIFETIME}
 
@@ -840,7 +840,9 @@ DRAW_ORDER_LIFETIME = 1
 DRAW_ORDER_REVERSE_LIFETIME = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particles are drawn in reverse order of remaining lifetime. In other words, the particle with the lowest lifetime is drawn at the front.
+
+---
 
 ### EmitFlags {#enum-EmitFlags}
 
@@ -848,25 +850,7 @@ DRAW_ORDER_REVERSE_LIFETIME = 2
 enum EmitFlags { EMIT_FLAG_POSITION = 1, EMIT_FLAG_ROTATION_SCALE = 2, EMIT_FLAG_VELOCITY = 4, EMIT_FLAG_COLOR = 8, EMIT_FLAG_CUSTOM = 16 }
 ```
 
-EmitFlags EMIT_FLAG_POSITION = 1
-
-Particle starts at the specified position.
-
-EmitFlags EMIT_FLAG_ROTATION_SCALE = 2
-
-Particle starts with specified rotation and scale.
-
-EmitFlags EMIT_FLAG_VELOCITY = 4
-
-Particle starts with the specified velocity vector, which defines the emission direction and speed.
-
-EmitFlags EMIT_FLAG_COLOR = 8
-
-Particle starts with specified color.
-
-EmitFlags EMIT_FLAG_CUSTOM = 16
-
-Particle starts with specified CUSTOM data.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EMIT_FLAG_POSITION {#EMIT_FLAG_POSITION}
 
@@ -874,7 +858,7 @@ Particle starts with specified CUSTOM data.
 EMIT_FLAG_POSITION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particle starts at the specified position.
 
 #### EMIT_FLAG_ROTATION_SCALE {#EMIT_FLAG_ROTATION_SCALE}
 
@@ -882,7 +866,7 @@ EMIT_FLAG_POSITION = 1
 EMIT_FLAG_ROTATION_SCALE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particle starts with specified rotation and scale.
 
 #### EMIT_FLAG_VELOCITY {#EMIT_FLAG_VELOCITY}
 
@@ -890,7 +874,7 @@ EMIT_FLAG_ROTATION_SCALE = 2
 EMIT_FLAG_VELOCITY = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particle starts with the specified velocity vector, which defines the emission direction and speed.
 
 #### EMIT_FLAG_COLOR {#EMIT_FLAG_COLOR}
 
@@ -898,7 +882,7 @@ EMIT_FLAG_VELOCITY = 4
 EMIT_FLAG_COLOR = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particle starts with specified color.
 
 #### EMIT_FLAG_CUSTOM {#EMIT_FLAG_CUSTOM}
 
@@ -906,4 +890,6 @@ EMIT_FLAG_COLOR = 8
 EMIT_FLAG_CUSTOM = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Particle starts with specified CUSTOM data.
+
+---

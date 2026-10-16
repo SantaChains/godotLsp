@@ -194,33 +194,7 @@ Skips the current section. If the currently parsed node contains more inner node
 enum NodeType { NODE_NONE = 0, NODE_ELEMENT = 1, NODE_ELEMENT_END = 2, NODE_TEXT = 3, NODE_COMMENT = 4, NODE_CDATA = 5, NODE_UNKNOWN = 6 }
 ```
 
-NodeType NODE_NONE = 0
-
-There's no node (no file or buffer opened).
-
-NodeType NODE_ELEMENT = 1
-
-An element node type, also known as a tag, e.g. .
-
-NodeType NODE_ELEMENT_END = 2
-
-An end of element node type, e.g. .
-
-NodeType NODE_TEXT = 3
-
-A text node type, i.e. text that is not inside an element. This includes whitespace.
-
-NodeType NODE_COMMENT = 4
-
-A comment node type, e.g. <!--A comment-->.
-
-NodeType NODE_CDATA = 5
-
-A node type for CDATA (Character Data) sections, e.g. <![CDATA[CDATA section]]>.
-
-NodeType NODE_UNKNOWN = 6
-
-An unknown node type.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### NODE_NONE {#NODE_NONE}
 
@@ -228,7 +202,7 @@ An unknown node type.
 NODE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There's no node (no file or buffer opened).
 
 #### NODE_ELEMENT {#NODE_ELEMENT}
 
@@ -236,7 +210,7 @@ NODE_NONE = 0
 NODE_ELEMENT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An element node type, also known as a tag, e.g. .
 
 #### NODE_ELEMENT_END {#NODE_ELEMENT_END}
 
@@ -244,7 +218,7 @@ NODE_ELEMENT = 1
 NODE_ELEMENT_END = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An end of element node type, e.g. .
 
 #### NODE_TEXT {#NODE_TEXT}
 
@@ -252,7 +226,7 @@ NODE_ELEMENT_END = 2
 NODE_TEXT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A text node type, i.e. text that is not inside an element. This includes whitespace.
 
 #### NODE_COMMENT {#NODE_COMMENT}
 
@@ -260,7 +234,7 @@ NODE_TEXT = 3
 NODE_COMMENT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A comment node type, e.g. <!--A comment-->.
 
 #### NODE_CDATA {#NODE_CDATA}
 
@@ -268,7 +242,7 @@ NODE_COMMENT = 4
 NODE_CDATA = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A node type for CDATA (Character Data) sections, e.g. <![CDATA[CDATA section]]>.
 
 #### NODE_UNKNOWN {#NODE_UNKNOWN}
 
@@ -276,4 +250,6 @@ NODE_CDATA = 5
 NODE_UNKNOWN = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An unknown node type.
+
+---

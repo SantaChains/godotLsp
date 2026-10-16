@@ -203,17 +203,7 @@ Emitted when this MultiplayerAPI's multiplayer_peer disconnects from server. Onl
 enum RPCMode { RPC_MODE_DISABLED = 0, RPC_MODE_ANY_PEER = 1, RPC_MODE_AUTHORITY = 2 }
 ```
 
-RPCMode RPC_MODE_DISABLED = 0
-
-Used with Node.rpc_config() to disable a method or property for all RPC calls, making it unavailable. Default for all methods.
-
-RPCMode RPC_MODE_ANY_PEER = 1
-
-Used with Node.rpc_config() to set a method to be callable remotely by any peer. Analogous to the @rpc("any_peer") annotation. Calls are accepted from all remote peers, no matter if they are node's authority or not.
-
-RPCMode RPC_MODE_AUTHORITY = 2
-
-Used with Node.rpc_config() to set a method to be callable remotely only by the current multiplayer authority (which is the server by default). Analogous to the @rpc("authority") annotation. See Node.set_multiplayer_authority().
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RPC_MODE_DISABLED {#RPC_MODE_DISABLED}
 
@@ -221,7 +211,7 @@ Used with Node.rpc_config() to set a method to be callable remotely only by the 
 RPC_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used with Node.rpc_config() to disable a method or property for all RPC calls, making it unavailable. Default for all methods.
 
 #### RPC_MODE_ANY_PEER {#RPC_MODE_ANY_PEER}
 
@@ -229,7 +219,7 @@ RPC_MODE_DISABLED = 0
 RPC_MODE_ANY_PEER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used with Node.rpc_config() to set a method to be callable remotely by any peer. Analogous to the @rpc("any_peer") annotation. Calls are accepted from all remote peers, no matter if they are node's authority or not.
 
 #### RPC_MODE_AUTHORITY {#RPC_MODE_AUTHORITY}
 
@@ -237,4 +227,6 @@ RPC_MODE_ANY_PEER = 1
 RPC_MODE_AUTHORITY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used with Node.rpc_config() to set a method to be callable remotely only by the current multiplayer authority (which is the server by default). Analogous to the @rpc("authority") annotation. See Node.set_multiplayer_authority().
+
+---

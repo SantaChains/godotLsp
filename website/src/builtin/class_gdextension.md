@@ -38,21 +38,7 @@ Returns true if this extension's library has been opened.
 enum InitializationLevel { INITIALIZATION_LEVEL_CORE = 0, INITIALIZATION_LEVEL_SERVERS = 1, INITIALIZATION_LEVEL_SCENE = 2, INITIALIZATION_LEVEL_EDITOR = 3 }
 ```
 
-InitializationLevel INITIALIZATION_LEVEL_CORE = 0
-
-The library is initialized at the same time as the core features of the engine.
-
-InitializationLevel INITIALIZATION_LEVEL_SERVERS = 1
-
-The library is initialized at the same time as the engine's servers (such as RenderingServer or PhysicsServer3D).
-
-InitializationLevel INITIALIZATION_LEVEL_SCENE = 2
-
-The library is initialized at the same time as the engine's scene-related classes.
-
-InitializationLevel INITIALIZATION_LEVEL_EDITOR = 3
-
-The library is initialized at the same time as the engine's editor classes. Only happens when loading the GDExtension in the editor.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### INITIALIZATION_LEVEL_CORE {#INITIALIZATION_LEVEL_CORE}
 
@@ -60,7 +46,7 @@ The library is initialized at the same time as the engine's editor classes. Only
 INITIALIZATION_LEVEL_CORE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The library is initialized at the same time as the core features of the engine.
 
 #### INITIALIZATION_LEVEL_SERVERS {#INITIALIZATION_LEVEL_SERVERS}
 
@@ -68,7 +54,7 @@ INITIALIZATION_LEVEL_CORE = 0
 INITIALIZATION_LEVEL_SERVERS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The library is initialized at the same time as the engine's servers (such as RenderingServer or PhysicsServer3D).
 
 #### INITIALIZATION_LEVEL_SCENE {#INITIALIZATION_LEVEL_SCENE}
 
@@ -76,7 +62,7 @@ INITIALIZATION_LEVEL_SERVERS = 1
 INITIALIZATION_LEVEL_SCENE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The library is initialized at the same time as the engine's scene-related classes.
 
 #### INITIALIZATION_LEVEL_EDITOR {#INITIALIZATION_LEVEL_EDITOR}
 
@@ -84,4 +70,6 @@ INITIALIZATION_LEVEL_SCENE = 2
 INITIALIZATION_LEVEL_EDITOR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The library is initialized at the same time as the engine's editor classes. Only happens when loading the GDExtension in the editor.
+
+---

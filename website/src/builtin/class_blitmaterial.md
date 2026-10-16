@@ -49,25 +49,7 @@ The manner in which the newly blitted texture is blended with the original Drawa
 enum BlendMode { BLEND_MODE_MIX = 0, BLEND_MODE_ADD = 1, BLEND_MODE_SUB = 2, BLEND_MODE_MUL = 3, BLEND_MODE_DISABLED = 4 }
 ```
 
-BlendMode BLEND_MODE_MIX = 0
-
-Mix blending mode. Colors are assumed to be independent of the alpha (opacity) value.
-
-BlendMode BLEND_MODE_ADD = 1
-
-Additive blending mode.
-
-BlendMode BLEND_MODE_SUB = 2
-
-Subtractive blending mode.
-
-BlendMode BLEND_MODE_MUL = 3
-
-Multiplicative blending mode.
-
-BlendMode BLEND_MODE_DISABLED = 4
-
-No blending mode, direct color copy.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BLEND_MODE_MIX {#BLEND_MODE_MIX}
 
@@ -75,7 +57,7 @@ No blending mode, direct color copy.
 BLEND_MODE_MIX = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mix blending mode. Colors are assumed to be independent of the alpha (opacity) value.
 
 #### BLEND_MODE_ADD {#BLEND_MODE_ADD}
 
@@ -83,7 +65,7 @@ BLEND_MODE_MIX = 0
 BLEND_MODE_ADD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Additive blending mode.
 
 #### BLEND_MODE_SUB {#BLEND_MODE_SUB}
 
@@ -91,7 +73,7 @@ BLEND_MODE_ADD = 1
 BLEND_MODE_SUB = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Subtractive blending mode.
 
 #### BLEND_MODE_MUL {#BLEND_MODE_MUL}
 
@@ -99,7 +81,7 @@ BLEND_MODE_SUB = 2
 BLEND_MODE_MUL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiplicative blending mode.
 
 #### BLEND_MODE_DISABLED {#BLEND_MODE_DISABLED}
 
@@ -107,4 +89,6 @@ BLEND_MODE_MUL = 3
 BLEND_MODE_DISABLED = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No blending mode, direct color copy.
+
+---

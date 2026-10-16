@@ -101,7 +101,10 @@ The root animation node of this AnimationTree. See AnimationRootNode.
 advance_expression_base_node: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_advance_expression_base_node(value: NodePath)
+- NodePath get_advance_expression_base_node()
+
+The path to the Node used to evaluate the AnimationNode Expression if one is not explicitly specified internally.
 
 ### anim_player {#anim_player}
 
@@ -109,7 +112,10 @@ advance_expression_base_node: NodePath
 anim_player: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_animation_player(value: NodePath)
+- NodePath get_animation_player()
+
+The path to the AnimationPlayer used for animating.
 
 ## 信号
 
@@ -129,17 +135,7 @@ Emitted when the anim_player is changed.
 enum AnimationProcessCallback { ANIMATION_PROCESS_PHYSICS = 0, ANIMATION_PROCESS_IDLE = 1, ANIMATION_PROCESS_MANUAL = 2 }
 ```
 
-AnimationProcessCallback ANIMATION_PROCESS_PHYSICS = 0
-
-Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS.
-
-AnimationProcessCallback ANIMATION_PROCESS_IDLE = 1
-
-Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_IDLE.
-
-AnimationProcessCallback ANIMATION_PROCESS_MANUAL = 2
-
-Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ANIMATION_PROCESS_PHYSICS {#ANIMATION_PROCESS_PHYSICS}
 
@@ -147,7 +143,7 @@ Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL.
 ANIMATION_PROCESS_PHYSICS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS.
 
 #### ANIMATION_PROCESS_IDLE {#ANIMATION_PROCESS_IDLE}
 
@@ -155,7 +151,7 @@ ANIMATION_PROCESS_PHYSICS = 0
 ANIMATION_PROCESS_IDLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_IDLE.
 
 #### ANIMATION_PROCESS_MANUAL {#ANIMATION_PROCESS_MANUAL}
 
@@ -163,4 +159,6 @@ ANIMATION_PROCESS_IDLE = 1
 ANIMATION_PROCESS_MANUAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: See AnimationMixer.ANIMATION_CALLBACK_MODE_PROCESS_MANUAL.
+
+---

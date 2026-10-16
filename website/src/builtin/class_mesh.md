@@ -256,7 +256,10 @@ Note: This assigns the material within the Mesh resource, not the Material assoc
 lightmap_size_hint: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_lightmap_size_hint(value: Vector2i)
+- Vector2i get_lightmap_size_hint()
+
+Sets a hint to be used for lightmap resolution.
 
 ## 枚举
 
@@ -266,25 +269,7 @@ lightmap_size_hint: Vector2i
 enum PrimitiveType { PRIMITIVE_POINTS = 0, PRIMITIVE_LINES = 1, PRIMITIVE_LINE_STRIP = 2, PRIMITIVE_TRIANGLES = 3, PRIMITIVE_TRIANGLE_STRIP = 4 }
 ```
 
-PrimitiveType PRIMITIVE_POINTS = 0
-
-Render array as points (one vertex equals one point).
-
-PrimitiveType PRIMITIVE_LINES = 1
-
-Render array as lines (every two vertices a line is created).
-
-PrimitiveType PRIMITIVE_LINE_STRIP = 2
-
-Render array as line strip.
-
-PrimitiveType PRIMITIVE_TRIANGLES = 3
-
-Render array as triangles (every three vertices a triangle is created).
-
-PrimitiveType PRIMITIVE_TRIANGLE_STRIP = 4
-
-Render array as triangle strips.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PRIMITIVE_POINTS {#PRIMITIVE_POINTS}
 
@@ -292,7 +277,7 @@ Render array as triangle strips.
 PRIMITIVE_POINTS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Render array as points (one vertex equals one point).
 
 #### PRIMITIVE_LINES {#PRIMITIVE_LINES}
 
@@ -300,7 +285,7 @@ PRIMITIVE_POINTS = 0
 PRIMITIVE_LINES = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Render array as lines (every two vertices a line is created).
 
 #### PRIMITIVE_LINE_STRIP {#PRIMITIVE_LINE_STRIP}
 
@@ -308,7 +293,7 @@ PRIMITIVE_LINES = 1
 PRIMITIVE_LINE_STRIP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Render array as line strip.
 
 #### PRIMITIVE_TRIANGLES {#PRIMITIVE_TRIANGLES}
 
@@ -316,7 +301,7 @@ PRIMITIVE_LINE_STRIP = 2
 PRIMITIVE_TRIANGLES = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Render array as triangles (every three vertices a triangle is created).
 
 #### PRIMITIVE_TRIANGLE_STRIP {#PRIMITIVE_TRIANGLE_STRIP}
 
@@ -324,7 +309,9 @@ PRIMITIVE_TRIANGLES = 3
 PRIMITIVE_TRIANGLE_STRIP = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Render array as triangle strips.
+
+---
 
 ### ArrayType {#enum-ArrayType}
 
@@ -332,65 +319,7 @@ PRIMITIVE_TRIANGLE_STRIP = 4
 enum ArrayType { ARRAY_VERTEX = 0, ARRAY_NORMAL = 1, ARRAY_TANGENT = 2, ARRAY_COLOR = 3, ARRAY_TEX_UV = 4, ARRAY_TEX_UV2 = 5, ARRAY_CUSTOM0 = 6, ARRAY_CUSTOM1 = 7, ARRAY_CUSTOM2 = 8, ARRAY_CUSTOM3 = 9, ARRAY_BONES = 10, ARRAY_WEIGHTS = 11, ARRAY_INDEX = 12, ARRAY_MAX = 13 }
 ```
 
-ArrayType ARRAY_VERTEX = 0
-
-PackedVector3Array, PackedVector2Array, or Array of vertex positions.
-
-ArrayType ARRAY_NORMAL = 1
-
-PackedVector3Array of vertex normals.
-
-Note: The array has to consist of normal vectors, otherwise they will be normalized by the engine, potentially causing visual discrepancies.
-
-ArrayType ARRAY_TANGENT = 2
-
-PackedFloat32Array of vertex tangents. Each element in groups of 4 floats, first 3 floats determine the tangent, and the last the binormal direction as -1 or 1.
-
-ArrayType ARRAY_COLOR = 3
-
-PackedColorArray of vertex colors.
-
-ArrayType ARRAY_TEX_UV = 4
-
-PackedVector2Array for UV coordinates.
-
-ArrayType ARRAY_TEX_UV2 = 5
-
-PackedVector2Array for second UV coordinates.
-
-ArrayType ARRAY_CUSTOM0 = 6
-
-Contains custom color channel 0. PackedByteArray if (format >> Mesh.ARRAY_FORMAT_CUSTOM0_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK is ARRAY_CUSTOM_RGBA8_UNORM, ARRAY_CUSTOM_RGBA8_SNORM, ARRAY_CUSTOM_RG_HALF, or ARRAY_CUSTOM_RGBA_HALF. PackedFloat32Array otherwise.
-
-ArrayType ARRAY_CUSTOM1 = 7
-
-Contains custom color channel 1. PackedByteArray if (format >> Mesh.ARRAY_FORMAT_CUSTOM1_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK is ARRAY_CUSTOM_RGBA8_UNORM, ARRAY_CUSTOM_RGBA8_SNORM, ARRAY_CUSTOM_RG_HALF, or ARRAY_CUSTOM_RGBA_HALF. PackedFloat32Array otherwise.
-
-ArrayType ARRAY_CUSTOM2 = 8
-
-Contains custom color channel 2. PackedByteArray if (format >> Mesh.ARRAY_FORMAT_CUSTOM2_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK is ARRAY_CUSTOM_RGBA8_UNORM, ARRAY_CUSTOM_RGBA8_SNORM, ARRAY_CUSTOM_RG_HALF, or ARRAY_CUSTOM_RGBA_HALF. PackedFloat32Array otherwise.
-
-ArrayType ARRAY_CUSTOM3 = 9
-
-Contains custom color channel 3. PackedByteArray if (format >> Mesh.ARRAY_FORMAT_CUSTOM3_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK is ARRAY_CUSTOM_RGBA8_UNORM, ARRAY_CUSTOM_RGBA8_SNORM, ARRAY_CUSTOM_RG_HALF, or ARRAY_CUSTOM_RGBA_HALF. PackedFloat32Array otherwise.
-
-ArrayType ARRAY_BONES = 10
-
-PackedFloat32Array or PackedInt32Array of bone indices. Contains either 4 or 8 numbers per vertex depending on the presence of the ARRAY_FLAG_USE_8_BONE_WEIGHTS flag.
-
-ArrayType ARRAY_WEIGHTS = 11
-
-PackedFloat32Array or PackedFloat64Array of bone weights in the range 0.0 to 1.0 (inclusive). Contains either 4 or 8 numbers per vertex depending on the presence of the ARRAY_FLAG_USE_8_BONE_WEIGHTS flag.
-
-ArrayType ARRAY_INDEX = 12
-
-PackedInt32Array of integers used as indices referencing vertices, colors, normals, tangents, and textures. All of those arrays must have the same number of elements as the vertex array. No index can be beyond the vertex array size. When this index array is present, it puts the function into "index mode," where the index selects the i'th vertex, normal, tangent, color, UV, etc. This means if you want to have different normals or colors along an edge, you have to duplicate the vertices.
-
-For triangles, the index array is interpreted as triples, referring to the vertices of each triangle. For lines, the index array is in pairs indicating the start and end of each line.
-
-ArrayType ARRAY_MAX = 13
-
-Represents the size of the ArrayType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ARRAY_VERTEX {#ARRAY_VERTEX}
 
@@ -398,7 +327,7 @@ Represents the size of the ArrayType enum.
 ARRAY_VERTEX = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PackedVector3Array, PackedVector2Array, or Array of vertex positions.
 
 #### ARRAY_NORMAL {#ARRAY_NORMAL}
 
@@ -406,7 +335,9 @@ ARRAY_VERTEX = 0
 ARRAY_NORMAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PackedVector3Array of vertex normals.
+
+Note: The array has to consist of normal vectors, otherwise they will be normalized by the engine, potentially causing visual discrepancies.
 
 #### ARRAY_TANGENT {#ARRAY_TANGENT}
 
@@ -414,7 +345,7 @@ ARRAY_NORMAL = 1
 ARRAY_TANGENT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PackedFloat32Array of vertex tangents. Each element in groups of 4 floats, first 3 floats determine the tangent, and the last the binormal direction as -1 or 1.
 
 #### ARRAY_COLOR {#ARRAY_COLOR}
 
@@ -422,7 +353,7 @@ ARRAY_TANGENT = 2
 ARRAY_COLOR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PackedColorArray of vertex colors.
 
 #### ARRAY_TEX_UV {#ARRAY_TEX_UV}
 
@@ -430,7 +361,7 @@ ARRAY_COLOR = 3
 ARRAY_TEX_UV = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PackedVector2Array for UV coordinates.
 
 #### ARRAY_TEX_UV2 {#ARRAY_TEX_UV2}
 
@@ -438,7 +369,7 @@ ARRAY_TEX_UV = 4
 ARRAY_TEX_UV2 = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PackedVector2Array for second UV coordinates.
 
 #### ARRAY_CUSTOM0 {#ARRAY_CUSTOM0}
 
@@ -446,7 +377,7 @@ ARRAY_TEX_UV2 = 5
 ARRAY_CUSTOM0 = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Contains custom color channel 0. PackedByteArray if (format >> Mesh.ARRAY_FORMAT_CUSTOM0_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK is ARRAY_CUSTOM_RGBA8_UNORM, ARRAY_CUSTOM_RGBA8_SNORM, ARRAY_CUSTOM_RG_HALF, or ARRAY_CUSTOM_RGBA_HALF. PackedFloat32Array otherwise.
 
 #### ARRAY_CUSTOM1 {#ARRAY_CUSTOM1}
 
@@ -454,7 +385,7 @@ ARRAY_CUSTOM0 = 6
 ARRAY_CUSTOM1 = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Contains custom color channel 1. PackedByteArray if (format >> Mesh.ARRAY_FORMAT_CUSTOM1_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK is ARRAY_CUSTOM_RGBA8_UNORM, ARRAY_CUSTOM_RGBA8_SNORM, ARRAY_CUSTOM_RG_HALF, or ARRAY_CUSTOM_RGBA_HALF. PackedFloat32Array otherwise.
 
 #### ARRAY_CUSTOM2 {#ARRAY_CUSTOM2}
 
@@ -462,7 +393,7 @@ ARRAY_CUSTOM1 = 7
 ARRAY_CUSTOM2 = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Contains custom color channel 2. PackedByteArray if (format >> Mesh.ARRAY_FORMAT_CUSTOM2_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK is ARRAY_CUSTOM_RGBA8_UNORM, ARRAY_CUSTOM_RGBA8_SNORM, ARRAY_CUSTOM_RG_HALF, or ARRAY_CUSTOM_RGBA_HALF. PackedFloat32Array otherwise.
 
 #### ARRAY_CUSTOM3 {#ARRAY_CUSTOM3}
 
@@ -470,7 +401,7 @@ ARRAY_CUSTOM2 = 8
 ARRAY_CUSTOM3 = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Contains custom color channel 3. PackedByteArray if (format >> Mesh.ARRAY_FORMAT_CUSTOM3_SHIFT) & Mesh.ARRAY_FORMAT_CUSTOM_MASK is ARRAY_CUSTOM_RGBA8_UNORM, ARRAY_CUSTOM_RGBA8_SNORM, ARRAY_CUSTOM_RG_HALF, or ARRAY_CUSTOM_RGBA_HALF. PackedFloat32Array otherwise.
 
 #### ARRAY_BONES {#ARRAY_BONES}
 
@@ -478,7 +409,7 @@ ARRAY_CUSTOM3 = 9
 ARRAY_BONES = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PackedFloat32Array or PackedInt32Array of bone indices. Contains either 4 or 8 numbers per vertex depending on the presence of the ARRAY_FLAG_USE_8_BONE_WEIGHTS flag.
 
 #### ARRAY_WEIGHTS {#ARRAY_WEIGHTS}
 
@@ -486,7 +417,7 @@ ARRAY_BONES = 10
 ARRAY_WEIGHTS = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PackedFloat32Array or PackedFloat64Array of bone weights in the range 0.0 to 1.0 (inclusive). Contains either 4 or 8 numbers per vertex depending on the presence of the ARRAY_FLAG_USE_8_BONE_WEIGHTS flag.
 
 #### ARRAY_INDEX {#ARRAY_INDEX}
 
@@ -494,7 +425,9 @@ ARRAY_WEIGHTS = 11
 ARRAY_INDEX = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+PackedInt32Array of integers used as indices referencing vertices, colors, normals, tangents, and textures. All of those arrays must have the same number of elements as the vertex array. No index can be beyond the vertex array size. When this index array is present, it puts the function into "index mode," where the index selects the i'th vertex, normal, tangent, color, UV, etc. This means if you want to have different normals or colors along an edge, you have to duplicate the vertices.
+
+For triangles, the index array is interpreted as triples, referring to the vertices of each triangle. For lines, the index array is in pairs indicating the start and end of each line.
 
 #### ARRAY_MAX {#ARRAY_MAX}
 
@@ -502,7 +435,9 @@ ARRAY_INDEX = 12
 ARRAY_MAX = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the ArrayType enum.
+
+---
 
 ### ArrayCustomFormat {#enum-ArrayCustomFormat}
 
@@ -510,41 +445,7 @@ ARRAY_MAX = 13
 enum ArrayCustomFormat { ARRAY_CUSTOM_RGBA8_UNORM = 0, ARRAY_CUSTOM_RGBA8_SNORM = 1, ARRAY_CUSTOM_RG_HALF = 2, ARRAY_CUSTOM_RGBA_HALF = 3, ARRAY_CUSTOM_R_FLOAT = 4, ARRAY_CUSTOM_RG_FLOAT = 5, ARRAY_CUSTOM_RGB_FLOAT = 6, ARRAY_CUSTOM_RGBA_FLOAT = 7, ARRAY_CUSTOM_MAX = 8 }
 ```
 
-ArrayCustomFormat ARRAY_CUSTOM_RGBA8_UNORM = 0
-
-Indicates this custom channel contains unsigned normalized byte colors from 0 to 1, encoded as PackedByteArray.
-
-ArrayCustomFormat ARRAY_CUSTOM_RGBA8_SNORM = 1
-
-Indicates this custom channel contains signed normalized byte colors from -1 to 1, encoded as PackedByteArray.
-
-ArrayCustomFormat ARRAY_CUSTOM_RG_HALF = 2
-
-Indicates this custom channel contains half precision float colors, encoded as PackedByteArray. Only red and green channels are used.
-
-ArrayCustomFormat ARRAY_CUSTOM_RGBA_HALF = 3
-
-Indicates this custom channel contains half precision float colors, encoded as PackedByteArray.
-
-ArrayCustomFormat ARRAY_CUSTOM_R_FLOAT = 4
-
-Indicates this custom channel contains full float colors, in a PackedFloat32Array. Only the red channel is used.
-
-ArrayCustomFormat ARRAY_CUSTOM_RG_FLOAT = 5
-
-Indicates this custom channel contains full float colors, in a PackedFloat32Array. Only red and green channels are used.
-
-ArrayCustomFormat ARRAY_CUSTOM_RGB_FLOAT = 6
-
-Indicates this custom channel contains full float colors, in a PackedFloat32Array. Only red, green and blue channels are used.
-
-ArrayCustomFormat ARRAY_CUSTOM_RGBA_FLOAT = 7
-
-Indicates this custom channel contains full float colors, in a PackedFloat32Array.
-
-ArrayCustomFormat ARRAY_CUSTOM_MAX = 8
-
-Represents the size of the ArrayCustomFormat enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ARRAY_CUSTOM_RGBA8_UNORM {#ARRAY_CUSTOM_RGBA8_UNORM}
 
@@ -552,7 +453,7 @@ Represents the size of the ArrayCustomFormat enum.
 ARRAY_CUSTOM_RGBA8_UNORM = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates this custom channel contains unsigned normalized byte colors from 0 to 1, encoded as PackedByteArray.
 
 #### ARRAY_CUSTOM_RGBA8_SNORM {#ARRAY_CUSTOM_RGBA8_SNORM}
 
@@ -560,7 +461,7 @@ ARRAY_CUSTOM_RGBA8_UNORM = 0
 ARRAY_CUSTOM_RGBA8_SNORM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates this custom channel contains signed normalized byte colors from -1 to 1, encoded as PackedByteArray.
 
 #### ARRAY_CUSTOM_RG_HALF {#ARRAY_CUSTOM_RG_HALF}
 
@@ -568,7 +469,7 @@ ARRAY_CUSTOM_RGBA8_SNORM = 1
 ARRAY_CUSTOM_RG_HALF = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates this custom channel contains half precision float colors, encoded as PackedByteArray. Only red and green channels are used.
 
 #### ARRAY_CUSTOM_RGBA_HALF {#ARRAY_CUSTOM_RGBA_HALF}
 
@@ -576,7 +477,7 @@ ARRAY_CUSTOM_RG_HALF = 2
 ARRAY_CUSTOM_RGBA_HALF = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates this custom channel contains half precision float colors, encoded as PackedByteArray.
 
 #### ARRAY_CUSTOM_R_FLOAT {#ARRAY_CUSTOM_R_FLOAT}
 
@@ -584,7 +485,7 @@ ARRAY_CUSTOM_RGBA_HALF = 3
 ARRAY_CUSTOM_R_FLOAT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates this custom channel contains full float colors, in a PackedFloat32Array. Only the red channel is used.
 
 #### ARRAY_CUSTOM_RG_FLOAT {#ARRAY_CUSTOM_RG_FLOAT}
 
@@ -592,7 +493,7 @@ ARRAY_CUSTOM_R_FLOAT = 4
 ARRAY_CUSTOM_RG_FLOAT = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates this custom channel contains full float colors, in a PackedFloat32Array. Only red and green channels are used.
 
 #### ARRAY_CUSTOM_RGB_FLOAT {#ARRAY_CUSTOM_RGB_FLOAT}
 
@@ -600,7 +501,7 @@ ARRAY_CUSTOM_RG_FLOAT = 5
 ARRAY_CUSTOM_RGB_FLOAT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates this custom channel contains full float colors, in a PackedFloat32Array. Only red, green and blue channels are used.
 
 #### ARRAY_CUSTOM_RGBA_FLOAT {#ARRAY_CUSTOM_RGBA_FLOAT}
 
@@ -608,7 +509,7 @@ ARRAY_CUSTOM_RGB_FLOAT = 6
 ARRAY_CUSTOM_RGBA_FLOAT = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates this custom channel contains full float colors, in a PackedFloat32Array.
 
 #### ARRAY_CUSTOM_MAX {#ARRAY_CUSTOM_MAX}
 
@@ -616,7 +517,11 @@ ARRAY_CUSTOM_RGBA_FLOAT = 7
 ARRAY_CUSTOM_MAX = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the ArrayCustomFormat enum.
+
+---
+
+flags ArrayFormat:
 
 ### ArrayFormat {#enum-ArrayFormat}
 
@@ -632,7 +537,7 @@ enum ArrayFormat（位标志） { ARRAY_FORMAT_VERTEX = 1, ARRAY_FORMAT_NORMAL =
 ARRAY_FORMAT_VERTEX = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains vertices. All meshes require a vertex array so this should always be present.
 
 #### ARRAY_FORMAT_NORMAL {#ARRAY_FORMAT_NORMAL}
 
@@ -640,7 +545,7 @@ ARRAY_FORMAT_VERTEX = 1
 ARRAY_FORMAT_NORMAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains normals.
 
 #### ARRAY_FORMAT_TANGENT {#ARRAY_FORMAT_TANGENT}
 
@@ -648,7 +553,7 @@ ARRAY_FORMAT_NORMAL = 2
 ARRAY_FORMAT_TANGENT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains tangents.
 
 #### ARRAY_FORMAT_COLOR {#ARRAY_FORMAT_COLOR}
 
@@ -656,7 +561,7 @@ ARRAY_FORMAT_TANGENT = 4
 ARRAY_FORMAT_COLOR = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains colors.
 
 #### ARRAY_FORMAT_TEX_UV {#ARRAY_FORMAT_TEX_UV}
 
@@ -664,7 +569,7 @@ ARRAY_FORMAT_COLOR = 8
 ARRAY_FORMAT_TEX_UV = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains UVs.
 
 #### ARRAY_FORMAT_TEX_UV2 {#ARRAY_FORMAT_TEX_UV2}
 
@@ -672,7 +577,7 @@ ARRAY_FORMAT_TEX_UV = 16
 ARRAY_FORMAT_TEX_UV2 = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains second UV.
 
 #### ARRAY_FORMAT_CUSTOM0 {#ARRAY_FORMAT_CUSTOM0}
 
@@ -680,7 +585,7 @@ ARRAY_FORMAT_TEX_UV2 = 32
 ARRAY_FORMAT_CUSTOM0 = 64
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains custom channel index 0.
 
 #### ARRAY_FORMAT_CUSTOM1 {#ARRAY_FORMAT_CUSTOM1}
 
@@ -688,7 +593,7 @@ ARRAY_FORMAT_CUSTOM0 = 64
 ARRAY_FORMAT_CUSTOM1 = 128
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains custom channel index 1.
 
 #### ARRAY_FORMAT_CUSTOM2 {#ARRAY_FORMAT_CUSTOM2}
 
@@ -696,7 +601,7 @@ ARRAY_FORMAT_CUSTOM1 = 128
 ARRAY_FORMAT_CUSTOM2 = 256
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains custom channel index 2.
 
 #### ARRAY_FORMAT_CUSTOM3 {#ARRAY_FORMAT_CUSTOM3}
 
@@ -704,7 +609,7 @@ ARRAY_FORMAT_CUSTOM2 = 256
 ARRAY_FORMAT_CUSTOM3 = 512
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains custom channel index 3.
 
 #### ARRAY_FORMAT_BONES {#ARRAY_FORMAT_BONES}
 
@@ -712,7 +617,7 @@ ARRAY_FORMAT_CUSTOM3 = 512
 ARRAY_FORMAT_BONES = 1024
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains bones.
 
 #### ARRAY_FORMAT_WEIGHTS {#ARRAY_FORMAT_WEIGHTS}
 
@@ -720,7 +625,7 @@ ARRAY_FORMAT_BONES = 1024
 ARRAY_FORMAT_WEIGHTS = 2048
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array contains bone weights.
 
 #### ARRAY_FORMAT_INDEX {#ARRAY_FORMAT_INDEX}
 
@@ -728,7 +633,7 @@ ARRAY_FORMAT_WEIGHTS = 2048
 ARRAY_FORMAT_INDEX = 4096
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mesh array uses indices.
 
 #### ARRAY_FORMAT_BLEND_SHAPE_MASK {#ARRAY_FORMAT_BLEND_SHAPE_MASK}
 
@@ -736,7 +641,7 @@ ARRAY_FORMAT_INDEX = 4096
 ARRAY_FORMAT_BLEND_SHAPE_MASK = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mask of mesh channels permitted in blend shapes.
 
 #### ARRAY_FORMAT_CUSTOM_BASE {#ARRAY_FORMAT_CUSTOM_BASE}
 
@@ -744,7 +649,7 @@ ARRAY_FORMAT_BLEND_SHAPE_MASK = 7
 ARRAY_FORMAT_CUSTOM_BASE = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Shift of first custom channel.
 
 #### ARRAY_FORMAT_CUSTOM_BITS {#ARRAY_FORMAT_CUSTOM_BITS}
 
@@ -752,7 +657,7 @@ ARRAY_FORMAT_CUSTOM_BASE = 13
 ARRAY_FORMAT_CUSTOM_BITS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Number of format bits per custom channel. See ArrayCustomFormat.
 
 #### ARRAY_FORMAT_CUSTOM0_SHIFT {#ARRAY_FORMAT_CUSTOM0_SHIFT}
 
@@ -760,7 +665,7 @@ ARRAY_FORMAT_CUSTOM_BITS = 3
 ARRAY_FORMAT_CUSTOM0_SHIFT = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Amount to shift ArrayCustomFormat for custom channel index 0.
 
 #### ARRAY_FORMAT_CUSTOM1_SHIFT {#ARRAY_FORMAT_CUSTOM1_SHIFT}
 
@@ -768,7 +673,7 @@ ARRAY_FORMAT_CUSTOM0_SHIFT = 13
 ARRAY_FORMAT_CUSTOM1_SHIFT = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Amount to shift ArrayCustomFormat for custom channel index 1.
 
 #### ARRAY_FORMAT_CUSTOM2_SHIFT {#ARRAY_FORMAT_CUSTOM2_SHIFT}
 
@@ -776,7 +681,7 @@ ARRAY_FORMAT_CUSTOM1_SHIFT = 16
 ARRAY_FORMAT_CUSTOM2_SHIFT = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Amount to shift ArrayCustomFormat for custom channel index 2.
 
 #### ARRAY_FORMAT_CUSTOM3_SHIFT {#ARRAY_FORMAT_CUSTOM3_SHIFT}
 
@@ -784,7 +689,7 @@ ARRAY_FORMAT_CUSTOM2_SHIFT = 19
 ARRAY_FORMAT_CUSTOM3_SHIFT = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Amount to shift ArrayCustomFormat for custom channel index 3.
 
 #### ARRAY_FORMAT_CUSTOM_MASK {#ARRAY_FORMAT_CUSTOM_MASK}
 
@@ -792,7 +697,7 @@ ARRAY_FORMAT_CUSTOM3_SHIFT = 22
 ARRAY_FORMAT_CUSTOM_MASK = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mask of custom format bits per custom channel. Must be shifted by one of the SHIFT constants. See ArrayCustomFormat.
 
 #### ARRAY_COMPRESS_FLAGS_BASE {#ARRAY_COMPRESS_FLAGS_BASE}
 
@@ -800,7 +705,7 @@ ARRAY_FORMAT_CUSTOM_MASK = 7
 ARRAY_COMPRESS_FLAGS_BASE = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Shift of first compress flag. Compress flags should be passed to ArrayMesh.add_surface_from_arrays() and SurfaceTool.commit().
 
 #### ARRAY_FLAG_USE_2D_VERTICES {#ARRAY_FLAG_USE_2D_VERTICES}
 
@@ -808,7 +713,7 @@ ARRAY_COMPRESS_FLAGS_BASE = 25
 ARRAY_FLAG_USE_2D_VERTICES = 33554432
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flag used to mark that the array contains 2D vertices.
 
 #### ARRAY_FLAG_USE_DYNAMIC_UPDATE {#ARRAY_FLAG_USE_DYNAMIC_UPDATE}
 
@@ -816,7 +721,7 @@ ARRAY_FLAG_USE_2D_VERTICES = 33554432
 ARRAY_FLAG_USE_DYNAMIC_UPDATE = 67108864
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flag used to mark that the mesh data will use GL_DYNAMIC_DRAW on GLES. Unused on Vulkan.
 
 #### ARRAY_FLAG_USE_8_BONE_WEIGHTS {#ARRAY_FLAG_USE_8_BONE_WEIGHTS}
 
@@ -824,7 +729,7 @@ ARRAY_FLAG_USE_DYNAMIC_UPDATE = 67108864
 ARRAY_FLAG_USE_8_BONE_WEIGHTS = 134217728
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flag used to mark that the mesh contains up to 8 bone influences per vertex. This flag indicates that ARRAY_BONES and ARRAY_WEIGHTS elements will have double length.
 
 #### ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY {#ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY}
 
@@ -832,7 +737,7 @@ ARRAY_FLAG_USE_8_BONE_WEIGHTS = 134217728
 ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY = 268435456
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flag used to mark that the mesh intentionally contains no vertex array.
 
 #### ARRAY_FLAG_COMPRESS_ATTRIBUTES {#ARRAY_FLAG_COMPRESS_ATTRIBUTES}
 
@@ -840,7 +745,9 @@ ARRAY_FLAG_USES_EMPTY_VERTEX_ARRAY = 268435456
 ARRAY_FLAG_COMPRESS_ATTRIBUTES = 536870912
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flag used to mark that a mesh is using compressed attributes (vertices, normals, tangents, UVs). When this form of compression is enabled, vertex positions will be packed into an RGBA16UNORM attribute and scaled in the vertex shader. The normal and tangent will be packed into an RG16UNORM representing an axis, and a 16-bit float stored in the A-channel of the vertex. UVs will use 16-bit normalized floats instead of full 32-bit signed floats. When using this compression mode you must use either vertices, normals, and tangents or only vertices. You cannot use normals without tangents. Importers will automatically enable this compression if they can.
+
+---
 
 ### BlendShapeMode {#enum-BlendShapeMode}
 
@@ -848,13 +755,7 @@ ARRAY_FLAG_COMPRESS_ATTRIBUTES = 536870912
 enum BlendShapeMode { BLEND_SHAPE_MODE_NORMALIZED = 0, BLEND_SHAPE_MODE_RELATIVE = 1 }
 ```
 
-BlendShapeMode BLEND_SHAPE_MODE_NORMALIZED = 0
-
-Blend shapes are normalized.
-
-BlendShapeMode BLEND_SHAPE_MODE_RELATIVE = 1
-
-Blend shapes are relative to base weight.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BLEND_SHAPE_MODE_NORMALIZED {#BLEND_SHAPE_MODE_NORMALIZED}
 
@@ -862,7 +763,7 @@ Blend shapes are relative to base weight.
 BLEND_SHAPE_MODE_NORMALIZED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Blend shapes are normalized.
 
 #### BLEND_SHAPE_MODE_RELATIVE {#BLEND_SHAPE_MODE_RELATIVE}
 
@@ -870,4 +771,6 @@ BLEND_SHAPE_MODE_NORMALIZED = 0
 BLEND_SHAPE_MODE_RELATIVE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Blend shapes are relative to base weight.
+
+---

@@ -160,7 +160,12 @@ void set_supported_protocols(protocols: PackedStringArray)
 supported_protocols: PackedStringArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_supported_protocols(value: PackedStringArray)
+- PackedStringArray get_supported_protocols()
+
+The supported WebSocket sub-protocols. See WebSocketPeer.supported_protocols for more details.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedStringArray for more details.
 
 ### handshake_headers {#handshake_headers}
 
@@ -168,7 +173,12 @@ supported_protocols: PackedStringArray
 handshake_headers: PackedStringArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_handshake_headers(value: PackedStringArray)
+- PackedStringArray get_handshake_headers()
+
+The extra headers to use during handshake. See WebSocketPeer.handshake_headers for more details.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedStringArray for more details.
 
 ### inbound_buffer_size {#inbound_buffer_size}
 

@@ -126,7 +126,12 @@ A disabled collision shape has no effect in the world. This property should be c
 debug_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_debug_color(value: Color)
+- Color get_debug_color()
+
+The collision shape color that is displayed in the editor, or in the running project if Debug > Visible Collision Shapes is checked at the top of the editor.
+
+Note: The default value is ProjectSettings.debug/shapes/collision/shape_color. The Color(0, 0, 0, 0) value documented here is a placeholder, and not the actual default debug color.
 
 ### debug_fill {#debug_fill}
 

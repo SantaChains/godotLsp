@@ -206,7 +206,7 @@ Returns a Rect2 that encloses both this rectangle and b around the edges. See al
 position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The origin point. This is usually the top-left corner of the rectangle.
 
 ### size {#size}
 
@@ -214,7 +214,9 @@ position: Vector2
 size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The rectangle's width and height, starting from position. Setting this value also affects the end point.
+
+Note: It's recommended setting the width and height to non-negative values, as most methods in Godot assume that the position is the top-left corner, and the end is the bottom-right corner. To get an equivalent rectangle with non-negative size, use abs().
 
 ### end {#end}
 
@@ -222,4 +224,4 @@ size: Vector2
 end: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The ending point. This is usually the bottom-right corner of the rectangle, and is equivalent to position + size. Setting this point affects the size.

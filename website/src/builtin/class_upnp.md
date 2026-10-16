@@ -259,121 +259,7 @@ If true, IPv6 is used for UPNPDevice discovery.
 enum UPNPResult { UPNP_RESULT_SUCCESS = 0, UPNP_RESULT_NOT_AUTHORIZED = 1, UPNP_RESULT_PORT_MAPPING_NOT_FOUND = 2, UPNP_RESULT_INCONSISTENT_PARAMETERS = 3, UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY = 4, UPNP_RESULT_ACTION_FAILED = 5, UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED = 6, UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED = 7, UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED = 8, UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD = 9, UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD = 10, UPNP_RESULT_NO_PORT_MAPS_AVAILABLE = 11, UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM = 12, UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING = 13, UPNP_RESULT_SAME_PORT_VALUES_REQUIRED = 14, UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED = 15, UPNP_RESULT_INVALID_GATEWAY = 16, UPNP_RESULT_INVALID_PORT = 17, UPNP_RESULT_INVALID_PROTOCOL = 18, UPNP_RESULT_INVALID_DURATION = 19, UPNP_RESULT_INVALID_ARGS = 20, UPNP_RESULT_INVALID_RESPONSE = 21, UPNP_RESULT_INVALID_PARAM = 22, UPNP_RESULT_HTTP_ERROR = 23, UPNP_RESULT_SOCKET_ERROR = 24, UPNP_RESULT_MEM_ALLOC_ERROR = 25, UPNP_RESULT_NO_GATEWAY = 26, UPNP_RESULT_NO_DEVICES = 27, UPNP_RESULT_UNKNOWN_ERROR = 28 }
 ```
 
-UPNPResult UPNP_RESULT_SUCCESS = 0
-
-UPNP command or discovery was successful.
-
-UPNPResult UPNP_RESULT_NOT_AUTHORIZED = 1
-
-Not authorized to use the command on the UPNPDevice. May be returned when the user disabled UPNP on their router.
-
-UPNPResult UPNP_RESULT_PORT_MAPPING_NOT_FOUND = 2
-
-No port mapping was found for the given port, protocol combination on the given UPNPDevice.
-
-UPNPResult UPNP_RESULT_INCONSISTENT_PARAMETERS = 3
-
-Inconsistent parameters.
-
-UPNPResult UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY = 4
-
-No such entry in array. May be returned if a given port, protocol combination is not found on a UPNPDevice.
-
-UPNPResult UPNP_RESULT_ACTION_FAILED = 5
-
-The action failed.
-
-UPNPResult UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED = 6
-
-The UPNPDevice does not allow wildcard values for the source IP address.
-
-UPNPResult UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED = 7
-
-The UPNPDevice does not allow wildcard values for the external port.
-
-UPNPResult UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED = 8
-
-The UPNPDevice does not allow wildcard values for the internal port.
-
-UPNPResult UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD = 9
-
-The remote host value must be a wildcard.
-
-UPNPResult UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD = 10
-
-The external port value must be a wildcard.
-
-UPNPResult UPNP_RESULT_NO_PORT_MAPS_AVAILABLE = 11
-
-No port maps are available. May also be returned if port mapping functionality is not available.
-
-UPNPResult UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM = 12
-
-Conflict with other mechanism. May be returned instead of UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING if a port mapping conflicts with an existing one.
-
-UPNPResult UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING = 13
-
-Conflict with an existing port mapping.
-
-UPNPResult UPNP_RESULT_SAME_PORT_VALUES_REQUIRED = 14
-
-External and internal port values must be the same.
-
-UPNPResult UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED = 15
-
-Only permanent leases are supported. Do not use the duration parameter when adding port mappings.
-
-UPNPResult UPNP_RESULT_INVALID_GATEWAY = 16
-
-Invalid gateway.
-
-UPNPResult UPNP_RESULT_INVALID_PORT = 17
-
-Invalid port.
-
-UPNPResult UPNP_RESULT_INVALID_PROTOCOL = 18
-
-Invalid protocol.
-
-UPNPResult UPNP_RESULT_INVALID_DURATION = 19
-
-Invalid duration.
-
-UPNPResult UPNP_RESULT_INVALID_ARGS = 20
-
-Invalid arguments.
-
-UPNPResult UPNP_RESULT_INVALID_RESPONSE = 21
-
-Invalid response.
-
-UPNPResult UPNP_RESULT_INVALID_PARAM = 22
-
-Invalid parameter.
-
-UPNPResult UPNP_RESULT_HTTP_ERROR = 23
-
-HTTP error.
-
-UPNPResult UPNP_RESULT_SOCKET_ERROR = 24
-
-Socket error.
-
-UPNPResult UPNP_RESULT_MEM_ALLOC_ERROR = 25
-
-Error allocating memory.
-
-UPNPResult UPNP_RESULT_NO_GATEWAY = 26
-
-No gateway available. You may need to call discover() first, or discovery didn't detect any valid IGDs (InternetGatewayDevices).
-
-UPNPResult UPNP_RESULT_NO_DEVICES = 27
-
-No devices available. You may need to call discover() first, or discovery didn't detect any valid UPNPDevices.
-
-UPNPResult UPNP_RESULT_UNKNOWN_ERROR = 28
-
-Unknown error.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### UPNP_RESULT_SUCCESS {#UPNP_RESULT_SUCCESS}
 
@@ -381,7 +267,7 @@ Unknown error.
 UPNP_RESULT_SUCCESS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+UPNP command or discovery was successful.
 
 #### UPNP_RESULT_NOT_AUTHORIZED {#UPNP_RESULT_NOT_AUTHORIZED}
 
@@ -389,7 +275,7 @@ UPNP_RESULT_SUCCESS = 0
 UPNP_RESULT_NOT_AUTHORIZED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Not authorized to use the command on the UPNPDevice. May be returned when the user disabled UPNP on their router.
 
 #### UPNP_RESULT_PORT_MAPPING_NOT_FOUND {#UPNP_RESULT_PORT_MAPPING_NOT_FOUND}
 
@@ -397,7 +283,7 @@ UPNP_RESULT_NOT_AUTHORIZED = 1
 UPNP_RESULT_PORT_MAPPING_NOT_FOUND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No port mapping was found for the given port, protocol combination on the given UPNPDevice.
 
 #### UPNP_RESULT_INCONSISTENT_PARAMETERS {#UPNP_RESULT_INCONSISTENT_PARAMETERS}
 
@@ -405,7 +291,7 @@ UPNP_RESULT_PORT_MAPPING_NOT_FOUND = 2
 UPNP_RESULT_INCONSISTENT_PARAMETERS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inconsistent parameters.
 
 #### UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY {#UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY}
 
@@ -413,7 +299,7 @@ UPNP_RESULT_INCONSISTENT_PARAMETERS = 3
 UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No such entry in array. May be returned if a given port, protocol combination is not found on a UPNPDevice.
 
 #### UPNP_RESULT_ACTION_FAILED {#UPNP_RESULT_ACTION_FAILED}
 
@@ -421,7 +307,7 @@ UPNP_RESULT_NO_SUCH_ENTRY_IN_ARRAY = 4
 UPNP_RESULT_ACTION_FAILED = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The action failed.
 
 #### UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED {#UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED}
 
@@ -429,7 +315,7 @@ UPNP_RESULT_ACTION_FAILED = 5
 UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The UPNPDevice does not allow wildcard values for the source IP address.
 
 #### UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED {#UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED}
 
@@ -437,7 +323,7 @@ UPNP_RESULT_SRC_IP_WILDCARD_NOT_PERMITTED = 6
 UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The UPNPDevice does not allow wildcard values for the external port.
 
 #### UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED {#UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED}
 
@@ -445,7 +331,7 @@ UPNP_RESULT_EXT_PORT_WILDCARD_NOT_PERMITTED = 7
 UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The UPNPDevice does not allow wildcard values for the internal port.
 
 #### UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD {#UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD}
 
@@ -453,7 +339,7 @@ UPNP_RESULT_INT_PORT_WILDCARD_NOT_PERMITTED = 8
 UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The remote host value must be a wildcard.
 
 #### UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD {#UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD}
 
@@ -461,7 +347,7 @@ UPNP_RESULT_REMOTE_HOST_MUST_BE_WILDCARD = 9
 UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The external port value must be a wildcard.
 
 #### UPNP_RESULT_NO_PORT_MAPS_AVAILABLE {#UPNP_RESULT_NO_PORT_MAPS_AVAILABLE}
 
@@ -469,7 +355,7 @@ UPNP_RESULT_EXT_PORT_MUST_BE_WILDCARD = 10
 UPNP_RESULT_NO_PORT_MAPS_AVAILABLE = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No port maps are available. May also be returned if port mapping functionality is not available.
 
 #### UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM {#UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM}
 
@@ -477,7 +363,7 @@ UPNP_RESULT_NO_PORT_MAPS_AVAILABLE = 11
 UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Conflict with other mechanism. May be returned instead of UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING if a port mapping conflicts with an existing one.
 
 #### UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING {#UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING}
 
@@ -485,7 +371,7 @@ UPNP_RESULT_CONFLICT_WITH_OTHER_MECHANISM = 12
 UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Conflict with an existing port mapping.
 
 #### UPNP_RESULT_SAME_PORT_VALUES_REQUIRED {#UPNP_RESULT_SAME_PORT_VALUES_REQUIRED}
 
@@ -493,7 +379,7 @@ UPNP_RESULT_CONFLICT_WITH_OTHER_MAPPING = 13
 UPNP_RESULT_SAME_PORT_VALUES_REQUIRED = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+External and internal port values must be the same.
 
 #### UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED {#UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED}
 
@@ -501,7 +387,7 @@ UPNP_RESULT_SAME_PORT_VALUES_REQUIRED = 14
 UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only permanent leases are supported. Do not use the duration parameter when adding port mappings.
 
 #### UPNP_RESULT_INVALID_GATEWAY {#UPNP_RESULT_INVALID_GATEWAY}
 
@@ -509,7 +395,7 @@ UPNP_RESULT_ONLY_PERMANENT_LEASE_SUPPORTED = 15
 UPNP_RESULT_INVALID_GATEWAY = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid gateway.
 
 #### UPNP_RESULT_INVALID_PORT {#UPNP_RESULT_INVALID_PORT}
 
@@ -517,7 +403,7 @@ UPNP_RESULT_INVALID_GATEWAY = 16
 UPNP_RESULT_INVALID_PORT = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid port.
 
 #### UPNP_RESULT_INVALID_PROTOCOL {#UPNP_RESULT_INVALID_PROTOCOL}
 
@@ -525,7 +411,7 @@ UPNP_RESULT_INVALID_PORT = 17
 UPNP_RESULT_INVALID_PROTOCOL = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid protocol.
 
 #### UPNP_RESULT_INVALID_DURATION {#UPNP_RESULT_INVALID_DURATION}
 
@@ -533,7 +419,7 @@ UPNP_RESULT_INVALID_PROTOCOL = 18
 UPNP_RESULT_INVALID_DURATION = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid duration.
 
 #### UPNP_RESULT_INVALID_ARGS {#UPNP_RESULT_INVALID_ARGS}
 
@@ -541,7 +427,7 @@ UPNP_RESULT_INVALID_DURATION = 19
 UPNP_RESULT_INVALID_ARGS = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid arguments.
 
 #### UPNP_RESULT_INVALID_RESPONSE {#UPNP_RESULT_INVALID_RESPONSE}
 
@@ -549,7 +435,7 @@ UPNP_RESULT_INVALID_ARGS = 20
 UPNP_RESULT_INVALID_RESPONSE = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid response.
 
 #### UPNP_RESULT_INVALID_PARAM {#UPNP_RESULT_INVALID_PARAM}
 
@@ -557,7 +443,7 @@ UPNP_RESULT_INVALID_RESPONSE = 21
 UPNP_RESULT_INVALID_PARAM = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid parameter.
 
 #### UPNP_RESULT_HTTP_ERROR {#UPNP_RESULT_HTTP_ERROR}
 
@@ -565,7 +451,7 @@ UPNP_RESULT_INVALID_PARAM = 22
 UPNP_RESULT_HTTP_ERROR = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP error.
 
 #### UPNP_RESULT_SOCKET_ERROR {#UPNP_RESULT_SOCKET_ERROR}
 
@@ -573,7 +459,7 @@ UPNP_RESULT_HTTP_ERROR = 23
 UPNP_RESULT_SOCKET_ERROR = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Socket error.
 
 #### UPNP_RESULT_MEM_ALLOC_ERROR {#UPNP_RESULT_MEM_ALLOC_ERROR}
 
@@ -581,7 +467,7 @@ UPNP_RESULT_SOCKET_ERROR = 24
 UPNP_RESULT_MEM_ALLOC_ERROR = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Error allocating memory.
 
 #### UPNP_RESULT_NO_GATEWAY {#UPNP_RESULT_NO_GATEWAY}
 
@@ -589,7 +475,7 @@ UPNP_RESULT_MEM_ALLOC_ERROR = 25
 UPNP_RESULT_NO_GATEWAY = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No gateway available. You may need to call discover() first, or discovery didn't detect any valid IGDs (InternetGatewayDevices).
 
 #### UPNP_RESULT_NO_DEVICES {#UPNP_RESULT_NO_DEVICES}
 
@@ -597,7 +483,7 @@ UPNP_RESULT_NO_GATEWAY = 26
 UPNP_RESULT_NO_DEVICES = 27
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No devices available. You may need to call discover() first, or discovery didn't detect any valid UPNPDevices.
 
 #### UPNP_RESULT_UNKNOWN_ERROR {#UPNP_RESULT_UNKNOWN_ERROR}
 
@@ -605,4 +491,6 @@ UPNP_RESULT_NO_DEVICES = 27
 UPNP_RESULT_UNKNOWN_ERROR = 28
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unknown error.
+
+---

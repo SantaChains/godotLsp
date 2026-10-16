@@ -314,7 +314,12 @@ Note: The maximum reflection distance is always at least equal to the probe's ex
 size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3)
+- Vector3 get_size()
+
+The size of the reflection probe. The larger the size, the more space covered by the probe, which will lower the perceived resolution. It is best to keep the size only as large as you need it.
+
+Note: To better fit areas that are not aligned to the grid, you can rotate the ReflectionProbe node.
 
 ### origin_offset {#origin_offset}
 
@@ -322,7 +327,10 @@ size: Vector3
 origin_offset: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_origin_offset(value: Vector3)
+- Vector3 get_origin_offset()
+
+Sets the origin offset to be used when this ReflectionProbe is in box_projection mode. This can be set to a non-zero value to ensure a reflection fits a rectangle-shaped room, while reducing the number of objects that "get in the way" of the reflection.
 
 ### box_projection {#box_projection}
 
@@ -413,7 +421,10 @@ The ambient color to use within the ReflectionProbe's box defined by its size. T
 ambient_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_ambient_color(value: Color)
+- Color get_ambient_color()
+
+The custom ambient color to use within the ReflectionProbe's box defined by its size. Only effective if ambient_mode is AMBIENT_COLOR.
 
 ### ambient_color_energy {#ambient_color_energy}
 
@@ -434,13 +445,7 @@ The custom ambient color energy to use within the ReflectionProbe's box defined 
 enum UpdateMode { UPDATE_ONCE = 0, UPDATE_ALWAYS = 1 }
 ```
 
-UpdateMode UPDATE_ONCE = 0
-
-Update the probe once on the next frame (recommended for most objects). The corresponding radiance map will be generated over the following six frames. This takes more time to update than UPDATE_ALWAYS, but it has a lower performance cost and can result in higher-quality reflections. The ReflectionProbe is updated when its transform changes, but not when nearby geometry changes. You can force a ReflectionProbe update by moving the ReflectionProbe slightly in any direction.
-
-UpdateMode UPDATE_ALWAYS = 1
-
-Update the probe every frame. This provides better results for fast-moving dynamic objects (such as cars). However, it has a significant performance cost. Due to the cost, it's recommended to only use one ReflectionProbe with UPDATE_ALWAYS at most per scene. For all other use cases, use UPDATE_ONCE.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### UPDATE_ONCE {#UPDATE_ONCE}
 
@@ -448,7 +453,7 @@ Update the probe every frame. This provides better results for fast-moving dynam
 UPDATE_ONCE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Update the probe once on the next frame (recommended for most objects). The corresponding radiance map will be generated over the following six frames. This takes more time to update than UPDATE_ALWAYS, but it has a lower performance cost and can result in higher-quality reflections. The ReflectionProbe is updated when its transform changes, but not when nearby geometry changes. You can force a ReflectionProbe update by moving the ReflectionProbe slightly in any direction.
 
 #### UPDATE_ALWAYS {#UPDATE_ALWAYS}
 
@@ -456,7 +461,9 @@ UPDATE_ONCE = 0
 UPDATE_ALWAYS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Update the probe every frame. This provides better results for fast-moving dynamic objects (such as cars). However, it has a significant performance cost. Due to the cost, it's recommended to only use one ReflectionProbe with UPDATE_ALWAYS at most per scene. For all other use cases, use UPDATE_ONCE.
+
+---
 
 ### AmbientMode {#enum-AmbientMode}
 
@@ -464,17 +471,7 @@ UPDATE_ALWAYS = 1
 enum AmbientMode { AMBIENT_DISABLED = 0, AMBIENT_ENVIRONMENT = 1, AMBIENT_COLOR = 2 }
 ```
 
-AmbientMode AMBIENT_DISABLED = 0
-
-Do not apply any ambient lighting inside the ReflectionProbe's box defined by its size.
-
-AmbientMode AMBIENT_ENVIRONMENT = 1
-
-Apply automatically-sourced environment lighting inside the ReflectionProbe's box defined by its size.
-
-AmbientMode AMBIENT_COLOR = 2
-
-Apply custom ambient lighting inside the ReflectionProbe's box defined by its size. See ambient_color and ambient_color_energy.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AMBIENT_DISABLED {#AMBIENT_DISABLED}
 
@@ -482,7 +479,7 @@ Apply custom ambient lighting inside the ReflectionProbe's box defined by its si
 AMBIENT_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not apply any ambient lighting inside the ReflectionProbe's box defined by its size.
 
 #### AMBIENT_ENVIRONMENT {#AMBIENT_ENVIRONMENT}
 
@@ -490,7 +487,7 @@ AMBIENT_DISABLED = 0
 AMBIENT_ENVIRONMENT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Apply automatically-sourced environment lighting inside the ReflectionProbe's box defined by its size.
 
 #### AMBIENT_COLOR {#AMBIENT_COLOR}
 
@@ -498,4 +495,6 @@ AMBIENT_ENVIRONMENT = 1
 AMBIENT_COLOR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Apply custom ambient lighting inside the ReflectionProbe's box defined by its size. See ambient_color and ambient_color_energy.
+
+---

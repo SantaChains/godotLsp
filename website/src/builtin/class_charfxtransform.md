@@ -228,7 +228,10 @@ void set_visibility(visibility: bool)
 transform: Transform2D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_transform(value: Transform2D)
+- Transform2D get_transform()
+
+The current transform of the current glyph. It can be overridden (for example, by driving the position and rotation from a curve). You can also alter the existing value to apply transforms on top of other effects.
 
 ### range {#range}
 
@@ -236,7 +239,12 @@ transform: Transform2D
 range: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_range(value: Vector2i)
+- Vector2i get_range()
+
+Absolute character range in the string, corresponding to the glyph.
+
+Note: Read-only. Setting this property won't affect drawing.
 
 ### elapsed_time {#elapsed_time}
 
@@ -281,7 +289,10 @@ Note: Read-only. Setting this property won't affect drawing.
 offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset(value: Vector2)
+- Vector2 get_offset()
+
+The position offset the character will be drawn with (in pixels).
 
 ### color {#color}
 
@@ -289,7 +300,10 @@ offset: Vector2
 color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_color(value: Color)
+- Color get_color()
+
+The color the character will be drawn with.
 
 ### env {#env}
 
@@ -364,4 +378,9 @@ Note: Read-only. Setting this property won't affect drawing.
 font: RID
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_font(value: RID)
+- RID get_font()
+
+TextServer RID of the font used to render glyph, this value can be used with TextServer.font_* methods to retrieve font information.
+
+Note: Read-only. Setting this property won't affect drawing.

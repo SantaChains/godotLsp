@@ -118,4 +118,7 @@ void set_rest(rest: Transform2D)
 rest: Transform2D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_rest(value: Transform2D)
+- Transform2D get_rest()
+
+Rest transform of the bone. You can reset the node's transforms to this value using apply_rest().

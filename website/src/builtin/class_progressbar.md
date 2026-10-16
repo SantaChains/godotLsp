@@ -130,21 +130,7 @@ If false, the indeterminate animation will be paused in the editor.
 enum FillMode { FILL_BEGIN_TO_END = 0, FILL_END_TO_BEGIN = 1, FILL_TOP_TO_BOTTOM = 2, FILL_BOTTOM_TO_TOP = 3 }
 ```
 
-FillMode FILL_BEGIN_TO_END = 0
-
-The progress bar fills from begin to end horizontally, according to the language direction. If Control.is_layout_rtl() returns false, it fills from left to right, and if it returns true, it fills from right to left.
-
-FillMode FILL_END_TO_BEGIN = 1
-
-The progress bar fills from end to begin horizontally, according to the language direction. If Control.is_layout_rtl() returns false, it fills from right to left, and if it returns true, it fills from left to right.
-
-FillMode FILL_TOP_TO_BOTTOM = 2
-
-The progress fills from top to bottom.
-
-FillMode FILL_BOTTOM_TO_TOP = 3
-
-The progress fills from bottom to top.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FILL_BEGIN_TO_END {#FILL_BEGIN_TO_END}
 
@@ -152,7 +138,7 @@ The progress fills from bottom to top.
 FILL_BEGIN_TO_END = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The progress bar fills from begin to end horizontally, according to the language direction. If Control.is_layout_rtl() returns false, it fills from left to right, and if it returns true, it fills from right to left.
 
 #### FILL_END_TO_BEGIN {#FILL_END_TO_BEGIN}
 
@@ -160,7 +146,7 @@ FILL_BEGIN_TO_END = 0
 FILL_END_TO_BEGIN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The progress bar fills from end to begin horizontally, according to the language direction. If Control.is_layout_rtl() returns false, it fills from right to left, and if it returns true, it fills from left to right.
 
 #### FILL_TOP_TO_BOTTOM {#FILL_TOP_TO_BOTTOM}
 
@@ -168,7 +154,7 @@ FILL_END_TO_BEGIN = 1
 FILL_TOP_TO_BOTTOM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The progress fills from top to bottom.
 
 #### FILL_BOTTOM_TO_TOP {#FILL_BOTTOM_TO_TOP}
 
@@ -176,4 +162,6 @@ FILL_TOP_TO_BOTTOM = 2
 FILL_BOTTOM_TO_TOP = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The progress fills from bottom to top.
+
+---

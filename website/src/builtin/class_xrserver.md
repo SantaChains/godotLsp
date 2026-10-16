@@ -217,7 +217,12 @@ The scale of the game world compared to the real world. By default, most AR/VR p
 world_origin: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_world_origin(value: Transform3D)
+- Transform3D get_world_origin()
+
+The current origin of our tracking space in the virtual world. This is used by the renderer to properly position the camera with new tracking data.
+
+Note: This property is managed by the current XROrigin3D node. It is exposed for access from GDExtensions.
 
 ### camera_locked_to_origin {#camera_locked_to_origin}
 
@@ -309,45 +314,7 @@ Emitted when the world origin transform changes.
 enum TrackerType { TRACKER_HEAD = 1, TRACKER_CONTROLLER = 2, TRACKER_BASESTATION = 4, TRACKER_ANCHOR = 8, TRACKER_HAND = 16, TRACKER_BODY = 32, TRACKER_FACE = 64, TRACKER_ANY_KNOWN = 127, TRACKER_UNKNOWN = 128, TRACKER_ANY = 255 }
 ```
 
-TrackerType TRACKER_HEAD = 1
-
-The tracker tracks the location of the player's head. This is usually a location centered between the player's eyes. Note that for handheld AR devices this can be the current location of the device.
-
-TrackerType TRACKER_CONTROLLER = 2
-
-The tracker tracks the location of a controller.
-
-TrackerType TRACKER_BASESTATION = 4
-
-The tracker tracks the location of a base station.
-
-TrackerType TRACKER_ANCHOR = 8
-
-The tracker tracks the location and size of an AR anchor.
-
-TrackerType TRACKER_HAND = 16
-
-The tracker tracks the location and joints of a hand.
-
-TrackerType TRACKER_BODY = 32
-
-The tracker tracks the location and joints of a body.
-
-TrackerType TRACKER_FACE = 64
-
-The tracker tracks the expressions of a face.
-
-TrackerType TRACKER_ANY_KNOWN = 127
-
-Used internally to filter trackers of any known type.
-
-TrackerType TRACKER_UNKNOWN = 128
-
-Used internally if we haven't set the tracker type yet.
-
-TrackerType TRACKER_ANY = 255
-
-Used internally to select all trackers.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TRACKER_HEAD {#TRACKER_HEAD}
 
@@ -355,7 +322,7 @@ Used internally to select all trackers.
 TRACKER_HEAD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The tracker tracks the location of the player's head. This is usually a location centered between the player's eyes. Note that for handheld AR devices this can be the current location of the device.
 
 #### TRACKER_CONTROLLER {#TRACKER_CONTROLLER}
 
@@ -363,7 +330,7 @@ TRACKER_HEAD = 1
 TRACKER_CONTROLLER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The tracker tracks the location of a controller.
 
 #### TRACKER_BASESTATION {#TRACKER_BASESTATION}
 
@@ -371,7 +338,7 @@ TRACKER_CONTROLLER = 2
 TRACKER_BASESTATION = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The tracker tracks the location of a base station.
 
 #### TRACKER_ANCHOR {#TRACKER_ANCHOR}
 
@@ -379,7 +346,7 @@ TRACKER_BASESTATION = 4
 TRACKER_ANCHOR = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The tracker tracks the location and size of an AR anchor.
 
 #### TRACKER_HAND {#TRACKER_HAND}
 
@@ -387,7 +354,7 @@ TRACKER_ANCHOR = 8
 TRACKER_HAND = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The tracker tracks the location and joints of a hand.
 
 #### TRACKER_BODY {#TRACKER_BODY}
 
@@ -395,7 +362,7 @@ TRACKER_HAND = 16
 TRACKER_BODY = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The tracker tracks the location and joints of a body.
 
 #### TRACKER_FACE {#TRACKER_FACE}
 
@@ -403,7 +370,7 @@ TRACKER_BODY = 32
 TRACKER_FACE = 64
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The tracker tracks the expressions of a face.
 
 #### TRACKER_ANY_KNOWN {#TRACKER_ANY_KNOWN}
 
@@ -411,7 +378,7 @@ TRACKER_FACE = 64
 TRACKER_ANY_KNOWN = 127
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used internally to filter trackers of any known type.
 
 #### TRACKER_UNKNOWN {#TRACKER_UNKNOWN}
 
@@ -419,7 +386,7 @@ TRACKER_ANY_KNOWN = 127
 TRACKER_UNKNOWN = 128
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used internally if we haven't set the tracker type yet.
 
 #### TRACKER_ANY {#TRACKER_ANY}
 
@@ -427,7 +394,9 @@ TRACKER_UNKNOWN = 128
 TRACKER_ANY = 255
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Used internally to select all trackers.
+
+---
 
 ### RotationMode {#enum-RotationMode}
 
@@ -435,17 +404,7 @@ TRACKER_ANY = 255
 enum RotationMode { RESET_FULL_ROTATION = 0, RESET_BUT_KEEP_TILT = 1, DONT_RESET_ROTATION = 2 }
 ```
 
-RotationMode RESET_FULL_ROTATION = 0
-
-Fully reset the orientation of the HMD. Regardless of what direction the user is looking to in the real world. The user will look dead ahead in the virtual world.
-
-RotationMode RESET_BUT_KEEP_TILT = 1
-
-Resets the orientation but keeps the tilt of the device. So if we're looking down, we keep looking down but heading will be reset.
-
-RotationMode DONT_RESET_ROTATION = 2
-
-Does not reset the orientation of the HMD, only the position of the player gets centered.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RESET_FULL_ROTATION {#RESET_FULL_ROTATION}
 
@@ -453,7 +412,7 @@ Does not reset the orientation of the HMD, only the position of the player gets 
 RESET_FULL_ROTATION = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Fully reset the orientation of the HMD. Regardless of what direction the user is looking to in the real world. The user will look dead ahead in the virtual world.
 
 #### RESET_BUT_KEEP_TILT {#RESET_BUT_KEEP_TILT}
 
@@ -461,7 +420,7 @@ RESET_FULL_ROTATION = 0
 RESET_BUT_KEEP_TILT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Resets the orientation but keeps the tilt of the device. So if we're looking down, we keep looking down but heading will be reset.
 
 #### DONT_RESET_ROTATION {#DONT_RESET_ROTATION}
 
@@ -469,4 +428,6 @@ RESET_BUT_KEEP_TILT = 1
 DONT_RESET_ROTATION = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Does not reset the orientation of the HMD, only the position of the player gets centered.
+
+---

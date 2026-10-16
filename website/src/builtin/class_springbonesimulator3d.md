@@ -750,7 +750,12 @@ Sets the stiffness force damping curve of the bone chain.
 external_force: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_external_force(value: Vector3)
+- Vector3 get_external_force()
+
+The constant force that always affected bones. It is equal to the result when the parent Skeleton3D moves at this speed in the opposite direction.
+
+This is useful for effects such as wind and anti-gravity.
 
 ### mutable_bone_axes {#mutable_bone_axes}
 
@@ -784,21 +789,7 @@ The number of settings.
 enum CenterFrom { CENTER_FROM_WORLD_ORIGIN = 0, CENTER_FROM_NODE = 1, CENTER_FROM_BONE = 2 }
 ```
 
-CenterFrom CENTER_FROM_WORLD_ORIGIN = 0
-
-The world origin is defined as center.
-
-CenterFrom CENTER_FROM_NODE = 1
-
-The Node3D specified by set_center_node() is defined as center.
-
-If Node3D is not found, the parent Skeleton3D is treated as center.
-
-CenterFrom CENTER_FROM_BONE = 2
-
-The bone pose origin of the parent Skeleton3D specified by set_center_bone() is defined as center.
-
-If Node3D is not found, the parent Skeleton3D is treated as center.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CENTER_FROM_WORLD_ORIGIN {#CENTER_FROM_WORLD_ORIGIN}
 
@@ -806,7 +797,7 @@ If Node3D is not found, the parent Skeleton3D is treated as center.
 CENTER_FROM_WORLD_ORIGIN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The world origin is defined as center.
 
 #### CENTER_FROM_NODE {#CENTER_FROM_NODE}
 
@@ -814,7 +805,9 @@ CENTER_FROM_WORLD_ORIGIN = 0
 CENTER_FROM_NODE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Node3D specified by set_center_node() is defined as center.
+
+If Node3D is not found, the parent Skeleton3D is treated as center.
 
 #### CENTER_FROM_BONE {#CENTER_FROM_BONE}
 
@@ -822,4 +815,8 @@ CENTER_FROM_NODE = 1
 CENTER_FROM_BONE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The bone pose origin of the parent Skeleton3D specified by set_center_bone() is defined as center.
+
+If Node3D is not found, the parent Skeleton3D is treated as center.
+
+---

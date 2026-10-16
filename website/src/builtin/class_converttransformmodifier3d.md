@@ -223,17 +223,7 @@ The number of settings in the modifier.
 enum TransformMode { TRANSFORM_MODE_POSITION = 0, TRANSFORM_MODE_ROTATION = 1, TRANSFORM_MODE_SCALE = 2 }
 ```
 
-TransformMode TRANSFORM_MODE_POSITION = 0
-
-Convert with position. Transfer the difference.
-
-TransformMode TRANSFORM_MODE_ROTATION = 1
-
-Convert with rotation. The angle is the roll for the specified axis.
-
-TransformMode TRANSFORM_MODE_SCALE = 2
-
-Convert with scale. Transfers the ratio, not the difference.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TRANSFORM_MODE_POSITION {#TRANSFORM_MODE_POSITION}
 
@@ -241,7 +231,7 @@ Convert with scale. Transfers the ratio, not the difference.
 TRANSFORM_MODE_POSITION = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Convert with position. Transfer the difference.
 
 #### TRANSFORM_MODE_ROTATION {#TRANSFORM_MODE_ROTATION}
 
@@ -249,7 +239,7 @@ TRANSFORM_MODE_POSITION = 0
 TRANSFORM_MODE_ROTATION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Convert with rotation. The angle is the roll for the specified axis.
 
 #### TRANSFORM_MODE_SCALE {#TRANSFORM_MODE_SCALE}
 
@@ -257,4 +247,6 @@ TRANSFORM_MODE_ROTATION = 1
 TRANSFORM_MODE_SCALE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Convert with scale. Transfers the ratio, not the difference.
+
+---

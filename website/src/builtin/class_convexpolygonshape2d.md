@@ -50,4 +50,11 @@ void set_points(points: PackedVector2Array)
 points: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_points(value: PackedVector2Array)
+- PackedVector2Array get_points()
+
+The polygon's list of vertices that form a convex hull. Can be in either clockwise or counterclockwise order.
+
+Warning: Only set this property to a list of points that actually form a convex hull. Use set_point_cloud() to generate the convex hull of an arbitrary set of points.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.

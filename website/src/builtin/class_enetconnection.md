@@ -188,25 +188,7 @@ This requires forward knowledge of a prospective client's address and communicat
 enum CompressionMode { COMPRESS_NONE = 0, COMPRESS_RANGE_CODER = 1, COMPRESS_FASTLZ = 2, COMPRESS_ZLIB = 3, COMPRESS_ZSTD = 4 }
 ```
 
-CompressionMode COMPRESS_NONE = 0
-
-No compression. This uses the most bandwidth, but has the upside of requiring the fewest CPU resources. This option may also be used to make network debugging using tools like Wireshark easier.
-
-CompressionMode COMPRESS_RANGE_CODER = 1
-
-ENet's built-in range encoding. Works well on small packets, but is not the most efficient algorithm on packets larger than 4 KB.
-
-CompressionMode COMPRESS_FASTLZ = 2
-
-FastLZ [https://fastlz.org/] compression. This option uses less CPU resources compared to COMPRESS_ZLIB, at the expense of using more bandwidth.
-
-CompressionMode COMPRESS_ZLIB = 3
-
-Zlib [https://www.zlib.net/] compression. This option uses less bandwidth compared to COMPRESS_FASTLZ, at the expense of using more CPU resources.
-
-CompressionMode COMPRESS_ZSTD = 4
-
-Zstandard [https://facebook.github.io/zstd/] compression. Note that this algorithm is not very efficient on packets smaller than 4 KB. Therefore, it's recommended to use other compression algorithms in most cases.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### COMPRESS_NONE {#COMPRESS_NONE}
 
@@ -214,7 +196,7 @@ Zstandard [https://facebook.github.io/zstd/] compression. Note that this algorit
 COMPRESS_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No compression. This uses the most bandwidth, but has the upside of requiring the fewest CPU resources. This option may also be used to make network debugging using tools like Wireshark easier.
 
 #### COMPRESS_RANGE_CODER {#COMPRESS_RANGE_CODER}
 
@@ -222,7 +204,7 @@ COMPRESS_NONE = 0
 COMPRESS_RANGE_CODER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+ENet's built-in range encoding. Works well on small packets, but is not the most efficient algorithm on packets larger than 4 KB.
 
 #### COMPRESS_FASTLZ {#COMPRESS_FASTLZ}
 
@@ -230,7 +212,7 @@ COMPRESS_RANGE_CODER = 1
 COMPRESS_FASTLZ = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+FastLZ [https://fastlz.org/] compression. This option uses less CPU resources compared to COMPRESS_ZLIB, at the expense of using more bandwidth.
 
 #### COMPRESS_ZLIB {#COMPRESS_ZLIB}
 
@@ -238,7 +220,7 @@ COMPRESS_FASTLZ = 2
 COMPRESS_ZLIB = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Zlib [https://www.zlib.net/] compression. This option uses less bandwidth compared to COMPRESS_FASTLZ, at the expense of using more CPU resources.
 
 #### COMPRESS_ZSTD {#COMPRESS_ZSTD}
 
@@ -246,7 +228,9 @@ COMPRESS_ZLIB = 3
 COMPRESS_ZSTD = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Zstandard [https://facebook.github.io/zstd/] compression. Note that this algorithm is not very efficient on packets smaller than 4 KB. Therefore, it's recommended to use other compression algorithms in most cases.
+
+---
 
 ### EventType {#enum-EventType}
 
@@ -254,25 +238,7 @@ COMPRESS_ZSTD = 4
 enum EventType { EVENT_ERROR = -1, EVENT_NONE = 0, EVENT_CONNECT = 1, EVENT_DISCONNECT = 2, EVENT_RECEIVE = 3 }
 ```
 
-EventType EVENT_ERROR = -1
-
-An error occurred during service(). You will likely need to destroy() the host and recreate it.
-
-EventType EVENT_NONE = 0
-
-No event occurred within the specified time limit.
-
-EventType EVENT_CONNECT = 1
-
-A connection request initiated by enet_host_connect has completed. The array will contain the peer which successfully connected.
-
-EventType EVENT_DISCONNECT = 2
-
-A peer has disconnected. This event is generated on a successful completion of a disconnect initiated by ENetPacketPeer.peer_disconnect(), if a peer has timed out, or if a connection request initialized by connect_to_host() has timed out. The array will contain the peer which disconnected. The data field contains user supplied data describing the disconnection, or 0, if none is available.
-
-EventType EVENT_RECEIVE = 3
-
-A packet has been received from a peer. The array will contain the peer which sent the packet and the channel number upon which the packet was received. The received packet will be queued to the associated ENetPacketPeer.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EVENT_ERROR {#EVENT_ERROR}
 
@@ -280,7 +246,7 @@ A packet has been received from a peer. The array will contain the peer which se
 EVENT_ERROR = -1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An error occurred during service(). You will likely need to destroy() the host and recreate it.
 
 #### EVENT_NONE {#EVENT_NONE}
 
@@ -288,7 +254,7 @@ EVENT_ERROR = -1
 EVENT_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No event occurred within the specified time limit.
 
 #### EVENT_CONNECT {#EVENT_CONNECT}
 
@@ -296,7 +262,7 @@ EVENT_NONE = 0
 EVENT_CONNECT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A connection request initiated by enet_host_connect has completed. The array will contain the peer which successfully connected.
 
 #### EVENT_DISCONNECT {#EVENT_DISCONNECT}
 
@@ -304,7 +270,7 @@ EVENT_CONNECT = 1
 EVENT_DISCONNECT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A peer has disconnected. This event is generated on a successful completion of a disconnect initiated by ENetPacketPeer.peer_disconnect(), if a peer has timed out, or if a connection request initialized by connect_to_host() has timed out. The array will contain the peer which disconnected. The data field contains user supplied data describing the disconnection, or 0, if none is available.
 
 #### EVENT_RECEIVE {#EVENT_RECEIVE}
 
@@ -312,7 +278,9 @@ EVENT_DISCONNECT = 2
 EVENT_RECEIVE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A packet has been received from a peer. The array will contain the peer which sent the packet and the channel number upon which the packet was received. The received packet will be queued to the associated ENetPacketPeer.
+
+---
 
 ### HostStatistic {#enum-HostStatistic}
 
@@ -320,21 +288,7 @@ EVENT_RECEIVE = 3
 enum HostStatistic { HOST_TOTAL_SENT_DATA = 0, HOST_TOTAL_SENT_PACKETS = 1, HOST_TOTAL_RECEIVED_DATA = 2, HOST_TOTAL_RECEIVED_PACKETS = 3 }
 ```
 
-HostStatistic HOST_TOTAL_SENT_DATA = 0
-
-Total data sent.
-
-HostStatistic HOST_TOTAL_SENT_PACKETS = 1
-
-Total UDP packets sent.
-
-HostStatistic HOST_TOTAL_RECEIVED_DATA = 2
-
-Total data received.
-
-HostStatistic HOST_TOTAL_RECEIVED_PACKETS = 3
-
-Total UDP packets received.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HOST_TOTAL_SENT_DATA {#HOST_TOTAL_SENT_DATA}
 
@@ -342,7 +296,7 @@ Total UDP packets received.
 HOST_TOTAL_SENT_DATA = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Total data sent.
 
 #### HOST_TOTAL_SENT_PACKETS {#HOST_TOTAL_SENT_PACKETS}
 
@@ -350,7 +304,7 @@ HOST_TOTAL_SENT_DATA = 0
 HOST_TOTAL_SENT_PACKETS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Total UDP packets sent.
 
 #### HOST_TOTAL_RECEIVED_DATA {#HOST_TOTAL_RECEIVED_DATA}
 
@@ -358,7 +312,7 @@ HOST_TOTAL_SENT_PACKETS = 1
 HOST_TOTAL_RECEIVED_DATA = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Total data received.
 
 #### HOST_TOTAL_RECEIVED_PACKETS {#HOST_TOTAL_RECEIVED_PACKETS}
 
@@ -366,4 +320,6 @@ HOST_TOTAL_RECEIVED_DATA = 2
 HOST_TOTAL_RECEIVED_PACKETS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Total UDP packets received.
+
+---

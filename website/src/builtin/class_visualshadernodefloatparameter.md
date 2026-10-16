@@ -184,21 +184,7 @@ A default value to be assigned within the shader.
 enum Hint { HINT_NONE = 0, HINT_RANGE = 1, HINT_RANGE_STEP = 2, HINT_MAX = 3 }
 ```
 
-Hint HINT_NONE = 0
-
-No hint used.
-
-Hint HINT_RANGE = 1
-
-A range hint for scalar value, which limits possible input values between min and max. Translated to hint_range(min, max) in shader code.
-
-Hint HINT_RANGE_STEP = 2
-
-A range hint for scalar value with step, which limits possible input values between min and max, with a step (increment) of step). Translated to hint_range(min, max, step) in shader code.
-
-Hint HINT_MAX = 3
-
-Represents the size of the Hint enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HINT_NONE {#HINT_NONE}
 
@@ -206,7 +192,7 @@ Represents the size of the Hint enum.
 HINT_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No hint used.
 
 #### HINT_RANGE {#HINT_RANGE}
 
@@ -214,7 +200,7 @@ HINT_NONE = 0
 HINT_RANGE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A range hint for scalar value, which limits possible input values between min and max. Translated to hint_range(min, max) in shader code.
 
 #### HINT_RANGE_STEP {#HINT_RANGE_STEP}
 
@@ -222,7 +208,7 @@ HINT_RANGE = 1
 HINT_RANGE_STEP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A range hint for scalar value with step, which limits possible input values between min and max, with a step (increment) of step). Translated to hint_range(min, max, step) in shader code.
 
 #### HINT_MAX {#HINT_MAX}
 
@@ -230,4 +216,6 @@ HINT_RANGE_STEP = 2
 HINT_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Hint enum.
+
+---

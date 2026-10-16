@@ -1249,7 +1249,14 @@ Specifies the initial type of position for the Window.
 position: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_position(value: Vector2i)
+- Vector2i get_position()
+
+The window's position in pixels.
+
+If ProjectSettings.display/window/subwindows/embed_subwindows is false, the position is in absolute screen coordinates. This typically applies to editor plugins. If the setting is true, the window's position is in the coordinates of its parent Viewport.
+
+Note: This property only works if initial_position is set to WINDOW_INITIAL_POSITION_ABSOLUTE.
 
 ### size {#size}
 
@@ -1257,7 +1264,10 @@ position: Vector2i
 size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector2i)
+- Vector2i get_size()
+
+The window's size in pixels. See also content_scale_size, which doesn't set the window's physical size but affects how scaling works relative to the current content_scale_mode.
 
 ### current_screen {#current_screen}
 
@@ -1276,7 +1286,10 @@ The screen the window is currently on.
 nonclient_area: Rect2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_nonclient_area(value: Rect2i)
+- Rect2i get_nonclient_area()
+
+If set, defines the window's custom decoration area which will receive mouse input, even if normal input to the window is blocked (such as when it has an exclusive child opened). See also nonclient_window_input.
 
 ### mouse_passthrough_polygon {#mouse_passthrough_polygon}
 
@@ -1284,7 +1297,38 @@ nonclient_area: Rect2i
 mouse_passthrough_polygon: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_mouse_passthrough_polygon(value: PackedVector2Array)
+- PackedVector2Array get_mouse_passthrough_polygon()
+
+Sets a polygonal region of the window which accepts mouse events. Mouse events outside the region will be passed through.
+
+Passing an empty array will disable passthrough support (all mouse events will be intercepted by the window, which is the default behavior).
+
+```
+# Set region, using Path2D node.
+$Window.mouse_passthrough_polygon = $Path2D.curve.get_baked_points()
+# Set region, using Polygon2D node.
+$Window.mouse_passthrough_polygon = $Polygon2D.polygon
+# Reset region to default.
+$Window.mouse_passthrough_polygon = []
+```
+
+```
+// Set region, using Path2D node.
+GetNode("Window").MousePassthroughPolygon = GetNode("Path2D").Curve.GetBakedPoints();
+// Set region, using Polygon2D node.
+GetNode("Window").MousePassthroughPolygon = GetNode("Polygon2D").Polygon;
+// Reset region to default.
+GetNode("Window").MousePassthroughPolygon = [];
+```
+
+Note: This property is ignored if mouse_passthrough is set to true.
+
+Note: On Windows, the portion of a window that lies outside the region is not drawn, while on Linux (X11) and macOS it is.
+
+Note: This property is implemented on Linux (X11), macOS and Windows.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.
 
 ### visible {#visible}
 
@@ -1535,7 +1579,12 @@ If true, native window will be used regardless of parent viewport and project se
 min_size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_min_size(value: Vector2i)
+- Vector2i get_min_size()
+
+If non-zero, the Window can't be resized to be smaller than this size.
+
+Note: This property will be ignored in favor of get_contents_minimum_size() if wrap_controls is enabled and if its size is bigger.
 
 ### max_size {#max_size}
 
@@ -1543,7 +1592,12 @@ min_size: Vector2i
 max_size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_max_size(value: Vector2i)
+- Vector2i get_max_size()
+
+If non-zero, the Window can't be resized to be bigger than this size.
+
+Note: This property will be ignored if the value is lower than min_size.
 
 ### keep_title_visible {#keep_title_visible}
 
@@ -1562,7 +1616,14 @@ If true, the Window width is expanded to keep the title bar text fully visible.
 content_scale_size: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_content_scale_size(value: Vector2i)
+- Vector2i get_content_scale_size()
+
+The content's base size in "virtual" pixels. Not to be confused with size, which sets the actual window's physical size in pixels. If set to a value greater than 0 and content_scale_mode is set to a value other than CONTENT_SCALE_MODE_DISABLED, the Window's content will be scaled when the window is resized to a different size. Higher values will make the content appear smaller, as it will be able to fit more of the project in view. On the root Window, this is set to match ProjectSettings.display/window/size/viewport_width and ProjectSettings.display/window/size/viewport_height by default.
+
+For example, when using CONTENT_SCALE_MODE_CANVAS_ITEMS and content_scale_size set to Vector2i(1280, 720), using a window size of 2560×1440 will make 2D elements appear at double their original size, as the content is scaled by a factor of 2.0 (2560.0 / 1280.0 = 2.0, 1440.0 / 720.0 = 2.0).
+
+See the Base size section of the Multiple resolutions documentation for details.
 
 ### content_scale_mode {#content_scale_mode}
 
@@ -1829,19 +1890,37 @@ Emitted when the output max linear value returned by get_output_max_linear_value
 enum Mode { MODE_WINDOWED = 0, MODE_MINIMIZED = 1, MODE_MAXIMIZED = 2, MODE_FULLSCREEN = 3, MODE_EXCLUSIVE_FULLSCREEN = 4 }
 ```
 
-Mode MODE_WINDOWED = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### MODE_WINDOWED {#MODE_WINDOWED}
+
+```gdscript
+MODE_WINDOWED = 0
+```
 
 Windowed mode, i.e. Window doesn't occupy the whole screen (unless set to the size of the screen).
 
-Mode MODE_MINIMIZED = 1
+#### MODE_MINIMIZED {#MODE_MINIMIZED}
+
+```gdscript
+MODE_MINIMIZED = 1
+```
 
 Minimized window mode, i.e. Window is not visible and available on window manager's window list. Normally happens when the minimize button is pressed.
 
-Mode MODE_MAXIMIZED = 2
+#### MODE_MAXIMIZED {#MODE_MAXIMIZED}
+
+```gdscript
+MODE_MAXIMIZED = 2
+```
 
 Maximized window mode, i.e. Window will occupy whole screen area except task bar and still display its borders. Normally happens when the maximize button is pressed.
 
-Mode MODE_FULLSCREEN = 3
+#### MODE_FULLSCREEN {#MODE_FULLSCREEN}
+
+```gdscript
+MODE_FULLSCREEN = 3
+```
 
 Full screen mode with full multi-window support.
 
@@ -1853,7 +1932,11 @@ On macOS: A new desktop is used to display the running project.
 
 Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports multiple resolutions when enabling full screen mode.
 
-Mode MODE_EXCLUSIVE_FULLSCREEN = 4
+#### MODE_EXCLUSIVE_FULLSCREEN {#MODE_EXCLUSIVE_FULLSCREEN}
+
+```gdscript
+MODE_EXCLUSIVE_FULLSCREEN = 4
+```
 
 A single window full screen mode. This mode has less overhead, but only one window can be open on a given screen at a time (opening a child window or application switching will trigger a full screen transition).
 
@@ -1873,45 +1956,7 @@ On Linux (Wayland): Equivalent to MODE_FULLSCREEN.
 
 Note: Regardless of the platform, enabling full screen will change the window size to match the monitor's size. Therefore, make sure your project supports multiple resolutions when enabling full screen mode.
 
-#### MODE_WINDOWED {#MODE_WINDOWED}
-
-```gdscript
-MODE_WINDOWED = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### MODE_MINIMIZED {#MODE_MINIMIZED}
-
-```gdscript
-MODE_MINIMIZED = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### MODE_MAXIMIZED {#MODE_MAXIMIZED}
-
-```gdscript
-MODE_MAXIMIZED = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### MODE_FULLSCREEN {#MODE_FULLSCREEN}
-
-```gdscript
-MODE_FULLSCREEN = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### MODE_EXCLUSIVE_FULLSCREEN {#MODE_EXCLUSIVE_FULLSCREEN}
-
-```gdscript
-MODE_EXCLUSIVE_FULLSCREEN = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+---
 
 ### Flags {#enum-Flags}
 
@@ -1919,25 +1964,43 @@ MODE_EXCLUSIVE_FULLSCREEN = 4
 enum Flags { FLAG_RESIZE_DISABLED = 0, FLAG_BORDERLESS = 1, FLAG_ALWAYS_ON_TOP = 2, FLAG_TRANSPARENT = 3, FLAG_NO_FOCUS = 4, FLAG_POPUP = 5, FLAG_EXTEND_TO_TITLE = 6, FLAG_MOUSE_PASSTHROUGH = 7, FLAG_SHARP_CORNERS = 8, FLAG_EXCLUDE_FROM_CAPTURE = 9, FLAG_POPUP_WM_HINT = 10, FLAG_MINIMIZE_DISABLED = 11, FLAG_MAXIMIZE_DISABLED = 12, FLAG_MAX = 13 }
 ```
 
-Flags FLAG_RESIZE_DISABLED = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### FLAG_RESIZE_DISABLED {#FLAG_RESIZE_DISABLED}
+
+```gdscript
+FLAG_RESIZE_DISABLED = 0
+```
 
 The window can't be resized by dragging its resize grip. It's still possible to resize the window using size. This flag is ignored for full screen windows. Set with unresizable.
 
 Note: This flag is implemented on Linux (X11), macOS, Windows, and embedded windows.
 
-Flags FLAG_BORDERLESS = 1
+#### FLAG_BORDERLESS {#FLAG_BORDERLESS}
+
+```gdscript
+FLAG_BORDERLESS = 1
+```
 
 The window do not have native title bar and other decorations. This flag is ignored for full-screen windows. Set with borderless.
 
 Note: This flag is implemented on Linux (X11/Wayland), macOS, Windows, and embedded windows.
 
-Flags FLAG_ALWAYS_ON_TOP = 2
+#### FLAG_ALWAYS_ON_TOP {#FLAG_ALWAYS_ON_TOP}
+
+```gdscript
+FLAG_ALWAYS_ON_TOP = 2
+```
 
 The window is floating on top of all other windows. This flag is ignored for full-screen windows. Set with always_on_top.
 
 Note: This flag is implemented on Linux (X11), macOS, Windows, and embedded windows.
 
-Flags FLAG_TRANSPARENT = 3
+#### FLAG_TRANSPARENT {#FLAG_TRANSPARENT}
+
+```gdscript
+FLAG_TRANSPARENT = 3
+```
 
 The window background can be transparent. Set with transparent.
 
@@ -1945,19 +2008,31 @@ Note: This flag has no effect if either ProjectSettings.display/window/per_pixel
 
 Note: Transparency support is implemented on Linux (X11/Wayland), macOS, Windows, and embedded windows.
 
-Flags FLAG_NO_FOCUS = 4
+#### FLAG_NO_FOCUS {#FLAG_NO_FOCUS}
+
+```gdscript
+FLAG_NO_FOCUS = 4
+```
 
 The window can't be focused. No-focus window will ignore all input, except mouse clicks. Set with unfocusable.
 
 Note: This flag is implemented on Linux (X11), macOS, Windows, and embedded windows.
 
-Flags FLAG_POPUP = 5
+#### FLAG_POPUP {#FLAG_POPUP}
+
+```gdscript
+FLAG_POPUP = 5
+```
 
 Window is part of menu or OptionButton dropdown. This flag can't be changed when the window is visible. An active popup window will exclusively receive all input, without stealing focus from its parent. Popup windows are automatically closed when uses click outside it, or when an application is switched. Popup window must have transient parent set (see transient).
 
 Note: This flag is implemented on Linux (X11/Wayland), macOS, Windows, and embedded Popup windows.
 
-Flags FLAG_EXTEND_TO_TITLE = 6
+#### FLAG_EXTEND_TO_TITLE {#FLAG_EXTEND_TO_TITLE}
+
+```gdscript
+FLAG_EXTEND_TO_TITLE = 6
+```
 
 Window content is expanded to the full size of the window. Unlike borderless window, the frame is left intact and can be used to resize the window, title bar is transparent, but have minimize/maximize/close buttons. Set with extend_to_title.
 
@@ -1965,7 +2040,11 @@ Note: This flag has no effect in embedded windows.
 
 Note: This flag is implemented only on macOS.
 
-Flags FLAG_MOUSE_PASSTHROUGH = 7
+#### FLAG_MOUSE_PASSTHROUGH {#FLAG_MOUSE_PASSTHROUGH}
+
+```gdscript
+FLAG_MOUSE_PASSTHROUGH = 7
+```
 
 All mouse events are passed to the underlying window of the same application.
 
@@ -1973,7 +2052,11 @@ Note: This flag has no effect in embedded windows.
 
 Note: This flag is implemented on Linux (X11), macOS, Windows.
 
-Flags FLAG_SHARP_CORNERS = 8
+#### FLAG_SHARP_CORNERS {#FLAG_SHARP_CORNERS}
+
+```gdscript
+FLAG_SHARP_CORNERS = 8
+```
 
 Window style is overridden, forcing sharp corners.
 
@@ -1981,7 +2064,11 @@ Note: This flag has no effect in embedded windows.
 
 Note: This flag is implemented only on Windows (11).
 
-Flags FLAG_EXCLUDE_FROM_CAPTURE = 9
+#### FLAG_EXCLUDE_FROM_CAPTURE {#FLAG_EXCLUDE_FROM_CAPTURE}
+
+```gdscript
+FLAG_EXCLUDE_FROM_CAPTURE = 9
+```
 
 Windows is excluded from screenshots taken by DisplayServer.screen_get_image(), DisplayServer.screen_get_image_rect(), and DisplayServer.screen_get_pixel().
 
@@ -1991,7 +2078,11 @@ Note: This flag is implemented on macOS and Windows (10, 20H1).
 
 Note: Setting this flag will prevent standard screenshot methods from capturing a window image, but does NOT guarantee that other apps won't be able to capture an image. It should not be used as a DRM or security measure.
 
-Flags FLAG_POPUP_WM_HINT = 10
+#### FLAG_POPUP_WM_HINT {#FLAG_POPUP_WM_HINT}
+
+```gdscript
+FLAG_POPUP_WM_HINT = 10
+```
 
 Signals the window manager that this window is supposed to be an implementation-defined "popup" (usually a floating, borderless, untileable and immovable child window).
 
@@ -1999,7 +2090,11 @@ Note: This flag has no effect in embedded windows.
 
 Note: This flag is implemented on Linux (Wayland).
 
-Flags FLAG_MINIMIZE_DISABLED = 11
+#### FLAG_MINIMIZE_DISABLED {#FLAG_MINIMIZE_DISABLED}
+
+```gdscript
+FLAG_MINIMIZE_DISABLED = 11
+```
 
 Window minimize button is disabled.
 
@@ -2007,7 +2102,11 @@ Note: This flag has no effect in embedded windows.
 
 Note: This flag is implemented on Linux (X11), macOS, and Windows.
 
-Flags FLAG_MAXIMIZE_DISABLED = 12
+#### FLAG_MAXIMIZE_DISABLED {#FLAG_MAXIMIZE_DISABLED}
+
+```gdscript
+FLAG_MAXIMIZE_DISABLED = 12
+```
 
 Window maximize button is disabled.
 
@@ -2015,121 +2114,15 @@ Note: This flag has no effect in embedded windows.
 
 Note: This flag is implemented on Linux (X11), macOS, and Windows.
 
-Flags FLAG_MAX = 13
-
-Max value of the Flags.
-
-#### FLAG_RESIZE_DISABLED {#FLAG_RESIZE_DISABLED}
-
-```gdscript
-FLAG_RESIZE_DISABLED = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_BORDERLESS {#FLAG_BORDERLESS}
-
-```gdscript
-FLAG_BORDERLESS = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_ALWAYS_ON_TOP {#FLAG_ALWAYS_ON_TOP}
-
-```gdscript
-FLAG_ALWAYS_ON_TOP = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_TRANSPARENT {#FLAG_TRANSPARENT}
-
-```gdscript
-FLAG_TRANSPARENT = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_NO_FOCUS {#FLAG_NO_FOCUS}
-
-```gdscript
-FLAG_NO_FOCUS = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_POPUP {#FLAG_POPUP}
-
-```gdscript
-FLAG_POPUP = 5
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_EXTEND_TO_TITLE {#FLAG_EXTEND_TO_TITLE}
-
-```gdscript
-FLAG_EXTEND_TO_TITLE = 6
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_MOUSE_PASSTHROUGH {#FLAG_MOUSE_PASSTHROUGH}
-
-```gdscript
-FLAG_MOUSE_PASSTHROUGH = 7
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_SHARP_CORNERS {#FLAG_SHARP_CORNERS}
-
-```gdscript
-FLAG_SHARP_CORNERS = 8
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_EXCLUDE_FROM_CAPTURE {#FLAG_EXCLUDE_FROM_CAPTURE}
-
-```gdscript
-FLAG_EXCLUDE_FROM_CAPTURE = 9
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_POPUP_WM_HINT {#FLAG_POPUP_WM_HINT}
-
-```gdscript
-FLAG_POPUP_WM_HINT = 10
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_MINIMIZE_DISABLED {#FLAG_MINIMIZE_DISABLED}
-
-```gdscript
-FLAG_MINIMIZE_DISABLED = 11
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### FLAG_MAXIMIZE_DISABLED {#FLAG_MAXIMIZE_DISABLED}
-
-```gdscript
-FLAG_MAXIMIZE_DISABLED = 12
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### FLAG_MAX {#FLAG_MAX}
 
 ```gdscript
 FLAG_MAX = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Max value of the Flags.
+
+---
 
 ### ContentScaleMode {#enum-ContentScaleMode}
 
@@ -2137,17 +2130,7 @@ FLAG_MAX = 13
 enum ContentScaleMode { CONTENT_SCALE_MODE_DISABLED = 0, CONTENT_SCALE_MODE_CANVAS_ITEMS = 1, CONTENT_SCALE_MODE_VIEWPORT = 2 }
 ```
 
-ContentScaleMode CONTENT_SCALE_MODE_DISABLED = 0
-
-The content will not be scaled to match the Window's size (content_scale_size is ignored).
-
-ContentScaleMode CONTENT_SCALE_MODE_CANVAS_ITEMS = 1
-
-The content will be rendered at the target size. This is more performance-expensive than CONTENT_SCALE_MODE_VIEWPORT, but provides better results.
-
-ContentScaleMode CONTENT_SCALE_MODE_VIEWPORT = 2
-
-The content will be rendered at the base size and then scaled to the target size. More performant than CONTENT_SCALE_MODE_CANVAS_ITEMS, but results in pixelated image.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CONTENT_SCALE_MODE_DISABLED {#CONTENT_SCALE_MODE_DISABLED}
 
@@ -2155,7 +2138,7 @@ The content will be rendered at the base size and then scaled to the target size
 CONTENT_SCALE_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The content will not be scaled to match the Window's size (content_scale_size is ignored).
 
 #### CONTENT_SCALE_MODE_CANVAS_ITEMS {#CONTENT_SCALE_MODE_CANVAS_ITEMS}
 
@@ -2163,7 +2146,7 @@ CONTENT_SCALE_MODE_DISABLED = 0
 CONTENT_SCALE_MODE_CANVAS_ITEMS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The content will be rendered at the target size. This is more performance-expensive than CONTENT_SCALE_MODE_VIEWPORT, but provides better results.
 
 #### CONTENT_SCALE_MODE_VIEWPORT {#CONTENT_SCALE_MODE_VIEWPORT}
 
@@ -2171,7 +2154,9 @@ CONTENT_SCALE_MODE_CANVAS_ITEMS = 1
 CONTENT_SCALE_MODE_VIEWPORT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The content will be rendered at the base size and then scaled to the target size. More performant than CONTENT_SCALE_MODE_CANVAS_ITEMS, but results in pixelated image.
+
+---
 
 ### ContentScaleAspect {#enum-ContentScaleAspect}
 
@@ -2179,25 +2164,7 @@ CONTENT_SCALE_MODE_VIEWPORT = 2
 enum ContentScaleAspect { CONTENT_SCALE_ASPECT_IGNORE = 0, CONTENT_SCALE_ASPECT_KEEP = 1, CONTENT_SCALE_ASPECT_KEEP_WIDTH = 2, CONTENT_SCALE_ASPECT_KEEP_HEIGHT = 3, CONTENT_SCALE_ASPECT_EXPAND = 4 }
 ```
 
-ContentScaleAspect CONTENT_SCALE_ASPECT_IGNORE = 0
-
-The aspect will be ignored. Scaling will simply stretch the content to fit the target size.
-
-ContentScaleAspect CONTENT_SCALE_ASPECT_KEEP = 1
-
-The content's aspect will be preserved. If the target size has different aspect from the base one, the image will be centered and black bars will appear on left and right sides.
-
-ContentScaleAspect CONTENT_SCALE_ASPECT_KEEP_WIDTH = 2
-
-The content can be expanded vertically. Scaling horizontally will result in keeping the width ratio and then black bars on left and right sides.
-
-ContentScaleAspect CONTENT_SCALE_ASPECT_KEEP_HEIGHT = 3
-
-The content can be expanded horizontally. Scaling vertically will result in keeping the height ratio and then black bars on top and bottom sides.
-
-ContentScaleAspect CONTENT_SCALE_ASPECT_EXPAND = 4
-
-The content's aspect will be preserved. If the target size has different aspect from the base one, the content will stay in the top-left corner and add an extra visible area in the stretched space.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CONTENT_SCALE_ASPECT_IGNORE {#CONTENT_SCALE_ASPECT_IGNORE}
 
@@ -2205,7 +2172,7 @@ The content's aspect will be preserved. If the target size has different aspect 
 CONTENT_SCALE_ASPECT_IGNORE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The aspect will be ignored. Scaling will simply stretch the content to fit the target size.
 
 #### CONTENT_SCALE_ASPECT_KEEP {#CONTENT_SCALE_ASPECT_KEEP}
 
@@ -2213,7 +2180,7 @@ CONTENT_SCALE_ASPECT_IGNORE = 0
 CONTENT_SCALE_ASPECT_KEEP = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The content's aspect will be preserved. If the target size has different aspect from the base one, the image will be centered and black bars will appear on left and right sides.
 
 #### CONTENT_SCALE_ASPECT_KEEP_WIDTH {#CONTENT_SCALE_ASPECT_KEEP_WIDTH}
 
@@ -2221,7 +2188,7 @@ CONTENT_SCALE_ASPECT_KEEP = 1
 CONTENT_SCALE_ASPECT_KEEP_WIDTH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The content can be expanded vertically. Scaling horizontally will result in keeping the width ratio and then black bars on left and right sides.
 
 #### CONTENT_SCALE_ASPECT_KEEP_HEIGHT {#CONTENT_SCALE_ASPECT_KEEP_HEIGHT}
 
@@ -2229,7 +2196,7 @@ CONTENT_SCALE_ASPECT_KEEP_WIDTH = 2
 CONTENT_SCALE_ASPECT_KEEP_HEIGHT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The content can be expanded horizontally. Scaling vertically will result in keeping the height ratio and then black bars on top and bottom sides.
 
 #### CONTENT_SCALE_ASPECT_EXPAND {#CONTENT_SCALE_ASPECT_EXPAND}
 
@@ -2237,7 +2204,9 @@ CONTENT_SCALE_ASPECT_KEEP_HEIGHT = 3
 CONTENT_SCALE_ASPECT_EXPAND = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The content's aspect will be preserved. If the target size has different aspect from the base one, the content will stay in the top-left corner and add an extra visible area in the stretched space.
+
+---
 
 ### ContentScaleStretch {#enum-ContentScaleStretch}
 
@@ -2245,13 +2214,7 @@ CONTENT_SCALE_ASPECT_EXPAND = 4
 enum ContentScaleStretch { CONTENT_SCALE_STRETCH_FRACTIONAL = 0, CONTENT_SCALE_STRETCH_INTEGER = 1 }
 ```
 
-ContentScaleStretch CONTENT_SCALE_STRETCH_FRACTIONAL = 0
-
-The content will be stretched according to a fractional factor. This fills all the space available in the window, but allows "pixel wobble" to occur due to uneven pixel scaling.
-
-ContentScaleStretch CONTENT_SCALE_STRETCH_INTEGER = 1
-
-The content will be stretched only according to an integer factor, preserving sharp pixels. This may leave a black background visible on the window's edges depending on the window size.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CONTENT_SCALE_STRETCH_FRACTIONAL {#CONTENT_SCALE_STRETCH_FRACTIONAL}
 
@@ -2259,7 +2222,7 @@ The content will be stretched only according to an integer factor, preserving sh
 CONTENT_SCALE_STRETCH_FRACTIONAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The content will be stretched according to a fractional factor. This fills all the space available in the window, but allows "pixel wobble" to occur due to uneven pixel scaling.
 
 #### CONTENT_SCALE_STRETCH_INTEGER {#CONTENT_SCALE_STRETCH_INTEGER}
 
@@ -2267,7 +2230,9 @@ CONTENT_SCALE_STRETCH_FRACTIONAL = 0
 CONTENT_SCALE_STRETCH_INTEGER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The content will be stretched only according to an integer factor, preserving sharp pixels. This may leave a black background visible on the window's edges depending on the window size.
+
+---
 
 ### LayoutDirection {#enum-LayoutDirection}
 
@@ -2275,33 +2240,7 @@ CONTENT_SCALE_STRETCH_INTEGER = 1
 enum LayoutDirection { LAYOUT_DIRECTION_INHERITED = 0, LAYOUT_DIRECTION_APPLICATION_LOCALE = 1, LAYOUT_DIRECTION_LTR = 2, LAYOUT_DIRECTION_RTL = 3, LAYOUT_DIRECTION_SYSTEM_LOCALE = 4, LAYOUT_DIRECTION_MAX = 5, LAYOUT_DIRECTION_LOCALE = 1 }
 ```
 
-LayoutDirection LAYOUT_DIRECTION_INHERITED = 0
-
-Automatic layout direction, determined from the parent window layout direction.
-
-LayoutDirection LAYOUT_DIRECTION_APPLICATION_LOCALE = 1
-
-Automatic layout direction, determined from the current locale.
-
-LayoutDirection LAYOUT_DIRECTION_LTR = 2
-
-Left-to-right layout direction.
-
-LayoutDirection LAYOUT_DIRECTION_RTL = 3
-
-Right-to-left layout direction.
-
-LayoutDirection LAYOUT_DIRECTION_SYSTEM_LOCALE = 4
-
-Automatic layout direction, determined from the system locale.
-
-LayoutDirection LAYOUT_DIRECTION_MAX = 5
-
-Represents the size of the LayoutDirection enum.
-
-LayoutDirection LAYOUT_DIRECTION_LOCALE = 1
-
-Deprecated: Use LAYOUT_DIRECTION_APPLICATION_LOCALE instead.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LAYOUT_DIRECTION_INHERITED {#LAYOUT_DIRECTION_INHERITED}
 
@@ -2309,7 +2248,7 @@ Deprecated: Use LAYOUT_DIRECTION_APPLICATION_LOCALE instead.
 LAYOUT_DIRECTION_INHERITED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatic layout direction, determined from the parent window layout direction.
 
 #### LAYOUT_DIRECTION_APPLICATION_LOCALE {#LAYOUT_DIRECTION_APPLICATION_LOCALE}
 
@@ -2317,7 +2256,7 @@ LAYOUT_DIRECTION_INHERITED = 0
 LAYOUT_DIRECTION_APPLICATION_LOCALE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatic layout direction, determined from the current locale.
 
 #### LAYOUT_DIRECTION_LTR {#LAYOUT_DIRECTION_LTR}
 
@@ -2325,7 +2264,7 @@ LAYOUT_DIRECTION_APPLICATION_LOCALE = 1
 LAYOUT_DIRECTION_LTR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Left-to-right layout direction.
 
 #### LAYOUT_DIRECTION_RTL {#LAYOUT_DIRECTION_RTL}
 
@@ -2333,7 +2272,7 @@ LAYOUT_DIRECTION_LTR = 2
 LAYOUT_DIRECTION_RTL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Right-to-left layout direction.
 
 #### LAYOUT_DIRECTION_SYSTEM_LOCALE {#LAYOUT_DIRECTION_SYSTEM_LOCALE}
 
@@ -2341,7 +2280,7 @@ LAYOUT_DIRECTION_RTL = 3
 LAYOUT_DIRECTION_SYSTEM_LOCALE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatic layout direction, determined from the system locale.
 
 #### LAYOUT_DIRECTION_MAX {#LAYOUT_DIRECTION_MAX}
 
@@ -2349,7 +2288,7 @@ LAYOUT_DIRECTION_SYSTEM_LOCALE = 4
 LAYOUT_DIRECTION_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the LayoutDirection enum.
 
 #### LAYOUT_DIRECTION_LOCALE {#LAYOUT_DIRECTION_LOCALE}
 
@@ -2357,7 +2296,9 @@ LAYOUT_DIRECTION_MAX = 5
 LAYOUT_DIRECTION_LOCALE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use LAYOUT_DIRECTION_APPLICATION_LOCALE instead.
+
+---
 
 ### WindowInitialPosition {#enum-WindowInitialPosition}
 
@@ -2365,29 +2306,7 @@ LAYOUT_DIRECTION_LOCALE = 1
 enum WindowInitialPosition { WINDOW_INITIAL_POSITION_ABSOLUTE = 0, WINDOW_INITIAL_POSITION_CENTER_PRIMARY_SCREEN = 1, WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN = 2, WINDOW_INITIAL_POSITION_CENTER_OTHER_SCREEN = 3, WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_MOUSE_FOCUS = 4, WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_KEYBOARD_FOCUS = 5 }
 ```
 
-WindowInitialPosition WINDOW_INITIAL_POSITION_ABSOLUTE = 0
-
-Initial window position is determined by position.
-
-WindowInitialPosition WINDOW_INITIAL_POSITION_CENTER_PRIMARY_SCREEN = 1
-
-Initial window position is the center of the primary screen.
-
-WindowInitialPosition WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN = 2
-
-Initial window position is the center of the main window screen.
-
-WindowInitialPosition WINDOW_INITIAL_POSITION_CENTER_OTHER_SCREEN = 3
-
-Initial window position is the center of current_screen screen.
-
-WindowInitialPosition WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_MOUSE_FOCUS = 4
-
-Initial window position is the center of the screen containing the mouse pointer.
-
-WindowInitialPosition WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_KEYBOARD_FOCUS = 5
-
-Initial window position is the center of the screen containing the window with the keyboard focus.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### WINDOW_INITIAL_POSITION_ABSOLUTE {#WINDOW_INITIAL_POSITION_ABSOLUTE}
 
@@ -2395,7 +2314,7 @@ Initial window position is the center of the screen containing the window with t
 WINDOW_INITIAL_POSITION_ABSOLUTE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Initial window position is determined by position.
 
 #### WINDOW_INITIAL_POSITION_CENTER_PRIMARY_SCREEN {#WINDOW_INITIAL_POSITION_CENTER_PRIMARY_SCREEN}
 
@@ -2403,7 +2322,7 @@ WINDOW_INITIAL_POSITION_ABSOLUTE = 0
 WINDOW_INITIAL_POSITION_CENTER_PRIMARY_SCREEN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Initial window position is the center of the primary screen.
 
 #### WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN {#WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN}
 
@@ -2411,7 +2330,7 @@ WINDOW_INITIAL_POSITION_CENTER_PRIMARY_SCREEN = 1
 WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Initial window position is the center of the main window screen.
 
 #### WINDOW_INITIAL_POSITION_CENTER_OTHER_SCREEN {#WINDOW_INITIAL_POSITION_CENTER_OTHER_SCREEN}
 
@@ -2419,7 +2338,7 @@ WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN = 2
 WINDOW_INITIAL_POSITION_CENTER_OTHER_SCREEN = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Initial window position is the center of current_screen screen.
 
 #### WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_MOUSE_FOCUS {#WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_MOUSE_FOCUS}
 
@@ -2427,7 +2346,7 @@ WINDOW_INITIAL_POSITION_CENTER_OTHER_SCREEN = 3
 WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_MOUSE_FOCUS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Initial window position is the center of the screen containing the mouse pointer.
 
 #### WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_KEYBOARD_FOCUS {#WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_KEYBOARD_FOCUS}
 
@@ -2435,7 +2354,9 @@ WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_MOUSE_FOCUS = 4
 WINDOW_INITIAL_POSITION_CENTER_SCREEN_WITH_KEYBOARD_FOCUS = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Initial window position is the center of the screen containing the window with the keyboard focus.
+
+---
 
 ## 常量
 

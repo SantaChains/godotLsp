@@ -325,7 +325,10 @@ triangles: PackedInt32Array
 min_space: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_min_space(value: Vector2)
+- Vector2 get_min_space()
+
+The blend space's X and Y axes' lower limit for the points' position. See add_blend_point().
 
 ### max_space {#max_space}
 
@@ -333,7 +336,10 @@ min_space: Vector2
 max_space: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_max_space(value: Vector2)
+- Vector2 get_max_space()
+
+The blend space's X and Y axes' upper limit for the points' position. See add_blend_point().
 
 ### snap {#snap}
 
@@ -341,7 +347,10 @@ max_space: Vector2
 snap: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_snap(value: Vector2)
+- Vector2 get_snap()
+
+Position increment to snap to when moving a point.
 
 ### x_label {#x_label}
 
@@ -429,17 +438,7 @@ Emitted every time the blend space's triangles are created, removed, or when one
 enum BlendMode { BLEND_MODE_INTERPOLATED = 0, BLEND_MODE_DISCRETE = 1, BLEND_MODE_DISCRETE_CARRY = 2 }
 ```
 
-BlendMode BLEND_MODE_INTERPOLATED = 0
-
-The interpolation between animations is linear.
-
-BlendMode BLEND_MODE_DISCRETE = 1
-
-The blend space plays the animation of the animation node which blending position is closest to. Useful for frame-by-frame 2D animations.
-
-BlendMode BLEND_MODE_DISCRETE_CARRY = 2
-
-Similar to BLEND_MODE_DISCRETE, but starts the new animation at the last animation's playback position.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BLEND_MODE_INTERPOLATED {#BLEND_MODE_INTERPOLATED}
 
@@ -447,7 +446,7 @@ Similar to BLEND_MODE_DISCRETE, but starts the new animation at the last animati
 BLEND_MODE_INTERPOLATED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The interpolation between animations is linear.
 
 #### BLEND_MODE_DISCRETE {#BLEND_MODE_DISCRETE}
 
@@ -455,7 +454,7 @@ BLEND_MODE_INTERPOLATED = 0
 BLEND_MODE_DISCRETE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The blend space plays the animation of the animation node which blending position is closest to. Useful for frame-by-frame 2D animations.
 
 #### BLEND_MODE_DISCRETE_CARRY {#BLEND_MODE_DISCRETE_CARRY}
 
@@ -463,7 +462,9 @@ BLEND_MODE_DISCRETE = 1
 BLEND_MODE_DISCRETE_CARRY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Similar to BLEND_MODE_DISCRETE, but starts the new animation at the last animation's playback position.
+
+---
 
 ### SyncMode {#enum-SyncMode}
 
@@ -471,25 +472,7 @@ BLEND_MODE_DISCRETE_CARRY = 2
 enum SyncMode { SYNC_MODE_NONE = 0, SYNC_MODE_INDEPENDENT = 1, SYNC_MODE_CYCLIC_MUTABLE = 2, SYNC_MODE_CYCLIC_CONSTANT = 3 }
 ```
 
-SyncMode SYNC_MODE_NONE = 0
-
-Inactive animations are frozen and do not advance.
-
-SyncMode SYNC_MODE_INDEPENDENT = 1
-
-Inactive animations advance with a weight of 0. This is equivalent to the previous sync = true behavior.
-
-SyncMode SYNC_MODE_CYCLIC_MUTABLE = 2
-
-All animations are time-scaled so they stay in sync, with the cycle length dynamically computed from active blend weights. This is self-normalizing: a solo animation plays at normal speed.
-
-Note: If you apply AnimationNodeTimeSeek to the result when handling animations of different lengths, synchronization will be broken. In such cases, it is recommended to use AnimationNodeAnimation.use_custom_timeline to align the animation lengths.
-
-SyncMode SYNC_MODE_CYCLIC_CONSTANT = 3
-
-All animations are time-scaled so they complete one cycle in cyclic_length seconds, keeping them in sync regardless of their individual lengths.
-
-Note: If you apply AnimationNodeTimeSeek to the result when handling animations of different lengths, synchronization will be broken. In such cases, it is recommended to use AnimationNodeAnimation.use_custom_timeline to align the animation lengths.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SYNC_MODE_NONE {#SYNC_MODE_NONE}
 
@@ -497,7 +480,7 @@ Note: If you apply AnimationNodeTimeSeek to the result when handling animations 
 SYNC_MODE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inactive animations are frozen and do not advance.
 
 #### SYNC_MODE_INDEPENDENT {#SYNC_MODE_INDEPENDENT}
 
@@ -505,7 +488,7 @@ SYNC_MODE_NONE = 0
 SYNC_MODE_INDEPENDENT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inactive animations advance with a weight of 0. This is equivalent to the previous sync = true behavior.
 
 #### SYNC_MODE_CYCLIC_MUTABLE {#SYNC_MODE_CYCLIC_MUTABLE}
 
@@ -513,7 +496,9 @@ SYNC_MODE_INDEPENDENT = 1
 SYNC_MODE_CYCLIC_MUTABLE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+All animations are time-scaled so they stay in sync, with the cycle length dynamically computed from active blend weights. This is self-normalizing: a solo animation plays at normal speed.
+
+Note: If you apply AnimationNodeTimeSeek to the result when handling animations of different lengths, synchronization will be broken. In such cases, it is recommended to use AnimationNodeAnimation.use_custom_timeline to align the animation lengths.
 
 #### SYNC_MODE_CYCLIC_CONSTANT {#SYNC_MODE_CYCLIC_CONSTANT}
 
@@ -521,4 +506,8 @@ SYNC_MODE_CYCLIC_MUTABLE = 2
 SYNC_MODE_CYCLIC_CONSTANT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+All animations are time-scaled so they complete one cycle in cyclic_length seconds, keeping them in sync regardless of their individual lengths.
+
+Note: If you apply AnimationNodeTimeSeek to the result when handling animations of different lengths, synchronization will be broken. In such cases, it is recommended to use AnimationNodeAnimation.use_custom_timeline to align the animation lengths.
+
+---

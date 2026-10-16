@@ -37,13 +37,7 @@ func _get_build_dependencies(path):
 enum ImportOrder { IMPORT_ORDER_DEFAULT = 0, IMPORT_ORDER_SCENE = 100 }
 ```
 
-ImportOrder IMPORT_ORDER_DEFAULT = 0
-
-The default import order.
-
-ImportOrder IMPORT_ORDER_SCENE = 100
-
-The import order for scenes, which ensures scenes are imported after all other core resources such as textures. Custom importers should generally have an import order lower than 100 to avoid issues when importing scenes that rely on custom resources.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### IMPORT_ORDER_DEFAULT {#IMPORT_ORDER_DEFAULT}
 
@@ -51,7 +45,7 @@ The import order for scenes, which ensures scenes are imported after all other c
 IMPORT_ORDER_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The default import order.
 
 #### IMPORT_ORDER_SCENE {#IMPORT_ORDER_SCENE}
 
@@ -59,4 +53,6 @@ IMPORT_ORDER_DEFAULT = 0
 IMPORT_ORDER_SCENE = 100
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The import order for scenes, which ensures scenes are imported after all other core resources such as textures. Custom importers should generally have an import order lower than 100 to avoid issues when importing scenes that rely on custom resources.
+
+---

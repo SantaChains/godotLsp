@@ -336,21 +336,7 @@ If autorestart is true, a random additional delay (in seconds) between 0 and thi
 enum OneShotRequest { ONE_SHOT_REQUEST_NONE = 0, ONE_SHOT_REQUEST_FIRE = 1, ONE_SHOT_REQUEST_ABORT = 2, ONE_SHOT_REQUEST_FADE_OUT = 3 }
 ```
 
-OneShotRequest ONE_SHOT_REQUEST_NONE = 0
-
-The default state of the request. Nothing is done.
-
-OneShotRequest ONE_SHOT_REQUEST_FIRE = 1
-
-The request to play the animation connected to "shot" port.
-
-OneShotRequest ONE_SHOT_REQUEST_ABORT = 2
-
-The request to stop the animation connected to "shot" port.
-
-OneShotRequest ONE_SHOT_REQUEST_FADE_OUT = 3
-
-The request to fade out the animation connected to "shot" port.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ONE_SHOT_REQUEST_NONE {#ONE_SHOT_REQUEST_NONE}
 
@@ -358,7 +344,7 @@ The request to fade out the animation connected to "shot" port.
 ONE_SHOT_REQUEST_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The default state of the request. Nothing is done.
 
 #### ONE_SHOT_REQUEST_FIRE {#ONE_SHOT_REQUEST_FIRE}
 
@@ -366,7 +352,7 @@ ONE_SHOT_REQUEST_NONE = 0
 ONE_SHOT_REQUEST_FIRE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The request to play the animation connected to "shot" port.
 
 #### ONE_SHOT_REQUEST_ABORT {#ONE_SHOT_REQUEST_ABORT}
 
@@ -374,7 +360,7 @@ ONE_SHOT_REQUEST_FIRE = 1
 ONE_SHOT_REQUEST_ABORT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The request to stop the animation connected to "shot" port.
 
 #### ONE_SHOT_REQUEST_FADE_OUT {#ONE_SHOT_REQUEST_FADE_OUT}
 
@@ -382,7 +368,9 @@ ONE_SHOT_REQUEST_ABORT = 2
 ONE_SHOT_REQUEST_FADE_OUT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The request to fade out the animation connected to "shot" port.
+
+---
 
 ### MixMode {#enum-MixMode}
 
@@ -390,13 +378,7 @@ ONE_SHOT_REQUEST_FADE_OUT = 3
 enum MixMode { MIX_MODE_BLEND = 0, MIX_MODE_ADD = 1 }
 ```
 
-MixMode MIX_MODE_BLEND = 0
-
-Blends two animations. See also AnimationNodeBlend2.
-
-MixMode MIX_MODE_ADD = 1
-
-Blends two animations additively. See also AnimationNodeAdd2.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MIX_MODE_BLEND {#MIX_MODE_BLEND}
 
@@ -404,7 +386,7 @@ Blends two animations additively. See also AnimationNodeAdd2.
 MIX_MODE_BLEND = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Blends two animations. See also AnimationNodeBlend2.
 
 #### MIX_MODE_ADD {#MIX_MODE_ADD}
 
@@ -412,4 +394,6 @@ MIX_MODE_BLEND = 0
 MIX_MODE_ADD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Blends two animations additively. See also AnimationNodeAdd2.
+
+---

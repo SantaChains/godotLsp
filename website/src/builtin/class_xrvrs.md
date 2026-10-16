@@ -100,4 +100,7 @@ The strength used to calculate the VRS density map. The greater this value, the 
 vrs_render_region: Rect2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_vrs_render_region(value: Rect2i)
+- Rect2i get_vrs_render_region()
+
+The render region that the VRS texture will be scaled to when generated.

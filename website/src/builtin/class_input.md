@@ -1187,31 +1187,7 @@ Emitted when a joypad device has been connected or disconnected.
 enum MouseMode { MOUSE_MODE_VISIBLE = 0, MOUSE_MODE_HIDDEN = 1, MOUSE_MODE_CAPTURED = 2, MOUSE_MODE_CONFINED = 3, MOUSE_MODE_CONFINED_HIDDEN = 4, MOUSE_MODE_MAX = 5 }
 ```
 
-MouseMode MOUSE_MODE_VISIBLE = 0
-
-Makes the mouse cursor visible if it is hidden.
-
-MouseMode MOUSE_MODE_HIDDEN = 1
-
-Makes the mouse cursor hidden if it is visible.
-
-MouseMode MOUSE_MODE_CAPTURED = 2
-
-Captures the mouse. The mouse will be hidden and its position locked at the center of the window manager's window.
-
-Note: If you want to process the mouse's movement in this mode, you need to use InputEventMouseMotion.relative.
-
-MouseMode MOUSE_MODE_CONFINED = 3
-
-Confines the mouse cursor to the game window, and make it visible.
-
-MouseMode MOUSE_MODE_CONFINED_HIDDEN = 4
-
-Confines the mouse cursor to the game window, and make it hidden.
-
-MouseMode MOUSE_MODE_MAX = 5
-
-Max value of the MouseMode.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MOUSE_MODE_VISIBLE {#MOUSE_MODE_VISIBLE}
 
@@ -1219,7 +1195,7 @@ Max value of the MouseMode.
 MOUSE_MODE_VISIBLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the mouse cursor visible if it is hidden.
 
 #### MOUSE_MODE_HIDDEN {#MOUSE_MODE_HIDDEN}
 
@@ -1227,7 +1203,7 @@ MOUSE_MODE_VISIBLE = 0
 MOUSE_MODE_HIDDEN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes the mouse cursor hidden if it is visible.
 
 #### MOUSE_MODE_CAPTURED {#MOUSE_MODE_CAPTURED}
 
@@ -1235,7 +1211,9 @@ MOUSE_MODE_HIDDEN = 1
 MOUSE_MODE_CAPTURED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Captures the mouse. The mouse will be hidden and its position locked at the center of the window manager's window.
+
+Note: If you want to process the mouse's movement in this mode, you need to use InputEventMouseMotion.relative.
 
 #### MOUSE_MODE_CONFINED {#MOUSE_MODE_CONFINED}
 
@@ -1243,7 +1221,7 @@ MOUSE_MODE_CAPTURED = 2
 MOUSE_MODE_CONFINED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Confines the mouse cursor to the game window, and make it visible.
 
 #### MOUSE_MODE_CONFINED_HIDDEN {#MOUSE_MODE_CONFINED_HIDDEN}
 
@@ -1251,7 +1229,7 @@ MOUSE_MODE_CONFINED = 3
 MOUSE_MODE_CONFINED_HIDDEN = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Confines the mouse cursor to the game window, and make it hidden.
 
 #### MOUSE_MODE_MAX {#MOUSE_MODE_MAX}
 
@@ -1259,7 +1237,9 @@ MOUSE_MODE_CONFINED_HIDDEN = 4
 MOUSE_MODE_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Max value of the MouseMode.
+
+---
 
 ### CursorShape {#enum-CursorShape}
 
@@ -1267,75 +1247,7 @@ MOUSE_MODE_MAX = 5
 enum CursorShape { CURSOR_ARROW = 0, CURSOR_IBEAM = 1, CURSOR_POINTING_HAND = 2, CURSOR_CROSS = 3, CURSOR_WAIT = 4, CURSOR_BUSY = 5, CURSOR_DRAG = 6, CURSOR_CAN_DROP = 7, CURSOR_FORBIDDEN = 8, CURSOR_VSIZE = 9, CURSOR_HSIZE = 10, CURSOR_BDIAGSIZE = 11, CURSOR_FDIAGSIZE = 12, CURSOR_MOVE = 13, CURSOR_VSPLIT = 14, CURSOR_HSPLIT = 15, CURSOR_HELP = 16 }
 ```
 
-CursorShape CURSOR_ARROW = 0
-
-Arrow cursor. Standard, default pointing cursor.
-
-CursorShape CURSOR_IBEAM = 1
-
-I-beam cursor. Usually used to show where the text cursor will appear when the mouse is clicked.
-
-CursorShape CURSOR_POINTING_HAND = 2
-
-Pointing hand cursor. Usually used to indicate the pointer is over a link or other interactable item.
-
-CursorShape CURSOR_CROSS = 3
-
-Cross cursor. Typically appears over regions in which a drawing operation can be performed or for selections.
-
-CursorShape CURSOR_WAIT = 4
-
-Wait cursor. Indicates that the application is busy performing an operation, and that it cannot be used during the operation (e.g. something is blocking its main thread).
-
-CursorShape CURSOR_BUSY = 5
-
-Busy cursor. Indicates that the application is busy performing an operation, and that it is still usable during the operation.
-
-CursorShape CURSOR_DRAG = 6
-
-Drag cursor. Usually displayed when dragging something.
-
-Note: Windows lacks a dragging cursor, so CURSOR_DRAG is the same as CURSOR_MOVE for this platform.
-
-CursorShape CURSOR_CAN_DROP = 7
-
-Can drop cursor. Usually displayed when dragging something to indicate that it can be dropped at the current position.
-
-CursorShape CURSOR_FORBIDDEN = 8
-
-Forbidden cursor. Indicates that the current action is forbidden (for example, when dragging something) or that the control at a position is disabled.
-
-CursorShape CURSOR_VSIZE = 9
-
-Vertical resize mouse cursor. A double-headed vertical arrow. It tells the user they can resize the window or the panel vertically.
-
-CursorShape CURSOR_HSIZE = 10
-
-Horizontal resize mouse cursor. A double-headed horizontal arrow. It tells the user they can resize the window or the panel horizontally.
-
-CursorShape CURSOR_BDIAGSIZE = 11
-
-Window resize mouse cursor. The cursor is a double-headed arrow that goes from the bottom left to the top right. It tells the user they can resize the window or the panel both horizontally and vertically.
-
-CursorShape CURSOR_FDIAGSIZE = 12
-
-Window resize mouse cursor. The cursor is a double-headed arrow that goes from the top left to the bottom right, the opposite of CURSOR_BDIAGSIZE. It tells the user they can resize the window or the panel both horizontally and vertically.
-
-CursorShape CURSOR_MOVE = 13
-
-Move cursor. Indicates that something can be moved.
-
-CursorShape CURSOR_VSPLIT = 14
-
-Vertical split mouse cursor. On Windows, it's the same as CURSOR_VSIZE.
-
-CursorShape CURSOR_HSPLIT = 15
-
-Horizontal split mouse cursor. On Windows, it's the same as CURSOR_HSIZE.
-
-CursorShape CURSOR_HELP = 16
-
-Help cursor. Usually a question mark.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CURSOR_ARROW {#CURSOR_ARROW}
 
@@ -1343,7 +1255,7 @@ Help cursor. Usually a question mark.
 CURSOR_ARROW = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Arrow cursor. Standard, default pointing cursor.
 
 #### CURSOR_IBEAM {#CURSOR_IBEAM}
 
@@ -1351,7 +1263,7 @@ CURSOR_ARROW = 0
 CURSOR_IBEAM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+I-beam cursor. Usually used to show where the text cursor will appear when the mouse is clicked.
 
 #### CURSOR_POINTING_HAND {#CURSOR_POINTING_HAND}
 
@@ -1359,7 +1271,7 @@ CURSOR_IBEAM = 1
 CURSOR_POINTING_HAND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pointing hand cursor. Usually used to indicate the pointer is over a link or other interactable item.
 
 #### CURSOR_CROSS {#CURSOR_CROSS}
 
@@ -1367,7 +1279,7 @@ CURSOR_POINTING_HAND = 2
 CURSOR_CROSS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cross cursor. Typically appears over regions in which a drawing operation can be performed or for selections.
 
 #### CURSOR_WAIT {#CURSOR_WAIT}
 
@@ -1375,7 +1287,7 @@ CURSOR_CROSS = 3
 CURSOR_WAIT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Wait cursor. Indicates that the application is busy performing an operation, and that it cannot be used during the operation (e.g. something is blocking its main thread).
 
 #### CURSOR_BUSY {#CURSOR_BUSY}
 
@@ -1383,7 +1295,7 @@ CURSOR_WAIT = 4
 CURSOR_BUSY = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Busy cursor. Indicates that the application is busy performing an operation, and that it is still usable during the operation.
 
 #### CURSOR_DRAG {#CURSOR_DRAG}
 
@@ -1391,7 +1303,9 @@ CURSOR_BUSY = 5
 CURSOR_DRAG = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Drag cursor. Usually displayed when dragging something.
+
+Note: Windows lacks a dragging cursor, so CURSOR_DRAG is the same as CURSOR_MOVE for this platform.
 
 #### CURSOR_CAN_DROP {#CURSOR_CAN_DROP}
 
@@ -1399,7 +1313,7 @@ CURSOR_DRAG = 6
 CURSOR_CAN_DROP = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Can drop cursor. Usually displayed when dragging something to indicate that it can be dropped at the current position.
 
 #### CURSOR_FORBIDDEN {#CURSOR_FORBIDDEN}
 
@@ -1407,7 +1321,7 @@ CURSOR_CAN_DROP = 7
 CURSOR_FORBIDDEN = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Forbidden cursor. Indicates that the current action is forbidden (for example, when dragging something) or that the control at a position is disabled.
 
 #### CURSOR_VSIZE {#CURSOR_VSIZE}
 
@@ -1415,7 +1329,7 @@ CURSOR_FORBIDDEN = 8
 CURSOR_VSIZE = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Vertical resize mouse cursor. A double-headed vertical arrow. It tells the user they can resize the window or the panel vertically.
 
 #### CURSOR_HSIZE {#CURSOR_HSIZE}
 
@@ -1423,7 +1337,7 @@ CURSOR_VSIZE = 9
 CURSOR_HSIZE = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Horizontal resize mouse cursor. A double-headed horizontal arrow. It tells the user they can resize the window or the panel horizontally.
 
 #### CURSOR_BDIAGSIZE {#CURSOR_BDIAGSIZE}
 
@@ -1431,7 +1345,7 @@ CURSOR_HSIZE = 10
 CURSOR_BDIAGSIZE = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Window resize mouse cursor. The cursor is a double-headed arrow that goes from the bottom left to the top right. It tells the user they can resize the window or the panel both horizontally and vertically.
 
 #### CURSOR_FDIAGSIZE {#CURSOR_FDIAGSIZE}
 
@@ -1439,7 +1353,7 @@ CURSOR_BDIAGSIZE = 11
 CURSOR_FDIAGSIZE = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Window resize mouse cursor. The cursor is a double-headed arrow that goes from the top left to the bottom right, the opposite of CURSOR_BDIAGSIZE. It tells the user they can resize the window or the panel both horizontally and vertically.
 
 #### CURSOR_MOVE {#CURSOR_MOVE}
 
@@ -1447,7 +1361,7 @@ CURSOR_FDIAGSIZE = 12
 CURSOR_MOVE = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Move cursor. Indicates that something can be moved.
 
 #### CURSOR_VSPLIT {#CURSOR_VSPLIT}
 
@@ -1455,7 +1369,7 @@ CURSOR_MOVE = 13
 CURSOR_VSPLIT = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Vertical split mouse cursor. On Windows, it's the same as CURSOR_VSIZE.
 
 #### CURSOR_HSPLIT {#CURSOR_HSPLIT}
 
@@ -1463,7 +1377,7 @@ CURSOR_VSPLIT = 14
 CURSOR_HSPLIT = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Horizontal split mouse cursor. On Windows, it's the same as CURSOR_HSIZE.
 
 #### CURSOR_HELP {#CURSOR_HELP}
 
@@ -1471,4 +1385,6 @@ CURSOR_HSPLIT = 15
 CURSOR_HELP = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Help cursor. Usually a question mark.
+
+---

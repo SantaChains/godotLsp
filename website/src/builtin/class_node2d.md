@@ -290,7 +290,10 @@ Translates the node by the given offset in local coordinates. This is equivalent
 position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_position(value: Vector2)
+- Vector2 get_position()
+
+Position, relative to the node's parent. See also global_position.
 
 ### rotation {#rotation}
 
@@ -322,7 +325,12 @@ Helper property to access rotation in degrees instead of radians. See also globa
 scale: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scale(value: Vector2)
+- Vector2 get_scale()
+
+The node's scale, relative to the node's parent. Unscaled value: (1, 1). See also global_scale.
+
+Note: Negative X scales in 2D are not decomposable from the transformation matrix. Due to the way scale is represented with transformation matrices in Godot, negative scales on the X axis will be changed to negative scales on the Y axis and a rotation of 180 degrees when decomposed.
 
 ### skew {#skew}
 

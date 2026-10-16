@@ -61,69 +61,7 @@ Note: Must be set before using this configuration to create a spatial context.
 enum ArucoDict { ARUCO_DICT_4X4_50 = 1, ARUCO_DICT_4X4_100 = 2, ARUCO_DICT_4X4_250 = 3, ARUCO_DICT_4X4_1000 = 4, ARUCO_DICT_5X5_50 = 5, ARUCO_DICT_5X5_100 = 6, ARUCO_DICT_5X5_250 = 7, ARUCO_DICT_5X5_1000 = 8, ARUCO_DICT_6X6_50 = 9, ARUCO_DICT_6X6_100 = 10, ARUCO_DICT_6X6_250 = 11, ARUCO_DICT_6X6_1000 = 12, ARUCO_DICT_7X7_50 = 13, ARUCO_DICT_7X7_100 = 14, ARUCO_DICT_7X7_250 = 15, ARUCO_DICT_7X7_1000 = 16 }
 ```
 
-ArucoDict ARUCO_DICT_4X4_50 = 1
-
-4 by 4 pixel Aruco marker dictionary with 50 IDs.
-
-ArucoDict ARUCO_DICT_4X4_100 = 2
-
-4 by 4 pixel Aruco marker dictionary with 100 IDs.
-
-ArucoDict ARUCO_DICT_4X4_250 = 3
-
-4 by 4 pixel Aruco marker dictionary with 250 IDs.
-
-ArucoDict ARUCO_DICT_4X4_1000 = 4
-
-4 by 4 pixel Aruco marker dictionary with 1000 IDs.
-
-ArucoDict ARUCO_DICT_5X5_50 = 5
-
-5 by 5 pixel Aruco marker dictionary with 50 IDs.
-
-ArucoDict ARUCO_DICT_5X5_100 = 6
-
-5 by 5 pixel Aruco marker dictionary with 100 IDs.
-
-ArucoDict ARUCO_DICT_5X5_250 = 7
-
-5 by 5 pixel Aruco marker dictionary with 250 IDs.
-
-ArucoDict ARUCO_DICT_5X5_1000 = 8
-
-5 by 5 pixel Aruco marker dictionary with 1000 IDs.
-
-ArucoDict ARUCO_DICT_6X6_50 = 9
-
-6 by 6 pixel Aruco marker dictionary with 50 IDs.
-
-ArucoDict ARUCO_DICT_6X6_100 = 10
-
-6 by 6 pixel Aruco marker dictionary with 100 IDs.
-
-ArucoDict ARUCO_DICT_6X6_250 = 11
-
-6 by 6 pixel Aruco marker dictionary with 250 IDs.
-
-ArucoDict ARUCO_DICT_6X6_1000 = 12
-
-6 by 6 pixel Aruco marker dictionary with 1000 IDs.
-
-ArucoDict ARUCO_DICT_7X7_50 = 13
-
-7 by 7 pixel Aruco marker dictionary with 50 IDs.
-
-ArucoDict ARUCO_DICT_7X7_100 = 14
-
-7 by 7 pixel Aruco marker dictionary with 100 IDs.
-
-ArucoDict ARUCO_DICT_7X7_250 = 15
-
-7 by 7 pixel Aruco marker dictionary with 250 IDs.
-
-ArucoDict ARUCO_DICT_7X7_1000 = 16
-
-7 by 7 pixel Aruco marker dictionary with 1000 IDs.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ARUCO_DICT_4X4_50 {#ARUCO_DICT_4X4_50}
 
@@ -131,7 +69,7 @@ ArucoDict ARUCO_DICT_7X7_1000 = 16
 ARUCO_DICT_4X4_50 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+4 by 4 pixel Aruco marker dictionary with 50 IDs.
 
 #### ARUCO_DICT_4X4_100 {#ARUCO_DICT_4X4_100}
 
@@ -139,7 +77,7 @@ ARUCO_DICT_4X4_50 = 1
 ARUCO_DICT_4X4_100 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+4 by 4 pixel Aruco marker dictionary with 100 IDs.
 
 #### ARUCO_DICT_4X4_250 {#ARUCO_DICT_4X4_250}
 
@@ -147,7 +85,7 @@ ARUCO_DICT_4X4_100 = 2
 ARUCO_DICT_4X4_250 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+4 by 4 pixel Aruco marker dictionary with 250 IDs.
 
 #### ARUCO_DICT_4X4_1000 {#ARUCO_DICT_4X4_1000}
 
@@ -155,7 +93,7 @@ ARUCO_DICT_4X4_250 = 3
 ARUCO_DICT_4X4_1000 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+4 by 4 pixel Aruco marker dictionary with 1000 IDs.
 
 #### ARUCO_DICT_5X5_50 {#ARUCO_DICT_5X5_50}
 
@@ -163,7 +101,7 @@ ARUCO_DICT_4X4_1000 = 4
 ARUCO_DICT_5X5_50 = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+5 by 5 pixel Aruco marker dictionary with 50 IDs.
 
 #### ARUCO_DICT_5X5_100 {#ARUCO_DICT_5X5_100}
 
@@ -171,7 +109,7 @@ ARUCO_DICT_5X5_50 = 5
 ARUCO_DICT_5X5_100 = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+5 by 5 pixel Aruco marker dictionary with 100 IDs.
 
 #### ARUCO_DICT_5X5_250 {#ARUCO_DICT_5X5_250}
 
@@ -179,7 +117,7 @@ ARUCO_DICT_5X5_100 = 6
 ARUCO_DICT_5X5_250 = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+5 by 5 pixel Aruco marker dictionary with 250 IDs.
 
 #### ARUCO_DICT_5X5_1000 {#ARUCO_DICT_5X5_1000}
 
@@ -187,7 +125,7 @@ ARUCO_DICT_5X5_250 = 7
 ARUCO_DICT_5X5_1000 = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+5 by 5 pixel Aruco marker dictionary with 1000 IDs.
 
 #### ARUCO_DICT_6X6_50 {#ARUCO_DICT_6X6_50}
 
@@ -195,7 +133,7 @@ ARUCO_DICT_5X5_1000 = 8
 ARUCO_DICT_6X6_50 = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+6 by 6 pixel Aruco marker dictionary with 50 IDs.
 
 #### ARUCO_DICT_6X6_100 {#ARUCO_DICT_6X6_100}
 
@@ -203,7 +141,7 @@ ARUCO_DICT_6X6_50 = 9
 ARUCO_DICT_6X6_100 = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+6 by 6 pixel Aruco marker dictionary with 100 IDs.
 
 #### ARUCO_DICT_6X6_250 {#ARUCO_DICT_6X6_250}
 
@@ -211,7 +149,7 @@ ARUCO_DICT_6X6_100 = 10
 ARUCO_DICT_6X6_250 = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+6 by 6 pixel Aruco marker dictionary with 250 IDs.
 
 #### ARUCO_DICT_6X6_1000 {#ARUCO_DICT_6X6_1000}
 
@@ -219,7 +157,7 @@ ARUCO_DICT_6X6_250 = 11
 ARUCO_DICT_6X6_1000 = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+6 by 6 pixel Aruco marker dictionary with 1000 IDs.
 
 #### ARUCO_DICT_7X7_50 {#ARUCO_DICT_7X7_50}
 
@@ -227,7 +165,7 @@ ARUCO_DICT_6X6_1000 = 12
 ARUCO_DICT_7X7_50 = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+7 by 7 pixel Aruco marker dictionary with 50 IDs.
 
 #### ARUCO_DICT_7X7_100 {#ARUCO_DICT_7X7_100}
 
@@ -235,7 +173,7 @@ ARUCO_DICT_7X7_50 = 13
 ARUCO_DICT_7X7_100 = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+7 by 7 pixel Aruco marker dictionary with 100 IDs.
 
 #### ARUCO_DICT_7X7_250 {#ARUCO_DICT_7X7_250}
 
@@ -243,7 +181,7 @@ ARUCO_DICT_7X7_100 = 14
 ARUCO_DICT_7X7_250 = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+7 by 7 pixel Aruco marker dictionary with 250 IDs.
 
 #### ARUCO_DICT_7X7_1000 {#ARUCO_DICT_7X7_1000}
 
@@ -251,4 +189,6 @@ ARUCO_DICT_7X7_250 = 15
 ARUCO_DICT_7X7_1000 = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+7 by 7 pixel Aruco marker dictionary with 1000 IDs.
+
+---

@@ -108,7 +108,10 @@ void set_plane_label(plane_label: String)
 bounds_size: int
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_bounds_size(value: Vector2)
+- Vector2 get_bounds_size()
+
+The bounding size of the plane. This is a 2D size.
 
 ### plane_alignment {#plane_alignment}
 

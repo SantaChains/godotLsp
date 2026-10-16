@@ -36,4 +36,7 @@ void set_constant(constant: Transform3D)
 constant: Transform3D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_constant(value: Transform3D)
+- Transform3D get_constant()
+
+A Transform3D constant which represents the state of this node.

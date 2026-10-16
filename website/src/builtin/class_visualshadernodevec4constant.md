@@ -36,7 +36,10 @@ void set_constant(constant: Quaternion)
 constant: Quaternion
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_constant(value: Quaternion)
+- Quaternion get_constant()
+
+A 4D vector (represented as a Quaternion) constant which represents the state of this node.
 
 ### constant_v4 {#constant_v4}
 

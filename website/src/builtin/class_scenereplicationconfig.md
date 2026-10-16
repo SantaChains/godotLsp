@@ -126,17 +126,7 @@ Removes the property identified by the given path from the configuration.
 enum ReplicationMode { REPLICATION_MODE_NEVER = 0, REPLICATION_MODE_ALWAYS = 1, REPLICATION_MODE_ON_CHANGE = 2 }
 ```
 
-ReplicationMode REPLICATION_MODE_NEVER = 0
-
-Do not keep the given property synchronized.
-
-ReplicationMode REPLICATION_MODE_ALWAYS = 1
-
-Replicate the given property on process by constantly sending updates using unreliable transfer mode.
-
-ReplicationMode REPLICATION_MODE_ON_CHANGE = 2
-
-Replicate the given property on process by sending updates using reliable transfer mode when its value changes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### REPLICATION_MODE_NEVER {#REPLICATION_MODE_NEVER}
 
@@ -144,7 +134,7 @@ Replicate the given property on process by sending updates using reliable transf
 REPLICATION_MODE_NEVER = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not keep the given property synchronized.
 
 #### REPLICATION_MODE_ALWAYS {#REPLICATION_MODE_ALWAYS}
 
@@ -152,7 +142,7 @@ REPLICATION_MODE_NEVER = 0
 REPLICATION_MODE_ALWAYS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Replicate the given property on process by constantly sending updates using unreliable transfer mode.
 
 #### REPLICATION_MODE_ON_CHANGE {#REPLICATION_MODE_ON_CHANGE}
 
@@ -160,4 +150,6 @@ REPLICATION_MODE_ALWAYS = 1
 REPLICATION_MODE_ON_CHANGE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Replicate the given property on process by sending updates using reliable transfer mode when its value changes.
+
+---

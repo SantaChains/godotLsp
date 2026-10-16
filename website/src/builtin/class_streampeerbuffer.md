@@ -86,4 +86,9 @@ void set_data_array(data: PackedByteArray)
 data_array: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_data_array(value: PackedByteArray)
+- PackedByteArray get_data_array()
+
+The underlying data buffer. Setting this value resets the cursor.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.

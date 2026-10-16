@@ -510,7 +510,12 @@ Overrides the default friction and bounce physics properties for the whole GridM
 cell_size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_cell_size(value: Vector3)
+- Vector3 get_cell_size()
+
+The dimensions of the grid's cells.
+
+This does not affect the size of the meshes. See cell_scale.
 
 ### cell_octant_size {#cell_octant_size}
 
@@ -652,17 +657,7 @@ Emitted when the MeshLibrary of this GridMap changes.
 enum DebugVisibilityMode { DEBUG_VISIBILITY_MODE_DEFAULT = 0, DEBUG_VISIBILITY_MODE_FORCE_SHOW = 1, DEBUG_VISIBILITY_MODE_FORCE_HIDE = 2 }
 ```
 
-DebugVisibilityMode DEBUG_VISIBILITY_MODE_DEFAULT = 0
-
-Hide the collisions debug shapes in the editor, and use the debug settings to determine their visibility in game (i.e. SceneTree.debug_collisions_hint or SceneTree.debug_navigation_hint).
-
-DebugVisibilityMode DEBUG_VISIBILITY_MODE_FORCE_SHOW = 1
-
-Always show the collisions debug shapes.
-
-DebugVisibilityMode DEBUG_VISIBILITY_MODE_FORCE_HIDE = 2
-
-Always hide the collisions debug shapes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DEBUG_VISIBILITY_MODE_DEFAULT {#DEBUG_VISIBILITY_MODE_DEFAULT}
 
@@ -670,7 +665,7 @@ Always hide the collisions debug shapes.
 DEBUG_VISIBILITY_MODE_DEFAULT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hide the collisions debug shapes in the editor, and use the debug settings to determine their visibility in game (i.e. SceneTree.debug_collisions_hint or SceneTree.debug_navigation_hint).
 
 #### DEBUG_VISIBILITY_MODE_FORCE_SHOW {#DEBUG_VISIBILITY_MODE_FORCE_SHOW}
 
@@ -678,7 +673,7 @@ DEBUG_VISIBILITY_MODE_DEFAULT = 0
 DEBUG_VISIBILITY_MODE_FORCE_SHOW = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always show the collisions debug shapes.
 
 #### DEBUG_VISIBILITY_MODE_FORCE_HIDE {#DEBUG_VISIBILITY_MODE_FORCE_HIDE}
 
@@ -686,7 +681,9 @@ DEBUG_VISIBILITY_MODE_FORCE_SHOW = 1
 DEBUG_VISIBILITY_MODE_FORCE_HIDE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always hide the collisions debug shapes.
+
+---
 
 ## 常量
 

@@ -265,7 +265,10 @@ In JOYSTICK_FOLLOWING mode, this radius also determines how far the finger can m
 initial_offset_ratio: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_initial_offset_ratio(value: Vector2)
+- Vector2 get_initial_offset_ratio()
+
+The initial position of the joystick as a ratio of the control's size. (0, 0) is top-left and (1, 1) is bottom-right.
 
 ### action_left {#action_left}
 
@@ -372,17 +375,7 @@ Emitted when the tip enters the deadzone after being outside of it.
 enum JoystickMode { JOYSTICK_FIXED = 0, JOYSTICK_DYNAMIC = 1, JOYSTICK_FOLLOWING = 2 }
 ```
 
-JoystickMode JOYSTICK_FIXED = 0
-
-The joystick doesn't move.
-
-JoystickMode JOYSTICK_DYNAMIC = 1
-
-The joystick is moved to the initial touch position as long as it's within the joystick's bounds. It moves back to its original position when released.
-
-JoystickMode JOYSTICK_FOLLOWING = 2
-
-The joystick is moved to the initial touch position as long as it's within the joystick's bounds. It will follow the touch input if it goes outside the joystick's range. It moves back to its original position when released.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### JOYSTICK_FIXED {#JOYSTICK_FIXED}
 
@@ -390,7 +383,7 @@ The joystick is moved to the initial touch position as long as it's within the j
 JOYSTICK_FIXED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The joystick doesn't move.
 
 #### JOYSTICK_DYNAMIC {#JOYSTICK_DYNAMIC}
 
@@ -398,7 +391,7 @@ JOYSTICK_FIXED = 0
 JOYSTICK_DYNAMIC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The joystick is moved to the initial touch position as long as it's within the joystick's bounds. It moves back to its original position when released.
 
 #### JOYSTICK_FOLLOWING {#JOYSTICK_FOLLOWING}
 
@@ -406,7 +399,9 @@ JOYSTICK_DYNAMIC = 1
 JOYSTICK_FOLLOWING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The joystick is moved to the initial touch position as long as it's within the joystick's bounds. It will follow the touch input if it goes outside the joystick's range. It moves back to its original position when released.
+
+---
 
 ### VisibilityMode {#enum-VisibilityMode}
 
@@ -414,13 +409,7 @@ JOYSTICK_FOLLOWING = 2
 enum VisibilityMode { VISIBILITY_ALWAYS = 0, VISIBILITY_WHEN_TOUCHED = 1 }
 ```
 
-VisibilityMode VISIBILITY_ALWAYS = 0
-
-The joystick is always visible.
-
-VisibilityMode VISIBILITY_WHEN_TOUCHED = 1
-
-The joystick is only visible when being touched.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VISIBILITY_ALWAYS {#VISIBILITY_ALWAYS}
 
@@ -428,7 +417,7 @@ The joystick is only visible when being touched.
 VISIBILITY_ALWAYS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The joystick is always visible.
 
 #### VISIBILITY_WHEN_TOUCHED {#VISIBILITY_WHEN_TOUCHED}
 
@@ -436,4 +425,6 @@ VISIBILITY_ALWAYS = 0
 VISIBILITY_WHEN_TOUCHED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The joystick is only visible when being touched.
+
+---

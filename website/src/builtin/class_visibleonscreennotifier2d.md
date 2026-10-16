@@ -66,7 +66,10 @@ void set_show_rect(show_rect: bool)
 rect: Rect2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_rect(value: Rect2)
+- Rect2 get_rect()
+
+The VisibleOnScreenNotifier2D's bounding rectangle.
 
 ### show_rect {#show_rect}
 

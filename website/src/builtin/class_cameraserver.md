@@ -143,21 +143,7 @@ Emitted when camera feeds are updated.
 enum FeedImage { FEED_RGBA_IMAGE = 0, FEED_YCBCR_IMAGE = 0, FEED_Y_IMAGE = 0, FEED_CBCR_IMAGE = 1 }
 ```
 
-FeedImage FEED_RGBA_IMAGE = 0
-
-The RGBA camera image.
-
-FeedImage FEED_YCBCR_IMAGE = 0
-
-The YCbCr [https://en.wikipedia.org/wiki/YCbCr] camera image.
-
-FeedImage FEED_Y_IMAGE = 0
-
-The Y component camera image.
-
-FeedImage FEED_CBCR_IMAGE = 1
-
-The CbCr component camera image.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FEED_RGBA_IMAGE {#FEED_RGBA_IMAGE}
 
@@ -165,7 +151,7 @@ The CbCr component camera image.
 FEED_RGBA_IMAGE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The RGBA camera image.
 
 #### FEED_YCBCR_IMAGE {#FEED_YCBCR_IMAGE}
 
@@ -173,7 +159,7 @@ FEED_RGBA_IMAGE = 0
 FEED_YCBCR_IMAGE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The YCbCr [https://en.wikipedia.org/wiki/YCbCr] camera image.
 
 #### FEED_Y_IMAGE {#FEED_Y_IMAGE}
 
@@ -181,7 +167,7 @@ FEED_YCBCR_IMAGE = 0
 FEED_Y_IMAGE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Y component camera image.
 
 #### FEED_CBCR_IMAGE {#FEED_CBCR_IMAGE}
 
@@ -189,4 +175,6 @@ FEED_Y_IMAGE = 0
 FEED_CBCR_IMAGE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The CbCr component camera image.
+
+---

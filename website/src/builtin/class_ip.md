@@ -111,21 +111,7 @@ Creates a queue item to resolve a hostname to an IPv4 or IPv6 address depending 
 enum ResolverStatus { RESOLVER_STATUS_NONE = 0, RESOLVER_STATUS_WAITING = 1, RESOLVER_STATUS_DONE = 2, RESOLVER_STATUS_ERROR = 3 }
 ```
 
-ResolverStatus RESOLVER_STATUS_NONE = 0
-
-DNS hostname resolver status: No status.
-
-ResolverStatus RESOLVER_STATUS_WAITING = 1
-
-DNS hostname resolver status: Waiting.
-
-ResolverStatus RESOLVER_STATUS_DONE = 2
-
-DNS hostname resolver status: Done.
-
-ResolverStatus RESOLVER_STATUS_ERROR = 3
-
-DNS hostname resolver status: Error.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RESOLVER_STATUS_NONE {#RESOLVER_STATUS_NONE}
 
@@ -133,7 +119,7 @@ DNS hostname resolver status: Error.
 RESOLVER_STATUS_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+DNS hostname resolver status: No status.
 
 #### RESOLVER_STATUS_WAITING {#RESOLVER_STATUS_WAITING}
 
@@ -141,7 +127,7 @@ RESOLVER_STATUS_NONE = 0
 RESOLVER_STATUS_WAITING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+DNS hostname resolver status: Waiting.
 
 #### RESOLVER_STATUS_DONE {#RESOLVER_STATUS_DONE}
 
@@ -149,7 +135,7 @@ RESOLVER_STATUS_WAITING = 1
 RESOLVER_STATUS_DONE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+DNS hostname resolver status: Done.
 
 #### RESOLVER_STATUS_ERROR {#RESOLVER_STATUS_ERROR}
 
@@ -157,7 +143,9 @@ RESOLVER_STATUS_DONE = 2
 RESOLVER_STATUS_ERROR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+DNS hostname resolver status: Error.
+
+---
 
 ### Type {#enum-Type}
 
@@ -165,21 +153,7 @@ RESOLVER_STATUS_ERROR = 3
 enum Type { TYPE_NONE = 0, TYPE_IPV4 = 1, TYPE_IPV6 = 2, TYPE_ANY = 3 }
 ```
 
-Type TYPE_NONE = 0
-
-Address type: None.
-
-Type TYPE_IPV4 = 1
-
-Address type: Internet protocol version 4 (IPv4).
-
-Type TYPE_IPV6 = 2
-
-Address type: Internet protocol version 6 (IPv6).
-
-Type TYPE_ANY = 3
-
-Address type: Any.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TYPE_NONE {#TYPE_NONE}
 
@@ -187,7 +161,7 @@ Address type: Any.
 TYPE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Address type: None.
 
 #### TYPE_IPV4 {#TYPE_IPV4}
 
@@ -195,7 +169,7 @@ TYPE_NONE = 0
 TYPE_IPV4 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Address type: Internet protocol version 4 (IPv4).
 
 #### TYPE_IPV6 {#TYPE_IPV6}
 
@@ -203,7 +177,7 @@ TYPE_IPV4 = 1
 TYPE_IPV6 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Address type: Internet protocol version 6 (IPv6).
 
 #### TYPE_ANY {#TYPE_ANY}
 
@@ -211,7 +185,9 @@ TYPE_IPV6 = 2
 TYPE_ANY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Address type: Any.
+
+---
 
 ## 常量
 

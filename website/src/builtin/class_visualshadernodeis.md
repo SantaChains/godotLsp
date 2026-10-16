@@ -49,17 +49,7 @@ The comparison function.
 enum Function { FUNC_IS_INF = 0, FUNC_IS_NAN = 1, FUNC_MAX = 2 }
 ```
 
-Function FUNC_IS_INF = 0
-
-Comparison with INF (Infinity).
-
-Function FUNC_IS_NAN = 1
-
-Comparison with NaN (Not a Number; indicates invalid numeric results, such as division by zero).
-
-Function FUNC_MAX = 2
-
-Represents the size of the Function enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FUNC_IS_INF {#FUNC_IS_INF}
 
@@ -67,7 +57,7 @@ Represents the size of the Function enum.
 FUNC_IS_INF = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Comparison with INF (Infinity).
 
 #### FUNC_IS_NAN {#FUNC_IS_NAN}
 
@@ -75,7 +65,7 @@ FUNC_IS_INF = 0
 FUNC_IS_NAN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Comparison with NaN (Not a Number; indicates invalid numeric results, such as division by zero).
 
 #### FUNC_MAX {#FUNC_MAX}
 
@@ -83,4 +73,6 @@ FUNC_IS_NAN = 1
 FUNC_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Function enum.
+
+---

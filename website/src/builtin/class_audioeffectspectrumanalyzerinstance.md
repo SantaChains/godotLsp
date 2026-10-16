@@ -32,13 +32,7 @@ mode determines how the frequency range will be processed.
 enum MagnitudeMode { MAGNITUDE_AVERAGE = 0, MAGNITUDE_MAX = 1 }
 ```
 
-MagnitudeMode MAGNITUDE_AVERAGE = 0
-
-Use the average value across the frequency range as magnitude.
-
-MagnitudeMode MAGNITUDE_MAX = 1
-
-Use the maximum value of the frequency range as magnitude.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MAGNITUDE_AVERAGE {#MAGNITUDE_AVERAGE}
 
@@ -46,7 +40,7 @@ Use the maximum value of the frequency range as magnitude.
 MAGNITUDE_AVERAGE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the average value across the frequency range as magnitude.
 
 #### MAGNITUDE_MAX {#MAGNITUDE_MAX}
 
@@ -54,4 +48,6 @@ MAGNITUDE_AVERAGE = 0
 MAGNITUDE_MAX = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the maximum value of the frequency range as magnitude.
+
+---

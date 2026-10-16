@@ -126,7 +126,10 @@ void set_target_node(target_nodepath: NodePath)
 target_nodepath: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_node(value: NodePath)
+- NodePath get_target_node()
+
+The NodePath to the node that is the target for the FABRIK modification. This node is what the FABRIK chain will attempt to rotate the bone chain to.
 
 ### fabrik_data_chain_length {#fabrik_data_chain_length}
 

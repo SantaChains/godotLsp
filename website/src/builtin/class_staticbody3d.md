@@ -85,7 +85,10 @@ If a material is assigned to this property, it will be used instead of any other
 constant_linear_velocity: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_constant_linear_velocity(value: Vector3)
+- Vector3 get_constant_linear_velocity()
+
+The body's constant linear velocity. This does not move the body, but affects touching bodies, as if it were moving.
 
 ### constant_angular_velocity {#constant_angular_velocity}
 
@@ -93,4 +96,7 @@ constant_linear_velocity: Vector3
 constant_angular_velocity: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_constant_angular_velocity(value: Vector3)
+- Vector3 get_constant_angular_velocity()
+
+The body's constant angular velocity. This does not rotate the body, but affects touching bodies, as if it were rotating.

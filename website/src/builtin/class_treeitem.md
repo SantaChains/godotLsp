@@ -1112,29 +1112,7 @@ The custom minimum height.
 enum TreeCellMode { CELL_MODE_STRING = 0, CELL_MODE_CHECK = 1, CELL_MODE_RANGE = 2, CELL_MODE_ICON = 3, CELL_MODE_CUSTOM = 4 }
 ```
 
-TreeCellMode CELL_MODE_STRING = 0
-
-Cell shows a string label, optionally with an icon. When editable, the text can be edited using a LineEdit, or a TextEdit popup if set_edit_multiline() is used.
-
-TreeCellMode CELL_MODE_CHECK = 1
-
-Cell shows a checkbox, optionally with text and an icon. The checkbox can be pressed, released, or indeterminate (via set_indeterminate()). The checkbox can't be clicked unless the cell is editable.
-
-TreeCellMode CELL_MODE_RANGE = 2
-
-Cell shows a numeric range. When editable, it can be edited using a range slider. Use set_range() to set the value and set_range_config() to configure the range.
-
-This cell can also be used in a text dropdown mode when you assign a text with set_text(). Separate options with a comma, e.g. "Option1,Option2,Option3".
-
-TreeCellMode CELL_MODE_ICON = 3
-
-Cell shows an icon. It can't be edited nor display text. The icon is always centered within the cell.
-
-TreeCellMode CELL_MODE_CUSTOM = 4
-
-Cell shows as a clickable button. It will display an arrow similar to OptionButton, but doesn't feature a dropdown (for that you can use CELL_MODE_RANGE). Clicking the button emits the Tree.item_edited signal. The button is flat by default, you can use set_custom_as_button() to display it with a StyleBox.
-
-This mode also supports custom drawing using set_custom_draw_callback().
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CELL_MODE_STRING {#CELL_MODE_STRING}
 
@@ -1142,7 +1120,7 @@ This mode also supports custom drawing using set_custom_draw_callback().
 CELL_MODE_STRING = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cell shows a string label, optionally with an icon. When editable, the text can be edited using a LineEdit, or a TextEdit popup if set_edit_multiline() is used.
 
 #### CELL_MODE_CHECK {#CELL_MODE_CHECK}
 
@@ -1150,7 +1128,7 @@ CELL_MODE_STRING = 0
 CELL_MODE_CHECK = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cell shows a checkbox, optionally with text and an icon. The checkbox can be pressed, released, or indeterminate (via set_indeterminate()). The checkbox can't be clicked unless the cell is editable.
 
 #### CELL_MODE_RANGE {#CELL_MODE_RANGE}
 
@@ -1158,7 +1136,9 @@ CELL_MODE_CHECK = 1
 CELL_MODE_RANGE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cell shows a numeric range. When editable, it can be edited using a range slider. Use set_range() to set the value and set_range_config() to configure the range.
+
+This cell can also be used in a text dropdown mode when you assign a text with set_text(). Separate options with a comma, e.g. "Option1,Option2,Option3".
 
 #### CELL_MODE_ICON {#CELL_MODE_ICON}
 
@@ -1166,7 +1146,7 @@ CELL_MODE_RANGE = 2
 CELL_MODE_ICON = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cell shows an icon. It can't be edited nor display text. The icon is always centered within the cell.
 
 #### CELL_MODE_CUSTOM {#CELL_MODE_CUSTOM}
 
@@ -1174,4 +1154,8 @@ CELL_MODE_ICON = 3
 CELL_MODE_CUSTOM = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cell shows as a clickable button. It will display an arrow similar to OptionButton, but doesn't feature a dropdown (for that you can use CELL_MODE_RANGE). Clicking the button emits the Tree.item_edited signal. The button is flat by default, you can use set_custom_as_button() to display it with a StyleBox.
+
+This mode also supports custom drawing using set_custom_draw_callback().
+
+---

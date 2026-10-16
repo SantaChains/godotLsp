@@ -301,7 +301,14 @@ Controls how the stylebox's texture will be stretched or tiled vertically.
 region_rect: Rect2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_region_rect(value: Rect2)
+- Rect2 get_region_rect()
+
+The region to use from the texture.
+
+This is equivalent to first wrapping the texture in an AtlasTexture with the same region.
+
+If empty (Rect2(0, 0, 0, 0)), the whole texture is used.
 
 ### modulate_color {#modulate_color}
 
@@ -309,7 +316,10 @@ region_rect: Rect2
 modulate_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_modulate(value: Color)
+- Color get_modulate()
+
+Modulates the color of the texture when this style box is drawn.
 
 ### draw_center {#draw_center}
 
@@ -330,17 +340,7 @@ If true, the nine-patch texture's center tile will be drawn.
 enum AxisStretchMode { AXIS_STRETCH_MODE_STRETCH = 0, AXIS_STRETCH_MODE_TILE = 1, AXIS_STRETCH_MODE_TILE_FIT = 2 }
 ```
 
-AxisStretchMode AXIS_STRETCH_MODE_STRETCH = 0
-
-Stretch the stylebox's texture. This results in visible distortion unless the texture size matches the stylebox's size perfectly.
-
-AxisStretchMode AXIS_STRETCH_MODE_TILE = 1
-
-Repeats the stylebox's texture to match the stylebox's size according to the nine-patch system.
-
-AxisStretchMode AXIS_STRETCH_MODE_TILE_FIT = 2
-
-Repeats the stylebox's texture to match the stylebox's size according to the nine-patch system. Unlike AXIS_STRETCH_MODE_TILE, the texture may be slightly stretched to make the nine-patch texture tile seamlessly.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AXIS_STRETCH_MODE_STRETCH {#AXIS_STRETCH_MODE_STRETCH}
 
@@ -348,7 +348,7 @@ Repeats the stylebox's texture to match the stylebox's size according to the nin
 AXIS_STRETCH_MODE_STRETCH = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Stretch the stylebox's texture. This results in visible distortion unless the texture size matches the stylebox's size perfectly.
 
 #### AXIS_STRETCH_MODE_TILE {#AXIS_STRETCH_MODE_TILE}
 
@@ -356,7 +356,7 @@ AXIS_STRETCH_MODE_STRETCH = 0
 AXIS_STRETCH_MODE_TILE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Repeats the stylebox's texture to match the stylebox's size according to the nine-patch system.
 
 #### AXIS_STRETCH_MODE_TILE_FIT {#AXIS_STRETCH_MODE_TILE_FIT}
 
@@ -364,4 +364,6 @@ AXIS_STRETCH_MODE_TILE = 1
 AXIS_STRETCH_MODE_TILE_FIT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Repeats the stylebox's texture to match the stylebox's size according to the nine-patch system. Unlike AXIS_STRETCH_MODE_TILE, the texture may be slightly stretched to make the nine-patch texture tile seamlessly.
+
+---

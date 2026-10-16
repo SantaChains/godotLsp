@@ -30,17 +30,7 @@ Pushes a toast notification to the editor for display.
 enum Severity { SEVERITY_INFO = 0, SEVERITY_WARNING = 1, SEVERITY_ERROR = 2 }
 ```
 
-Severity SEVERITY_INFO = 0
-
-Toast will display with an INFO severity.
-
-Severity SEVERITY_WARNING = 1
-
-Toast will display with a WARNING severity and have a corresponding color.
-
-Severity SEVERITY_ERROR = 2
-
-Toast will display with an ERROR severity and have a corresponding color.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SEVERITY_INFO {#SEVERITY_INFO}
 
@@ -48,7 +38,7 @@ Toast will display with an ERROR severity and have a corresponding color.
 SEVERITY_INFO = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Toast will display with an INFO severity.
 
 #### SEVERITY_WARNING {#SEVERITY_WARNING}
 
@@ -56,7 +46,7 @@ SEVERITY_INFO = 0
 SEVERITY_WARNING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Toast will display with a WARNING severity and have a corresponding color.
 
 #### SEVERITY_ERROR {#SEVERITY_ERROR}
 
@@ -64,4 +54,6 @@ SEVERITY_WARNING = 1
 SEVERITY_ERROR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Toast will display with an ERROR severity and have a corresponding color.
+
+---

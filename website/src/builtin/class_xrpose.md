@@ -153,7 +153,10 @@ The name of this pose. Usually, this name is derived from an action map set up b
 transform: String
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_transform(value: Transform3D)
+- Transform3D get_transform()
+
+The transform containing the original and transform as reported by the XR runtime.
 
 ### linear_velocity {#linear_velocity}
 
@@ -161,7 +164,10 @@ transform: String
 linear_velocity: String
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_linear_velocity(value: Vector3)
+- Vector3 get_linear_velocity()
+
+The linear velocity of this pose.
 
 ### angular_velocity {#angular_velocity}
 
@@ -169,7 +175,10 @@ linear_velocity: String
 angular_velocity: String
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_angular_velocity(value: Vector3)
+- Vector3 get_angular_velocity()
+
+The angular velocity for this pose.
 
 ### tracking_confidence {#tracking_confidence}
 
@@ -190,17 +199,7 @@ The tracking confidence for this pose, provides insight on how accurate the spat
 enum TrackingConfidence { XR_TRACKING_CONFIDENCE_NONE = 0, XR_TRACKING_CONFIDENCE_LOW = 1, XR_TRACKING_CONFIDENCE_HIGH = 2 }
 ```
 
-TrackingConfidence XR_TRACKING_CONFIDENCE_NONE = 0
-
-No tracking information is available for this pose.
-
-TrackingConfidence XR_TRACKING_CONFIDENCE_LOW = 1
-
-Tracking information may be inaccurate or estimated. For example, with inside out tracking this would indicate a controller may be (partially) obscured.
-
-TrackingConfidence XR_TRACKING_CONFIDENCE_HIGH = 2
-
-Tracking information is considered accurate and up to date.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### XR_TRACKING_CONFIDENCE_NONE {#XR_TRACKING_CONFIDENCE_NONE}
 
@@ -208,7 +207,7 @@ Tracking information is considered accurate and up to date.
 XR_TRACKING_CONFIDENCE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No tracking information is available for this pose.
 
 #### XR_TRACKING_CONFIDENCE_LOW {#XR_TRACKING_CONFIDENCE_LOW}
 
@@ -216,7 +215,7 @@ XR_TRACKING_CONFIDENCE_NONE = 0
 XR_TRACKING_CONFIDENCE_LOW = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tracking information may be inaccurate or estimated. For example, with inside out tracking this would indicate a controller may be (partially) obscured.
 
 #### XR_TRACKING_CONFIDENCE_HIGH {#XR_TRACKING_CONFIDENCE_HIGH}
 
@@ -224,4 +223,6 @@ XR_TRACKING_CONFIDENCE_LOW = 1
 XR_TRACKING_CONFIDENCE_HIGH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tracking information is considered accurate and up to date.
+
+---

@@ -170,7 +170,7 @@ This can be seen as transforming with respect to the local frame.
 basis: Basis
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Basis of this transform. It is composed by 3 axes (Basis.x, Basis.y, and Basis.z). Together, these represent the transform's rotation, scale, and shear.
 
 ### origin {#origin}
 
@@ -178,7 +178,7 @@ basis: Basis
 origin: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The translation offset of this transform. In 3D space, this can be seen as the position.
 
 ## 常量
 
@@ -188,7 +188,41 @@ origin: Vector3
 const IDENTITY = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The identity Transform3D. This is a transform with no translation, no rotation, and a scale of Vector3.ONE. Its basis is equal to Basis.IDENTITY. This also means that:
+
+- Its Basis.x points right (Vector3.RIGHT);
+- Its Basis.y points up (Vector3.UP);
+- Its Basis.z points back (Vector3.BACK).
+
+```gdscript
+var transform = Transform3D.IDENTITY
+var basis = transform.basis
+print("| X | Y | Z | Origin")
+print("| %.f | %.f | %.f | %.f" % [basis.x.x, basis.y.x, basis.z.x, transform.origin.x])
+print("| %.f | %.f | %.f | %.f" % [basis.x.y, basis.y.y, basis.z.y, transform.origin.y])
+print("| %.f | %.f | %.f | %.f" % [basis.x.z, basis.y.z, basis.z.z, transform.origin.z])
+# Prints:
+# | X | Y | Z | Origin
+# | 1 | 0 | 0 | 0
+# | 0 | 1 | 0 | 0
+# | 0 | 0 | 1 | 0
+```
+
+If a Vector3, an AABB, a Plane, a PackedVector3Array, or another Transform3D is transformed (multiplied) by this constant, no transformation occurs.
+
+Note: In GDScript, this constant is equivalent to creating a Transform3D without any arguments. It can be used to make your code clearer, and for consistency with C#.
+
+FLIP_X = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0) 
+
+Transform3D with mirroring applied perpendicular to the YZ plane. Its basis is equal to Basis.FLIP_X.
+
+FLIP_Y = Transform3D(1, 0, 0, 0, -1, 0, 0, 0, 1, 0, 0, 0) 
+
+Transform3D with mirroring applied perpendicular to the XZ plane. Its basis is equal to Basis.FLIP_Y.
+
+FLIP_Z = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0) 
+
+Transform3D with mirroring applied perpendicular to the XY plane. Its basis is equal to Basis.FLIP_Z.
 
 ### FLIP_X {#FLIP_X}
 

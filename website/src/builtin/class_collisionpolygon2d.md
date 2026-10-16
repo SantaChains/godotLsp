@@ -129,7 +129,14 @@ Collision build mode.
 polygon: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_polygon(value: PackedVector2Array)
+- PackedVector2Array get_polygon()
+
+The polygon's list of vertices. Each point will be connected to the next, and the final point will be connected to the first.
+
+Note: The returned vertices are in the local coordinate space of the given CollisionPolygon2D.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.
 
 ### disabled {#disabled}
 
@@ -174,7 +181,10 @@ The margin used for one-way collision (in pixels). Higher values will make the s
 one_way_collision_direction: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_one_way_collision_direction(value: Vector2)
+- Vector2 get_one_way_collision_direction()
+
+The direction used for one-way collision.
 
 ## 枚举
 
@@ -184,13 +194,7 @@ one_way_collision_direction: Vector2
 enum BuildMode { BUILD_SOLIDS = 0, BUILD_SEGMENTS = 1 }
 ```
 
-BuildMode BUILD_SOLIDS = 0
-
-Collisions will include the polygon and its contained area. In this mode the node has the same effect as several ConvexPolygonShape2D nodes, one for each convex shape in the convex decomposition of the polygon (but without the overhead of multiple nodes).
-
-BuildMode BUILD_SEGMENTS = 1
-
-Collisions will only include the polygon edges. In this mode the node has the same effect as a single ConcavePolygonShape2D made of segments, with the restriction that each segment (after the first one) starts where the previous one ends, and the last one ends where the first one starts (forming a closed but hollow polygon).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BUILD_SOLIDS {#BUILD_SOLIDS}
 
@@ -198,7 +202,7 @@ Collisions will only include the polygon edges. In this mode the node has the sa
 BUILD_SOLIDS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Collisions will include the polygon and its contained area. In this mode the node has the same effect as several ConvexPolygonShape2D nodes, one for each convex shape in the convex decomposition of the polygon (but without the overhead of multiple nodes).
 
 #### BUILD_SEGMENTS {#BUILD_SEGMENTS}
 
@@ -206,4 +210,6 @@ BUILD_SOLIDS = 0
 BUILD_SEGMENTS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Collisions will only include the polygon edges. In this mode the node has the same effect as a single ConcavePolygonShape2D made of segments, with the restriction that each segment (after the first one) starts where the previous one ends, and the last one ends where the first one starts (forming a closed but hollow polygon).
+
+---

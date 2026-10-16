@@ -161,7 +161,10 @@ void set_to(to: Vector3)
 from: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_from(value: Vector3)
+- Vector3 get_from()
+
+The starting point of the ray being queried for, in global coordinates.
 
 ### to {#to}
 
@@ -169,7 +172,10 @@ from: Vector3
 to: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_to(value: Vector3)
+- Vector3 get_to()
+
+The ending point of the ray being queried for, in global coordinates.
 
 ### collision_mask {#collision_mask}
 

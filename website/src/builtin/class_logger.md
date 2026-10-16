@@ -50,21 +50,7 @@ Note: Logging another message from this method using functions like @GlobalScope
 enum ErrorType { ERROR_TYPE_ERROR = 0, ERROR_TYPE_WARNING = 1, ERROR_TYPE_SCRIPT = 2, ERROR_TYPE_SHADER = 3 }
 ```
 
-ErrorType ERROR_TYPE_ERROR = 0
-
-The message received is an error.
-
-ErrorType ERROR_TYPE_WARNING = 1
-
-The message received is a warning.
-
-ErrorType ERROR_TYPE_SCRIPT = 2
-
-The message received is a script error.
-
-ErrorType ERROR_TYPE_SHADER = 3
-
-The message received is a shader error.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ERROR_TYPE_ERROR {#ERROR_TYPE_ERROR}
 
@@ -72,7 +58,7 @@ The message received is a shader error.
 ERROR_TYPE_ERROR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The message received is an error.
 
 #### ERROR_TYPE_WARNING {#ERROR_TYPE_WARNING}
 
@@ -80,7 +66,7 @@ ERROR_TYPE_ERROR = 0
 ERROR_TYPE_WARNING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The message received is a warning.
 
 #### ERROR_TYPE_SCRIPT {#ERROR_TYPE_SCRIPT}
 
@@ -88,7 +74,7 @@ ERROR_TYPE_WARNING = 1
 ERROR_TYPE_SCRIPT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The message received is a script error.
 
 #### ERROR_TYPE_SHADER {#ERROR_TYPE_SHADER}
 
@@ -96,4 +82,6 @@ ERROR_TYPE_SCRIPT = 2
 ERROR_TYPE_SHADER = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The message received is a shader error.
+
+---

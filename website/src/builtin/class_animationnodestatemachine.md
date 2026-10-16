@@ -275,17 +275,7 @@ In most cases, when additional cross-fades are performed in the parent Animation
 enum StateMachineType { STATE_MACHINE_TYPE_ROOT = 0, STATE_MACHINE_TYPE_NESTED = 1, STATE_MACHINE_TYPE_GROUPED = 2 }
 ```
 
-StateMachineType STATE_MACHINE_TYPE_ROOT = 0
-
-Seeking to the beginning is treated as playing from the start state. Transition to the end state is treated as exiting the state machine.
-
-StateMachineType STATE_MACHINE_TYPE_NESTED = 1
-
-Seeking to the beginning is treated as seeking to the beginning of the animation in the current state. Transition to the end state, or the absence of transitions in each state, is treated as exiting the state machine.
-
-StateMachineType STATE_MACHINE_TYPE_GROUPED = 2
-
-This is a grouped state machine that can be controlled from a parent state machine. It does not work independently. There must be a state machine with state_machine_type of STATE_MACHINE_TYPE_ROOT or STATE_MACHINE_TYPE_NESTED in the parent or ancestor.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STATE_MACHINE_TYPE_ROOT {#STATE_MACHINE_TYPE_ROOT}
 
@@ -293,7 +283,7 @@ This is a grouped state machine that can be controlled from a parent state machi
 STATE_MACHINE_TYPE_ROOT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Seeking to the beginning is treated as playing from the start state. Transition to the end state is treated as exiting the state machine.
 
 #### STATE_MACHINE_TYPE_NESTED {#STATE_MACHINE_TYPE_NESTED}
 
@@ -301,7 +291,7 @@ STATE_MACHINE_TYPE_ROOT = 0
 STATE_MACHINE_TYPE_NESTED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Seeking to the beginning is treated as seeking to the beginning of the animation in the current state. Transition to the end state, or the absence of transitions in each state, is treated as exiting the state machine.
 
 #### STATE_MACHINE_TYPE_GROUPED {#STATE_MACHINE_TYPE_GROUPED}
 
@@ -309,4 +299,6 @@ STATE_MACHINE_TYPE_NESTED = 1
 STATE_MACHINE_TYPE_GROUPED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This is a grouped state machine that can be controlled from a parent state machine. It does not work independently. There must be a state machine with state_machine_type of STATE_MACHINE_TYPE_ROOT or STATE_MACHINE_TYPE_NESTED in the parent or ancestor.
+
+---

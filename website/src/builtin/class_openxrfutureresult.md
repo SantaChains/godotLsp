@@ -72,17 +72,7 @@ Emitted when the asynchronous function is finished or has been cancelled.
 enum ResultStatus { RESULT_RUNNING = 0, RESULT_FINISHED = 1, RESULT_CANCELLED = 2 }
 ```
 
-ResultStatus RESULT_RUNNING = 0
-
-The asynchronous function is running.
-
-ResultStatus RESULT_FINISHED = 1
-
-The asynchronous function has finished.
-
-ResultStatus RESULT_CANCELLED = 2
-
-The asynchronous function has been cancelled.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RESULT_RUNNING {#RESULT_RUNNING}
 
@@ -90,7 +80,7 @@ The asynchronous function has been cancelled.
 RESULT_RUNNING = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The asynchronous function is running.
 
 #### RESULT_FINISHED {#RESULT_FINISHED}
 
@@ -98,7 +88,7 @@ RESULT_RUNNING = 0
 RESULT_FINISHED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The asynchronous function has finished.
 
 #### RESULT_CANCELLED {#RESULT_CANCELLED}
 
@@ -106,4 +96,6 @@ RESULT_FINISHED = 1
 RESULT_CANCELLED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The asynchronous function has been cancelled.
+
+---

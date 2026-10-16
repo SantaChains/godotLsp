@@ -395,17 +395,7 @@ Emitted when a sound finishes playing without interruptions. This signal is not 
 enum MixTarget { MIX_TARGET_STEREO = 0, MIX_TARGET_SURROUND = 1, MIX_TARGET_CENTER = 2 }
 ```
 
-MixTarget MIX_TARGET_STEREO = 0
-
-The audio will be played only on the first channel. This is the default.
-
-MixTarget MIX_TARGET_SURROUND = 1
-
-The audio will be played on all surround channels.
-
-MixTarget MIX_TARGET_CENTER = 2
-
-The audio will be played on the second channel, which is usually the center.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MIX_TARGET_STEREO {#MIX_TARGET_STEREO}
 
@@ -413,7 +403,7 @@ The audio will be played on the second channel, which is usually the center.
 MIX_TARGET_STEREO = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The audio will be played only on the first channel. This is the default.
 
 #### MIX_TARGET_SURROUND {#MIX_TARGET_SURROUND}
 
@@ -421,7 +411,7 @@ MIX_TARGET_STEREO = 0
 MIX_TARGET_SURROUND = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The audio will be played on all surround channels.
 
 #### MIX_TARGET_CENTER {#MIX_TARGET_CENTER}
 
@@ -429,4 +419,6 @@ MIX_TARGET_SURROUND = 1
 MIX_TARGET_CENTER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The audio will be played on the second channel, which is usually the center.
+
+---

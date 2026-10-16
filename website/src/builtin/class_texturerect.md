@@ -159,29 +159,7 @@ If true, texture is flipped vertically.
 enum ExpandMode { EXPAND_KEEP_SIZE = 0, EXPAND_IGNORE_SIZE = 1, EXPAND_FIT_WIDTH = 2, EXPAND_FIT_WIDTH_PROPORTIONAL = 3, EXPAND_FIT_HEIGHT = 4, EXPAND_FIT_HEIGHT_PROPORTIONAL = 5 }
 ```
 
-ExpandMode EXPAND_KEEP_SIZE = 0
-
-The minimum size will be equal to texture size, i.e. TextureRect can't be smaller than the texture.
-
-ExpandMode EXPAND_IGNORE_SIZE = 1
-
-The size of the texture won't be considered for minimum size calculation, so the TextureRect can be shrunk down past the texture size.
-
-ExpandMode EXPAND_FIT_WIDTH = 2
-
-The height of the texture will be ignored. Minimum width will be equal to the current height. Useful for horizontal layouts, e.g. inside HBoxContainer.
-
-ExpandMode EXPAND_FIT_WIDTH_PROPORTIONAL = 3
-
-Same as EXPAND_FIT_WIDTH, but keeps texture's aspect ratio.
-
-ExpandMode EXPAND_FIT_HEIGHT = 4
-
-The width of the texture will be ignored. Minimum height will be equal to the current width. Useful for vertical layouts, e.g. inside VBoxContainer.
-
-ExpandMode EXPAND_FIT_HEIGHT_PROPORTIONAL = 5
-
-Same as EXPAND_FIT_HEIGHT, but keeps texture's aspect ratio.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EXPAND_KEEP_SIZE {#EXPAND_KEEP_SIZE}
 
@@ -189,7 +167,7 @@ Same as EXPAND_FIT_HEIGHT, but keeps texture's aspect ratio.
 EXPAND_KEEP_SIZE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The minimum size will be equal to texture size, i.e. TextureRect can't be smaller than the texture.
 
 #### EXPAND_IGNORE_SIZE {#EXPAND_IGNORE_SIZE}
 
@@ -197,7 +175,7 @@ EXPAND_KEEP_SIZE = 0
 EXPAND_IGNORE_SIZE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The size of the texture won't be considered for minimum size calculation, so the TextureRect can be shrunk down past the texture size.
 
 #### EXPAND_FIT_WIDTH {#EXPAND_FIT_WIDTH}
 
@@ -205,7 +183,7 @@ EXPAND_IGNORE_SIZE = 1
 EXPAND_FIT_WIDTH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The height of the texture will be ignored. Minimum width will be equal to the current height. Useful for horizontal layouts, e.g. inside HBoxContainer.
 
 #### EXPAND_FIT_WIDTH_PROPORTIONAL {#EXPAND_FIT_WIDTH_PROPORTIONAL}
 
@@ -213,7 +191,7 @@ EXPAND_FIT_WIDTH = 2
 EXPAND_FIT_WIDTH_PROPORTIONAL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Same as EXPAND_FIT_WIDTH, but keeps texture's aspect ratio.
 
 #### EXPAND_FIT_HEIGHT {#EXPAND_FIT_HEIGHT}
 
@@ -221,7 +199,7 @@ EXPAND_FIT_WIDTH_PROPORTIONAL = 3
 EXPAND_FIT_HEIGHT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The width of the texture will be ignored. Minimum height will be equal to the current width. Useful for vertical layouts, e.g. inside VBoxContainer.
 
 #### EXPAND_FIT_HEIGHT_PROPORTIONAL {#EXPAND_FIT_HEIGHT_PROPORTIONAL}
 
@@ -229,7 +207,9 @@ EXPAND_FIT_HEIGHT = 4
 EXPAND_FIT_HEIGHT_PROPORTIONAL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Same as EXPAND_FIT_HEIGHT, but keeps texture's aspect ratio.
+
+---
 
 ### StretchMode {#enum-StretchMode}
 
@@ -237,35 +217,7 @@ EXPAND_FIT_HEIGHT_PROPORTIONAL = 5
 enum StretchMode { STRETCH_SCALE = 0, STRETCH_TILE = 1, STRETCH_KEEP = 2, STRETCH_KEEP_CENTERED = 3, STRETCH_KEEP_ASPECT = 4, STRETCH_KEEP_ASPECT_CENTERED = 5, STRETCH_KEEP_ASPECT_COVERED = 6 }
 ```
 
-StretchMode STRETCH_SCALE = 0
-
-Scale to fit the node's bounding rectangle.
-
-StretchMode STRETCH_TILE = 1
-
-Tile inside the node's bounding rectangle.
-
-Note: STRETCH_TILE mode is not supported for texture set to an AtlasTexture with non-zero AtlasTexture.margin.
-
-StretchMode STRETCH_KEEP = 2
-
-The texture keeps its original size and stays in the bounding rectangle's top-left corner.
-
-StretchMode STRETCH_KEEP_CENTERED = 3
-
-The texture keeps its original size and stays centered in the node's bounding rectangle.
-
-StretchMode STRETCH_KEEP_ASPECT = 4
-
-Scale the texture to fit the node's bounding rectangle, but maintain the texture's aspect ratio.
-
-StretchMode STRETCH_KEEP_ASPECT_CENTERED = 5
-
-Scale the texture to fit the node's bounding rectangle, center it and maintain its aspect ratio.
-
-StretchMode STRETCH_KEEP_ASPECT_COVERED = 6
-
-Scale the texture so that the shorter side fits the bounding rectangle. The other side clips to the node's limits.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STRETCH_SCALE {#STRETCH_SCALE}
 
@@ -273,7 +225,7 @@ Scale the texture so that the shorter side fits the bounding rectangle. The othe
 STRETCH_SCALE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scale to fit the node's bounding rectangle.
 
 #### STRETCH_TILE {#STRETCH_TILE}
 
@@ -281,7 +233,9 @@ STRETCH_SCALE = 0
 STRETCH_TILE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tile inside the node's bounding rectangle.
+
+Note: STRETCH_TILE mode is not supported for texture set to an AtlasTexture with non-zero AtlasTexture.margin.
 
 #### STRETCH_KEEP {#STRETCH_KEEP}
 
@@ -289,7 +243,7 @@ STRETCH_TILE = 1
 STRETCH_KEEP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture keeps its original size and stays in the bounding rectangle's top-left corner.
 
 #### STRETCH_KEEP_CENTERED {#STRETCH_KEEP_CENTERED}
 
@@ -297,7 +251,7 @@ STRETCH_KEEP = 2
 STRETCH_KEEP_CENTERED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture keeps its original size and stays centered in the node's bounding rectangle.
 
 #### STRETCH_KEEP_ASPECT {#STRETCH_KEEP_ASPECT}
 
@@ -305,7 +259,7 @@ STRETCH_KEEP_CENTERED = 3
 STRETCH_KEEP_ASPECT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scale the texture to fit the node's bounding rectangle, but maintain the texture's aspect ratio.
 
 #### STRETCH_KEEP_ASPECT_CENTERED {#STRETCH_KEEP_ASPECT_CENTERED}
 
@@ -313,7 +267,7 @@ STRETCH_KEEP_ASPECT = 4
 STRETCH_KEEP_ASPECT_CENTERED = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scale the texture to fit the node's bounding rectangle, center it and maintain its aspect ratio.
 
 #### STRETCH_KEEP_ASPECT_COVERED {#STRETCH_KEEP_ASPECT_COVERED}
 
@@ -321,4 +275,6 @@ STRETCH_KEEP_ASPECT_CENTERED = 5
 STRETCH_KEEP_ASPECT_COVERED = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scale the texture so that the shorter side fits the bounding rectangle. The other side clips to the node's limits.
+
+---

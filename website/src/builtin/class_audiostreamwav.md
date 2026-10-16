@@ -195,7 +195,16 @@ void set_tags(tags: Dictionary)
 data: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_data(value: PackedByteArray)
+- PackedByteArray get_data()
+
+Contains the audio data in bytes.
+
+Note: If format is set to FORMAT_8_BITS, this property expects signed 8-bit PCM data. To convert from unsigned 8-bit PCM, subtract 128 from each byte.
+
+Note: If format is set to FORMAT_QOA, this property expects data from a full QOA file.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### format {#format}
 
@@ -292,21 +301,7 @@ Note: Only WAV files using a LIST chunk with an identifier of INFO to encode the
 enum Format { FORMAT_8_BITS = 0, FORMAT_16_BITS = 1, FORMAT_IMA_ADPCM = 2, FORMAT_QOA = 3 }
 ```
 
-Format FORMAT_8_BITS = 0
-
-8-bit PCM audio codec.
-
-Format FORMAT_16_BITS = 1
-
-16-bit PCM audio codec.
-
-Format FORMAT_IMA_ADPCM = 2
-
-Audio is lossily compressed as IMA ADPCM.
-
-Format FORMAT_QOA = 3
-
-Audio is lossily compressed as Quite OK Audio [https://qoaformat.org/].
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FORMAT_8_BITS {#FORMAT_8_BITS}
 
@@ -314,7 +309,7 @@ Audio is lossily compressed as Quite OK Audio [https://qoaformat.org/].
 FORMAT_8_BITS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+8-bit PCM audio codec.
 
 #### FORMAT_16_BITS {#FORMAT_16_BITS}
 
@@ -322,7 +317,7 @@ FORMAT_8_BITS = 0
 FORMAT_16_BITS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+16-bit PCM audio codec.
 
 #### FORMAT_IMA_ADPCM {#FORMAT_IMA_ADPCM}
 
@@ -330,7 +325,7 @@ FORMAT_16_BITS = 1
 FORMAT_IMA_ADPCM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Audio is lossily compressed as IMA ADPCM.
 
 #### FORMAT_QOA {#FORMAT_QOA}
 
@@ -338,7 +333,9 @@ FORMAT_IMA_ADPCM = 2
 FORMAT_QOA = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Audio is lossily compressed as Quite OK Audio [https://qoaformat.org/].
+
+---
 
 ### LoopMode {#enum-LoopMode}
 
@@ -346,21 +343,7 @@ FORMAT_QOA = 3
 enum LoopMode { LOOP_DISABLED = 0, LOOP_FORWARD = 1, LOOP_PINGPONG = 2, LOOP_BACKWARD = 3 }
 ```
 
-LoopMode LOOP_DISABLED = 0
-
-Audio does not loop.
-
-LoopMode LOOP_FORWARD = 1
-
-Audio loops the data between loop_begin and loop_end, playing forward only.
-
-LoopMode LOOP_PINGPONG = 2
-
-Audio loops the data between loop_begin and loop_end, playing back and forth.
-
-LoopMode LOOP_BACKWARD = 3
-
-Audio loops the data between loop_begin and loop_end, playing backward only.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LOOP_DISABLED {#LOOP_DISABLED}
 
@@ -368,7 +351,7 @@ Audio loops the data between loop_begin and loop_end, playing backward only.
 LOOP_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Audio does not loop.
 
 #### LOOP_FORWARD {#LOOP_FORWARD}
 
@@ -376,7 +359,7 @@ LOOP_DISABLED = 0
 LOOP_FORWARD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Audio loops the data between loop_begin and loop_end, playing forward only.
 
 #### LOOP_PINGPONG {#LOOP_PINGPONG}
 
@@ -384,7 +367,7 @@ LOOP_FORWARD = 1
 LOOP_PINGPONG = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Audio loops the data between loop_begin and loop_end, playing back and forth.
 
 #### LOOP_BACKWARD {#LOOP_BACKWARD}
 
@@ -392,4 +375,6 @@ LOOP_PINGPONG = 2
 LOOP_BACKWARD = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Audio loops the data between loop_begin and loop_end, playing backward only.
+
+---

@@ -519,7 +519,10 @@ The size of one pixel's width on the label to scale it in 3D. To make the font l
 offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset(value: Vector2)
+- Vector2 get_offset()
+
+The text drawing offset (in pixels).
 
 ### billboard {#billboard}
 
@@ -678,7 +681,10 @@ Note: This only applies to sorting of transparent objects. This will not impact 
 modulate: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_modulate(value: Color)
+- Color get_modulate()
+
+Text Color of the Label3D.
 
 ### outline_modulate {#outline_modulate}
 
@@ -686,7 +692,10 @@ modulate: Color
 outline_modulate: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_outline_modulate(value: Color)
+- Color get_outline_modulate()
+
+The tint of text outline.
 
 ### text {#text}
 
@@ -874,25 +883,7 @@ Set additional options for BiDi override.
 enum DrawFlags { FLAG_SHADED = 0, FLAG_DOUBLE_SIDED = 1, FLAG_DISABLE_DEPTH_TEST = 2, FLAG_FIXED_SIZE = 3, FLAG_MAX = 4 }
 ```
 
-DrawFlags FLAG_SHADED = 0
-
-If set, lights in the environment affect the label.
-
-DrawFlags FLAG_DOUBLE_SIDED = 1
-
-If set, text can be seen from the back as well. If not, the text is invisible when looking at it from behind.
-
-DrawFlags FLAG_DISABLE_DEPTH_TEST = 2
-
-Disables the depth test, so this object is drawn on top of all others. However, objects drawn after it in the draw order may cover it.
-
-DrawFlags FLAG_FIXED_SIZE = 3
-
-Label is scaled by depth so that it always appears the same size on screen.
-
-DrawFlags FLAG_MAX = 4
-
-Represents the size of the DrawFlags enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FLAG_SHADED {#FLAG_SHADED}
 
@@ -900,7 +891,7 @@ Represents the size of the DrawFlags enum.
 FLAG_SHADED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, lights in the environment affect the label.
 
 #### FLAG_DOUBLE_SIDED {#FLAG_DOUBLE_SIDED}
 
@@ -908,7 +899,7 @@ FLAG_SHADED = 0
 FLAG_DOUBLE_SIDED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, text can be seen from the back as well. If not, the text is invisible when looking at it from behind.
 
 #### FLAG_DISABLE_DEPTH_TEST {#FLAG_DISABLE_DEPTH_TEST}
 
@@ -916,7 +907,7 @@ FLAG_DOUBLE_SIDED = 1
 FLAG_DISABLE_DEPTH_TEST = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables the depth test, so this object is drawn on top of all others. However, objects drawn after it in the draw order may cover it.
 
 #### FLAG_FIXED_SIZE {#FLAG_FIXED_SIZE}
 
@@ -924,7 +915,7 @@ FLAG_DISABLE_DEPTH_TEST = 2
 FLAG_FIXED_SIZE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Label is scaled by depth so that it always appears the same size on screen.
 
 #### FLAG_MAX {#FLAG_MAX}
 
@@ -932,7 +923,9 @@ FLAG_FIXED_SIZE = 3
 FLAG_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the DrawFlags enum.
+
+---
 
 ### AlphaCutMode {#enum-AlphaCutMode}
 
@@ -940,27 +933,7 @@ FLAG_MAX = 4
 enum AlphaCutMode { ALPHA_CUT_DISABLED = 0, ALPHA_CUT_DISCARD = 1, ALPHA_CUT_OPAQUE_PREPASS = 2, ALPHA_CUT_HASH = 3 }
 ```
 
-AlphaCutMode ALPHA_CUT_DISABLED = 0
-
-This mode performs standard alpha blending. It can display translucent areas, but transparency sorting issues may be visible when multiple transparent materials are overlapping. GeometryInstance3D.cast_shadow has no effect when this transparency mode is used; the Label3D will never cast shadows.
-
-AlphaCutMode ALPHA_CUT_DISCARD = 1
-
-This mode only allows fully transparent or fully opaque pixels. Harsh edges will be visible unless some form of screen-space antialiasing is enabled (see ProjectSettings.rendering/anti_aliasing/quality/screen_space_aa). This mode is also known as alpha testing or 1-bit transparency.
-
-Note: This mode might have issues with anti-aliased fonts and outlines, try adjusting alpha_scissor_threshold or using MSDF font.
-
-Note: When using text with overlapping glyphs (e.g., cursive scripts), this mode might have transparency sorting issues between the main text and the outline.
-
-AlphaCutMode ALPHA_CUT_OPAQUE_PREPASS = 2
-
-This mode draws fully opaque pixels in the depth prepass. This is slower than ALPHA_CUT_DISABLED or ALPHA_CUT_DISCARD, but it allows displaying translucent areas and smooth edges while using proper sorting.
-
-Note: When using text with overlapping glyphs (e.g., cursive scripts), this mode might have transparency sorting issues between the main text and the outline.
-
-AlphaCutMode ALPHA_CUT_HASH = 3
-
-This mode draws cuts off all values below a spatially-deterministic threshold, the rest will remain opaque.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ALPHA_CUT_DISABLED {#ALPHA_CUT_DISABLED}
 
@@ -968,7 +941,7 @@ This mode draws cuts off all values below a spatially-deterministic threshold, t
 ALPHA_CUT_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This mode performs standard alpha blending. It can display translucent areas, but transparency sorting issues may be visible when multiple transparent materials are overlapping. GeometryInstance3D.cast_shadow has no effect when this transparency mode is used; the Label3D will never cast shadows.
 
 #### ALPHA_CUT_DISCARD {#ALPHA_CUT_DISCARD}
 
@@ -976,7 +949,11 @@ ALPHA_CUT_DISABLED = 0
 ALPHA_CUT_DISCARD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This mode only allows fully transparent or fully opaque pixels. Harsh edges will be visible unless some form of screen-space antialiasing is enabled (see ProjectSettings.rendering/anti_aliasing/quality/screen_space_aa). This mode is also known as alpha testing or 1-bit transparency.
+
+Note: This mode might have issues with anti-aliased fonts and outlines, try adjusting alpha_scissor_threshold or using MSDF font.
+
+Note: When using text with overlapping glyphs (e.g., cursive scripts), this mode might have transparency sorting issues between the main text and the outline.
 
 #### ALPHA_CUT_OPAQUE_PREPASS {#ALPHA_CUT_OPAQUE_PREPASS}
 
@@ -984,7 +961,9 @@ ALPHA_CUT_DISCARD = 1
 ALPHA_CUT_OPAQUE_PREPASS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This mode draws fully opaque pixels in the depth prepass. This is slower than ALPHA_CUT_DISABLED or ALPHA_CUT_DISCARD, but it allows displaying translucent areas and smooth edges while using proper sorting.
+
+Note: When using text with overlapping glyphs (e.g., cursive scripts), this mode might have transparency sorting issues between the main text and the outline.
 
 #### ALPHA_CUT_HASH {#ALPHA_CUT_HASH}
 
@@ -992,4 +971,6 @@ ALPHA_CUT_OPAQUE_PREPASS = 2
 ALPHA_CUT_HASH = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This mode draws cuts off all values below a spatially-deterministic threshold, the rest will remain opaque.
+
+---

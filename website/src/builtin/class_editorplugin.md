@@ -1005,53 +1005,7 @@ Emitted when any project setting has changed.
 enum CustomControlContainer { CONTAINER_TOOLBAR = 0, CONTAINER_SPATIAL_EDITOR_MENU = 1, CONTAINER_SPATIAL_EDITOR_SIDE_LEFT = 2, CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT = 3, CONTAINER_SPATIAL_EDITOR_BOTTOM = 4, CONTAINER_CANVAS_EDITOR_MENU = 5, CONTAINER_CANVAS_EDITOR_SIDE_LEFT = 6, CONTAINER_CANVAS_EDITOR_SIDE_RIGHT = 7, CONTAINER_CANVAS_EDITOR_BOTTOM = 8, CONTAINER_INSPECTOR_BOTTOM = 9, CONTAINER_PROJECT_SETTING_TAB_LEFT = 10, CONTAINER_PROJECT_SETTING_TAB_RIGHT = 11 }
 ```
 
-CustomControlContainer CONTAINER_TOOLBAR = 0
-
-Main editor toolbar, next to play buttons.
-
-CustomControlContainer CONTAINER_SPATIAL_EDITOR_MENU = 1
-
-The toolbar that appears when 3D editor is active.
-
-CustomControlContainer CONTAINER_SPATIAL_EDITOR_SIDE_LEFT = 2
-
-Left sidebar of the 3D editor.
-
-CustomControlContainer CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT = 3
-
-Right sidebar of the 3D editor.
-
-CustomControlContainer CONTAINER_SPATIAL_EDITOR_BOTTOM = 4
-
-Bottom panel of the 3D editor.
-
-CustomControlContainer CONTAINER_CANVAS_EDITOR_MENU = 5
-
-The toolbar that appears when 2D editor is active.
-
-CustomControlContainer CONTAINER_CANVAS_EDITOR_SIDE_LEFT = 6
-
-Left sidebar of the 2D editor.
-
-CustomControlContainer CONTAINER_CANVAS_EDITOR_SIDE_RIGHT = 7
-
-Right sidebar of the 2D editor.
-
-CustomControlContainer CONTAINER_CANVAS_EDITOR_BOTTOM = 8
-
-Bottom panel of the 2D editor.
-
-CustomControlContainer CONTAINER_INSPECTOR_BOTTOM = 9
-
-Bottom section of the inspector.
-
-CustomControlContainer CONTAINER_PROJECT_SETTING_TAB_LEFT = 10
-
-Tab of Project Settings dialog, to the left of other tabs.
-
-CustomControlContainer CONTAINER_PROJECT_SETTING_TAB_RIGHT = 11
-
-Tab of Project Settings dialog, to the right of other tabs.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CONTAINER_TOOLBAR {#CONTAINER_TOOLBAR}
 
@@ -1059,7 +1013,7 @@ Tab of Project Settings dialog, to the right of other tabs.
 CONTAINER_TOOLBAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Main editor toolbar, next to play buttons.
 
 #### CONTAINER_SPATIAL_EDITOR_MENU {#CONTAINER_SPATIAL_EDITOR_MENU}
 
@@ -1067,7 +1021,7 @@ CONTAINER_TOOLBAR = 0
 CONTAINER_SPATIAL_EDITOR_MENU = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The toolbar that appears when 3D editor is active.
 
 #### CONTAINER_SPATIAL_EDITOR_SIDE_LEFT {#CONTAINER_SPATIAL_EDITOR_SIDE_LEFT}
 
@@ -1075,7 +1029,7 @@ CONTAINER_SPATIAL_EDITOR_MENU = 1
 CONTAINER_SPATIAL_EDITOR_SIDE_LEFT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Left sidebar of the 3D editor.
 
 #### CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT {#CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT}
 
@@ -1083,7 +1037,7 @@ CONTAINER_SPATIAL_EDITOR_SIDE_LEFT = 2
 CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Right sidebar of the 3D editor.
 
 #### CONTAINER_SPATIAL_EDITOR_BOTTOM {#CONTAINER_SPATIAL_EDITOR_BOTTOM}
 
@@ -1091,7 +1045,7 @@ CONTAINER_SPATIAL_EDITOR_SIDE_RIGHT = 3
 CONTAINER_SPATIAL_EDITOR_BOTTOM = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bottom panel of the 3D editor.
 
 #### CONTAINER_CANVAS_EDITOR_MENU {#CONTAINER_CANVAS_EDITOR_MENU}
 
@@ -1099,7 +1053,7 @@ CONTAINER_SPATIAL_EDITOR_BOTTOM = 4
 CONTAINER_CANVAS_EDITOR_MENU = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The toolbar that appears when 2D editor is active.
 
 #### CONTAINER_CANVAS_EDITOR_SIDE_LEFT {#CONTAINER_CANVAS_EDITOR_SIDE_LEFT}
 
@@ -1107,7 +1061,7 @@ CONTAINER_CANVAS_EDITOR_MENU = 5
 CONTAINER_CANVAS_EDITOR_SIDE_LEFT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Left sidebar of the 2D editor.
 
 #### CONTAINER_CANVAS_EDITOR_SIDE_RIGHT {#CONTAINER_CANVAS_EDITOR_SIDE_RIGHT}
 
@@ -1115,7 +1069,7 @@ CONTAINER_CANVAS_EDITOR_SIDE_LEFT = 6
 CONTAINER_CANVAS_EDITOR_SIDE_RIGHT = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Right sidebar of the 2D editor.
 
 #### CONTAINER_CANVAS_EDITOR_BOTTOM {#CONTAINER_CANVAS_EDITOR_BOTTOM}
 
@@ -1123,7 +1077,7 @@ CONTAINER_CANVAS_EDITOR_SIDE_RIGHT = 7
 CONTAINER_CANVAS_EDITOR_BOTTOM = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bottom panel of the 2D editor.
 
 #### CONTAINER_INSPECTOR_BOTTOM {#CONTAINER_INSPECTOR_BOTTOM}
 
@@ -1131,7 +1085,7 @@ CONTAINER_CANVAS_EDITOR_BOTTOM = 8
 CONTAINER_INSPECTOR_BOTTOM = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bottom section of the inspector.
 
 #### CONTAINER_PROJECT_SETTING_TAB_LEFT {#CONTAINER_PROJECT_SETTING_TAB_LEFT}
 
@@ -1139,7 +1093,7 @@ CONTAINER_INSPECTOR_BOTTOM = 9
 CONTAINER_PROJECT_SETTING_TAB_LEFT = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tab of Project Settings dialog, to the left of other tabs.
 
 #### CONTAINER_PROJECT_SETTING_TAB_RIGHT {#CONTAINER_PROJECT_SETTING_TAB_RIGHT}
 
@@ -1147,7 +1101,9 @@ CONTAINER_PROJECT_SETTING_TAB_LEFT = 10
 CONTAINER_PROJECT_SETTING_TAB_RIGHT = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tab of Project Settings dialog, to the right of other tabs.
+
+---
 
 ### DockSlot {#enum-DockSlot}
 
@@ -1155,49 +1111,7 @@ CONTAINER_PROJECT_SETTING_TAB_RIGHT = 11
 enum DockSlot { DOCK_SLOT_NONE = -1, DOCK_SLOT_LEFT_UL = 0, DOCK_SLOT_LEFT_BL = 1, DOCK_SLOT_LEFT_UR = 2, DOCK_SLOT_LEFT_BR = 3, DOCK_SLOT_RIGHT_UL = 4, DOCK_SLOT_RIGHT_BL = 5, DOCK_SLOT_RIGHT_UR = 6, DOCK_SLOT_RIGHT_BR = 7, DOCK_SLOT_BOTTOM = 8, DOCK_SLOT_MAX = 9 }
 ```
 
-DockSlot DOCK_SLOT_NONE = -1
-
-The dock is closed.
-
-DockSlot DOCK_SLOT_LEFT_UL = 0
-
-Dock slot, left side, upper-left (empty in default layout).
-
-DockSlot DOCK_SLOT_LEFT_BL = 1
-
-Dock slot, left side, bottom-left (empty in default layout).
-
-DockSlot DOCK_SLOT_LEFT_UR = 2
-
-Dock slot, left side, upper-right (in default layout includes Scene and Import docks).
-
-DockSlot DOCK_SLOT_LEFT_BR = 3
-
-Dock slot, left side, bottom-right (in default layout includes FileSystem dock).
-
-DockSlot DOCK_SLOT_RIGHT_UL = 4
-
-Dock slot, right side, upper-left (in default layout includes Inspector, Node, and History docks).
-
-DockSlot DOCK_SLOT_RIGHT_BL = 5
-
-Dock slot, right side, bottom-left (empty in default layout).
-
-DockSlot DOCK_SLOT_RIGHT_UR = 6
-
-Dock slot, right side, upper-right (empty in default layout).
-
-DockSlot DOCK_SLOT_RIGHT_BR = 7
-
-Dock slot, right side, bottom-right (empty in default layout).
-
-DockSlot DOCK_SLOT_BOTTOM = 8
-
-Bottom panel.
-
-DockSlot DOCK_SLOT_MAX = 9
-
-Represents the size of the DockSlot enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DOCK_SLOT_NONE {#DOCK_SLOT_NONE}
 
@@ -1205,7 +1119,7 @@ Represents the size of the DockSlot enum.
 DOCK_SLOT_NONE = -1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dock is closed.
 
 #### DOCK_SLOT_LEFT_UL {#DOCK_SLOT_LEFT_UL}
 
@@ -1213,7 +1127,7 @@ DOCK_SLOT_NONE = -1
 DOCK_SLOT_LEFT_UL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, left side, upper-left (empty in default layout).
 
 #### DOCK_SLOT_LEFT_BL {#DOCK_SLOT_LEFT_BL}
 
@@ -1221,7 +1135,7 @@ DOCK_SLOT_LEFT_UL = 0
 DOCK_SLOT_LEFT_BL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, left side, bottom-left (empty in default layout).
 
 #### DOCK_SLOT_LEFT_UR {#DOCK_SLOT_LEFT_UR}
 
@@ -1229,7 +1143,7 @@ DOCK_SLOT_LEFT_BL = 1
 DOCK_SLOT_LEFT_UR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, left side, upper-right (in default layout includes Scene and Import docks).
 
 #### DOCK_SLOT_LEFT_BR {#DOCK_SLOT_LEFT_BR}
 
@@ -1237,7 +1151,7 @@ DOCK_SLOT_LEFT_UR = 2
 DOCK_SLOT_LEFT_BR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, left side, bottom-right (in default layout includes FileSystem dock).
 
 #### DOCK_SLOT_RIGHT_UL {#DOCK_SLOT_RIGHT_UL}
 
@@ -1245,7 +1159,7 @@ DOCK_SLOT_LEFT_BR = 3
 DOCK_SLOT_RIGHT_UL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, right side, upper-left (in default layout includes Inspector, Node, and History docks).
 
 #### DOCK_SLOT_RIGHT_BL {#DOCK_SLOT_RIGHT_BL}
 
@@ -1253,7 +1167,7 @@ DOCK_SLOT_RIGHT_UL = 4
 DOCK_SLOT_RIGHT_BL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, right side, bottom-left (empty in default layout).
 
 #### DOCK_SLOT_RIGHT_UR {#DOCK_SLOT_RIGHT_UR}
 
@@ -1261,7 +1175,7 @@ DOCK_SLOT_RIGHT_BL = 5
 DOCK_SLOT_RIGHT_UR = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, right side, upper-right (empty in default layout).
 
 #### DOCK_SLOT_RIGHT_BR {#DOCK_SLOT_RIGHT_BR}
 
@@ -1269,7 +1183,7 @@ DOCK_SLOT_RIGHT_UR = 6
 DOCK_SLOT_RIGHT_BR = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, right side, bottom-right (empty in default layout).
 
 #### DOCK_SLOT_BOTTOM {#DOCK_SLOT_BOTTOM}
 
@@ -1277,7 +1191,7 @@ DOCK_SLOT_RIGHT_BR = 7
 DOCK_SLOT_BOTTOM = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bottom panel.
 
 #### DOCK_SLOT_MAX {#DOCK_SLOT_MAX}
 
@@ -1285,7 +1199,9 @@ DOCK_SLOT_BOTTOM = 8
 DOCK_SLOT_MAX = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the DockSlot enum.
+
+---
 
 ### AfterGUIInput {#enum-AfterGUIInput}
 
@@ -1293,17 +1209,7 @@ DOCK_SLOT_MAX = 9
 enum AfterGUIInput { AFTER_GUI_INPUT_PASS = 0, AFTER_GUI_INPUT_STOP = 1, AFTER_GUI_INPUT_CUSTOM = 2 }
 ```
 
-AfterGUIInput AFTER_GUI_INPUT_PASS = 0
-
-Forwards the InputEvent to other EditorPlugins.
-
-AfterGUIInput AFTER_GUI_INPUT_STOP = 1
-
-Prevents the InputEvent from reaching other Editor classes.
-
-AfterGUIInput AFTER_GUI_INPUT_CUSTOM = 2
-
-Pass the InputEvent to other editor plugins except the main Node3D one. This can be used to prevent node selection changes and work with sub-gizmos instead.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AFTER_GUI_INPUT_PASS {#AFTER_GUI_INPUT_PASS}
 
@@ -1311,7 +1217,7 @@ Pass the InputEvent to other editor plugins except the main Node3D one. This can
 AFTER_GUI_INPUT_PASS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Forwards the InputEvent to other EditorPlugins.
 
 #### AFTER_GUI_INPUT_STOP {#AFTER_GUI_INPUT_STOP}
 
@@ -1319,7 +1225,7 @@ AFTER_GUI_INPUT_PASS = 0
 AFTER_GUI_INPUT_STOP = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Prevents the InputEvent from reaching other Editor classes.
 
 #### AFTER_GUI_INPUT_CUSTOM {#AFTER_GUI_INPUT_CUSTOM}
 
@@ -1327,4 +1233,6 @@ AFTER_GUI_INPUT_STOP = 1
 AFTER_GUI_INPUT_CUSTOM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pass the InputEvent to other editor plugins except the main Node3D one. This can be used to prevent node selection changes and work with sub-gizmos instead.
+
+---

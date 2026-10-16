@@ -150,7 +150,10 @@ void set_target_node(target_nodepath: NodePath)
 target_nodepath: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_node(value: NodePath)
+- NodePath get_target_node()
+
+The NodePath to the node that is the target for the TwoBoneIK modification. This node is what the modification will use when bending the Bone2D nodes.
 
 ### target_minimum_distance {#target_minimum_distance}
 

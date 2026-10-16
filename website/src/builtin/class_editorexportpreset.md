@@ -222,25 +222,7 @@ Returns true if the "Runnable" toggle is enabled in the export dialog.
 enum ExportFilter { EXPORT_ALL_RESOURCES = 0, EXPORT_SELECTED_SCENES = 1, EXPORT_SELECTED_RESOURCES = 2, EXCLUDE_SELECTED_RESOURCES = 3, EXPORT_CUSTOMIZED = 4 }
 ```
 
-ExportFilter EXPORT_ALL_RESOURCES = 0
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-ExportFilter EXPORT_SELECTED_SCENES = 1
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-ExportFilter EXPORT_SELECTED_RESOURCES = 2
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-ExportFilter EXCLUDE_SELECTED_RESOURCES = 3
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-ExportFilter EXPORT_CUSTOMIZED = 4
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EXPORT_ALL_RESOURCES {#EXPORT_ALL_RESOURCES}
 
@@ -248,7 +230,7 @@ There is currently no description for this enum. Please help us by contributing 
 EXPORT_ALL_RESOURCES = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### EXPORT_SELECTED_SCENES {#EXPORT_SELECTED_SCENES}
 
@@ -256,7 +238,7 @@ EXPORT_ALL_RESOURCES = 0
 EXPORT_SELECTED_SCENES = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### EXPORT_SELECTED_RESOURCES {#EXPORT_SELECTED_RESOURCES}
 
@@ -264,7 +246,7 @@ EXPORT_SELECTED_SCENES = 1
 EXPORT_SELECTED_RESOURCES = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### EXCLUDE_SELECTED_RESOURCES {#EXCLUDE_SELECTED_RESOURCES}
 
@@ -272,7 +254,7 @@ EXPORT_SELECTED_RESOURCES = 2
 EXCLUDE_SELECTED_RESOURCES = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### EXPORT_CUSTOMIZED {#EXPORT_CUSTOMIZED}
 
@@ -280,7 +262,9 @@ EXCLUDE_SELECTED_RESOURCES = 3
 EXPORT_CUSTOMIZED = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+---
 
 ### FileExportMode {#enum-FileExportMode}
 
@@ -288,21 +272,7 @@ EXPORT_CUSTOMIZED = 4
 enum FileExportMode { MODE_FILE_NOT_CUSTOMIZED = 0, MODE_FILE_STRIP = 1, MODE_FILE_KEEP = 2, MODE_FILE_REMOVE = 3 }
 ```
 
-FileExportMode MODE_FILE_NOT_CUSTOMIZED = 0
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-FileExportMode MODE_FILE_STRIP = 1
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-FileExportMode MODE_FILE_KEEP = 2
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-FileExportMode MODE_FILE_REMOVE = 3
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MODE_FILE_NOT_CUSTOMIZED {#MODE_FILE_NOT_CUSTOMIZED}
 
@@ -310,7 +280,7 @@ There is currently no description for this enum. Please help us by contributing 
 MODE_FILE_NOT_CUSTOMIZED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### MODE_FILE_STRIP {#MODE_FILE_STRIP}
 
@@ -318,7 +288,7 @@ MODE_FILE_NOT_CUSTOMIZED = 0
 MODE_FILE_STRIP = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### MODE_FILE_KEEP {#MODE_FILE_KEEP}
 
@@ -326,7 +296,7 @@ MODE_FILE_STRIP = 1
 MODE_FILE_KEEP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### MODE_FILE_REMOVE {#MODE_FILE_REMOVE}
 
@@ -334,7 +304,9 @@ MODE_FILE_KEEP = 2
 MODE_FILE_REMOVE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+---
 
 ### ScriptExportMode {#enum-ScriptExportMode}
 
@@ -342,17 +314,7 @@ MODE_FILE_REMOVE = 3
 enum ScriptExportMode { MODE_SCRIPT_TEXT = 0, MODE_SCRIPT_BINARY_TOKENS = 1, MODE_SCRIPT_BINARY_TOKENS_COMPRESSED = 2 }
 ```
 
-ScriptExportMode MODE_SCRIPT_TEXT = 0
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-ScriptExportMode MODE_SCRIPT_BINARY_TOKENS = 1
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-ScriptExportMode MODE_SCRIPT_BINARY_TOKENS_COMPRESSED = 2
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MODE_SCRIPT_TEXT {#MODE_SCRIPT_TEXT}
 
@@ -360,7 +322,7 @@ There is currently no description for this enum. Please help us by contributing 
 MODE_SCRIPT_TEXT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### MODE_SCRIPT_BINARY_TOKENS {#MODE_SCRIPT_BINARY_TOKENS}
 
@@ -368,7 +330,7 @@ MODE_SCRIPT_TEXT = 0
 MODE_SCRIPT_BINARY_TOKENS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### MODE_SCRIPT_BINARY_TOKENS_COMPRESSED {#MODE_SCRIPT_BINARY_TOKENS_COMPRESSED}
 
@@ -376,4 +338,6 @@ MODE_SCRIPT_BINARY_TOKENS = 1
 MODE_SCRIPT_BINARY_TOKENS_COMPRESSED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+---

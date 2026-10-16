@@ -514,7 +514,10 @@ The above is true only when the unit distance is a positive number. When this is
 gravity_point_center: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_gravity_point_center(value: Vector3)
+- Vector3 get_gravity_point_center()
+
+If gravity is a point (see gravity_point), this will be the point of attraction.
 
 ### gravity_direction {#gravity_direction}
 
@@ -522,7 +525,10 @@ gravity_point_center: Vector3
 gravity_direction: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_gravity_direction(value: Vector3)
+- Vector3 get_gravity_direction()
+
+The area's gravity vector (not normalized).
 
 ### gravity {#gravity}
 
@@ -615,7 +621,12 @@ Note: This wind force only applies to SoftBody3D nodes. Other physics bodies are
 wind_source_path: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_wind_source_path(value: NodePath)
+- NodePath get_wind_source_path()
+
+The Node3D which is used to specify the direction and origin of an area-specific wind force. The direction is opposite to the z-axis of the Node3D's local transform, and its origin is the origin of the Node3D's local transform.
+
+Note: This wind force only applies to SoftBody3D nodes. Other physics bodies are currently not affected by wind.
 
 ### audio_bus_override {#audio_bus_override}
 
@@ -791,25 +802,7 @@ Emitted when the received area exits this area. Requires monitoring to be set to
 enum SpaceOverride { SPACE_OVERRIDE_DISABLED = 0, SPACE_OVERRIDE_COMBINE = 1, SPACE_OVERRIDE_COMBINE_REPLACE = 2, SPACE_OVERRIDE_REPLACE = 3, SPACE_OVERRIDE_REPLACE_COMBINE = 4 }
 ```
 
-SpaceOverride SPACE_OVERRIDE_DISABLED = 0
-
-This area does not affect gravity/damping.
-
-SpaceOverride SPACE_OVERRIDE_COMBINE = 1
-
-This area adds its gravity/damping values to whatever has been calculated so far (in priority order).
-
-SpaceOverride SPACE_OVERRIDE_COMBINE_REPLACE = 2
-
-This area adds its gravity/damping values to whatever has been calculated so far (in priority order), ignoring any lower priority areas.
-
-SpaceOverride SPACE_OVERRIDE_REPLACE = 3
-
-This area replaces any gravity/damping, even the defaults, ignoring any lower priority areas.
-
-SpaceOverride SPACE_OVERRIDE_REPLACE_COMBINE = 4
-
-This area replaces any gravity/damping calculated so far (in priority order), but keeps calculating the rest of the areas.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SPACE_OVERRIDE_DISABLED {#SPACE_OVERRIDE_DISABLED}
 
@@ -817,7 +810,7 @@ This area replaces any gravity/damping calculated so far (in priority order), bu
 SPACE_OVERRIDE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area does not affect gravity/damping.
 
 #### SPACE_OVERRIDE_COMBINE {#SPACE_OVERRIDE_COMBINE}
 
@@ -825,7 +818,7 @@ SPACE_OVERRIDE_DISABLED = 0
 SPACE_OVERRIDE_COMBINE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area adds its gravity/damping values to whatever has been calculated so far (in priority order).
 
 #### SPACE_OVERRIDE_COMBINE_REPLACE {#SPACE_OVERRIDE_COMBINE_REPLACE}
 
@@ -833,7 +826,7 @@ SPACE_OVERRIDE_COMBINE = 1
 SPACE_OVERRIDE_COMBINE_REPLACE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area adds its gravity/damping values to whatever has been calculated so far (in priority order), ignoring any lower priority areas.
 
 #### SPACE_OVERRIDE_REPLACE {#SPACE_OVERRIDE_REPLACE}
 
@@ -841,7 +834,7 @@ SPACE_OVERRIDE_COMBINE_REPLACE = 2
 SPACE_OVERRIDE_REPLACE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area replaces any gravity/damping, even the defaults, ignoring any lower priority areas.
 
 #### SPACE_OVERRIDE_REPLACE_COMBINE {#SPACE_OVERRIDE_REPLACE_COMBINE}
 
@@ -849,4 +842,6 @@ SPACE_OVERRIDE_REPLACE = 3
 SPACE_OVERRIDE_REPLACE_COMBINE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area replaces any gravity/damping calculated so far (in priority order), but keeps calculating the rest of the areas.
+
+---

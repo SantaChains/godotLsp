@@ -149,7 +149,10 @@ The current Material of the primitive mesh.
 custom_aabb: AABB
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_custom_aabb(value: AABB)
+- AABB get_custom_aabb()
+
+Overrides the AABB with one defined by user for use with frustum culling. Especially useful to avoid unexpected culling when using a shader to offset vertices.
 
 ### flip_faces {#flip_faces}
 

@@ -484,7 +484,10 @@ Note: The radius must be equal or higher than 0.0. If the radius is 0.0, it won'
 baking_rect: Rect2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_baking_rect(value: Rect2)
+- Rect2 get_baking_rect()
+
+If the baking Rect2 has an area the navigation mesh baking will be restricted to its enclosing area.
 
 ### baking_rect_offset {#baking_rect_offset}
 
@@ -492,7 +495,10 @@ baking_rect: Rect2
 baking_rect_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_baking_rect_offset(value: Vector2)
+- Vector2 get_baking_rect_offset()
+
+The position offset applied to the baking_rect Rect2.
 
 ## 枚举
 
@@ -502,17 +508,7 @@ baking_rect_offset: Vector2
 enum SamplePartitionType { SAMPLE_PARTITION_CONVEX_PARTITION = 0, SAMPLE_PARTITION_TRIANGULATE = 1, SAMPLE_PARTITION_MAX = 2 }
 ```
 
-SamplePartitionType SAMPLE_PARTITION_CONVEX_PARTITION = 0
-
-Convex partitioning that results in a navigation mesh with convex polygons.
-
-SamplePartitionType SAMPLE_PARTITION_TRIANGULATE = 1
-
-Triangulation partitioning that results in a navigation mesh with triangle polygons.
-
-SamplePartitionType SAMPLE_PARTITION_MAX = 2
-
-Represents the size of the SamplePartitionType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SAMPLE_PARTITION_CONVEX_PARTITION {#SAMPLE_PARTITION_CONVEX_PARTITION}
 
@@ -520,7 +516,7 @@ Represents the size of the SamplePartitionType enum.
 SAMPLE_PARTITION_CONVEX_PARTITION = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Convex partitioning that results in a navigation mesh with convex polygons.
 
 #### SAMPLE_PARTITION_TRIANGULATE {#SAMPLE_PARTITION_TRIANGULATE}
 
@@ -528,7 +524,7 @@ SAMPLE_PARTITION_CONVEX_PARTITION = 0
 SAMPLE_PARTITION_TRIANGULATE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Triangulation partitioning that results in a navigation mesh with triangle polygons.
 
 #### SAMPLE_PARTITION_MAX {#SAMPLE_PARTITION_MAX}
 
@@ -536,7 +532,9 @@ SAMPLE_PARTITION_TRIANGULATE = 1
 SAMPLE_PARTITION_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the SamplePartitionType enum.
+
+---
 
 ### ParsedGeometryType {#enum-ParsedGeometryType}
 
@@ -544,23 +542,7 @@ SAMPLE_PARTITION_MAX = 2
 enum ParsedGeometryType { PARSED_GEOMETRY_MESH_INSTANCES = 0, PARSED_GEOMETRY_STATIC_COLLIDERS = 1, PARSED_GEOMETRY_BOTH = 2, PARSED_GEOMETRY_MAX = 3 }
 ```
 
-ParsedGeometryType PARSED_GEOMETRY_MESH_INSTANCES = 0
-
-Parses mesh instances as obstruction geometry. This includes Polygon2D, MeshInstance2D, MultiMeshInstance2D, and TileMap nodes.
-
-Meshes are only parsed when they use a 2D vertices surface format.
-
-ParsedGeometryType PARSED_GEOMETRY_STATIC_COLLIDERS = 1
-
-Parses StaticBody2D and TileMap colliders as obstruction geometry. The collider should be in any of the layers specified by parsed_collision_mask.
-
-ParsedGeometryType PARSED_GEOMETRY_BOTH = 2
-
-Both PARSED_GEOMETRY_MESH_INSTANCES and PARSED_GEOMETRY_STATIC_COLLIDERS.
-
-ParsedGeometryType PARSED_GEOMETRY_MAX = 3
-
-Represents the size of the ParsedGeometryType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PARSED_GEOMETRY_MESH_INSTANCES {#PARSED_GEOMETRY_MESH_INSTANCES}
 
@@ -568,7 +550,9 @@ Represents the size of the ParsedGeometryType enum.
 PARSED_GEOMETRY_MESH_INSTANCES = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Parses mesh instances as obstruction geometry. This includes Polygon2D, MeshInstance2D, MultiMeshInstance2D, and TileMap nodes.
+
+Meshes are only parsed when they use a 2D vertices surface format.
 
 #### PARSED_GEOMETRY_STATIC_COLLIDERS {#PARSED_GEOMETRY_STATIC_COLLIDERS}
 
@@ -576,7 +560,7 @@ PARSED_GEOMETRY_MESH_INSTANCES = 0
 PARSED_GEOMETRY_STATIC_COLLIDERS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Parses StaticBody2D and TileMap colliders as obstruction geometry. The collider should be in any of the layers specified by parsed_collision_mask.
 
 #### PARSED_GEOMETRY_BOTH {#PARSED_GEOMETRY_BOTH}
 
@@ -584,7 +568,7 @@ PARSED_GEOMETRY_STATIC_COLLIDERS = 1
 PARSED_GEOMETRY_BOTH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Both PARSED_GEOMETRY_MESH_INSTANCES and PARSED_GEOMETRY_STATIC_COLLIDERS.
 
 #### PARSED_GEOMETRY_MAX {#PARSED_GEOMETRY_MAX}
 
@@ -592,7 +576,9 @@ PARSED_GEOMETRY_BOTH = 2
 PARSED_GEOMETRY_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the ParsedGeometryType enum.
+
+---
 
 ### SourceGeometryMode {#enum-SourceGeometryMode}
 
@@ -600,21 +586,7 @@ PARSED_GEOMETRY_MAX = 3
 enum SourceGeometryMode { SOURCE_GEOMETRY_ROOT_NODE_CHILDREN = 0, SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN = 1, SOURCE_GEOMETRY_GROUPS_EXPLICIT = 2, SOURCE_GEOMETRY_MAX = 3 }
 ```
 
-SourceGeometryMode SOURCE_GEOMETRY_ROOT_NODE_CHILDREN = 0
-
-Scans the child nodes of the root node recursively for geometry.
-
-SourceGeometryMode SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN = 1
-
-Scans nodes in a group and their child nodes recursively for geometry. The group is specified by source_geometry_group_name.
-
-SourceGeometryMode SOURCE_GEOMETRY_GROUPS_EXPLICIT = 2
-
-Uses nodes in a group for geometry. The group is specified by source_geometry_group_name.
-
-SourceGeometryMode SOURCE_GEOMETRY_MAX = 3
-
-Represents the size of the SourceGeometryMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SOURCE_GEOMETRY_ROOT_NODE_CHILDREN {#SOURCE_GEOMETRY_ROOT_NODE_CHILDREN}
 
@@ -622,7 +594,7 @@ Represents the size of the SourceGeometryMode enum.
 SOURCE_GEOMETRY_ROOT_NODE_CHILDREN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scans the child nodes of the root node recursively for geometry.
 
 #### SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN {#SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN}
 
@@ -630,7 +602,7 @@ SOURCE_GEOMETRY_ROOT_NODE_CHILDREN = 0
 SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scans nodes in a group and their child nodes recursively for geometry. The group is specified by source_geometry_group_name.
 
 #### SOURCE_GEOMETRY_GROUPS_EXPLICIT {#SOURCE_GEOMETRY_GROUPS_EXPLICIT}
 
@@ -638,7 +610,7 @@ SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN = 1
 SOURCE_GEOMETRY_GROUPS_EXPLICIT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses nodes in a group for geometry. The group is specified by source_geometry_group_name.
 
 #### SOURCE_GEOMETRY_MAX {#SOURCE_GEOMETRY_MAX}
 
@@ -646,4 +618,6 @@ SOURCE_GEOMETRY_GROUPS_EXPLICIT = 2
 SOURCE_GEOMETRY_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the SourceGeometryMode enum.
+
+---

@@ -364,17 +364,7 @@ Emitted when max_domain or min_domain is changed.
 enum TangentMode { TANGENT_FREE = 0, TANGENT_LINEAR = 1, TANGENT_MODE_COUNT = 2 }
 ```
 
-TangentMode TANGENT_FREE = 0
-
-The tangent on this side of the point is user-defined.
-
-TangentMode TANGENT_LINEAR = 1
-
-The curve calculates the tangent on this side of the point as the slope halfway towards the adjacent point.
-
-TangentMode TANGENT_MODE_COUNT = 2
-
-The total number of available tangent modes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TANGENT_FREE {#TANGENT_FREE}
 
@@ -382,7 +372,7 @@ The total number of available tangent modes.
 TANGENT_FREE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The tangent on this side of the point is user-defined.
 
 #### TANGENT_LINEAR {#TANGENT_LINEAR}
 
@@ -390,7 +380,7 @@ TANGENT_FREE = 0
 TANGENT_LINEAR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The curve calculates the tangent on this side of the point as the slope halfway towards the adjacent point.
 
 #### TANGENT_MODE_COUNT {#TANGENT_MODE_COUNT}
 
@@ -398,4 +388,6 @@ TANGENT_LINEAR = 1
 TANGENT_MODE_COUNT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The total number of available tangent modes.
+
+---

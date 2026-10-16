@@ -32,21 +32,7 @@ NOTE: The id returned by Thread.get_id() is incompatible with thread_id.
 enum ThreadType { THREAD_TYPE_APPLICATION_MAIN = 0, THREAD_TYPE_APPLICATION_WORKER = 1, THREAD_TYPE_RENDERER_MAIN = 2, THREAD_TYPE_RENDERER_WORKER = 3 }
 ```
 
-ThreadType THREAD_TYPE_APPLICATION_MAIN = 0
-
-Hints to the XR runtime that the thread is doing time critical CPU tasks.
-
-ThreadType THREAD_TYPE_APPLICATION_WORKER = 1
-
-Hints to the XR runtime that the thread is doing background CPU tasks.
-
-ThreadType THREAD_TYPE_RENDERER_MAIN = 2
-
-Hints to the XR runtime that the thread is doing time critical graphics device tasks.
-
-ThreadType THREAD_TYPE_RENDERER_WORKER = 3
-
-Hints to the XR runtime that the thread is doing background graphics device tasks.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### THREAD_TYPE_APPLICATION_MAIN {#THREAD_TYPE_APPLICATION_MAIN}
 
@@ -54,7 +40,7 @@ Hints to the XR runtime that the thread is doing background graphics device task
 THREAD_TYPE_APPLICATION_MAIN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hints to the XR runtime that the thread is doing time critical CPU tasks.
 
 #### THREAD_TYPE_APPLICATION_WORKER {#THREAD_TYPE_APPLICATION_WORKER}
 
@@ -62,7 +48,7 @@ THREAD_TYPE_APPLICATION_MAIN = 0
 THREAD_TYPE_APPLICATION_WORKER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hints to the XR runtime that the thread is doing background CPU tasks.
 
 #### THREAD_TYPE_RENDERER_MAIN {#THREAD_TYPE_RENDERER_MAIN}
 
@@ -70,7 +56,7 @@ THREAD_TYPE_APPLICATION_WORKER = 1
 THREAD_TYPE_RENDERER_MAIN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hints to the XR runtime that the thread is doing time critical graphics device tasks.
 
 #### THREAD_TYPE_RENDERER_WORKER {#THREAD_TYPE_RENDERER_WORKER}
 
@@ -78,4 +64,6 @@ THREAD_TYPE_RENDERER_MAIN = 2
 THREAD_TYPE_RENDERER_WORKER = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Hints to the XR runtime that the thread is doing background graphics device tasks.
+
+---

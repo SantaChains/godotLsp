@@ -912,7 +912,12 @@ Sets variation coordinates for the specified font cache entry. See Font.get_supp
 data: PackedByteArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_data(value: PackedByteArray)
+- PackedByteArray get_data()
+
+Contents of the dynamic font source file.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedByteArray for more details.
 
 ### generate_mipmaps {#generate_mipmaps}
 

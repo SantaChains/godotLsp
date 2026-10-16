@@ -49,17 +49,7 @@ An input source type.
 enum Source { SOURCE_TEXTURE = 0, SOURCE_PORT = 1, SOURCE_MAX = 2 }
 ```
 
-Source SOURCE_TEXTURE = 0
-
-Creates internal uniform and provides a way to assign it within node.
-
-Source SOURCE_PORT = 1
-
-Use the uniform texture from sampler port.
-
-Source SOURCE_MAX = 2
-
-Represents the size of the Source enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SOURCE_TEXTURE {#SOURCE_TEXTURE}
 
@@ -67,7 +57,7 @@ Represents the size of the Source enum.
 SOURCE_TEXTURE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Creates internal uniform and provides a way to assign it within node.
 
 #### SOURCE_PORT {#SOURCE_PORT}
 
@@ -75,7 +65,7 @@ SOURCE_TEXTURE = 0
 SOURCE_PORT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the uniform texture from sampler port.
 
 #### SOURCE_MAX {#SOURCE_MAX}
 
@@ -83,4 +73,6 @@ SOURCE_PORT = 1
 SOURCE_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Source enum.
+
+---

@@ -492,53 +492,7 @@ There is currently no description for this method. Please help us by contributin
 enum LookupResultType { LOOKUP_RESULT_SCRIPT_LOCATION = 0, LOOKUP_RESULT_CLASS = 1, LOOKUP_RESULT_CLASS_CONSTANT = 2, LOOKUP_RESULT_CLASS_PROPERTY = 3, LOOKUP_RESULT_CLASS_METHOD = 4, LOOKUP_RESULT_CLASS_SIGNAL = 5, LOOKUP_RESULT_CLASS_ENUM = 6, LOOKUP_RESULT_CLASS_TBD_GLOBALSCOPE = 7, LOOKUP_RESULT_CLASS_ANNOTATION = 8, LOOKUP_RESULT_LOCAL_CONSTANT = 9, LOOKUP_RESULT_LOCAL_VARIABLE = 10, LOOKUP_RESULT_MAX = 11 }
 ```
 
-LookupResultType LOOKUP_RESULT_SCRIPT_LOCATION = 0
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-LookupResultType LOOKUP_RESULT_CLASS = 1
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-LookupResultType LOOKUP_RESULT_CLASS_CONSTANT = 2
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-LookupResultType LOOKUP_RESULT_CLASS_PROPERTY = 3
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-LookupResultType LOOKUP_RESULT_CLASS_METHOD = 4
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-LookupResultType LOOKUP_RESULT_CLASS_SIGNAL = 5
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-LookupResultType LOOKUP_RESULT_CLASS_ENUM = 6
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-LookupResultType LOOKUP_RESULT_CLASS_TBD_GLOBALSCOPE = 7
-
-Deprecated: This constant may be changed or removed in future versions.
-
-LookupResultType LOOKUP_RESULT_CLASS_ANNOTATION = 8
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-LookupResultType LOOKUP_RESULT_LOCAL_CONSTANT = 9
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-LookupResultType LOOKUP_RESULT_LOCAL_VARIABLE = 10
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-LookupResultType LOOKUP_RESULT_MAX = 11
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LOOKUP_RESULT_SCRIPT_LOCATION {#LOOKUP_RESULT_SCRIPT_LOCATION}
 
@@ -546,7 +500,7 @@ There is currently no description for this enum. Please help us by contributing 
 LOOKUP_RESULT_SCRIPT_LOCATION = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### LOOKUP_RESULT_CLASS {#LOOKUP_RESULT_CLASS}
 
@@ -554,7 +508,7 @@ LOOKUP_RESULT_SCRIPT_LOCATION = 0
 LOOKUP_RESULT_CLASS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### LOOKUP_RESULT_CLASS_CONSTANT {#LOOKUP_RESULT_CLASS_CONSTANT}
 
@@ -562,7 +516,7 @@ LOOKUP_RESULT_CLASS = 1
 LOOKUP_RESULT_CLASS_CONSTANT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### LOOKUP_RESULT_CLASS_PROPERTY {#LOOKUP_RESULT_CLASS_PROPERTY}
 
@@ -570,7 +524,7 @@ LOOKUP_RESULT_CLASS_CONSTANT = 2
 LOOKUP_RESULT_CLASS_PROPERTY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### LOOKUP_RESULT_CLASS_METHOD {#LOOKUP_RESULT_CLASS_METHOD}
 
@@ -578,7 +532,7 @@ LOOKUP_RESULT_CLASS_PROPERTY = 3
 LOOKUP_RESULT_CLASS_METHOD = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### LOOKUP_RESULT_CLASS_SIGNAL {#LOOKUP_RESULT_CLASS_SIGNAL}
 
@@ -586,7 +540,7 @@ LOOKUP_RESULT_CLASS_METHOD = 4
 LOOKUP_RESULT_CLASS_SIGNAL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### LOOKUP_RESULT_CLASS_ENUM {#LOOKUP_RESULT_CLASS_ENUM}
 
@@ -594,7 +548,7 @@ LOOKUP_RESULT_CLASS_SIGNAL = 5
 LOOKUP_RESULT_CLASS_ENUM = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### LOOKUP_RESULT_CLASS_TBD_GLOBALSCOPE {#LOOKUP_RESULT_CLASS_TBD_GLOBALSCOPE}
 
@@ -602,7 +556,7 @@ LOOKUP_RESULT_CLASS_ENUM = 6
 LOOKUP_RESULT_CLASS_TBD_GLOBALSCOPE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: This constant may be changed or removed in future versions.
 
 #### LOOKUP_RESULT_CLASS_ANNOTATION {#LOOKUP_RESULT_CLASS_ANNOTATION}
 
@@ -610,7 +564,7 @@ LOOKUP_RESULT_CLASS_TBD_GLOBALSCOPE = 7
 LOOKUP_RESULT_CLASS_ANNOTATION = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### LOOKUP_RESULT_LOCAL_CONSTANT {#LOOKUP_RESULT_LOCAL_CONSTANT}
 
@@ -618,7 +572,7 @@ LOOKUP_RESULT_CLASS_ANNOTATION = 8
 LOOKUP_RESULT_LOCAL_CONSTANT = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### LOOKUP_RESULT_LOCAL_VARIABLE {#LOOKUP_RESULT_LOCAL_VARIABLE}
 
@@ -626,7 +580,7 @@ LOOKUP_RESULT_LOCAL_CONSTANT = 9
 LOOKUP_RESULT_LOCAL_VARIABLE = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### LOOKUP_RESULT_MAX {#LOOKUP_RESULT_MAX}
 
@@ -634,7 +588,9 @@ LOOKUP_RESULT_LOCAL_VARIABLE = 10
 LOOKUP_RESULT_MAX = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+---
 
 ### CodeCompletionLocation {#enum-CodeCompletionLocation}
 
@@ -642,21 +598,7 @@ LOOKUP_RESULT_MAX = 11
 enum CodeCompletionLocation { LOCATION_LOCAL = 0, LOCATION_PARENT_MASK = 256, LOCATION_OTHER_USER_CODE = 512, LOCATION_OTHER = 1024 }
 ```
 
-CodeCompletionLocation LOCATION_LOCAL = 0
-
-The option is local to the location of the code completion query - e.g. a local variable. Subsequent value of location represent options from the outer class, the exact value represent how far they are (in terms of inner classes).
-
-CodeCompletionLocation LOCATION_PARENT_MASK = 256
-
-The option is from the containing class or a parent class, relative to the location of the code completion query. Perform a bitwise OR with the class depth (e.g. 0 for the local class, 1 for the parent, 2 for the grandparent, etc.) to store the depth of an option in the class or a parent class.
-
-CodeCompletionLocation LOCATION_OTHER_USER_CODE = 512
-
-The option is from user code which is not local and not in a derived class (e.g. Autoload Singletons).
-
-CodeCompletionLocation LOCATION_OTHER = 1024
-
-The option is from other engine code, not covered by the other enum constants - e.g. built-in classes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LOCATION_LOCAL {#LOCATION_LOCAL}
 
@@ -664,7 +606,7 @@ The option is from other engine code, not covered by the other enum constants - 
 LOCATION_LOCAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The option is local to the location of the code completion query - e.g. a local variable. Subsequent value of location represent options from the outer class, the exact value represent how far they are (in terms of inner classes).
 
 #### LOCATION_PARENT_MASK {#LOCATION_PARENT_MASK}
 
@@ -672,7 +614,7 @@ LOCATION_LOCAL = 0
 LOCATION_PARENT_MASK = 256
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The option is from the containing class or a parent class, relative to the location of the code completion query. Perform a bitwise OR with the class depth (e.g. 0 for the local class, 1 for the parent, 2 for the grandparent, etc.) to store the depth of an option in the class or a parent class.
 
 #### LOCATION_OTHER_USER_CODE {#LOCATION_OTHER_USER_CODE}
 
@@ -680,7 +622,7 @@ LOCATION_PARENT_MASK = 256
 LOCATION_OTHER_USER_CODE = 512
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The option is from user code which is not local and not in a derived class (e.g. Autoload Singletons).
 
 #### LOCATION_OTHER {#LOCATION_OTHER}
 
@@ -688,7 +630,9 @@ LOCATION_OTHER_USER_CODE = 512
 LOCATION_OTHER = 1024
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The option is from other engine code, not covered by the other enum constants - e.g. built-in classes.
+
+---
 
 ### CodeCompletionKind {#enum-CodeCompletionKind}
 
@@ -696,53 +640,7 @@ LOCATION_OTHER = 1024
 enum CodeCompletionKind { CODE_COMPLETION_KIND_CLASS = 0, CODE_COMPLETION_KIND_FUNCTION = 1, CODE_COMPLETION_KIND_SIGNAL = 2, CODE_COMPLETION_KIND_VARIABLE = 3, CODE_COMPLETION_KIND_MEMBER = 4, CODE_COMPLETION_KIND_ENUM = 5, CODE_COMPLETION_KIND_CONSTANT = 6, CODE_COMPLETION_KIND_NODE_PATH = 7, CODE_COMPLETION_KIND_FILE_PATH = 8, CODE_COMPLETION_KIND_PLAIN_TEXT = 9, CODE_COMPLETION_KIND_KEYWORD = 10, CODE_COMPLETION_KIND_MAX = 11 }
 ```
 
-CodeCompletionKind CODE_COMPLETION_KIND_CLASS = 0
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_FUNCTION = 1
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_SIGNAL = 2
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_VARIABLE = 3
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_MEMBER = 4
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_ENUM = 5
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_CONSTANT = 6
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_NODE_PATH = 7
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_FILE_PATH = 8
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_PLAIN_TEXT = 9
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_KEYWORD = 10
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CodeCompletionKind CODE_COMPLETION_KIND_MAX = 11
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CODE_COMPLETION_KIND_CLASS {#CODE_COMPLETION_KIND_CLASS}
 
@@ -750,7 +648,7 @@ There is currently no description for this enum. Please help us by contributing 
 CODE_COMPLETION_KIND_CLASS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_FUNCTION {#CODE_COMPLETION_KIND_FUNCTION}
 
@@ -758,7 +656,7 @@ CODE_COMPLETION_KIND_CLASS = 0
 CODE_COMPLETION_KIND_FUNCTION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_SIGNAL {#CODE_COMPLETION_KIND_SIGNAL}
 
@@ -766,7 +664,7 @@ CODE_COMPLETION_KIND_FUNCTION = 1
 CODE_COMPLETION_KIND_SIGNAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_VARIABLE {#CODE_COMPLETION_KIND_VARIABLE}
 
@@ -774,7 +672,7 @@ CODE_COMPLETION_KIND_SIGNAL = 2
 CODE_COMPLETION_KIND_VARIABLE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_MEMBER {#CODE_COMPLETION_KIND_MEMBER}
 
@@ -782,7 +680,7 @@ CODE_COMPLETION_KIND_VARIABLE = 3
 CODE_COMPLETION_KIND_MEMBER = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_ENUM {#CODE_COMPLETION_KIND_ENUM}
 
@@ -790,7 +688,7 @@ CODE_COMPLETION_KIND_MEMBER = 4
 CODE_COMPLETION_KIND_ENUM = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_CONSTANT {#CODE_COMPLETION_KIND_CONSTANT}
 
@@ -798,7 +696,7 @@ CODE_COMPLETION_KIND_ENUM = 5
 CODE_COMPLETION_KIND_CONSTANT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_NODE_PATH {#CODE_COMPLETION_KIND_NODE_PATH}
 
@@ -806,7 +704,7 @@ CODE_COMPLETION_KIND_CONSTANT = 6
 CODE_COMPLETION_KIND_NODE_PATH = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_FILE_PATH {#CODE_COMPLETION_KIND_FILE_PATH}
 
@@ -814,7 +712,7 @@ CODE_COMPLETION_KIND_NODE_PATH = 7
 CODE_COMPLETION_KIND_FILE_PATH = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_PLAIN_TEXT {#CODE_COMPLETION_KIND_PLAIN_TEXT}
 
@@ -822,7 +720,7 @@ CODE_COMPLETION_KIND_FILE_PATH = 8
 CODE_COMPLETION_KIND_PLAIN_TEXT = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_KEYWORD {#CODE_COMPLETION_KIND_KEYWORD}
 
@@ -830,7 +728,7 @@ CODE_COMPLETION_KIND_PLAIN_TEXT = 9
 CODE_COMPLETION_KIND_KEYWORD = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### CODE_COMPLETION_KIND_MAX {#CODE_COMPLETION_KIND_MAX}
 
@@ -838,4 +736,6 @@ CODE_COMPLETION_KIND_KEYWORD = 10
 CODE_COMPLETION_KIND_MAX = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+---

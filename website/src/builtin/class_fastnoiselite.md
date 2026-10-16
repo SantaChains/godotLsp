@@ -391,7 +391,10 @@ The frequency for all noise types. Low frequency results in smooth noise while h
 offset: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset(value: Vector3)
+- Vector3 get_offset()
+
+Translate the noise input coordinates by the given Vector3.
 
 ### fractal_type {#fractal_type}
 
@@ -592,31 +595,7 @@ A low value places more emphasis on the lower frequency base layers, while a hig
 enum NoiseType { TYPE_VALUE = 5, TYPE_VALUE_CUBIC = 4, TYPE_PERLIN = 3, TYPE_CELLULAR = 2, TYPE_SIMPLEX = 0, TYPE_SIMPLEX_SMOOTH = 1 }
 ```
 
-NoiseType TYPE_VALUE = 5
-
-A lattice of points are assigned random values then interpolated based on neighboring values.
-
-NoiseType TYPE_VALUE_CUBIC = 4
-
-Similar to value noise (TYPE_VALUE), but slower. Has more variance in peaks and valleys.
-
-Cubic noise can be used to avoid certain artifacts when using value noise to create a bumpmap. In general, you should always use this mode if the value noise is being used for a heightmap or bumpmap.
-
-NoiseType TYPE_PERLIN = 3
-
-A lattice of random gradients. Their dot products are interpolated to obtain values in between the lattices.
-
-NoiseType TYPE_CELLULAR = 2
-
-Cellular includes both Worley noise and Voronoi diagrams which creates various regions of the same value.
-
-NoiseType TYPE_SIMPLEX = 0
-
-As opposed to TYPE_PERLIN, gradients exist in a simplex lattice rather than a grid lattice, avoiding directional artifacts. Internally uses FastNoiseLite's OpenSimplex2 noise type.
-
-NoiseType TYPE_SIMPLEX_SMOOTH = 1
-
-Modified, higher quality version of TYPE_SIMPLEX, but slower. Internally uses FastNoiseLite's OpenSimplex2S noise type.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TYPE_VALUE {#TYPE_VALUE}
 
@@ -624,7 +603,7 @@ Modified, higher quality version of TYPE_SIMPLEX, but slower. Internally uses Fa
 TYPE_VALUE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A lattice of points are assigned random values then interpolated based on neighboring values.
 
 #### TYPE_VALUE_CUBIC {#TYPE_VALUE_CUBIC}
 
@@ -632,7 +611,9 @@ TYPE_VALUE = 5
 TYPE_VALUE_CUBIC = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Similar to value noise (TYPE_VALUE), but slower. Has more variance in peaks and valleys.
+
+Cubic noise can be used to avoid certain artifacts when using value noise to create a bumpmap. In general, you should always use this mode if the value noise is being used for a heightmap or bumpmap.
 
 #### TYPE_PERLIN {#TYPE_PERLIN}
 
@@ -640,7 +621,7 @@ TYPE_VALUE_CUBIC = 4
 TYPE_PERLIN = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A lattice of random gradients. Their dot products are interpolated to obtain values in between the lattices.
 
 #### TYPE_CELLULAR {#TYPE_CELLULAR}
 
@@ -648,7 +629,7 @@ TYPE_PERLIN = 3
 TYPE_CELLULAR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cellular includes both Worley noise and Voronoi diagrams which creates various regions of the same value.
 
 #### TYPE_SIMPLEX {#TYPE_SIMPLEX}
 
@@ -656,7 +637,7 @@ TYPE_CELLULAR = 2
 TYPE_SIMPLEX = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+As opposed to TYPE_PERLIN, gradients exist in a simplex lattice rather than a grid lattice, avoiding directional artifacts. Internally uses FastNoiseLite's OpenSimplex2 noise type.
 
 #### TYPE_SIMPLEX_SMOOTH {#TYPE_SIMPLEX_SMOOTH}
 
@@ -664,7 +645,9 @@ TYPE_SIMPLEX = 0
 TYPE_SIMPLEX_SMOOTH = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Modified, higher quality version of TYPE_SIMPLEX, but slower. Internally uses FastNoiseLite's OpenSimplex2S noise type.
+
+---
 
 ### FractalType {#enum-FractalType}
 
@@ -672,21 +655,7 @@ TYPE_SIMPLEX_SMOOTH = 1
 enum FractalType { FRACTAL_NONE = 0, FRACTAL_FBM = 1, FRACTAL_RIDGED = 2, FRACTAL_PING_PONG = 3 }
 ```
 
-FractalType FRACTAL_NONE = 0
-
-No fractal noise.
-
-FractalType FRACTAL_FBM = 1
-
-Method using Fractional Brownian Motion to combine octaves into a fractal.
-
-FractalType FRACTAL_RIDGED = 2
-
-Method of combining octaves into a fractal resulting in a "ridged" look.
-
-FractalType FRACTAL_PING_PONG = 3
-
-Method of combining octaves into a fractal with a ping pong effect.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FRACTAL_NONE {#FRACTAL_NONE}
 
@@ -694,7 +663,7 @@ Method of combining octaves into a fractal with a ping pong effect.
 FRACTAL_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No fractal noise.
 
 #### FRACTAL_FBM {#FRACTAL_FBM}
 
@@ -702,7 +671,7 @@ FRACTAL_NONE = 0
 FRACTAL_FBM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Method using Fractional Brownian Motion to combine octaves into a fractal.
 
 #### FRACTAL_RIDGED {#FRACTAL_RIDGED}
 
@@ -710,7 +679,7 @@ FRACTAL_FBM = 1
 FRACTAL_RIDGED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Method of combining octaves into a fractal resulting in a "ridged" look.
 
 #### FRACTAL_PING_PONG {#FRACTAL_PING_PONG}
 
@@ -718,7 +687,9 @@ FRACTAL_RIDGED = 2
 FRACTAL_PING_PONG = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Method of combining octaves into a fractal with a ping pong effect.
+
+---
 
 ### CellularDistanceFunction {#enum-CellularDistanceFunction}
 
@@ -726,21 +697,7 @@ FRACTAL_PING_PONG = 3
 enum CellularDistanceFunction { DISTANCE_EUCLIDEAN = 0, DISTANCE_EUCLIDEAN_SQUARED = 1, DISTANCE_MANHATTAN = 2, DISTANCE_HYBRID = 3 }
 ```
 
-CellularDistanceFunction DISTANCE_EUCLIDEAN = 0
-
-Euclidean distance to the nearest point.
-
-CellularDistanceFunction DISTANCE_EUCLIDEAN_SQUARED = 1
-
-Squared Euclidean distance to the nearest point.
-
-CellularDistanceFunction DISTANCE_MANHATTAN = 2
-
-Manhattan distance (taxicab metric) to the nearest point.
-
-CellularDistanceFunction DISTANCE_HYBRID = 3
-
-Blend of DISTANCE_EUCLIDEAN and DISTANCE_MANHATTAN to give curved cell boundaries.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DISTANCE_EUCLIDEAN {#DISTANCE_EUCLIDEAN}
 
@@ -748,7 +705,7 @@ Blend of DISTANCE_EUCLIDEAN and DISTANCE_MANHATTAN to give curved cell boundarie
 DISTANCE_EUCLIDEAN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Euclidean distance to the nearest point.
 
 #### DISTANCE_EUCLIDEAN_SQUARED {#DISTANCE_EUCLIDEAN_SQUARED}
 
@@ -756,7 +713,7 @@ DISTANCE_EUCLIDEAN = 0
 DISTANCE_EUCLIDEAN_SQUARED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Squared Euclidean distance to the nearest point.
 
 #### DISTANCE_MANHATTAN {#DISTANCE_MANHATTAN}
 
@@ -764,7 +721,7 @@ DISTANCE_EUCLIDEAN_SQUARED = 1
 DISTANCE_MANHATTAN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Manhattan distance (taxicab metric) to the nearest point.
 
 #### DISTANCE_HYBRID {#DISTANCE_HYBRID}
 
@@ -772,7 +729,9 @@ DISTANCE_MANHATTAN = 2
 DISTANCE_HYBRID = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Blend of DISTANCE_EUCLIDEAN and DISTANCE_MANHATTAN to give curved cell boundaries.
+
+---
 
 ### CellularReturnType {#enum-CellularReturnType}
 
@@ -780,33 +739,7 @@ DISTANCE_HYBRID = 3
 enum CellularReturnType { RETURN_CELL_VALUE = 0, RETURN_DISTANCE = 1, RETURN_DISTANCE2 = 2, RETURN_DISTANCE2_ADD = 3, RETURN_DISTANCE2_SUB = 4, RETURN_DISTANCE2_MUL = 5, RETURN_DISTANCE2_DIV = 6 }
 ```
 
-CellularReturnType RETURN_CELL_VALUE = 0
-
-The cellular distance function will return the same value for all points within a cell.
-
-CellularReturnType RETURN_DISTANCE = 1
-
-The cellular distance function will return a value determined by the distance to the nearest point.
-
-CellularReturnType RETURN_DISTANCE2 = 2
-
-The cellular distance function returns the distance to the second-nearest point.
-
-CellularReturnType RETURN_DISTANCE2_ADD = 3
-
-The distance to the nearest point is added to the distance to the second-nearest point.
-
-CellularReturnType RETURN_DISTANCE2_SUB = 4
-
-The distance to the nearest point is subtracted from the distance to the second-nearest point.
-
-CellularReturnType RETURN_DISTANCE2_MUL = 5
-
-The distance to the nearest point is multiplied with the distance to the second-nearest point.
-
-CellularReturnType RETURN_DISTANCE2_DIV = 6
-
-The distance to the nearest point is divided by the distance to the second-nearest point.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RETURN_CELL_VALUE {#RETURN_CELL_VALUE}
 
@@ -814,7 +747,7 @@ The distance to the nearest point is divided by the distance to the second-neare
 RETURN_CELL_VALUE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The cellular distance function will return the same value for all points within a cell.
 
 #### RETURN_DISTANCE {#RETURN_DISTANCE}
 
@@ -822,7 +755,7 @@ RETURN_CELL_VALUE = 0
 RETURN_DISTANCE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The cellular distance function will return a value determined by the distance to the nearest point.
 
 #### RETURN_DISTANCE2 {#RETURN_DISTANCE2}
 
@@ -830,7 +763,7 @@ RETURN_DISTANCE = 1
 RETURN_DISTANCE2 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The cellular distance function returns the distance to the second-nearest point.
 
 #### RETURN_DISTANCE2_ADD {#RETURN_DISTANCE2_ADD}
 
@@ -838,7 +771,7 @@ RETURN_DISTANCE2 = 2
 RETURN_DISTANCE2_ADD = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The distance to the nearest point is added to the distance to the second-nearest point.
 
 #### RETURN_DISTANCE2_SUB {#RETURN_DISTANCE2_SUB}
 
@@ -846,7 +779,7 @@ RETURN_DISTANCE2_ADD = 3
 RETURN_DISTANCE2_SUB = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The distance to the nearest point is subtracted from the distance to the second-nearest point.
 
 #### RETURN_DISTANCE2_MUL {#RETURN_DISTANCE2_MUL}
 
@@ -854,7 +787,7 @@ RETURN_DISTANCE2_SUB = 4
 RETURN_DISTANCE2_MUL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The distance to the nearest point is multiplied with the distance to the second-nearest point.
 
 #### RETURN_DISTANCE2_DIV {#RETURN_DISTANCE2_DIV}
 
@@ -862,7 +795,9 @@ RETURN_DISTANCE2_MUL = 5
 RETURN_DISTANCE2_DIV = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The distance to the nearest point is divided by the distance to the second-nearest point.
+
+---
 
 ### DomainWarpType {#enum-DomainWarpType}
 
@@ -870,17 +805,7 @@ RETURN_DISTANCE2_DIV = 6
 enum DomainWarpType { DOMAIN_WARP_SIMPLEX = 0, DOMAIN_WARP_SIMPLEX_REDUCED = 1, DOMAIN_WARP_BASIC_GRID = 2 }
 ```
 
-DomainWarpType DOMAIN_WARP_SIMPLEX = 0
-
-The domain is warped using the simplex noise algorithm.
-
-DomainWarpType DOMAIN_WARP_SIMPLEX_REDUCED = 1
-
-The domain is warped using a simplified version of the simplex noise algorithm.
-
-DomainWarpType DOMAIN_WARP_BASIC_GRID = 2
-
-The domain is warped using a simple noise grid (not as smooth as the other methods, but more performant).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DOMAIN_WARP_SIMPLEX {#DOMAIN_WARP_SIMPLEX}
 
@@ -888,7 +813,7 @@ The domain is warped using a simple noise grid (not as smooth as the other metho
 DOMAIN_WARP_SIMPLEX = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The domain is warped using the simplex noise algorithm.
 
 #### DOMAIN_WARP_SIMPLEX_REDUCED {#DOMAIN_WARP_SIMPLEX_REDUCED}
 
@@ -896,7 +821,7 @@ DOMAIN_WARP_SIMPLEX = 0
 DOMAIN_WARP_SIMPLEX_REDUCED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The domain is warped using a simplified version of the simplex noise algorithm.
 
 #### DOMAIN_WARP_BASIC_GRID {#DOMAIN_WARP_BASIC_GRID}
 
@@ -904,7 +829,9 @@ DOMAIN_WARP_SIMPLEX_REDUCED = 1
 DOMAIN_WARP_BASIC_GRID = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The domain is warped using a simple noise grid (not as smooth as the other methods, but more performant).
+
+---
 
 ### DomainWarpFractalType {#enum-DomainWarpFractalType}
 
@@ -912,17 +839,7 @@ DOMAIN_WARP_BASIC_GRID = 2
 enum DomainWarpFractalType { DOMAIN_WARP_FRACTAL_NONE = 0, DOMAIN_WARP_FRACTAL_PROGRESSIVE = 1, DOMAIN_WARP_FRACTAL_INDEPENDENT = 2 }
 ```
 
-DomainWarpFractalType DOMAIN_WARP_FRACTAL_NONE = 0
-
-No fractal noise for warping the space.
-
-DomainWarpFractalType DOMAIN_WARP_FRACTAL_PROGRESSIVE = 1
-
-Warping the space progressively, octave for octave, resulting in a more "liquified" distortion.
-
-DomainWarpFractalType DOMAIN_WARP_FRACTAL_INDEPENDENT = 2
-
-Warping the space independently for each octave, resulting in a more chaotic distortion.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DOMAIN_WARP_FRACTAL_NONE {#DOMAIN_WARP_FRACTAL_NONE}
 
@@ -930,7 +847,7 @@ Warping the space independently for each octave, resulting in a more chaotic dis
 DOMAIN_WARP_FRACTAL_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No fractal noise for warping the space.
 
 #### DOMAIN_WARP_FRACTAL_PROGRESSIVE {#DOMAIN_WARP_FRACTAL_PROGRESSIVE}
 
@@ -938,7 +855,7 @@ DOMAIN_WARP_FRACTAL_NONE = 0
 DOMAIN_WARP_FRACTAL_PROGRESSIVE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Warping the space progressively, octave for octave, resulting in a more "liquified" distortion.
 
 #### DOMAIN_WARP_FRACTAL_INDEPENDENT {#DOMAIN_WARP_FRACTAL_INDEPENDENT}
 
@@ -946,4 +863,6 @@ DOMAIN_WARP_FRACTAL_PROGRESSIVE = 1
 DOMAIN_WARP_FRACTAL_INDEPENDENT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Warping the space independently for each octave, resulting in a more chaotic distortion.
+
+---

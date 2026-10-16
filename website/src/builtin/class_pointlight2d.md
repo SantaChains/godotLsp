@@ -79,7 +79,10 @@ Texture2D used for the light's appearance.
 offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_texture_offset(value: Vector2)
+- Vector2 get_texture_offset()
+
+The offset of the light's texture.
 
 ### texture_scale {#texture_scale}
 

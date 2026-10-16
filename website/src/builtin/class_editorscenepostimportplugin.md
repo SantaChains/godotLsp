@@ -110,37 +110,7 @@ Query the value of an option. This function can only be called from those queryi
 enum InternalImportCategory { INTERNAL_IMPORT_CATEGORY_NODE = 0, INTERNAL_IMPORT_CATEGORY_MESH_3D_NODE = 1, INTERNAL_IMPORT_CATEGORY_MESH = 2, INTERNAL_IMPORT_CATEGORY_MATERIAL = 3, INTERNAL_IMPORT_CATEGORY_ANIMATION = 4, INTERNAL_IMPORT_CATEGORY_ANIMATION_NODE = 5, INTERNAL_IMPORT_CATEGORY_SKELETON_3D_NODE = 6, INTERNAL_IMPORT_CATEGORY_MAX = 7 }
 ```
 
-InternalImportCategory INTERNAL_IMPORT_CATEGORY_NODE = 0
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-InternalImportCategory INTERNAL_IMPORT_CATEGORY_MESH_3D_NODE = 1
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-InternalImportCategory INTERNAL_IMPORT_CATEGORY_MESH = 2
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-InternalImportCategory INTERNAL_IMPORT_CATEGORY_MATERIAL = 3
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-InternalImportCategory INTERNAL_IMPORT_CATEGORY_ANIMATION = 4
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-InternalImportCategory INTERNAL_IMPORT_CATEGORY_ANIMATION_NODE = 5
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-InternalImportCategory INTERNAL_IMPORT_CATEGORY_SKELETON_3D_NODE = 6
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-InternalImportCategory INTERNAL_IMPORT_CATEGORY_MAX = 7
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### INTERNAL_IMPORT_CATEGORY_NODE {#INTERNAL_IMPORT_CATEGORY_NODE}
 
@@ -148,7 +118,7 @@ There is currently no description for this enum. Please help us by contributing 
 INTERNAL_IMPORT_CATEGORY_NODE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### INTERNAL_IMPORT_CATEGORY_MESH_3D_NODE {#INTERNAL_IMPORT_CATEGORY_MESH_3D_NODE}
 
@@ -156,7 +126,7 @@ INTERNAL_IMPORT_CATEGORY_NODE = 0
 INTERNAL_IMPORT_CATEGORY_MESH_3D_NODE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### INTERNAL_IMPORT_CATEGORY_MESH {#INTERNAL_IMPORT_CATEGORY_MESH}
 
@@ -164,7 +134,7 @@ INTERNAL_IMPORT_CATEGORY_MESH_3D_NODE = 1
 INTERNAL_IMPORT_CATEGORY_MESH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### INTERNAL_IMPORT_CATEGORY_MATERIAL {#INTERNAL_IMPORT_CATEGORY_MATERIAL}
 
@@ -172,7 +142,7 @@ INTERNAL_IMPORT_CATEGORY_MESH = 2
 INTERNAL_IMPORT_CATEGORY_MATERIAL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### INTERNAL_IMPORT_CATEGORY_ANIMATION {#INTERNAL_IMPORT_CATEGORY_ANIMATION}
 
@@ -180,7 +150,7 @@ INTERNAL_IMPORT_CATEGORY_MATERIAL = 3
 INTERNAL_IMPORT_CATEGORY_ANIMATION = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### INTERNAL_IMPORT_CATEGORY_ANIMATION_NODE {#INTERNAL_IMPORT_CATEGORY_ANIMATION_NODE}
 
@@ -188,7 +158,7 @@ INTERNAL_IMPORT_CATEGORY_ANIMATION = 4
 INTERNAL_IMPORT_CATEGORY_ANIMATION_NODE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### INTERNAL_IMPORT_CATEGORY_SKELETON_3D_NODE {#INTERNAL_IMPORT_CATEGORY_SKELETON_3D_NODE}
 
@@ -196,7 +166,7 @@ INTERNAL_IMPORT_CATEGORY_ANIMATION_NODE = 5
 INTERNAL_IMPORT_CATEGORY_SKELETON_3D_NODE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### INTERNAL_IMPORT_CATEGORY_MAX {#INTERNAL_IMPORT_CATEGORY_MAX}
 
@@ -204,4 +174,6 @@ INTERNAL_IMPORT_CATEGORY_SKELETON_3D_NODE = 6
 INTERNAL_IMPORT_CATEGORY_MAX = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+---

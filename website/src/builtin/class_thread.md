@@ -108,17 +108,7 @@ To determine if this can be called without blocking the calling thread, check if
 enum Priority { PRIORITY_LOW = 0, PRIORITY_NORMAL = 1, PRIORITY_HIGH = 2 }
 ```
 
-Priority PRIORITY_LOW = 0
-
-A thread running with lower priority than normally.
-
-Priority PRIORITY_NORMAL = 1
-
-A thread with a standard priority.
-
-Priority PRIORITY_HIGH = 2
-
-A thread running with higher priority than normally.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PRIORITY_LOW {#PRIORITY_LOW}
 
@@ -126,7 +116,7 @@ A thread running with higher priority than normally.
 PRIORITY_LOW = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A thread running with lower priority than normally.
 
 #### PRIORITY_NORMAL {#PRIORITY_NORMAL}
 
@@ -134,7 +124,7 @@ PRIORITY_LOW = 0
 PRIORITY_NORMAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A thread with a standard priority.
 
 #### PRIORITY_HIGH {#PRIORITY_HIGH}
 
@@ -142,4 +132,6 @@ PRIORITY_NORMAL = 1
 PRIORITY_HIGH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A thread running with higher priority than normally.
+
+---

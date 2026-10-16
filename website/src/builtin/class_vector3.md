@@ -466,17 +466,7 @@ The vector's Z component. Also accessible by using the index position [2].
 enum Axis { AXIS_X = 0, AXIS_Y = 1, AXIS_Z = 2 }
 ```
 
-Axis AXIS_X = 0
-
-Enumerated value for the X axis. Returned by max_axis_index() and min_axis_index().
-
-Axis AXIS_Y = 1
-
-Enumerated value for the Y axis. Returned by max_axis_index() and min_axis_index().
-
-Axis AXIS_Z = 2
-
-Enumerated value for the Z axis. Returned by max_axis_index() and min_axis_index().
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AXIS_X {#AXIS_X}
 
@@ -484,7 +474,7 @@ Enumerated value for the Z axis. Returned by max_axis_index() and min_axis_index
 AXIS_X = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the X axis. Returned by max_axis_index() and min_axis_index().
 
 #### AXIS_Y {#AXIS_Y}
 
@@ -492,7 +482,7 @@ AXIS_X = 0
 AXIS_Y = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the Y axis. Returned by max_axis_index() and min_axis_index().
 
 #### AXIS_Z {#AXIS_Z}
 
@@ -500,7 +490,9 @@ AXIS_Y = 1
 AXIS_Z = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the Z axis. Returned by max_axis_index() and min_axis_index().
+
+---
 
 ## 常量
 
@@ -510,7 +502,63 @@ AXIS_Z = 2
 const ZERO = Vector3(0, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Zero vector, a vector with all components set to 0.
+
+ONE = Vector3(1, 1, 1) 
+
+One vector, a vector with all components set to 1.
+
+INF = Vector3(inf, inf, inf) 
+
+Infinity vector, a vector with all components set to @GDScript.INF.
+
+LEFT = Vector3(-1, 0, 0) 
+
+Left unit vector. Represents the local direction of left, and the global direction of west.
+
+RIGHT = Vector3(1, 0, 0) 
+
+Right unit vector. Represents the local direction of right, and the global direction of east.
+
+UP = Vector3(0, 1, 0) 
+
+Up unit vector.
+
+DOWN = Vector3(0, -1, 0) 
+
+Down unit vector.
+
+FORWARD = Vector3(0, 0, -1) 
+
+Forward unit vector. Represents the local direction of forward, and the global direction of north. Keep in mind that the forward direction for lights, cameras, etc is different from 3D assets like characters, which face towards the camera by convention. Use MODEL_FRONT and similar constants when working in 3D asset space.
+
+BACK = Vector3(0, 0, 1) 
+
+Back unit vector. Represents the local direction of back, and the global direction of south.
+
+MODEL_LEFT = Vector3(1, 0, 0) 
+
+Unit vector pointing towards the left side of imported 3D assets.
+
+MODEL_RIGHT = Vector3(-1, 0, 0) 
+
+Unit vector pointing towards the right side of imported 3D assets.
+
+MODEL_TOP = Vector3(0, 1, 0) 
+
+Unit vector pointing towards the top side (up) of imported 3D assets.
+
+MODEL_BOTTOM = Vector3(0, -1, 0) 
+
+Unit vector pointing towards the bottom side (down) of imported 3D assets.
+
+MODEL_FRONT = Vector3(0, 0, 1) 
+
+Unit vector pointing towards the front side (facing forward) of imported 3D assets.
+
+MODEL_REAR = Vector3(0, 0, -1) 
+
+Unit vector pointing towards the rear side (back) of imported 3D assets.
 
 ### ONE {#ONE}
 

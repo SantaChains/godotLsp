@@ -31,4 +31,7 @@ void set_aabb(aabb: AABB)
 aabb: AABB
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_aabb(value: AABB)
+- AABB get_aabb()
+
+The smallest AABB enclosing this mesh in local space.

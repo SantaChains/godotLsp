@@ -106,7 +106,10 @@ The logic operation to perform for blending. Only effective if enable_logic_op i
 blend_constant: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_blend_constant(value: Color)
+- Color get_blend_constant()
+
+The constant color to blend with. See also RenderingDevice.draw_list_set_blend_constants().
 
 ### attachments {#attachments}
 

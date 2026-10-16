@@ -110,25 +110,7 @@ Note: This signal is only emitted in editor builds.
 enum LoadStatus { LOAD_STATUS_OK = 0, LOAD_STATUS_FAILED = 1, LOAD_STATUS_ALREADY_LOADED = 2, LOAD_STATUS_NOT_LOADED = 3, LOAD_STATUS_NEEDS_RESTART = 4 }
 ```
 
-LoadStatus LOAD_STATUS_OK = 0
-
-The extension has loaded successfully.
-
-LoadStatus LOAD_STATUS_FAILED = 1
-
-The extension has failed to load, possibly because it does not exist or has missing dependencies.
-
-LoadStatus LOAD_STATUS_ALREADY_LOADED = 2
-
-The extension has already been loaded.
-
-LoadStatus LOAD_STATUS_NOT_LOADED = 3
-
-The extension has not been loaded.
-
-LoadStatus LOAD_STATUS_NEEDS_RESTART = 4
-
-The extension requires the application to restart to fully load.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LOAD_STATUS_OK {#LOAD_STATUS_OK}
 
@@ -136,7 +118,7 @@ The extension requires the application to restart to fully load.
 LOAD_STATUS_OK = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The extension has loaded successfully.
 
 #### LOAD_STATUS_FAILED {#LOAD_STATUS_FAILED}
 
@@ -144,7 +126,7 @@ LOAD_STATUS_OK = 0
 LOAD_STATUS_FAILED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The extension has failed to load, possibly because it does not exist or has missing dependencies.
 
 #### LOAD_STATUS_ALREADY_LOADED {#LOAD_STATUS_ALREADY_LOADED}
 
@@ -152,7 +134,7 @@ LOAD_STATUS_FAILED = 1
 LOAD_STATUS_ALREADY_LOADED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The extension has already been loaded.
 
 #### LOAD_STATUS_NOT_LOADED {#LOAD_STATUS_NOT_LOADED}
 
@@ -160,7 +142,7 @@ LOAD_STATUS_ALREADY_LOADED = 2
 LOAD_STATUS_NOT_LOADED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The extension has not been loaded.
 
 #### LOAD_STATUS_NEEDS_RESTART {#LOAD_STATUS_NEEDS_RESTART}
 
@@ -168,4 +150,6 @@ LOAD_STATUS_NOT_LOADED = 3
 LOAD_STATUS_NEEDS_RESTART = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The extension requires the application to restart to fully load.
+
+---

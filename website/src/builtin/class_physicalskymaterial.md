@@ -209,7 +209,10 @@ Controls the strength of the Rayleigh scattering [https://en.wikipedia.org/wiki/
 rayleigh_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_rayleigh_color(value: Color)
+- Color get_rayleigh_color()
+
+Controls the Color of the Rayleigh scattering [https://en.wikipedia.org/wiki/Rayleigh_scattering]. While not physically accurate, this allows for the creation of alien-looking planets. For example, setting this to a red Color results in a Mars-looking atmosphere with a corresponding blue sunset.
 
 ### mie_coefficient {#mie_coefficient}
 
@@ -239,7 +242,10 @@ Controls the direction of the Mie scattering [https://en.wikipedia.org/wiki/Mie_
 mie_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_mie_color(value: Color)
+- Color get_mie_color()
+
+Controls the Color of the Mie scattering [https://en.wikipedia.org/wiki/Mie_scattering] effect. While not physically accurate, this allows for the creation of alien-looking planets.
 
 ### turbidity {#turbidity}
 
@@ -269,7 +275,10 @@ Sets the size of the sun disk. Default value is based on Sol's perceived size fr
 ground_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_ground_color(value: Color)
+- Color get_ground_color()
+
+Modulates the Color on the bottom half of the sky to represent the ground.
 
 ### energy_multiplier {#energy_multiplier}
 

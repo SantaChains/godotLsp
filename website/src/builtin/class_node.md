@@ -1814,25 +1814,7 @@ Emitted when an attribute of the node that is relevant to the editor is changed.
 enum ProcessMode { PROCESS_MODE_INHERIT = 0, PROCESS_MODE_PAUSABLE = 1, PROCESS_MODE_WHEN_PAUSED = 2, PROCESS_MODE_ALWAYS = 3, PROCESS_MODE_DISABLED = 4 }
 ```
 
-ProcessMode PROCESS_MODE_INHERIT = 0
-
-Inherits process_mode from the node's parent. This is the default for any newly created node.
-
-ProcessMode PROCESS_MODE_PAUSABLE = 1
-
-Processes when SceneTree.paused is false. This is the inverse of PROCESS_MODE_WHEN_PAUSED, and the default for the root node.
-
-ProcessMode PROCESS_MODE_WHEN_PAUSED = 2
-
-Processes only when SceneTree.paused is true. This is the inverse of PROCESS_MODE_PAUSABLE.
-
-ProcessMode PROCESS_MODE_ALWAYS = 3
-
-Always processes. Keeps processing, ignoring SceneTree.paused. This is the inverse of PROCESS_MODE_DISABLED.
-
-ProcessMode PROCESS_MODE_DISABLED = 4
-
-Never processes. Completely disables processing, ignoring SceneTree.paused. This is the inverse of PROCESS_MODE_ALWAYS.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PROCESS_MODE_INHERIT {#PROCESS_MODE_INHERIT}
 
@@ -1840,7 +1822,7 @@ Never processes. Completely disables processing, ignoring SceneTree.paused. This
 PROCESS_MODE_INHERIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inherits process_mode from the node's parent. This is the default for any newly created node.
 
 #### PROCESS_MODE_PAUSABLE {#PROCESS_MODE_PAUSABLE}
 
@@ -1848,7 +1830,7 @@ PROCESS_MODE_INHERIT = 0
 PROCESS_MODE_PAUSABLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Processes when SceneTree.paused is false. This is the inverse of PROCESS_MODE_WHEN_PAUSED, and the default for the root node.
 
 #### PROCESS_MODE_WHEN_PAUSED {#PROCESS_MODE_WHEN_PAUSED}
 
@@ -1856,7 +1838,7 @@ PROCESS_MODE_PAUSABLE = 1
 PROCESS_MODE_WHEN_PAUSED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Processes only when SceneTree.paused is true. This is the inverse of PROCESS_MODE_PAUSABLE.
 
 #### PROCESS_MODE_ALWAYS {#PROCESS_MODE_ALWAYS}
 
@@ -1864,7 +1846,7 @@ PROCESS_MODE_WHEN_PAUSED = 2
 PROCESS_MODE_ALWAYS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always processes. Keeps processing, ignoring SceneTree.paused. This is the inverse of PROCESS_MODE_DISABLED.
 
 #### PROCESS_MODE_DISABLED {#PROCESS_MODE_DISABLED}
 
@@ -1872,7 +1854,9 @@ PROCESS_MODE_ALWAYS = 3
 PROCESS_MODE_DISABLED = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Never processes. Completely disables processing, ignoring SceneTree.paused. This is the inverse of PROCESS_MODE_ALWAYS.
+
+---
 
 ### ProcessThreadGroup {#enum-ProcessThreadGroup}
 
@@ -1880,17 +1864,7 @@ PROCESS_MODE_DISABLED = 4
 enum ProcessThreadGroup { PROCESS_THREAD_GROUP_INHERIT = 0, PROCESS_THREAD_GROUP_MAIN_THREAD = 1, PROCESS_THREAD_GROUP_SUB_THREAD = 2 }
 ```
 
-ProcessThreadGroup PROCESS_THREAD_GROUP_INHERIT = 0
-
-Process this node based on the thread group mode of the first parent (or grandparent) node that has a thread group mode that is not inherit. See process_thread_group for more information.
-
-ProcessThreadGroup PROCESS_THREAD_GROUP_MAIN_THREAD = 1
-
-Process this node (and child nodes set to inherit) on the main thread. See process_thread_group for more information.
-
-ProcessThreadGroup PROCESS_THREAD_GROUP_SUB_THREAD = 2
-
-Process this node (and child nodes set to inherit) on a sub-thread. See process_thread_group for more information.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PROCESS_THREAD_GROUP_INHERIT {#PROCESS_THREAD_GROUP_INHERIT}
 
@@ -1898,7 +1872,7 @@ Process this node (and child nodes set to inherit) on a sub-thread. See process_
 PROCESS_THREAD_GROUP_INHERIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Process this node based on the thread group mode of the first parent (or grandparent) node that has a thread group mode that is not inherit. See process_thread_group for more information.
 
 #### PROCESS_THREAD_GROUP_MAIN_THREAD {#PROCESS_THREAD_GROUP_MAIN_THREAD}
 
@@ -1906,7 +1880,7 @@ PROCESS_THREAD_GROUP_INHERIT = 0
 PROCESS_THREAD_GROUP_MAIN_THREAD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Process this node (and child nodes set to inherit) on the main thread. See process_thread_group for more information.
 
 #### PROCESS_THREAD_GROUP_SUB_THREAD {#PROCESS_THREAD_GROUP_SUB_THREAD}
 
@@ -1914,7 +1888,11 @@ PROCESS_THREAD_GROUP_MAIN_THREAD = 1
 PROCESS_THREAD_GROUP_SUB_THREAD = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Process this node (and child nodes set to inherit) on a sub-thread. See process_thread_group for more information.
+
+---
+
+flags ProcessThreadMessages:
 
 ### ProcessThreadMessages {#enum-ProcessThreadMessages}
 
@@ -1930,7 +1908,7 @@ enum ProcessThreadMessages（位标志） { FLAG_PROCESS_THREAD_MESSAGES = 1, FL
 FLAG_PROCESS_THREAD_MESSAGES = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows this node to process threaded messages created with call_deferred_thread_group() right before _process() is called.
 
 #### FLAG_PROCESS_THREAD_MESSAGES_PHYSICS {#FLAG_PROCESS_THREAD_MESSAGES_PHYSICS}
 
@@ -1938,7 +1916,7 @@ FLAG_PROCESS_THREAD_MESSAGES = 1
 FLAG_PROCESS_THREAD_MESSAGES_PHYSICS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows this node to process threaded messages created with call_deferred_thread_group() right before _physics_process() is called.
 
 #### FLAG_PROCESS_THREAD_MESSAGES_ALL {#FLAG_PROCESS_THREAD_MESSAGES_ALL}
 
@@ -1946,7 +1924,9 @@ FLAG_PROCESS_THREAD_MESSAGES_PHYSICS = 2
 FLAG_PROCESS_THREAD_MESSAGES_ALL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows this node to process threaded messages created with call_deferred_thread_group() right before either _process() or _physics_process() are called.
+
+---
 
 ### PhysicsInterpolationMode {#enum-PhysicsInterpolationMode}
 
@@ -1954,17 +1934,7 @@ FLAG_PROCESS_THREAD_MESSAGES_ALL = 3
 enum PhysicsInterpolationMode { PHYSICS_INTERPOLATION_MODE_INHERIT = 0, PHYSICS_INTERPOLATION_MODE_ON = 1, PHYSICS_INTERPOLATION_MODE_OFF = 2 }
 ```
 
-PhysicsInterpolationMode PHYSICS_INTERPOLATION_MODE_INHERIT = 0
-
-Inherits physics_interpolation_mode from the node's parent. This is the default for any newly created node.
-
-PhysicsInterpolationMode PHYSICS_INTERPOLATION_MODE_ON = 1
-
-Enables physics interpolation for this node and for children set to PHYSICS_INTERPOLATION_MODE_INHERIT. This is the default for the root node.
-
-PhysicsInterpolationMode PHYSICS_INTERPOLATION_MODE_OFF = 2
-
-Disables physics interpolation for this node and for children set to PHYSICS_INTERPOLATION_MODE_INHERIT.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PHYSICS_INTERPOLATION_MODE_INHERIT {#PHYSICS_INTERPOLATION_MODE_INHERIT}
 
@@ -1972,7 +1942,7 @@ Disables physics interpolation for this node and for children set to PHYSICS_INT
 PHYSICS_INTERPOLATION_MODE_INHERIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inherits physics_interpolation_mode from the node's parent. This is the default for any newly created node.
 
 #### PHYSICS_INTERPOLATION_MODE_ON {#PHYSICS_INTERPOLATION_MODE_ON}
 
@@ -1980,7 +1950,7 @@ PHYSICS_INTERPOLATION_MODE_INHERIT = 0
 PHYSICS_INTERPOLATION_MODE_ON = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables physics interpolation for this node and for children set to PHYSICS_INTERPOLATION_MODE_INHERIT. This is the default for the root node.
 
 #### PHYSICS_INTERPOLATION_MODE_OFF {#PHYSICS_INTERPOLATION_MODE_OFF}
 
@@ -1988,7 +1958,9 @@ PHYSICS_INTERPOLATION_MODE_ON = 1
 PHYSICS_INTERPOLATION_MODE_OFF = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables physics interpolation for this node and for children set to PHYSICS_INTERPOLATION_MODE_INHERIT.
+
+---
 
 ### DuplicateFlags {#enum-DuplicateFlags}
 
@@ -1996,27 +1968,53 @@ PHYSICS_INTERPOLATION_MODE_OFF = 2
 enum DuplicateFlags { DUPLICATE_SIGNALS = 1, DUPLICATE_GROUPS = 2, DUPLICATE_SCRIPTS = 4, DUPLICATE_USE_INSTANTIATION = 8, DUPLICATE_INTERNAL_STATE = 16, DUPLICATE_DEFAULT = 15 }
 ```
 
-DuplicateFlags DUPLICATE_SIGNALS = 1
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### DUPLICATE_SIGNALS {#DUPLICATE_SIGNALS}
+
+```gdscript
+DUPLICATE_SIGNALS = 1
+```
 
 Duplicate the node's signal connections that are connected with the Object.CONNECT_PERSIST flag.
 
-DuplicateFlags DUPLICATE_GROUPS = 2
+#### DUPLICATE_GROUPS {#DUPLICATE_GROUPS}
+
+```gdscript
+DUPLICATE_GROUPS = 2
+```
 
 Duplicate the node's groups.
 
-DuplicateFlags DUPLICATE_SCRIPTS = 4
+#### DUPLICATE_SCRIPTS {#DUPLICATE_SCRIPTS}
+
+```gdscript
+DUPLICATE_SCRIPTS = 4
+```
 
 Duplicate the node's script (also overriding the duplicated children's scripts, if combined with DUPLICATE_USE_INSTANTIATION).
 
-DuplicateFlags DUPLICATE_USE_INSTANTIATION = 8
+#### DUPLICATE_USE_INSTANTIATION {#DUPLICATE_USE_INSTANTIATION}
+
+```gdscript
+DUPLICATE_USE_INSTANTIATION = 8
+```
 
 Duplicate using PackedScene.instantiate(). If the node comes from a scene saved on disk, reuses PackedScene.instantiate() as the base for the duplicated node and its children.
 
-DuplicateFlags DUPLICATE_INTERNAL_STATE = 16
+#### DUPLICATE_INTERNAL_STATE {#DUPLICATE_INTERNAL_STATE}
+
+```gdscript
+DUPLICATE_INTERNAL_STATE = 16
+```
 
 Duplicate also non-serializable variables (i.e. without @GlobalScope.PROPERTY_USAGE_STORAGE).
 
-DuplicateFlags DUPLICATE_DEFAULT = 15
+#### DUPLICATE_DEFAULT {#DUPLICATE_DEFAULT}
+
+```gdscript
+DUPLICATE_DEFAULT = 15
+```
 
 Duplicate using default flags. This constant is useful to add or remove a single flag.
 
@@ -2025,53 +2023,7 @@ Duplicate using default flags. This constant is useful to add or remove a single
 var dupe = duplicate(DUPLICATE_DEFAULT | DUPLICATE_INTERNAL_STATE)
 ```
 
-#### DUPLICATE_SIGNALS {#DUPLICATE_SIGNALS}
-
-```gdscript
-DUPLICATE_SIGNALS = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DUPLICATE_GROUPS {#DUPLICATE_GROUPS}
-
-```gdscript
-DUPLICATE_GROUPS = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DUPLICATE_SCRIPTS {#DUPLICATE_SCRIPTS}
-
-```gdscript
-DUPLICATE_SCRIPTS = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DUPLICATE_USE_INSTANTIATION {#DUPLICATE_USE_INSTANTIATION}
-
-```gdscript
-DUPLICATE_USE_INSTANTIATION = 8
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DUPLICATE_INTERNAL_STATE {#DUPLICATE_INTERNAL_STATE}
-
-```gdscript
-DUPLICATE_INTERNAL_STATE = 16
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DUPLICATE_DEFAULT {#DUPLICATE_DEFAULT}
-
-```gdscript
-DUPLICATE_DEFAULT = 15
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+---
 
 ### InternalMode {#enum-InternalMode}
 
@@ -2079,17 +2031,7 @@ DUPLICATE_DEFAULT = 15
 enum InternalMode { INTERNAL_MODE_DISABLED = 0, INTERNAL_MODE_FRONT = 1, INTERNAL_MODE_BACK = 2 }
 ```
 
-InternalMode INTERNAL_MODE_DISABLED = 0
-
-The node will not be internal.
-
-InternalMode INTERNAL_MODE_FRONT = 1
-
-The node will be placed at the beginning of the parent's children, before any non-internal sibling.
-
-InternalMode INTERNAL_MODE_BACK = 2
-
-The node will be placed at the end of the parent's children, after any non-internal sibling.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### INTERNAL_MODE_DISABLED {#INTERNAL_MODE_DISABLED}
 
@@ -2097,7 +2039,7 @@ The node will be placed at the end of the parent's children, after any non-inter
 INTERNAL_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The node will not be internal.
 
 #### INTERNAL_MODE_FRONT {#INTERNAL_MODE_FRONT}
 
@@ -2105,7 +2047,7 @@ INTERNAL_MODE_DISABLED = 0
 INTERNAL_MODE_FRONT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The node will be placed at the beginning of the parent's children, before any non-internal sibling.
 
 #### INTERNAL_MODE_BACK {#INTERNAL_MODE_BACK}
 
@@ -2113,7 +2055,9 @@ INTERNAL_MODE_FRONT = 1
 INTERNAL_MODE_BACK = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The node will be placed at the end of the parent's children, after any non-internal sibling.
+
+---
 
 ### AutoTranslateMode {#enum-AutoTranslateMode}
 
@@ -2121,19 +2065,7 @@ INTERNAL_MODE_BACK = 2
 enum AutoTranslateMode { AUTO_TRANSLATE_MODE_INHERIT = 0, AUTO_TRANSLATE_MODE_ALWAYS = 1, AUTO_TRANSLATE_MODE_DISABLED = 2 }
 ```
 
-AutoTranslateMode AUTO_TRANSLATE_MODE_INHERIT = 0
-
-Inherits auto_translate_mode from the node's parent. This is the default for any newly created node.
-
-AutoTranslateMode AUTO_TRANSLATE_MODE_ALWAYS = 1
-
-Always automatically translate. This is the inverse of AUTO_TRANSLATE_MODE_DISABLED, and the default for the root node.
-
-AutoTranslateMode AUTO_TRANSLATE_MODE_DISABLED = 2
-
-Never automatically translate. This is the inverse of AUTO_TRANSLATE_MODE_ALWAYS.
-
-String parsing for translation template generation will be skipped for this node and children that are set to AUTO_TRANSLATE_MODE_INHERIT.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AUTO_TRANSLATE_MODE_INHERIT {#AUTO_TRANSLATE_MODE_INHERIT}
 
@@ -2141,7 +2073,7 @@ String parsing for translation template generation will be skipped for this node
 AUTO_TRANSLATE_MODE_INHERIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inherits auto_translate_mode from the node's parent. This is the default for any newly created node.
 
 #### AUTO_TRANSLATE_MODE_ALWAYS {#AUTO_TRANSLATE_MODE_ALWAYS}
 
@@ -2149,7 +2081,7 @@ AUTO_TRANSLATE_MODE_INHERIT = 0
 AUTO_TRANSLATE_MODE_ALWAYS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always automatically translate. This is the inverse of AUTO_TRANSLATE_MODE_DISABLED, and the default for the root node.
 
 #### AUTO_TRANSLATE_MODE_DISABLED {#AUTO_TRANSLATE_MODE_DISABLED}
 
@@ -2157,7 +2089,11 @@ AUTO_TRANSLATE_MODE_ALWAYS = 1
 AUTO_TRANSLATE_MODE_DISABLED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Never automatically translate. This is the inverse of AUTO_TRANSLATE_MODE_ALWAYS.
+
+String parsing for translation template generation will be skipped for this node and children that are set to AUTO_TRANSLATE_MODE_INHERIT.
+
+---
 
 ## 常量
 

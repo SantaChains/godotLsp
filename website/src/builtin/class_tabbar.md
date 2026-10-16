@@ -736,21 +736,7 @@ Emitted when the active tab is rearranged via mouse drag. See drag_to_rearrange_
 enum AlignmentMode { ALIGNMENT_LEFT = 0, ALIGNMENT_CENTER = 1, ALIGNMENT_RIGHT = 2, ALIGNMENT_MAX = 3 }
 ```
 
-AlignmentMode ALIGNMENT_LEFT = 0
-
-Aligns tabs to the left.
-
-AlignmentMode ALIGNMENT_CENTER = 1
-
-Aligns tabs in the middle.
-
-AlignmentMode ALIGNMENT_RIGHT = 2
-
-Aligns tabs to the right.
-
-AlignmentMode ALIGNMENT_MAX = 3
-
-Represents the size of the AlignmentMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ALIGNMENT_LEFT {#ALIGNMENT_LEFT}
 
@@ -758,7 +744,7 @@ Represents the size of the AlignmentMode enum.
 ALIGNMENT_LEFT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Aligns tabs to the left.
 
 #### ALIGNMENT_CENTER {#ALIGNMENT_CENTER}
 
@@ -766,7 +752,7 @@ ALIGNMENT_LEFT = 0
 ALIGNMENT_CENTER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Aligns tabs in the middle.
 
 #### ALIGNMENT_RIGHT {#ALIGNMENT_RIGHT}
 
@@ -774,7 +760,7 @@ ALIGNMENT_CENTER = 1
 ALIGNMENT_RIGHT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Aligns tabs to the right.
 
 #### ALIGNMENT_MAX {#ALIGNMENT_MAX}
 
@@ -782,7 +768,9 @@ ALIGNMENT_RIGHT = 2
 ALIGNMENT_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the AlignmentMode enum.
+
+---
 
 ### CloseButtonDisplayPolicy {#enum-CloseButtonDisplayPolicy}
 
@@ -790,21 +778,7 @@ ALIGNMENT_MAX = 3
 enum CloseButtonDisplayPolicy { CLOSE_BUTTON_SHOW_NEVER = 0, CLOSE_BUTTON_SHOW_ACTIVE_ONLY = 1, CLOSE_BUTTON_SHOW_ALWAYS = 2, CLOSE_BUTTON_MAX = 3 }
 ```
 
-CloseButtonDisplayPolicy CLOSE_BUTTON_SHOW_NEVER = 0
-
-Never show the close buttons.
-
-CloseButtonDisplayPolicy CLOSE_BUTTON_SHOW_ACTIVE_ONLY = 1
-
-Only show the close button on the currently active tab.
-
-CloseButtonDisplayPolicy CLOSE_BUTTON_SHOW_ALWAYS = 2
-
-Show the close button on all tabs.
-
-CloseButtonDisplayPolicy CLOSE_BUTTON_MAX = 3
-
-Represents the size of the CloseButtonDisplayPolicy enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CLOSE_BUTTON_SHOW_NEVER {#CLOSE_BUTTON_SHOW_NEVER}
 
@@ -812,7 +786,7 @@ Represents the size of the CloseButtonDisplayPolicy enum.
 CLOSE_BUTTON_SHOW_NEVER = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Never show the close buttons.
 
 #### CLOSE_BUTTON_SHOW_ACTIVE_ONLY {#CLOSE_BUTTON_SHOW_ACTIVE_ONLY}
 
@@ -820,7 +794,7 @@ CLOSE_BUTTON_SHOW_NEVER = 0
 CLOSE_BUTTON_SHOW_ACTIVE_ONLY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only show the close button on the currently active tab.
 
 #### CLOSE_BUTTON_SHOW_ALWAYS {#CLOSE_BUTTON_SHOW_ALWAYS}
 
@@ -828,7 +802,7 @@ CLOSE_BUTTON_SHOW_ACTIVE_ONLY = 1
 CLOSE_BUTTON_SHOW_ALWAYS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the close button on all tabs.
 
 #### CLOSE_BUTTON_MAX {#CLOSE_BUTTON_MAX}
 
@@ -836,4 +810,6 @@ CLOSE_BUTTON_SHOW_ALWAYS = 2
 CLOSE_BUTTON_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the CloseButtonDisplayPolicy enum.
+
+---

@@ -217,17 +217,7 @@ Emitted when a remote peer has disconnected.
 enum ConnectionStatus { CONNECTION_DISCONNECTED = 0, CONNECTION_CONNECTING = 1, CONNECTION_CONNECTED = 2 }
 ```
 
-ConnectionStatus CONNECTION_DISCONNECTED = 0
-
-The MultiplayerPeer is disconnected.
-
-ConnectionStatus CONNECTION_CONNECTING = 1
-
-The MultiplayerPeer is currently connecting to a server.
-
-ConnectionStatus CONNECTION_CONNECTED = 2
-
-This MultiplayerPeer is connected.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CONNECTION_DISCONNECTED {#CONNECTION_DISCONNECTED}
 
@@ -235,7 +225,7 @@ This MultiplayerPeer is connected.
 CONNECTION_DISCONNECTED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The MultiplayerPeer is disconnected.
 
 #### CONNECTION_CONNECTING {#CONNECTION_CONNECTING}
 
@@ -243,7 +233,7 @@ CONNECTION_DISCONNECTED = 0
 CONNECTION_CONNECTING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The MultiplayerPeer is currently connecting to a server.
 
 #### CONNECTION_CONNECTED {#CONNECTION_CONNECTED}
 
@@ -251,7 +241,9 @@ CONNECTION_CONNECTING = 1
 CONNECTION_CONNECTED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This MultiplayerPeer is connected.
+
+---
 
 ### TransferMode {#enum-TransferMode}
 
@@ -259,17 +251,7 @@ CONNECTION_CONNECTED = 2
 enum TransferMode { TRANSFER_MODE_UNRELIABLE = 0, TRANSFER_MODE_UNRELIABLE_ORDERED = 1, TRANSFER_MODE_RELIABLE = 2 }
 ```
 
-TransferMode TRANSFER_MODE_UNRELIABLE = 0
-
-Packets are not acknowledged, no resend attempts are made for lost packets. Packets may arrive in any order. Potentially faster than TRANSFER_MODE_UNRELIABLE_ORDERED. Use for non-critical data, and always consider whether the order matters.
-
-TransferMode TRANSFER_MODE_UNRELIABLE_ORDERED = 1
-
-Packets are not acknowledged, no resend attempts are made for lost packets. Packets are received in the order they were sent in. Potentially faster than TRANSFER_MODE_RELIABLE. Use for non-critical data or data that would be outdated if received late due to resend attempt(s) anyway, for example movement and positional data.
-
-TransferMode TRANSFER_MODE_RELIABLE = 2
-
-Packets must be received and resend attempts should be made until the packets are acknowledged. Packets must be received in the order they were sent in. Most reliable transfer mode, but potentially the slowest due to the overhead. Use for critical data that must be transmitted and arrive in order, for example an ability being triggered or a chat message. Consider carefully if the information really is critical, and use sparingly.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TRANSFER_MODE_UNRELIABLE {#TRANSFER_MODE_UNRELIABLE}
 
@@ -277,7 +259,7 @@ Packets must be received and resend attempts should be made until the packets ar
 TRANSFER_MODE_UNRELIABLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Packets are not acknowledged, no resend attempts are made for lost packets. Packets may arrive in any order. Potentially faster than TRANSFER_MODE_UNRELIABLE_ORDERED. Use for non-critical data, and always consider whether the order matters.
 
 #### TRANSFER_MODE_UNRELIABLE_ORDERED {#TRANSFER_MODE_UNRELIABLE_ORDERED}
 
@@ -285,7 +267,7 @@ TRANSFER_MODE_UNRELIABLE = 0
 TRANSFER_MODE_UNRELIABLE_ORDERED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Packets are not acknowledged, no resend attempts are made for lost packets. Packets are received in the order they were sent in. Potentially faster than TRANSFER_MODE_RELIABLE. Use for non-critical data or data that would be outdated if received late due to resend attempt(s) anyway, for example movement and positional data.
 
 #### TRANSFER_MODE_RELIABLE {#TRANSFER_MODE_RELIABLE}
 
@@ -293,7 +275,9 @@ TRANSFER_MODE_UNRELIABLE_ORDERED = 1
 TRANSFER_MODE_RELIABLE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Packets must be received and resend attempts should be made until the packets are acknowledged. Packets must be received in the order they were sent in. Most reliable transfer mode, but potentially the slowest due to the overhead. Use for critical data that must be transmitted and arrive in order, for example an ability being triggered or a chat message. Consider carefully if the information really is critical, and use sparingly.
+
+---
 
 ## 常量
 

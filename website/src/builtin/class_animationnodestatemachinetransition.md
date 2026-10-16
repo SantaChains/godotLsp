@@ -287,17 +287,7 @@ Emitted when advance_condition is changed.
 enum SwitchMode { SWITCH_MODE_IMMEDIATE = 0, SWITCH_MODE_SYNC = 1, SWITCH_MODE_AT_END = 2 }
 ```
 
-SwitchMode SWITCH_MODE_IMMEDIATE = 0
-
-Switch to the next state immediately. The current state will end and blend into the beginning of the new one.
-
-SwitchMode SWITCH_MODE_SYNC = 1
-
-Switch to the next state immediately, but will seek the new state to the playback position of the old state.
-
-SwitchMode SWITCH_MODE_AT_END = 2
-
-Wait for the current state playback to end, then switch to the beginning of the next state animation.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SWITCH_MODE_IMMEDIATE {#SWITCH_MODE_IMMEDIATE}
 
@@ -305,7 +295,7 @@ Wait for the current state playback to end, then switch to the beginning of the 
 SWITCH_MODE_IMMEDIATE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Switch to the next state immediately. The current state will end and blend into the beginning of the new one.
 
 #### SWITCH_MODE_SYNC {#SWITCH_MODE_SYNC}
 
@@ -313,7 +303,7 @@ SWITCH_MODE_IMMEDIATE = 0
 SWITCH_MODE_SYNC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Switch to the next state immediately, but will seek the new state to the playback position of the old state.
 
 #### SWITCH_MODE_AT_END {#SWITCH_MODE_AT_END}
 
@@ -321,7 +311,9 @@ SWITCH_MODE_SYNC = 1
 SWITCH_MODE_AT_END = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Wait for the current state playback to end, then switch to the beginning of the next state animation.
+
+---
 
 ### AdvanceMode {#enum-AdvanceMode}
 
@@ -329,17 +321,7 @@ SWITCH_MODE_AT_END = 2
 enum AdvanceMode { ADVANCE_MODE_DISABLED = 0, ADVANCE_MODE_ENABLED = 1, ADVANCE_MODE_AUTO = 2 }
 ```
 
-AdvanceMode ADVANCE_MODE_DISABLED = 0
-
-Don't use this transition.
-
-AdvanceMode ADVANCE_MODE_ENABLED = 1
-
-Only use this transition during AnimationNodeStateMachinePlayback.travel().
-
-AdvanceMode ADVANCE_MODE_AUTO = 2
-
-Automatically use this transition if the advance_condition and advance_expression checks are true (if assigned).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ADVANCE_MODE_DISABLED {#ADVANCE_MODE_DISABLED}
 
@@ -347,7 +329,7 @@ Automatically use this transition if the advance_condition and advance_expressio
 ADVANCE_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Don't use this transition.
 
 #### ADVANCE_MODE_ENABLED {#ADVANCE_MODE_ENABLED}
 
@@ -355,7 +337,7 @@ ADVANCE_MODE_DISABLED = 0
 ADVANCE_MODE_ENABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Only use this transition during AnimationNodeStateMachinePlayback.travel().
 
 #### ADVANCE_MODE_AUTO {#ADVANCE_MODE_AUTO}
 
@@ -363,4 +345,6 @@ ADVANCE_MODE_ENABLED = 1
 ADVANCE_MODE_AUTO = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatically use this transition if the advance_condition and advance_expression checks are true (if assigned).
+
+---

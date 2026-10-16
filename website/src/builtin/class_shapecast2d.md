@@ -351,7 +351,10 @@ If true, the parent node will be excluded from collision detection.
 target_position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_position(value: Vector2)
+- Vector2 get_target_position()
+
+The shape's destination point, relative to this node's Node2D.position.
 
 ### margin {#margin}
 

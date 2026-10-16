@@ -192,25 +192,7 @@ Note: This property is only used and visible in the editor if particles_animatio
 enum BlendMode { BLEND_MODE_MIX = 0, BLEND_MODE_ADD = 1, BLEND_MODE_SUB = 2, BLEND_MODE_MUL = 3, BLEND_MODE_PREMULT_ALPHA = 4 }
 ```
 
-BlendMode BLEND_MODE_MIX = 0
-
-Mix blending mode. Colors are assumed to be independent of the alpha (opacity) value.
-
-BlendMode BLEND_MODE_ADD = 1
-
-Additive blending mode.
-
-BlendMode BLEND_MODE_SUB = 2
-
-Subtractive blending mode.
-
-BlendMode BLEND_MODE_MUL = 3
-
-Multiplicative blending mode.
-
-BlendMode BLEND_MODE_PREMULT_ALPHA = 4
-
-Mix blending mode. Colors are assumed to be premultiplied by the alpha (opacity) value.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BLEND_MODE_MIX {#BLEND_MODE_MIX}
 
@@ -218,7 +200,7 @@ Mix blending mode. Colors are assumed to be premultiplied by the alpha (opacity)
 BLEND_MODE_MIX = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mix blending mode. Colors are assumed to be independent of the alpha (opacity) value.
 
 #### BLEND_MODE_ADD {#BLEND_MODE_ADD}
 
@@ -226,7 +208,7 @@ BLEND_MODE_MIX = 0
 BLEND_MODE_ADD = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Additive blending mode.
 
 #### BLEND_MODE_SUB {#BLEND_MODE_SUB}
 
@@ -234,7 +216,7 @@ BLEND_MODE_ADD = 1
 BLEND_MODE_SUB = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Subtractive blending mode.
 
 #### BLEND_MODE_MUL {#BLEND_MODE_MUL}
 
@@ -242,7 +224,7 @@ BLEND_MODE_SUB = 2
 BLEND_MODE_MUL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiplicative blending mode.
 
 #### BLEND_MODE_PREMULT_ALPHA {#BLEND_MODE_PREMULT_ALPHA}
 
@@ -250,7 +232,9 @@ BLEND_MODE_MUL = 3
 BLEND_MODE_PREMULT_ALPHA = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mix blending mode. Colors are assumed to be premultiplied by the alpha (opacity) value.
+
+---
 
 ### LightMode {#enum-LightMode}
 
@@ -258,17 +242,7 @@ BLEND_MODE_PREMULT_ALPHA = 4
 enum LightMode { LIGHT_MODE_NORMAL = 0, LIGHT_MODE_UNSHADED = 1, LIGHT_MODE_LIGHT_ONLY = 2 }
 ```
 
-LightMode LIGHT_MODE_NORMAL = 0
-
-Render the material using both light and non-light sensitive material properties.
-
-LightMode LIGHT_MODE_UNSHADED = 1
-
-Render the material as if there were no light.
-
-LightMode LIGHT_MODE_LIGHT_ONLY = 2
-
-Render the material as if there were only light.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LIGHT_MODE_NORMAL {#LIGHT_MODE_NORMAL}
 
@@ -276,7 +250,7 @@ Render the material as if there were only light.
 LIGHT_MODE_NORMAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Render the material using both light and non-light sensitive material properties.
 
 #### LIGHT_MODE_UNSHADED {#LIGHT_MODE_UNSHADED}
 
@@ -284,7 +258,7 @@ LIGHT_MODE_NORMAL = 0
 LIGHT_MODE_UNSHADED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Render the material as if there were no light.
 
 #### LIGHT_MODE_LIGHT_ONLY {#LIGHT_MODE_LIGHT_ONLY}
 
@@ -292,4 +266,6 @@ LIGHT_MODE_UNSHADED = 1
 LIGHT_MODE_LIGHT_ONLY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Render the material as if there were only light.
+
+---

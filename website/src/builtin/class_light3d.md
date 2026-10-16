@@ -309,7 +309,10 @@ The sun on a cloudy day is approximately 6500 Kelvin, on a clear day it is betwe
 light_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_color(value: Color)
+- Color get_color()
+
+The light's color in nonlinear sRGB encoding. An overbright color can be used to achieve a result equivalent to increasing the light's light_energy.
 
 ### light_energy {#light_energy}
 
@@ -600,93 +603,7 @@ If true, the light only appears in the editor and will not be visible at runtime
 enum Param { PARAM_ENERGY = 0, PARAM_INDIRECT_ENERGY = 1, PARAM_VOLUMETRIC_FOG_ENERGY = 2, PARAM_SPECULAR = 3, PARAM_RANGE = 4, PARAM_SIZE = 5, PARAM_ATTENUATION = 6, PARAM_SPOT_ANGLE = 7, PARAM_SPOT_ATTENUATION = 8, PARAM_SHADOW_MAX_DISTANCE = 9, PARAM_SHADOW_SPLIT_1_OFFSET = 10, PARAM_SHADOW_SPLIT_2_OFFSET = 11, PARAM_SHADOW_SPLIT_3_OFFSET = 12, PARAM_SHADOW_FADE_START = 13, PARAM_SHADOW_NORMAL_BIAS = 14, PARAM_SHADOW_BIAS = 15, PARAM_SHADOW_PANCAKE_SIZE = 16, PARAM_SHADOW_OPACITY = 17, PARAM_SHADOW_BLUR = 18, PARAM_TRANSMITTANCE_BIAS = 19, PARAM_INTENSITY = 20, PARAM_MAX = 21 }
 ```
 
-Param PARAM_ENERGY = 0
-
-Constant for accessing light_energy.
-
-Param PARAM_INDIRECT_ENERGY = 1
-
-Constant for accessing light_indirect_energy.
-
-Param PARAM_VOLUMETRIC_FOG_ENERGY = 2
-
-Constant for accessing light_volumetric_fog_energy.
-
-Param PARAM_SPECULAR = 3
-
-Constant for accessing light_specular.
-
-Param PARAM_RANGE = 4
-
-Constant for accessing OmniLight3D.omni_range or SpotLight3D.spot_range.
-
-Param PARAM_SIZE = 5
-
-Constant for accessing light_size.
-
-Param PARAM_ATTENUATION = 6
-
-Constant for accessing OmniLight3D.omni_attenuation or SpotLight3D.spot_attenuation.
-
-Param PARAM_SPOT_ANGLE = 7
-
-Constant for accessing SpotLight3D.spot_angle.
-
-Param PARAM_SPOT_ATTENUATION = 8
-
-Constant for accessing SpotLight3D.spot_angle_attenuation.
-
-Param PARAM_SHADOW_MAX_DISTANCE = 9
-
-Constant for accessing DirectionalLight3D.directional_shadow_max_distance.
-
-Param PARAM_SHADOW_SPLIT_1_OFFSET = 10
-
-Constant for accessing DirectionalLight3D.directional_shadow_split_1.
-
-Param PARAM_SHADOW_SPLIT_2_OFFSET = 11
-
-Constant for accessing DirectionalLight3D.directional_shadow_split_2.
-
-Param PARAM_SHADOW_SPLIT_3_OFFSET = 12
-
-Constant for accessing DirectionalLight3D.directional_shadow_split_3.
-
-Param PARAM_SHADOW_FADE_START = 13
-
-Constant for accessing DirectionalLight3D.directional_shadow_fade_start.
-
-Param PARAM_SHADOW_NORMAL_BIAS = 14
-
-Constant for accessing shadow_normal_bias.
-
-Param PARAM_SHADOW_BIAS = 15
-
-Constant for accessing shadow_bias.
-
-Param PARAM_SHADOW_PANCAKE_SIZE = 16
-
-Constant for accessing DirectionalLight3D.directional_shadow_pancake_size.
-
-Param PARAM_SHADOW_OPACITY = 17
-
-Constant for accessing shadow_opacity.
-
-Param PARAM_SHADOW_BLUR = 18
-
-Constant for accessing shadow_blur.
-
-Param PARAM_TRANSMITTANCE_BIAS = 19
-
-Constant for accessing shadow_transmittance_bias.
-
-Param PARAM_INTENSITY = 20
-
-Constant for accessing light_intensity_lumens and light_intensity_lux. Only used when ProjectSettings.rendering/lights_and_shadows/use_physical_light_units is true.
-
-Param PARAM_MAX = 21
-
-Represents the size of the Param enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PARAM_ENERGY {#PARAM_ENERGY}
 
@@ -694,7 +611,7 @@ Represents the size of the Param enum.
 PARAM_ENERGY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing light_energy.
 
 #### PARAM_INDIRECT_ENERGY {#PARAM_INDIRECT_ENERGY}
 
@@ -702,7 +619,7 @@ PARAM_ENERGY = 0
 PARAM_INDIRECT_ENERGY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing light_indirect_energy.
 
 #### PARAM_VOLUMETRIC_FOG_ENERGY {#PARAM_VOLUMETRIC_FOG_ENERGY}
 
@@ -710,7 +627,7 @@ PARAM_INDIRECT_ENERGY = 1
 PARAM_VOLUMETRIC_FOG_ENERGY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing light_volumetric_fog_energy.
 
 #### PARAM_SPECULAR {#PARAM_SPECULAR}
 
@@ -718,7 +635,7 @@ PARAM_VOLUMETRIC_FOG_ENERGY = 2
 PARAM_SPECULAR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing light_specular.
 
 #### PARAM_RANGE {#PARAM_RANGE}
 
@@ -726,7 +643,7 @@ PARAM_SPECULAR = 3
 PARAM_RANGE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing OmniLight3D.omni_range or SpotLight3D.spot_range.
 
 #### PARAM_SIZE {#PARAM_SIZE}
 
@@ -734,7 +651,7 @@ PARAM_RANGE = 4
 PARAM_SIZE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing light_size.
 
 #### PARAM_ATTENUATION {#PARAM_ATTENUATION}
 
@@ -742,7 +659,7 @@ PARAM_SIZE = 5
 PARAM_ATTENUATION = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing OmniLight3D.omni_attenuation or SpotLight3D.spot_attenuation.
 
 #### PARAM_SPOT_ANGLE {#PARAM_SPOT_ANGLE}
 
@@ -750,7 +667,7 @@ PARAM_ATTENUATION = 6
 PARAM_SPOT_ANGLE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing SpotLight3D.spot_angle.
 
 #### PARAM_SPOT_ATTENUATION {#PARAM_SPOT_ATTENUATION}
 
@@ -758,7 +675,7 @@ PARAM_SPOT_ANGLE = 7
 PARAM_SPOT_ATTENUATION = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing SpotLight3D.spot_angle_attenuation.
 
 #### PARAM_SHADOW_MAX_DISTANCE {#PARAM_SHADOW_MAX_DISTANCE}
 
@@ -766,7 +683,7 @@ PARAM_SPOT_ATTENUATION = 8
 PARAM_SHADOW_MAX_DISTANCE = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing DirectionalLight3D.directional_shadow_max_distance.
 
 #### PARAM_SHADOW_SPLIT_1_OFFSET {#PARAM_SHADOW_SPLIT_1_OFFSET}
 
@@ -774,7 +691,7 @@ PARAM_SHADOW_MAX_DISTANCE = 9
 PARAM_SHADOW_SPLIT_1_OFFSET = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing DirectionalLight3D.directional_shadow_split_1.
 
 #### PARAM_SHADOW_SPLIT_2_OFFSET {#PARAM_SHADOW_SPLIT_2_OFFSET}
 
@@ -782,7 +699,7 @@ PARAM_SHADOW_SPLIT_1_OFFSET = 10
 PARAM_SHADOW_SPLIT_2_OFFSET = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing DirectionalLight3D.directional_shadow_split_2.
 
 #### PARAM_SHADOW_SPLIT_3_OFFSET {#PARAM_SHADOW_SPLIT_3_OFFSET}
 
@@ -790,7 +707,7 @@ PARAM_SHADOW_SPLIT_2_OFFSET = 11
 PARAM_SHADOW_SPLIT_3_OFFSET = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing DirectionalLight3D.directional_shadow_split_3.
 
 #### PARAM_SHADOW_FADE_START {#PARAM_SHADOW_FADE_START}
 
@@ -798,7 +715,7 @@ PARAM_SHADOW_SPLIT_3_OFFSET = 12
 PARAM_SHADOW_FADE_START = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing DirectionalLight3D.directional_shadow_fade_start.
 
 #### PARAM_SHADOW_NORMAL_BIAS {#PARAM_SHADOW_NORMAL_BIAS}
 
@@ -806,7 +723,7 @@ PARAM_SHADOW_FADE_START = 13
 PARAM_SHADOW_NORMAL_BIAS = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing shadow_normal_bias.
 
 #### PARAM_SHADOW_BIAS {#PARAM_SHADOW_BIAS}
 
@@ -814,7 +731,7 @@ PARAM_SHADOW_NORMAL_BIAS = 14
 PARAM_SHADOW_BIAS = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing shadow_bias.
 
 #### PARAM_SHADOW_PANCAKE_SIZE {#PARAM_SHADOW_PANCAKE_SIZE}
 
@@ -822,7 +739,7 @@ PARAM_SHADOW_BIAS = 15
 PARAM_SHADOW_PANCAKE_SIZE = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing DirectionalLight3D.directional_shadow_pancake_size.
 
 #### PARAM_SHADOW_OPACITY {#PARAM_SHADOW_OPACITY}
 
@@ -830,7 +747,7 @@ PARAM_SHADOW_PANCAKE_SIZE = 16
 PARAM_SHADOW_OPACITY = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing shadow_opacity.
 
 #### PARAM_SHADOW_BLUR {#PARAM_SHADOW_BLUR}
 
@@ -838,7 +755,7 @@ PARAM_SHADOW_OPACITY = 17
 PARAM_SHADOW_BLUR = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing shadow_blur.
 
 #### PARAM_TRANSMITTANCE_BIAS {#PARAM_TRANSMITTANCE_BIAS}
 
@@ -846,7 +763,7 @@ PARAM_SHADOW_BLUR = 18
 PARAM_TRANSMITTANCE_BIAS = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing shadow_transmittance_bias.
 
 #### PARAM_INTENSITY {#PARAM_INTENSITY}
 
@@ -854,7 +771,7 @@ PARAM_TRANSMITTANCE_BIAS = 19
 PARAM_INTENSITY = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for accessing light_intensity_lumens and light_intensity_lux. Only used when ProjectSettings.rendering/lights_and_shadows/use_physical_light_units is true.
 
 #### PARAM_MAX {#PARAM_MAX}
 
@@ -862,7 +779,9 @@ PARAM_INTENSITY = 20
 PARAM_MAX = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Param enum.
+
+---
 
 ### BakeMode {#enum-BakeMode}
 
@@ -870,21 +789,7 @@ PARAM_MAX = 21
 enum BakeMode { BAKE_DISABLED = 0, BAKE_STATIC = 1, BAKE_DYNAMIC = 2 }
 ```
 
-BakeMode BAKE_DISABLED = 0
-
-Light is ignored when baking. This is the fastest mode, but the light will not be taken into account when baking global illumination. This mode should generally be used for dynamic lights that change quickly, as the effect of global illumination is less noticeable on those lights.
-
-Note: Hiding a light does not affect baking LightmapGI. Hiding a light will still affect baking VoxelGI and SDFGI (see Environment.sdfgi_enabled).
-
-BakeMode BAKE_STATIC = 1
-
-Light is taken into account in static baking (VoxelGI, LightmapGI, SDFGI (Environment.sdfgi_enabled)). The light can be moved around or modified, but its global illumination will not update in real-time. This is suitable for subtle changes (such as flickering torches), but generally not large changes such as toggling a light on and off.
-
-Note: The light is not baked in LightmapGI if editor_only is true.
-
-BakeMode BAKE_DYNAMIC = 2
-
-Light is taken into account in dynamic baking (VoxelGI and SDFGI (Environment.sdfgi_enabled) only). The light can be moved around or modified with global illumination updating in real-time. The light's global illumination appearance will be slightly different compared to BAKE_STATIC. This has a greater performance cost compared to BAKE_STATIC. When using SDFGI, the update speed of dynamic lights is affected by ProjectSettings.rendering/global_illumination/sdfgi/frames_to_update_lights.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BAKE_DISABLED {#BAKE_DISABLED}
 
@@ -892,7 +797,9 @@ Light is taken into account in dynamic baking (VoxelGI and SDFGI (Environment.sd
 BAKE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Light is ignored when baking. This is the fastest mode, but the light will not be taken into account when baking global illumination. This mode should generally be used for dynamic lights that change quickly, as the effect of global illumination is less noticeable on those lights.
+
+Note: Hiding a light does not affect baking LightmapGI. Hiding a light will still affect baking VoxelGI and SDFGI (see Environment.sdfgi_enabled).
 
 #### BAKE_STATIC {#BAKE_STATIC}
 
@@ -900,7 +807,9 @@ BAKE_DISABLED = 0
 BAKE_STATIC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Light is taken into account in static baking (VoxelGI, LightmapGI, SDFGI (Environment.sdfgi_enabled)). The light can be moved around or modified, but its global illumination will not update in real-time. This is suitable for subtle changes (such as flickering torches), but generally not large changes such as toggling a light on and off.
+
+Note: The light is not baked in LightmapGI if editor_only is true.
 
 #### BAKE_DYNAMIC {#BAKE_DYNAMIC}
 
@@ -908,4 +817,6 @@ BAKE_STATIC = 1
 BAKE_DYNAMIC = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Light is taken into account in dynamic baking (VoxelGI and SDFGI (Environment.sdfgi_enabled) only). The light can be moved around or modified with global illumination updating in real-time. The light's global illumination appearance will be slightly different compared to BAKE_STATIC. This has a greater performance cost compared to BAKE_STATIC. When using SDFGI, the update speed of dynamic lights is affected by ProjectSettings.rendering/global_illumination/sdfgi/frames_to_update_lights.
+
+---

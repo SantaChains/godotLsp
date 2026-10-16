@@ -321,17 +321,7 @@ How to deal with node visibility during export. This setting does nothing if all
 enum RootNodeMode { ROOT_NODE_MODE_SINGLE_ROOT = 0, ROOT_NODE_MODE_KEEP_ROOT = 1, ROOT_NODE_MODE_MULTI_ROOT = 2 }
 ```
 
-RootNodeMode ROOT_NODE_MODE_SINGLE_ROOT = 0
-
-Treat the Godot scene's root node as the root node of the glTF file, and mark it as the single root node via the GODOT_single_root glTF extension. This will be parsed the same as ROOT_NODE_MODE_KEEP_ROOT if the implementation does not support GODOT_single_root.
-
-RootNodeMode ROOT_NODE_MODE_KEEP_ROOT = 1
-
-Treat the Godot scene's root node as the root node of the glTF file, but do not mark it as anything special. An extra root node will be generated when importing into Godot. This uses only vanilla glTF features. This is equivalent to the behavior in Godot 4.1 and earlier.
-
-RootNodeMode ROOT_NODE_MODE_MULTI_ROOT = 2
-
-Treat the Godot scene's root node as the name of the glTF scene, and add all of its children as root nodes of the glTF file. This uses only vanilla glTF features. This avoids an extra root node, but only the name of the Godot scene's root node will be preserved, as it will not be saved as a node.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ROOT_NODE_MODE_SINGLE_ROOT {#ROOT_NODE_MODE_SINGLE_ROOT}
 
@@ -339,7 +329,7 @@ Treat the Godot scene's root node as the name of the glTF scene, and add all of 
 ROOT_NODE_MODE_SINGLE_ROOT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Treat the Godot scene's root node as the root node of the glTF file, and mark it as the single root node via the GODOT_single_root glTF extension. This will be parsed the same as ROOT_NODE_MODE_KEEP_ROOT if the implementation does not support GODOT_single_root.
 
 #### ROOT_NODE_MODE_KEEP_ROOT {#ROOT_NODE_MODE_KEEP_ROOT}
 
@@ -347,7 +337,7 @@ ROOT_NODE_MODE_SINGLE_ROOT = 0
 ROOT_NODE_MODE_KEEP_ROOT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Treat the Godot scene's root node as the root node of the glTF file, but do not mark it as anything special. An extra root node will be generated when importing into Godot. This uses only vanilla glTF features. This is equivalent to the behavior in Godot 4.1 and earlier.
 
 #### ROOT_NODE_MODE_MULTI_ROOT {#ROOT_NODE_MODE_MULTI_ROOT}
 
@@ -355,7 +345,9 @@ ROOT_NODE_MODE_KEEP_ROOT = 1
 ROOT_NODE_MODE_MULTI_ROOT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Treat the Godot scene's root node as the name of the glTF scene, and add all of its children as root nodes of the glTF file. This uses only vanilla glTF features. This avoids an extra root node, but only the name of the Godot scene's root node will be preserved, as it will not be saved as a node.
+
+---
 
 ### TextureMapMode {#enum-TextureMapMode}
 
@@ -363,13 +355,7 @@ ROOT_NODE_MODE_MULTI_ROOT = 2
 enum TextureMapMode { TEXTURE_MAP_MODE_DO_NOT_REMAP = 0, TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL = 1 }
 ```
 
-TextureMapMode TEXTURE_MAP_MODE_DO_NOT_REMAP = 0
-
-Import the texture maps in the glTF file as they are, without trying to fit them into specific texture slots suitable for Godot's built-in materials. This may be desirable if using the glTF file with custom shaders, but may not display correctly with Godot's built-in materials. This is equivalent to the behavior in Godot 4.6 and earlier.
-
-TextureMapMode TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL = 1
-
-Import the texture maps in the glTF file remapped to the most suitable texture slots based on Godot's StandardMaterial3D class. This is the default behavior.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TEXTURE_MAP_MODE_DO_NOT_REMAP {#TEXTURE_MAP_MODE_DO_NOT_REMAP}
 
@@ -377,7 +363,7 @@ Import the texture maps in the glTF file remapped to the most suitable texture s
 TEXTURE_MAP_MODE_DO_NOT_REMAP = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Import the texture maps in the glTF file as they are, without trying to fit them into specific texture slots suitable for Godot's built-in materials. This may be desirable if using the glTF file with custom shaders, but may not display correctly with Godot's built-in materials. This is equivalent to the behavior in Godot 4.6 and earlier.
 
 #### TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL {#TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL}
 
@@ -385,7 +371,9 @@ TEXTURE_MAP_MODE_DO_NOT_REMAP = 0
 TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Import the texture maps in the glTF file remapped to the most suitable texture slots based on Godot's StandardMaterial3D class. This is the default behavior.
+
+---
 
 ### VisibilityMode {#enum-VisibilityMode}
 
@@ -393,17 +381,7 @@ TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL = 1
 enum VisibilityMode { VISIBILITY_MODE_INCLUDE_REQUIRED = 0, VISIBILITY_MODE_INCLUDE_OPTIONAL = 1, VISIBILITY_MODE_EXCLUDE = 2 }
 ```
 
-VisibilityMode VISIBILITY_MODE_INCLUDE_REQUIRED = 0
-
-If the scene contains any non-visible nodes, include them, mark them as non-visible with KHR_node_visibility, and require that importers respect their non-visibility. Downside: If the importer does not support KHR_node_visibility, the file cannot be imported.
-
-VisibilityMode VISIBILITY_MODE_INCLUDE_OPTIONAL = 1
-
-If the scene contains any non-visible nodes, include them, mark them as non-visible with KHR_node_visibility, and do not impose any requirements on importers. Downside: If the importer does not support KHR_node_visibility, invisible objects will be visible.
-
-VisibilityMode VISIBILITY_MODE_EXCLUDE = 2
-
-If the scene contains any non-visible nodes, do not include them in the export. This is the same as the behavior in Godot 4.4 and earlier. Downside: Invisible nodes will not exist in the exported file.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VISIBILITY_MODE_INCLUDE_REQUIRED {#VISIBILITY_MODE_INCLUDE_REQUIRED}
 
@@ -411,7 +389,7 @@ If the scene contains any non-visible nodes, do not include them in the export. 
 VISIBILITY_MODE_INCLUDE_REQUIRED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If the scene contains any non-visible nodes, include them, mark them as non-visible with KHR_node_visibility, and require that importers respect their non-visibility. Downside: If the importer does not support KHR_node_visibility, the file cannot be imported.
 
 #### VISIBILITY_MODE_INCLUDE_OPTIONAL {#VISIBILITY_MODE_INCLUDE_OPTIONAL}
 
@@ -419,7 +397,7 @@ VISIBILITY_MODE_INCLUDE_REQUIRED = 0
 VISIBILITY_MODE_INCLUDE_OPTIONAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If the scene contains any non-visible nodes, include them, mark them as non-visible with KHR_node_visibility, and do not impose any requirements on importers. Downside: If the importer does not support KHR_node_visibility, invisible objects will be visible.
 
 #### VISIBILITY_MODE_EXCLUDE {#VISIBILITY_MODE_EXCLUDE}
 
@@ -427,7 +405,11 @@ VISIBILITY_MODE_INCLUDE_OPTIONAL = 1
 VISIBILITY_MODE_EXCLUDE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If the scene contains any non-visible nodes, do not include them in the export. This is the same as the behavior in Godot 4.4 and earlier. Downside: Invisible nodes will not exist in the exported file.
+
+---
+
+flags ImportFlags:
 
 ### ImportFlags {#enum-ImportFlags}
 
@@ -443,7 +425,9 @@ enum ImportFlags（位标志） { IMPORT_FLAG_GENERATE_TANGENT_ARRAYS = 8, IMPOR
 IMPORT_FLAG_GENERATE_TANGENT_ARRAYS = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If true, generate vertex tangents using Mikktspace [http://www.mikktspace.com/] if the input meshes don't have tangent data. When possible, it's recommended to let the 3D modeling software generate tangents on export instead of relying on this option. Tangents are required for correct display of normal and height maps, along with any material/shader features that require tangents.
+
+If you don't need material features that require tangents, disabling this can reduce output file size and speed up importing if the source 3D file doesn't contain tangents.
 
 #### IMPORT_FLAG_USE_NAMED_SKIN_BINDS {#IMPORT_FLAG_USE_NAMED_SKIN_BINDS}
 
@@ -451,7 +435,13 @@ IMPORT_FLAG_GENERATE_TANGENT_ARRAYS = 8
 IMPORT_FLAG_USE_NAMED_SKIN_BINDS = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If checked, use named Skins for animation. The MeshInstance3D node contains 3 properties of relevance here: a skeleton NodePath pointing to the Skeleton3D node (usually ..), a mesh, and a skin:
+
+- The Skeleton3D node contains a list of bones with names, their pose and rest, a name, and a parent bone.
+- The mesh is all of the raw vertex data needed to display a mesh. In terms of the mesh, it knows how vertices are weight-painted and uses some internal numbering often imported from 3D modeling software.
+- The skin contains the information necessary to bind this mesh onto this Skeleton3D. For each of the internal bone IDs chosen by the 3D modeling software, it contains two things. Firstly, a matrix known as the Bind Pose Matrix, Inverse Bind Matrix, or IBM for short. Secondly, the Skin contains each bone's name (if this flag is enabled), or the bone's index within the Skeleton3D list (if this flag is disabled).
+
+Together, this information is enough to tell Godot how to use the bone poses in the Skeleton3D node to render the mesh from each MeshInstance3D. Note that each MeshInstance3D may share binds, as is common in models exported from Blender, or each MeshInstance3D may use a separate Skin object, as is common in models exported from other tools such as Maya.
 
 #### IMPORT_FLAG_DISCARD_MESHES_AND_MATERIALS {#IMPORT_FLAG_DISCARD_MESHES_AND_MATERIALS}
 
@@ -459,7 +449,7 @@ IMPORT_FLAG_USE_NAMED_SKIN_BINDS = 16
 IMPORT_FLAG_DISCARD_MESHES_AND_MATERIALS = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ignore meshes and materials on import. When importing a scene as an AnimationLibrary, this flag is always enabled.
 
 #### IMPORT_FLAG_FORCE_DISABLE_MESH_COMPRESSION {#IMPORT_FLAG_FORCE_DISABLE_MESH_COMPRESSION}
 
@@ -467,4 +457,6 @@ IMPORT_FLAG_DISCARD_MESHES_AND_MATERIALS = 32
 IMPORT_FLAG_FORCE_DISABLE_MESH_COMPRESSION = 64
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If true, mesh compression will not be used. Consider enabling if you notice blocky artifacts in your mesh normals or UVs, or if you have meshes that are larger than a few thousand meters in each direction.
+
+---

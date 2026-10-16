@@ -114,55 +114,7 @@ If disable is true, disables the editor feature specified in feature. When a fea
 enum Feature { FEATURE_3D = 0, FEATURE_SCRIPT = 1, FEATURE_ASSET_LIB = 2, FEATURE_SCENE_TREE = 3, FEATURE_NODE_DOCK = 4, FEATURE_FILESYSTEM_DOCK = 5, FEATURE_IMPORT_DOCK = 6, FEATURE_HISTORY_DOCK = 7, FEATURE_GAME = 8, FEATURE_SIGNALS_DOCK = 9, FEATURE_GROUPS_DOCK = 10, FEATURE_MAX = 11 }
 ```
 
-Feature FEATURE_3D = 0
-
-The 3D editor. If this feature is disabled, the 3D editor won't display but 3D nodes will still display in the Create New Node dialog.
-
-Feature FEATURE_SCRIPT = 1
-
-The Script tab, which contains the script editor and class reference browser. If this feature is disabled, the Script tab won't display.
-
-Feature FEATURE_ASSET_LIB = 2
-
-The Asset Store tab. If this feature is disabled, the Asset Store tab won't display.
-
-Feature FEATURE_SCENE_TREE = 3
-
-Scene tree editing. If this feature is disabled, the Scene tree dock will still be visible but will be read-only.
-
-Feature FEATURE_NODE_DOCK = 4
-
-Deprecated: Replaced by the Signals and Groups docks.
-
-The Node dock. If this feature is disabled, signals and groups won't be visible and modifiable from the editor.
-
-Feature FEATURE_FILESYSTEM_DOCK = 5
-
-The FileSystem dock. If this feature is disabled, the FileSystem dock won't be visible.
-
-Feature FEATURE_IMPORT_DOCK = 6
-
-The Import dock. If this feature is disabled, the Import dock won't be visible.
-
-Feature FEATURE_HISTORY_DOCK = 7
-
-The History dock. If this feature is disabled, the History dock won't be visible.
-
-Feature FEATURE_GAME = 8
-
-The Game tab, which allows embedding the game window and selecting nodes by clicking inside of it. If this feature is disabled, the Game tab won't display.
-
-Feature FEATURE_SIGNALS_DOCK = 9
-
-The Signals dock. If this feature is disabled, signals won't be visible and modifiable from the editor.
-
-Feature FEATURE_GROUPS_DOCK = 10
-
-The Groups dock. If this feature is disabled, groups won't be visible and modifiable from the editor.
-
-Feature FEATURE_MAX = 11
-
-Represents the size of the Feature enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FEATURE_3D {#FEATURE_3D}
 
@@ -170,7 +122,7 @@ Represents the size of the Feature enum.
 FEATURE_3D = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The 3D editor. If this feature is disabled, the 3D editor won't display but 3D nodes will still display in the Create New Node dialog.
 
 #### FEATURE_SCRIPT {#FEATURE_SCRIPT}
 
@@ -178,7 +130,7 @@ FEATURE_3D = 0
 FEATURE_SCRIPT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Script tab, which contains the script editor and class reference browser. If this feature is disabled, the Script tab won't display.
 
 #### FEATURE_ASSET_LIB {#FEATURE_ASSET_LIB}
 
@@ -186,7 +138,7 @@ FEATURE_SCRIPT = 1
 FEATURE_ASSET_LIB = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Asset Store tab. If this feature is disabled, the Asset Store tab won't display.
 
 #### FEATURE_SCENE_TREE {#FEATURE_SCENE_TREE}
 
@@ -194,7 +146,7 @@ FEATURE_ASSET_LIB = 2
 FEATURE_SCENE_TREE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scene tree editing. If this feature is disabled, the Scene tree dock will still be visible but will be read-only.
 
 #### FEATURE_NODE_DOCK {#FEATURE_NODE_DOCK}
 
@@ -202,7 +154,9 @@ FEATURE_SCENE_TREE = 3
 FEATURE_NODE_DOCK = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Replaced by the Signals and Groups docks.
+
+The Node dock. If this feature is disabled, signals and groups won't be visible and modifiable from the editor.
 
 #### FEATURE_FILESYSTEM_DOCK {#FEATURE_FILESYSTEM_DOCK}
 
@@ -210,7 +164,7 @@ FEATURE_NODE_DOCK = 4
 FEATURE_FILESYSTEM_DOCK = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The FileSystem dock. If this feature is disabled, the FileSystem dock won't be visible.
 
 #### FEATURE_IMPORT_DOCK {#FEATURE_IMPORT_DOCK}
 
@@ -218,7 +172,7 @@ FEATURE_FILESYSTEM_DOCK = 5
 FEATURE_IMPORT_DOCK = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Import dock. If this feature is disabled, the Import dock won't be visible.
 
 #### FEATURE_HISTORY_DOCK {#FEATURE_HISTORY_DOCK}
 
@@ -226,7 +180,7 @@ FEATURE_IMPORT_DOCK = 6
 FEATURE_HISTORY_DOCK = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The History dock. If this feature is disabled, the History dock won't be visible.
 
 #### FEATURE_GAME {#FEATURE_GAME}
 
@@ -234,7 +188,7 @@ FEATURE_HISTORY_DOCK = 7
 FEATURE_GAME = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Game tab, which allows embedding the game window and selecting nodes by clicking inside of it. If this feature is disabled, the Game tab won't display.
 
 #### FEATURE_SIGNALS_DOCK {#FEATURE_SIGNALS_DOCK}
 
@@ -242,7 +196,7 @@ FEATURE_GAME = 8
 FEATURE_SIGNALS_DOCK = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Signals dock. If this feature is disabled, signals won't be visible and modifiable from the editor.
 
 #### FEATURE_GROUPS_DOCK {#FEATURE_GROUPS_DOCK}
 
@@ -250,7 +204,7 @@ FEATURE_SIGNALS_DOCK = 9
 FEATURE_GROUPS_DOCK = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Groups dock. If this feature is disabled, groups won't be visible and modifiable from the editor.
 
 #### FEATURE_MAX {#FEATURE_MAX}
 
@@ -258,4 +212,6 @@ FEATURE_GROUPS_DOCK = 10
 FEATURE_MAX = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Feature enum.
+
+---

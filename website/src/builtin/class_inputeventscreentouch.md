@@ -95,7 +95,10 @@ The touch index in the case of a multi-touch event. One index = one finger.
 position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_position(value: Vector2)
+- Vector2 get_position()
+
+The touch position in the viewport the node is in, using the coordinate system of this viewport.
 
 ### canceled {#canceled}
 

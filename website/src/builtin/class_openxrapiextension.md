@@ -454,17 +454,7 @@ Returns true if the provided XrResult [https://registry.khronos.org/OpenXR/specs
 enum OpenXRAlphaBlendModeSupport { OPENXR_ALPHA_BLEND_MODE_SUPPORT_NONE = 0, OPENXR_ALPHA_BLEND_MODE_SUPPORT_REAL = 1, OPENXR_ALPHA_BLEND_MODE_SUPPORT_EMULATING = 2 }
 ```
 
-OpenXRAlphaBlendModeSupport OPENXR_ALPHA_BLEND_MODE_SUPPORT_NONE = 0
-
-Means that XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND isn't supported at all.
-
-OpenXRAlphaBlendModeSupport OPENXR_ALPHA_BLEND_MODE_SUPPORT_REAL = 1
-
-Means that XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND is really supported.
-
-OpenXRAlphaBlendModeSupport OPENXR_ALPHA_BLEND_MODE_SUPPORT_EMULATING = 2
-
-Means that XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND is emulated.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OPENXR_ALPHA_BLEND_MODE_SUPPORT_NONE {#OPENXR_ALPHA_BLEND_MODE_SUPPORT_NONE}
 
@@ -472,7 +462,7 @@ Means that XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND is emulated.
 OPENXR_ALPHA_BLEND_MODE_SUPPORT_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Means that XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND isn't supported at all.
 
 #### OPENXR_ALPHA_BLEND_MODE_SUPPORT_REAL {#OPENXR_ALPHA_BLEND_MODE_SUPPORT_REAL}
 
@@ -480,7 +470,7 @@ OPENXR_ALPHA_BLEND_MODE_SUPPORT_NONE = 0
 OPENXR_ALPHA_BLEND_MODE_SUPPORT_REAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Means that XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND is really supported.
 
 #### OPENXR_ALPHA_BLEND_MODE_SUPPORT_EMULATING {#OPENXR_ALPHA_BLEND_MODE_SUPPORT_EMULATING}
 
@@ -488,4 +478,6 @@ OPENXR_ALPHA_BLEND_MODE_SUPPORT_REAL = 1
 OPENXR_ALPHA_BLEND_MODE_SUPPORT_EMULATING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Means that XRInterface.XR_ENV_BLEND_MODE_ALPHA_BLEND is emulated.
+
+---

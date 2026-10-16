@@ -90,7 +90,12 @@ The culling mode to use.
 polygon: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_polygon(value: PackedVector2Array)
+- PackedVector2Array get_polygon()
+
+A Vector2 array with the index for polygon's vertices positions.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.
 
 ## 枚举
 
@@ -100,17 +105,7 @@ polygon: PackedVector2Array
 enum CullMode { CULL_DISABLED = 0, CULL_CLOCKWISE = 1, CULL_COUNTER_CLOCKWISE = 2 }
 ```
 
-CullMode CULL_DISABLED = 0
-
-Culling is disabled. See cull_mode.
-
-CullMode CULL_CLOCKWISE = 1
-
-Culling is performed in the clockwise direction. See cull_mode.
-
-CullMode CULL_COUNTER_CLOCKWISE = 2
-
-Culling is performed in the counterclockwise direction. See cull_mode.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CULL_DISABLED {#CULL_DISABLED}
 
@@ -118,7 +113,7 @@ Culling is performed in the counterclockwise direction. See cull_mode.
 CULL_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Culling is disabled. See cull_mode.
 
 #### CULL_CLOCKWISE {#CULL_CLOCKWISE}
 
@@ -126,7 +121,7 @@ CULL_DISABLED = 0
 CULL_CLOCKWISE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Culling is performed in the clockwise direction. See cull_mode.
 
 #### CULL_COUNTER_CLOCKWISE {#CULL_COUNTER_CLOCKWISE}
 
@@ -134,4 +129,6 @@ CULL_CLOCKWISE = 1
 CULL_COUNTER_CLOCKWISE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Culling is performed in the counterclockwise direction. See cull_mode.
+
+---

@@ -116,7 +116,10 @@ void set_selected(selected: bool)
 position_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_position_offset(value: Vector2)
+- Vector2 get_position_offset()
+
+The offset of the GraphElement, relative to the scroll offset of the GraphEdit.
 
 ### resizable {#resizable}
 

@@ -266,7 +266,10 @@ void set_sliders_visible(visible: bool)
 color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_pick_color(value: Color)
+- Color get_pick_color()
+
+The currently selected color.
 
 ### edit_alpha {#edit_alpha}
 
@@ -423,29 +426,7 @@ Emitted when a preset is removed.
 enum ColorModeType { MODE_RGB = 0, MODE_HSV = 1, MODE_RAW = 2, MODE_LINEAR = 2, MODE_OKHSL = 3 }
 ```
 
-ColorModeType MODE_RGB = 0
-
-Allows editing the color with Red/Green/Blue sliders in sRGB color space.
-
-ColorModeType MODE_HSV = 1
-
-Allows editing the color with Hue/Saturation/Value sliders.
-
-ColorModeType MODE_RAW = 2
-
-Deprecated: This is replaced by MODE_LINEAR.
-
-ColorModeType MODE_LINEAR = 2
-
-Allows editing the color with Red/Green/Blue sliders in linear color space.
-
-ColorModeType MODE_OKHSL = 3
-
-Allows editing the color with Hue/Saturation/Lightness sliders.
-
-OKHSL is a new color space similar to HSL but that better match perception by leveraging the Oklab color space which is designed to be simple to use, while doing a good job at predicting perceived lightness, chroma and hue.
-
-Okhsv and Okhsl color spaces [https://bottosson.github.io/posts/colorpicker/]
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MODE_RGB {#MODE_RGB}
 
@@ -453,7 +434,7 @@ Okhsv and Okhsl color spaces [https://bottosson.github.io/posts/colorpicker/]
 MODE_RGB = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows editing the color with Red/Green/Blue sliders in sRGB color space.
 
 #### MODE_HSV {#MODE_HSV}
 
@@ -461,7 +442,7 @@ MODE_RGB = 0
 MODE_HSV = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows editing the color with Hue/Saturation/Value sliders.
 
 #### MODE_RAW {#MODE_RAW}
 
@@ -469,7 +450,7 @@ MODE_HSV = 1
 MODE_RAW = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: This is replaced by MODE_LINEAR.
 
 #### MODE_LINEAR {#MODE_LINEAR}
 
@@ -477,7 +458,7 @@ MODE_RAW = 2
 MODE_LINEAR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows editing the color with Red/Green/Blue sliders in linear color space.
 
 #### MODE_OKHSL {#MODE_OKHSL}
 
@@ -485,7 +466,13 @@ MODE_LINEAR = 2
 MODE_OKHSL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows editing the color with Hue/Saturation/Lightness sliders.
+
+OKHSL is a new color space similar to HSL but that better match perception by leveraging the Oklab color space which is designed to be simple to use, while doing a good job at predicting perceived lightness, chroma and hue.
+
+Okhsv and Okhsl color spaces [https://bottosson.github.io/posts/colorpicker/]
+
+---
 
 ### PickerShapeType {#enum-PickerShapeType}
 
@@ -493,33 +480,7 @@ MODE_OKHSL = 3
 enum PickerShapeType { SHAPE_HSV_RECTANGLE = 0, SHAPE_HSV_WHEEL = 1, SHAPE_VHS_CIRCLE = 2, SHAPE_OKHSL_CIRCLE = 3, SHAPE_NONE = 4, SHAPE_OK_HS_RECTANGLE = 5, SHAPE_OK_HL_RECTANGLE = 6 }
 ```
 
-PickerShapeType SHAPE_HSV_RECTANGLE = 0
-
-HSV Color Model rectangle color space.
-
-PickerShapeType SHAPE_HSV_WHEEL = 1
-
-HSV Color Model rectangle color space with a wheel.
-
-PickerShapeType SHAPE_VHS_CIRCLE = 2
-
-HSV Color Model circle color space. Use Saturation as a radius.
-
-PickerShapeType SHAPE_OKHSL_CIRCLE = 3
-
-HSL OK Color Model circle color space.
-
-PickerShapeType SHAPE_NONE = 4
-
-The color space shape and the shape select button are hidden. Can't be selected from the shapes popup.
-
-PickerShapeType SHAPE_OK_HS_RECTANGLE = 5
-
-OKHSL Color Model rectangle with constant lightness.
-
-PickerShapeType SHAPE_OK_HL_RECTANGLE = 6
-
-OKHSL Color Model rectangle with constant saturation.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHAPE_HSV_RECTANGLE {#SHAPE_HSV_RECTANGLE}
 
@@ -527,7 +488,7 @@ OKHSL Color Model rectangle with constant saturation.
 SHAPE_HSV_RECTANGLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HSV Color Model rectangle color space.
 
 #### SHAPE_HSV_WHEEL {#SHAPE_HSV_WHEEL}
 
@@ -535,7 +496,7 @@ SHAPE_HSV_RECTANGLE = 0
 SHAPE_HSV_WHEEL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HSV Color Model rectangle color space with a wheel.
 
 #### SHAPE_VHS_CIRCLE {#SHAPE_VHS_CIRCLE}
 
@@ -543,7 +504,7 @@ SHAPE_HSV_WHEEL = 1
 SHAPE_VHS_CIRCLE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HSV Color Model circle color space. Use Saturation as a radius.
 
 #### SHAPE_OKHSL_CIRCLE {#SHAPE_OKHSL_CIRCLE}
 
@@ -551,7 +512,7 @@ SHAPE_VHS_CIRCLE = 2
 SHAPE_OKHSL_CIRCLE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HSL OK Color Model circle color space.
 
 #### SHAPE_NONE {#SHAPE_NONE}
 
@@ -559,7 +520,7 @@ SHAPE_OKHSL_CIRCLE = 3
 SHAPE_NONE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The color space shape and the shape select button are hidden. Can't be selected from the shapes popup.
 
 #### SHAPE_OK_HS_RECTANGLE {#SHAPE_OK_HS_RECTANGLE}
 
@@ -567,7 +528,7 @@ SHAPE_NONE = 4
 SHAPE_OK_HS_RECTANGLE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OKHSL Color Model rectangle with constant lightness.
 
 #### SHAPE_OK_HL_RECTANGLE {#SHAPE_OK_HL_RECTANGLE}
 
@@ -575,4 +536,6 @@ SHAPE_OK_HS_RECTANGLE = 5
 SHAPE_OK_HL_RECTANGLE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OKHSL Color Model rectangle with constant saturation.
+
+---

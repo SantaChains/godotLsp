@@ -103,25 +103,7 @@ The index within 0-15 range, which is used to avoid clashes when shader used on 
 enum Qualifier { QUAL_NONE = 0, QUAL_GLOBAL = 1, QUAL_INSTANCE = 2, QUAL_INSTANCE_INDEX = 3, QUAL_MAX = 4 }
 ```
 
-Qualifier QUAL_NONE = 0
-
-The parameter will be tied to the ShaderMaterial using this shader.
-
-Qualifier QUAL_GLOBAL = 1
-
-The parameter will use a global value, defined in Project Settings.
-
-Qualifier QUAL_INSTANCE = 2
-
-The parameter will be tied to the node with attached ShaderMaterial using this shader.
-
-Qualifier QUAL_INSTANCE_INDEX = 3
-
-The parameter will be tied to the node with attached ShaderMaterial using this shader. Enables setting a instance_index property.
-
-Qualifier QUAL_MAX = 4
-
-Represents the size of the Qualifier enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### QUAL_NONE {#QUAL_NONE}
 
@@ -129,7 +111,7 @@ Represents the size of the Qualifier enum.
 QUAL_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The parameter will be tied to the ShaderMaterial using this shader.
 
 #### QUAL_GLOBAL {#QUAL_GLOBAL}
 
@@ -137,7 +119,7 @@ QUAL_NONE = 0
 QUAL_GLOBAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The parameter will use a global value, defined in Project Settings.
 
 #### QUAL_INSTANCE {#QUAL_INSTANCE}
 
@@ -145,7 +127,7 @@ QUAL_GLOBAL = 1
 QUAL_INSTANCE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The parameter will be tied to the node with attached ShaderMaterial using this shader.
 
 #### QUAL_INSTANCE_INDEX {#QUAL_INSTANCE_INDEX}
 
@@ -153,7 +135,7 @@ QUAL_INSTANCE = 2
 QUAL_INSTANCE_INDEX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The parameter will be tied to the node with attached ShaderMaterial using this shader. Enables setting a instance_index property.
 
 #### QUAL_MAX {#QUAL_MAX}
 
@@ -161,4 +143,6 @@ QUAL_INSTANCE_INDEX = 3
 QUAL_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Qualifier enum.
+
+---

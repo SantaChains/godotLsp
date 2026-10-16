@@ -244,21 +244,7 @@ Index of the initial clip, which will be played first when this stream is played
 enum TransitionFromTime { TRANSITION_FROM_TIME_IMMEDIATE = 0, TRANSITION_FROM_TIME_NEXT_BEAT = 1, TRANSITION_FROM_TIME_NEXT_BAR = 2, TRANSITION_FROM_TIME_END = 3 }
 ```
 
-TransitionFromTime TRANSITION_FROM_TIME_IMMEDIATE = 0
-
-Start transition as soon as possible, don't wait for any specific time position.
-
-TransitionFromTime TRANSITION_FROM_TIME_NEXT_BEAT = 1
-
-Transition when the clip playback position reaches the next beat.
-
-TransitionFromTime TRANSITION_FROM_TIME_NEXT_BAR = 2
-
-Transition when the clip playback position reaches the next bar.
-
-TransitionFromTime TRANSITION_FROM_TIME_END = 3
-
-Transition when the current clip finished playing.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TRANSITION_FROM_TIME_IMMEDIATE {#TRANSITION_FROM_TIME_IMMEDIATE}
 
@@ -266,7 +252,7 @@ Transition when the current clip finished playing.
 TRANSITION_FROM_TIME_IMMEDIATE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Start transition as soon as possible, don't wait for any specific time position.
 
 #### TRANSITION_FROM_TIME_NEXT_BEAT {#TRANSITION_FROM_TIME_NEXT_BEAT}
 
@@ -274,7 +260,7 @@ TRANSITION_FROM_TIME_IMMEDIATE = 0
 TRANSITION_FROM_TIME_NEXT_BEAT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Transition when the clip playback position reaches the next beat.
 
 #### TRANSITION_FROM_TIME_NEXT_BAR {#TRANSITION_FROM_TIME_NEXT_BAR}
 
@@ -282,7 +268,7 @@ TRANSITION_FROM_TIME_NEXT_BEAT = 1
 TRANSITION_FROM_TIME_NEXT_BAR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Transition when the clip playback position reaches the next bar.
 
 #### TRANSITION_FROM_TIME_END {#TRANSITION_FROM_TIME_END}
 
@@ -290,7 +276,9 @@ TRANSITION_FROM_TIME_NEXT_BAR = 2
 TRANSITION_FROM_TIME_END = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Transition when the current clip finished playing.
+
+---
 
 ### TransitionToTime {#enum-TransitionToTime}
 
@@ -298,17 +286,7 @@ TRANSITION_FROM_TIME_END = 3
 enum TransitionToTime { TRANSITION_TO_TIME_SAME_POSITION = 0, TRANSITION_TO_TIME_START = 1, TRANSITION_TO_TIME_PREVIOUS_POSITION = 2 }
 ```
 
-TransitionToTime TRANSITION_TO_TIME_SAME_POSITION = 0
-
-Transition to the same position in the destination clip. This is useful when both clips have exactly the same length and the music should fade between them.
-
-TransitionToTime TRANSITION_TO_TIME_START = 1
-
-Transition to the start of the destination clip.
-
-TransitionToTime TRANSITION_TO_TIME_PREVIOUS_POSITION = 2
-
-Transition to the last played position in the destination clip, if there was a previous transition from that clip. Otherwise, plays from the start of the destination clip.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TRANSITION_TO_TIME_SAME_POSITION {#TRANSITION_TO_TIME_SAME_POSITION}
 
@@ -316,7 +294,7 @@ Transition to the last played position in the destination clip, if there was a p
 TRANSITION_TO_TIME_SAME_POSITION = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Transition to the same position in the destination clip. This is useful when both clips have exactly the same length and the music should fade between them.
 
 #### TRANSITION_TO_TIME_START {#TRANSITION_TO_TIME_START}
 
@@ -324,7 +302,7 @@ TRANSITION_TO_TIME_SAME_POSITION = 0
 TRANSITION_TO_TIME_START = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Transition to the start of the destination clip.
 
 #### TRANSITION_TO_TIME_PREVIOUS_POSITION {#TRANSITION_TO_TIME_PREVIOUS_POSITION}
 
@@ -332,7 +310,9 @@ TRANSITION_TO_TIME_START = 1
 TRANSITION_TO_TIME_PREVIOUS_POSITION = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Transition to the last played position in the destination clip, if there was a previous transition from that clip. Otherwise, plays from the start of the destination clip.
+
+---
 
 ### FadeMode {#enum-FadeMode}
 
@@ -340,25 +320,7 @@ TRANSITION_TO_TIME_PREVIOUS_POSITION = 2
 enum FadeMode { FADE_DISABLED = 0, FADE_IN = 1, FADE_OUT = 2, FADE_CROSS = 3, FADE_AUTOMATIC = 4 }
 ```
 
-FadeMode FADE_DISABLED = 0
-
-Do not use fade for the transition. This is useful when transitioning from a clip-end to clip-beginning, and each clip has their begin/end.
-
-FadeMode FADE_IN = 1
-
-Use a fade-in in the next clip, let the current clip finish.
-
-FadeMode FADE_OUT = 2
-
-Use a fade-out in the current clip, the next clip will start by itself.
-
-FadeMode FADE_CROSS = 3
-
-Use a cross-fade between clips.
-
-FadeMode FADE_AUTOMATIC = 4
-
-Use automatic fade logic depending on the transition from/to. It is recommended to use this by default.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FADE_DISABLED {#FADE_DISABLED}
 
@@ -366,7 +328,7 @@ Use automatic fade logic depending on the transition from/to. It is recommended 
 FADE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not use fade for the transition. This is useful when transitioning from a clip-end to clip-beginning, and each clip has their begin/end.
 
 #### FADE_IN {#FADE_IN}
 
@@ -374,7 +336,7 @@ FADE_DISABLED = 0
 FADE_IN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use a fade-in in the next clip, let the current clip finish.
 
 #### FADE_OUT {#FADE_OUT}
 
@@ -382,7 +344,7 @@ FADE_IN = 1
 FADE_OUT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use a fade-out in the current clip, the next clip will start by itself.
 
 #### FADE_CROSS {#FADE_CROSS}
 
@@ -390,7 +352,7 @@ FADE_OUT = 2
 FADE_CROSS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use a cross-fade between clips.
 
 #### FADE_AUTOMATIC {#FADE_AUTOMATIC}
 
@@ -398,7 +360,9 @@ FADE_CROSS = 3
 FADE_AUTOMATIC = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use automatic fade logic depending on the transition from/to. It is recommended to use this by default.
+
+---
 
 ### AutoAdvanceMode {#enum-AutoAdvanceMode}
 
@@ -406,17 +370,7 @@ FADE_AUTOMATIC = 4
 enum AutoAdvanceMode { AUTO_ADVANCE_DISABLED = 0, AUTO_ADVANCE_ENABLED = 1, AUTO_ADVANCE_RETURN_TO_HOLD = 2 }
 ```
 
-AutoAdvanceMode AUTO_ADVANCE_DISABLED = 0
-
-Disable auto-advance (default).
-
-AutoAdvanceMode AUTO_ADVANCE_ENABLED = 1
-
-Enable auto-advance, a clip must be specified.
-
-AutoAdvanceMode AUTO_ADVANCE_RETURN_TO_HOLD = 2
-
-Enable auto-advance, but instead of specifying a clip, the playback will return to hold (see add_transition()).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AUTO_ADVANCE_DISABLED {#AUTO_ADVANCE_DISABLED}
 
@@ -424,7 +378,7 @@ Enable auto-advance, but instead of specifying a clip, the playback will return 
 AUTO_ADVANCE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disable auto-advance (default).
 
 #### AUTO_ADVANCE_ENABLED {#AUTO_ADVANCE_ENABLED}
 
@@ -432,7 +386,7 @@ AUTO_ADVANCE_DISABLED = 0
 AUTO_ADVANCE_ENABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enable auto-advance, a clip must be specified.
 
 #### AUTO_ADVANCE_RETURN_TO_HOLD {#AUTO_ADVANCE_RETURN_TO_HOLD}
 
@@ -440,7 +394,9 @@ AUTO_ADVANCE_ENABLED = 1
 AUTO_ADVANCE_RETURN_TO_HOLD = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enable auto-advance, but instead of specifying a clip, the playback will return to hold (see add_transition()).
+
+---
 
 ## 常量
 

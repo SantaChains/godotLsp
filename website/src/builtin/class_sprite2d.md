@@ -277,7 +277,12 @@ Note: For games with a pixel art aesthetic, textures may appear deformed when ce
 offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset(value: Vector2)
+- Vector2 get_offset()
+
+The texture's drawing offset.
+
+Note: When you increase offset.y in Sprite2D, the sprite moves downward on screen (i.e., +Y is down).
 
 ### flip_h {#flip_h}
 
@@ -340,7 +345,10 @@ Current frame to display from sprite sheet. hframes or vframes must be greater t
 frame_coords: Vector2i
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_frame_coords(value: Vector2i)
+- Vector2i get_frame_coords()
+
+Coordinates of the frame to display from sprite sheet. This is as an alias for the frame property. hframes or vframes must be greater than 1.
 
 ### region_enabled {#region_enabled}
 
@@ -361,7 +369,10 @@ Note: When using a custom Shader on a Sprite2D, the UV shader built-in will refe
 region_rect: Rect2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_region_rect(value: Rect2)
+- Rect2 get_region_rect()
+
+The region of the atlas texture to display. region_enabled must be true.
 
 ### region_filter_clip_enabled {#region_filter_clip_enabled}
 

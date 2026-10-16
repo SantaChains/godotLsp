@@ -186,17 +186,7 @@ Emitted when the version of any history has changed as a result of undo or redo 
 enum SpecialHistory { GLOBAL_HISTORY = 0, REMOTE_HISTORY = -9, INVALID_HISTORY = -99 }
 ```
 
-SpecialHistory GLOBAL_HISTORY = 0
-
-Global history not associated with any scene, but with external resources etc.
-
-SpecialHistory REMOTE_HISTORY = -9
-
-History associated with remote inspector. Used when live editing a running project.
-
-SpecialHistory INVALID_HISTORY = -99
-
-Invalid "null" history. It's a special value, not associated with any object.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GLOBAL_HISTORY {#GLOBAL_HISTORY}
 
@@ -204,7 +194,7 @@ Invalid "null" history. It's a special value, not associated with any object.
 GLOBAL_HISTORY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Global history not associated with any scene, but with external resources etc.
 
 #### REMOTE_HISTORY {#REMOTE_HISTORY}
 
@@ -212,7 +202,7 @@ GLOBAL_HISTORY = 0
 REMOTE_HISTORY = -9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+History associated with remote inspector. Used when live editing a running project.
 
 #### INVALID_HISTORY {#INVALID_HISTORY}
 
@@ -220,4 +210,6 @@ REMOTE_HISTORY = -9
 INVALID_HISTORY = -99
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid "null" history. It's a special value, not associated with any object.
+
+---

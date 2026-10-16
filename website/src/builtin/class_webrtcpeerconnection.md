@@ -197,29 +197,7 @@ The object will be an instance of WebRTCDataChannel. You must keep a reference o
 enum ConnectionState { STATE_NEW = 0, STATE_CONNECTING = 1, STATE_CONNECTED = 2, STATE_DISCONNECTED = 3, STATE_FAILED = 4, STATE_CLOSED = 5 }
 ```
 
-ConnectionState STATE_NEW = 0
-
-The connection is new, data channels and an offer can be created in this state.
-
-ConnectionState STATE_CONNECTING = 1
-
-The peer is connecting, ICE is in progress, none of the transports has failed.
-
-ConnectionState STATE_CONNECTED = 2
-
-The peer is connected, all ICE transports are connected.
-
-ConnectionState STATE_DISCONNECTED = 3
-
-At least one ICE transport is disconnected.
-
-ConnectionState STATE_FAILED = 4
-
-One or more of the ICE transports failed.
-
-ConnectionState STATE_CLOSED = 5
-
-The peer connection is closed (after calling close() for example).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STATE_NEW {#STATE_NEW}
 
@@ -227,7 +205,7 @@ The peer connection is closed (after calling close() for example).
 STATE_NEW = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The connection is new, data channels and an offer can be created in this state.
 
 #### STATE_CONNECTING {#STATE_CONNECTING}
 
@@ -235,7 +213,7 @@ STATE_NEW = 0
 STATE_CONNECTING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The peer is connecting, ICE is in progress, none of the transports has failed.
 
 #### STATE_CONNECTED {#STATE_CONNECTED}
 
@@ -243,7 +221,7 @@ STATE_CONNECTING = 1
 STATE_CONNECTED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The peer is connected, all ICE transports are connected.
 
 #### STATE_DISCONNECTED {#STATE_DISCONNECTED}
 
@@ -251,7 +229,7 @@ STATE_CONNECTED = 2
 STATE_DISCONNECTED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+At least one ICE transport is disconnected.
 
 #### STATE_FAILED {#STATE_FAILED}
 
@@ -259,7 +237,7 @@ STATE_DISCONNECTED = 3
 STATE_FAILED = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+One or more of the ICE transports failed.
 
 #### STATE_CLOSED {#STATE_CLOSED}
 
@@ -267,7 +245,9 @@ STATE_FAILED = 4
 STATE_CLOSED = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The peer connection is closed (after calling close() for example).
+
+---
 
 ### GatheringState {#enum-GatheringState}
 
@@ -275,17 +255,7 @@ STATE_CLOSED = 5
 enum GatheringState { GATHERING_STATE_NEW = 0, GATHERING_STATE_GATHERING = 1, GATHERING_STATE_COMPLETE = 2 }
 ```
 
-GatheringState GATHERING_STATE_NEW = 0
-
-The peer connection was just created and hasn't done any networking yet.
-
-GatheringState GATHERING_STATE_GATHERING = 1
-
-The ICE agent is in the process of gathering candidates for the connection.
-
-GatheringState GATHERING_STATE_COMPLETE = 2
-
-The ICE agent has finished gathering candidates. If something happens that requires collecting new candidates, such as a new interface being added or the addition of a new ICE server, the state will revert to gathering to gather those candidates.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GATHERING_STATE_NEW {#GATHERING_STATE_NEW}
 
@@ -293,7 +263,7 @@ The ICE agent has finished gathering candidates. If something happens that requi
 GATHERING_STATE_NEW = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The peer connection was just created and hasn't done any networking yet.
 
 #### GATHERING_STATE_GATHERING {#GATHERING_STATE_GATHERING}
 
@@ -301,7 +271,7 @@ GATHERING_STATE_NEW = 0
 GATHERING_STATE_GATHERING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The ICE agent is in the process of gathering candidates for the connection.
 
 #### GATHERING_STATE_COMPLETE {#GATHERING_STATE_COMPLETE}
 
@@ -309,7 +279,9 @@ GATHERING_STATE_GATHERING = 1
 GATHERING_STATE_COMPLETE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The ICE agent has finished gathering candidates. If something happens that requires collecting new candidates, such as a new interface being added or the addition of a new ICE server, the state will revert to gathering to gather those candidates.
+
+---
 
 ### SignalingState {#enum-SignalingState}
 
@@ -317,29 +289,7 @@ GATHERING_STATE_COMPLETE = 2
 enum SignalingState { SIGNALING_STATE_STABLE = 0, SIGNALING_STATE_HAVE_LOCAL_OFFER = 1, SIGNALING_STATE_HAVE_REMOTE_OFFER = 2, SIGNALING_STATE_HAVE_LOCAL_PRANSWER = 3, SIGNALING_STATE_HAVE_REMOTE_PRANSWER = 4, SIGNALING_STATE_CLOSED = 5 }
 ```
 
-SignalingState SIGNALING_STATE_STABLE = 0
-
-There is no ongoing exchange of offer and answer underway. This may mean that the WebRTCPeerConnection is new (STATE_NEW) or that negotiation is complete and a connection has been established (STATE_CONNECTED).
-
-SignalingState SIGNALING_STATE_HAVE_LOCAL_OFFER = 1
-
-The local peer has called set_local_description(), passing in SDP representing an offer (usually created by calling create_offer()), and the offer has been applied successfully.
-
-SignalingState SIGNALING_STATE_HAVE_REMOTE_OFFER = 2
-
-The remote peer has created an offer and used the signaling server to deliver it to the local peer, which has set the offer as the remote description by calling set_remote_description().
-
-SignalingState SIGNALING_STATE_HAVE_LOCAL_PRANSWER = 3
-
-The offer sent by the remote peer has been applied and an answer has been created and applied by calling set_local_description(). This provisional answer describes the supported media formats and so forth, but may not have a complete set of ICE candidates included. Further candidates will be delivered separately later.
-
-SignalingState SIGNALING_STATE_HAVE_REMOTE_PRANSWER = 4
-
-A provisional answer has been received and successfully applied in response to an offer previously sent and established by calling set_local_description().
-
-SignalingState SIGNALING_STATE_CLOSED = 5
-
-The WebRTCPeerConnection has been closed.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SIGNALING_STATE_STABLE {#SIGNALING_STATE_STABLE}
 
@@ -347,7 +297,7 @@ The WebRTCPeerConnection has been closed.
 SIGNALING_STATE_STABLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is no ongoing exchange of offer and answer underway. This may mean that the WebRTCPeerConnection is new (STATE_NEW) or that negotiation is complete and a connection has been established (STATE_CONNECTED).
 
 #### SIGNALING_STATE_HAVE_LOCAL_OFFER {#SIGNALING_STATE_HAVE_LOCAL_OFFER}
 
@@ -355,7 +305,7 @@ SIGNALING_STATE_STABLE = 0
 SIGNALING_STATE_HAVE_LOCAL_OFFER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The local peer has called set_local_description(), passing in SDP representing an offer (usually created by calling create_offer()), and the offer has been applied successfully.
 
 #### SIGNALING_STATE_HAVE_REMOTE_OFFER {#SIGNALING_STATE_HAVE_REMOTE_OFFER}
 
@@ -363,7 +313,7 @@ SIGNALING_STATE_HAVE_LOCAL_OFFER = 1
 SIGNALING_STATE_HAVE_REMOTE_OFFER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The remote peer has created an offer and used the signaling server to deliver it to the local peer, which has set the offer as the remote description by calling set_remote_description().
 
 #### SIGNALING_STATE_HAVE_LOCAL_PRANSWER {#SIGNALING_STATE_HAVE_LOCAL_PRANSWER}
 
@@ -371,7 +321,7 @@ SIGNALING_STATE_HAVE_REMOTE_OFFER = 2
 SIGNALING_STATE_HAVE_LOCAL_PRANSWER = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The offer sent by the remote peer has been applied and an answer has been created and applied by calling set_local_description(). This provisional answer describes the supported media formats and so forth, but may not have a complete set of ICE candidates included. Further candidates will be delivered separately later.
 
 #### SIGNALING_STATE_HAVE_REMOTE_PRANSWER {#SIGNALING_STATE_HAVE_REMOTE_PRANSWER}
 
@@ -379,7 +329,7 @@ SIGNALING_STATE_HAVE_LOCAL_PRANSWER = 3
 SIGNALING_STATE_HAVE_REMOTE_PRANSWER = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A provisional answer has been received and successfully applied in response to an offer previously sent and established by calling set_local_description().
 
 #### SIGNALING_STATE_CLOSED {#SIGNALING_STATE_CLOSED}
 
@@ -387,4 +337,6 @@ SIGNALING_STATE_HAVE_REMOTE_PRANSWER = 4
 SIGNALING_STATE_CLOSED = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The WebRTCPeerConnection has been closed.
+
+---

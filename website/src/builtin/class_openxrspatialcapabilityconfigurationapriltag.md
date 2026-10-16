@@ -61,21 +61,7 @@ Note: Must be set before using this configuration to create a spatial context.
 enum AprilTagDict { APRIL_TAG_DICT_16H5 = 1, APRIL_TAG_DICT_25H9 = 2, APRIL_TAG_DICT_36H10 = 3, APRIL_TAG_DICT_36H11 = 4 }
 ```
 
-AprilTagDict APRIL_TAG_DICT_16H5 = 1
-
-4 by 4 bits, minimum Hamming distance between any two codes = 5, 30 codes.
-
-AprilTagDict APRIL_TAG_DICT_25H9 = 2
-
-5 by 5 bits, minimum Hamming distance between any two codes = 9, 35 codes.
-
-AprilTagDict APRIL_TAG_DICT_36H10 = 3
-
-6 by 6 bits, minimum Hamming distance between any two codes = 10, 2320 codes.
-
-AprilTagDict APRIL_TAG_DICT_36H11 = 4
-
-6 by 6 bits, minimum Hamming distance between any two codes = 11, 587 codes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### APRIL_TAG_DICT_16H5 {#APRIL_TAG_DICT_16H5}
 
@@ -83,7 +69,7 @@ AprilTagDict APRIL_TAG_DICT_36H11 = 4
 APRIL_TAG_DICT_16H5 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+4 by 4 bits, minimum Hamming distance between any two codes = 5, 30 codes.
 
 #### APRIL_TAG_DICT_25H9 {#APRIL_TAG_DICT_25H9}
 
@@ -91,7 +77,7 @@ APRIL_TAG_DICT_16H5 = 1
 APRIL_TAG_DICT_25H9 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+5 by 5 bits, minimum Hamming distance between any two codes = 9, 35 codes.
 
 #### APRIL_TAG_DICT_36H10 {#APRIL_TAG_DICT_36H10}
 
@@ -99,7 +85,7 @@ APRIL_TAG_DICT_25H9 = 2
 APRIL_TAG_DICT_36H10 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+6 by 6 bits, minimum Hamming distance between any two codes = 10, 2320 codes.
 
 #### APRIL_TAG_DICT_36H11 {#APRIL_TAG_DICT_36H11}
 
@@ -107,4 +93,6 @@ APRIL_TAG_DICT_36H10 = 3
 APRIL_TAG_DICT_36H11 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+6 by 6 bits, minimum Hamming distance between any two codes = 11, 587 codes.
+
+---

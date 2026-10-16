@@ -260,29 +260,7 @@ If true this triggers specular data being rendered to a separate buffer and comb
 enum EffectCallbackType { EFFECT_CALLBACK_TYPE_PRE_OPAQUE = 0, EFFECT_CALLBACK_TYPE_POST_OPAQUE = 1, EFFECT_CALLBACK_TYPE_POST_SKY = 2, EFFECT_CALLBACK_TYPE_PRE_TRANSPARENT = 3, EFFECT_CALLBACK_TYPE_POST_TRANSPARENT = 4, EFFECT_CALLBACK_TYPE_MAX = 5 }
 ```
 
-EffectCallbackType EFFECT_CALLBACK_TYPE_PRE_OPAQUE = 0
-
-The callback is called before our opaque rendering pass, but after depth prepass (if applicable).
-
-EffectCallbackType EFFECT_CALLBACK_TYPE_POST_OPAQUE = 1
-
-The callback is called after our opaque rendering pass, but before our sky is rendered.
-
-EffectCallbackType EFFECT_CALLBACK_TYPE_POST_SKY = 2
-
-The callback is called after our sky is rendered, but before our back buffers are created (and if enabled, before subsurface scattering and/or screen space reflections).
-
-EffectCallbackType EFFECT_CALLBACK_TYPE_PRE_TRANSPARENT = 3
-
-The callback is called before our transparent rendering pass, but after our sky is rendered and we've created our back buffers.
-
-EffectCallbackType EFFECT_CALLBACK_TYPE_POST_TRANSPARENT = 4
-
-The callback is called after our transparent rendering pass, but before any built-in post-processing effects and output to our render target.
-
-EffectCallbackType EFFECT_CALLBACK_TYPE_MAX = 5
-
-Represents the size of the EffectCallbackType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EFFECT_CALLBACK_TYPE_PRE_OPAQUE {#EFFECT_CALLBACK_TYPE_PRE_OPAQUE}
 
@@ -290,7 +268,7 @@ Represents the size of the EffectCallbackType enum.
 EFFECT_CALLBACK_TYPE_PRE_OPAQUE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The callback is called before our opaque rendering pass, but after depth prepass (if applicable).
 
 #### EFFECT_CALLBACK_TYPE_POST_OPAQUE {#EFFECT_CALLBACK_TYPE_POST_OPAQUE}
 
@@ -298,7 +276,7 @@ EFFECT_CALLBACK_TYPE_PRE_OPAQUE = 0
 EFFECT_CALLBACK_TYPE_POST_OPAQUE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The callback is called after our opaque rendering pass, but before our sky is rendered.
 
 #### EFFECT_CALLBACK_TYPE_POST_SKY {#EFFECT_CALLBACK_TYPE_POST_SKY}
 
@@ -306,7 +284,7 @@ EFFECT_CALLBACK_TYPE_POST_OPAQUE = 1
 EFFECT_CALLBACK_TYPE_POST_SKY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The callback is called after our sky is rendered, but before our back buffers are created (and if enabled, before subsurface scattering and/or screen space reflections).
 
 #### EFFECT_CALLBACK_TYPE_PRE_TRANSPARENT {#EFFECT_CALLBACK_TYPE_PRE_TRANSPARENT}
 
@@ -314,7 +292,7 @@ EFFECT_CALLBACK_TYPE_POST_SKY = 2
 EFFECT_CALLBACK_TYPE_PRE_TRANSPARENT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The callback is called before our transparent rendering pass, but after our sky is rendered and we've created our back buffers.
 
 #### EFFECT_CALLBACK_TYPE_POST_TRANSPARENT {#EFFECT_CALLBACK_TYPE_POST_TRANSPARENT}
 
@@ -322,7 +300,7 @@ EFFECT_CALLBACK_TYPE_PRE_TRANSPARENT = 3
 EFFECT_CALLBACK_TYPE_POST_TRANSPARENT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The callback is called after our transparent rendering pass, but before any built-in post-processing effects and output to our render target.
 
 #### EFFECT_CALLBACK_TYPE_MAX {#EFFECT_CALLBACK_TYPE_MAX}
 
@@ -330,4 +308,6 @@ EFFECT_CALLBACK_TYPE_POST_TRANSPARENT = 4
 EFFECT_CALLBACK_TYPE_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the EffectCallbackType enum.
+
+---

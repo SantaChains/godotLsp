@@ -533,7 +533,10 @@ This makes it more convenient to preview and edit animations in the editor, as c
 root_node: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_root_node(value: NodePath)
+- NodePath get_root_node()
+
+The node which node path references will travel from.
 
 ### root_motion_track {#root_motion_track}
 
@@ -541,7 +544,12 @@ root_node: NodePath
 root_motion_track: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_root_motion_track(value: NodePath)
+- NodePath get_root_motion_track()
+
+The path to the Animation track used for root motion. Paths must be valid scene-tree paths to a node, and must be specified starting from the parent node of the node that will reproduce the animation. The root_motion_track uses the same format as Animation.track_set_path(), but note that a bone must be specified.
+
+If the track has type Animation.TYPE_POSITION_3D, Animation.TYPE_ROTATION_3D, or Animation.TYPE_SCALE_3D the transformation will be canceled visually, and the animation will appear to stay in place. See also get_root_motion_position(), get_root_motion_rotation(), get_root_motion_scale(), and RootMotionView.
 
 ### root_motion_local {#root_motion_local}
 
@@ -674,17 +682,7 @@ Notifies when the property related process have been updated.
 enum AnimationCallbackModeProcess { ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS = 0, ANIMATION_CALLBACK_MODE_PROCESS_IDLE = 1, ANIMATION_CALLBACK_MODE_PROCESS_MANUAL = 2 }
 ```
 
-AnimationCallbackModeProcess ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS = 0
-
-Process animation during physics frames (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS). This is especially useful when animating physics bodies.
-
-AnimationCallbackModeProcess ANIMATION_CALLBACK_MODE_PROCESS_IDLE = 1
-
-Process animation during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS).
-
-AnimationCallbackModeProcess ANIMATION_CALLBACK_MODE_PROCESS_MANUAL = 2
-
-Do not process animation. Use advance() to process the animation manually.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS {#ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS}
 
@@ -692,7 +690,7 @@ Do not process animation. Use advance() to process the animation manually.
 ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Process animation during physics frames (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS). This is especially useful when animating physics bodies.
 
 #### ANIMATION_CALLBACK_MODE_PROCESS_IDLE {#ANIMATION_CALLBACK_MODE_PROCESS_IDLE}
 
@@ -700,7 +698,7 @@ ANIMATION_CALLBACK_MODE_PROCESS_PHYSICS = 0
 ANIMATION_CALLBACK_MODE_PROCESS_IDLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Process animation during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS).
 
 #### ANIMATION_CALLBACK_MODE_PROCESS_MANUAL {#ANIMATION_CALLBACK_MODE_PROCESS_MANUAL}
 
@@ -708,7 +706,9 @@ ANIMATION_CALLBACK_MODE_PROCESS_IDLE = 1
 ANIMATION_CALLBACK_MODE_PROCESS_MANUAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not process animation. Use advance() to process the animation manually.
+
+---
 
 ### AnimationCallbackModeMethod {#enum-AnimationCallbackModeMethod}
 
@@ -716,13 +716,7 @@ ANIMATION_CALLBACK_MODE_PROCESS_MANUAL = 2
 enum AnimationCallbackModeMethod { ANIMATION_CALLBACK_MODE_METHOD_DEFERRED = 0, ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE = 1 }
 ```
 
-AnimationCallbackModeMethod ANIMATION_CALLBACK_MODE_METHOD_DEFERRED = 0
-
-Batch method calls during the animation process, then do the calls after events are processed. This avoids bugs involving deleting nodes or modifying the AnimationPlayer while playing.
-
-AnimationCallbackModeMethod ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE = 1
-
-Make method calls immediately when reached in the animation.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ANIMATION_CALLBACK_MODE_METHOD_DEFERRED {#ANIMATION_CALLBACK_MODE_METHOD_DEFERRED}
 
@@ -730,7 +724,7 @@ Make method calls immediately when reached in the animation.
 ANIMATION_CALLBACK_MODE_METHOD_DEFERRED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Batch method calls during the animation process, then do the calls after events are processed. This avoids bugs involving deleting nodes or modifying the AnimationPlayer while playing.
 
 #### ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE {#ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE}
 
@@ -738,7 +732,9 @@ ANIMATION_CALLBACK_MODE_METHOD_DEFERRED = 0
 ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Make method calls immediately when reached in the animation.
+
+---
 
 ### AnimationCallbackModeDiscrete {#enum-AnimationCallbackModeDiscrete}
 
@@ -746,15 +742,29 @@ ANIMATION_CALLBACK_MODE_METHOD_IMMEDIATE = 1
 enum AnimationCallbackModeDiscrete { ANIMATION_CALLBACK_MODE_DISCRETE_DOMINANT = 0, ANIMATION_CALLBACK_MODE_DISCRETE_RECESSIVE = 1, ANIMATION_CALLBACK_MODE_DISCRETE_FORCE_CONTINUOUS = 2 }
 ```
 
-AnimationCallbackModeDiscrete ANIMATION_CALLBACK_MODE_DISCRETE_DOMINANT = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### ANIMATION_CALLBACK_MODE_DISCRETE_DOMINANT {#ANIMATION_CALLBACK_MODE_DISCRETE_DOMINANT}
+
+```gdscript
+ANIMATION_CALLBACK_MODE_DISCRETE_DOMINANT = 0
+```
 
 An Animation.UPDATE_DISCRETE track value takes precedence when blending Animation.UPDATE_CONTINUOUS or Animation.UPDATE_CAPTURE track values and Animation.UPDATE_DISCRETE track values.
 
-AnimationCallbackModeDiscrete ANIMATION_CALLBACK_MODE_DISCRETE_RECESSIVE = 1
+#### ANIMATION_CALLBACK_MODE_DISCRETE_RECESSIVE {#ANIMATION_CALLBACK_MODE_DISCRETE_RECESSIVE}
+
+```gdscript
+ANIMATION_CALLBACK_MODE_DISCRETE_RECESSIVE = 1
+```
 
 An Animation.UPDATE_CONTINUOUS or Animation.UPDATE_CAPTURE track value takes precedence when blending the Animation.UPDATE_CONTINUOUS or Animation.UPDATE_CAPTURE track values and the Animation.UPDATE_DISCRETE track values. This is the default behavior for AnimationPlayer.
 
-AnimationCallbackModeDiscrete ANIMATION_CALLBACK_MODE_DISCRETE_FORCE_CONTINUOUS = 2
+#### ANIMATION_CALLBACK_MODE_DISCRETE_FORCE_CONTINUOUS {#ANIMATION_CALLBACK_MODE_DISCRETE_FORCE_CONTINUOUS}
+
+```gdscript
+ANIMATION_CALLBACK_MODE_DISCRETE_FORCE_CONTINUOUS = 2
+```
 
 Always treat the Animation.UPDATE_DISCRETE track value as Animation.UPDATE_CONTINUOUS with Animation.INTERPOLATION_NEAREST. This is the default behavior for AnimationTree.
 
@@ -777,26 +787,4 @@ It is same for arrays and vectors with them such as @GlobalScope.TYPE_PACKED_INT
 
 @GlobalScope.TYPE_STRING and @GlobalScope.TYPE_STRING_NAME are interpolated between character codes and lengths, but note that there is a difference in algorithm between interpolation between keys and interpolation by blending.
 
-#### ANIMATION_CALLBACK_MODE_DISCRETE_DOMINANT {#ANIMATION_CALLBACK_MODE_DISCRETE_DOMINANT}
-
-```gdscript
-ANIMATION_CALLBACK_MODE_DISCRETE_DOMINANT = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ANIMATION_CALLBACK_MODE_DISCRETE_RECESSIVE {#ANIMATION_CALLBACK_MODE_DISCRETE_RECESSIVE}
-
-```gdscript
-ANIMATION_CALLBACK_MODE_DISCRETE_RECESSIVE = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ANIMATION_CALLBACK_MODE_DISCRETE_FORCE_CONTINUOUS {#ANIMATION_CALLBACK_MODE_DISCRETE_FORCE_CONTINUOUS}
-
-```gdscript
-ANIMATION_CALLBACK_MODE_DISCRETE_FORCE_CONTINUOUS = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+---

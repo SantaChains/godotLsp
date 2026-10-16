@@ -636,7 +636,10 @@ Updates all the EditorNode3DGizmo objects attached to this node. Only works in t
 transform: Transform3D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_transform(value: Transform3D)
+- Transform3D get_transform()
+
+The local transformation of this node, in parent space (relative to the parent node). Contains and represents this node's position, rotation, and scale.
 
 ### global_transform {#global_transform}
 
@@ -657,7 +660,10 @@ Note: If the node is not inside the tree, getting this property fails and return
 position: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_position(value: Vector3)
+- Vector3 get_position()
+
+Position (translation) of this node in parent space (relative to the parent node). This is equivalent to the transform's Transform3D.origin.
 
 ### rotation {#rotation}
 
@@ -665,7 +671,18 @@ position: Vector3
 rotation: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_rotation(value: Vector3)
+- Vector3 get_rotation()
+
+Rotation of this node as Euler angles [https://en.wikipedia.org/wiki/Euler_angles], in radians and in parent space (relative to the parent node). This value is obtained from basis's rotation.
+
+- The Vector3.x is the angle around the local X axis (pitch);
+- The Vector3.y is the angle around the local Y axis (yaw);
+- The Vector3.z is the angle around the local Z axis (roll).
+
+The order of each consecutive rotation can be changed with rotation_order (see EulerOrder constants). In Godot, Euler angles always use intrinsic order. By default, the intrinsic YXZ convention is used (@GlobalScope.EULER_ORDER_YXZ).
+
+Note: This property is edited in degrees in the inspector. If you want to use degrees in a script, use rotation_degrees.
 
 ### rotation_degrees {#rotation_degrees}
 
@@ -710,7 +727,14 @@ Basis of the transform property. Represents the rotation, scale, and shear of th
 scale: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scale(value: Vector3)
+- Vector3 get_scale()
+
+Scale of this node in local space (relative to this node). This value is obtained from basis's scale.
+
+Note: The behavior of some 3D node types is not affected by this property. These include Light3D, Camera3D, AudioStreamPlayer3D, and more.
+
+Warning: The scale's components must either be all positive or all negative, and not exactly 0.0. Otherwise, it won't be possible to obtain the scale from the basis. This may cause the intended scale to be lost when reloaded from disk, and potentially other unstable behavior.
 
 ### rotation_edit_mode {#rotation_edit_mode}
 
@@ -820,7 +844,12 @@ If true, this node can be visible. The node is only rendered when all of its anc
 visibility_parent: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_visibility_parent(value: NodePath)
+- NodePath get_visibility_parent()
+
+Path to the visibility range parent for this node and its descendants. The visibility parent must be a GeometryInstance3D.
+
+Any visual instance will only be visible if the visibility parent (and all of its visibility ancestors) is hidden by being closer to the camera than its own GeometryInstance3D.visibility_range_begin. Nodes hidden via the visible property are essentially removed from the visibility dependency tree, so dependent instances will not take the hidden node or its descendants into account.
 
 ## 信号
 
@@ -842,17 +871,7 @@ This signal is emitted after the related NOTIFICATION_VISIBILITY_CHANGED notific
 enum RotationEditMode { ROTATION_EDIT_MODE_EULER = 0, ROTATION_EDIT_MODE_QUATERNION = 1, ROTATION_EDIT_MODE_BASIS = 2 }
 ```
 
-RotationEditMode ROTATION_EDIT_MODE_EULER = 0
-
-The rotation is edited using a Vector3 in Euler angles [https://en.wikipedia.org/wiki/Euler_angles]. In Godot, Euler angles always use intrinsic order, meaning that rotation happens around the local axes of the object.
-
-RotationEditMode ROTATION_EDIT_MODE_QUATERNION = 1
-
-The rotation is edited using a Quaternion. Quaternions avoid gimbal lock and having to choose an order of rotation, but are less intuitive. Quaternion rotation is mostly the same as rotors in 3D geometric algebra, except that the numbers are labeled differently.
-
-RotationEditMode ROTATION_EDIT_MODE_BASIS = 2
-
-The rotation is edited using a Basis. In this mode, the raw basis's axes can be freely modified, but the scale property is not available.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ROTATION_EDIT_MODE_EULER {#ROTATION_EDIT_MODE_EULER}
 
@@ -860,7 +879,7 @@ The rotation is edited using a Basis. In this mode, the raw basis's axes can be 
 ROTATION_EDIT_MODE_EULER = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The rotation is edited using a Vector3 in Euler angles [https://en.wikipedia.org/wiki/Euler_angles]. In Godot, Euler angles always use intrinsic order, meaning that rotation happens around the local axes of the object.
 
 #### ROTATION_EDIT_MODE_QUATERNION {#ROTATION_EDIT_MODE_QUATERNION}
 
@@ -868,7 +887,7 @@ ROTATION_EDIT_MODE_EULER = 0
 ROTATION_EDIT_MODE_QUATERNION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The rotation is edited using a Quaternion. Quaternions avoid gimbal lock and having to choose an order of rotation, but are less intuitive. Quaternion rotation is mostly the same as rotors in 3D geometric algebra, except that the numbers are labeled differently.
 
 #### ROTATION_EDIT_MODE_BASIS {#ROTATION_EDIT_MODE_BASIS}
 
@@ -876,7 +895,9 @@ ROTATION_EDIT_MODE_QUATERNION = 1
 ROTATION_EDIT_MODE_BASIS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The rotation is edited using a Basis. In this mode, the raw basis's axes can be freely modified, but the scale property is not available.
+
+---
 
 ## 常量
 

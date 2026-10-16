@@ -1531,29 +1531,7 @@ Creates a 3D world boundary shape in the physics server, and returns the RID tha
 enum JointType { JOINT_TYPE_PIN = 0, JOINT_TYPE_HINGE = 1, JOINT_TYPE_SLIDER = 2, JOINT_TYPE_CONE_TWIST = 3, JOINT_TYPE_6DOF = 4, JOINT_TYPE_MAX = 5 }
 ```
 
-JointType JOINT_TYPE_PIN = 0
-
-The Joint3D is a PinJoint3D.
-
-JointType JOINT_TYPE_HINGE = 1
-
-The Joint3D is a HingeJoint3D.
-
-JointType JOINT_TYPE_SLIDER = 2
-
-The Joint3D is a SliderJoint3D.
-
-JointType JOINT_TYPE_CONE_TWIST = 3
-
-The Joint3D is a ConeTwistJoint3D.
-
-JointType JOINT_TYPE_6DOF = 4
-
-The Joint3D is a Generic6DOFJoint3D.
-
-JointType JOINT_TYPE_MAX = 5
-
-Represents the size of the JointType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### JOINT_TYPE_PIN {#JOINT_TYPE_PIN}
 
@@ -1561,7 +1539,7 @@ Represents the size of the JointType enum.
 JOINT_TYPE_PIN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Joint3D is a PinJoint3D.
 
 #### JOINT_TYPE_HINGE {#JOINT_TYPE_HINGE}
 
@@ -1569,7 +1547,7 @@ JOINT_TYPE_PIN = 0
 JOINT_TYPE_HINGE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Joint3D is a HingeJoint3D.
 
 #### JOINT_TYPE_SLIDER {#JOINT_TYPE_SLIDER}
 
@@ -1577,7 +1555,7 @@ JOINT_TYPE_HINGE = 1
 JOINT_TYPE_SLIDER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Joint3D is a SliderJoint3D.
 
 #### JOINT_TYPE_CONE_TWIST {#JOINT_TYPE_CONE_TWIST}
 
@@ -1585,7 +1563,7 @@ JOINT_TYPE_SLIDER = 2
 JOINT_TYPE_CONE_TWIST = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Joint3D is a ConeTwistJoint3D.
 
 #### JOINT_TYPE_6DOF {#JOINT_TYPE_6DOF}
 
@@ -1593,7 +1571,7 @@ JOINT_TYPE_CONE_TWIST = 3
 JOINT_TYPE_6DOF = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Joint3D is a Generic6DOFJoint3D.
 
 #### JOINT_TYPE_MAX {#JOINT_TYPE_MAX}
 
@@ -1601,7 +1579,9 @@ JOINT_TYPE_6DOF = 4
 JOINT_TYPE_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the JointType enum.
+
+---
 
 ### PinJointParam {#enum-PinJointParam}
 
@@ -1609,23 +1589,7 @@ JOINT_TYPE_MAX = 5
 enum PinJointParam { PIN_JOINT_BIAS = 0, PIN_JOINT_DAMPING = 1, PIN_JOINT_IMPULSE_CLAMP = 2 }
 ```
 
-PinJointParam PIN_JOINT_BIAS = 0
-
-The strength with which the pinned objects try to stay in positional relation to each other. The higher, the stronger.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-PinJointParam PIN_JOINT_DAMPING = 1
-
-The strength with which the pinned objects try to stay in velocity relation to each other. The higher, the stronger.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-PinJointParam PIN_JOINT_IMPULSE_CLAMP = 2
-
-If above 0, this value is the maximum value for an impulse that this Joint3D puts on its ends.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PIN_JOINT_BIAS {#PIN_JOINT_BIAS}
 
@@ -1633,7 +1597,9 @@ Note: Only supported when using GodotPhysics3D. This parameter is ignored when u
 PIN_JOINT_BIAS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The strength with which the pinned objects try to stay in positional relation to each other. The higher, the stronger.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### PIN_JOINT_DAMPING {#PIN_JOINT_DAMPING}
 
@@ -1641,7 +1607,9 @@ PIN_JOINT_BIAS = 0
 PIN_JOINT_DAMPING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The strength with which the pinned objects try to stay in velocity relation to each other. The higher, the stronger.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### PIN_JOINT_IMPULSE_CLAMP {#PIN_JOINT_IMPULSE_CLAMP}
 
@@ -1649,7 +1617,11 @@ PIN_JOINT_DAMPING = 1
 PIN_JOINT_IMPULSE_CLAMP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If above 0, this value is the maximum value for an impulse that this Joint3D puts on its ends.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
+
+---
 
 ### HingeJointParam {#enum-HingeJointParam}
 
@@ -1657,43 +1629,7 @@ PIN_JOINT_IMPULSE_CLAMP = 2
 enum HingeJointParam { HINGE_JOINT_BIAS = 0, HINGE_JOINT_LIMIT_UPPER = 1, HINGE_JOINT_LIMIT_LOWER = 2, HINGE_JOINT_LIMIT_BIAS = 3, HINGE_JOINT_LIMIT_SOFTNESS = 4, HINGE_JOINT_LIMIT_RELAXATION = 5, HINGE_JOINT_MOTOR_TARGET_VELOCITY = 6, HINGE_JOINT_MOTOR_MAX_IMPULSE = 7 }
 ```
 
-HingeJointParam HINGE_JOINT_BIAS = 0
-
-The speed with which the two bodies get pulled together when they move in different directions.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-HingeJointParam HINGE_JOINT_LIMIT_UPPER = 1
-
-The maximum rotation across the Hinge.
-
-HingeJointParam HINGE_JOINT_LIMIT_LOWER = 2
-
-The minimum rotation across the Hinge.
-
-HingeJointParam HINGE_JOINT_LIMIT_BIAS = 3
-
-The speed with which the rotation across the axis perpendicular to the hinge gets corrected.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-HingeJointParam HINGE_JOINT_LIMIT_SOFTNESS = 4
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-HingeJointParam HINGE_JOINT_LIMIT_RELAXATION = 5
-
-The lower this value, the more the rotation gets slowed down.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-HingeJointParam HINGE_JOINT_MOTOR_TARGET_VELOCITY = 6
-
-Target speed for the motor.
-
-HingeJointParam HINGE_JOINT_MOTOR_MAX_IMPULSE = 7
-
-Maximum acceleration for the motor.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HINGE_JOINT_BIAS {#HINGE_JOINT_BIAS}
 
@@ -1701,7 +1637,9 @@ Maximum acceleration for the motor.
 HINGE_JOINT_BIAS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The speed with which the two bodies get pulled together when they move in different directions.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### HINGE_JOINT_LIMIT_UPPER {#HINGE_JOINT_LIMIT_UPPER}
 
@@ -1709,7 +1647,7 @@ HINGE_JOINT_BIAS = 0
 HINGE_JOINT_LIMIT_UPPER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The maximum rotation across the Hinge.
 
 #### HINGE_JOINT_LIMIT_LOWER {#HINGE_JOINT_LIMIT_LOWER}
 
@@ -1717,7 +1655,7 @@ HINGE_JOINT_LIMIT_UPPER = 1
 HINGE_JOINT_LIMIT_LOWER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The minimum rotation across the Hinge.
 
 #### HINGE_JOINT_LIMIT_BIAS {#HINGE_JOINT_LIMIT_BIAS}
 
@@ -1725,7 +1663,9 @@ HINGE_JOINT_LIMIT_LOWER = 2
 HINGE_JOINT_LIMIT_BIAS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The speed with which the rotation across the axis perpendicular to the hinge gets corrected.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### HINGE_JOINT_LIMIT_SOFTNESS {#HINGE_JOINT_LIMIT_SOFTNESS}
 
@@ -1733,7 +1673,7 @@ HINGE_JOINT_LIMIT_BIAS = 3
 HINGE_JOINT_LIMIT_SOFTNESS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### HINGE_JOINT_LIMIT_RELAXATION {#HINGE_JOINT_LIMIT_RELAXATION}
 
@@ -1741,7 +1681,9 @@ HINGE_JOINT_LIMIT_SOFTNESS = 4
 HINGE_JOINT_LIMIT_RELAXATION = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The lower this value, the more the rotation gets slowed down.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### HINGE_JOINT_MOTOR_TARGET_VELOCITY {#HINGE_JOINT_MOTOR_TARGET_VELOCITY}
 
@@ -1749,7 +1691,7 @@ HINGE_JOINT_LIMIT_RELAXATION = 5
 HINGE_JOINT_MOTOR_TARGET_VELOCITY = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Target speed for the motor.
 
 #### HINGE_JOINT_MOTOR_MAX_IMPULSE {#HINGE_JOINT_MOTOR_MAX_IMPULSE}
 
@@ -1757,7 +1699,9 @@ HINGE_JOINT_MOTOR_TARGET_VELOCITY = 6
 HINGE_JOINT_MOTOR_MAX_IMPULSE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum acceleration for the motor.
+
+---
 
 ### HingeJointFlag {#enum-HingeJointFlag}
 
@@ -1765,13 +1709,7 @@ HINGE_JOINT_MOTOR_MAX_IMPULSE = 7
 enum HingeJointFlag { HINGE_JOINT_FLAG_USE_LIMIT = 0, HINGE_JOINT_FLAG_ENABLE_MOTOR = 1 }
 ```
 
-HingeJointFlag HINGE_JOINT_FLAG_USE_LIMIT = 0
-
-If true, the Hinge has a maximum and a minimum rotation.
-
-HingeJointFlag HINGE_JOINT_FLAG_ENABLE_MOTOR = 1
-
-If true, a motor turns the Hinge.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HINGE_JOINT_FLAG_USE_LIMIT {#HINGE_JOINT_FLAG_USE_LIMIT}
 
@@ -1779,7 +1717,7 @@ If true, a motor turns the Hinge.
 HINGE_JOINT_FLAG_USE_LIMIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If true, the Hinge has a maximum and a minimum rotation.
 
 #### HINGE_JOINT_FLAG_ENABLE_MOTOR {#HINGE_JOINT_FLAG_ENABLE_MOTOR}
 
@@ -1787,7 +1725,9 @@ HINGE_JOINT_FLAG_USE_LIMIT = 0
 HINGE_JOINT_FLAG_ENABLE_MOTOR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If true, a motor turns the Hinge.
+
+---
 
 ### SliderJointParam {#enum-SliderJointParam}
 
@@ -1795,137 +1735,7 @@ HINGE_JOINT_FLAG_ENABLE_MOTOR = 1
 enum SliderJointParam { SLIDER_JOINT_LINEAR_LIMIT_UPPER = 0, SLIDER_JOINT_LINEAR_LIMIT_LOWER = 1, SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS = 2, SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION = 3, SLIDER_JOINT_LINEAR_LIMIT_DAMPING = 4, SLIDER_JOINT_LINEAR_MOTION_SOFTNESS = 5, SLIDER_JOINT_LINEAR_MOTION_RESTITUTION = 6, SLIDER_JOINT_LINEAR_MOTION_DAMPING = 7, SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS = 8, SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION = 9, SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING = 10, SLIDER_JOINT_ANGULAR_LIMIT_UPPER = 11, SLIDER_JOINT_ANGULAR_LIMIT_LOWER = 12, SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS = 13, SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION = 14, SLIDER_JOINT_ANGULAR_LIMIT_DAMPING = 15, SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS = 16, SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION = 17, SLIDER_JOINT_ANGULAR_MOTION_DAMPING = 18, SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS = 19, SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION = 20, SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING = 21, SLIDER_JOINT_MAX = 22 }
 ```
 
-SliderJointParam SLIDER_JOINT_LINEAR_LIMIT_UPPER = 0
-
-The maximum difference between the pivot points on their X axis before damping happens.
-
-SliderJointParam SLIDER_JOINT_LINEAR_LIMIT_LOWER = 1
-
-The minimum difference between the pivot points on their X axis before damping happens.
-
-SliderJointParam SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS = 2
-
-A factor applied to the movement across the slider axis once the limits get surpassed. The lower, the slower the movement.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION = 3
-
-The amount of restitution once the limits are surpassed. The lower, the more velocity-energy gets lost.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_LINEAR_LIMIT_DAMPING = 4
-
-The amount of damping once the slider limits are surpassed.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_LINEAR_MOTION_SOFTNESS = 5
-
-A factor applied to the movement across the slider axis as long as the slider is in the limits. The lower, the slower the movement.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_LINEAR_MOTION_RESTITUTION = 6
-
-The amount of restitution inside the slider limits.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_LINEAR_MOTION_DAMPING = 7
-
-The amount of damping inside the slider limits.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS = 8
-
-A factor applied to the movement across axes orthogonal to the slider.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION = 9
-
-The amount of restitution when movement is across axes orthogonal to the slider.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING = 10
-
-The amount of damping when movement is across axes orthogonal to the slider.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_LIMIT_UPPER = 11
-
-The upper limit of rotation in the slider.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_LIMIT_LOWER = 12
-
-The lower limit of rotation in the slider.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS = 13
-
-A factor applied to the all rotation once the limit is surpassed.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION = 14
-
-The amount of restitution of the rotation when the limit is surpassed.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_LIMIT_DAMPING = 15
-
-The amount of damping of the rotation when the limit is surpassed.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS = 16
-
-A factor that gets applied to the all rotation in the limits.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION = 17
-
-The amount of restitution of the rotation in the limits.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_MOTION_DAMPING = 18
-
-The amount of damping of the rotation in the limits.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS = 19
-
-A factor that gets applied to the all rotation across axes orthogonal to the slider.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION = 20
-
-The amount of restitution of the rotation across axes orthogonal to the slider.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING = 21
-
-The amount of damping of the rotation across axes orthogonal to the slider.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SliderJointParam SLIDER_JOINT_MAX = 22
-
-Represents the size of the SliderJointParam enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SLIDER_JOINT_LINEAR_LIMIT_UPPER {#SLIDER_JOINT_LINEAR_LIMIT_UPPER}
 
@@ -1933,7 +1743,7 @@ Represents the size of the SliderJointParam enum.
 SLIDER_JOINT_LINEAR_LIMIT_UPPER = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The maximum difference between the pivot points on their X axis before damping happens.
 
 #### SLIDER_JOINT_LINEAR_LIMIT_LOWER {#SLIDER_JOINT_LINEAR_LIMIT_LOWER}
 
@@ -1941,7 +1751,7 @@ SLIDER_JOINT_LINEAR_LIMIT_UPPER = 0
 SLIDER_JOINT_LINEAR_LIMIT_LOWER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The minimum difference between the pivot points on their X axis before damping happens.
 
 #### SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS {#SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS}
 
@@ -1949,7 +1759,9 @@ SLIDER_JOINT_LINEAR_LIMIT_LOWER = 1
 SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A factor applied to the movement across the slider axis once the limits get surpassed. The lower, the slower the movement.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION {#SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION}
 
@@ -1957,7 +1769,9 @@ SLIDER_JOINT_LINEAR_LIMIT_SOFTNESS = 2
 SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of restitution once the limits are surpassed. The lower, the more velocity-energy gets lost.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_LINEAR_LIMIT_DAMPING {#SLIDER_JOINT_LINEAR_LIMIT_DAMPING}
 
@@ -1965,7 +1779,9 @@ SLIDER_JOINT_LINEAR_LIMIT_RESTITUTION = 3
 SLIDER_JOINT_LINEAR_LIMIT_DAMPING = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of damping once the slider limits are surpassed.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_LINEAR_MOTION_SOFTNESS {#SLIDER_JOINT_LINEAR_MOTION_SOFTNESS}
 
@@ -1973,7 +1789,9 @@ SLIDER_JOINT_LINEAR_LIMIT_DAMPING = 4
 SLIDER_JOINT_LINEAR_MOTION_SOFTNESS = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A factor applied to the movement across the slider axis as long as the slider is in the limits. The lower, the slower the movement.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_LINEAR_MOTION_RESTITUTION {#SLIDER_JOINT_LINEAR_MOTION_RESTITUTION}
 
@@ -1981,7 +1799,9 @@ SLIDER_JOINT_LINEAR_MOTION_SOFTNESS = 5
 SLIDER_JOINT_LINEAR_MOTION_RESTITUTION = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of restitution inside the slider limits.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_LINEAR_MOTION_DAMPING {#SLIDER_JOINT_LINEAR_MOTION_DAMPING}
 
@@ -1989,7 +1809,9 @@ SLIDER_JOINT_LINEAR_MOTION_RESTITUTION = 6
 SLIDER_JOINT_LINEAR_MOTION_DAMPING = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of damping inside the slider limits.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS {#SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS}
 
@@ -1997,7 +1819,9 @@ SLIDER_JOINT_LINEAR_MOTION_DAMPING = 7
 SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A factor applied to the movement across axes orthogonal to the slider.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION {#SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION}
 
@@ -2005,7 +1829,9 @@ SLIDER_JOINT_LINEAR_ORTHOGONAL_SOFTNESS = 8
 SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of restitution when movement is across axes orthogonal to the slider.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING {#SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING}
 
@@ -2013,7 +1839,9 @@ SLIDER_JOINT_LINEAR_ORTHOGONAL_RESTITUTION = 9
 SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of damping when movement is across axes orthogonal to the slider.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_LIMIT_UPPER {#SLIDER_JOINT_ANGULAR_LIMIT_UPPER}
 
@@ -2021,7 +1849,9 @@ SLIDER_JOINT_LINEAR_ORTHOGONAL_DAMPING = 10
 SLIDER_JOINT_ANGULAR_LIMIT_UPPER = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The upper limit of rotation in the slider.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_LIMIT_LOWER {#SLIDER_JOINT_ANGULAR_LIMIT_LOWER}
 
@@ -2029,7 +1859,9 @@ SLIDER_JOINT_ANGULAR_LIMIT_UPPER = 11
 SLIDER_JOINT_ANGULAR_LIMIT_LOWER = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The lower limit of rotation in the slider.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS {#SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS}
 
@@ -2037,7 +1869,9 @@ SLIDER_JOINT_ANGULAR_LIMIT_LOWER = 12
 SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A factor applied to the all rotation once the limit is surpassed.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION {#SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION}
 
@@ -2045,7 +1879,9 @@ SLIDER_JOINT_ANGULAR_LIMIT_SOFTNESS = 13
 SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of restitution of the rotation when the limit is surpassed.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_LIMIT_DAMPING {#SLIDER_JOINT_ANGULAR_LIMIT_DAMPING}
 
@@ -2053,7 +1889,9 @@ SLIDER_JOINT_ANGULAR_LIMIT_RESTITUTION = 14
 SLIDER_JOINT_ANGULAR_LIMIT_DAMPING = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of damping of the rotation when the limit is surpassed.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS {#SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS}
 
@@ -2061,7 +1899,9 @@ SLIDER_JOINT_ANGULAR_LIMIT_DAMPING = 15
 SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A factor that gets applied to the all rotation in the limits.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION {#SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION}
 
@@ -2069,7 +1909,9 @@ SLIDER_JOINT_ANGULAR_MOTION_SOFTNESS = 16
 SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of restitution of the rotation in the limits.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_MOTION_DAMPING {#SLIDER_JOINT_ANGULAR_MOTION_DAMPING}
 
@@ -2077,7 +1919,9 @@ SLIDER_JOINT_ANGULAR_MOTION_RESTITUTION = 17
 SLIDER_JOINT_ANGULAR_MOTION_DAMPING = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of damping of the rotation in the limits.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS {#SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS}
 
@@ -2085,7 +1929,9 @@ SLIDER_JOINT_ANGULAR_MOTION_DAMPING = 18
 SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A factor that gets applied to the all rotation across axes orthogonal to the slider.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION {#SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION}
 
@@ -2093,7 +1939,9 @@ SLIDER_JOINT_ANGULAR_ORTHOGONAL_SOFTNESS = 19
 SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of restitution of the rotation across axes orthogonal to the slider.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING {#SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING}
 
@@ -2101,7 +1949,9 @@ SLIDER_JOINT_ANGULAR_ORTHOGONAL_RESTITUTION = 20
 SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of damping of the rotation across axes orthogonal to the slider.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SLIDER_JOINT_MAX {#SLIDER_JOINT_MAX}
 
@@ -2109,7 +1959,9 @@ SLIDER_JOINT_ANGULAR_ORTHOGONAL_DAMPING = 21
 SLIDER_JOINT_MAX = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the SliderJointParam enum.
+
+---
 
 ### ConeTwistJointParam {#enum-ConeTwistJointParam}
 
@@ -2117,35 +1969,7 @@ SLIDER_JOINT_MAX = 22
 enum ConeTwistJointParam { CONE_TWIST_JOINT_SWING_SPAN = 0, CONE_TWIST_JOINT_TWIST_SPAN = 1, CONE_TWIST_JOINT_BIAS = 2, CONE_TWIST_JOINT_SOFTNESS = 3, CONE_TWIST_JOINT_RELAXATION = 4 }
 ```
 
-ConeTwistJointParam CONE_TWIST_JOINT_SWING_SPAN = 0
-
-Swing is rotation from side to side, around the axis perpendicular to the twist axis.
-
-The swing span defines, how much rotation will not get corrected along the swing axis.
-
-Could be defined as looseness in the ConeTwistJoint3D. If below 0.05, this behavior is locked.
-
-ConeTwistJointParam CONE_TWIST_JOINT_TWIST_SPAN = 1
-
-Twist is the rotation around the twist axis, this value defined how far the joint can twist. Twist is locked if below 0.05.
-
-ConeTwistJointParam CONE_TWIST_JOINT_BIAS = 2
-
-The speed with which the swing or twist will take place. The higher, the faster.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-ConeTwistJointParam CONE_TWIST_JOINT_SOFTNESS = 3
-
-The ease with which the Joint3D twists, if it's too low, it takes more force to twist the joint.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-ConeTwistJointParam CONE_TWIST_JOINT_RELAXATION = 4
-
-Defines, how fast the swing- and twist-speed-difference on both sides gets synced.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CONE_TWIST_JOINT_SWING_SPAN {#CONE_TWIST_JOINT_SWING_SPAN}
 
@@ -2153,7 +1977,11 @@ Note: Only supported when using GodotPhysics3D. This parameter is ignored when u
 CONE_TWIST_JOINT_SWING_SPAN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Swing is rotation from side to side, around the axis perpendicular to the twist axis.
+
+The swing span defines, how much rotation will not get corrected along the swing axis.
+
+Could be defined as looseness in the ConeTwistJoint3D. If below 0.05, this behavior is locked.
 
 #### CONE_TWIST_JOINT_TWIST_SPAN {#CONE_TWIST_JOINT_TWIST_SPAN}
 
@@ -2161,7 +1989,7 @@ CONE_TWIST_JOINT_SWING_SPAN = 0
 CONE_TWIST_JOINT_TWIST_SPAN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Twist is the rotation around the twist axis, this value defined how far the joint can twist. Twist is locked if below 0.05.
 
 #### CONE_TWIST_JOINT_BIAS {#CONE_TWIST_JOINT_BIAS}
 
@@ -2169,7 +1997,9 @@ CONE_TWIST_JOINT_TWIST_SPAN = 1
 CONE_TWIST_JOINT_BIAS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The speed with which the swing or twist will take place. The higher, the faster.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### CONE_TWIST_JOINT_SOFTNESS {#CONE_TWIST_JOINT_SOFTNESS}
 
@@ -2177,7 +2007,9 @@ CONE_TWIST_JOINT_BIAS = 2
 CONE_TWIST_JOINT_SOFTNESS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The ease with which the Joint3D twists, if it's too low, it takes more force to twist the joint.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### CONE_TWIST_JOINT_RELAXATION {#CONE_TWIST_JOINT_RELAXATION}
 
@@ -2185,7 +2017,11 @@ CONE_TWIST_JOINT_SOFTNESS = 3
 CONE_TWIST_JOINT_RELAXATION = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Defines, how fast the swing- and twist-speed-difference on both sides gets synced.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
+
+---
 
 ### G6DOFJointAxisParam {#enum-G6DOFJointAxisParam}
 
@@ -2193,113 +2029,7 @@ CONE_TWIST_JOINT_RELAXATION = 4
 enum G6DOFJointAxisParam { G6DOF_JOINT_LINEAR_LOWER_LIMIT = 0, G6DOF_JOINT_LINEAR_UPPER_LIMIT = 1, G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS = 2, G6DOF_JOINT_LINEAR_RESTITUTION = 3, G6DOF_JOINT_LINEAR_DAMPING = 4, G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY = 5, G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT = 6, G6DOF_JOINT_LINEAR_SPRING_STIFFNESS = 7, G6DOF_JOINT_LINEAR_SPRING_DAMPING = 8, G6DOF_JOINT_LINEAR_SPRING_EQUILIBRIUM_POINT = 9, G6DOF_JOINT_ANGULAR_LOWER_LIMIT = 10, G6DOF_JOINT_ANGULAR_UPPER_LIMIT = 11, G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS = 12, G6DOF_JOINT_ANGULAR_DAMPING = 13, G6DOF_JOINT_ANGULAR_RESTITUTION = 14, G6DOF_JOINT_ANGULAR_FORCE_LIMIT = 15, G6DOF_JOINT_ANGULAR_ERP = 16, G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY = 17, G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT = 18, G6DOF_JOINT_ANGULAR_SPRING_STIFFNESS = 19, G6DOF_JOINT_ANGULAR_SPRING_DAMPING = 20, G6DOF_JOINT_ANGULAR_SPRING_EQUILIBRIUM_POINT = 21, G6DOF_JOINT_MAX = 22 }
 ```
 
-G6DOFJointAxisParam G6DOF_JOINT_LINEAR_LOWER_LIMIT = 0
-
-The minimum difference between the pivot points' axes.
-
-G6DOFJointAxisParam G6DOF_JOINT_LINEAR_UPPER_LIMIT = 1
-
-The maximum difference between the pivot points' axes.
-
-G6DOFJointAxisParam G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS = 2
-
-A factor that gets applied to the movement across the axes. The lower, the slower the movement.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-G6DOFJointAxisParam G6DOF_JOINT_LINEAR_RESTITUTION = 3
-
-The amount of restitution on the axes movement. The lower, the more velocity-energy gets lost.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-G6DOFJointAxisParam G6DOF_JOINT_LINEAR_DAMPING = 4
-
-The amount of damping that happens at the linear motion across the axes.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-G6DOFJointAxisParam G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY = 5
-
-The velocity that the joint's linear motor will attempt to reach.
-
-G6DOFJointAxisParam G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT = 6
-
-The maximum force that the linear motor can apply while trying to reach the target velocity.
-
-G6DOFJointAxisParam G6DOF_JOINT_LINEAR_SPRING_STIFFNESS = 7
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-G6DOFJointAxisParam G6DOF_JOINT_LINEAR_SPRING_DAMPING = 8
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-G6DOFJointAxisParam G6DOF_JOINT_LINEAR_SPRING_EQUILIBRIUM_POINT = 9
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_LOWER_LIMIT = 10
-
-The minimum rotation in negative direction to break loose and rotate around the axes.
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_UPPER_LIMIT = 11
-
-The minimum rotation in positive direction to break loose and rotate around the axes.
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS = 12
-
-A factor that gets multiplied onto all rotations across the axes.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_DAMPING = 13
-
-The amount of rotational damping across the axes. The lower, the more damping occurs.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_RESTITUTION = 14
-
-The amount of rotational restitution across the axes. The lower, the more restitution occurs.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_FORCE_LIMIT = 15
-
-The maximum amount of force that can occur, when rotating around the axes.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_ERP = 16
-
-When correcting the crossing of limits in rotation across the axes, this error tolerance factor defines how much the correction gets slowed down. The lower, the slower.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY = 17
-
-Target speed for the motor at the axes.
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT = 18
-
-Maximum acceleration for the motor at the axes.
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_SPRING_STIFFNESS = 19
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_SPRING_DAMPING = 20
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-G6DOFJointAxisParam G6DOF_JOINT_ANGULAR_SPRING_EQUILIBRIUM_POINT = 21
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-G6DOFJointAxisParam G6DOF_JOINT_MAX = 22
-
-Represents the size of the G6DOFJointAxisParam enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### G6DOF_JOINT_LINEAR_LOWER_LIMIT {#G6DOF_JOINT_LINEAR_LOWER_LIMIT}
 
@@ -2307,7 +2037,7 @@ Represents the size of the G6DOFJointAxisParam enum.
 G6DOF_JOINT_LINEAR_LOWER_LIMIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The minimum difference between the pivot points' axes.
 
 #### G6DOF_JOINT_LINEAR_UPPER_LIMIT {#G6DOF_JOINT_LINEAR_UPPER_LIMIT}
 
@@ -2315,7 +2045,7 @@ G6DOF_JOINT_LINEAR_LOWER_LIMIT = 0
 G6DOF_JOINT_LINEAR_UPPER_LIMIT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The maximum difference between the pivot points' axes.
 
 #### G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS {#G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS}
 
@@ -2323,7 +2053,9 @@ G6DOF_JOINT_LINEAR_UPPER_LIMIT = 1
 G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A factor that gets applied to the movement across the axes. The lower, the slower the movement.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### G6DOF_JOINT_LINEAR_RESTITUTION {#G6DOF_JOINT_LINEAR_RESTITUTION}
 
@@ -2331,7 +2063,9 @@ G6DOF_JOINT_LINEAR_LIMIT_SOFTNESS = 2
 G6DOF_JOINT_LINEAR_RESTITUTION = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of restitution on the axes movement. The lower, the more velocity-energy gets lost.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### G6DOF_JOINT_LINEAR_DAMPING {#G6DOF_JOINT_LINEAR_DAMPING}
 
@@ -2339,7 +2073,9 @@ G6DOF_JOINT_LINEAR_RESTITUTION = 3
 G6DOF_JOINT_LINEAR_DAMPING = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of damping that happens at the linear motion across the axes.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY {#G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY}
 
@@ -2347,7 +2083,7 @@ G6DOF_JOINT_LINEAR_DAMPING = 4
 G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The velocity that the joint's linear motor will attempt to reach.
 
 #### G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT {#G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT}
 
@@ -2355,7 +2091,7 @@ G6DOF_JOINT_LINEAR_MOTOR_TARGET_VELOCITY = 5
 G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The maximum force that the linear motor can apply while trying to reach the target velocity.
 
 #### G6DOF_JOINT_LINEAR_SPRING_STIFFNESS {#G6DOF_JOINT_LINEAR_SPRING_STIFFNESS}
 
@@ -2363,7 +2099,7 @@ G6DOF_JOINT_LINEAR_MOTOR_FORCE_LIMIT = 6
 G6DOF_JOINT_LINEAR_SPRING_STIFFNESS = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### G6DOF_JOINT_LINEAR_SPRING_DAMPING {#G6DOF_JOINT_LINEAR_SPRING_DAMPING}
 
@@ -2371,7 +2107,7 @@ G6DOF_JOINT_LINEAR_SPRING_STIFFNESS = 7
 G6DOF_JOINT_LINEAR_SPRING_DAMPING = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### G6DOF_JOINT_LINEAR_SPRING_EQUILIBRIUM_POINT {#G6DOF_JOINT_LINEAR_SPRING_EQUILIBRIUM_POINT}
 
@@ -2379,7 +2115,7 @@ G6DOF_JOINT_LINEAR_SPRING_DAMPING = 8
 G6DOF_JOINT_LINEAR_SPRING_EQUILIBRIUM_POINT = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### G6DOF_JOINT_ANGULAR_LOWER_LIMIT {#G6DOF_JOINT_ANGULAR_LOWER_LIMIT}
 
@@ -2387,7 +2123,7 @@ G6DOF_JOINT_LINEAR_SPRING_EQUILIBRIUM_POINT = 9
 G6DOF_JOINT_ANGULAR_LOWER_LIMIT = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The minimum rotation in negative direction to break loose and rotate around the axes.
 
 #### G6DOF_JOINT_ANGULAR_UPPER_LIMIT {#G6DOF_JOINT_ANGULAR_UPPER_LIMIT}
 
@@ -2395,7 +2131,7 @@ G6DOF_JOINT_ANGULAR_LOWER_LIMIT = 10
 G6DOF_JOINT_ANGULAR_UPPER_LIMIT = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The minimum rotation in positive direction to break loose and rotate around the axes.
 
 #### G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS {#G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS}
 
@@ -2403,7 +2139,9 @@ G6DOF_JOINT_ANGULAR_UPPER_LIMIT = 11
 G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A factor that gets multiplied onto all rotations across the axes.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### G6DOF_JOINT_ANGULAR_DAMPING {#G6DOF_JOINT_ANGULAR_DAMPING}
 
@@ -2411,7 +2149,9 @@ G6DOF_JOINT_ANGULAR_LIMIT_SOFTNESS = 12
 G6DOF_JOINT_ANGULAR_DAMPING = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of rotational damping across the axes. The lower, the more damping occurs.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### G6DOF_JOINT_ANGULAR_RESTITUTION {#G6DOF_JOINT_ANGULAR_RESTITUTION}
 
@@ -2419,7 +2159,9 @@ G6DOF_JOINT_ANGULAR_DAMPING = 13
 G6DOF_JOINT_ANGULAR_RESTITUTION = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount of rotational restitution across the axes. The lower, the more restitution occurs.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### G6DOF_JOINT_ANGULAR_FORCE_LIMIT {#G6DOF_JOINT_ANGULAR_FORCE_LIMIT}
 
@@ -2427,7 +2169,9 @@ G6DOF_JOINT_ANGULAR_RESTITUTION = 14
 G6DOF_JOINT_ANGULAR_FORCE_LIMIT = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The maximum amount of force that can occur, when rotating around the axes.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### G6DOF_JOINT_ANGULAR_ERP {#G6DOF_JOINT_ANGULAR_ERP}
 
@@ -2435,7 +2179,9 @@ G6DOF_JOINT_ANGULAR_FORCE_LIMIT = 15
 G6DOF_JOINT_ANGULAR_ERP = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When correcting the crossing of limits in rotation across the axes, this error tolerance factor defines how much the correction gets slowed down. The lower, the slower.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY {#G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY}
 
@@ -2443,7 +2189,7 @@ G6DOF_JOINT_ANGULAR_ERP = 16
 G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Target speed for the motor at the axes.
 
 #### G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT {#G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT}
 
@@ -2451,7 +2197,7 @@ G6DOF_JOINT_ANGULAR_MOTOR_TARGET_VELOCITY = 17
 G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum acceleration for the motor at the axes.
 
 #### G6DOF_JOINT_ANGULAR_SPRING_STIFFNESS {#G6DOF_JOINT_ANGULAR_SPRING_STIFFNESS}
 
@@ -2459,7 +2205,7 @@ G6DOF_JOINT_ANGULAR_MOTOR_FORCE_LIMIT = 18
 G6DOF_JOINT_ANGULAR_SPRING_STIFFNESS = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### G6DOF_JOINT_ANGULAR_SPRING_DAMPING {#G6DOF_JOINT_ANGULAR_SPRING_DAMPING}
 
@@ -2467,7 +2213,7 @@ G6DOF_JOINT_ANGULAR_SPRING_STIFFNESS = 19
 G6DOF_JOINT_ANGULAR_SPRING_DAMPING = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### G6DOF_JOINT_ANGULAR_SPRING_EQUILIBRIUM_POINT {#G6DOF_JOINT_ANGULAR_SPRING_EQUILIBRIUM_POINT}
 
@@ -2475,7 +2221,7 @@ G6DOF_JOINT_ANGULAR_SPRING_DAMPING = 20
 G6DOF_JOINT_ANGULAR_SPRING_EQUILIBRIUM_POINT = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### G6DOF_JOINT_MAX {#G6DOF_JOINT_MAX}
 
@@ -2483,7 +2229,9 @@ G6DOF_JOINT_ANGULAR_SPRING_EQUILIBRIUM_POINT = 21
 G6DOF_JOINT_MAX = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the G6DOFJointAxisParam enum.
+
+---
 
 ### G6DOFJointAxisFlag {#enum-G6DOFJointAxisFlag}
 
@@ -2491,33 +2239,7 @@ G6DOF_JOINT_MAX = 22
 enum G6DOFJointAxisFlag { G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT = 0, G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT = 1, G6DOF_JOINT_FLAG_ENABLE_ANGULAR_SPRING = 2, G6DOF_JOINT_FLAG_ENABLE_LINEAR_SPRING = 3, G6DOF_JOINT_FLAG_ENABLE_MOTOR = 4, G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR = 5, G6DOF_JOINT_FLAG_MAX = 6 }
 ```
 
-G6DOFJointAxisFlag G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT = 0
-
-If set, linear motion is possible within the given limits.
-
-G6DOFJointAxisFlag G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT = 1
-
-If set, rotational motion is possible.
-
-G6DOFJointAxisFlag G6DOF_JOINT_FLAG_ENABLE_ANGULAR_SPRING = 2
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-G6DOFJointAxisFlag G6DOF_JOINT_FLAG_ENABLE_LINEAR_SPRING = 3
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-G6DOFJointAxisFlag G6DOF_JOINT_FLAG_ENABLE_MOTOR = 4
-
-If set, there is a rotational motor across these axes.
-
-G6DOFJointAxisFlag G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR = 5
-
-If set, there is a linear motor on this axis that targets a specific velocity.
-
-G6DOFJointAxisFlag G6DOF_JOINT_FLAG_MAX = 6
-
-Represents the size of the G6DOFJointAxisFlag enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT {#G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT}
 
@@ -2525,7 +2247,7 @@ Represents the size of the G6DOFJointAxisFlag enum.
 G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, linear motion is possible within the given limits.
 
 #### G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT {#G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT}
 
@@ -2533,7 +2255,7 @@ G6DOF_JOINT_FLAG_ENABLE_LINEAR_LIMIT = 0
 G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, rotational motion is possible.
 
 #### G6DOF_JOINT_FLAG_ENABLE_ANGULAR_SPRING {#G6DOF_JOINT_FLAG_ENABLE_ANGULAR_SPRING}
 
@@ -2541,7 +2263,7 @@ G6DOF_JOINT_FLAG_ENABLE_ANGULAR_LIMIT = 1
 G6DOF_JOINT_FLAG_ENABLE_ANGULAR_SPRING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### G6DOF_JOINT_FLAG_ENABLE_LINEAR_SPRING {#G6DOF_JOINT_FLAG_ENABLE_LINEAR_SPRING}
 
@@ -2549,7 +2271,7 @@ G6DOF_JOINT_FLAG_ENABLE_ANGULAR_SPRING = 2
 G6DOF_JOINT_FLAG_ENABLE_LINEAR_SPRING = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### G6DOF_JOINT_FLAG_ENABLE_MOTOR {#G6DOF_JOINT_FLAG_ENABLE_MOTOR}
 
@@ -2557,7 +2279,7 @@ G6DOF_JOINT_FLAG_ENABLE_LINEAR_SPRING = 3
 G6DOF_JOINT_FLAG_ENABLE_MOTOR = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, there is a rotational motor across these axes.
 
 #### G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR {#G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR}
 
@@ -2565,7 +2287,7 @@ G6DOF_JOINT_FLAG_ENABLE_MOTOR = 4
 G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If set, there is a linear motor on this axis that targets a specific velocity.
 
 #### G6DOF_JOINT_FLAG_MAX {#G6DOF_JOINT_FLAG_MAX}
 
@@ -2573,7 +2295,9 @@ G6DOF_JOINT_FLAG_ENABLE_LINEAR_MOTOR = 5
 G6DOF_JOINT_FLAG_MAX = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the G6DOFJointAxisFlag enum.
+
+---
 
 ### ShapeType {#enum-ShapeType}
 
@@ -2581,49 +2305,7 @@ G6DOF_JOINT_FLAG_MAX = 6
 enum ShapeType { SHAPE_WORLD_BOUNDARY = 0, SHAPE_SEPARATION_RAY = 1, SHAPE_SPHERE = 2, SHAPE_BOX = 3, SHAPE_CAPSULE = 4, SHAPE_CYLINDER = 5, SHAPE_CONVEX_POLYGON = 6, SHAPE_CONCAVE_POLYGON = 7, SHAPE_HEIGHTMAP = 8, SHAPE_SOFT_BODY = 9, SHAPE_CUSTOM = 10 }
 ```
 
-ShapeType SHAPE_WORLD_BOUNDARY = 0
-
-Constant for creating a world boundary shape (used by the WorldBoundaryShape3D resource).
-
-ShapeType SHAPE_SEPARATION_RAY = 1
-
-Constant for creating a separation ray shape (used by the SeparationRayShape3D resource).
-
-ShapeType SHAPE_SPHERE = 2
-
-Constant for creating a sphere shape (used by the SphereShape3D resource).
-
-ShapeType SHAPE_BOX = 3
-
-Constant for creating a box shape (used by the BoxShape3D resource).
-
-ShapeType SHAPE_CAPSULE = 4
-
-Constant for creating a capsule shape (used by the CapsuleShape3D resource).
-
-ShapeType SHAPE_CYLINDER = 5
-
-Constant for creating a cylinder shape (used by the CylinderShape3D resource).
-
-ShapeType SHAPE_CONVEX_POLYGON = 6
-
-Constant for creating a convex polygon shape (used by the ConvexPolygonShape3D resource).
-
-ShapeType SHAPE_CONCAVE_POLYGON = 7
-
-Constant for creating a concave polygon (trimesh) shape (used by the ConcavePolygonShape3D resource).
-
-ShapeType SHAPE_HEIGHTMAP = 8
-
-Constant for creating a heightmap shape (used by the HeightMapShape3D resource).
-
-ShapeType SHAPE_SOFT_BODY = 9
-
-Constant used internally for a soft body shape. Any attempt to create this kind of shape results in an error.
-
-ShapeType SHAPE_CUSTOM = 10
-
-Constant used internally for a custom shape. Any attempt to create this kind of shape results in an error when using Godot Physics or Jolt Physics.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHAPE_WORLD_BOUNDARY {#SHAPE_WORLD_BOUNDARY}
 
@@ -2631,7 +2313,7 @@ Constant used internally for a custom shape. Any attempt to create this kind of 
 SHAPE_WORLD_BOUNDARY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for creating a world boundary shape (used by the WorldBoundaryShape3D resource).
 
 #### SHAPE_SEPARATION_RAY {#SHAPE_SEPARATION_RAY}
 
@@ -2639,7 +2321,7 @@ SHAPE_WORLD_BOUNDARY = 0
 SHAPE_SEPARATION_RAY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for creating a separation ray shape (used by the SeparationRayShape3D resource).
 
 #### SHAPE_SPHERE {#SHAPE_SPHERE}
 
@@ -2647,7 +2329,7 @@ SHAPE_SEPARATION_RAY = 1
 SHAPE_SPHERE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for creating a sphere shape (used by the SphereShape3D resource).
 
 #### SHAPE_BOX {#SHAPE_BOX}
 
@@ -2655,7 +2337,7 @@ SHAPE_SPHERE = 2
 SHAPE_BOX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for creating a box shape (used by the BoxShape3D resource).
 
 #### SHAPE_CAPSULE {#SHAPE_CAPSULE}
 
@@ -2663,7 +2345,7 @@ SHAPE_BOX = 3
 SHAPE_CAPSULE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for creating a capsule shape (used by the CapsuleShape3D resource).
 
 #### SHAPE_CYLINDER {#SHAPE_CYLINDER}
 
@@ -2671,7 +2353,7 @@ SHAPE_CAPSULE = 4
 SHAPE_CYLINDER = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for creating a cylinder shape (used by the CylinderShape3D resource).
 
 #### SHAPE_CONVEX_POLYGON {#SHAPE_CONVEX_POLYGON}
 
@@ -2679,7 +2361,7 @@ SHAPE_CYLINDER = 5
 SHAPE_CONVEX_POLYGON = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for creating a convex polygon shape (used by the ConvexPolygonShape3D resource).
 
 #### SHAPE_CONCAVE_POLYGON {#SHAPE_CONCAVE_POLYGON}
 
@@ -2687,7 +2369,7 @@ SHAPE_CONVEX_POLYGON = 6
 SHAPE_CONCAVE_POLYGON = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for creating a concave polygon (trimesh) shape (used by the ConcavePolygonShape3D resource).
 
 #### SHAPE_HEIGHTMAP {#SHAPE_HEIGHTMAP}
 
@@ -2695,7 +2377,7 @@ SHAPE_CONCAVE_POLYGON = 7
 SHAPE_HEIGHTMAP = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for creating a heightmap shape (used by the HeightMapShape3D resource).
 
 #### SHAPE_SOFT_BODY {#SHAPE_SOFT_BODY}
 
@@ -2703,7 +2385,7 @@ SHAPE_HEIGHTMAP = 8
 SHAPE_SOFT_BODY = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant used internally for a soft body shape. Any attempt to create this kind of shape results in an error.
 
 #### SHAPE_CUSTOM {#SHAPE_CUSTOM}
 
@@ -2711,7 +2393,9 @@ SHAPE_SOFT_BODY = 9
 SHAPE_CUSTOM = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant used internally for a custom shape. Any attempt to create this kind of shape results in an error when using Godot Physics or Jolt Physics.
+
+---
 
 ### AreaParameter {#enum-AreaParameter}
 
@@ -2719,63 +2403,7 @@ SHAPE_CUSTOM = 10
 enum AreaParameter { AREA_PARAM_GRAVITY_OVERRIDE_MODE = 0, AREA_PARAM_GRAVITY = 1, AREA_PARAM_GRAVITY_VECTOR = 2, AREA_PARAM_GRAVITY_IS_POINT = 3, AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE = 4, AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE = 5, AREA_PARAM_LINEAR_DAMP = 6, AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE = 7, AREA_PARAM_ANGULAR_DAMP = 8, AREA_PARAM_PRIORITY = 9, AREA_PARAM_WIND_FORCE_MAGNITUDE = 10, AREA_PARAM_WIND_SOURCE = 11, AREA_PARAM_WIND_DIRECTION = 12, AREA_PARAM_WIND_ATTENUATION_FACTOR = 13 }
 ```
 
-AreaParameter AREA_PARAM_GRAVITY_OVERRIDE_MODE = 0
-
-Constant to set/get gravity override mode in an area. See AreaSpaceOverrideMode for possible values.
-
-AreaParameter AREA_PARAM_GRAVITY = 1
-
-Constant to set/get gravity strength in an area.
-
-AreaParameter AREA_PARAM_GRAVITY_VECTOR = 2
-
-Constant to set/get gravity vector/center in an area.
-
-AreaParameter AREA_PARAM_GRAVITY_IS_POINT = 3
-
-Constant to set/get whether the gravity vector of an area is a direction, or a center point.
-
-AreaParameter AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE = 4
-
-Constant to set/get the distance at which the gravity strength is equal to the gravity controlled by AREA_PARAM_GRAVITY. For example, on a planet 100 meters in radius with a surface gravity of 4.0 m/s², set the gravity to 4.0 and the unit distance to 100.0. The gravity will have falloff according to the inverse square law, so in the example, at 200 meters from the center the gravity will be 1.0 m/s² (twice the distance, 1/4th the gravity), at 50 meters it will be 16.0 m/s² (half the distance, 4x the gravity), and so on.
-
-The above is true only when the unit distance is a positive number. When this is set to 0.0, the gravity will be constant regardless of distance.
-
-AreaParameter AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE = 5
-
-Constant to set/get linear damping override mode in an area. See AreaSpaceOverrideMode for possible values.
-
-AreaParameter AREA_PARAM_LINEAR_DAMP = 6
-
-Constant to set/get the linear damping factor of an area.
-
-AreaParameter AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE = 7
-
-Constant to set/get angular damping override mode in an area. See AreaSpaceOverrideMode for possible values.
-
-AreaParameter AREA_PARAM_ANGULAR_DAMP = 8
-
-Constant to set/get the angular damping factor of an area.
-
-AreaParameter AREA_PARAM_PRIORITY = 9
-
-Constant to set/get the priority (order of processing) of an area.
-
-AreaParameter AREA_PARAM_WIND_FORCE_MAGNITUDE = 10
-
-Constant to set/get the magnitude of area-specific wind force. This wind force only applies to SoftBody3D nodes. Other physics bodies are currently not affected by wind.
-
-AreaParameter AREA_PARAM_WIND_SOURCE = 11
-
-Constant to set/get the 3D vector that specifies the origin from which an area-specific wind blows.
-
-AreaParameter AREA_PARAM_WIND_DIRECTION = 12
-
-Constant to set/get the 3D vector that specifies the direction in which an area-specific wind blows.
-
-AreaParameter AREA_PARAM_WIND_ATTENUATION_FACTOR = 13
-
-Constant to set/get the exponential rate at which wind force decreases with distance from its origin.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AREA_PARAM_GRAVITY_OVERRIDE_MODE {#AREA_PARAM_GRAVITY_OVERRIDE_MODE}
 
@@ -2783,7 +2411,7 @@ Constant to set/get the exponential rate at which wind force decreases with dist
 AREA_PARAM_GRAVITY_OVERRIDE_MODE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get gravity override mode in an area. See AreaSpaceOverrideMode for possible values.
 
 #### AREA_PARAM_GRAVITY {#AREA_PARAM_GRAVITY}
 
@@ -2791,7 +2419,7 @@ AREA_PARAM_GRAVITY_OVERRIDE_MODE = 0
 AREA_PARAM_GRAVITY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get gravity strength in an area.
 
 #### AREA_PARAM_GRAVITY_VECTOR {#AREA_PARAM_GRAVITY_VECTOR}
 
@@ -2799,7 +2427,7 @@ AREA_PARAM_GRAVITY = 1
 AREA_PARAM_GRAVITY_VECTOR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get gravity vector/center in an area.
 
 #### AREA_PARAM_GRAVITY_IS_POINT {#AREA_PARAM_GRAVITY_IS_POINT}
 
@@ -2807,7 +2435,7 @@ AREA_PARAM_GRAVITY_VECTOR = 2
 AREA_PARAM_GRAVITY_IS_POINT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get whether the gravity vector of an area is a direction, or a center point.
 
 #### AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE {#AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE}
 
@@ -2815,7 +2443,9 @@ AREA_PARAM_GRAVITY_IS_POINT = 3
 AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the distance at which the gravity strength is equal to the gravity controlled by AREA_PARAM_GRAVITY. For example, on a planet 100 meters in radius with a surface gravity of 4.0 m/s², set the gravity to 4.0 and the unit distance to 100.0. The gravity will have falloff according to the inverse square law, so in the example, at 200 meters from the center the gravity will be 1.0 m/s² (twice the distance, 1/4th the gravity), at 50 meters it will be 16.0 m/s² (half the distance, 4x the gravity), and so on.
+
+The above is true only when the unit distance is a positive number. When this is set to 0.0, the gravity will be constant regardless of distance.
 
 #### AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE {#AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE}
 
@@ -2823,7 +2453,7 @@ AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE = 4
 AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get linear damping override mode in an area. See AreaSpaceOverrideMode for possible values.
 
 #### AREA_PARAM_LINEAR_DAMP {#AREA_PARAM_LINEAR_DAMP}
 
@@ -2831,7 +2461,7 @@ AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE = 5
 AREA_PARAM_LINEAR_DAMP = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the linear damping factor of an area.
 
 #### AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE {#AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE}
 
@@ -2839,7 +2469,7 @@ AREA_PARAM_LINEAR_DAMP = 6
 AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get angular damping override mode in an area. See AreaSpaceOverrideMode for possible values.
 
 #### AREA_PARAM_ANGULAR_DAMP {#AREA_PARAM_ANGULAR_DAMP}
 
@@ -2847,7 +2477,7 @@ AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE = 7
 AREA_PARAM_ANGULAR_DAMP = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the angular damping factor of an area.
 
 #### AREA_PARAM_PRIORITY {#AREA_PARAM_PRIORITY}
 
@@ -2855,7 +2485,7 @@ AREA_PARAM_ANGULAR_DAMP = 8
 AREA_PARAM_PRIORITY = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the priority (order of processing) of an area.
 
 #### AREA_PARAM_WIND_FORCE_MAGNITUDE {#AREA_PARAM_WIND_FORCE_MAGNITUDE}
 
@@ -2863,7 +2493,7 @@ AREA_PARAM_PRIORITY = 9
 AREA_PARAM_WIND_FORCE_MAGNITUDE = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the magnitude of area-specific wind force. This wind force only applies to SoftBody3D nodes. Other physics bodies are currently not affected by wind.
 
 #### AREA_PARAM_WIND_SOURCE {#AREA_PARAM_WIND_SOURCE}
 
@@ -2871,7 +2501,7 @@ AREA_PARAM_WIND_FORCE_MAGNITUDE = 10
 AREA_PARAM_WIND_SOURCE = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the 3D vector that specifies the origin from which an area-specific wind blows.
 
 #### AREA_PARAM_WIND_DIRECTION {#AREA_PARAM_WIND_DIRECTION}
 
@@ -2879,7 +2509,7 @@ AREA_PARAM_WIND_SOURCE = 11
 AREA_PARAM_WIND_DIRECTION = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the 3D vector that specifies the direction in which an area-specific wind blows.
 
 #### AREA_PARAM_WIND_ATTENUATION_FACTOR {#AREA_PARAM_WIND_ATTENUATION_FACTOR}
 
@@ -2887,7 +2517,9 @@ AREA_PARAM_WIND_DIRECTION = 12
 AREA_PARAM_WIND_ATTENUATION_FACTOR = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the exponential rate at which wind force decreases with distance from its origin.
+
+---
 
 ### AreaSpaceOverrideMode {#enum-AreaSpaceOverrideMode}
 
@@ -2895,25 +2527,7 @@ AREA_PARAM_WIND_ATTENUATION_FACTOR = 13
 enum AreaSpaceOverrideMode { AREA_SPACE_OVERRIDE_DISABLED = 0, AREA_SPACE_OVERRIDE_COMBINE = 1, AREA_SPACE_OVERRIDE_COMBINE_REPLACE = 2, AREA_SPACE_OVERRIDE_REPLACE = 3, AREA_SPACE_OVERRIDE_REPLACE_COMBINE = 4 }
 ```
 
-AreaSpaceOverrideMode AREA_SPACE_OVERRIDE_DISABLED = 0
-
-This area does not affect gravity/damp. These are generally areas that exist only to detect collisions, and objects entering or exiting them.
-
-AreaSpaceOverrideMode AREA_SPACE_OVERRIDE_COMBINE = 1
-
-This area adds its gravity/damp values to whatever has been calculated so far. This way, many overlapping areas can combine their physics to make interesting effects.
-
-AreaSpaceOverrideMode AREA_SPACE_OVERRIDE_COMBINE_REPLACE = 2
-
-This area adds its gravity/damp values to whatever has been calculated so far. Then stops taking into account the rest of the areas, even the default one.
-
-AreaSpaceOverrideMode AREA_SPACE_OVERRIDE_REPLACE = 3
-
-This area replaces any gravity/damp, even the default one, and stops taking into account the rest of the areas.
-
-AreaSpaceOverrideMode AREA_SPACE_OVERRIDE_REPLACE_COMBINE = 4
-
-This area replaces any gravity/damp calculated so far, but keeps calculating the rest of the areas, down to the default one.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AREA_SPACE_OVERRIDE_DISABLED {#AREA_SPACE_OVERRIDE_DISABLED}
 
@@ -2921,7 +2535,7 @@ This area replaces any gravity/damp calculated so far, but keeps calculating the
 AREA_SPACE_OVERRIDE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area does not affect gravity/damp. These are generally areas that exist only to detect collisions, and objects entering or exiting them.
 
 #### AREA_SPACE_OVERRIDE_COMBINE {#AREA_SPACE_OVERRIDE_COMBINE}
 
@@ -2929,7 +2543,7 @@ AREA_SPACE_OVERRIDE_DISABLED = 0
 AREA_SPACE_OVERRIDE_COMBINE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area adds its gravity/damp values to whatever has been calculated so far. This way, many overlapping areas can combine their physics to make interesting effects.
 
 #### AREA_SPACE_OVERRIDE_COMBINE_REPLACE {#AREA_SPACE_OVERRIDE_COMBINE_REPLACE}
 
@@ -2937,7 +2551,7 @@ AREA_SPACE_OVERRIDE_COMBINE = 1
 AREA_SPACE_OVERRIDE_COMBINE_REPLACE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area adds its gravity/damp values to whatever has been calculated so far. Then stops taking into account the rest of the areas, even the default one.
 
 #### AREA_SPACE_OVERRIDE_REPLACE {#AREA_SPACE_OVERRIDE_REPLACE}
 
@@ -2945,7 +2559,7 @@ AREA_SPACE_OVERRIDE_COMBINE_REPLACE = 2
 AREA_SPACE_OVERRIDE_REPLACE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area replaces any gravity/damp, even the default one, and stops taking into account the rest of the areas.
 
 #### AREA_SPACE_OVERRIDE_REPLACE_COMBINE {#AREA_SPACE_OVERRIDE_REPLACE_COMBINE}
 
@@ -2953,7 +2567,9 @@ AREA_SPACE_OVERRIDE_REPLACE = 3
 AREA_SPACE_OVERRIDE_REPLACE_COMBINE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area replaces any gravity/damp calculated so far, but keeps calculating the rest of the areas, down to the default one.
+
+---
 
 ### BodyMode {#enum-BodyMode}
 
@@ -2961,21 +2577,7 @@ AREA_SPACE_OVERRIDE_REPLACE_COMBINE = 4
 enum BodyMode { BODY_MODE_STATIC = 0, BODY_MODE_KINEMATIC = 1, BODY_MODE_RIGID = 2, BODY_MODE_RIGID_LINEAR = 3 }
 ```
 
-BodyMode BODY_MODE_STATIC = 0
-
-Constant for static bodies. In this mode, a body can be only moved by user code and doesn't collide with other bodies along its path when moved.
-
-BodyMode BODY_MODE_KINEMATIC = 1
-
-Constant for kinematic bodies. In this mode, a body can be only moved by user code and collides with other bodies along its path.
-
-BodyMode BODY_MODE_RIGID = 2
-
-Constant for rigid bodies. In this mode, a body can be pushed by other bodies and has forces applied.
-
-BodyMode BODY_MODE_RIGID_LINEAR = 3
-
-Constant for linear rigid bodies. In this mode, a body can not rotate, and only its linear velocity is affected by external forces.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BODY_MODE_STATIC {#BODY_MODE_STATIC}
 
@@ -2983,7 +2585,7 @@ Constant for linear rigid bodies. In this mode, a body can not rotate, and only 
 BODY_MODE_STATIC = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for static bodies. In this mode, a body can be only moved by user code and doesn't collide with other bodies along its path when moved.
 
 #### BODY_MODE_KINEMATIC {#BODY_MODE_KINEMATIC}
 
@@ -2991,7 +2593,7 @@ BODY_MODE_STATIC = 0
 BODY_MODE_KINEMATIC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for kinematic bodies. In this mode, a body can be only moved by user code and collides with other bodies along its path.
 
 #### BODY_MODE_RIGID {#BODY_MODE_RIGID}
 
@@ -2999,7 +2601,7 @@ BODY_MODE_KINEMATIC = 1
 BODY_MODE_RIGID = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for rigid bodies. In this mode, a body can be pushed by other bodies and has forces applied.
 
 #### BODY_MODE_RIGID_LINEAR {#BODY_MODE_RIGID_LINEAR}
 
@@ -3007,7 +2609,9 @@ BODY_MODE_RIGID = 2
 BODY_MODE_RIGID_LINEAR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for linear rigid bodies. In this mode, a body can not rotate, and only its linear velocity is affected by external forces.
+
+---
 
 ### BodyParameter {#enum-BodyParameter}
 
@@ -3015,49 +2619,7 @@ BODY_MODE_RIGID_LINEAR = 3
 enum BodyParameter { BODY_PARAM_BOUNCE = 0, BODY_PARAM_FRICTION = 1, BODY_PARAM_MASS = 2, BODY_PARAM_INERTIA = 3, BODY_PARAM_CENTER_OF_MASS = 4, BODY_PARAM_GRAVITY_SCALE = 5, BODY_PARAM_LINEAR_DAMP_MODE = 6, BODY_PARAM_ANGULAR_DAMP_MODE = 7, BODY_PARAM_LINEAR_DAMP = 8, BODY_PARAM_ANGULAR_DAMP = 9, BODY_PARAM_MAX = 10 }
 ```
 
-BodyParameter BODY_PARAM_BOUNCE = 0
-
-Constant to set/get a body's bounce factor.
-
-BodyParameter BODY_PARAM_FRICTION = 1
-
-Constant to set/get a body's friction.
-
-BodyParameter BODY_PARAM_MASS = 2
-
-Constant to set/get a body's mass.
-
-BodyParameter BODY_PARAM_INERTIA = 3
-
-Constant to set/get a body's inertia.
-
-BodyParameter BODY_PARAM_CENTER_OF_MASS = 4
-
-Constant to set/get a body's center of mass position in the body's local coordinate system.
-
-BodyParameter BODY_PARAM_GRAVITY_SCALE = 5
-
-Constant to set/get a body's gravity multiplier.
-
-BodyParameter BODY_PARAM_LINEAR_DAMP_MODE = 6
-
-Constant to set/get a body's linear damping mode. See BodyDampMode for possible values.
-
-BodyParameter BODY_PARAM_ANGULAR_DAMP_MODE = 7
-
-Constant to set/get a body's angular damping mode. See BodyDampMode for possible values.
-
-BodyParameter BODY_PARAM_LINEAR_DAMP = 8
-
-Constant to set/get a body's linear damping factor.
-
-BodyParameter BODY_PARAM_ANGULAR_DAMP = 9
-
-Constant to set/get a body's angular damping factor.
-
-BodyParameter BODY_PARAM_MAX = 10
-
-Represents the size of the BodyParameter enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BODY_PARAM_BOUNCE {#BODY_PARAM_BOUNCE}
 
@@ -3065,7 +2627,7 @@ Represents the size of the BodyParameter enum.
 BODY_PARAM_BOUNCE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's bounce factor.
 
 #### BODY_PARAM_FRICTION {#BODY_PARAM_FRICTION}
 
@@ -3073,7 +2635,7 @@ BODY_PARAM_BOUNCE = 0
 BODY_PARAM_FRICTION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's friction.
 
 #### BODY_PARAM_MASS {#BODY_PARAM_MASS}
 
@@ -3081,7 +2643,7 @@ BODY_PARAM_FRICTION = 1
 BODY_PARAM_MASS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's mass.
 
 #### BODY_PARAM_INERTIA {#BODY_PARAM_INERTIA}
 
@@ -3089,7 +2651,7 @@ BODY_PARAM_MASS = 2
 BODY_PARAM_INERTIA = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's inertia.
 
 #### BODY_PARAM_CENTER_OF_MASS {#BODY_PARAM_CENTER_OF_MASS}
 
@@ -3097,7 +2659,7 @@ BODY_PARAM_INERTIA = 3
 BODY_PARAM_CENTER_OF_MASS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's center of mass position in the body's local coordinate system.
 
 #### BODY_PARAM_GRAVITY_SCALE {#BODY_PARAM_GRAVITY_SCALE}
 
@@ -3105,7 +2667,7 @@ BODY_PARAM_CENTER_OF_MASS = 4
 BODY_PARAM_GRAVITY_SCALE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's gravity multiplier.
 
 #### BODY_PARAM_LINEAR_DAMP_MODE {#BODY_PARAM_LINEAR_DAMP_MODE}
 
@@ -3113,7 +2675,7 @@ BODY_PARAM_GRAVITY_SCALE = 5
 BODY_PARAM_LINEAR_DAMP_MODE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's linear damping mode. See BodyDampMode for possible values.
 
 #### BODY_PARAM_ANGULAR_DAMP_MODE {#BODY_PARAM_ANGULAR_DAMP_MODE}
 
@@ -3121,7 +2683,7 @@ BODY_PARAM_LINEAR_DAMP_MODE = 6
 BODY_PARAM_ANGULAR_DAMP_MODE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's angular damping mode. See BodyDampMode for possible values.
 
 #### BODY_PARAM_LINEAR_DAMP {#BODY_PARAM_LINEAR_DAMP}
 
@@ -3129,7 +2691,7 @@ BODY_PARAM_ANGULAR_DAMP_MODE = 7
 BODY_PARAM_LINEAR_DAMP = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's linear damping factor.
 
 #### BODY_PARAM_ANGULAR_DAMP {#BODY_PARAM_ANGULAR_DAMP}
 
@@ -3137,7 +2699,7 @@ BODY_PARAM_LINEAR_DAMP = 8
 BODY_PARAM_ANGULAR_DAMP = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's angular damping factor.
 
 #### BODY_PARAM_MAX {#BODY_PARAM_MAX}
 
@@ -3145,7 +2707,9 @@ BODY_PARAM_ANGULAR_DAMP = 9
 BODY_PARAM_MAX = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the BodyParameter enum.
+
+---
 
 ### BodyDampMode {#enum-BodyDampMode}
 
@@ -3153,13 +2717,7 @@ BODY_PARAM_MAX = 10
 enum BodyDampMode { BODY_DAMP_MODE_COMBINE = 0, BODY_DAMP_MODE_REPLACE = 1 }
 ```
 
-BodyDampMode BODY_DAMP_MODE_COMBINE = 0
-
-The body's damping value is added to any value set in areas or the default value.
-
-BodyDampMode BODY_DAMP_MODE_REPLACE = 1
-
-The body's damping value replaces any value set in areas or the default value.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BODY_DAMP_MODE_COMBINE {#BODY_DAMP_MODE_COMBINE}
 
@@ -3167,7 +2725,7 @@ The body's damping value replaces any value set in areas or the default value.
 BODY_DAMP_MODE_COMBINE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The body's damping value is added to any value set in areas or the default value.
 
 #### BODY_DAMP_MODE_REPLACE {#BODY_DAMP_MODE_REPLACE}
 
@@ -3175,7 +2733,9 @@ BODY_DAMP_MODE_COMBINE = 0
 BODY_DAMP_MODE_REPLACE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The body's damping value replaces any value set in areas or the default value.
+
+---
 
 ### BodyState {#enum-BodyState}
 
@@ -3183,25 +2743,7 @@ BODY_DAMP_MODE_REPLACE = 1
 enum BodyState { BODY_STATE_TRANSFORM = 0, BODY_STATE_LINEAR_VELOCITY = 1, BODY_STATE_ANGULAR_VELOCITY = 2, BODY_STATE_SLEEPING = 3, BODY_STATE_CAN_SLEEP = 4 }
 ```
 
-BodyState BODY_STATE_TRANSFORM = 0
-
-Constant to set/get the current transform matrix of the body.
-
-BodyState BODY_STATE_LINEAR_VELOCITY = 1
-
-Constant to set/get the current linear velocity of the body.
-
-BodyState BODY_STATE_ANGULAR_VELOCITY = 2
-
-Constant to set/get the current angular velocity of the body.
-
-BodyState BODY_STATE_SLEEPING = 3
-
-Constant to sleep/wake up a body, or to get whether it is sleeping.
-
-BodyState BODY_STATE_CAN_SLEEP = 4
-
-Constant to set/get whether the body can sleep.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BODY_STATE_TRANSFORM {#BODY_STATE_TRANSFORM}
 
@@ -3209,7 +2751,7 @@ Constant to set/get whether the body can sleep.
 BODY_STATE_TRANSFORM = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the current transform matrix of the body.
 
 #### BODY_STATE_LINEAR_VELOCITY {#BODY_STATE_LINEAR_VELOCITY}
 
@@ -3217,7 +2759,7 @@ BODY_STATE_TRANSFORM = 0
 BODY_STATE_LINEAR_VELOCITY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the current linear velocity of the body.
 
 #### BODY_STATE_ANGULAR_VELOCITY {#BODY_STATE_ANGULAR_VELOCITY}
 
@@ -3225,7 +2767,7 @@ BODY_STATE_LINEAR_VELOCITY = 1
 BODY_STATE_ANGULAR_VELOCITY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the current angular velocity of the body.
 
 #### BODY_STATE_SLEEPING {#BODY_STATE_SLEEPING}
 
@@ -3233,7 +2775,7 @@ BODY_STATE_ANGULAR_VELOCITY = 2
 BODY_STATE_SLEEPING = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to sleep/wake up a body, or to get whether it is sleeping.
 
 #### BODY_STATE_CAN_SLEEP {#BODY_STATE_CAN_SLEEP}
 
@@ -3241,7 +2783,9 @@ BODY_STATE_SLEEPING = 3
 BODY_STATE_CAN_SLEEP = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get whether the body can sleep.
+
+---
 
 ### AreaBodyStatus {#enum-AreaBodyStatus}
 
@@ -3249,13 +2793,7 @@ BODY_STATE_CAN_SLEEP = 4
 enum AreaBodyStatus { AREA_BODY_ADDED = 0, AREA_BODY_REMOVED = 1 }
 ```
 
-AreaBodyStatus AREA_BODY_ADDED = 0
-
-The value of the first parameter and area callback function receives, when an object enters one of its shapes.
-
-AreaBodyStatus AREA_BODY_REMOVED = 1
-
-The value of the first parameter and area callback function receives, when an object exits one of its shapes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AREA_BODY_ADDED {#AREA_BODY_ADDED}
 
@@ -3263,7 +2801,7 @@ The value of the first parameter and area callback function receives, when an ob
 AREA_BODY_ADDED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The value of the first parameter and area callback function receives, when an object enters one of its shapes.
 
 #### AREA_BODY_REMOVED {#AREA_BODY_REMOVED}
 
@@ -3271,7 +2809,9 @@ AREA_BODY_ADDED = 0
 AREA_BODY_REMOVED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The value of the first parameter and area callback function receives, when an object exits one of its shapes.
+
+---
 
 ### ProcessInfo {#enum-ProcessInfo}
 
@@ -3279,17 +2819,7 @@ AREA_BODY_REMOVED = 1
 enum ProcessInfo { INFO_ACTIVE_OBJECTS = 0, INFO_COLLISION_PAIRS = 1, INFO_ISLAND_COUNT = 2 }
 ```
 
-ProcessInfo INFO_ACTIVE_OBJECTS = 0
-
-Constant to get the number of objects that are not sleeping.
-
-ProcessInfo INFO_COLLISION_PAIRS = 1
-
-Constant to get the number of possible collisions.
-
-ProcessInfo INFO_ISLAND_COUNT = 2
-
-Constant to get the number of space regions where a collision could occur.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### INFO_ACTIVE_OBJECTS {#INFO_ACTIVE_OBJECTS}
 
@@ -3297,7 +2827,7 @@ Constant to get the number of space regions where a collision could occur.
 INFO_ACTIVE_OBJECTS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of objects that are not sleeping.
 
 #### INFO_COLLISION_PAIRS {#INFO_COLLISION_PAIRS}
 
@@ -3305,7 +2835,7 @@ INFO_ACTIVE_OBJECTS = 0
 INFO_COLLISION_PAIRS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of possible collisions.
 
 #### INFO_ISLAND_COUNT {#INFO_ISLAND_COUNT}
 
@@ -3313,7 +2843,9 @@ INFO_COLLISION_PAIRS = 1
 INFO_ISLAND_COUNT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of space regions where a collision could occur.
+
+---
 
 ### SpaceParameter {#enum-SpaceParameter}
 
@@ -3321,41 +2853,7 @@ INFO_ISLAND_COUNT = 2
 enum SpaceParameter { SPACE_PARAM_CONTACT_RECYCLE_RADIUS = 0, SPACE_PARAM_CONTACT_MAX_SEPARATION = 1, SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION = 2, SPACE_PARAM_CONTACT_DEFAULT_BIAS = 3, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD = 4, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD = 5, SPACE_PARAM_BODY_TIME_TO_SLEEP = 6, SPACE_PARAM_SOLVER_ITERATIONS = 7 }
 ```
 
-SpaceParameter SPACE_PARAM_CONTACT_RECYCLE_RADIUS = 0
-
-Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated.
-
-SpaceParameter SPACE_PARAM_CONTACT_MAX_SEPARATION = 1
-
-Constant to set/get the maximum distance a shape can be from another before they are considered separated and the contact is discarded.
-
-SpaceParameter SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION = 2
-
-Constant to set/get the maximum distance a shape can penetrate another shape before it is considered a collision.
-
-SpaceParameter SPACE_PARAM_CONTACT_DEFAULT_BIAS = 3
-
-Constant to set/get the default solver bias for all physics contacts. A solver bias is a factor controlling how much two objects "rebound", after overlapping, to avoid leaving them in that state because of numerical imprecision.
-
-SpaceParameter SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD = 4
-
-Constant to set/get the threshold linear velocity of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after the time given.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SpaceParameter SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD = 5
-
-Constant to set/get the threshold angular velocity of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after the time given.
-
-Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
-
-SpaceParameter SPACE_PARAM_BODY_TIME_TO_SLEEP = 6
-
-Constant to set/get the maximum time of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after this time.
-
-SpaceParameter SPACE_PARAM_SOLVER_ITERATIONS = 7
-
-Constant to set/get the number of solver iterations for contacts and constraints. The greater the number of iterations, the more accurate the collisions and constraints will be. However, a greater number of iterations requires more CPU power, which can decrease performance.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SPACE_PARAM_CONTACT_RECYCLE_RADIUS {#SPACE_PARAM_CONTACT_RECYCLE_RADIUS}
 
@@ -3363,7 +2861,7 @@ Constant to set/get the number of solver iterations for contacts and constraints
 SPACE_PARAM_CONTACT_RECYCLE_RADIUS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated.
 
 #### SPACE_PARAM_CONTACT_MAX_SEPARATION {#SPACE_PARAM_CONTACT_MAX_SEPARATION}
 
@@ -3371,7 +2869,7 @@ SPACE_PARAM_CONTACT_RECYCLE_RADIUS = 0
 SPACE_PARAM_CONTACT_MAX_SEPARATION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the maximum distance a shape can be from another before they are considered separated and the contact is discarded.
 
 #### SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION {#SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION}
 
@@ -3379,7 +2877,7 @@ SPACE_PARAM_CONTACT_MAX_SEPARATION = 1
 SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the maximum distance a shape can penetrate another shape before it is considered a collision.
 
 #### SPACE_PARAM_CONTACT_DEFAULT_BIAS {#SPACE_PARAM_CONTACT_DEFAULT_BIAS}
 
@@ -3387,7 +2885,7 @@ SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION = 2
 SPACE_PARAM_CONTACT_DEFAULT_BIAS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the default solver bias for all physics contacts. A solver bias is a factor controlling how much two objects "rebound", after overlapping, to avoid leaving them in that state because of numerical imprecision.
 
 #### SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD {#SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD}
 
@@ -3395,7 +2893,9 @@ SPACE_PARAM_CONTACT_DEFAULT_BIAS = 3
 SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the threshold linear velocity of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after the time given.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD {#SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD}
 
@@ -3403,7 +2903,9 @@ SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD = 4
 SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the threshold angular velocity of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after the time given.
+
+Note: Only supported when using GodotPhysics3D. This parameter is ignored when using Jolt Physics.
 
 #### SPACE_PARAM_BODY_TIME_TO_SLEEP {#SPACE_PARAM_BODY_TIME_TO_SLEEP}
 
@@ -3411,7 +2913,7 @@ SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD = 5
 SPACE_PARAM_BODY_TIME_TO_SLEEP = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the maximum time of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after this time.
 
 #### SPACE_PARAM_SOLVER_ITERATIONS {#SPACE_PARAM_SOLVER_ITERATIONS}
 
@@ -3419,7 +2921,9 @@ SPACE_PARAM_BODY_TIME_TO_SLEEP = 6
 SPACE_PARAM_SOLVER_ITERATIONS = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the number of solver iterations for contacts and constraints. The greater the number of iterations, the more accurate the collisions and constraints will be. However, a greater number of iterations requires more CPU power, which can decrease performance.
+
+---
 
 ### BodyAxis {#enum-BodyAxis}
 
@@ -3427,29 +2931,7 @@ SPACE_PARAM_SOLVER_ITERATIONS = 7
 enum BodyAxis { BODY_AXIS_LINEAR_X = 1, BODY_AXIS_LINEAR_Y = 2, BODY_AXIS_LINEAR_Z = 4, BODY_AXIS_ANGULAR_X = 8, BODY_AXIS_ANGULAR_Y = 16, BODY_AXIS_ANGULAR_Z = 32 }
 ```
 
-BodyAxis BODY_AXIS_LINEAR_X = 1
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-BodyAxis BODY_AXIS_LINEAR_Y = 2
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-BodyAxis BODY_AXIS_LINEAR_Z = 4
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-BodyAxis BODY_AXIS_ANGULAR_X = 8
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-BodyAxis BODY_AXIS_ANGULAR_Y = 16
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-BodyAxis BODY_AXIS_ANGULAR_Z = 32
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BODY_AXIS_LINEAR_X {#BODY_AXIS_LINEAR_X}
 
@@ -3457,7 +2939,7 @@ There is currently no description for this enum. Please help us by contributing 
 BODY_AXIS_LINEAR_X = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### BODY_AXIS_LINEAR_Y {#BODY_AXIS_LINEAR_Y}
 
@@ -3465,7 +2947,7 @@ BODY_AXIS_LINEAR_X = 1
 BODY_AXIS_LINEAR_Y = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### BODY_AXIS_LINEAR_Z {#BODY_AXIS_LINEAR_Z}
 
@@ -3473,7 +2955,7 @@ BODY_AXIS_LINEAR_Y = 2
 BODY_AXIS_LINEAR_Z = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### BODY_AXIS_ANGULAR_X {#BODY_AXIS_ANGULAR_X}
 
@@ -3481,7 +2963,7 @@ BODY_AXIS_LINEAR_Z = 4
 BODY_AXIS_ANGULAR_X = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### BODY_AXIS_ANGULAR_Y {#BODY_AXIS_ANGULAR_Y}
 
@@ -3489,7 +2971,7 @@ BODY_AXIS_ANGULAR_X = 8
 BODY_AXIS_ANGULAR_Y = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### BODY_AXIS_ANGULAR_Z {#BODY_AXIS_ANGULAR_Z}
 
@@ -3497,4 +2979,6 @@ BODY_AXIS_ANGULAR_Y = 16
 BODY_AXIS_ANGULAR_Z = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+---

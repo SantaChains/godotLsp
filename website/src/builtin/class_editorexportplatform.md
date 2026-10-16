@@ -250,21 +250,7 @@ Executes specified command on the remote host via SSH protocol and returns proce
 enum ExportMessageType { EXPORT_MESSAGE_NONE = 0, EXPORT_MESSAGE_INFO = 1, EXPORT_MESSAGE_WARNING = 2, EXPORT_MESSAGE_ERROR = 3 }
 ```
 
-ExportMessageType EXPORT_MESSAGE_NONE = 0
-
-Invalid message type used as the default value when no type is specified.
-
-ExportMessageType EXPORT_MESSAGE_INFO = 1
-
-Message type for informational messages that have no effect on the export.
-
-ExportMessageType EXPORT_MESSAGE_WARNING = 2
-
-Message type for warning messages that should be addressed but still allow to complete the export.
-
-ExportMessageType EXPORT_MESSAGE_ERROR = 3
-
-Message type for error messages that must be addressed and fail the export.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EXPORT_MESSAGE_NONE {#EXPORT_MESSAGE_NONE}
 
@@ -272,7 +258,7 @@ Message type for error messages that must be addressed and fail the export.
 EXPORT_MESSAGE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid message type used as the default value when no type is specified.
 
 #### EXPORT_MESSAGE_INFO {#EXPORT_MESSAGE_INFO}
 
@@ -280,7 +266,7 @@ EXPORT_MESSAGE_NONE = 0
 EXPORT_MESSAGE_INFO = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Message type for informational messages that have no effect on the export.
 
 #### EXPORT_MESSAGE_WARNING {#EXPORT_MESSAGE_WARNING}
 
@@ -288,7 +274,7 @@ EXPORT_MESSAGE_INFO = 1
 EXPORT_MESSAGE_WARNING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Message type for warning messages that should be addressed but still allow to complete the export.
 
 #### EXPORT_MESSAGE_ERROR {#EXPORT_MESSAGE_ERROR}
 
@@ -296,7 +282,11 @@ EXPORT_MESSAGE_WARNING = 2
 EXPORT_MESSAGE_ERROR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Message type for error messages that must be addressed and fail the export.
+
+---
+
+flags DebugFlags:
 
 ### DebugFlags {#enum-DebugFlags}
 
@@ -312,7 +302,7 @@ enum DebugFlags（位标志） { DEBUG_FLAG_DUMB_CLIENT = 1, DEBUG_FLAG_REMOTE_D
 DEBUG_FLAG_DUMB_CLIENT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flag is set if the remotely debugged project is expected to use the remote file system. If set, gen_export_flags() will append --remote-fs and --remote-fs-password (if EditorSettings.filesystem/file_server/password is defined) command line arguments to the returned list.
 
 #### DEBUG_FLAG_REMOTE_DEBUG {#DEBUG_FLAG_REMOTE_DEBUG}
 
@@ -320,7 +310,7 @@ DEBUG_FLAG_DUMB_CLIENT = 1
 DEBUG_FLAG_REMOTE_DEBUG = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flag is set if remote debug is enabled. If set, gen_export_flags() will append --remote-debug and --breakpoints (if breakpoints are selected in the script editor or added by the plugin) command line arguments to the returned list.
 
 #### DEBUG_FLAG_REMOTE_DEBUG_LOCALHOST {#DEBUG_FLAG_REMOTE_DEBUG_LOCALHOST}
 
@@ -328,7 +318,7 @@ DEBUG_FLAG_REMOTE_DEBUG = 2
 DEBUG_FLAG_REMOTE_DEBUG_LOCALHOST = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flag is set if remotely debugged project is running on the localhost. If set, gen_export_flags() will use localhost instead of EditorSettings.network/debug/remote_host as remote debugger host.
 
 #### DEBUG_FLAG_VIEW_COLLISIONS {#DEBUG_FLAG_VIEW_COLLISIONS}
 
@@ -336,7 +326,7 @@ DEBUG_FLAG_REMOTE_DEBUG_LOCALHOST = 4
 DEBUG_FLAG_VIEW_COLLISIONS = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flag is set if the "Visible Collision Shapes" remote debug option is enabled. If set, gen_export_flags() will append the --debug-collisions command line argument to the returned list.
 
 #### DEBUG_FLAG_VIEW_NAVIGATION {#DEBUG_FLAG_VIEW_NAVIGATION}
 
@@ -344,4 +334,6 @@ DEBUG_FLAG_VIEW_COLLISIONS = 8
 DEBUG_FLAG_VIEW_NAVIGATION = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flag is set if the "Visible Navigation" remote debug option is enabled. If set, gen_export_flags() will append the --debug-navigation command line argument to the returned list.
+
+---

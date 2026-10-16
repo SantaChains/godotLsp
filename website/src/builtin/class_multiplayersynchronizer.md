@@ -166,7 +166,12 @@ Updates the visibility of for_peer according to visibility filters. If for_peer 
 root_path: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_root_path(value: NodePath)
+- NodePath get_root_path()
+
+Node path that replicated properties are relative to.
+
+If root_path was spawned by a MultiplayerSpawner, the node will be also be spawned and despawned based on this synchronizer visibility options.
 
 ### replication_interval {#replication_interval}
 
@@ -257,17 +262,7 @@ Emitted when visibility of for_peer is updated. See update_visibility().
 enum VisibilityUpdateMode { VISIBILITY_PROCESS_IDLE = 0, VISIBILITY_PROCESS_PHYSICS = 1, VISIBILITY_PROCESS_NONE = 2 }
 ```
 
-VisibilityUpdateMode VISIBILITY_PROCESS_IDLE = 0
-
-Visibility filters are updated during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS).
-
-VisibilityUpdateMode VISIBILITY_PROCESS_PHYSICS = 1
-
-Visibility filters are updated during physics frames (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS).
-
-VisibilityUpdateMode VISIBILITY_PROCESS_NONE = 2
-
-Visibility filters are not updated automatically, and must be updated manually by calling update_visibility().
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VISIBILITY_PROCESS_IDLE {#VISIBILITY_PROCESS_IDLE}
 
@@ -275,7 +270,7 @@ Visibility filters are not updated automatically, and must be updated manually b
 VISIBILITY_PROCESS_IDLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Visibility filters are updated during process frames (see Node.NOTIFICATION_INTERNAL_PROCESS).
 
 #### VISIBILITY_PROCESS_PHYSICS {#VISIBILITY_PROCESS_PHYSICS}
 
@@ -283,7 +278,7 @@ VISIBILITY_PROCESS_IDLE = 0
 VISIBILITY_PROCESS_PHYSICS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Visibility filters are updated during physics frames (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS).
 
 #### VISIBILITY_PROCESS_NONE {#VISIBILITY_PROCESS_NONE}
 
@@ -291,4 +286,6 @@ VISIBILITY_PROCESS_PHYSICS = 1
 VISIBILITY_PROCESS_NONE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Visibility filters are not updated automatically, and must be updated manually by calling update_visibility().
+
+---

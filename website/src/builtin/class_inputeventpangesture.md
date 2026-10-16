@@ -38,4 +38,7 @@ void set_delta(delta: Vector2)
 delta: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_delta(value: Vector2)
+- Vector2 get_delta()
+
+Panning amount since last pan event.

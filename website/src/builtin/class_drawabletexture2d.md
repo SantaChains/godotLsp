@@ -82,23 +82,7 @@ Initializes the DrawableTexture to a White texture of the given width, height, a
 enum DrawableFormat { DRAWABLE_FORMAT_RGBA8 = 0, DRAWABLE_FORMAT_RGBA8_SRGB = 1, DRAWABLE_FORMAT_RGBAH = 2, DRAWABLE_FORMAT_RGBAF = 3 }
 ```
 
-DrawableFormat DRAWABLE_FORMAT_RGBA8 = 0
-
-OpenGL texture format RGBA with four components, each with a bitdepth of 8.
-
-DrawableFormat DRAWABLE_FORMAT_RGBA8_SRGB = 1
-
-OpenGL texture format RGBA with four components, each with a bitdepth of 8.
-
-When drawn to, an sRGB to linear color space conversion is performed.
-
-DrawableFormat DRAWABLE_FORMAT_RGBAH = 2
-
-OpenGL texture format GL_RGBA16F where there are four components, each a 16-bit "half-precision" floating-point value.
-
-DrawableFormat DRAWABLE_FORMAT_RGBAF = 3
-
-OpenGL texture format GL_RGBA32F where there are four components, each a 32-bit floating-point value.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DRAWABLE_FORMAT_RGBA8 {#DRAWABLE_FORMAT_RGBA8}
 
@@ -106,7 +90,7 @@ OpenGL texture format GL_RGBA32F where there are four components, each a 32-bit 
 DRAWABLE_FORMAT_RGBA8 = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format RGBA with four components, each with a bitdepth of 8.
 
 #### DRAWABLE_FORMAT_RGBA8_SRGB {#DRAWABLE_FORMAT_RGBA8_SRGB}
 
@@ -114,7 +98,9 @@ DRAWABLE_FORMAT_RGBA8 = 0
 DRAWABLE_FORMAT_RGBA8_SRGB = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format RGBA with four components, each with a bitdepth of 8.
+
+When drawn to, an sRGB to linear color space conversion is performed.
 
 #### DRAWABLE_FORMAT_RGBAH {#DRAWABLE_FORMAT_RGBAH}
 
@@ -122,7 +108,7 @@ DRAWABLE_FORMAT_RGBA8_SRGB = 1
 DRAWABLE_FORMAT_RGBAH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RGBA16F where there are four components, each a 16-bit "half-precision" floating-point value.
 
 #### DRAWABLE_FORMAT_RGBAF {#DRAWABLE_FORMAT_RGBAF}
 
@@ -130,4 +116,6 @@ DRAWABLE_FORMAT_RGBAH = 2
 DRAWABLE_FORMAT_RGBAF = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OpenGL texture format GL_RGBA32F where there are four components, each a 32-bit floating-point value.
+
+---

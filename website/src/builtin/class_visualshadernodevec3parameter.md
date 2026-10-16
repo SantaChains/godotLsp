@@ -63,4 +63,7 @@ Enables usage of the default_value.
 default_value: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_default_value(value: Vector3)
+- Vector3 get_default_value()
+
+A default value to be assigned within the shader.

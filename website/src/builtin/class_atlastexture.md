@@ -99,7 +99,12 @@ The texture that contains the atlas. Can be any type inheriting from Texture2D, 
 region: Rect2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_region(value: Rect2)
+- Rect2 get_region()
+
+The region used to draw the atlas. If either dimension of the region's size is 0, the value from atlas size will be used for that axis instead.
+
+Note: The image size is always an integer, so the actual region size is rounded down.
 
 ### margin {#margin}
 
@@ -107,7 +112,10 @@ region: Rect2
 margin: Rect2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_margin(value: Rect2)
+- Rect2 get_margin()
+
+The margin around the region. Useful for small adjustments. If the Rect2.size of this property ("w" and "h" in the editor) is set, the drawn texture is resized to fit within the margin.
 
 ### filter_clip {#filter_clip}
 

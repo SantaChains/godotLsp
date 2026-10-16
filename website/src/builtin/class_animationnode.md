@@ -299,21 +299,7 @@ Emitted by nodes that inherit from this class and that have an internal tree whe
 enum FilterAction { FILTER_IGNORE = 0, FILTER_PASS = 1, FILTER_STOP = 2, FILTER_BLEND = 3 }
 ```
 
-FilterAction FILTER_IGNORE = 0
-
-Do not use filtering.
-
-FilterAction FILTER_PASS = 1
-
-Paths matching the filter will be allowed to pass.
-
-FilterAction FILTER_STOP = 2
-
-Paths matching the filter will be discarded.
-
-FilterAction FILTER_BLEND = 3
-
-Paths matching the filter will be blended (by the blend value).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FILTER_IGNORE {#FILTER_IGNORE}
 
@@ -321,7 +307,7 @@ Paths matching the filter will be blended (by the blend value).
 FILTER_IGNORE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not use filtering.
 
 #### FILTER_PASS {#FILTER_PASS}
 
@@ -329,7 +315,7 @@ FILTER_IGNORE = 0
 FILTER_PASS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Paths matching the filter will be allowed to pass.
 
 #### FILTER_STOP {#FILTER_STOP}
 
@@ -337,7 +323,7 @@ FILTER_PASS = 1
 FILTER_STOP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Paths matching the filter will be discarded.
 
 #### FILTER_BLEND {#FILTER_BLEND}
 
@@ -345,4 +331,6 @@ FILTER_STOP = 2
 FILTER_BLEND = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Paths matching the filter will be blended (by the blend value).
+
+---

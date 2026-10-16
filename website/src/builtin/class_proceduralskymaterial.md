@@ -248,7 +248,10 @@ void set_use_debanding(use_debanding: bool)
 sky_top_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_sky_top_color(value: Color)
+- Color get_sky_top_color()
+
+Color of the sky at the top. Blends with sky_horizon_color.
 
 ### sky_horizon_color {#sky_horizon_color}
 
@@ -256,7 +259,10 @@ sky_top_color: Color
 sky_horizon_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_sky_horizon_color(value: Color)
+- Color get_sky_horizon_color()
+
+Color of the sky at the horizon. Blends with sky_top_color.
 
 ### sky_curve {#sky_curve}
 
@@ -297,7 +303,10 @@ The sky cover texture to use. This texture must use an equirectangular projectio
 sky_cover_modulate: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_sky_cover_modulate(value: Color)
+- Color get_sky_cover_modulate()
+
+The tint to apply to the sky_cover texture. This can be used to change the sky cover's colors or opacity independently of the sky energy, which is useful for day/night or weather transitions. Only effective if a texture is defined in sky_cover.
 
 ### ground_bottom_color {#ground_bottom_color}
 
@@ -305,7 +314,10 @@ sky_cover_modulate: Color
 ground_bottom_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_ground_bottom_color(value: Color)
+- Color get_ground_bottom_color()
+
+Color of the ground at the bottom. Blends with ground_horizon_color.
 
 ### ground_horizon_color {#ground_horizon_color}
 
@@ -313,7 +325,10 @@ ground_bottom_color: Color
 ground_horizon_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_ground_horizon_color(value: Color)
+- Color get_ground_horizon_color()
+
+Color of the ground at the horizon. Blends with ground_bottom_color.
 
 ### ground_curve {#ground_curve}
 

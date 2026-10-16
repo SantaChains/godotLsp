@@ -110,7 +110,10 @@ void set_use_global_coordinates(use_global_coordinates: bool)
 remote_path: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_remote_node(value: NodePath)
+- NodePath get_remote_node()
+
+The NodePath to the remote node, relative to the RemoteTransform3D's position in the scene.
 
 ### use_global_coordinates {#use_global_coordinates}
 

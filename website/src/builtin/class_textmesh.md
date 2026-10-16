@@ -463,7 +463,12 @@ Text width (in pixels), used for fill alignment.
 offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset(value: Vector2)
+- Vector2 get_offset()
+
+The text drawing offset (in pixels).
+
+Note: Changing this property will regenerate the mesh, which is a slow operation. To change the text's position in real-time efficiently, change the node's Node3D.position instead.
 
 ### text_direction {#text_direction}
 

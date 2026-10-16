@@ -296,7 +296,10 @@ If true, this raycast will not report collisions with its parent node. This prop
 target_position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_position(value: Vector2)
+- Vector2 get_target_position()
+
+The ray's destination point, relative to this raycast's Node2D.position.
 
 ### collision_mask {#collision_mask}
 

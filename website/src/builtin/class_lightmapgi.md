@@ -595,7 +595,10 @@ The sky to use as a source of environment lighting. Only effective if environmen
 environment_custom_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_environment_custom_color(value: Color)
+- Color get_environment_custom_color()
+
+The color to use for environment lighting. Only effective if environment_mode is ENVIRONMENT_MODE_CUSTOM_COLOR.
 
 ### environment_custom_energy {#environment_custom_energy}
 
@@ -653,21 +656,7 @@ The LightmapGIData associated to this LightmapGI node. This resource is automati
 enum BakeQuality { BAKE_QUALITY_LOW = 0, BAKE_QUALITY_MEDIUM = 1, BAKE_QUALITY_HIGH = 2, BAKE_QUALITY_ULTRA = 3 }
 ```
 
-BakeQuality BAKE_QUALITY_LOW = 0
-
-Low bake quality (fastest bake times). The quality of this preset can be adjusted by changing ProjectSettings.rendering/lightmapping/bake_quality/low_quality_ray_count and ProjectSettings.rendering/lightmapping/bake_quality/low_quality_probe_ray_count.
-
-BakeQuality BAKE_QUALITY_MEDIUM = 1
-
-Medium bake quality (fast bake times). The quality of this preset can be adjusted by changing ProjectSettings.rendering/lightmapping/bake_quality/medium_quality_ray_count and ProjectSettings.rendering/lightmapping/bake_quality/medium_quality_probe_ray_count.
-
-BakeQuality BAKE_QUALITY_HIGH = 2
-
-High bake quality (slow bake times). The quality of this preset can be adjusted by changing ProjectSettings.rendering/lightmapping/bake_quality/high_quality_ray_count and ProjectSettings.rendering/lightmapping/bake_quality/high_quality_probe_ray_count.
-
-BakeQuality BAKE_QUALITY_ULTRA = 3
-
-Highest bake quality (slowest bake times). The quality of this preset can be adjusted by changing ProjectSettings.rendering/lightmapping/bake_quality/ultra_quality_ray_count and ProjectSettings.rendering/lightmapping/bake_quality/ultra_quality_probe_ray_count.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BAKE_QUALITY_LOW {#BAKE_QUALITY_LOW}
 
@@ -675,7 +664,7 @@ Highest bake quality (slowest bake times). The quality of this preset can be adj
 BAKE_QUALITY_LOW = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Low bake quality (fastest bake times). The quality of this preset can be adjusted by changing ProjectSettings.rendering/lightmapping/bake_quality/low_quality_ray_count and ProjectSettings.rendering/lightmapping/bake_quality/low_quality_probe_ray_count.
 
 #### BAKE_QUALITY_MEDIUM {#BAKE_QUALITY_MEDIUM}
 
@@ -683,7 +672,7 @@ BAKE_QUALITY_LOW = 0
 BAKE_QUALITY_MEDIUM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Medium bake quality (fast bake times). The quality of this preset can be adjusted by changing ProjectSettings.rendering/lightmapping/bake_quality/medium_quality_ray_count and ProjectSettings.rendering/lightmapping/bake_quality/medium_quality_probe_ray_count.
 
 #### BAKE_QUALITY_HIGH {#BAKE_QUALITY_HIGH}
 
@@ -691,7 +680,7 @@ BAKE_QUALITY_MEDIUM = 1
 BAKE_QUALITY_HIGH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+High bake quality (slow bake times). The quality of this preset can be adjusted by changing ProjectSettings.rendering/lightmapping/bake_quality/high_quality_ray_count and ProjectSettings.rendering/lightmapping/bake_quality/high_quality_probe_ray_count.
 
 #### BAKE_QUALITY_ULTRA {#BAKE_QUALITY_ULTRA}
 
@@ -699,7 +688,9 @@ BAKE_QUALITY_HIGH = 2
 BAKE_QUALITY_ULTRA = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Highest bake quality (slowest bake times). The quality of this preset can be adjusted by changing ProjectSettings.rendering/lightmapping/bake_quality/ultra_quality_ray_count and ProjectSettings.rendering/lightmapping/bake_quality/ultra_quality_probe_ray_count.
+
+---
 
 ### GenerateProbes {#enum-GenerateProbes}
 
@@ -707,25 +698,7 @@ BAKE_QUALITY_ULTRA = 3
 enum GenerateProbes { GENERATE_PROBES_DISABLED = 0, GENERATE_PROBES_SUBDIV_4 = 1, GENERATE_PROBES_SUBDIV_8 = 2, GENERATE_PROBES_SUBDIV_16 = 3, GENERATE_PROBES_SUBDIV_32 = 4 }
 ```
 
-GenerateProbes GENERATE_PROBES_DISABLED = 0
-
-Don't generate lightmap probes for lighting dynamic objects.
-
-GenerateProbes GENERATE_PROBES_SUBDIV_4 = 1
-
-Lowest level of subdivision (fastest bake times, smallest file sizes).
-
-GenerateProbes GENERATE_PROBES_SUBDIV_8 = 2
-
-Low level of subdivision (fast bake times, small file sizes).
-
-GenerateProbes GENERATE_PROBES_SUBDIV_16 = 3
-
-High level of subdivision (slow bake times, large file sizes).
-
-GenerateProbes GENERATE_PROBES_SUBDIV_32 = 4
-
-Highest level of subdivision (slowest bake times, largest file sizes).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GENERATE_PROBES_DISABLED {#GENERATE_PROBES_DISABLED}
 
@@ -733,7 +706,7 @@ Highest level of subdivision (slowest bake times, largest file sizes).
 GENERATE_PROBES_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Don't generate lightmap probes for lighting dynamic objects.
 
 #### GENERATE_PROBES_SUBDIV_4 {#GENERATE_PROBES_SUBDIV_4}
 
@@ -741,7 +714,7 @@ GENERATE_PROBES_DISABLED = 0
 GENERATE_PROBES_SUBDIV_4 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lowest level of subdivision (fastest bake times, smallest file sizes).
 
 #### GENERATE_PROBES_SUBDIV_8 {#GENERATE_PROBES_SUBDIV_8}
 
@@ -749,7 +722,7 @@ GENERATE_PROBES_SUBDIV_4 = 1
 GENERATE_PROBES_SUBDIV_8 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Low level of subdivision (fast bake times, small file sizes).
 
 #### GENERATE_PROBES_SUBDIV_16 {#GENERATE_PROBES_SUBDIV_16}
 
@@ -757,7 +730,7 @@ GENERATE_PROBES_SUBDIV_8 = 2
 GENERATE_PROBES_SUBDIV_16 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+High level of subdivision (slow bake times, large file sizes).
 
 #### GENERATE_PROBES_SUBDIV_32 {#GENERATE_PROBES_SUBDIV_32}
 
@@ -765,7 +738,9 @@ GENERATE_PROBES_SUBDIV_16 = 3
 GENERATE_PROBES_SUBDIV_32 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Highest level of subdivision (slowest bake times, largest file sizes).
+
+---
 
 ### BakeError {#enum-BakeError}
 
@@ -773,53 +748,7 @@ GENERATE_PROBES_SUBDIV_32 = 4
 enum BakeError { BAKE_ERROR_OK = 0, BAKE_ERROR_NO_SCENE_ROOT = 1, BAKE_ERROR_FOREIGN_DATA = 2, BAKE_ERROR_NO_LIGHTMAPPER = 3, BAKE_ERROR_NO_SAVE_PATH = 4, BAKE_ERROR_NO_MESHES = 5, BAKE_ERROR_MESHES_INVALID = 6, BAKE_ERROR_CANT_CREATE_IMAGE = 7, BAKE_ERROR_USER_ABORTED = 8, BAKE_ERROR_TEXTURE_SIZE_TOO_SMALL = 9, BAKE_ERROR_LIGHTMAP_TOO_SMALL = 10, BAKE_ERROR_ATLAS_TOO_SMALL = 11 }
 ```
 
-BakeError BAKE_ERROR_OK = 0
-
-Lightmap baking was successful.
-
-BakeError BAKE_ERROR_NO_SCENE_ROOT = 1
-
-Lightmap baking failed because the root node for the edited scene could not be accessed.
-
-BakeError BAKE_ERROR_FOREIGN_DATA = 2
-
-Lightmap baking failed as the lightmap data resource is embedded in a foreign resource.
-
-BakeError BAKE_ERROR_NO_LIGHTMAPPER = 3
-
-Lightmap baking failed as there is no lightmapper available in this Godot build.
-
-BakeError BAKE_ERROR_NO_SAVE_PATH = 4
-
-Lightmap baking failed as the LightmapGIData save path isn't configured in the resource.
-
-BakeError BAKE_ERROR_NO_MESHES = 5
-
-Lightmap baking failed as there are no meshes whose GeometryInstance3D.gi_mode is GeometryInstance3D.GI_MODE_STATIC and with valid UV2 mapping in the current scene. You may need to select 3D scenes in the Import dock and change their global illumination mode accordingly.
-
-BakeError BAKE_ERROR_MESHES_INVALID = 6
-
-Lightmap baking failed as the lightmapper failed to analyze some of the meshes marked as static for baking.
-
-BakeError BAKE_ERROR_CANT_CREATE_IMAGE = 7
-
-Lightmap baking failed as the resulting image couldn't be saved or imported by Godot after it was saved.
-
-BakeError BAKE_ERROR_USER_ABORTED = 8
-
-The user aborted the lightmap baking operation (typically by clicking the Cancel button in the progress dialog).
-
-BakeError BAKE_ERROR_TEXTURE_SIZE_TOO_SMALL = 9
-
-Lightmap baking failed as the maximum texture size is too small to fit some of the meshes marked for baking.
-
-BakeError BAKE_ERROR_LIGHTMAP_TOO_SMALL = 10
-
-Lightmap baking failed as the lightmap is too small.
-
-BakeError BAKE_ERROR_ATLAS_TOO_SMALL = 11
-
-Lightmap baking failed as the lightmap was unable to fit into an atlas.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BAKE_ERROR_OK {#BAKE_ERROR_OK}
 
@@ -827,7 +756,7 @@ Lightmap baking failed as the lightmap was unable to fit into an atlas.
 BAKE_ERROR_OK = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking was successful.
 
 #### BAKE_ERROR_NO_SCENE_ROOT {#BAKE_ERROR_NO_SCENE_ROOT}
 
@@ -835,7 +764,7 @@ BAKE_ERROR_OK = 0
 BAKE_ERROR_NO_SCENE_ROOT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking failed because the root node for the edited scene could not be accessed.
 
 #### BAKE_ERROR_FOREIGN_DATA {#BAKE_ERROR_FOREIGN_DATA}
 
@@ -843,7 +772,7 @@ BAKE_ERROR_NO_SCENE_ROOT = 1
 BAKE_ERROR_FOREIGN_DATA = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking failed as the lightmap data resource is embedded in a foreign resource.
 
 #### BAKE_ERROR_NO_LIGHTMAPPER {#BAKE_ERROR_NO_LIGHTMAPPER}
 
@@ -851,7 +780,7 @@ BAKE_ERROR_FOREIGN_DATA = 2
 BAKE_ERROR_NO_LIGHTMAPPER = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking failed as there is no lightmapper available in this Godot build.
 
 #### BAKE_ERROR_NO_SAVE_PATH {#BAKE_ERROR_NO_SAVE_PATH}
 
@@ -859,7 +788,7 @@ BAKE_ERROR_NO_LIGHTMAPPER = 3
 BAKE_ERROR_NO_SAVE_PATH = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking failed as the LightmapGIData save path isn't configured in the resource.
 
 #### BAKE_ERROR_NO_MESHES {#BAKE_ERROR_NO_MESHES}
 
@@ -867,7 +796,7 @@ BAKE_ERROR_NO_SAVE_PATH = 4
 BAKE_ERROR_NO_MESHES = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking failed as there are no meshes whose GeometryInstance3D.gi_mode is GeometryInstance3D.GI_MODE_STATIC and with valid UV2 mapping in the current scene. You may need to select 3D scenes in the Import dock and change their global illumination mode accordingly.
 
 #### BAKE_ERROR_MESHES_INVALID {#BAKE_ERROR_MESHES_INVALID}
 
@@ -875,7 +804,7 @@ BAKE_ERROR_NO_MESHES = 5
 BAKE_ERROR_MESHES_INVALID = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking failed as the lightmapper failed to analyze some of the meshes marked as static for baking.
 
 #### BAKE_ERROR_CANT_CREATE_IMAGE {#BAKE_ERROR_CANT_CREATE_IMAGE}
 
@@ -883,7 +812,7 @@ BAKE_ERROR_MESHES_INVALID = 6
 BAKE_ERROR_CANT_CREATE_IMAGE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking failed as the resulting image couldn't be saved or imported by Godot after it was saved.
 
 #### BAKE_ERROR_USER_ABORTED {#BAKE_ERROR_USER_ABORTED}
 
@@ -891,7 +820,7 @@ BAKE_ERROR_CANT_CREATE_IMAGE = 7
 BAKE_ERROR_USER_ABORTED = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The user aborted the lightmap baking operation (typically by clicking the Cancel button in the progress dialog).
 
 #### BAKE_ERROR_TEXTURE_SIZE_TOO_SMALL {#BAKE_ERROR_TEXTURE_SIZE_TOO_SMALL}
 
@@ -899,7 +828,7 @@ BAKE_ERROR_USER_ABORTED = 8
 BAKE_ERROR_TEXTURE_SIZE_TOO_SMALL = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking failed as the maximum texture size is too small to fit some of the meshes marked for baking.
 
 #### BAKE_ERROR_LIGHTMAP_TOO_SMALL {#BAKE_ERROR_LIGHTMAP_TOO_SMALL}
 
@@ -907,7 +836,7 @@ BAKE_ERROR_TEXTURE_SIZE_TOO_SMALL = 9
 BAKE_ERROR_LIGHTMAP_TOO_SMALL = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking failed as the lightmap is too small.
 
 #### BAKE_ERROR_ATLAS_TOO_SMALL {#BAKE_ERROR_ATLAS_TOO_SMALL}
 
@@ -915,7 +844,9 @@ BAKE_ERROR_LIGHTMAP_TOO_SMALL = 10
 BAKE_ERROR_ATLAS_TOO_SMALL = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Lightmap baking failed as the lightmap was unable to fit into an atlas.
+
+---
 
 ### EnvironmentMode {#enum-EnvironmentMode}
 
@@ -923,23 +854,7 @@ BAKE_ERROR_ATLAS_TOO_SMALL = 11
 enum EnvironmentMode { ENVIRONMENT_MODE_DISABLED = 0, ENVIRONMENT_MODE_SCENE = 1, ENVIRONMENT_MODE_CUSTOM_SKY = 2, ENVIRONMENT_MODE_CUSTOM_COLOR = 3 }
 ```
 
-EnvironmentMode ENVIRONMENT_MODE_DISABLED = 0
-
-Ignore environment lighting when baking lightmaps.
-
-EnvironmentMode ENVIRONMENT_MODE_SCENE = 1
-
-Use the scene's environment lighting when baking lightmaps.
-
-Note: If baking lightmaps in a scene with no WorldEnvironment node, this will act like ENVIRONMENT_MODE_DISABLED. The editor's preview sky and sun is not taken into account by LightmapGI when baking lightmaps.
-
-EnvironmentMode ENVIRONMENT_MODE_CUSTOM_SKY = 2
-
-Use environment_custom_sky as a source of environment lighting when baking lightmaps.
-
-EnvironmentMode ENVIRONMENT_MODE_CUSTOM_COLOR = 3
-
-Use environment_custom_color multiplied by environment_custom_energy as a constant source of environment lighting when baking lightmaps.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ENVIRONMENT_MODE_DISABLED {#ENVIRONMENT_MODE_DISABLED}
 
@@ -947,7 +862,7 @@ Use environment_custom_color multiplied by environment_custom_energy as a consta
 ENVIRONMENT_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ignore environment lighting when baking lightmaps.
 
 #### ENVIRONMENT_MODE_SCENE {#ENVIRONMENT_MODE_SCENE}
 
@@ -955,7 +870,9 @@ ENVIRONMENT_MODE_DISABLED = 0
 ENVIRONMENT_MODE_SCENE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use the scene's environment lighting when baking lightmaps.
+
+Note: If baking lightmaps in a scene with no WorldEnvironment node, this will act like ENVIRONMENT_MODE_DISABLED. The editor's preview sky and sun is not taken into account by LightmapGI when baking lightmaps.
 
 #### ENVIRONMENT_MODE_CUSTOM_SKY {#ENVIRONMENT_MODE_CUSTOM_SKY}
 
@@ -963,7 +880,7 @@ ENVIRONMENT_MODE_SCENE = 1
 ENVIRONMENT_MODE_CUSTOM_SKY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use environment_custom_sky as a source of environment lighting when baking lightmaps.
 
 #### ENVIRONMENT_MODE_CUSTOM_COLOR {#ENVIRONMENT_MODE_CUSTOM_COLOR}
 
@@ -971,4 +888,6 @@ ENVIRONMENT_MODE_CUSTOM_SKY = 2
 ENVIRONMENT_MODE_CUSTOM_COLOR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use environment_custom_color multiplied by environment_custom_energy as a constant source of environment lighting when baking lightmaps.
+
+---

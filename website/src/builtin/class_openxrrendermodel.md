@@ -46,7 +46,10 @@ void set_render_model(render_model: RID)
 render_model: RID
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_render_model(value: RID)
+- RID get_render_model()
+
+The render model RID for the render model to load, as returned by OpenXRRenderModelExtension.render_model_create() or OpenXRRenderModelExtension.render_model_get_all().
 
 ## 信号
 

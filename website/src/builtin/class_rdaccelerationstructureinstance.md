@@ -116,7 +116,10 @@ void set_transform(p_member: Transform3D)
 transform: Transform3D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_transform(value: Transform3D)
+- Transform3D get_transform()
+
+Transform applied to the referenced BLAS for this instance.
 
 ### id {#id}
 
@@ -168,4 +171,7 @@ Flags for the instance.
 blas: RID
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_blas(value: RID)
+- RID get_blas()
+
+The BLAS referenced by this instance. If null, the instance is treated as a placeholder but still contributes to gl_InstanceIndex in GLSL.

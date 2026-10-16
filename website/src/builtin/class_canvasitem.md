@@ -930,7 +930,10 @@ Note: For controls that inherit Popup, the correct way to make them visible is t
 modulate: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_modulate(value: Color)
+- Color get_modulate()
+
+The color applied to this CanvasItem. This property does affect child CanvasItems, unlike self_modulate which only affects the node itself.
 
 ### self_modulate {#self_modulate}
 
@@ -938,7 +941,12 @@ modulate: Color
 self_modulate: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_self_modulate(value: Color)
+- Color get_self_modulate()
+
+The color applied to this CanvasItem. This property does not affect child CanvasItems, unlike modulate which affects both the node itself and its children.
+
+Note: Internal children are also not affected by this property (see the include_internal parameter in Node.add_child()). For built-in nodes this includes sliders in ColorPicker, and the tab bar in TabContainer.
 
 ### show_behind_parent {#show_behind_parent}
 
@@ -1143,45 +1151,7 @@ Emitted when the CanvasItem's boundaries (position or size) change, or when an a
 enum TextureFilter { TEXTURE_FILTER_PARENT_NODE = 0, TEXTURE_FILTER_NEAREST = 1, TEXTURE_FILTER_LINEAR = 2, TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 3, TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 4, TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC = 5, TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC = 6, TEXTURE_FILTER_MAX = 7 }
 ```
 
-TextureFilter TEXTURE_FILTER_PARENT_NODE = 0
-
-The CanvasItem will inherit the filter from its parent.
-
-TextureFilter TEXTURE_FILTER_NEAREST = 1
-
-The texture filter reads from the nearest pixel only. This makes the texture look pixelated from up close, and grainy from a distance (due to mipmaps not being sampled).
-
-TextureFilter TEXTURE_FILTER_LINEAR = 2
-
-The texture filter blends between the nearest 4 pixels. This makes the texture look smooth from up close, and grainy from a distance (due to mipmaps not being sampled).
-
-TextureFilter TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 3
-
-The texture filter reads from the nearest pixel and blends between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look pixelated from up close, and smooth from a distance.
-
-Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to Camera2D zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
-
-TextureFilter TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 4
-
-The texture filter blends between the nearest 4 pixels and between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look smooth from up close, and smooth from a distance.
-
-Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to Camera2D zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
-
-TextureFilter TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC = 5
-
-The texture filter reads from the nearest pixel and blends between 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true) based on the angle between the surface and the camera view. This makes the texture look pixelated from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level.
-
-Note: This texture filter is rarely useful in 2D projects. TEXTURE_FILTER_NEAREST_WITH_MIPMAPS is usually more appropriate in this case.
-
-TextureFilter TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC = 6
-
-The texture filter blends between the nearest 4 pixels and blends between 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true) based on the angle between the surface and the camera view. This makes the texture look smooth from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level.
-
-Note: This texture filter is rarely useful in 2D projects. TEXTURE_FILTER_LINEAR_WITH_MIPMAPS is usually more appropriate in this case.
-
-TextureFilter TEXTURE_FILTER_MAX = 7
-
-Represents the size of the TextureFilter enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TEXTURE_FILTER_PARENT_NODE {#TEXTURE_FILTER_PARENT_NODE}
 
@@ -1189,7 +1159,7 @@ Represents the size of the TextureFilter enum.
 TEXTURE_FILTER_PARENT_NODE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The CanvasItem will inherit the filter from its parent.
 
 #### TEXTURE_FILTER_NEAREST {#TEXTURE_FILTER_NEAREST}
 
@@ -1197,7 +1167,7 @@ TEXTURE_FILTER_PARENT_NODE = 0
 TEXTURE_FILTER_NEAREST = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter reads from the nearest pixel only. This makes the texture look pixelated from up close, and grainy from a distance (due to mipmaps not being sampled).
 
 #### TEXTURE_FILTER_LINEAR {#TEXTURE_FILTER_LINEAR}
 
@@ -1205,7 +1175,7 @@ TEXTURE_FILTER_NEAREST = 1
 TEXTURE_FILTER_LINEAR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter blends between the nearest 4 pixels. This makes the texture look smooth from up close, and grainy from a distance (due to mipmaps not being sampled).
 
 #### TEXTURE_FILTER_NEAREST_WITH_MIPMAPS {#TEXTURE_FILTER_NEAREST_WITH_MIPMAPS}
 
@@ -1213,7 +1183,9 @@ TEXTURE_FILTER_LINEAR = 2
 TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter reads from the nearest pixel and blends between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look pixelated from up close, and smooth from a distance.
+
+Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to Camera2D zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
 
 #### TEXTURE_FILTER_LINEAR_WITH_MIPMAPS {#TEXTURE_FILTER_LINEAR_WITH_MIPMAPS}
 
@@ -1221,7 +1193,9 @@ TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 3
 TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter blends between the nearest 4 pixels and between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look smooth from up close, and smooth from a distance.
+
+Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to Camera2D zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
 
 #### TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC {#TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC}
 
@@ -1229,7 +1203,9 @@ TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 4
 TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter reads from the nearest pixel and blends between 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true) based on the angle between the surface and the camera view. This makes the texture look pixelated from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level.
+
+Note: This texture filter is rarely useful in 2D projects. TEXTURE_FILTER_NEAREST_WITH_MIPMAPS is usually more appropriate in this case.
 
 #### TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC {#TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC}
 
@@ -1237,7 +1213,9 @@ TEXTURE_FILTER_NEAREST_WITH_MIPMAPS_ANISOTROPIC = 5
 TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter blends between the nearest 4 pixels and blends between 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true) based on the angle between the surface and the camera view. This makes the texture look smooth from up close, and smooth from a distance. Anisotropic filtering improves texture quality on surfaces that are almost in line with the camera, but is slightly slower. The anisotropic filtering level can be changed by adjusting ProjectSettings.rendering/textures/default_filters/anisotropic_filtering_level.
+
+Note: This texture filter is rarely useful in 2D projects. TEXTURE_FILTER_LINEAR_WITH_MIPMAPS is usually more appropriate in this case.
 
 #### TEXTURE_FILTER_MAX {#TEXTURE_FILTER_MAX}
 
@@ -1245,7 +1223,9 @@ TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC = 6
 TEXTURE_FILTER_MAX = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the TextureFilter enum.
+
+---
 
 ### TextureRepeat {#enum-TextureRepeat}
 
@@ -1253,25 +1233,7 @@ TEXTURE_FILTER_MAX = 7
 enum TextureRepeat { TEXTURE_REPEAT_PARENT_NODE = 0, TEXTURE_REPEAT_DISABLED = 1, TEXTURE_REPEAT_ENABLED = 2, TEXTURE_REPEAT_MIRROR = 3, TEXTURE_REPEAT_MAX = 4 }
 ```
 
-TextureRepeat TEXTURE_REPEAT_PARENT_NODE = 0
-
-The CanvasItem will inherit the repeat mode from its parent.
-
-TextureRepeat TEXTURE_REPEAT_DISABLED = 1
-
-The texture does not repeat. Sampling the texture outside its extents will result in "stretching" of the edge pixels. You can avoid this by ensuring a 1-pixel fully transparent border on each side of the texture.
-
-TextureRepeat TEXTURE_REPEAT_ENABLED = 2
-
-The texture repeats when exceeding the texture's size.
-
-TextureRepeat TEXTURE_REPEAT_MIRROR = 3
-
-The texture repeats when the exceeding the texture's size in a "2×2 tiled mode". Repeated textures at even positions are mirrored.
-
-TextureRepeat TEXTURE_REPEAT_MAX = 4
-
-Represents the size of the TextureRepeat enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TEXTURE_REPEAT_PARENT_NODE {#TEXTURE_REPEAT_PARENT_NODE}
 
@@ -1279,7 +1241,7 @@ Represents the size of the TextureRepeat enum.
 TEXTURE_REPEAT_PARENT_NODE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The CanvasItem will inherit the repeat mode from its parent.
 
 #### TEXTURE_REPEAT_DISABLED {#TEXTURE_REPEAT_DISABLED}
 
@@ -1287,7 +1249,7 @@ TEXTURE_REPEAT_PARENT_NODE = 0
 TEXTURE_REPEAT_DISABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture does not repeat. Sampling the texture outside its extents will result in "stretching" of the edge pixels. You can avoid this by ensuring a 1-pixel fully transparent border on each side of the texture.
 
 #### TEXTURE_REPEAT_ENABLED {#TEXTURE_REPEAT_ENABLED}
 
@@ -1295,7 +1257,7 @@ TEXTURE_REPEAT_DISABLED = 1
 TEXTURE_REPEAT_ENABLED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture repeats when exceeding the texture's size.
 
 #### TEXTURE_REPEAT_MIRROR {#TEXTURE_REPEAT_MIRROR}
 
@@ -1303,7 +1265,7 @@ TEXTURE_REPEAT_ENABLED = 2
 TEXTURE_REPEAT_MIRROR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture repeats when the exceeding the texture's size in a "2×2 tiled mode". Repeated textures at even positions are mirrored.
 
 #### TEXTURE_REPEAT_MAX {#TEXTURE_REPEAT_MAX}
 
@@ -1311,7 +1273,9 @@ TEXTURE_REPEAT_MIRROR = 3
 TEXTURE_REPEAT_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the TextureRepeat enum.
+
+---
 
 ### ClipChildrenMode {#enum-ClipChildrenMode}
 
@@ -1319,21 +1283,7 @@ TEXTURE_REPEAT_MAX = 4
 enum ClipChildrenMode { CLIP_CHILDREN_DISABLED = 0, CLIP_CHILDREN_ONLY = 1, CLIP_CHILDREN_AND_DRAW = 2, CLIP_CHILDREN_MAX = 3 }
 ```
 
-ClipChildrenMode CLIP_CHILDREN_DISABLED = 0
-
-Children are drawn over this node and are not clipped.
-
-ClipChildrenMode CLIP_CHILDREN_ONLY = 1
-
-This node is used as a mask and is not drawn. The mask is based on this node's alpha channel: Opaque pixels are kept, transparent pixels are discarded, and semi-transparent pixels are blended in according to their opacity. Children are clipped to this node's drawn area.
-
-ClipChildrenMode CLIP_CHILDREN_AND_DRAW = 2
-
-This node is used as a mask and is also drawn. The mask is based on this node's alpha channel: Opaque pixels are kept, transparent pixels are discarded, and semi-transparent pixels are blended in according to their opacity. Children are clipped to the parent's drawn area.
-
-ClipChildrenMode CLIP_CHILDREN_MAX = 3
-
-Represents the size of the ClipChildrenMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CLIP_CHILDREN_DISABLED {#CLIP_CHILDREN_DISABLED}
 
@@ -1341,7 +1291,7 @@ Represents the size of the ClipChildrenMode enum.
 CLIP_CHILDREN_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Children are drawn over this node and are not clipped.
 
 #### CLIP_CHILDREN_ONLY {#CLIP_CHILDREN_ONLY}
 
@@ -1349,7 +1299,7 @@ CLIP_CHILDREN_DISABLED = 0
 CLIP_CHILDREN_ONLY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This node is used as a mask and is not drawn. The mask is based on this node's alpha channel: Opaque pixels are kept, transparent pixels are discarded, and semi-transparent pixels are blended in according to their opacity. Children are clipped to this node's drawn area.
 
 #### CLIP_CHILDREN_AND_DRAW {#CLIP_CHILDREN_AND_DRAW}
 
@@ -1357,7 +1307,7 @@ CLIP_CHILDREN_ONLY = 1
 CLIP_CHILDREN_AND_DRAW = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This node is used as a mask and is also drawn. The mask is based on this node's alpha channel: Opaque pixels are kept, transparent pixels are discarded, and semi-transparent pixels are blended in according to their opacity. Children are clipped to the parent's drawn area.
 
 #### CLIP_CHILDREN_MAX {#CLIP_CHILDREN_MAX}
 
@@ -1365,7 +1315,9 @@ CLIP_CHILDREN_AND_DRAW = 2
 CLIP_CHILDREN_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the ClipChildrenMode enum.
+
+---
 
 ### OversamplingWithScale {#enum-OversamplingWithScale}
 
@@ -1373,21 +1325,7 @@ CLIP_CHILDREN_MAX = 3
 enum OversamplingWithScale { OVERSAMPLING_WITH_SCALE_PARENT_NODE = 0, OVERSAMPLING_WITH_SCALE_DISABLED = 1, OVERSAMPLING_WITH_SCALE_ENABLED = 2, OVERSAMPLING_WITH_SCALE_MAX = 3 }
 ```
 
-OversamplingWithScale OVERSAMPLING_WITH_SCALE_PARENT_NODE = 0
-
-The CanvasItem will inherit the oversampling mode from its parent.
-
-OversamplingWithScale OVERSAMPLING_WITH_SCALE_DISABLED = 1
-
-The oversampling is not affected by CanvasItem scale, and is equal to the Viewport oversampling.
-
-OversamplingWithScale OVERSAMPLING_WITH_SCALE_ENABLED = 2
-
-The oversampling is a product of CanvasItem scale and Viewport oversampling.
-
-OversamplingWithScale OVERSAMPLING_WITH_SCALE_MAX = 3
-
-Represents the size of the OversamplingWithScale enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### OVERSAMPLING_WITH_SCALE_PARENT_NODE {#OVERSAMPLING_WITH_SCALE_PARENT_NODE}
 
@@ -1395,7 +1333,7 @@ Represents the size of the OversamplingWithScale enum.
 OVERSAMPLING_WITH_SCALE_PARENT_NODE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The CanvasItem will inherit the oversampling mode from its parent.
 
 #### OVERSAMPLING_WITH_SCALE_DISABLED {#OVERSAMPLING_WITH_SCALE_DISABLED}
 
@@ -1403,7 +1341,7 @@ OVERSAMPLING_WITH_SCALE_PARENT_NODE = 0
 OVERSAMPLING_WITH_SCALE_DISABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The oversampling is not affected by CanvasItem scale, and is equal to the Viewport oversampling.
 
 #### OVERSAMPLING_WITH_SCALE_ENABLED {#OVERSAMPLING_WITH_SCALE_ENABLED}
 
@@ -1411,7 +1349,7 @@ OVERSAMPLING_WITH_SCALE_DISABLED = 1
 OVERSAMPLING_WITH_SCALE_ENABLED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The oversampling is a product of CanvasItem scale and Viewport oversampling.
 
 #### OVERSAMPLING_WITH_SCALE_MAX {#OVERSAMPLING_WITH_SCALE_MAX}
 
@@ -1419,7 +1357,9 @@ OVERSAMPLING_WITH_SCALE_ENABLED = 2
 OVERSAMPLING_WITH_SCALE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the OversamplingWithScale enum.
+
+---
 
 ## 常量
 

@@ -128,7 +128,10 @@ Set the motion range (if supported) limiting the hand motion.
 hand_skeleton: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_hand_skeleton(value: NodePath)
+- NodePath get_hand_skeleton()
+
+Set a Skeleton3D node for which the pose positions will be updated.
 
 ### skeleton_rig {#skeleton_rig}
 
@@ -160,17 +163,7 @@ Specify the type of updates to perform on the bone.
 enum Hands { HAND_LEFT = 0, HAND_RIGHT = 1, HAND_MAX = 2 }
 ```
 
-Hands HAND_LEFT = 0
-
-Tracking the player's left hand.
-
-Hands HAND_RIGHT = 1
-
-Tracking the player's right hand.
-
-Hands HAND_MAX = 2
-
-Maximum supported hands.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HAND_LEFT {#HAND_LEFT}
 
@@ -178,7 +171,7 @@ Maximum supported hands.
 HAND_LEFT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tracking the player's left hand.
 
 #### HAND_RIGHT {#HAND_RIGHT}
 
@@ -186,7 +179,7 @@ HAND_LEFT = 0
 HAND_RIGHT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tracking the player's right hand.
 
 #### HAND_MAX {#HAND_MAX}
 
@@ -194,7 +187,9 @@ HAND_RIGHT = 1
 HAND_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum supported hands.
+
+---
 
 ### MotionRange {#enum-MotionRange}
 
@@ -202,17 +197,7 @@ HAND_MAX = 2
 enum MotionRange { MOTION_RANGE_UNOBSTRUCTED = 0, MOTION_RANGE_CONFORM_TO_CONTROLLER = 1, MOTION_RANGE_MAX = 2 }
 ```
 
-MotionRange MOTION_RANGE_UNOBSTRUCTED = 0
-
-When player grips, hand skeleton will form a full fist.
-
-MotionRange MOTION_RANGE_CONFORM_TO_CONTROLLER = 1
-
-When player grips, hand skeleton conforms to the controller the player is holding.
-
-MotionRange MOTION_RANGE_MAX = 2
-
-Maximum supported motion ranges.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MOTION_RANGE_UNOBSTRUCTED {#MOTION_RANGE_UNOBSTRUCTED}
 
@@ -220,7 +205,7 @@ Maximum supported motion ranges.
 MOTION_RANGE_UNOBSTRUCTED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When player grips, hand skeleton will form a full fist.
 
 #### MOTION_RANGE_CONFORM_TO_CONTROLLER {#MOTION_RANGE_CONFORM_TO_CONTROLLER}
 
@@ -228,7 +213,7 @@ MOTION_RANGE_UNOBSTRUCTED = 0
 MOTION_RANGE_CONFORM_TO_CONTROLLER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When player grips, hand skeleton conforms to the controller the player is holding.
 
 #### MOTION_RANGE_MAX {#MOTION_RANGE_MAX}
 
@@ -236,7 +221,9 @@ MOTION_RANGE_CONFORM_TO_CONTROLLER = 1
 MOTION_RANGE_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum supported motion ranges.
+
+---
 
 ### SkeletonRig {#enum-SkeletonRig}
 
@@ -244,17 +231,7 @@ MOTION_RANGE_MAX = 2
 enum SkeletonRig { SKELETON_RIG_OPENXR = 0, SKELETON_RIG_HUMANOID = 1, SKELETON_RIG_MAX = 2 }
 ```
 
-SkeletonRig SKELETON_RIG_OPENXR = 0
-
-An OpenXR compliant skeleton.
-
-SkeletonRig SKELETON_RIG_HUMANOID = 1
-
-A SkeletonProfileHumanoid compliant skeleton.
-
-SkeletonRig SKELETON_RIG_MAX = 2
-
-Maximum supported hands.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SKELETON_RIG_OPENXR {#SKELETON_RIG_OPENXR}
 
@@ -262,7 +239,7 @@ Maximum supported hands.
 SKELETON_RIG_OPENXR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An OpenXR compliant skeleton.
 
 #### SKELETON_RIG_HUMANOID {#SKELETON_RIG_HUMANOID}
 
@@ -270,7 +247,7 @@ SKELETON_RIG_OPENXR = 0
 SKELETON_RIG_HUMANOID = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A SkeletonProfileHumanoid compliant skeleton.
 
 #### SKELETON_RIG_MAX {#SKELETON_RIG_MAX}
 
@@ -278,7 +255,9 @@ SKELETON_RIG_HUMANOID = 1
 SKELETON_RIG_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum supported hands.
+
+---
 
 ### BoneUpdate {#enum-BoneUpdate}
 
@@ -286,17 +265,7 @@ SKELETON_RIG_MAX = 2
 enum BoneUpdate { BONE_UPDATE_FULL = 0, BONE_UPDATE_ROTATION_ONLY = 1, BONE_UPDATE_MAX = 2 }
 ```
 
-BoneUpdate BONE_UPDATE_FULL = 0
-
-The skeletons bones are fully updated (both position and rotation) to match the tracked bones.
-
-BoneUpdate BONE_UPDATE_ROTATION_ONLY = 1
-
-The skeletons bones are only rotated to align with the tracked bones, preserving bone length.
-
-BoneUpdate BONE_UPDATE_MAX = 2
-
-Maximum supported bone update mode.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BONE_UPDATE_FULL {#BONE_UPDATE_FULL}
 
@@ -304,7 +273,7 @@ Maximum supported bone update mode.
 BONE_UPDATE_FULL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The skeletons bones are fully updated (both position and rotation) to match the tracked bones.
 
 #### BONE_UPDATE_ROTATION_ONLY {#BONE_UPDATE_ROTATION_ONLY}
 
@@ -312,7 +281,7 @@ BONE_UPDATE_FULL = 0
 BONE_UPDATE_ROTATION_ONLY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The skeletons bones are only rotated to align with the tracked bones, preserving bone length.
 
 #### BONE_UPDATE_MAX {#BONE_UPDATE_MAX}
 
@@ -320,4 +289,6 @@ BONE_UPDATE_ROTATION_ONLY = 1
 BONE_UPDATE_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum supported bone update mode.
+
+---

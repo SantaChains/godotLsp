@@ -169,7 +169,10 @@ The specular map to use for Light2D specular reflections. This should be a grays
 specular_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_specular_color(value: Color)
+- Color get_specular_color()
+
+The multiplier for specular reflection colors. The Light2D's color is also taken into account when determining the reflection color. Only has a visible effect if Light2Ds are affecting this CanvasTexture.
 
 ### specular_shininess {#specular_shininess}
 

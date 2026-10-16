@@ -38,4 +38,11 @@ void set_polygon(polygon: PackedVector2Array)
 polygon: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_polygon(value: PackedVector2Array)
+- PackedVector2Array get_polygon()
+
+The polygon to use for occlusion culling. The polygon can be convex or concave, but it should have as few points as possible to maximize performance.
+
+The polygon must not have intersecting lines. Otherwise, triangulation will fail (with an error message printed).
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.

@@ -254,7 +254,12 @@ void set_upper_fade(fade: float)
 size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3)
+- Vector3 get_size()
+
+Sets the size of the AABB used by the decal. All dimensions must be set to a value greater than zero (they will be clamped to 0.001 if this is not the case). The AABB goes from -size/2 to size/2.
+
+Note: To improve culling efficiency of "hard surface" decals, set their upper_fade and lower_fade to 0.0 and set the Y component of the size as low as possible. This will reduce the decals' AABB size without affecting their appearance.
 
 ### texture_albedo {#texture_albedo}
 
@@ -331,7 +336,10 @@ Energy multiplier for the emission texture. This will make the decal emit light 
 modulate: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_modulate(value: Color)
+- Color get_modulate()
+
+Changes the Color of the Decal by multiplying the albedo and emission colors with this value. The alpha component is only taken into account when multiplying the albedo color, not the emission color. See also emission_energy and albedo_mix to change the emission and albedo intensity independently of each other.
 
 ### albedo_mix {#albedo_mix}
 
@@ -431,25 +439,7 @@ Specifies which VisualInstance3D.layers this decal will project on. By default, 
 enum DecalTexture { TEXTURE_ALBEDO = 0, TEXTURE_NORMAL = 1, TEXTURE_ORM = 2, TEXTURE_EMISSION = 3, TEXTURE_MAX = 4 }
 ```
 
-DecalTexture TEXTURE_ALBEDO = 0
-
-Texture2D corresponding to texture_albedo.
-
-DecalTexture TEXTURE_NORMAL = 1
-
-Texture2D corresponding to texture_normal.
-
-DecalTexture TEXTURE_ORM = 2
-
-Texture2D corresponding to texture_orm.
-
-DecalTexture TEXTURE_EMISSION = 3
-
-Texture2D corresponding to texture_emission.
-
-DecalTexture TEXTURE_MAX = 4
-
-Max size of DecalTexture enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TEXTURE_ALBEDO {#TEXTURE_ALBEDO}
 
@@ -457,7 +447,7 @@ Max size of DecalTexture enum.
 TEXTURE_ALBEDO = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture2D corresponding to texture_albedo.
 
 #### TEXTURE_NORMAL {#TEXTURE_NORMAL}
 
@@ -465,7 +455,7 @@ TEXTURE_ALBEDO = 0
 TEXTURE_NORMAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture2D corresponding to texture_normal.
 
 #### TEXTURE_ORM {#TEXTURE_ORM}
 
@@ -473,7 +463,7 @@ TEXTURE_NORMAL = 1
 TEXTURE_ORM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture2D corresponding to texture_orm.
 
 #### TEXTURE_EMISSION {#TEXTURE_EMISSION}
 
@@ -481,7 +471,7 @@ TEXTURE_ORM = 2
 TEXTURE_EMISSION = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture2D corresponding to texture_emission.
 
 #### TEXTURE_MAX {#TEXTURE_MAX}
 
@@ -489,4 +479,6 @@ TEXTURE_EMISSION = 3
 TEXTURE_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Max size of DecalTexture enum.
+
+---

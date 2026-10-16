@@ -44,4 +44,9 @@ void set_segments(segments: PackedVector2Array)
 segments: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_segments(value: PackedVector2Array)
+- PackedVector2Array get_segments()
+
+The array of points that make up the ConcavePolygonShape2D's line segments. The array (of length divisible by two) is naturally divided into pairs (one pair for each segment); each pair consists of the starting point of a segment and the endpoint of a segment.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.

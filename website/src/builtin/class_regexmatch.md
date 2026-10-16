@@ -102,4 +102,8 @@ A dictionary of named groups and its corresponding group number. Only groups tha
 strings: Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- PackedStringArray get_strings()
+
+An Array of the match and its capturing groups.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedStringArray for more details.

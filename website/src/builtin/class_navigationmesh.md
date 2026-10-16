@@ -766,7 +766,10 @@ If true, marks walkable spans as not walkable if the clearance above the span is
 filter_baking_aabb: AABB
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_filter_baking_aabb(value: AABB)
+- AABB get_filter_baking_aabb()
+
+If the baking AABB has a volume the navigation mesh baking will be restricted to its enclosing area.
 
 ### filter_baking_aabb_offset {#filter_baking_aabb_offset}
 
@@ -774,7 +777,10 @@ filter_baking_aabb: AABB
 filter_baking_aabb_offset: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_filter_baking_aabb_offset(value: Vector3)
+- Vector3 get_filter_baking_aabb_offset()
+
+The position offset applied to the filter_baking_aabb AABB.
 
 ## 枚举
 
@@ -784,21 +790,7 @@ filter_baking_aabb_offset: Vector3
 enum SamplePartitionType { SAMPLE_PARTITION_WATERSHED = 0, SAMPLE_PARTITION_MONOTONE = 1, SAMPLE_PARTITION_LAYERS = 2, SAMPLE_PARTITION_MAX = 3 }
 ```
 
-SamplePartitionType SAMPLE_PARTITION_WATERSHED = 0
-
-Watershed partitioning. Generally the best choice if you precompute the navigation mesh, use this if you have large open areas.
-
-SamplePartitionType SAMPLE_PARTITION_MONOTONE = 1
-
-Monotone partitioning. Use this if you want fast navigation mesh generation.
-
-SamplePartitionType SAMPLE_PARTITION_LAYERS = 2
-
-Layer partitioning. Good choice to use for tiled navigation mesh with medium and small sized tiles.
-
-SamplePartitionType SAMPLE_PARTITION_MAX = 3
-
-Represents the size of the SamplePartitionType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SAMPLE_PARTITION_WATERSHED {#SAMPLE_PARTITION_WATERSHED}
 
@@ -806,7 +798,7 @@ Represents the size of the SamplePartitionType enum.
 SAMPLE_PARTITION_WATERSHED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Watershed partitioning. Generally the best choice if you precompute the navigation mesh, use this if you have large open areas.
 
 #### SAMPLE_PARTITION_MONOTONE {#SAMPLE_PARTITION_MONOTONE}
 
@@ -814,7 +806,7 @@ SAMPLE_PARTITION_WATERSHED = 0
 SAMPLE_PARTITION_MONOTONE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Monotone partitioning. Use this if you want fast navigation mesh generation.
 
 #### SAMPLE_PARTITION_LAYERS {#SAMPLE_PARTITION_LAYERS}
 
@@ -822,7 +814,7 @@ SAMPLE_PARTITION_MONOTONE = 1
 SAMPLE_PARTITION_LAYERS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Layer partitioning. Good choice to use for tiled navigation mesh with medium and small sized tiles.
 
 #### SAMPLE_PARTITION_MAX {#SAMPLE_PARTITION_MAX}
 
@@ -830,7 +822,9 @@ SAMPLE_PARTITION_LAYERS = 2
 SAMPLE_PARTITION_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the SamplePartitionType enum.
+
+---
 
 ### ParsedGeometryType {#enum-ParsedGeometryType}
 
@@ -838,21 +832,7 @@ SAMPLE_PARTITION_MAX = 3
 enum ParsedGeometryType { PARSED_GEOMETRY_MESH_INSTANCES = 0, PARSED_GEOMETRY_STATIC_COLLIDERS = 1, PARSED_GEOMETRY_BOTH = 2, PARSED_GEOMETRY_MAX = 3 }
 ```
 
-ParsedGeometryType PARSED_GEOMETRY_MESH_INSTANCES = 0
-
-Parses mesh instances as geometry. This includes MeshInstance3D, CSGShape3D, and GridMap nodes.
-
-ParsedGeometryType PARSED_GEOMETRY_STATIC_COLLIDERS = 1
-
-Parses StaticBody3D colliders as geometry. The collider should be in any of the layers specified by geometry_collision_mask.
-
-ParsedGeometryType PARSED_GEOMETRY_BOTH = 2
-
-Both PARSED_GEOMETRY_MESH_INSTANCES and PARSED_GEOMETRY_STATIC_COLLIDERS.
-
-ParsedGeometryType PARSED_GEOMETRY_MAX = 3
-
-Represents the size of the ParsedGeometryType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PARSED_GEOMETRY_MESH_INSTANCES {#PARSED_GEOMETRY_MESH_INSTANCES}
 
@@ -860,7 +840,7 @@ Represents the size of the ParsedGeometryType enum.
 PARSED_GEOMETRY_MESH_INSTANCES = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Parses mesh instances as geometry. This includes MeshInstance3D, CSGShape3D, and GridMap nodes.
 
 #### PARSED_GEOMETRY_STATIC_COLLIDERS {#PARSED_GEOMETRY_STATIC_COLLIDERS}
 
@@ -868,7 +848,7 @@ PARSED_GEOMETRY_MESH_INSTANCES = 0
 PARSED_GEOMETRY_STATIC_COLLIDERS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Parses StaticBody3D colliders as geometry. The collider should be in any of the layers specified by geometry_collision_mask.
 
 #### PARSED_GEOMETRY_BOTH {#PARSED_GEOMETRY_BOTH}
 
@@ -876,7 +856,7 @@ PARSED_GEOMETRY_STATIC_COLLIDERS = 1
 PARSED_GEOMETRY_BOTH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Both PARSED_GEOMETRY_MESH_INSTANCES and PARSED_GEOMETRY_STATIC_COLLIDERS.
 
 #### PARSED_GEOMETRY_MAX {#PARSED_GEOMETRY_MAX}
 
@@ -884,7 +864,9 @@ PARSED_GEOMETRY_BOTH = 2
 PARSED_GEOMETRY_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the ParsedGeometryType enum.
+
+---
 
 ### SourceGeometryMode {#enum-SourceGeometryMode}
 
@@ -892,21 +874,7 @@ PARSED_GEOMETRY_MAX = 3
 enum SourceGeometryMode { SOURCE_GEOMETRY_ROOT_NODE_CHILDREN = 0, SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN = 1, SOURCE_GEOMETRY_GROUPS_EXPLICIT = 2, SOURCE_GEOMETRY_MAX = 3 }
 ```
 
-SourceGeometryMode SOURCE_GEOMETRY_ROOT_NODE_CHILDREN = 0
-
-Scans the child nodes of the root node recursively for geometry.
-
-SourceGeometryMode SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN = 1
-
-Scans nodes in a group and their child nodes recursively for geometry. The group is specified by geometry_source_group_name.
-
-SourceGeometryMode SOURCE_GEOMETRY_GROUPS_EXPLICIT = 2
-
-Uses nodes in a group for geometry. The group is specified by geometry_source_group_name.
-
-SourceGeometryMode SOURCE_GEOMETRY_MAX = 3
-
-Represents the size of the SourceGeometryMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SOURCE_GEOMETRY_ROOT_NODE_CHILDREN {#SOURCE_GEOMETRY_ROOT_NODE_CHILDREN}
 
@@ -914,7 +882,7 @@ Represents the size of the SourceGeometryMode enum.
 SOURCE_GEOMETRY_ROOT_NODE_CHILDREN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scans the child nodes of the root node recursively for geometry.
 
 #### SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN {#SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN}
 
@@ -922,7 +890,7 @@ SOURCE_GEOMETRY_ROOT_NODE_CHILDREN = 0
 SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scans nodes in a group and their child nodes recursively for geometry. The group is specified by geometry_source_group_name.
 
 #### SOURCE_GEOMETRY_GROUPS_EXPLICIT {#SOURCE_GEOMETRY_GROUPS_EXPLICIT}
 
@@ -930,7 +898,7 @@ SOURCE_GEOMETRY_GROUPS_WITH_CHILDREN = 1
 SOURCE_GEOMETRY_GROUPS_EXPLICIT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses nodes in a group for geometry. The group is specified by geometry_source_group_name.
 
 #### SOURCE_GEOMETRY_MAX {#SOURCE_GEOMETRY_MAX}
 
@@ -938,4 +906,6 @@ SOURCE_GEOMETRY_GROUPS_EXPLICIT = 2
 SOURCE_GEOMETRY_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the SourceGeometryMode enum.
+
+---

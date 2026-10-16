@@ -118,7 +118,10 @@ void set_scroll_offset(offset: Vector2)
 scroll_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scroll_offset(value: Vector2)
+- Vector2 get_scroll_offset()
+
+The ParallaxBackground's scroll value. Calculated automatically when using a Camera2D, but can be used to manually manage scrolling when no camera is present.
 
 ### scroll_base_offset {#scroll_base_offset}
 
@@ -126,7 +129,10 @@ scroll_offset: Vector2
 scroll_base_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scroll_base_offset(value: Vector2)
+- Vector2 get_scroll_base_offset()
+
+The base position offset for all ParallaxLayer children.
 
 ### scroll_base_scale {#scroll_base_scale}
 
@@ -134,7 +140,10 @@ scroll_base_offset: Vector2
 scroll_base_scale: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scroll_base_scale(value: Vector2)
+- Vector2 get_scroll_base_scale()
+
+The base motion scale for all ParallaxLayer children.
 
 ### scroll_limit_begin {#scroll_limit_begin}
 
@@ -142,7 +151,10 @@ scroll_base_scale: Vector2
 scroll_limit_begin: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_limit_begin(value: Vector2)
+- Vector2 get_limit_begin()
+
+Top-left limits for scrolling to begin. If the camera is outside of this limit, the background will stop scrolling. Must be lower than scroll_limit_end to work.
 
 ### scroll_limit_end {#scroll_limit_end}
 
@@ -150,7 +162,10 @@ scroll_limit_begin: Vector2
 scroll_limit_end: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_limit_end(value: Vector2)
+- Vector2 get_limit_end()
+
+Bottom-right limits for scrolling to end. If the camera is outside of this limit, the background will stop scrolling. Must be higher than scroll_limit_begin to work.
 
 ### scroll_ignore_camera_zoom {#scroll_ignore_camera_zoom}
 

@@ -297,13 +297,7 @@ Emitted when the button is released (up).
 enum VisibilityMode { VISIBILITY_ALWAYS = 0, VISIBILITY_TOUCHSCREEN_ONLY = 1 }
 ```
 
-VisibilityMode VISIBILITY_ALWAYS = 0
-
-Always visible.
-
-VisibilityMode VISIBILITY_TOUCHSCREEN_ONLY = 1
-
-Visible on touch screens only.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VISIBILITY_ALWAYS {#VISIBILITY_ALWAYS}
 
@@ -311,7 +305,7 @@ Visible on touch screens only.
 VISIBILITY_ALWAYS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Always visible.
 
 #### VISIBILITY_TOUCHSCREEN_ONLY {#VISIBILITY_TOUCHSCREEN_ONLY}
 
@@ -319,4 +313,6 @@ VISIBILITY_ALWAYS = 0
 VISIBILITY_TOUCHSCREEN_ONLY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Visible on touch screens only.
+
+---

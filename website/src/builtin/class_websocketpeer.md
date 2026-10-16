@@ -291,7 +291,12 @@ Returns true if the last received packet was sent as a text payload. See WriteMo
 supported_protocols: PackedStringArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_supported_protocols(value: PackedStringArray)
+- PackedStringArray get_supported_protocols()
+
+The WebSocket sub-protocols allowed during the WebSocket handshake.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedStringArray for more details.
 
 ### handshake_headers {#handshake_headers}
 
@@ -299,7 +304,14 @@ supported_protocols: PackedStringArray
 handshake_headers: PackedStringArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_handshake_headers(value: PackedStringArray)
+- PackedStringArray get_handshake_headers()
+
+The extra HTTP headers to be sent during the WebSocket handshake.
+
+Note: Not supported in Web exports due to browsers' restrictions.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedStringArray for more details.
 
 ### inbound_buffer_size {#inbound_buffer_size}
 
@@ -355,13 +367,7 @@ Note: Has no effect in Web exports due to browser restrictions.
 enum WriteMode { WRITE_MODE_TEXT = 0, WRITE_MODE_BINARY = 1 }
 ```
 
-WriteMode WRITE_MODE_TEXT = 0
-
-Specifies that WebSockets messages should be transferred as text payload (only valid UTF-8 is allowed).
-
-WriteMode WRITE_MODE_BINARY = 1
-
-Specifies that WebSockets messages should be transferred as binary payload (any byte combination is allowed).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### WRITE_MODE_TEXT {#WRITE_MODE_TEXT}
 
@@ -369,7 +375,7 @@ Specifies that WebSockets messages should be transferred as binary payload (any 
 WRITE_MODE_TEXT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Specifies that WebSockets messages should be transferred as text payload (only valid UTF-8 is allowed).
 
 #### WRITE_MODE_BINARY {#WRITE_MODE_BINARY}
 
@@ -377,7 +383,9 @@ WRITE_MODE_TEXT = 0
 WRITE_MODE_BINARY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Specifies that WebSockets messages should be transferred as binary payload (any byte combination is allowed).
+
+---
 
 ### State {#enum-State}
 
@@ -385,21 +393,7 @@ WRITE_MODE_BINARY = 1
 enum State { STATE_CONNECTING = 0, STATE_OPEN = 1, STATE_CLOSING = 2, STATE_CLOSED = 3 }
 ```
 
-State STATE_CONNECTING = 0
-
-Socket has been created. The connection is not yet open.
-
-State STATE_OPEN = 1
-
-The connection is open and ready to communicate.
-
-State STATE_CLOSING = 2
-
-The connection is in the process of closing. This means a close request has been sent to the remote peer but confirmation has not been received.
-
-State STATE_CLOSED = 3
-
-The connection is closed or couldn't be opened.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### STATE_CONNECTING {#STATE_CONNECTING}
 
@@ -407,7 +401,7 @@ The connection is closed or couldn't be opened.
 STATE_CONNECTING = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Socket has been created. The connection is not yet open.
 
 #### STATE_OPEN {#STATE_OPEN}
 
@@ -415,7 +409,7 @@ STATE_CONNECTING = 0
 STATE_OPEN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The connection is open and ready to communicate.
 
 #### STATE_CLOSING {#STATE_CLOSING}
 
@@ -423,7 +417,7 @@ STATE_OPEN = 1
 STATE_CLOSING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The connection is in the process of closing. This means a close request has been sent to the remote peer but confirmation has not been received.
 
 #### STATE_CLOSED {#STATE_CLOSED}
 
@@ -431,4 +425,6 @@ STATE_CLOSING = 2
 STATE_CLOSED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The connection is closed or couldn't be opened.
+
+---

@@ -254,7 +254,16 @@ void set_vertical(vertical: bool)
 split_offsets: PackedInt32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_split_offsets(value: PackedInt32Array)
+- PackedInt32Array get_split_offsets()
+
+Offsets for each dragger in pixels. Each one is the offset of the split between the Control nodes before and after the dragger, with 0 being the default position. The default position is based on the Control nodes expand flags and minimum sizes. See Control.size_flags_horizontal, Control.size_flags_vertical, and Control.size_flags_stretch_ratio.
+
+If none of the Control nodes before the dragger are expanded, the default position will be at the start of the SplitContainer. If none of the Control nodes after the dragger are expanded, the default position will be at the end of the SplitContainer. If the dragger is in between expanded Control nodes, the default position will be in the middle, based on the Control.size_flags_stretch_ratios and minimum sizes.
+
+Note: If the split offsets cause Control nodes to overlap, the first split will take priority when resolving the positions.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt32Array for more details.
 
 ### collapsed {#collapsed}
 
@@ -415,23 +424,7 @@ Emitted when the user ends dragging.
 enum DraggerVisibility { DRAGGER_VISIBLE = 0, DRAGGER_HIDDEN = 1, DRAGGER_HIDDEN_COLLAPSED = 2 }
 ```
 
-DraggerVisibility DRAGGER_VISIBLE = 0
-
-The split dragger icon is always visible when autohide is false, otherwise visible only when the cursor hovers it.
-
-The size of the grabber icon determines the minimum separation.
-
-The dragger icon is automatically hidden if the length of the grabber icon is longer than the split bar.
-
-DraggerVisibility DRAGGER_HIDDEN = 1
-
-The split dragger icon is never visible regardless of the value of autohide.
-
-The size of the grabber icon determines the minimum separation.
-
-DraggerVisibility DRAGGER_HIDDEN_COLLAPSED = 2
-
-The split dragger icon is not visible, and the split bar is collapsed to zero thickness.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DRAGGER_VISIBLE {#DRAGGER_VISIBLE}
 
@@ -439,7 +432,11 @@ The split dragger icon is not visible, and the split bar is collapsed to zero th
 DRAGGER_VISIBLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The split dragger icon is always visible when autohide is false, otherwise visible only when the cursor hovers it.
+
+The size of the grabber icon determines the minimum separation.
+
+The dragger icon is automatically hidden if the length of the grabber icon is longer than the split bar.
 
 #### DRAGGER_HIDDEN {#DRAGGER_HIDDEN}
 
@@ -447,7 +444,9 @@ DRAGGER_VISIBLE = 0
 DRAGGER_HIDDEN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The split dragger icon is never visible regardless of the value of autohide.
+
+The size of the grabber icon determines the minimum separation.
 
 #### DRAGGER_HIDDEN_COLLAPSED {#DRAGGER_HIDDEN_COLLAPSED}
 
@@ -455,4 +454,6 @@ DRAGGER_HIDDEN = 1
 DRAGGER_HIDDEN_COLLAPSED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The split dragger icon is not visible, and the split bar is collapsed to zero thickness.
+
+---

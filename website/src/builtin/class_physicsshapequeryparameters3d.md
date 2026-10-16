@@ -199,7 +199,10 @@ The collision margin for the shape.
 motion: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_motion(value: Vector3)
+- Vector3 get_motion()
+
+The motion of the shape being queried for.
 
 ### shape {#shape}
 
@@ -218,7 +221,32 @@ The Shape3D that will be used for collision/intersection queries. This stores th
 shape_rid: RID
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_shape_rid(value: RID)
+- RID get_shape_rid()
+
+The queried shape's RID that will be used for collision/intersection queries. Use this over shape if you want to optimize for performance using the Servers API:
+
+```
+var shape_rid = PhysicsServer3D.sphere_shape_create()
+var radius = 2.0
+PhysicsServer3D.shape_set_data(shape_rid, radius)
+var params = PhysicsShapeQueryParameters3D.new()
+params.shape_rid = shape_rid
+# Execute physics queries here...
+# Release the shape when done with physics queries.
+PhysicsServer3D.free_rid(shape_rid)
+```
+
+```
+RID shapeRid = PhysicsServer3D.SphereShapeCreate();
+float radius = 2.0f;
+PhysicsServer3D.ShapeSetData(shapeRid, radius);
+var params = new PhysicsShapeQueryParameters3D();
+params.ShapeRid = shapeRid;
+// Execute physics queries here...
+// Release the shape when done with physics queries.
+PhysicsServer3D.FreeRid(shapeRid);
+```
 
 ### transform {#transform}
 
@@ -226,7 +254,10 @@ shape_rid: RID
 transform: Transform3D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_transform(value: Transform3D)
+- Transform3D get_transform()
+
+The queried shape's transform matrix.
 
 ### collide_with_bodies {#collide_with_bodies}
 

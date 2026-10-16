@@ -54,7 +54,10 @@ void set_specialization_constants(specialization_constants: typedarray::RDPipeli
 shader: RID
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_shader(value: RID)
+- RID get_shader()
+
+Shader resource. The required stage is selected by the pipeline.
 
 ### specialization_constants {#specialization_constants}
 

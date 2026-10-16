@@ -106,7 +106,10 @@ void set_size_override(size: Vector2)
 size_override: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size_override(value: Vector2)
+- Vector2 get_size_override()
+
+Allows overriding the texture's size (for 2D only).
 
 ### keep_compressed_buffer {#keep_compressed_buffer}
 
@@ -129,33 +132,7 @@ Note: This property must be set before create_from_image() for this to work.
 enum CompressionMode { COMPRESSION_MODE_LOSSLESS = 0, COMPRESSION_MODE_LOSSY = 1, COMPRESSION_MODE_BASIS_UNIVERSAL = 2, COMPRESSION_MODE_S3TC = 3, COMPRESSION_MODE_ETC2 = 4, COMPRESSION_MODE_BPTC = 5, COMPRESSION_MODE_ASTC = 6 }
 ```
 
-CompressionMode COMPRESSION_MODE_LOSSLESS = 0
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CompressionMode COMPRESSION_MODE_LOSSY = 1
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CompressionMode COMPRESSION_MODE_BASIS_UNIVERSAL = 2
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CompressionMode COMPRESSION_MODE_S3TC = 3
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CompressionMode COMPRESSION_MODE_ETC2 = 4
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CompressionMode COMPRESSION_MODE_BPTC = 5
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
-
-CompressionMode COMPRESSION_MODE_ASTC = 6
-
-There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### COMPRESSION_MODE_LOSSLESS {#COMPRESSION_MODE_LOSSLESS}
 
@@ -163,7 +140,7 @@ There is currently no description for this enum. Please help us by contributing 
 COMPRESSION_MODE_LOSSLESS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### COMPRESSION_MODE_LOSSY {#COMPRESSION_MODE_LOSSY}
 
@@ -171,7 +148,7 @@ COMPRESSION_MODE_LOSSLESS = 0
 COMPRESSION_MODE_LOSSY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### COMPRESSION_MODE_BASIS_UNIVERSAL {#COMPRESSION_MODE_BASIS_UNIVERSAL}
 
@@ -179,7 +156,7 @@ COMPRESSION_MODE_LOSSY = 1
 COMPRESSION_MODE_BASIS_UNIVERSAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### COMPRESSION_MODE_S3TC {#COMPRESSION_MODE_S3TC}
 
@@ -187,7 +164,7 @@ COMPRESSION_MODE_BASIS_UNIVERSAL = 2
 COMPRESSION_MODE_S3TC = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### COMPRESSION_MODE_ETC2 {#COMPRESSION_MODE_ETC2}
 
@@ -195,7 +172,7 @@ COMPRESSION_MODE_S3TC = 3
 COMPRESSION_MODE_ETC2 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### COMPRESSION_MODE_BPTC {#COMPRESSION_MODE_BPTC}
 
@@ -203,7 +180,7 @@ COMPRESSION_MODE_ETC2 = 4
 COMPRESSION_MODE_BPTC = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 #### COMPRESSION_MODE_ASTC {#COMPRESSION_MODE_ASTC}
 
@@ -211,4 +188,6 @@ COMPRESSION_MODE_BPTC = 5
 COMPRESSION_MODE_ASTC = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+There is currently no description for this enum. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
+
+---

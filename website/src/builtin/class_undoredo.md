@@ -333,17 +333,7 @@ Called when undo() or redo() was called.
 enum MergeMode { MERGE_DISABLE = 0, MERGE_ENDS = 1, MERGE_ALL = 2 }
 ```
 
-MergeMode MERGE_DISABLE = 0
-
-Makes "do"/"undo" operations stay in separate actions.
-
-MergeMode MERGE_ENDS = 1
-
-Merges this action with the previous one if they have the same name. Keeps only the first action's "undo" operations and the last action's "do" operations. Useful for sequential changes to a single value.
-
-MergeMode MERGE_ALL = 2
-
-Merges this action with the previous one if they have the same name.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MERGE_DISABLE {#MERGE_DISABLE}
 
@@ -351,7 +341,7 @@ Merges this action with the previous one if they have the same name.
 MERGE_DISABLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Makes "do"/"undo" operations stay in separate actions.
 
 #### MERGE_ENDS {#MERGE_ENDS}
 
@@ -359,7 +349,7 @@ MERGE_DISABLE = 0
 MERGE_ENDS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Merges this action with the previous one if they have the same name. Keeps only the first action's "undo" operations and the last action's "do" operations. Useful for sequential changes to a single value.
 
 #### MERGE_ALL {#MERGE_ALL}
 
@@ -367,4 +357,6 @@ MERGE_ENDS = 1
 MERGE_ALL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Merges this action with the previous one if they have the same name.
+
+---

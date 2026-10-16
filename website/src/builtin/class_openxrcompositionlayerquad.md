@@ -36,4 +36,7 @@ void set_quad_size(size: Vector2)
 quad_size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_quad_size(value: Vector2)
+- Vector2 get_quad_size()
+
+The dimensions of the quad.

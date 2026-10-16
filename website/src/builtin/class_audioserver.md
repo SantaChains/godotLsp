@@ -576,21 +576,7 @@ Emitted when the audio bus at bus_index is renamed from old_name to new_name.
 enum SpeakerMode { SPEAKER_MODE_STEREO = 0, SPEAKER_SURROUND_31 = 1, SPEAKER_SURROUND_51 = 2, SPEAKER_SURROUND_71 = 3 }
 ```
 
-SpeakerMode SPEAKER_MODE_STEREO = 0
-
-Two or fewer speakers were detected.
-
-SpeakerMode SPEAKER_SURROUND_31 = 1
-
-A 3.1 channel surround setup was detected.
-
-SpeakerMode SPEAKER_SURROUND_51 = 2
-
-A 5.1 channel surround setup was detected.
-
-SpeakerMode SPEAKER_SURROUND_71 = 3
-
-A 7.1 channel surround setup was detected.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SPEAKER_MODE_STEREO {#SPEAKER_MODE_STEREO}
 
@@ -598,7 +584,7 @@ A 7.1 channel surround setup was detected.
 SPEAKER_MODE_STEREO = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Two or fewer speakers were detected.
 
 #### SPEAKER_SURROUND_31 {#SPEAKER_SURROUND_31}
 
@@ -606,7 +592,7 @@ SPEAKER_MODE_STEREO = 0
 SPEAKER_SURROUND_31 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 3.1 channel surround setup was detected.
 
 #### SPEAKER_SURROUND_51 {#SPEAKER_SURROUND_51}
 
@@ -614,7 +600,7 @@ SPEAKER_SURROUND_31 = 1
 SPEAKER_SURROUND_51 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 5.1 channel surround setup was detected.
 
 #### SPEAKER_SURROUND_71 {#SPEAKER_SURROUND_71}
 
@@ -622,7 +608,9 @@ SPEAKER_SURROUND_51 = 2
 SPEAKER_SURROUND_71 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 7.1 channel surround setup was detected.
+
+---
 
 ### PlaybackType {#enum-PlaybackType}
 
@@ -630,19 +618,33 @@ SPEAKER_SURROUND_71 = 3
 enum PlaybackType { PLAYBACK_TYPE_DEFAULT = 0, PLAYBACK_TYPE_STREAM = 1, PLAYBACK_TYPE_SAMPLE = 2, PLAYBACK_TYPE_MAX = 3 }
 ```
 
-PlaybackType PLAYBACK_TYPE_DEFAULT = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### PLAYBACK_TYPE_DEFAULT {#PLAYBACK_TYPE_DEFAULT}
+
+```gdscript
+PLAYBACK_TYPE_DEFAULT = 0
+```
 
 Experimental: This constant may be changed or removed in future versions.
 
 The playback will be considered of the type declared at ProjectSettings.audio/general/default_playback_type.
 
-PlaybackType PLAYBACK_TYPE_STREAM = 1
+#### PLAYBACK_TYPE_STREAM {#PLAYBACK_TYPE_STREAM}
+
+```gdscript
+PLAYBACK_TYPE_STREAM = 1
+```
 
 Experimental: This constant may be changed or removed in future versions.
 
 Force the playback to be considered as a stream.
 
-PlaybackType PLAYBACK_TYPE_SAMPLE = 2
+#### PLAYBACK_TYPE_SAMPLE {#PLAYBACK_TYPE_SAMPLE}
+
+```gdscript
+PLAYBACK_TYPE_SAMPLE = 2
+```
 
 Experimental: This constant may be changed or removed in future versions.
 
@@ -652,40 +654,14 @@ Note: Only currently supported on the web platform.
 
 Note: AudioEffects are not supported when playback is considered as a sample.
 
-PlaybackType PLAYBACK_TYPE_MAX = 3
-
-Experimental: This constant may be changed or removed in future versions.
-
-Represents the size of the PlaybackType enum.
-
-#### PLAYBACK_TYPE_DEFAULT {#PLAYBACK_TYPE_DEFAULT}
-
-```gdscript
-PLAYBACK_TYPE_DEFAULT = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### PLAYBACK_TYPE_STREAM {#PLAYBACK_TYPE_STREAM}
-
-```gdscript
-PLAYBACK_TYPE_STREAM = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### PLAYBACK_TYPE_SAMPLE {#PLAYBACK_TYPE_SAMPLE}
-
-```gdscript
-PLAYBACK_TYPE_SAMPLE = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### PLAYBACK_TYPE_MAX {#PLAYBACK_TYPE_MAX}
 
 ```gdscript
 PLAYBACK_TYPE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Experimental: This constant may be changed or removed in future versions.
+
+Represents the size of the PlaybackType enum.
+
+---

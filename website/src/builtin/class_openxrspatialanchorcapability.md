@@ -154,13 +154,7 @@ Note: This is an asynchronous method and returns an OpenXRFutureResult object wi
 enum PersistenceScope { PERSISTENCE_SCOPE_SYSTEM_MANAGED = 1, PERSISTENCE_SCOPE_LOCAL_ANCHORS = 1000781000 }
 ```
 
-PersistenceScope PERSISTENCE_SCOPE_SYSTEM_MANAGED = 1
-
-Provides the application with read-only access (i.e. application cannot modify this scope) to spatial entities persisted and managed by the system. The application can use the UUID in the persistence component for this scope to correlate entities across spatial contexts and device reboots.
-
-PersistenceScope PERSISTENCE_SCOPE_LOCAL_ANCHORS = 1000781000
-
-Persistence operations and data access is limited to spatial anchors, on the same device, for the same user and same app (using persist_anchor() and unpersist_anchor() functions)
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PERSISTENCE_SCOPE_SYSTEM_MANAGED {#PERSISTENCE_SCOPE_SYSTEM_MANAGED}
 
@@ -168,7 +162,7 @@ Persistence operations and data access is limited to spatial anchors, on the sam
 PERSISTENCE_SCOPE_SYSTEM_MANAGED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Provides the application with read-only access (i.e. application cannot modify this scope) to spatial entities persisted and managed by the system. The application can use the UUID in the persistence component for this scope to correlate entities across spatial contexts and device reboots.
 
 #### PERSISTENCE_SCOPE_LOCAL_ANCHORS {#PERSISTENCE_SCOPE_LOCAL_ANCHORS}
 
@@ -176,4 +170,6 @@ PERSISTENCE_SCOPE_SYSTEM_MANAGED = 1
 PERSISTENCE_SCOPE_LOCAL_ANCHORS = 1000781000
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Persistence operations and data access is limited to spatial anchors, on the same device, for the same user and same app (using persist_anchor() and unpersist_anchor() functions)
+
+---

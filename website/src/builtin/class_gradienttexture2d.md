@@ -189,7 +189,10 @@ The gradient's fill type.
 fill_from: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_fill_from(value: Vector2)
+- Vector2 get_fill_from()
+
+The initial offset used to fill the texture specified in UV coordinates.
 
 ### fill_to {#fill_to}
 
@@ -197,7 +200,10 @@ fill_from: Vector2
 fill_to: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_fill_to(value: Vector2)
+- Vector2 get_fill_to()
+
+The final offset used to fill the texture specified in UV coordinates.
 
 ### repeat {#repeat}
 
@@ -218,21 +224,7 @@ The gradient's repeat type.
 enum Fill { FILL_LINEAR = 0, FILL_RADIAL = 1, FILL_SQUARE = 2, FILL_CONIC = 3 }
 ```
 
-Fill FILL_LINEAR = 0
-
-The colors are linearly interpolated in a straight line.
-
-Fill FILL_RADIAL = 1
-
-The colors are linearly interpolated in a circular pattern.
-
-Fill FILL_SQUARE = 2
-
-The colors are linearly interpolated in a square pattern.
-
-Fill FILL_CONIC = 3
-
-The colors are linearly interpolated in a cone pattern.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FILL_LINEAR {#FILL_LINEAR}
 
@@ -240,7 +232,7 @@ The colors are linearly interpolated in a cone pattern.
 FILL_LINEAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The colors are linearly interpolated in a straight line.
 
 #### FILL_RADIAL {#FILL_RADIAL}
 
@@ -248,7 +240,7 @@ FILL_LINEAR = 0
 FILL_RADIAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The colors are linearly interpolated in a circular pattern.
 
 #### FILL_SQUARE {#FILL_SQUARE}
 
@@ -256,7 +248,7 @@ FILL_RADIAL = 1
 FILL_SQUARE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The colors are linearly interpolated in a square pattern.
 
 #### FILL_CONIC {#FILL_CONIC}
 
@@ -264,7 +256,9 @@ FILL_SQUARE = 2
 FILL_CONIC = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The colors are linearly interpolated in a cone pattern.
+
+---
 
 ### Repeat {#enum-Repeat}
 
@@ -272,17 +266,7 @@ FILL_CONIC = 3
 enum Repeat { REPEAT_NONE = 0, REPEAT = 1, REPEAT_MIRROR = 2 }
 ```
 
-Repeat REPEAT_NONE = 0
-
-The gradient fill is restricted to the range defined by fill_from to fill_to offsets.
-
-Repeat REPEAT = 1
-
-The texture is filled starting from fill_from to fill_to offsets, repeating the same pattern in both directions.
-
-Repeat REPEAT_MIRROR = 2
-
-The texture is filled starting from fill_from to fill_to offsets, mirroring the pattern in both directions.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### REPEAT_NONE {#REPEAT_NONE}
 
@@ -290,7 +274,7 @@ The texture is filled starting from fill_from to fill_to offsets, mirroring the 
 REPEAT_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The gradient fill is restricted to the range defined by fill_from to fill_to offsets.
 
 #### REPEAT {#REPEAT}
 
@@ -298,7 +282,7 @@ REPEAT_NONE = 0
 REPEAT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture is filled starting from fill_from to fill_to offsets, repeating the same pattern in both directions.
 
 #### REPEAT_MIRROR {#REPEAT_MIRROR}
 
@@ -306,4 +290,6 @@ REPEAT = 1
 REPEAT_MIRROR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture is filled starting from fill_from to fill_to offsets, mirroring the pattern in both directions.
+
+---

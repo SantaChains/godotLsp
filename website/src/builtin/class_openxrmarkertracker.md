@@ -86,7 +86,10 @@ void set_marker_type(marker_type: OpenXRSpatialComponentMarkerList.MarkerType)
 bounds_size: int
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_bounds_size(value: Vector2)
+- Vector2 get_bounds_size()
+
+The bounds size for this marker.
 
 ### marker_type {#marker_type}
 

@@ -281,25 +281,7 @@ If true, the tilt property of Curve3D takes effect.
 enum RotationMode { ROTATION_NONE = 0, ROTATION_Y = 1, ROTATION_XY = 2, ROTATION_XYZ = 3, ROTATION_ORIENTED = 4 }
 ```
 
-RotationMode ROTATION_NONE = 0
-
-Forbids the PathFollow3D to rotate.
-
-RotationMode ROTATION_Y = 1
-
-Allows the PathFollow3D to rotate in the Y axis only.
-
-RotationMode ROTATION_XY = 2
-
-Allows the PathFollow3D to rotate in both the X, and Y axes.
-
-RotationMode ROTATION_XYZ = 3
-
-Allows the PathFollow3D to rotate in any axis.
-
-RotationMode ROTATION_ORIENTED = 4
-
-Uses the up vector information in a Curve3D to enforce orientation. This rotation mode requires the Path3D's Curve3D.up_vector_enabled property to be set to true.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ROTATION_NONE {#ROTATION_NONE}
 
@@ -307,7 +289,7 @@ Uses the up vector information in a Curve3D to enforce orientation. This rotatio
 ROTATION_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Forbids the PathFollow3D to rotate.
 
 #### ROTATION_Y {#ROTATION_Y}
 
@@ -315,7 +297,7 @@ ROTATION_NONE = 0
 ROTATION_Y = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows the PathFollow3D to rotate in the Y axis only.
 
 #### ROTATION_XY {#ROTATION_XY}
 
@@ -323,7 +305,7 @@ ROTATION_Y = 1
 ROTATION_XY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows the PathFollow3D to rotate in both the X, and Y axes.
 
 #### ROTATION_XYZ {#ROTATION_XYZ}
 
@@ -331,7 +313,7 @@ ROTATION_XY = 2
 ROTATION_XYZ = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows the PathFollow3D to rotate in any axis.
 
 #### ROTATION_ORIENTED {#ROTATION_ORIENTED}
 
@@ -339,4 +321,6 @@ ROTATION_XYZ = 3
 ROTATION_ORIENTED = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses the up vector information in a Curve3D to enforce orientation. This rotation mode requires the Path3D's Curve3D.up_vector_enabled property to be set to true.
+
+---

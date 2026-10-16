@@ -103,41 +103,7 @@ Extra condition which is applied if type is set to CTYPE_VECTOR_3D.
 enum ComparisonType { CTYPE_SCALAR = 0, CTYPE_SCALAR_INT = 1, CTYPE_SCALAR_UINT = 2, CTYPE_VECTOR_2D = 3, CTYPE_VECTOR_3D = 4, CTYPE_VECTOR_4D = 5, CTYPE_BOOLEAN = 6, CTYPE_TRANSFORM = 7, CTYPE_MAX = 8 }
 ```
 
-ComparisonType CTYPE_SCALAR = 0
-
-A floating-point scalar.
-
-ComparisonType CTYPE_SCALAR_INT = 1
-
-An integer scalar.
-
-ComparisonType CTYPE_SCALAR_UINT = 2
-
-An unsigned integer scalar.
-
-ComparisonType CTYPE_VECTOR_2D = 3
-
-A 2D vector type.
-
-ComparisonType CTYPE_VECTOR_3D = 4
-
-A 3D vector type.
-
-ComparisonType CTYPE_VECTOR_4D = 5
-
-A 4D vector type.
-
-ComparisonType CTYPE_BOOLEAN = 6
-
-A boolean type.
-
-ComparisonType CTYPE_TRANSFORM = 7
-
-A transform (mat4) type.
-
-ComparisonType CTYPE_MAX = 8
-
-Represents the size of the ComparisonType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CTYPE_SCALAR {#CTYPE_SCALAR}
 
@@ -145,7 +111,7 @@ Represents the size of the ComparisonType enum.
 CTYPE_SCALAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A floating-point scalar.
 
 #### CTYPE_SCALAR_INT {#CTYPE_SCALAR_INT}
 
@@ -153,7 +119,7 @@ CTYPE_SCALAR = 0
 CTYPE_SCALAR_INT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An integer scalar.
 
 #### CTYPE_SCALAR_UINT {#CTYPE_SCALAR_UINT}
 
@@ -161,7 +127,7 @@ CTYPE_SCALAR_INT = 1
 CTYPE_SCALAR_UINT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+An unsigned integer scalar.
 
 #### CTYPE_VECTOR_2D {#CTYPE_VECTOR_2D}
 
@@ -169,7 +135,7 @@ CTYPE_SCALAR_UINT = 2
 CTYPE_VECTOR_2D = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 2D vector type.
 
 #### CTYPE_VECTOR_3D {#CTYPE_VECTOR_3D}
 
@@ -177,7 +143,7 @@ CTYPE_VECTOR_2D = 3
 CTYPE_VECTOR_3D = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 3D vector type.
 
 #### CTYPE_VECTOR_4D {#CTYPE_VECTOR_4D}
 
@@ -185,7 +151,7 @@ CTYPE_VECTOR_3D = 4
 CTYPE_VECTOR_4D = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 4D vector type.
 
 #### CTYPE_BOOLEAN {#CTYPE_BOOLEAN}
 
@@ -193,7 +159,7 @@ CTYPE_VECTOR_4D = 5
 CTYPE_BOOLEAN = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A boolean type.
 
 #### CTYPE_TRANSFORM {#CTYPE_TRANSFORM}
 
@@ -201,7 +167,7 @@ CTYPE_BOOLEAN = 6
 CTYPE_TRANSFORM = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A transform (mat4) type.
 
 #### CTYPE_MAX {#CTYPE_MAX}
 
@@ -209,7 +175,9 @@ CTYPE_TRANSFORM = 7
 CTYPE_MAX = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the ComparisonType enum.
+
+---
 
 ### Function {#enum-Function}
 
@@ -217,33 +185,7 @@ CTYPE_MAX = 8
 enum Function { FUNC_EQUAL = 0, FUNC_NOT_EQUAL = 1, FUNC_GREATER_THAN = 2, FUNC_GREATER_THAN_EQUAL = 3, FUNC_LESS_THAN = 4, FUNC_LESS_THAN_EQUAL = 5, FUNC_MAX = 6 }
 ```
 
-Function FUNC_EQUAL = 0
-
-Comparison for equality (a == b).
-
-Function FUNC_NOT_EQUAL = 1
-
-Comparison for inequality (a != b).
-
-Function FUNC_GREATER_THAN = 2
-
-Comparison for greater than (a > b). Cannot be used if type set to CTYPE_BOOLEAN or CTYPE_TRANSFORM.
-
-Function FUNC_GREATER_THAN_EQUAL = 3
-
-Comparison for greater than or equal (a >= b). Cannot be used if type set to CTYPE_BOOLEAN or CTYPE_TRANSFORM.
-
-Function FUNC_LESS_THAN = 4
-
-Comparison for less than (a < b). Cannot be used if type set to CTYPE_BOOLEAN or CTYPE_TRANSFORM.
-
-Function FUNC_LESS_THAN_EQUAL = 5
-
-Comparison for less than or equal (a <= b). Cannot be used if type set to CTYPE_BOOLEAN or CTYPE_TRANSFORM.
-
-Function FUNC_MAX = 6
-
-Represents the size of the Function enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FUNC_EQUAL {#FUNC_EQUAL}
 
@@ -251,7 +193,7 @@ Represents the size of the Function enum.
 FUNC_EQUAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Comparison for equality (a == b).
 
 #### FUNC_NOT_EQUAL {#FUNC_NOT_EQUAL}
 
@@ -259,7 +201,7 @@ FUNC_EQUAL = 0
 FUNC_NOT_EQUAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Comparison for inequality (a != b).
 
 #### FUNC_GREATER_THAN {#FUNC_GREATER_THAN}
 
@@ -267,7 +209,7 @@ FUNC_NOT_EQUAL = 1
 FUNC_GREATER_THAN = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Comparison for greater than (a > b). Cannot be used if type set to CTYPE_BOOLEAN or CTYPE_TRANSFORM.
 
 #### FUNC_GREATER_THAN_EQUAL {#FUNC_GREATER_THAN_EQUAL}
 
@@ -275,7 +217,7 @@ FUNC_GREATER_THAN = 2
 FUNC_GREATER_THAN_EQUAL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Comparison for greater than or equal (a >= b). Cannot be used if type set to CTYPE_BOOLEAN or CTYPE_TRANSFORM.
 
 #### FUNC_LESS_THAN {#FUNC_LESS_THAN}
 
@@ -283,7 +225,7 @@ FUNC_GREATER_THAN_EQUAL = 3
 FUNC_LESS_THAN = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Comparison for less than (a < b). Cannot be used if type set to CTYPE_BOOLEAN or CTYPE_TRANSFORM.
 
 #### FUNC_LESS_THAN_EQUAL {#FUNC_LESS_THAN_EQUAL}
 
@@ -291,7 +233,7 @@ FUNC_LESS_THAN = 4
 FUNC_LESS_THAN_EQUAL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Comparison for less than or equal (a <= b). Cannot be used if type set to CTYPE_BOOLEAN or CTYPE_TRANSFORM.
 
 #### FUNC_MAX {#FUNC_MAX}
 
@@ -299,7 +241,9 @@ FUNC_LESS_THAN_EQUAL = 5
 FUNC_MAX = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Function enum.
+
+---
 
 ### Condition {#enum-Condition}
 
@@ -307,17 +251,7 @@ FUNC_MAX = 6
 enum Condition { COND_ALL = 0, COND_ANY = 1, COND_MAX = 2 }
 ```
 
-Condition COND_ALL = 0
-
-The result will be true if all components in the vector satisfy the comparison condition.
-
-Condition COND_ANY = 1
-
-The result will be true if any component in the vector satisfies the comparison condition.
-
-Condition COND_MAX = 2
-
-Represents the size of the Condition enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### COND_ALL {#COND_ALL}
 
@@ -325,7 +259,7 @@ Represents the size of the Condition enum.
 COND_ALL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The result will be true if all components in the vector satisfy the comparison condition.
 
 #### COND_ANY {#COND_ANY}
 
@@ -333,7 +267,7 @@ COND_ALL = 0
 COND_ANY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The result will be true if any component in the vector satisfies the comparison condition.
 
 #### COND_MAX {#COND_MAX}
 
@@ -341,4 +275,6 @@ COND_ANY = 1
 COND_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Condition enum.
+
+---

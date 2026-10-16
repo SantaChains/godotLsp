@@ -773,7 +773,10 @@ void set_zoom_step(zoom_step: float)
 scroll_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scroll_offset(value: Vector2)
+- Vector2 get_scroll_offset()
+
+The scroll offset.
 
 ### show_grid {#show_grid}
 
@@ -971,7 +974,10 @@ If true, the minimap is visible.
 minimap_size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_minimap_size(value: Vector2)
+- Vector2 get_minimap_size()
+
+The size of the minimap rectangle. The map itself is based on the size of the grid area and is scaled to fit this rectangle.
 
 ### minimap_opacity {#minimap_opacity}
 
@@ -1216,13 +1222,7 @@ Emitted when the scroll offset is changed by the user. It will not be emitted wh
 enum PanningScheme { SCROLL_ZOOMS = 0, SCROLL_PANS = 1 }
 ```
 
-PanningScheme SCROLL_ZOOMS = 0
-
-Mouse Wheel will zoom, Ctrl + Mouse Wheel will move the view.
-
-PanningScheme SCROLL_PANS = 1
-
-Mouse Wheel will move the view, Ctrl + Mouse Wheel will zoom.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCROLL_ZOOMS {#SCROLL_ZOOMS}
 
@@ -1230,7 +1230,7 @@ Mouse Wheel will move the view, Ctrl + Mouse Wheel will zoom.
 SCROLL_ZOOMS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mouse Wheel will zoom, Ctrl + Mouse Wheel will move the view.
 
 #### SCROLL_PANS {#SCROLL_PANS}
 
@@ -1238,7 +1238,9 @@ SCROLL_ZOOMS = 0
 SCROLL_PANS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Mouse Wheel will move the view, Ctrl + Mouse Wheel will zoom.
+
+---
 
 ### GridPattern {#enum-GridPattern}
 
@@ -1246,13 +1248,7 @@ SCROLL_PANS = 1
 enum GridPattern { GRID_PATTERN_LINES = 0, GRID_PATTERN_DOTS = 1 }
 ```
 
-GridPattern GRID_PATTERN_LINES = 0
-
-Draw the grid using solid lines.
-
-GridPattern GRID_PATTERN_DOTS = 1
-
-Draw the grid using dots.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GRID_PATTERN_LINES {#GRID_PATTERN_LINES}
 
@@ -1260,7 +1256,7 @@ Draw the grid using dots.
 GRID_PATTERN_LINES = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draw the grid using solid lines.
 
 #### GRID_PATTERN_DOTS {#GRID_PATTERN_DOTS}
 
@@ -1268,4 +1264,6 @@ GRID_PATTERN_LINES = 0
 GRID_PATTERN_DOTS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draw the grid using dots.
+
+---

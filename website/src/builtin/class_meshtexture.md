@@ -90,4 +90,7 @@ Sets the base texture that the Mesh will use to draw.
 image_size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_image_size(value: Vector2)
+- Vector2 get_image_size()
+
+Sets the size of the image, needed for reference.

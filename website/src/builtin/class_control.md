@@ -1985,7 +1985,12 @@ Note: warp_mouse() is only supported on Windows, macOS and Linux. It has no effe
 custom_minimum_size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_custom_minimum_size(value: Vector2)
+- Vector2 get_custom_minimum_size()
+
+The minimum size of the node's bounding rectangle. If you set it to a value greater than (0, 0), the node's bounding rectangle will always have at least this size. Note that Control nodes have their internal minimum size returned by get_minimum_size(). It depends on the control's contents, like text, textures, or style boxes. The actual minimum size is the maximum value of this property and the internal minimum size (see get_combined_minimum_size()).
+
+Note: custom_maximum_size has priority over this property. For example, if you set custom_minimum_size to (200, 200) and custom_maximum_size to (100, 100), the resulting size will be (100, 100).
 
 ### custom_maximum_size {#custom_maximum_size}
 
@@ -1993,7 +1998,18 @@ custom_minimum_size: Vector2
 custom_maximum_size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_custom_maximum_size(value: Vector2)
+- Vector2 get_custom_maximum_size()
+
+The maximum size of this Control's bounding rectangle. If set to a value greater than or equal to (0, 0), the node's bounding rectangle will never exceed this size. A value below (0, 0) means there is no maximum size.
+
+Note: The final effective maximum size may be subject to parent Container sizing and propagated maximum sizes. See also: get_combined_maximum_size().
+
+Note: Not all Control subtypes handle a custom maximum size gracefully, which may lead to unexpected behavior if the control's contents exceed this size.
+
+Note: This value has priority over custom_minimum_size. For example, if you set custom_maximum_size to (100, 100) and custom_minimum_size to (200, 200), the resulting size will be (100, 100).
+
+Note: It is recommended to use get_bound_minimum_size() instead of get_combined_minimum_size() when using this property, as the former respects maximum size limits when calculating the minimum size, while the latter does not.
 
 ### propagate_maximum_size {#propagate_maximum_size}
 
@@ -2153,7 +2169,9 @@ Controls the direction on the vertical axis in which the control should grow if 
 size: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- Vector2 get_size()
+
+The size of the node's bounding rectangle, in the node's coordinate system. Container nodes update this property automatically.
 
 ### position {#position}
 
@@ -2161,7 +2179,9 @@ size: Vector2
 position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- Vector2 get_position()
+
+The node's position, relative to its containing node. It corresponds to the rectangle's top-left corner. The property is not affected by pivot_offset.
 
 ### global_position {#global_position}
 
@@ -2203,7 +2223,16 @@ Helper property to access rotation in degrees instead of radians.
 scale: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scale(value: Vector2)
+- Vector2 get_scale()
+
+The node's scale, relative to its size. Change this property to scale the node around its pivot_offset. The Control's tooltip will also scale according to this value.
+
+Note: This property is mainly intended to be used for animation purposes. To support multiple resolutions in your project, use an appropriate viewport stretch mode as described in the documentation instead of scaling Controls individually.
+
+Note: FontFile.oversampling does not take Control scale into account. This means that scaling up/down will cause bitmap fonts and rasterized (non-MSDF) dynamic fonts to appear blurry or pixelated. To ensure text remains crisp regardless of scale, you can enable MSDF font rendering by enabling ProjectSettings.gui/theme/default_font_multichannel_signed_distance_field (applies to the default project font only), or enabling Multichannel Signed Distance Field in the import options of a DynamicFont for custom fonts. On system fonts, SystemFont.multichannel_signed_distance_field can be enabled in the inspector.
+
+Note: If the Control node is a child of a Container node, the scale will be reset to Vector2(1, 1) when the scene is instantiated. To set the Control's scale when it's instantiated, wait for one frame using await get_tree().process_frame then set its scale property.
 
 ### pivot_offset {#pivot_offset}
 
@@ -2211,7 +2240,12 @@ scale: Vector2
 pivot_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_pivot_offset(value: Vector2)
+- Vector2 get_pivot_offset()
+
+By default, the node's pivot is its top-left corner. When you change its rotation or scale, it will rotate or scale around this pivot.
+
+The actual offset is the combined value of this property and pivot_offset_ratio.
 
 ### pivot_offset_ratio {#pivot_offset_ratio}
 
@@ -2219,7 +2253,12 @@ pivot_offset: Vector2
 pivot_offset_ratio: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_pivot_offset_ratio(value: Vector2)
+- Vector2 get_pivot_offset_ratio()
+
+Same as pivot_offset, but expressed as uniform vector, where Vector2(0, 0) is the top-left corner of this control, and Vector2(1, 1) is its bottom-right corner. Set this property to Vector2(0.5, 0.5) to pivot around this control's center.
+
+The actual offset is the combined value of this property and pivot_offset.
 
 ### size_flags_horizontal {#size_flags_horizontal}
 
@@ -2271,7 +2310,12 @@ If true, applies all offset transform properties. Otherwise, no offset transform
 offset_transform_position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset_transform_position(value: Vector2)
+- Vector2 get_offset_transform_position()
+
+Position offset in absolute units. The final offset is the combined value of this property and offset_transform_position_ratio.
+
+Has no effect unless offset_transform_enabled is true.
 
 ### offset_transform_position_ratio {#offset_transform_position_ratio}
 
@@ -2279,7 +2323,14 @@ offset_transform_position: Vector2
 offset_transform_position_ratio: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset_transform_position_ratio(value: Vector2)
+- Vector2 get_offset_transform_position_ratio()
+
+Same as offset_transform_position but expressed in units relative to the Control size where Vector2(0, 0) is the top-left corner of this control, and Vector2(1, 1) is its bottom-right corner.
+
+The final offset is the combined value of this property and offset_transform_position.
+
+Has no effect unless offset_transform_enabled is true.
 
 ### offset_transform_scale {#offset_transform_scale}
 
@@ -2287,7 +2338,12 @@ offset_transform_position_ratio: Vector2
 offset_transform_scale: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset_transform_scale(value: Vector2)
+- Vector2 get_offset_transform_scale()
+
+Scale offset. The scale pivot is defined by offset_transform_pivot and offset_transform_pivot_ratio.
+
+Has no effect unless offset_transform_enabled is true.
 
 ### offset_transform_rotation {#offset_transform_rotation}
 
@@ -2308,7 +2364,14 @@ Has no effect unless offset_transform_enabled is true.
 offset_transform_pivot: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset_transform_pivot(value: Vector2)
+- Vector2 get_offset_transform_pivot()
+
+Pivot used by offset_transform_rotation and offset_transform_scale in absolute units.
+
+The final pivot position is the combined value of this property and offset_transform_pivot_ratio.
+
+Has no effect unless offset_transform_enabled is true.
 
 ### offset_transform_pivot_ratio {#offset_transform_pivot_ratio}
 
@@ -2316,7 +2379,14 @@ offset_transform_pivot: Vector2
 offset_transform_pivot_ratio: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset_transform_pivot_ratio(value: Vector2)
+- Vector2 get_offset_transform_pivot_ratio()
+
+Same as offset_transform_pivot but expressed in units relative to the Control size where Vector2(0, 0) is the top-left corner of this control, and Vector2(1, 1) is its bottom-right corner.
+
+The final pivot position is the combined value of this property and offset_transform_pivot.
+
+Has no effect unless offset_transform_enabled is true.
 
 ### offset_transform_visual_only {#offset_transform_visual_only}
 
@@ -2433,7 +2503,10 @@ Note: Tooltips customized using _make_custom_tooltip() do not use this auto tran
 focus_neighbor_left: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_focus_neighbor(side: Side, neighbor: NodePath)
+- NodePath get_focus_neighbor(side: Side) const
+
+Tells Godot which node it should give focus to if the user presses the left arrow on the keyboard or left on a gamepad by default. You can change the key by editing the ProjectSettings.input/ui_left input action. The node must be a Control. If this property is not set, Godot will give focus to the closest Control to the left of this one.
 
 ### focus_neighbor_top {#focus_neighbor_top}
 
@@ -2441,7 +2514,10 @@ focus_neighbor_left: NodePath
 focus_neighbor_top: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_focus_neighbor(side: Side, neighbor: NodePath)
+- NodePath get_focus_neighbor(side: Side) const
+
+Tells Godot which node it should give focus to if the user presses the top arrow on the keyboard or top on a gamepad by default. You can change the key by editing the ProjectSettings.input/ui_up input action. The node must be a Control. If this property is not set, Godot will give focus to the closest Control to the top of this one.
 
 ### focus_neighbor_right {#focus_neighbor_right}
 
@@ -2449,7 +2525,10 @@ focus_neighbor_top: NodePath
 focus_neighbor_right: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_focus_neighbor(side: Side, neighbor: NodePath)
+- NodePath get_focus_neighbor(side: Side) const
+
+Tells Godot which node it should give focus to if the user presses the right arrow on the keyboard or right on a gamepad by default. You can change the key by editing the ProjectSettings.input/ui_right input action. The node must be a Control. If this property is not set, Godot will give focus to the closest Control to the right of this one.
 
 ### focus_neighbor_bottom {#focus_neighbor_bottom}
 
@@ -2457,7 +2536,10 @@ focus_neighbor_right: NodePath
 focus_neighbor_bottom: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_focus_neighbor(side: Side, neighbor: NodePath)
+- NodePath get_focus_neighbor(side: Side) const
+
+Tells Godot which node it should give focus to if the user presses the down arrow on the keyboard or down on a gamepad by default. You can change the key by editing the ProjectSettings.input/ui_down input action. The node must be a Control. If this property is not set, Godot will give focus to the closest Control to the bottom of this one.
 
 ### focus_next {#focus_next}
 
@@ -2465,7 +2547,12 @@ focus_neighbor_bottom: NodePath
 focus_next: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_focus_next(value: NodePath)
+- NodePath get_focus_next()
+
+Tells Godot which node it should give focus to if the user presses Tab on a keyboard by default. You can change the key by editing the ProjectSettings.input/ui_focus_next input action.
+
+If this property is not set, Godot will select a "best guess" based on surrounding nodes in the scene tree.
 
 ### focus_previous {#focus_previous}
 
@@ -2473,7 +2560,12 @@ focus_next: NodePath
 focus_previous: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_focus_previous(value: NodePath)
+- NodePath get_focus_previous()
+
+Tells Godot which node it should give focus to if the user presses Shift + Tab on a keyboard by default. You can change the key by editing the ProjectSettings.input/ui_focus_prev input action.
+
+If this property is not set, Godot will select a "best guess" based on surrounding nodes in the scene tree.
 
 ### focus_mode {#focus_mode}
 
@@ -2767,21 +2859,7 @@ Emitted when the NOTIFICATION_THEME_CHANGED notification is sent.
 enum FocusMode { FOCUS_NONE = 0, FOCUS_CLICK = 1, FOCUS_ALL = 2, FOCUS_ACCESSIBILITY = 3 }
 ```
 
-FocusMode FOCUS_NONE = 0
-
-The node cannot grab focus. Use with focus_mode.
-
-FocusMode FOCUS_CLICK = 1
-
-The node can only grab focus on mouse clicks. Use with focus_mode.
-
-FocusMode FOCUS_ALL = 2
-
-The node can grab focus on mouse click, using the arrows and the Tab keys on the keyboard, or using the D-pad buttons on a gamepad. Use with focus_mode.
-
-FocusMode FOCUS_ACCESSIBILITY = 3
-
-The node can grab focus only when screen reader is active. Use with focus_mode.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FOCUS_NONE {#FOCUS_NONE}
 
@@ -2789,7 +2867,7 @@ The node can grab focus only when screen reader is active. Use with focus_mode.
 FOCUS_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The node cannot grab focus. Use with focus_mode.
 
 #### FOCUS_CLICK {#FOCUS_CLICK}
 
@@ -2797,7 +2875,7 @@ FOCUS_NONE = 0
 FOCUS_CLICK = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The node can only grab focus on mouse clicks. Use with focus_mode.
 
 #### FOCUS_ALL {#FOCUS_ALL}
 
@@ -2805,7 +2883,7 @@ FOCUS_CLICK = 1
 FOCUS_ALL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The node can grab focus on mouse click, using the arrows and the Tab keys on the keyboard, or using the D-pad buttons on a gamepad. Use with focus_mode.
 
 #### FOCUS_ACCESSIBILITY {#FOCUS_ACCESSIBILITY}
 
@@ -2813,7 +2891,9 @@ FOCUS_ALL = 2
 FOCUS_ACCESSIBILITY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The node can grab focus only when screen reader is active. Use with focus_mode.
+
+---
 
 ### FocusBehaviorRecursive {#enum-FocusBehaviorRecursive}
 
@@ -2821,17 +2901,7 @@ FOCUS_ACCESSIBILITY = 3
 enum FocusBehaviorRecursive { FOCUS_BEHAVIOR_INHERITED = 0, FOCUS_BEHAVIOR_DISABLED = 1, FOCUS_BEHAVIOR_ENABLED = 2 }
 ```
 
-FocusBehaviorRecursive FOCUS_BEHAVIOR_INHERITED = 0
-
-Inherits the focus_behavior_recursive from the parent control. If there is no parent control, this is the same as FOCUS_BEHAVIOR_ENABLED.
-
-FocusBehaviorRecursive FOCUS_BEHAVIOR_DISABLED = 1
-
-Prevents the control from getting focused. get_focus_mode_with_override() will return FOCUS_NONE.
-
-FocusBehaviorRecursive FOCUS_BEHAVIOR_ENABLED = 2
-
-Allows the control to be focused, depending on the focus_mode. This can be used to ignore the parent's focus_behavior_recursive. get_focus_mode_with_override() will return the focus_mode.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FOCUS_BEHAVIOR_INHERITED {#FOCUS_BEHAVIOR_INHERITED}
 
@@ -2839,7 +2909,7 @@ Allows the control to be focused, depending on the focus_mode. This can be used 
 FOCUS_BEHAVIOR_INHERITED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inherits the focus_behavior_recursive from the parent control. If there is no parent control, this is the same as FOCUS_BEHAVIOR_ENABLED.
 
 #### FOCUS_BEHAVIOR_DISABLED {#FOCUS_BEHAVIOR_DISABLED}
 
@@ -2847,7 +2917,7 @@ FOCUS_BEHAVIOR_INHERITED = 0
 FOCUS_BEHAVIOR_DISABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Prevents the control from getting focused. get_focus_mode_with_override() will return FOCUS_NONE.
 
 #### FOCUS_BEHAVIOR_ENABLED {#FOCUS_BEHAVIOR_ENABLED}
 
@@ -2855,7 +2925,9 @@ FOCUS_BEHAVIOR_DISABLED = 1
 FOCUS_BEHAVIOR_ENABLED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows the control to be focused, depending on the focus_mode. This can be used to ignore the parent's focus_behavior_recursive. get_focus_mode_with_override() will return the focus_mode.
+
+---
 
 ### MouseBehaviorRecursive {#enum-MouseBehaviorRecursive}
 
@@ -2863,17 +2935,7 @@ FOCUS_BEHAVIOR_ENABLED = 2
 enum MouseBehaviorRecursive { MOUSE_BEHAVIOR_INHERITED = 0, MOUSE_BEHAVIOR_DISABLED = 1, MOUSE_BEHAVIOR_ENABLED = 2 }
 ```
 
-MouseBehaviorRecursive MOUSE_BEHAVIOR_INHERITED = 0
-
-Inherits the mouse_behavior_recursive from the parent control. If there is no parent control, this is the same as MOUSE_BEHAVIOR_ENABLED.
-
-MouseBehaviorRecursive MOUSE_BEHAVIOR_DISABLED = 1
-
-Prevents the control from receiving mouse input. get_mouse_filter_with_override() will return MOUSE_FILTER_IGNORE.
-
-MouseBehaviorRecursive MOUSE_BEHAVIOR_ENABLED = 2
-
-Allows the control to receive mouse input, depending on the mouse_filter. This can be used to ignore the parent's mouse_behavior_recursive. get_mouse_filter_with_override() will return the mouse_filter.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MOUSE_BEHAVIOR_INHERITED {#MOUSE_BEHAVIOR_INHERITED}
 
@@ -2881,7 +2943,7 @@ Allows the control to receive mouse input, depending on the mouse_filter. This c
 MOUSE_BEHAVIOR_INHERITED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Inherits the mouse_behavior_recursive from the parent control. If there is no parent control, this is the same as MOUSE_BEHAVIOR_ENABLED.
 
 #### MOUSE_BEHAVIOR_DISABLED {#MOUSE_BEHAVIOR_DISABLED}
 
@@ -2889,7 +2951,7 @@ MOUSE_BEHAVIOR_INHERITED = 0
 MOUSE_BEHAVIOR_DISABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Prevents the control from receiving mouse input. get_mouse_filter_with_override() will return MOUSE_FILTER_IGNORE.
 
 #### MOUSE_BEHAVIOR_ENABLED {#MOUSE_BEHAVIOR_ENABLED}
 
@@ -2897,7 +2959,9 @@ MOUSE_BEHAVIOR_DISABLED = 1
 MOUSE_BEHAVIOR_ENABLED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Allows the control to receive mouse input, depending on the mouse_filter. This can be used to ignore the parent's mouse_behavior_recursive. get_mouse_filter_with_override() will return the mouse_filter.
+
+---
 
 ### CursorShape {#enum-CursorShape}
 
@@ -2905,73 +2969,7 @@ MOUSE_BEHAVIOR_ENABLED = 2
 enum CursorShape { CURSOR_ARROW = 0, CURSOR_IBEAM = 1, CURSOR_POINTING_HAND = 2, CURSOR_CROSS = 3, CURSOR_WAIT = 4, CURSOR_BUSY = 5, CURSOR_DRAG = 6, CURSOR_CAN_DROP = 7, CURSOR_FORBIDDEN = 8, CURSOR_VSIZE = 9, CURSOR_HSIZE = 10, CURSOR_BDIAGSIZE = 11, CURSOR_FDIAGSIZE = 12, CURSOR_MOVE = 13, CURSOR_VSPLIT = 14, CURSOR_HSPLIT = 15, CURSOR_HELP = 16 }
 ```
 
-CursorShape CURSOR_ARROW = 0
-
-Show the system's arrow mouse cursor when the user hovers the node. Use with mouse_default_cursor_shape.
-
-CursorShape CURSOR_IBEAM = 1
-
-Show the system's I-beam mouse cursor when the user hovers the node. The I-beam pointer has a shape similar to "I". It tells the user they can highlight or insert text.
-
-CursorShape CURSOR_POINTING_HAND = 2
-
-Show the system's pointing hand mouse cursor when the user hovers the node.
-
-CursorShape CURSOR_CROSS = 3
-
-Show the system's cross mouse cursor when the user hovers the node.
-
-CursorShape CURSOR_WAIT = 4
-
-Show the system's wait mouse cursor when the user hovers the node. Often an hourglass.
-
-CursorShape CURSOR_BUSY = 5
-
-Show the system's busy mouse cursor when the user hovers the node. Often an arrow with a small hourglass.
-
-CursorShape CURSOR_DRAG = 6
-
-Show the system's drag mouse cursor, often a closed fist or a cross symbol, when the user hovers the node. It tells the user they're currently dragging an item, like a node in the Scene dock.
-
-CursorShape CURSOR_CAN_DROP = 7
-
-Show the system's drop mouse cursor when the user hovers the node. It can be an open hand. It tells the user they can drop an item they're currently grabbing, like a node in the Scene dock.
-
-CursorShape CURSOR_FORBIDDEN = 8
-
-Show the system's forbidden mouse cursor when the user hovers the node. Often a crossed circle.
-
-CursorShape CURSOR_VSIZE = 9
-
-Show the system's vertical resize mouse cursor when the user hovers the node. A double-headed vertical arrow. It tells the user they can resize the window or the panel vertically.
-
-CursorShape CURSOR_HSIZE = 10
-
-Show the system's horizontal resize mouse cursor when the user hovers the node. A double-headed horizontal arrow. It tells the user they can resize the window or the panel horizontally.
-
-CursorShape CURSOR_BDIAGSIZE = 11
-
-Show the system's window resize mouse cursor when the user hovers the node. The cursor is a double-headed arrow that goes from the bottom left to the top right. It tells the user they can resize the window or the panel both horizontally and vertically.
-
-CursorShape CURSOR_FDIAGSIZE = 12
-
-Show the system's window resize mouse cursor when the user hovers the node. The cursor is a double-headed arrow that goes from the top left to the bottom right, the opposite of CURSOR_BDIAGSIZE. It tells the user they can resize the window or the panel both horizontally and vertically.
-
-CursorShape CURSOR_MOVE = 13
-
-Show the system's move mouse cursor when the user hovers the node. It shows 2 double-headed arrows at a 90 degree angle. It tells the user they can move a UI element freely.
-
-CursorShape CURSOR_VSPLIT = 14
-
-Show the system's vertical split mouse cursor when the user hovers the node. On Windows, it's the same as CURSOR_VSIZE.
-
-CursorShape CURSOR_HSPLIT = 15
-
-Show the system's horizontal split mouse cursor when the user hovers the node. On Windows, it's the same as CURSOR_HSIZE.
-
-CursorShape CURSOR_HELP = 16
-
-Show the system's help mouse cursor when the user hovers the node, a question mark.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CURSOR_ARROW {#CURSOR_ARROW}
 
@@ -2979,7 +2977,7 @@ Show the system's help mouse cursor when the user hovers the node, a question ma
 CURSOR_ARROW = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's arrow mouse cursor when the user hovers the node. Use with mouse_default_cursor_shape.
 
 #### CURSOR_IBEAM {#CURSOR_IBEAM}
 
@@ -2987,7 +2985,7 @@ CURSOR_ARROW = 0
 CURSOR_IBEAM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's I-beam mouse cursor when the user hovers the node. The I-beam pointer has a shape similar to "I". It tells the user they can highlight or insert text.
 
 #### CURSOR_POINTING_HAND {#CURSOR_POINTING_HAND}
 
@@ -2995,7 +2993,7 @@ CURSOR_IBEAM = 1
 CURSOR_POINTING_HAND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's pointing hand mouse cursor when the user hovers the node.
 
 #### CURSOR_CROSS {#CURSOR_CROSS}
 
@@ -3003,7 +3001,7 @@ CURSOR_POINTING_HAND = 2
 CURSOR_CROSS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's cross mouse cursor when the user hovers the node.
 
 #### CURSOR_WAIT {#CURSOR_WAIT}
 
@@ -3011,7 +3009,7 @@ CURSOR_CROSS = 3
 CURSOR_WAIT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's wait mouse cursor when the user hovers the node. Often an hourglass.
 
 #### CURSOR_BUSY {#CURSOR_BUSY}
 
@@ -3019,7 +3017,7 @@ CURSOR_WAIT = 4
 CURSOR_BUSY = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's busy mouse cursor when the user hovers the node. Often an arrow with a small hourglass.
 
 #### CURSOR_DRAG {#CURSOR_DRAG}
 
@@ -3027,7 +3025,7 @@ CURSOR_BUSY = 5
 CURSOR_DRAG = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's drag mouse cursor, often a closed fist or a cross symbol, when the user hovers the node. It tells the user they're currently dragging an item, like a node in the Scene dock.
 
 #### CURSOR_CAN_DROP {#CURSOR_CAN_DROP}
 
@@ -3035,7 +3033,7 @@ CURSOR_DRAG = 6
 CURSOR_CAN_DROP = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's drop mouse cursor when the user hovers the node. It can be an open hand. It tells the user they can drop an item they're currently grabbing, like a node in the Scene dock.
 
 #### CURSOR_FORBIDDEN {#CURSOR_FORBIDDEN}
 
@@ -3043,7 +3041,7 @@ CURSOR_CAN_DROP = 7
 CURSOR_FORBIDDEN = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's forbidden mouse cursor when the user hovers the node. Often a crossed circle.
 
 #### CURSOR_VSIZE {#CURSOR_VSIZE}
 
@@ -3051,7 +3049,7 @@ CURSOR_FORBIDDEN = 8
 CURSOR_VSIZE = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's vertical resize mouse cursor when the user hovers the node. A double-headed vertical arrow. It tells the user they can resize the window or the panel vertically.
 
 #### CURSOR_HSIZE {#CURSOR_HSIZE}
 
@@ -3059,7 +3057,7 @@ CURSOR_VSIZE = 9
 CURSOR_HSIZE = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's horizontal resize mouse cursor when the user hovers the node. A double-headed horizontal arrow. It tells the user they can resize the window or the panel horizontally.
 
 #### CURSOR_BDIAGSIZE {#CURSOR_BDIAGSIZE}
 
@@ -3067,7 +3065,7 @@ CURSOR_HSIZE = 10
 CURSOR_BDIAGSIZE = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's window resize mouse cursor when the user hovers the node. The cursor is a double-headed arrow that goes from the bottom left to the top right. It tells the user they can resize the window or the panel both horizontally and vertically.
 
 #### CURSOR_FDIAGSIZE {#CURSOR_FDIAGSIZE}
 
@@ -3075,7 +3073,7 @@ CURSOR_BDIAGSIZE = 11
 CURSOR_FDIAGSIZE = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's window resize mouse cursor when the user hovers the node. The cursor is a double-headed arrow that goes from the top left to the bottom right, the opposite of CURSOR_BDIAGSIZE. It tells the user they can resize the window or the panel both horizontally and vertically.
 
 #### CURSOR_MOVE {#CURSOR_MOVE}
 
@@ -3083,7 +3081,7 @@ CURSOR_FDIAGSIZE = 12
 CURSOR_MOVE = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's move mouse cursor when the user hovers the node. It shows 2 double-headed arrows at a 90 degree angle. It tells the user they can move a UI element freely.
 
 #### CURSOR_VSPLIT {#CURSOR_VSPLIT}
 
@@ -3091,7 +3089,7 @@ CURSOR_MOVE = 13
 CURSOR_VSPLIT = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's vertical split mouse cursor when the user hovers the node. On Windows, it's the same as CURSOR_VSIZE.
 
 #### CURSOR_HSPLIT {#CURSOR_HSPLIT}
 
@@ -3099,7 +3097,7 @@ CURSOR_VSPLIT = 14
 CURSOR_HSPLIT = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's horizontal split mouse cursor when the user hovers the node. On Windows, it's the same as CURSOR_HSIZE.
 
 #### CURSOR_HELP {#CURSOR_HELP}
 
@@ -3107,7 +3105,9 @@ CURSOR_HSPLIT = 15
 CURSOR_HELP = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show the system's help mouse cursor when the user hovers the node, a question mark.
+
+---
 
 ### LayoutPreset {#enum-LayoutPreset}
 
@@ -3115,69 +3115,7 @@ CURSOR_HELP = 16
 enum LayoutPreset { PRESET_TOP_LEFT = 0, PRESET_TOP_RIGHT = 1, PRESET_BOTTOM_LEFT = 2, PRESET_BOTTOM_RIGHT = 3, PRESET_CENTER_LEFT = 4, PRESET_CENTER_TOP = 5, PRESET_CENTER_RIGHT = 6, PRESET_CENTER_BOTTOM = 7, PRESET_CENTER = 8, PRESET_LEFT_WIDE = 9, PRESET_TOP_WIDE = 10, PRESET_RIGHT_WIDE = 11, PRESET_BOTTOM_WIDE = 12, PRESET_VCENTER_WIDE = 13, PRESET_HCENTER_WIDE = 14, PRESET_FULL_RECT = 15 }
 ```
 
-LayoutPreset PRESET_TOP_LEFT = 0
-
-Snap all 4 anchors to the top-left of the parent control's bounds. Use with set_anchors_preset().
-
-LayoutPreset PRESET_TOP_RIGHT = 1
-
-Snap all 4 anchors to the top-right of the parent control's bounds. Use with set_anchors_preset().
-
-LayoutPreset PRESET_BOTTOM_LEFT = 2
-
-Snap all 4 anchors to the bottom-left of the parent control's bounds. Use with set_anchors_preset().
-
-LayoutPreset PRESET_BOTTOM_RIGHT = 3
-
-Snap all 4 anchors to the bottom-right of the parent control's bounds. Use with set_anchors_preset().
-
-LayoutPreset PRESET_CENTER_LEFT = 4
-
-Snap all 4 anchors to the center of the left edge of the parent control's bounds. Use with set_anchors_preset().
-
-LayoutPreset PRESET_CENTER_TOP = 5
-
-Snap all 4 anchors to the center of the top edge of the parent control's bounds. Use with set_anchors_preset().
-
-LayoutPreset PRESET_CENTER_RIGHT = 6
-
-Snap all 4 anchors to the center of the right edge of the parent control's bounds. Use with set_anchors_preset().
-
-LayoutPreset PRESET_CENTER_BOTTOM = 7
-
-Snap all 4 anchors to the center of the bottom edge of the parent control's bounds. Use with set_anchors_preset().
-
-LayoutPreset PRESET_CENTER = 8
-
-Snap all 4 anchors to the center of the parent control's bounds. Use with set_anchors_preset().
-
-LayoutPreset PRESET_LEFT_WIDE = 9
-
-Snap all 4 anchors to the left edge of the parent control. The left offset becomes relative to the left edge and the top offset relative to the top left corner of the node's parent. Use with set_anchors_preset().
-
-LayoutPreset PRESET_TOP_WIDE = 10
-
-Snap all 4 anchors to the top edge of the parent control. The left offset becomes relative to the top left corner, the top offset relative to the top edge, and the right offset relative to the top right corner of the node's parent. Use with set_anchors_preset().
-
-LayoutPreset PRESET_RIGHT_WIDE = 11
-
-Snap all 4 anchors to the right edge of the parent control. The right offset becomes relative to the right edge and the top offset relative to the top right corner of the node's parent. Use with set_anchors_preset().
-
-LayoutPreset PRESET_BOTTOM_WIDE = 12
-
-Snap all 4 anchors to the bottom edge of the parent control. The left offset becomes relative to the bottom left corner, the bottom offset relative to the bottom edge, and the right offset relative to the bottom right corner of the node's parent. Use with set_anchors_preset().
-
-LayoutPreset PRESET_VCENTER_WIDE = 13
-
-Snap all 4 anchors to a vertical line that cuts the parent control in half. Use with set_anchors_preset().
-
-LayoutPreset PRESET_HCENTER_WIDE = 14
-
-Snap all 4 anchors to a horizontal line that cuts the parent control in half. Use with set_anchors_preset().
-
-LayoutPreset PRESET_FULL_RECT = 15
-
-Snap all 4 anchors to the respective corners of the parent control. Set all 4 offsets to 0 after you applied this preset and the Control will fit its parent control. Use with set_anchors_preset().
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PRESET_TOP_LEFT {#PRESET_TOP_LEFT}
 
@@ -3185,7 +3123,7 @@ Snap all 4 anchors to the respective corners of the parent control. Set all 4 of
 PRESET_TOP_LEFT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the top-left of the parent control's bounds. Use with set_anchors_preset().
 
 #### PRESET_TOP_RIGHT {#PRESET_TOP_RIGHT}
 
@@ -3193,7 +3131,7 @@ PRESET_TOP_LEFT = 0
 PRESET_TOP_RIGHT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the top-right of the parent control's bounds. Use with set_anchors_preset().
 
 #### PRESET_BOTTOM_LEFT {#PRESET_BOTTOM_LEFT}
 
@@ -3201,7 +3139,7 @@ PRESET_TOP_RIGHT = 1
 PRESET_BOTTOM_LEFT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the bottom-left of the parent control's bounds. Use with set_anchors_preset().
 
 #### PRESET_BOTTOM_RIGHT {#PRESET_BOTTOM_RIGHT}
 
@@ -3209,7 +3147,7 @@ PRESET_BOTTOM_LEFT = 2
 PRESET_BOTTOM_RIGHT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the bottom-right of the parent control's bounds. Use with set_anchors_preset().
 
 #### PRESET_CENTER_LEFT {#PRESET_CENTER_LEFT}
 
@@ -3217,7 +3155,7 @@ PRESET_BOTTOM_RIGHT = 3
 PRESET_CENTER_LEFT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the center of the left edge of the parent control's bounds. Use with set_anchors_preset().
 
 #### PRESET_CENTER_TOP {#PRESET_CENTER_TOP}
 
@@ -3225,7 +3163,7 @@ PRESET_CENTER_LEFT = 4
 PRESET_CENTER_TOP = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the center of the top edge of the parent control's bounds. Use with set_anchors_preset().
 
 #### PRESET_CENTER_RIGHT {#PRESET_CENTER_RIGHT}
 
@@ -3233,7 +3171,7 @@ PRESET_CENTER_TOP = 5
 PRESET_CENTER_RIGHT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the center of the right edge of the parent control's bounds. Use with set_anchors_preset().
 
 #### PRESET_CENTER_BOTTOM {#PRESET_CENTER_BOTTOM}
 
@@ -3241,7 +3179,7 @@ PRESET_CENTER_RIGHT = 6
 PRESET_CENTER_BOTTOM = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the center of the bottom edge of the parent control's bounds. Use with set_anchors_preset().
 
 #### PRESET_CENTER {#PRESET_CENTER}
 
@@ -3249,7 +3187,7 @@ PRESET_CENTER_BOTTOM = 7
 PRESET_CENTER = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the center of the parent control's bounds. Use with set_anchors_preset().
 
 #### PRESET_LEFT_WIDE {#PRESET_LEFT_WIDE}
 
@@ -3257,7 +3195,7 @@ PRESET_CENTER = 8
 PRESET_LEFT_WIDE = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the left edge of the parent control. The left offset becomes relative to the left edge and the top offset relative to the top left corner of the node's parent. Use with set_anchors_preset().
 
 #### PRESET_TOP_WIDE {#PRESET_TOP_WIDE}
 
@@ -3265,7 +3203,7 @@ PRESET_LEFT_WIDE = 9
 PRESET_TOP_WIDE = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the top edge of the parent control. The left offset becomes relative to the top left corner, the top offset relative to the top edge, and the right offset relative to the top right corner of the node's parent. Use with set_anchors_preset().
 
 #### PRESET_RIGHT_WIDE {#PRESET_RIGHT_WIDE}
 
@@ -3273,7 +3211,7 @@ PRESET_TOP_WIDE = 10
 PRESET_RIGHT_WIDE = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the right edge of the parent control. The right offset becomes relative to the right edge and the top offset relative to the top right corner of the node's parent. Use with set_anchors_preset().
 
 #### PRESET_BOTTOM_WIDE {#PRESET_BOTTOM_WIDE}
 
@@ -3281,7 +3219,7 @@ PRESET_RIGHT_WIDE = 11
 PRESET_BOTTOM_WIDE = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the bottom edge of the parent control. The left offset becomes relative to the bottom left corner, the bottom offset relative to the bottom edge, and the right offset relative to the bottom right corner of the node's parent. Use with set_anchors_preset().
 
 #### PRESET_VCENTER_WIDE {#PRESET_VCENTER_WIDE}
 
@@ -3289,7 +3227,7 @@ PRESET_BOTTOM_WIDE = 12
 PRESET_VCENTER_WIDE = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to a vertical line that cuts the parent control in half. Use with set_anchors_preset().
 
 #### PRESET_HCENTER_WIDE {#PRESET_HCENTER_WIDE}
 
@@ -3297,7 +3235,7 @@ PRESET_VCENTER_WIDE = 13
 PRESET_HCENTER_WIDE = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to a horizontal line that cuts the parent control in half. Use with set_anchors_preset().
 
 #### PRESET_FULL_RECT {#PRESET_FULL_RECT}
 
@@ -3305,7 +3243,9 @@ PRESET_HCENTER_WIDE = 14
 PRESET_FULL_RECT = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snap all 4 anchors to the respective corners of the parent control. Set all 4 offsets to 0 after you applied this preset and the Control will fit its parent control. Use with set_anchors_preset().
+
+---
 
 ### LayoutPresetMode {#enum-LayoutPresetMode}
 
@@ -3313,21 +3253,7 @@ PRESET_FULL_RECT = 15
 enum LayoutPresetMode { PRESET_MODE_MINSIZE = 0, PRESET_MODE_KEEP_WIDTH = 1, PRESET_MODE_KEEP_HEIGHT = 2, PRESET_MODE_KEEP_SIZE = 3 }
 ```
 
-LayoutPresetMode PRESET_MODE_MINSIZE = 0
-
-The control will be resized to its minimum size.
-
-LayoutPresetMode PRESET_MODE_KEEP_WIDTH = 1
-
-The control's width will not change.
-
-LayoutPresetMode PRESET_MODE_KEEP_HEIGHT = 2
-
-The control's height will not change.
-
-LayoutPresetMode PRESET_MODE_KEEP_SIZE = 3
-
-The control's size will not change.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PRESET_MODE_MINSIZE {#PRESET_MODE_MINSIZE}
 
@@ -3335,7 +3261,7 @@ The control's size will not change.
 PRESET_MODE_MINSIZE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The control will be resized to its minimum size.
 
 #### PRESET_MODE_KEEP_WIDTH {#PRESET_MODE_KEEP_WIDTH}
 
@@ -3343,7 +3269,7 @@ PRESET_MODE_MINSIZE = 0
 PRESET_MODE_KEEP_WIDTH = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The control's width will not change.
 
 #### PRESET_MODE_KEEP_HEIGHT {#PRESET_MODE_KEEP_HEIGHT}
 
@@ -3351,7 +3277,7 @@ PRESET_MODE_KEEP_WIDTH = 1
 PRESET_MODE_KEEP_HEIGHT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The control's height will not change.
 
 #### PRESET_MODE_KEEP_SIZE {#PRESET_MODE_KEEP_SIZE}
 
@@ -3359,7 +3285,11 @@ PRESET_MODE_KEEP_HEIGHT = 2
 PRESET_MODE_KEEP_SIZE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The control's size will not change.
+
+---
+
+flags SizeFlags:
 
 ### SizeFlags {#enum-SizeFlags}
 
@@ -3375,7 +3305,9 @@ enum SizeFlags（位标志） { SIZE_SHRINK_BEGIN = 0, SIZE_FILL = 1, SIZE_EXPAN
 SIZE_SHRINK_BEGIN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tells the parent Container to align the node with its start, either the top or the left edge. It is mutually exclusive with SIZE_FILL and other shrink size flags, but can be used with SIZE_EXPAND in some containers. Use with size_flags_horizontal and size_flags_vertical.
+
+Note: Setting this flag is equal to not having any size flags.
 
 #### SIZE_FILL {#SIZE_FILL}
 
@@ -3383,7 +3315,7 @@ SIZE_SHRINK_BEGIN = 0
 SIZE_FILL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tells the parent Container to expand the bounds of this node to fill all the available space without pushing any other node. It is mutually exclusive with shrink size flags. Use with size_flags_horizontal and size_flags_vertical.
 
 #### SIZE_EXPAND {#SIZE_EXPAND}
 
@@ -3391,7 +3323,7 @@ SIZE_FILL = 1
 SIZE_EXPAND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tells the parent Container to let this node take all the available space on the axis you flag. If multiple neighboring nodes are set to expand, they'll share the space based on their stretch ratio. See size_flags_stretch_ratio. Use with size_flags_horizontal and size_flags_vertical.
 
 #### SIZE_EXPAND_FILL {#SIZE_EXPAND_FILL}
 
@@ -3399,7 +3331,7 @@ SIZE_EXPAND = 2
 SIZE_EXPAND_FILL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets the node's size flags to both fill and expand. See SIZE_FILL and SIZE_EXPAND for more information.
 
 #### SIZE_SHRINK_CENTER {#SIZE_SHRINK_CENTER}
 
@@ -3407,7 +3339,7 @@ SIZE_EXPAND_FILL = 3
 SIZE_SHRINK_CENTER = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tells the parent Container to center the node in the available space. It is mutually exclusive with SIZE_FILL and other shrink size flags, but can be used with SIZE_EXPAND in some containers. Use with size_flags_horizontal and size_flags_vertical.
 
 #### SIZE_SHRINK_END {#SIZE_SHRINK_END}
 
@@ -3415,7 +3347,9 @@ SIZE_SHRINK_CENTER = 4
 SIZE_SHRINK_END = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tells the parent Container to align the node with its end, either the bottom or the right edge. It is mutually exclusive with SIZE_FILL and other shrink size flags, but can be used with SIZE_EXPAND in some containers. Use with size_flags_horizontal and size_flags_vertical.
+
+---
 
 ### MouseFilter {#enum-MouseFilter}
 
@@ -3423,21 +3357,7 @@ SIZE_SHRINK_END = 8
 enum MouseFilter { MOUSE_FILTER_STOP = 0, MOUSE_FILTER_PASS = 1, MOUSE_FILTER_IGNORE = 2 }
 ```
 
-MouseFilter MOUSE_FILTER_STOP = 0
-
-The control will receive mouse movement input events and mouse button input events if clicked on through _gui_input(). The control will also receive the mouse_entered and mouse_exited signals. These events are automatically marked as handled, and they will not propagate further to other controls. This also results in blocking signals in other controls.
-
-MouseFilter MOUSE_FILTER_PASS = 1
-
-The control will receive mouse movement input events and mouse button input events if clicked on through _gui_input(). The control will also receive the mouse_entered and mouse_exited signals.
-
-If this control does not handle the event, the event will propagate up to its parent control if it has one. The event is bubbled up the node hierarchy until it reaches a non-CanvasItem, a control with MOUSE_FILTER_STOP, or a CanvasItem with CanvasItem.top_level enabled. This will allow signals to fire in all controls it reaches. If no control handled it, the event will be passed to Node._shortcut_input() for further processing.
-
-MouseFilter MOUSE_FILTER_IGNORE = 2
-
-The control will not receive any mouse movement input events nor mouse button input events through _gui_input(). The control will also not receive the mouse_entered nor mouse_exited signals. This will not block other controls from receiving these events or firing the signals. Ignored events will not be handled automatically. If a child has MOUSE_FILTER_PASS and an event was passed to this control, the event will further propagate up to the control's parent.
-
-Note: If the control has received mouse_entered but not mouse_exited, changing the mouse_filter to MOUSE_FILTER_IGNORE will cause mouse_exited to be emitted.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MOUSE_FILTER_STOP {#MOUSE_FILTER_STOP}
 
@@ -3445,7 +3365,7 @@ Note: If the control has received mouse_entered but not mouse_exited, changing t
 MOUSE_FILTER_STOP = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The control will receive mouse movement input events and mouse button input events if clicked on through _gui_input(). The control will also receive the mouse_entered and mouse_exited signals. These events are automatically marked as handled, and they will not propagate further to other controls. This also results in blocking signals in other controls.
 
 #### MOUSE_FILTER_PASS {#MOUSE_FILTER_PASS}
 
@@ -3453,7 +3373,9 @@ MOUSE_FILTER_STOP = 0
 MOUSE_FILTER_PASS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The control will receive mouse movement input events and mouse button input events if clicked on through _gui_input(). The control will also receive the mouse_entered and mouse_exited signals.
+
+If this control does not handle the event, the event will propagate up to its parent control if it has one. The event is bubbled up the node hierarchy until it reaches a non-CanvasItem, a control with MOUSE_FILTER_STOP, or a CanvasItem with CanvasItem.top_level enabled. This will allow signals to fire in all controls it reaches. If no control handled it, the event will be passed to Node._shortcut_input() for further processing.
 
 #### MOUSE_FILTER_IGNORE {#MOUSE_FILTER_IGNORE}
 
@@ -3461,7 +3383,11 @@ MOUSE_FILTER_PASS = 1
 MOUSE_FILTER_IGNORE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The control will not receive any mouse movement input events nor mouse button input events through _gui_input(). The control will also not receive the mouse_entered nor mouse_exited signals. This will not block other controls from receiving these events or firing the signals. Ignored events will not be handled automatically. If a child has MOUSE_FILTER_PASS and an event was passed to this control, the event will further propagate up to the control's parent.
+
+Note: If the control has received mouse_entered but not mouse_exited, changing the mouse_filter to MOUSE_FILTER_IGNORE will cause mouse_exited to be emitted.
+
+---
 
 ### GrowDirection {#enum-GrowDirection}
 
@@ -3469,17 +3395,7 @@ MOUSE_FILTER_IGNORE = 2
 enum GrowDirection { GROW_DIRECTION_BEGIN = 0, GROW_DIRECTION_END = 1, GROW_DIRECTION_BOTH = 2 }
 ```
 
-GrowDirection GROW_DIRECTION_BEGIN = 0
-
-The control will grow to the left or top to make up if its minimum size is changed to be greater than its current size on the respective axis.
-
-GrowDirection GROW_DIRECTION_END = 1
-
-The control will grow to the right or bottom to make up if its minimum size is changed to be greater than its current size on the respective axis.
-
-GrowDirection GROW_DIRECTION_BOTH = 2
-
-The control will grow in both directions equally to make up if its minimum size is changed to be greater than its current size.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### GROW_DIRECTION_BEGIN {#GROW_DIRECTION_BEGIN}
 
@@ -3487,7 +3403,7 @@ The control will grow in both directions equally to make up if its minimum size 
 GROW_DIRECTION_BEGIN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The control will grow to the left or top to make up if its minimum size is changed to be greater than its current size on the respective axis.
 
 #### GROW_DIRECTION_END {#GROW_DIRECTION_END}
 
@@ -3495,7 +3411,7 @@ GROW_DIRECTION_BEGIN = 0
 GROW_DIRECTION_END = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The control will grow to the right or bottom to make up if its minimum size is changed to be greater than its current size on the respective axis.
 
 #### GROW_DIRECTION_BOTH {#GROW_DIRECTION_BOTH}
 
@@ -3503,7 +3419,9 @@ GROW_DIRECTION_END = 1
 GROW_DIRECTION_BOTH = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The control will grow in both directions equally to make up if its minimum size is changed to be greater than its current size.
+
+---
 
 ### Anchor {#enum-Anchor}
 
@@ -3511,13 +3429,7 @@ GROW_DIRECTION_BOTH = 2
 enum Anchor { ANCHOR_BEGIN = 0, ANCHOR_END = 1 }
 ```
 
-Anchor ANCHOR_BEGIN = 0
-
-Snaps one of the 4 anchor's sides to the origin of the node's Rect, in the top left. Use it with one of the anchor_* member variables, like anchor_left. To change all 4 anchors at once, use set_anchors_preset().
-
-Anchor ANCHOR_END = 1
-
-Snaps one of the 4 anchor's sides to the end of the node's Rect, in the bottom right. Use it with one of the anchor_* member variables, like anchor_left. To change all 4 anchors at once, use set_anchors_preset().
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ANCHOR_BEGIN {#ANCHOR_BEGIN}
 
@@ -3525,7 +3437,7 @@ Snaps one of the 4 anchor's sides to the end of the node's Rect, in the bottom r
 ANCHOR_BEGIN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snaps one of the 4 anchor's sides to the origin of the node's Rect, in the top left. Use it with one of the anchor_* member variables, like anchor_left. To change all 4 anchors at once, use set_anchors_preset().
 
 #### ANCHOR_END {#ANCHOR_END}
 
@@ -3533,7 +3445,9 @@ ANCHOR_BEGIN = 0
 ANCHOR_END = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Snaps one of the 4 anchor's sides to the end of the node's Rect, in the bottom right. Use it with one of the anchor_* member variables, like anchor_left. To change all 4 anchors at once, use set_anchors_preset().
+
+---
 
 ### LayoutDirection {#enum-LayoutDirection}
 
@@ -3541,33 +3455,7 @@ ANCHOR_END = 1
 enum LayoutDirection { LAYOUT_DIRECTION_INHERITED = 0, LAYOUT_DIRECTION_APPLICATION_LOCALE = 1, LAYOUT_DIRECTION_LTR = 2, LAYOUT_DIRECTION_RTL = 3, LAYOUT_DIRECTION_SYSTEM_LOCALE = 4, LAYOUT_DIRECTION_MAX = 5, LAYOUT_DIRECTION_LOCALE = 1 }
 ```
 
-LayoutDirection LAYOUT_DIRECTION_INHERITED = 0
-
-Automatic layout direction, determined from the parent control layout direction.
-
-LayoutDirection LAYOUT_DIRECTION_APPLICATION_LOCALE = 1
-
-Automatic layout direction, determined from the current locale. Right-to-left layout direction is automatically used for languages that require it such as Arabic and Hebrew, but only if a valid translation file is loaded for the given language (unless said language is configured as a fallback in ProjectSettings.internationalization/locale/fallback). For all other languages (or if no valid translation file is found by Godot), left-to-right layout direction is used. If using TextServerFallback (ProjectSettings.internationalization/rendering/text_driver), left-to-right layout direction is always used regardless of the language. Right-to-left layout direction can also be forced using ProjectSettings.internationalization/rendering/force_right_to_left_layout_direction.
-
-LayoutDirection LAYOUT_DIRECTION_LTR = 2
-
-Left-to-right layout direction.
-
-LayoutDirection LAYOUT_DIRECTION_RTL = 3
-
-Right-to-left layout direction.
-
-LayoutDirection LAYOUT_DIRECTION_SYSTEM_LOCALE = 4
-
-Automatic layout direction, determined from the system locale. Right-to-left layout direction is automatically used for languages that require it such as Arabic and Hebrew, but only if a valid translation file is loaded for the given language. For all other languages (or if no valid translation file is found by Godot), left-to-right layout direction is used. If using TextServerFallback (ProjectSettings.internationalization/rendering/text_driver), left-to-right layout direction is always used regardless of the language.
-
-LayoutDirection LAYOUT_DIRECTION_MAX = 5
-
-Represents the size of the LayoutDirection enum.
-
-LayoutDirection LAYOUT_DIRECTION_LOCALE = 1
-
-Deprecated: Use LAYOUT_DIRECTION_APPLICATION_LOCALE instead.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LAYOUT_DIRECTION_INHERITED {#LAYOUT_DIRECTION_INHERITED}
 
@@ -3575,7 +3463,7 @@ Deprecated: Use LAYOUT_DIRECTION_APPLICATION_LOCALE instead.
 LAYOUT_DIRECTION_INHERITED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatic layout direction, determined from the parent control layout direction.
 
 #### LAYOUT_DIRECTION_APPLICATION_LOCALE {#LAYOUT_DIRECTION_APPLICATION_LOCALE}
 
@@ -3583,7 +3471,7 @@ LAYOUT_DIRECTION_INHERITED = 0
 LAYOUT_DIRECTION_APPLICATION_LOCALE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatic layout direction, determined from the current locale. Right-to-left layout direction is automatically used for languages that require it such as Arabic and Hebrew, but only if a valid translation file is loaded for the given language (unless said language is configured as a fallback in ProjectSettings.internationalization/locale/fallback). For all other languages (or if no valid translation file is found by Godot), left-to-right layout direction is used. If using TextServerFallback (ProjectSettings.internationalization/rendering/text_driver), left-to-right layout direction is always used regardless of the language. Right-to-left layout direction can also be forced using ProjectSettings.internationalization/rendering/force_right_to_left_layout_direction.
 
 #### LAYOUT_DIRECTION_LTR {#LAYOUT_DIRECTION_LTR}
 
@@ -3591,7 +3479,7 @@ LAYOUT_DIRECTION_APPLICATION_LOCALE = 1
 LAYOUT_DIRECTION_LTR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Left-to-right layout direction.
 
 #### LAYOUT_DIRECTION_RTL {#LAYOUT_DIRECTION_RTL}
 
@@ -3599,7 +3487,7 @@ LAYOUT_DIRECTION_LTR = 2
 LAYOUT_DIRECTION_RTL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Right-to-left layout direction.
 
 #### LAYOUT_DIRECTION_SYSTEM_LOCALE {#LAYOUT_DIRECTION_SYSTEM_LOCALE}
 
@@ -3607,7 +3495,7 @@ LAYOUT_DIRECTION_RTL = 3
 LAYOUT_DIRECTION_SYSTEM_LOCALE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatic layout direction, determined from the system locale. Right-to-left layout direction is automatically used for languages that require it such as Arabic and Hebrew, but only if a valid translation file is loaded for the given language. For all other languages (or if no valid translation file is found by Godot), left-to-right layout direction is used. If using TextServerFallback (ProjectSettings.internationalization/rendering/text_driver), left-to-right layout direction is always used regardless of the language.
 
 #### LAYOUT_DIRECTION_MAX {#LAYOUT_DIRECTION_MAX}
 
@@ -3615,7 +3503,7 @@ LAYOUT_DIRECTION_SYSTEM_LOCALE = 4
 LAYOUT_DIRECTION_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the LayoutDirection enum.
 
 #### LAYOUT_DIRECTION_LOCALE {#LAYOUT_DIRECTION_LOCALE}
 
@@ -3623,7 +3511,9 @@ LAYOUT_DIRECTION_MAX = 5
 LAYOUT_DIRECTION_LOCALE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: Use LAYOUT_DIRECTION_APPLICATION_LOCALE instead.
+
+---
 
 ### TextDirection {#enum-TextDirection}
 
@@ -3631,21 +3521,7 @@ LAYOUT_DIRECTION_LOCALE = 1
 enum TextDirection { TEXT_DIRECTION_INHERITED = 3, TEXT_DIRECTION_AUTO = 0, TEXT_DIRECTION_LTR = 1, TEXT_DIRECTION_RTL = 2 }
 ```
 
-TextDirection TEXT_DIRECTION_INHERITED = 3
-
-Text writing direction is the same as layout direction.
-
-TextDirection TEXT_DIRECTION_AUTO = 0
-
-Automatic text writing direction, determined from the current locale and text content.
-
-TextDirection TEXT_DIRECTION_LTR = 1
-
-Left-to-right text writing direction.
-
-TextDirection TEXT_DIRECTION_RTL = 2
-
-Right-to-left text writing direction.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TEXT_DIRECTION_INHERITED {#TEXT_DIRECTION_INHERITED}
 
@@ -3653,7 +3529,7 @@ Right-to-left text writing direction.
 TEXT_DIRECTION_INHERITED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Text writing direction is the same as layout direction.
 
 #### TEXT_DIRECTION_AUTO {#TEXT_DIRECTION_AUTO}
 
@@ -3661,7 +3537,7 @@ TEXT_DIRECTION_INHERITED = 3
 TEXT_DIRECTION_AUTO = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Automatic text writing direction, determined from the current locale and text content.
 
 #### TEXT_DIRECTION_LTR {#TEXT_DIRECTION_LTR}
 
@@ -3669,7 +3545,7 @@ TEXT_DIRECTION_AUTO = 0
 TEXT_DIRECTION_LTR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Left-to-right text writing direction.
 
 #### TEXT_DIRECTION_RTL {#TEXT_DIRECTION_RTL}
 
@@ -3677,7 +3553,9 @@ TEXT_DIRECTION_LTR = 1
 TEXT_DIRECTION_RTL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Right-to-left text writing direction.
+
+---
 
 ## 常量
 

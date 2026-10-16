@@ -187,17 +187,7 @@ light_textures: Array
 enum ShadowmaskMode { SHADOWMASK_MODE_NONE = 0, SHADOWMASK_MODE_REPLACE = 1, SHADOWMASK_MODE_OVERLAY = 2 }
 ```
 
-ShadowmaskMode SHADOWMASK_MODE_NONE = 0
-
-Shadowmasking is disabled. No shadowmask texture will be created when baking lightmaps. Existing shadowmask textures will be removed during baking.
-
-ShadowmaskMode SHADOWMASK_MODE_REPLACE = 1
-
-Shadowmasking is enabled. Directional shadows that are outside the DirectionalLight3D.directional_shadow_max_distance will be rendered using the shadowmask texture. Shadows that are inside the range will be rendered using real-time shadows exclusively. This mode allows for more precise real-time shadows up close, without the potential "smearing" effect that can occur when using lightmaps with a high texel size. The downside is that when the camera moves fast, the transition between the real-time light and shadowmask can be obvious. Also, objects that only have shadows baked in the shadowmask (and no real-time shadows) won't display any shadows up close.
-
-ShadowmaskMode SHADOWMASK_MODE_OVERLAY = 2
-
-Shadowmasking is enabled. Directional shadows will be rendered with real-time shadows overlaid on top of the shadowmask texture. This mode makes for smoother shadow transitions when the camera moves fast, at the cost of a potential smearing effect for directional shadows that are up close (due to the real-time shadow being mixed with a low-resolution shadowmask). Objects that only have shadows baked in the shadowmask (and no real-time shadows) will keep their shadows up close.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHADOWMASK_MODE_NONE {#SHADOWMASK_MODE_NONE}
 
@@ -205,7 +195,7 @@ Shadowmasking is enabled. Directional shadows will be rendered with real-time sh
 SHADOWMASK_MODE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Shadowmasking is disabled. No shadowmask texture will be created when baking lightmaps. Existing shadowmask textures will be removed during baking.
 
 #### SHADOWMASK_MODE_REPLACE {#SHADOWMASK_MODE_REPLACE}
 
@@ -213,7 +203,7 @@ SHADOWMASK_MODE_NONE = 0
 SHADOWMASK_MODE_REPLACE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Shadowmasking is enabled. Directional shadows that are outside the DirectionalLight3D.directional_shadow_max_distance will be rendered using the shadowmask texture. Shadows that are inside the range will be rendered using real-time shadows exclusively. This mode allows for more precise real-time shadows up close, without the potential "smearing" effect that can occur when using lightmaps with a high texel size. The downside is that when the camera moves fast, the transition between the real-time light and shadowmask can be obvious. Also, objects that only have shadows baked in the shadowmask (and no real-time shadows) won't display any shadows up close.
 
 #### SHADOWMASK_MODE_OVERLAY {#SHADOWMASK_MODE_OVERLAY}
 
@@ -221,4 +211,6 @@ SHADOWMASK_MODE_REPLACE = 1
 SHADOWMASK_MODE_OVERLAY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Shadowmasking is enabled. Directional shadows will be rendered with real-time shadows overlaid on top of the shadowmask texture. This mode makes for smoother shadow transitions when the camera moves fast, at the cost of a potential smearing effect for directional shadows that are up close (due to the real-time shadow being mixed with a low-resolution shadowmask). Objects that only have shadows baked in the shadowmask (and no real-time shadows) will keep their shadows up close.
+
+---

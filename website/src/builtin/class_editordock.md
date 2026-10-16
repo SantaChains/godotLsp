@@ -378,7 +378,10 @@ If true, the dock will always display an icon, regardless of EditorSettings.inte
 title_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_title_color(value: Color)
+- Color get_title_color()
+
+The color of the dock tab's title. If its alpha is 0.0, the default font color will be used.
 
 ### dock_shortcut {#dock_shortcut}
 
@@ -481,57 +484,7 @@ DOCK_LAYOUT_ALL = 7
 enum DockSlot { DOCK_SLOT_NONE = -1, DOCK_SLOT_LEFT_UL = 0, DOCK_SLOT_LEFT_BL = 1, DOCK_SLOT_LEFT_UR = 2, DOCK_SLOT_LEFT_BR = 3, DOCK_SLOT_RIGHT_UL = 4, DOCK_SLOT_RIGHT_BL = 5, DOCK_SLOT_RIGHT_UR = 6, DOCK_SLOT_RIGHT_BR = 7, DOCK_SLOT_BOTTOM = 8, DOCK_SLOT_BOTTOM_L = 9, DOCK_SLOT_BOTTOM_R = 10, DOCK_SLOT_MAX = 11 }
 ```
 
-DockSlot DOCK_SLOT_NONE = -1
-
-The dock is closed.
-
-DockSlot DOCK_SLOT_LEFT_UL = 0
-
-Dock slot, left side, upper-left (empty in default layout).
-
-DockSlot DOCK_SLOT_LEFT_BL = 1
-
-Dock slot, left side, bottom-left (empty in default layout).
-
-DockSlot DOCK_SLOT_LEFT_UR = 2
-
-Dock slot, left side, upper-right (in default layout includes Scene and Import docks).
-
-DockSlot DOCK_SLOT_LEFT_BR = 3
-
-Dock slot, left side, bottom-right (in default layout includes FileSystem and History docks).
-
-DockSlot DOCK_SLOT_RIGHT_UL = 4
-
-Dock slot, right side, upper-left (in default layout includes Inspector, Signal, and Group docks).
-
-DockSlot DOCK_SLOT_RIGHT_BL = 5
-
-Dock slot, right side, bottom-left (empty in default layout).
-
-DockSlot DOCK_SLOT_RIGHT_UR = 6
-
-Dock slot, right side, upper-right (empty in default layout).
-
-DockSlot DOCK_SLOT_RIGHT_BR = 7
-
-Dock slot, right side, bottom-right (empty in default layout).
-
-DockSlot DOCK_SLOT_BOTTOM = 8
-
-Bottom panel.
-
-DockSlot DOCK_SLOT_BOTTOM_L = 9
-
-Dock slot at the bottom, below bottom panel, on the left side.
-
-DockSlot DOCK_SLOT_BOTTOM_R = 10
-
-Dock slot at the bottom, below bottom panel, on the right side.
-
-DockSlot DOCK_SLOT_MAX = 11
-
-Represents the size of the DockSlot enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DOCK_SLOT_NONE {#DOCK_SLOT_NONE}
 
@@ -539,7 +492,7 @@ Represents the size of the DockSlot enum.
 DOCK_SLOT_NONE = -1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The dock is closed.
 
 #### DOCK_SLOT_LEFT_UL {#DOCK_SLOT_LEFT_UL}
 
@@ -547,7 +500,7 @@ DOCK_SLOT_NONE = -1
 DOCK_SLOT_LEFT_UL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, left side, upper-left (empty in default layout).
 
 #### DOCK_SLOT_LEFT_BL {#DOCK_SLOT_LEFT_BL}
 
@@ -555,7 +508,7 @@ DOCK_SLOT_LEFT_UL = 0
 DOCK_SLOT_LEFT_BL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, left side, bottom-left (empty in default layout).
 
 #### DOCK_SLOT_LEFT_UR {#DOCK_SLOT_LEFT_UR}
 
@@ -563,7 +516,7 @@ DOCK_SLOT_LEFT_BL = 1
 DOCK_SLOT_LEFT_UR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, left side, upper-right (in default layout includes Scene and Import docks).
 
 #### DOCK_SLOT_LEFT_BR {#DOCK_SLOT_LEFT_BR}
 
@@ -571,7 +524,7 @@ DOCK_SLOT_LEFT_UR = 2
 DOCK_SLOT_LEFT_BR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, left side, bottom-right (in default layout includes FileSystem and History docks).
 
 #### DOCK_SLOT_RIGHT_UL {#DOCK_SLOT_RIGHT_UL}
 
@@ -579,7 +532,7 @@ DOCK_SLOT_LEFT_BR = 3
 DOCK_SLOT_RIGHT_UL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, right side, upper-left (in default layout includes Inspector, Signal, and Group docks).
 
 #### DOCK_SLOT_RIGHT_BL {#DOCK_SLOT_RIGHT_BL}
 
@@ -587,7 +540,7 @@ DOCK_SLOT_RIGHT_UL = 4
 DOCK_SLOT_RIGHT_BL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, right side, bottom-left (empty in default layout).
 
 #### DOCK_SLOT_RIGHT_UR {#DOCK_SLOT_RIGHT_UR}
 
@@ -595,7 +548,7 @@ DOCK_SLOT_RIGHT_BL = 5
 DOCK_SLOT_RIGHT_UR = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, right side, upper-right (empty in default layout).
 
 #### DOCK_SLOT_RIGHT_BR {#DOCK_SLOT_RIGHT_BR}
 
@@ -603,7 +556,7 @@ DOCK_SLOT_RIGHT_UR = 6
 DOCK_SLOT_RIGHT_BR = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot, right side, bottom-right (empty in default layout).
 
 #### DOCK_SLOT_BOTTOM {#DOCK_SLOT_BOTTOM}
 
@@ -611,7 +564,7 @@ DOCK_SLOT_RIGHT_BR = 7
 DOCK_SLOT_BOTTOM = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Bottom panel.
 
 #### DOCK_SLOT_BOTTOM_L {#DOCK_SLOT_BOTTOM_L}
 
@@ -619,7 +572,7 @@ DOCK_SLOT_BOTTOM = 8
 DOCK_SLOT_BOTTOM_L = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot at the bottom, below bottom panel, on the left side.
 
 #### DOCK_SLOT_BOTTOM_R {#DOCK_SLOT_BOTTOM_R}
 
@@ -627,7 +580,7 @@ DOCK_SLOT_BOTTOM_L = 9
 DOCK_SLOT_BOTTOM_R = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dock slot at the bottom, below bottom panel, on the right side.
 
 #### DOCK_SLOT_MAX {#DOCK_SLOT_MAX}
 
@@ -635,4 +588,6 @@ DOCK_SLOT_BOTTOM_R = 10
 DOCK_SLOT_MAX = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the DockSlot enum.
+
+---

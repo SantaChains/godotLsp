@@ -249,7 +249,10 @@ The name of the current tip bone, the last bone in the IK chain placed at the ta
 target: Transform3D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_transform(value: Transform3D)
+- Transform3D get_target_transform()
+
+First target of the IK chain where the tip bone is placed and, if override_tip_basis is true, how the tip bone is rotated. If a target_node path is available the nodes transform is used instead and this property is ignored.
 
 ### override_tip_basis {#override_tip_basis}
 
@@ -279,7 +282,10 @@ If true, instructs the IK solver to consider the secondary magnet target (pole t
 magnet: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_magnet_position(value: Vector3)
+- Vector3 get_magnet_position()
+
+Secondary target position (first is target property or target_node) for the IK chain. Use magnet position (pole target) to control the bending of the IK chain. Only works if the bone chain has more than 2 bones. The middle chain bone position will be linearly interpolated with the magnet position.
 
 ### target_node {#target_node}
 
@@ -287,7 +293,10 @@ magnet: Vector3
 target_node: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_target_node(value: NodePath)
+- NodePath get_target_node()
+
+Target node NodePath for the IK chain. If available, the node's current Transform3D is used instead of the target property.
 
 ### min_distance {#min_distance}
 

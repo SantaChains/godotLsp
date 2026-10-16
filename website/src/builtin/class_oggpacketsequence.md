@@ -87,7 +87,12 @@ Contains the raw packets that make up this OggPacketSequence.
 granule_positions: PackedInt64Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_packet_granule_positions(value: PackedInt64Array)
+- PackedInt64Array get_packet_granule_positions()
+
+Contains the granule positions for each page in this packet sequence.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedInt64Array for more details.
 
 ### sampling_rate {#sampling_rate}
 

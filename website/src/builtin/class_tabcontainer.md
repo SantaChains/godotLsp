@@ -636,17 +636,7 @@ Emitted when the TabContainer's Popup button is clicked. See set_popup() for det
 enum TabPosition { POSITION_TOP = 0, POSITION_BOTTOM = 1, POSITION_MAX = 2 }
 ```
 
-TabPosition POSITION_TOP = 0
-
-Places the tab bar at the top.
-
-TabPosition POSITION_BOTTOM = 1
-
-Places the tab bar at the bottom. The tab bar's StyleBox will be flipped vertically.
-
-TabPosition POSITION_MAX = 2
-
-Represents the size of the TabPosition enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### POSITION_TOP {#POSITION_TOP}
 
@@ -654,7 +644,7 @@ Represents the size of the TabPosition enum.
 POSITION_TOP = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Places the tab bar at the top.
 
 #### POSITION_BOTTOM {#POSITION_BOTTOM}
 
@@ -662,7 +652,7 @@ POSITION_TOP = 0
 POSITION_BOTTOM = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Places the tab bar at the bottom. The tab bar's StyleBox will be flipped vertically.
 
 #### POSITION_MAX {#POSITION_MAX}
 
@@ -670,4 +660,6 @@ POSITION_BOTTOM = 1
 POSITION_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the TabPosition enum.
+
+---

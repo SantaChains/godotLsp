@@ -216,49 +216,7 @@ IGD status.
 enum IGDStatus { IGD_STATUS_OK = 0, IGD_STATUS_HTTP_ERROR = 1, IGD_STATUS_HTTP_EMPTY = 2, IGD_STATUS_NO_URLS = 3, IGD_STATUS_NO_IGD = 4, IGD_STATUS_DISCONNECTED = 5, IGD_STATUS_UNKNOWN_DEVICE = 6, IGD_STATUS_INVALID_CONTROL = 7, IGD_STATUS_MALLOC_ERROR = 8, IGD_STATUS_UNKNOWN_ERROR = 9 }
 ```
 
-IGDStatus IGD_STATUS_OK = 0
-
-OK.
-
-IGDStatus IGD_STATUS_HTTP_ERROR = 1
-
-HTTP error.
-
-IGDStatus IGD_STATUS_HTTP_EMPTY = 2
-
-Empty HTTP response.
-
-IGDStatus IGD_STATUS_NO_URLS = 3
-
-Deprecated: This value is no longer used.
-
-Returned response contained no URLs.
-
-IGDStatus IGD_STATUS_NO_IGD = 4
-
-Not a valid IGD.
-
-IGDStatus IGD_STATUS_DISCONNECTED = 5
-
-Disconnected.
-
-IGDStatus IGD_STATUS_UNKNOWN_DEVICE = 6
-
-Unknown device.
-
-IGDStatus IGD_STATUS_INVALID_CONTROL = 7
-
-Invalid control.
-
-IGDStatus IGD_STATUS_MALLOC_ERROR = 8
-
-Deprecated: This value is no longer used.
-
-Memory allocation error.
-
-IGDStatus IGD_STATUS_UNKNOWN_ERROR = 9
-
-Unknown error.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### IGD_STATUS_OK {#IGD_STATUS_OK}
 
@@ -266,7 +224,7 @@ Unknown error.
 IGD_STATUS_OK = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+OK.
 
 #### IGD_STATUS_HTTP_ERROR {#IGD_STATUS_HTTP_ERROR}
 
@@ -274,7 +232,7 @@ IGD_STATUS_OK = 0
 IGD_STATUS_HTTP_ERROR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTP error.
 
 #### IGD_STATUS_HTTP_EMPTY {#IGD_STATUS_HTTP_EMPTY}
 
@@ -282,7 +240,7 @@ IGD_STATUS_HTTP_ERROR = 1
 IGD_STATUS_HTTP_EMPTY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Empty HTTP response.
 
 #### IGD_STATUS_NO_URLS {#IGD_STATUS_NO_URLS}
 
@@ -290,7 +248,9 @@ IGD_STATUS_HTTP_EMPTY = 2
 IGD_STATUS_NO_URLS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: This value is no longer used.
+
+Returned response contained no URLs.
 
 #### IGD_STATUS_NO_IGD {#IGD_STATUS_NO_IGD}
 
@@ -298,7 +258,7 @@ IGD_STATUS_NO_URLS = 3
 IGD_STATUS_NO_IGD = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Not a valid IGD.
 
 #### IGD_STATUS_DISCONNECTED {#IGD_STATUS_DISCONNECTED}
 
@@ -306,7 +266,7 @@ IGD_STATUS_NO_IGD = 4
 IGD_STATUS_DISCONNECTED = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disconnected.
 
 #### IGD_STATUS_UNKNOWN_DEVICE {#IGD_STATUS_UNKNOWN_DEVICE}
 
@@ -314,7 +274,7 @@ IGD_STATUS_DISCONNECTED = 5
 IGD_STATUS_UNKNOWN_DEVICE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unknown device.
 
 #### IGD_STATUS_INVALID_CONTROL {#IGD_STATUS_INVALID_CONTROL}
 
@@ -322,7 +282,7 @@ IGD_STATUS_UNKNOWN_DEVICE = 6
 IGD_STATUS_INVALID_CONTROL = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Invalid control.
 
 #### IGD_STATUS_MALLOC_ERROR {#IGD_STATUS_MALLOC_ERROR}
 
@@ -330,7 +290,9 @@ IGD_STATUS_INVALID_CONTROL = 7
 IGD_STATUS_MALLOC_ERROR = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Deprecated: This value is no longer used.
+
+Memory allocation error.
 
 #### IGD_STATUS_UNKNOWN_ERROR {#IGD_STATUS_UNKNOWN_ERROR}
 
@@ -338,4 +300,6 @@ IGD_STATUS_MALLOC_ERROR = 8
 IGD_STATUS_UNKNOWN_ERROR = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unknown error.
+
+---

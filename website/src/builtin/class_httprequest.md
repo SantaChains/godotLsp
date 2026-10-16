@@ -452,61 +452,7 @@ Emitted when a request is completed.
 enum Result { RESULT_SUCCESS = 0, RESULT_CHUNKED_BODY_SIZE_MISMATCH = 1, RESULT_CANT_CONNECT = 2, RESULT_CANT_RESOLVE = 3, RESULT_CONNECTION_ERROR = 4, RESULT_TLS_HANDSHAKE_ERROR = 5, RESULT_NO_RESPONSE = 6, RESULT_BODY_SIZE_LIMIT_EXCEEDED = 7, RESULT_BODY_DECOMPRESS_FAILED = 8, RESULT_REQUEST_FAILED = 9, RESULT_DOWNLOAD_FILE_CANT_OPEN = 10, RESULT_DOWNLOAD_FILE_WRITE_ERROR = 11, RESULT_REDIRECT_LIMIT_REACHED = 12, RESULT_TIMEOUT = 13 }
 ```
 
-Result RESULT_SUCCESS = 0
-
-Request successful.
-
-Result RESULT_CHUNKED_BODY_SIZE_MISMATCH = 1
-
-Request failed due to a mismatch between the expected and actual chunked body size during transfer. Possible causes include network errors, server misconfiguration, or issues with chunked encoding.
-
-Result RESULT_CANT_CONNECT = 2
-
-Request failed while connecting.
-
-Result RESULT_CANT_RESOLVE = 3
-
-Request failed while resolving.
-
-Result RESULT_CONNECTION_ERROR = 4
-
-Request failed due to connection (read/write) error.
-
-Result RESULT_TLS_HANDSHAKE_ERROR = 5
-
-Request failed on TLS handshake.
-
-Result RESULT_NO_RESPONSE = 6
-
-Request does not have a response (yet).
-
-Result RESULT_BODY_SIZE_LIMIT_EXCEEDED = 7
-
-Request exceeded its maximum size limit, see body_size_limit.
-
-Result RESULT_BODY_DECOMPRESS_FAILED = 8
-
-Request failed due to an error while decompressing the response body. Possible causes include unsupported or incorrect compression format, corrupted data, or incomplete transfer.
-
-Result RESULT_REQUEST_FAILED = 9
-
-Request failed (currently unused).
-
-Result RESULT_DOWNLOAD_FILE_CANT_OPEN = 10
-
-HTTPRequest couldn't open the download file.
-
-Result RESULT_DOWNLOAD_FILE_WRITE_ERROR = 11
-
-HTTPRequest couldn't write to the download file.
-
-Result RESULT_REDIRECT_LIMIT_REACHED = 12
-
-Request reached its maximum redirect limit, see max_redirects.
-
-Result RESULT_TIMEOUT = 13
-
-Request failed due to a timeout. If you expect requests to take a long time, try increasing the value of timeout or setting it to 0.0 to remove the timeout completely.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RESULT_SUCCESS {#RESULT_SUCCESS}
 
@@ -514,7 +460,7 @@ Request failed due to a timeout. If you expect requests to take a long time, try
 RESULT_SUCCESS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request successful.
 
 #### RESULT_CHUNKED_BODY_SIZE_MISMATCH {#RESULT_CHUNKED_BODY_SIZE_MISMATCH}
 
@@ -522,7 +468,7 @@ RESULT_SUCCESS = 0
 RESULT_CHUNKED_BODY_SIZE_MISMATCH = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request failed due to a mismatch between the expected and actual chunked body size during transfer. Possible causes include network errors, server misconfiguration, or issues with chunked encoding.
 
 #### RESULT_CANT_CONNECT {#RESULT_CANT_CONNECT}
 
@@ -530,7 +476,7 @@ RESULT_CHUNKED_BODY_SIZE_MISMATCH = 1
 RESULT_CANT_CONNECT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request failed while connecting.
 
 #### RESULT_CANT_RESOLVE {#RESULT_CANT_RESOLVE}
 
@@ -538,7 +484,7 @@ RESULT_CANT_CONNECT = 2
 RESULT_CANT_RESOLVE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request failed while resolving.
 
 #### RESULT_CONNECTION_ERROR {#RESULT_CONNECTION_ERROR}
 
@@ -546,7 +492,7 @@ RESULT_CANT_RESOLVE = 3
 RESULT_CONNECTION_ERROR = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request failed due to connection (read/write) error.
 
 #### RESULT_TLS_HANDSHAKE_ERROR {#RESULT_TLS_HANDSHAKE_ERROR}
 
@@ -554,7 +500,7 @@ RESULT_CONNECTION_ERROR = 4
 RESULT_TLS_HANDSHAKE_ERROR = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request failed on TLS handshake.
 
 #### RESULT_NO_RESPONSE {#RESULT_NO_RESPONSE}
 
@@ -562,7 +508,7 @@ RESULT_TLS_HANDSHAKE_ERROR = 5
 RESULT_NO_RESPONSE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request does not have a response (yet).
 
 #### RESULT_BODY_SIZE_LIMIT_EXCEEDED {#RESULT_BODY_SIZE_LIMIT_EXCEEDED}
 
@@ -570,7 +516,7 @@ RESULT_NO_RESPONSE = 6
 RESULT_BODY_SIZE_LIMIT_EXCEEDED = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request exceeded its maximum size limit, see body_size_limit.
 
 #### RESULT_BODY_DECOMPRESS_FAILED {#RESULT_BODY_DECOMPRESS_FAILED}
 
@@ -578,7 +524,7 @@ RESULT_BODY_SIZE_LIMIT_EXCEEDED = 7
 RESULT_BODY_DECOMPRESS_FAILED = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request failed due to an error while decompressing the response body. Possible causes include unsupported or incorrect compression format, corrupted data, or incomplete transfer.
 
 #### RESULT_REQUEST_FAILED {#RESULT_REQUEST_FAILED}
 
@@ -586,7 +532,7 @@ RESULT_BODY_DECOMPRESS_FAILED = 8
 RESULT_REQUEST_FAILED = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request failed (currently unused).
 
 #### RESULT_DOWNLOAD_FILE_CANT_OPEN {#RESULT_DOWNLOAD_FILE_CANT_OPEN}
 
@@ -594,7 +540,7 @@ RESULT_REQUEST_FAILED = 9
 RESULT_DOWNLOAD_FILE_CANT_OPEN = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTPRequest couldn't open the download file.
 
 #### RESULT_DOWNLOAD_FILE_WRITE_ERROR {#RESULT_DOWNLOAD_FILE_WRITE_ERROR}
 
@@ -602,7 +548,7 @@ RESULT_DOWNLOAD_FILE_CANT_OPEN = 10
 RESULT_DOWNLOAD_FILE_WRITE_ERROR = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+HTTPRequest couldn't write to the download file.
 
 #### RESULT_REDIRECT_LIMIT_REACHED {#RESULT_REDIRECT_LIMIT_REACHED}
 
@@ -610,7 +556,7 @@ RESULT_DOWNLOAD_FILE_WRITE_ERROR = 11
 RESULT_REDIRECT_LIMIT_REACHED = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request reached its maximum redirect limit, see max_redirects.
 
 #### RESULT_TIMEOUT {#RESULT_TIMEOUT}
 
@@ -618,4 +564,6 @@ RESULT_REDIRECT_LIMIT_REACHED = 12
 RESULT_TIMEOUT = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Request failed due to a timeout. If you expect requests to take a long time, try increasing the value of timeout or setting it to 0.0 to remove the timeout completely.
+
+---

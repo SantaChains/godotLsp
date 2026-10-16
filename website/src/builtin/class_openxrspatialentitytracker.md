@@ -96,7 +96,10 @@ void set_spatial_tracking_state(spatial_tracking_state: OpenXRSpatialEntityTrack
 entity: RID
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_entity(value: RID)
+- RID get_entity()
+
+The spatial entity associated with this tracker.
 
 ### spatial_tracking_state {#spatial_tracking_state}
 
@@ -135,17 +138,7 @@ There is currently no description for this signal. Please help us by contributin
 enum EntityTrackingState { ENTITY_TRACKING_STATE_STOPPED = 1, ENTITY_TRACKING_STATE_PAUSED = 2, ENTITY_TRACKING_STATE_TRACKING = 3 }
 ```
 
-EntityTrackingState ENTITY_TRACKING_STATE_STOPPED = 1
-
-This anchor has stopped tracking.
-
-EntityTrackingState ENTITY_TRACKING_STATE_PAUSED = 2
-
-Tracking is currently paused.
-
-EntityTrackingState ENTITY_TRACKING_STATE_TRACKING = 3
-
-This anchor is currently being tracked.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ENTITY_TRACKING_STATE_STOPPED {#ENTITY_TRACKING_STATE_STOPPED}
 
@@ -153,7 +146,7 @@ This anchor is currently being tracked.
 ENTITY_TRACKING_STATE_STOPPED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This anchor has stopped tracking.
 
 #### ENTITY_TRACKING_STATE_PAUSED {#ENTITY_TRACKING_STATE_PAUSED}
 
@@ -161,7 +154,7 @@ ENTITY_TRACKING_STATE_STOPPED = 1
 ENTITY_TRACKING_STATE_PAUSED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tracking is currently paused.
 
 #### ENTITY_TRACKING_STATE_TRACKING {#ENTITY_TRACKING_STATE_TRACKING}
 
@@ -169,4 +162,6 @@ ENTITY_TRACKING_STATE_PAUSED = 2
 ENTITY_TRACKING_STATE_TRACKING = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This anchor is currently being tracked.
+
+---

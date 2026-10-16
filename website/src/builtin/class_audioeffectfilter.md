@@ -144,21 +144,7 @@ Steepness of the cutoff curve in dB per octave (twice the frequency above cutoff
 enum FilterDB { FILTER_6DB = 0, FILTER_12DB = 1, FILTER_18DB = 2, FILTER_24DB = 3 }
 ```
 
-FilterDB FILTER_6DB = 0
-
-Cutting off at 6 dB per octave. One octave is twice the frequency above cutoff_hz, or half the frequency below cutoff_hz.
-
-FilterDB FILTER_12DB = 1
-
-Cutting off at 12 dB per octave. One octave is twice the frequency above cutoff_hz, or half the frequency below cutoff_hz.
-
-FilterDB FILTER_18DB = 2
-
-Cutting off at 18 dB per octave. One octave is twice the frequency above cutoff_hz, or half the frequency below cutoff_hz.
-
-FilterDB FILTER_24DB = 3
-
-Cutting off at 24 dB per octave. One octave is twice the frequency above cutoff_hz, or half the frequency below cutoff_hz.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FILTER_6DB {#FILTER_6DB}
 
@@ -166,7 +152,7 @@ Cutting off at 24 dB per octave. One octave is twice the frequency above cutoff_
 FILTER_6DB = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cutting off at 6 dB per octave. One octave is twice the frequency above cutoff_hz, or half the frequency below cutoff_hz.
 
 #### FILTER_12DB {#FILTER_12DB}
 
@@ -174,7 +160,7 @@ FILTER_6DB = 0
 FILTER_12DB = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cutting off at 12 dB per octave. One octave is twice the frequency above cutoff_hz, or half the frequency below cutoff_hz.
 
 #### FILTER_18DB {#FILTER_18DB}
 
@@ -182,7 +168,7 @@ FILTER_12DB = 1
 FILTER_18DB = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cutting off at 18 dB per octave. One octave is twice the frequency above cutoff_hz, or half the frequency below cutoff_hz.
 
 #### FILTER_24DB {#FILTER_24DB}
 
@@ -190,4 +176,6 @@ FILTER_18DB = 2
 FILTER_24DB = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Cutting off at 24 dB per octave. One octave is twice the frequency above cutoff_hz, or half the frequency below cutoff_hz.
+
+---

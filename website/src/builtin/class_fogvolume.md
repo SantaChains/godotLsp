@@ -72,7 +72,14 @@ void set_size(size: Vector3)
 size: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_size(value: Vector3)
+- Vector3 get_size()
+
+The size of the FogVolume when shape is RenderingServer.FOG_VOLUME_SHAPE_ELLIPSOID, RenderingServer.FOG_VOLUME_SHAPE_CONE, RenderingServer.FOG_VOLUME_SHAPE_CYLINDER or RenderingServer.FOG_VOLUME_SHAPE_BOX.
+
+Note: Thin fog volumes may appear to flicker when the camera moves or rotates. This can be alleviated by increasing ProjectSettings.rendering/environment/volumetric_fog/volume_depth (at a performance cost) or by decreasing Environment.volumetric_fog_length (at no performance cost, but at the cost of lower fog range). Alternatively, the FogVolume can be made thicker and use a lower density in the material.
+
+Note: If shape is RenderingServer.FOG_VOLUME_SHAPE_CONE or RenderingServer.FOG_VOLUME_SHAPE_CYLINDER, the cone/cylinder will be adjusted to fit within the size. Non-uniform scaling of cone/cylinder shapes via the size property is not supported, but you can scale the FogVolume node instead.
 
 ### shape {#shape}
 

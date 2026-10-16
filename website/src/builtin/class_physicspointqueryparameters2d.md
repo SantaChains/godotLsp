@@ -116,7 +116,10 @@ void set_position(position: Vector2)
 position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_position(value: Vector2)
+- Vector2 get_position()
+
+The position being queried for, in global coordinates.
 
 ### canvas_instance_id {#canvas_instance_id}
 

@@ -118,7 +118,10 @@ Modifies the position of a sub animation node.
 graph_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_graph_offset(value: Vector2)
+- Vector2 get_graph_offset()
+
+The global offset of all sub animation nodes.
 
 ## 信号
 

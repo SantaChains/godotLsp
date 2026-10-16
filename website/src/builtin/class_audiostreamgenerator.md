@@ -164,21 +164,7 @@ The length of the buffer to generate (in seconds). Lower values result in less l
 enum AudioStreamGeneratorMixRate { MIX_RATE_OUTPUT = 0, MIX_RATE_INPUT = 1, MIX_RATE_CUSTOM = 2, MIX_RATE_MAX = 3 }
 ```
 
-AudioStreamGeneratorMixRate MIX_RATE_OUTPUT = 0
-
-Current AudioServer output mixing rate.
-
-AudioStreamGeneratorMixRate MIX_RATE_INPUT = 1
-
-Current AudioServer input mixing rate.
-
-AudioStreamGeneratorMixRate MIX_RATE_CUSTOM = 2
-
-Custom mixing rate, specified by mix_rate.
-
-AudioStreamGeneratorMixRate MIX_RATE_MAX = 3
-
-Maximum value for the mixing rate mode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MIX_RATE_OUTPUT {#MIX_RATE_OUTPUT}
 
@@ -186,7 +172,7 @@ Maximum value for the mixing rate mode enum.
 MIX_RATE_OUTPUT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Current AudioServer output mixing rate.
 
 #### MIX_RATE_INPUT {#MIX_RATE_INPUT}
 
@@ -194,7 +180,7 @@ MIX_RATE_OUTPUT = 0
 MIX_RATE_INPUT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Current AudioServer input mixing rate.
 
 #### MIX_RATE_CUSTOM {#MIX_RATE_CUSTOM}
 
@@ -202,7 +188,7 @@ MIX_RATE_INPUT = 1
 MIX_RATE_CUSTOM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Custom mixing rate, specified by mix_rate.
 
 #### MIX_RATE_MAX {#MIX_RATE_MAX}
 
@@ -210,4 +196,6 @@ MIX_RATE_CUSTOM = 2
 MIX_RATE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Maximum value for the mixing rate mode enum.
+
+---

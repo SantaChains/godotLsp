@@ -148,7 +148,10 @@ void set_recovery_as_collision_enabled(enabled: bool)
 from: Transform3D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_from(value: Transform3D)
+- Transform3D get_from()
+
+Transform in global space where the motion should start. Usually set to Node3D.global_transform for the current body's transform.
 
 ### motion {#motion}
 
@@ -156,7 +159,10 @@ from: Transform3D
 motion: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_motion(value: Vector3)
+- Vector3 get_motion()
+
+Motion vector to define the length and direction of the motion to test.
 
 ### margin {#margin}
 

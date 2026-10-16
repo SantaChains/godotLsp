@@ -132,7 +132,10 @@ void set_recovery_as_collision_enabled(enabled: bool)
 from: Transform2D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_from(value: Transform2D)
+- Transform2D get_from()
+
+Transform in global space where the motion should start. Usually set to Node2D.global_transform for the current body's transform.
 
 ### motion {#motion}
 
@@ -140,7 +143,10 @@ from: Transform2D
 motion: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_motion(value: Vector2)
+- Vector2 get_motion()
+
+Motion vector to define the length and direction of the motion to test.
 
 ### margin {#margin}
 

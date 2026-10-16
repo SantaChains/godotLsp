@@ -38,4 +38,7 @@ void set_constant(constant: Color)
 constant: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_constant(value: Color)
+- Color get_constant()
+
+A Color constant which represents a state of this node.

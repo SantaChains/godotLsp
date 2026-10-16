@@ -49,17 +49,7 @@ A function to be applied to the scalar.
 enum Function { FUNC_NEGATE = 0, FUNC_BITWISE_NOT = 1, FUNC_MAX = 2 }
 ```
 
-Function FUNC_NEGATE = 0
-
-Negates the x using -(x).
-
-Function FUNC_BITWISE_NOT = 1
-
-Returns the result of bitwise NOT operation on the integer. Translates to ~a in the Godot Shader Language.
-
-Function FUNC_MAX = 2
-
-Represents the size of the Function enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FUNC_NEGATE {#FUNC_NEGATE}
 
@@ -67,7 +57,7 @@ Represents the size of the Function enum.
 FUNC_NEGATE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Negates the x using -(x).
 
 #### FUNC_BITWISE_NOT {#FUNC_BITWISE_NOT}
 
@@ -75,7 +65,7 @@ FUNC_NEGATE = 0
 FUNC_BITWISE_NOT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Returns the result of bitwise NOT operation on the integer. Translates to ~a in the Godot Shader Language.
 
 #### FUNC_MAX {#FUNC_MAX}
 
@@ -83,4 +73,6 @@ FUNC_BITWISE_NOT = 1
 FUNC_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Function enum.
+
+---

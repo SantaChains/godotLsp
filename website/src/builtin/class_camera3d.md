@@ -574,7 +574,12 @@ The camera's size in meters measured as the diameter of the width or height, dep
 frustum_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_frustum_offset(value: Vector2)
+- Vector2 get_frustum_offset()
+
+The camera's frustum offset. This can be changed from the default to create "tilted frustum" effects such as Y-shearing [https://zdoom.org/wiki/Y-shearing].
+
+Note: Only effective if projection is PROJECTION_FRUSTUM.
 
 ### near {#near}
 
@@ -606,17 +611,7 @@ The distance to the far culling boundary for this camera relative to its local Z
 enum ProjectionType { PROJECTION_PERSPECTIVE = 0, PROJECTION_ORTHOGONAL = 1, PROJECTION_FRUSTUM = 2 }
 ```
 
-ProjectionType PROJECTION_PERSPECTIVE = 0
-
-Perspective projection. Objects on the screen becomes smaller when they are far away.
-
-ProjectionType PROJECTION_ORTHOGONAL = 1
-
-Orthogonal projection, also known as orthographic projection. Objects remain the same size on the screen no matter how far away they are.
-
-ProjectionType PROJECTION_FRUSTUM = 2
-
-Frustum projection. This mode allows adjusting frustum_offset to create "tilted frustum" effects.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PROJECTION_PERSPECTIVE {#PROJECTION_PERSPECTIVE}
 
@@ -624,7 +619,7 @@ Frustum projection. This mode allows adjusting frustum_offset to create "tilted 
 PROJECTION_PERSPECTIVE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Perspective projection. Objects on the screen becomes smaller when they are far away.
 
 #### PROJECTION_ORTHOGONAL {#PROJECTION_ORTHOGONAL}
 
@@ -632,7 +627,7 @@ PROJECTION_PERSPECTIVE = 0
 PROJECTION_ORTHOGONAL = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Orthogonal projection, also known as orthographic projection. Objects remain the same size on the screen no matter how far away they are.
 
 #### PROJECTION_FRUSTUM {#PROJECTION_FRUSTUM}
 
@@ -640,7 +635,9 @@ PROJECTION_ORTHOGONAL = 1
 PROJECTION_FRUSTUM = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Frustum projection. This mode allows adjusting frustum_offset to create "tilted frustum" effects.
+
+---
 
 ### KeepAspect {#enum-KeepAspect}
 
@@ -648,13 +645,7 @@ PROJECTION_FRUSTUM = 2
 enum KeepAspect { KEEP_WIDTH = 0, KEEP_HEIGHT = 1 }
 ```
 
-KeepAspect KEEP_WIDTH = 0
-
-Preserves the horizontal aspect ratio; also known as Vert- scaling. This is usually the best option for projects running in portrait mode, as taller aspect ratios will benefit from a wider vertical FOV.
-
-KeepAspect KEEP_HEIGHT = 1
-
-Preserves the vertical aspect ratio; also known as Hor+ scaling. This is usually the best option for projects running in landscape mode, as wider aspect ratios will automatically benefit from a wider horizontal FOV.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### KEEP_WIDTH {#KEEP_WIDTH}
 
@@ -662,7 +653,7 @@ Preserves the vertical aspect ratio; also known as Hor+ scaling. This is usually
 KEEP_WIDTH = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Preserves the horizontal aspect ratio; also known as Vert- scaling. This is usually the best option for projects running in portrait mode, as taller aspect ratios will benefit from a wider vertical FOV.
 
 #### KEEP_HEIGHT {#KEEP_HEIGHT}
 
@@ -670,7 +661,9 @@ KEEP_WIDTH = 0
 KEEP_HEIGHT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Preserves the vertical aspect ratio; also known as Hor+ scaling. This is usually the best option for projects running in landscape mode, as wider aspect ratios will automatically benefit from a wider horizontal FOV.
+
+---
 
 ### DopplerTracking {#enum-DopplerTracking}
 
@@ -678,17 +671,7 @@ KEEP_HEIGHT = 1
 enum DopplerTracking { DOPPLER_TRACKING_DISABLED = 0, DOPPLER_TRACKING_IDLE_STEP = 1, DOPPLER_TRACKING_PHYSICS_STEP = 2 }
 ```
 
-DopplerTracking DOPPLER_TRACKING_DISABLED = 0
-
-Disables Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] simulation (default).
-
-DopplerTracking DOPPLER_TRACKING_IDLE_STEP = 1
-
-Simulate Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] by tracking positions of objects that are changed in _process. Changes in the relative velocity of this camera compared to those objects affect how audio is perceived (changing the audio's AudioStreamPlayer3D.pitch_scale).
-
-DopplerTracking DOPPLER_TRACKING_PHYSICS_STEP = 2
-
-Simulate Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] by tracking positions of objects that are changed in _physics_process. Changes in the relative velocity of this camera compared to those objects affect how audio is perceived (changing the audio's AudioStreamPlayer3D.pitch_scale).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DOPPLER_TRACKING_DISABLED {#DOPPLER_TRACKING_DISABLED}
 
@@ -696,7 +679,7 @@ Simulate Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] by tracki
 DOPPLER_TRACKING_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] simulation (default).
 
 #### DOPPLER_TRACKING_IDLE_STEP {#DOPPLER_TRACKING_IDLE_STEP}
 
@@ -704,7 +687,7 @@ DOPPLER_TRACKING_DISABLED = 0
 DOPPLER_TRACKING_IDLE_STEP = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Simulate Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] by tracking positions of objects that are changed in _process. Changes in the relative velocity of this camera compared to those objects affect how audio is perceived (changing the audio's AudioStreamPlayer3D.pitch_scale).
 
 #### DOPPLER_TRACKING_PHYSICS_STEP {#DOPPLER_TRACKING_PHYSICS_STEP}
 
@@ -712,4 +695,6 @@ DOPPLER_TRACKING_IDLE_STEP = 1
 DOPPLER_TRACKING_PHYSICS_STEP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Simulate Doppler effect [https://en.wikipedia.org/wiki/Doppler_effect] by tracking positions of objects that are changed in _physics_process. Changes in the relative velocity of this camera compared to those objects affect how audio is perceived (changing the audio's AudioStreamPlayer3D.pitch_scale).
+
+---

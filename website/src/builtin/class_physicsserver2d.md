@@ -1067,41 +1067,7 @@ Creates a 2D world boundary shape in the physics server, and returns the RID tha
 enum SpaceParameter { SPACE_PARAM_CONTACT_RECYCLE_RADIUS = 0, SPACE_PARAM_CONTACT_MAX_SEPARATION = 1, SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION = 2, SPACE_PARAM_CONTACT_DEFAULT_BIAS = 3, SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD = 4, SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD = 5, SPACE_PARAM_BODY_TIME_TO_SLEEP = 6, SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS = 7, SPACE_PARAM_SOLVER_ITERATIONS = 8 }
 ```
 
-SpaceParameter SPACE_PARAM_CONTACT_RECYCLE_RADIUS = 0
-
-Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated. The default value of this parameter is ProjectSettings.physics/2d/solver/contact_recycle_radius.
-
-SpaceParameter SPACE_PARAM_CONTACT_MAX_SEPARATION = 1
-
-Constant to set/get the maximum distance a shape can be from another before they are considered separated and the contact is discarded. The default value of this parameter is ProjectSettings.physics/2d/solver/contact_max_separation.
-
-SpaceParameter SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION = 2
-
-Constant to set/get the maximum distance a shape can penetrate another shape before it is considered a collision. The default value of this parameter is ProjectSettings.physics/2d/solver/contact_max_allowed_penetration.
-
-SpaceParameter SPACE_PARAM_CONTACT_DEFAULT_BIAS = 3
-
-Constant to set/get the default solver bias for all physics contacts. A solver bias is a factor controlling how much two objects "rebound", after overlapping, to avoid leaving them in that state because of numerical imprecision. The default value of this parameter is ProjectSettings.physics/2d/solver/default_contact_bias.
-
-SpaceParameter SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD = 4
-
-Constant to set/get the threshold linear velocity of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after the time given. The default value of this parameter is ProjectSettings.physics/2d/sleep_threshold_linear.
-
-SpaceParameter SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD = 5
-
-Constant to set/get the threshold angular velocity of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after the time given. The default value of this parameter is ProjectSettings.physics/2d/sleep_threshold_angular.
-
-SpaceParameter SPACE_PARAM_BODY_TIME_TO_SLEEP = 6
-
-Constant to set/get the maximum time of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after this time. The default value of this parameter is ProjectSettings.physics/2d/time_before_sleep.
-
-SpaceParameter SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS = 7
-
-Constant to set/get the default solver bias for all physics constraints. A solver bias is a factor controlling how much two objects "rebound", after violating a constraint, to avoid leaving them in that state because of numerical imprecision. The default value of this parameter is ProjectSettings.physics/2d/solver/default_constraint_bias.
-
-SpaceParameter SPACE_PARAM_SOLVER_ITERATIONS = 8
-
-Constant to set/get the number of solver iterations for all contacts and constraints. The greater the number of iterations, the more accurate the collisions will be. However, a greater number of iterations requires more CPU power, which can decrease performance. The default value of this parameter is ProjectSettings.physics/2d/solver/solver_iterations.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SPACE_PARAM_CONTACT_RECYCLE_RADIUS {#SPACE_PARAM_CONTACT_RECYCLE_RADIUS}
 
@@ -1109,7 +1075,7 @@ Constant to set/get the number of solver iterations for all contacts and constra
 SPACE_PARAM_CONTACT_RECYCLE_RADIUS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the maximum distance a pair of bodies has to move before their collision status has to be recalculated. The default value of this parameter is ProjectSettings.physics/2d/solver/contact_recycle_radius.
 
 #### SPACE_PARAM_CONTACT_MAX_SEPARATION {#SPACE_PARAM_CONTACT_MAX_SEPARATION}
 
@@ -1117,7 +1083,7 @@ SPACE_PARAM_CONTACT_RECYCLE_RADIUS = 0
 SPACE_PARAM_CONTACT_MAX_SEPARATION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the maximum distance a shape can be from another before they are considered separated and the contact is discarded. The default value of this parameter is ProjectSettings.physics/2d/solver/contact_max_separation.
 
 #### SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION {#SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION}
 
@@ -1125,7 +1091,7 @@ SPACE_PARAM_CONTACT_MAX_SEPARATION = 1
 SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the maximum distance a shape can penetrate another shape before it is considered a collision. The default value of this parameter is ProjectSettings.physics/2d/solver/contact_max_allowed_penetration.
 
 #### SPACE_PARAM_CONTACT_DEFAULT_BIAS {#SPACE_PARAM_CONTACT_DEFAULT_BIAS}
 
@@ -1133,7 +1099,7 @@ SPACE_PARAM_CONTACT_MAX_ALLOWED_PENETRATION = 2
 SPACE_PARAM_CONTACT_DEFAULT_BIAS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the default solver bias for all physics contacts. A solver bias is a factor controlling how much two objects "rebound", after overlapping, to avoid leaving them in that state because of numerical imprecision. The default value of this parameter is ProjectSettings.physics/2d/solver/default_contact_bias.
 
 #### SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD {#SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD}
 
@@ -1141,7 +1107,7 @@ SPACE_PARAM_CONTACT_DEFAULT_BIAS = 3
 SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the threshold linear velocity of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after the time given. The default value of this parameter is ProjectSettings.physics/2d/sleep_threshold_linear.
 
 #### SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD {#SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD}
 
@@ -1149,7 +1115,7 @@ SPACE_PARAM_BODY_LINEAR_VELOCITY_SLEEP_THRESHOLD = 4
 SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the threshold angular velocity of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after the time given. The default value of this parameter is ProjectSettings.physics/2d/sleep_threshold_angular.
 
 #### SPACE_PARAM_BODY_TIME_TO_SLEEP {#SPACE_PARAM_BODY_TIME_TO_SLEEP}
 
@@ -1157,7 +1123,7 @@ SPACE_PARAM_BODY_ANGULAR_VELOCITY_SLEEP_THRESHOLD = 5
 SPACE_PARAM_BODY_TIME_TO_SLEEP = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the maximum time of activity. A body marked as potentially inactive for both linear and angular velocity will be put to sleep after this time. The default value of this parameter is ProjectSettings.physics/2d/time_before_sleep.
 
 #### SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS {#SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS}
 
@@ -1165,7 +1131,7 @@ SPACE_PARAM_BODY_TIME_TO_SLEEP = 6
 SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the default solver bias for all physics constraints. A solver bias is a factor controlling how much two objects "rebound", after violating a constraint, to avoid leaving them in that state because of numerical imprecision. The default value of this parameter is ProjectSettings.physics/2d/solver/default_constraint_bias.
 
 #### SPACE_PARAM_SOLVER_ITERATIONS {#SPACE_PARAM_SOLVER_ITERATIONS}
 
@@ -1173,7 +1139,9 @@ SPACE_PARAM_CONSTRAINT_DEFAULT_BIAS = 7
 SPACE_PARAM_SOLVER_ITERATIONS = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the number of solver iterations for all contacts and constraints. The greater the number of iterations, the more accurate the collisions will be. However, a greater number of iterations requires more CPU power, which can decrease performance. The default value of this parameter is ProjectSettings.physics/2d/solver/solver_iterations.
+
+---
 
 ### ShapeType {#enum-ShapeType}
 
@@ -1181,41 +1149,7 @@ SPACE_PARAM_SOLVER_ITERATIONS = 8
 enum ShapeType { SHAPE_WORLD_BOUNDARY = 0, SHAPE_SEPARATION_RAY = 1, SHAPE_SEGMENT = 2, SHAPE_CIRCLE = 3, SHAPE_RECTANGLE = 4, SHAPE_CAPSULE = 5, SHAPE_CONVEX_POLYGON = 6, SHAPE_CONCAVE_POLYGON = 7, SHAPE_CUSTOM = 8 }
 ```
 
-ShapeType SHAPE_WORLD_BOUNDARY = 0
-
-This is the constant for creating world boundary shapes. A world boundary shape is an infinite line with an origin point, and a normal. Thus, it can be used for front/behind checks.
-
-ShapeType SHAPE_SEPARATION_RAY = 1
-
-This is the constant for creating separation ray shapes. A separation ray is defined by a length and separates itself from what is touching its far endpoint. Useful for character controllers.
-
-ShapeType SHAPE_SEGMENT = 2
-
-This is the constant for creating segment shapes. A segment shape is a finite line from a point A to a point B. It can be checked for intersections.
-
-ShapeType SHAPE_CIRCLE = 3
-
-This is the constant for creating circle shapes. A circle shape only has a radius. It can be used for intersections and inside/outside checks.
-
-ShapeType SHAPE_RECTANGLE = 4
-
-This is the constant for creating rectangle shapes. A rectangle shape is defined by a width and a height. It can be used for intersections and inside/outside checks.
-
-ShapeType SHAPE_CAPSULE = 5
-
-This is the constant for creating capsule shapes. A capsule shape is defined by a radius and a length. It can be used for intersections and inside/outside checks.
-
-ShapeType SHAPE_CONVEX_POLYGON = 6
-
-This is the constant for creating convex polygon shapes. A polygon is defined by a list of points. It can be used for intersections and inside/outside checks.
-
-ShapeType SHAPE_CONCAVE_POLYGON = 7
-
-This is the constant for creating concave polygon shapes. A polygon is defined by a list of points. It can be used for intersections checks, but not for inside/outside checks.
-
-ShapeType SHAPE_CUSTOM = 8
-
-This constant is used internally by the engine. Any attempt to create this kind of shape results in an error.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHAPE_WORLD_BOUNDARY {#SHAPE_WORLD_BOUNDARY}
 
@@ -1223,7 +1157,7 @@ This constant is used internally by the engine. Any attempt to create this kind 
 SHAPE_WORLD_BOUNDARY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This is the constant for creating world boundary shapes. A world boundary shape is an infinite line with an origin point, and a normal. Thus, it can be used for front/behind checks.
 
 #### SHAPE_SEPARATION_RAY {#SHAPE_SEPARATION_RAY}
 
@@ -1231,7 +1165,7 @@ SHAPE_WORLD_BOUNDARY = 0
 SHAPE_SEPARATION_RAY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This is the constant for creating separation ray shapes. A separation ray is defined by a length and separates itself from what is touching its far endpoint. Useful for character controllers.
 
 #### SHAPE_SEGMENT {#SHAPE_SEGMENT}
 
@@ -1239,7 +1173,7 @@ SHAPE_SEPARATION_RAY = 1
 SHAPE_SEGMENT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This is the constant for creating segment shapes. A segment shape is a finite line from a point A to a point B. It can be checked for intersections.
 
 #### SHAPE_CIRCLE {#SHAPE_CIRCLE}
 
@@ -1247,7 +1181,7 @@ SHAPE_SEGMENT = 2
 SHAPE_CIRCLE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This is the constant for creating circle shapes. A circle shape only has a radius. It can be used for intersections and inside/outside checks.
 
 #### SHAPE_RECTANGLE {#SHAPE_RECTANGLE}
 
@@ -1255,7 +1189,7 @@ SHAPE_CIRCLE = 3
 SHAPE_RECTANGLE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This is the constant for creating rectangle shapes. A rectangle shape is defined by a width and a height. It can be used for intersections and inside/outside checks.
 
 #### SHAPE_CAPSULE {#SHAPE_CAPSULE}
 
@@ -1263,7 +1197,7 @@ SHAPE_RECTANGLE = 4
 SHAPE_CAPSULE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This is the constant for creating capsule shapes. A capsule shape is defined by a radius and a length. It can be used for intersections and inside/outside checks.
 
 #### SHAPE_CONVEX_POLYGON {#SHAPE_CONVEX_POLYGON}
 
@@ -1271,7 +1205,7 @@ SHAPE_CAPSULE = 5
 SHAPE_CONVEX_POLYGON = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This is the constant for creating convex polygon shapes. A polygon is defined by a list of points. It can be used for intersections and inside/outside checks.
 
 #### SHAPE_CONCAVE_POLYGON {#SHAPE_CONCAVE_POLYGON}
 
@@ -1279,7 +1213,7 @@ SHAPE_CONVEX_POLYGON = 6
 SHAPE_CONCAVE_POLYGON = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This is the constant for creating concave polygon shapes. A polygon is defined by a list of points. It can be used for intersections checks, but not for inside/outside checks.
 
 #### SHAPE_CUSTOM {#SHAPE_CUSTOM}
 
@@ -1287,7 +1221,9 @@ SHAPE_CONCAVE_POLYGON = 7
 SHAPE_CUSTOM = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This constant is used internally by the engine. Any attempt to create this kind of shape results in an error.
+
+---
 
 ### AreaParameter {#enum-AreaParameter}
 
@@ -1295,47 +1231,7 @@ SHAPE_CUSTOM = 8
 enum AreaParameter { AREA_PARAM_GRAVITY_OVERRIDE_MODE = 0, AREA_PARAM_GRAVITY = 1, AREA_PARAM_GRAVITY_VECTOR = 2, AREA_PARAM_GRAVITY_IS_POINT = 3, AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE = 4, AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE = 5, AREA_PARAM_LINEAR_DAMP = 6, AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE = 7, AREA_PARAM_ANGULAR_DAMP = 8, AREA_PARAM_PRIORITY = 9 }
 ```
 
-AreaParameter AREA_PARAM_GRAVITY_OVERRIDE_MODE = 0
-
-Constant to set/get gravity override mode in an area. See AreaSpaceOverrideMode for possible values. The default value of this parameter is AREA_SPACE_OVERRIDE_DISABLED.
-
-AreaParameter AREA_PARAM_GRAVITY = 1
-
-Constant to set/get gravity strength in an area. The default value of this parameter is 9.80665.
-
-AreaParameter AREA_PARAM_GRAVITY_VECTOR = 2
-
-Constant to set/get gravity vector/center in an area. The default value of this parameter is Vector2(0, -1).
-
-AreaParameter AREA_PARAM_GRAVITY_IS_POINT = 3
-
-Constant to set/get whether the gravity vector of an area is a direction, or a center point. The default value of this parameter is false.
-
-AreaParameter AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE = 4
-
-Constant to set/get the distance at which the gravity strength is equal to the gravity controlled by AREA_PARAM_GRAVITY. For example, on a planet 100 pixels in radius with a surface gravity of 4.0 px/s², set the gravity to 4.0 and the unit distance to 100.0. The gravity will have falloff according to the inverse square law, so in the example, at 200 pixels from the center the gravity will be 1.0 px/s² (twice the distance, 1/4th the gravity), at 50 pixels it will be 16.0 px/s² (half the distance, 4x the gravity), and so on.
-
-The above is true only when the unit distance is a positive number. When the unit distance is set to 0.0, the gravity will be constant regardless of distance. The default value of this parameter is 0.0.
-
-AreaParameter AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE = 5
-
-Constant to set/get linear damping override mode in an area. See AreaSpaceOverrideMode for possible values. The default value of this parameter is AREA_SPACE_OVERRIDE_DISABLED.
-
-AreaParameter AREA_PARAM_LINEAR_DAMP = 6
-
-Constant to set/get the linear damping factor of an area. The default value of this parameter is 0.1.
-
-AreaParameter AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE = 7
-
-Constant to set/get angular damping override mode in an area. See AreaSpaceOverrideMode for possible values. The default value of this parameter is AREA_SPACE_OVERRIDE_DISABLED.
-
-AreaParameter AREA_PARAM_ANGULAR_DAMP = 8
-
-Constant to set/get the angular damping factor of an area. The default value of this parameter is 1.0.
-
-AreaParameter AREA_PARAM_PRIORITY = 9
-
-Constant to set/get the priority (order of processing) of an area. The default value of this parameter is 0.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AREA_PARAM_GRAVITY_OVERRIDE_MODE {#AREA_PARAM_GRAVITY_OVERRIDE_MODE}
 
@@ -1343,7 +1239,7 @@ Constant to set/get the priority (order of processing) of an area. The default v
 AREA_PARAM_GRAVITY_OVERRIDE_MODE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get gravity override mode in an area. See AreaSpaceOverrideMode for possible values. The default value of this parameter is AREA_SPACE_OVERRIDE_DISABLED.
 
 #### AREA_PARAM_GRAVITY {#AREA_PARAM_GRAVITY}
 
@@ -1351,7 +1247,7 @@ AREA_PARAM_GRAVITY_OVERRIDE_MODE = 0
 AREA_PARAM_GRAVITY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get gravity strength in an area. The default value of this parameter is 9.80665.
 
 #### AREA_PARAM_GRAVITY_VECTOR {#AREA_PARAM_GRAVITY_VECTOR}
 
@@ -1359,7 +1255,7 @@ AREA_PARAM_GRAVITY = 1
 AREA_PARAM_GRAVITY_VECTOR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get gravity vector/center in an area. The default value of this parameter is Vector2(0, -1).
 
 #### AREA_PARAM_GRAVITY_IS_POINT {#AREA_PARAM_GRAVITY_IS_POINT}
 
@@ -1367,7 +1263,7 @@ AREA_PARAM_GRAVITY_VECTOR = 2
 AREA_PARAM_GRAVITY_IS_POINT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get whether the gravity vector of an area is a direction, or a center point. The default value of this parameter is false.
 
 #### AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE {#AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE}
 
@@ -1375,7 +1271,9 @@ AREA_PARAM_GRAVITY_IS_POINT = 3
 AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the distance at which the gravity strength is equal to the gravity controlled by AREA_PARAM_GRAVITY. For example, on a planet 100 pixels in radius with a surface gravity of 4.0 px/s², set the gravity to 4.0 and the unit distance to 100.0. The gravity will have falloff according to the inverse square law, so in the example, at 200 pixels from the center the gravity will be 1.0 px/s² (twice the distance, 1/4th the gravity), at 50 pixels it will be 16.0 px/s² (half the distance, 4x the gravity), and so on.
+
+The above is true only when the unit distance is a positive number. When the unit distance is set to 0.0, the gravity will be constant regardless of distance. The default value of this parameter is 0.0.
 
 #### AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE {#AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE}
 
@@ -1383,7 +1281,7 @@ AREA_PARAM_GRAVITY_POINT_UNIT_DISTANCE = 4
 AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get linear damping override mode in an area. See AreaSpaceOverrideMode for possible values. The default value of this parameter is AREA_SPACE_OVERRIDE_DISABLED.
 
 #### AREA_PARAM_LINEAR_DAMP {#AREA_PARAM_LINEAR_DAMP}
 
@@ -1391,7 +1289,7 @@ AREA_PARAM_LINEAR_DAMP_OVERRIDE_MODE = 5
 AREA_PARAM_LINEAR_DAMP = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the linear damping factor of an area. The default value of this parameter is 0.1.
 
 #### AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE {#AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE}
 
@@ -1399,7 +1297,7 @@ AREA_PARAM_LINEAR_DAMP = 6
 AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get angular damping override mode in an area. See AreaSpaceOverrideMode for possible values. The default value of this parameter is AREA_SPACE_OVERRIDE_DISABLED.
 
 #### AREA_PARAM_ANGULAR_DAMP {#AREA_PARAM_ANGULAR_DAMP}
 
@@ -1407,7 +1305,7 @@ AREA_PARAM_ANGULAR_DAMP_OVERRIDE_MODE = 7
 AREA_PARAM_ANGULAR_DAMP = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the angular damping factor of an area. The default value of this parameter is 1.0.
 
 #### AREA_PARAM_PRIORITY {#AREA_PARAM_PRIORITY}
 
@@ -1415,7 +1313,9 @@ AREA_PARAM_ANGULAR_DAMP = 8
 AREA_PARAM_PRIORITY = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the priority (order of processing) of an area. The default value of this parameter is 0.
+
+---
 
 ### AreaSpaceOverrideMode {#enum-AreaSpaceOverrideMode}
 
@@ -1423,25 +1323,7 @@ AREA_PARAM_PRIORITY = 9
 enum AreaSpaceOverrideMode { AREA_SPACE_OVERRIDE_DISABLED = 0, AREA_SPACE_OVERRIDE_COMBINE = 1, AREA_SPACE_OVERRIDE_COMBINE_REPLACE = 2, AREA_SPACE_OVERRIDE_REPLACE = 3, AREA_SPACE_OVERRIDE_REPLACE_COMBINE = 4 }
 ```
 
-AreaSpaceOverrideMode AREA_SPACE_OVERRIDE_DISABLED = 0
-
-This area does not affect gravity/damp. These are generally areas that exist only to detect collisions, and objects entering or exiting them.
-
-AreaSpaceOverrideMode AREA_SPACE_OVERRIDE_COMBINE = 1
-
-This area adds its gravity/damp values to whatever has been calculated so far. This way, many overlapping areas can combine their physics to make interesting effects.
-
-AreaSpaceOverrideMode AREA_SPACE_OVERRIDE_COMBINE_REPLACE = 2
-
-This area adds its gravity/damp values to whatever has been calculated so far. Then stops taking into account the rest of the areas, even the default one.
-
-AreaSpaceOverrideMode AREA_SPACE_OVERRIDE_REPLACE = 3
-
-This area replaces any gravity/damp, even the default one, and stops taking into account the rest of the areas.
-
-AreaSpaceOverrideMode AREA_SPACE_OVERRIDE_REPLACE_COMBINE = 4
-
-This area replaces any gravity/damp calculated so far, but keeps calculating the rest of the areas, down to the default one.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AREA_SPACE_OVERRIDE_DISABLED {#AREA_SPACE_OVERRIDE_DISABLED}
 
@@ -1449,7 +1331,7 @@ This area replaces any gravity/damp calculated so far, but keeps calculating the
 AREA_SPACE_OVERRIDE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area does not affect gravity/damp. These are generally areas that exist only to detect collisions, and objects entering or exiting them.
 
 #### AREA_SPACE_OVERRIDE_COMBINE {#AREA_SPACE_OVERRIDE_COMBINE}
 
@@ -1457,7 +1339,7 @@ AREA_SPACE_OVERRIDE_DISABLED = 0
 AREA_SPACE_OVERRIDE_COMBINE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area adds its gravity/damp values to whatever has been calculated so far. This way, many overlapping areas can combine their physics to make interesting effects.
 
 #### AREA_SPACE_OVERRIDE_COMBINE_REPLACE {#AREA_SPACE_OVERRIDE_COMBINE_REPLACE}
 
@@ -1465,7 +1347,7 @@ AREA_SPACE_OVERRIDE_COMBINE = 1
 AREA_SPACE_OVERRIDE_COMBINE_REPLACE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area adds its gravity/damp values to whatever has been calculated so far. Then stops taking into account the rest of the areas, even the default one.
 
 #### AREA_SPACE_OVERRIDE_REPLACE {#AREA_SPACE_OVERRIDE_REPLACE}
 
@@ -1473,7 +1355,7 @@ AREA_SPACE_OVERRIDE_COMBINE_REPLACE = 2
 AREA_SPACE_OVERRIDE_REPLACE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area replaces any gravity/damp, even the default one, and stops taking into account the rest of the areas.
 
 #### AREA_SPACE_OVERRIDE_REPLACE_COMBINE {#AREA_SPACE_OVERRIDE_REPLACE_COMBINE}
 
@@ -1481,7 +1363,9 @@ AREA_SPACE_OVERRIDE_REPLACE = 3
 AREA_SPACE_OVERRIDE_REPLACE_COMBINE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This area replaces any gravity/damp calculated so far, but keeps calculating the rest of the areas, down to the default one.
+
+---
 
 ### BodyMode {#enum-BodyMode}
 
@@ -1489,21 +1373,7 @@ AREA_SPACE_OVERRIDE_REPLACE_COMBINE = 4
 enum BodyMode { BODY_MODE_STATIC = 0, BODY_MODE_KINEMATIC = 1, BODY_MODE_RIGID = 2, BODY_MODE_RIGID_LINEAR = 3 }
 ```
 
-BodyMode BODY_MODE_STATIC = 0
-
-Constant for static bodies. In this mode, a body can be only moved by user code and doesn't collide with other bodies along its path when moved.
-
-BodyMode BODY_MODE_KINEMATIC = 1
-
-Constant for kinematic bodies. In this mode, a body can be only moved by user code and collides with other bodies along its path.
-
-BodyMode BODY_MODE_RIGID = 2
-
-Constant for rigid bodies. In this mode, a body can be pushed by other bodies and has forces applied.
-
-BodyMode BODY_MODE_RIGID_LINEAR = 3
-
-Constant for linear rigid bodies. In this mode, a body can not rotate, and only its linear velocity is affected by external forces.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BODY_MODE_STATIC {#BODY_MODE_STATIC}
 
@@ -1511,7 +1381,7 @@ Constant for linear rigid bodies. In this mode, a body can not rotate, and only 
 BODY_MODE_STATIC = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for static bodies. In this mode, a body can be only moved by user code and doesn't collide with other bodies along its path when moved.
 
 #### BODY_MODE_KINEMATIC {#BODY_MODE_KINEMATIC}
 
@@ -1519,7 +1389,7 @@ BODY_MODE_STATIC = 0
 BODY_MODE_KINEMATIC = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for kinematic bodies. In this mode, a body can be only moved by user code and collides with other bodies along its path.
 
 #### BODY_MODE_RIGID {#BODY_MODE_RIGID}
 
@@ -1527,7 +1397,7 @@ BODY_MODE_KINEMATIC = 1
 BODY_MODE_RIGID = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for rigid bodies. In this mode, a body can be pushed by other bodies and has forces applied.
 
 #### BODY_MODE_RIGID_LINEAR {#BODY_MODE_RIGID_LINEAR}
 
@@ -1535,7 +1405,9 @@ BODY_MODE_RIGID = 2
 BODY_MODE_RIGID_LINEAR = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant for linear rigid bodies. In this mode, a body can not rotate, and only its linear velocity is affected by external forces.
+
+---
 
 ### BodyParameter {#enum-BodyParameter}
 
@@ -1543,52 +1415,7 @@ BODY_MODE_RIGID_LINEAR = 3
 enum BodyParameter { BODY_PARAM_BOUNCE = 0, BODY_PARAM_FRICTION = 1, BODY_PARAM_MASS = 2, BODY_PARAM_INERTIA = 3, BODY_PARAM_CENTER_OF_MASS = 4, BODY_PARAM_GRAVITY_SCALE = 5, BODY_PARAM_LINEAR_DAMP_MODE = 6, BODY_PARAM_ANGULAR_DAMP_MODE = 7, BODY_PARAM_LINEAR_DAMP = 8, BODY_PARAM_ANGULAR_DAMP = 9, BODY_PARAM_MAX = 10 }
 ```
 
-BodyParameter BODY_PARAM_BOUNCE = 0
-
-Constant to set/get a body's bounce factor. The default value of this parameter is 0.0.
-
-BodyParameter BODY_PARAM_FRICTION = 1
-
-Constant to set/get a body's friction. The default value of this parameter is 1.0.
-
-BodyParameter BODY_PARAM_MASS = 2
-
-Constant to set/get a body's mass. The default value of this parameter is 1.0. If the body's mode is set to BODY_MODE_RIGID, then setting this parameter will have the following additional effects:
-
-- If the parameter BODY_PARAM_CENTER_OF_MASS has never been set explicitly, then the value of that parameter will be recalculated based on the body's shapes.
-- If the parameter BODY_PARAM_INERTIA is set to a value <= 0.0, then the value of that parameter will be recalculated based on the body's shapes, mass, and center of mass.
-
-BodyParameter BODY_PARAM_INERTIA = 3
-
-Constant to set/get a body's inertia. The default value of this parameter is 0.0. If the body's inertia is set to a value <= 0.0, then the inertia will be recalculated based on the body's shapes, mass, and center of mass.
-
-BodyParameter BODY_PARAM_CENTER_OF_MASS = 4
-
-Constant to set/get a body's center of mass position in the body's local coordinate system. The default value of this parameter is Vector2(0, 0). If this parameter is never set explicitly, then it is recalculated based on the body's shapes when setting the parameter BODY_PARAM_MASS or when calling body_set_space().
-
-BodyParameter BODY_PARAM_GRAVITY_SCALE = 5
-
-Constant to set/get a body's gravity multiplier. The default value of this parameter is 1.0.
-
-BodyParameter BODY_PARAM_LINEAR_DAMP_MODE = 6
-
-Constant to set/get a body's linear damping mode. See BodyDampMode for possible values. The default value of this parameter is BODY_DAMP_MODE_COMBINE.
-
-BodyParameter BODY_PARAM_ANGULAR_DAMP_MODE = 7
-
-Constant to set/get a body's angular damping mode. See BodyDampMode for possible values. The default value of this parameter is BODY_DAMP_MODE_COMBINE.
-
-BodyParameter BODY_PARAM_LINEAR_DAMP = 8
-
-Constant to set/get a body's linear damping factor. The default value of this parameter is 0.0.
-
-BodyParameter BODY_PARAM_ANGULAR_DAMP = 9
-
-Constant to set/get a body's angular damping factor. The default value of this parameter is 0.0.
-
-BodyParameter BODY_PARAM_MAX = 10
-
-Represents the size of the BodyParameter enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BODY_PARAM_BOUNCE {#BODY_PARAM_BOUNCE}
 
@@ -1596,7 +1423,7 @@ Represents the size of the BodyParameter enum.
 BODY_PARAM_BOUNCE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's bounce factor. The default value of this parameter is 0.0.
 
 #### BODY_PARAM_FRICTION {#BODY_PARAM_FRICTION}
 
@@ -1604,7 +1431,7 @@ BODY_PARAM_BOUNCE = 0
 BODY_PARAM_FRICTION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's friction. The default value of this parameter is 1.0.
 
 #### BODY_PARAM_MASS {#BODY_PARAM_MASS}
 
@@ -1612,7 +1439,10 @@ BODY_PARAM_FRICTION = 1
 BODY_PARAM_MASS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's mass. The default value of this parameter is 1.0. If the body's mode is set to BODY_MODE_RIGID, then setting this parameter will have the following additional effects:
+
+- If the parameter BODY_PARAM_CENTER_OF_MASS has never been set explicitly, then the value of that parameter will be recalculated based on the body's shapes.
+- If the parameter BODY_PARAM_INERTIA is set to a value <= 0.0, then the value of that parameter will be recalculated based on the body's shapes, mass, and center of mass.
 
 #### BODY_PARAM_INERTIA {#BODY_PARAM_INERTIA}
 
@@ -1620,7 +1450,7 @@ BODY_PARAM_MASS = 2
 BODY_PARAM_INERTIA = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's inertia. The default value of this parameter is 0.0. If the body's inertia is set to a value <= 0.0, then the inertia will be recalculated based on the body's shapes, mass, and center of mass.
 
 #### BODY_PARAM_CENTER_OF_MASS {#BODY_PARAM_CENTER_OF_MASS}
 
@@ -1628,7 +1458,7 @@ BODY_PARAM_INERTIA = 3
 BODY_PARAM_CENTER_OF_MASS = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's center of mass position in the body's local coordinate system. The default value of this parameter is Vector2(0, 0). If this parameter is never set explicitly, then it is recalculated based on the body's shapes when setting the parameter BODY_PARAM_MASS or when calling body_set_space().
 
 #### BODY_PARAM_GRAVITY_SCALE {#BODY_PARAM_GRAVITY_SCALE}
 
@@ -1636,7 +1466,7 @@ BODY_PARAM_CENTER_OF_MASS = 4
 BODY_PARAM_GRAVITY_SCALE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's gravity multiplier. The default value of this parameter is 1.0.
 
 #### BODY_PARAM_LINEAR_DAMP_MODE {#BODY_PARAM_LINEAR_DAMP_MODE}
 
@@ -1644,7 +1474,7 @@ BODY_PARAM_GRAVITY_SCALE = 5
 BODY_PARAM_LINEAR_DAMP_MODE = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's linear damping mode. See BodyDampMode for possible values. The default value of this parameter is BODY_DAMP_MODE_COMBINE.
 
 #### BODY_PARAM_ANGULAR_DAMP_MODE {#BODY_PARAM_ANGULAR_DAMP_MODE}
 
@@ -1652,7 +1482,7 @@ BODY_PARAM_LINEAR_DAMP_MODE = 6
 BODY_PARAM_ANGULAR_DAMP_MODE = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's angular damping mode. See BodyDampMode for possible values. The default value of this parameter is BODY_DAMP_MODE_COMBINE.
 
 #### BODY_PARAM_LINEAR_DAMP {#BODY_PARAM_LINEAR_DAMP}
 
@@ -1660,7 +1490,7 @@ BODY_PARAM_ANGULAR_DAMP_MODE = 7
 BODY_PARAM_LINEAR_DAMP = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's linear damping factor. The default value of this parameter is 0.0.
 
 #### BODY_PARAM_ANGULAR_DAMP {#BODY_PARAM_ANGULAR_DAMP}
 
@@ -1668,7 +1498,7 @@ BODY_PARAM_LINEAR_DAMP = 8
 BODY_PARAM_ANGULAR_DAMP = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a body's angular damping factor. The default value of this parameter is 0.0.
 
 #### BODY_PARAM_MAX {#BODY_PARAM_MAX}
 
@@ -1676,7 +1506,9 @@ BODY_PARAM_ANGULAR_DAMP = 9
 BODY_PARAM_MAX = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the BodyParameter enum.
+
+---
 
 ### BodyDampMode {#enum-BodyDampMode}
 
@@ -1684,13 +1516,7 @@ BODY_PARAM_MAX = 10
 enum BodyDampMode { BODY_DAMP_MODE_COMBINE = 0, BODY_DAMP_MODE_REPLACE = 1 }
 ```
 
-BodyDampMode BODY_DAMP_MODE_COMBINE = 0
-
-The body's damping value is added to any value set in areas or the default value.
-
-BodyDampMode BODY_DAMP_MODE_REPLACE = 1
-
-The body's damping value replaces any value set in areas or the default value.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BODY_DAMP_MODE_COMBINE {#BODY_DAMP_MODE_COMBINE}
 
@@ -1698,7 +1524,7 @@ The body's damping value replaces any value set in areas or the default value.
 BODY_DAMP_MODE_COMBINE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The body's damping value is added to any value set in areas or the default value.
 
 #### BODY_DAMP_MODE_REPLACE {#BODY_DAMP_MODE_REPLACE}
 
@@ -1706,7 +1532,9 @@ BODY_DAMP_MODE_COMBINE = 0
 BODY_DAMP_MODE_REPLACE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The body's damping value replaces any value set in areas or the default value.
+
+---
 
 ### BodyState {#enum-BodyState}
 
@@ -1714,25 +1542,7 @@ BODY_DAMP_MODE_REPLACE = 1
 enum BodyState { BODY_STATE_TRANSFORM = 0, BODY_STATE_LINEAR_VELOCITY = 1, BODY_STATE_ANGULAR_VELOCITY = 2, BODY_STATE_SLEEPING = 3, BODY_STATE_CAN_SLEEP = 4 }
 ```
 
-BodyState BODY_STATE_TRANSFORM = 0
-
-Constant to set/get the current transform matrix of the body.
-
-BodyState BODY_STATE_LINEAR_VELOCITY = 1
-
-Constant to set/get the current linear velocity of the body.
-
-BodyState BODY_STATE_ANGULAR_VELOCITY = 2
-
-Constant to set/get the current angular velocity of the body.
-
-BodyState BODY_STATE_SLEEPING = 3
-
-Constant to sleep/wake up a body, or to get whether it is sleeping.
-
-BodyState BODY_STATE_CAN_SLEEP = 4
-
-Constant to set/get whether the body can sleep.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### BODY_STATE_TRANSFORM {#BODY_STATE_TRANSFORM}
 
@@ -1740,7 +1550,7 @@ Constant to set/get whether the body can sleep.
 BODY_STATE_TRANSFORM = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the current transform matrix of the body.
 
 #### BODY_STATE_LINEAR_VELOCITY {#BODY_STATE_LINEAR_VELOCITY}
 
@@ -1748,7 +1558,7 @@ BODY_STATE_TRANSFORM = 0
 BODY_STATE_LINEAR_VELOCITY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the current linear velocity of the body.
 
 #### BODY_STATE_ANGULAR_VELOCITY {#BODY_STATE_ANGULAR_VELOCITY}
 
@@ -1756,7 +1566,7 @@ BODY_STATE_LINEAR_VELOCITY = 1
 BODY_STATE_ANGULAR_VELOCITY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the current angular velocity of the body.
 
 #### BODY_STATE_SLEEPING {#BODY_STATE_SLEEPING}
 
@@ -1764,7 +1574,7 @@ BODY_STATE_ANGULAR_VELOCITY = 2
 BODY_STATE_SLEEPING = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to sleep/wake up a body, or to get whether it is sleeping.
 
 #### BODY_STATE_CAN_SLEEP {#BODY_STATE_CAN_SLEEP}
 
@@ -1772,7 +1582,9 @@ BODY_STATE_SLEEPING = 3
 BODY_STATE_CAN_SLEEP = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get whether the body can sleep.
+
+---
 
 ### JointType {#enum-JointType}
 
@@ -1780,21 +1592,7 @@ BODY_STATE_CAN_SLEEP = 4
 enum JointType { JOINT_TYPE_PIN = 0, JOINT_TYPE_GROOVE = 1, JOINT_TYPE_DAMPED_SPRING = 2, JOINT_TYPE_MAX = 3 }
 ```
 
-JointType JOINT_TYPE_PIN = 0
-
-Constant to create pin joints.
-
-JointType JOINT_TYPE_GROOVE = 1
-
-Constant to create groove joints.
-
-JointType JOINT_TYPE_DAMPED_SPRING = 2
-
-Constant to create damped spring joints.
-
-JointType JOINT_TYPE_MAX = 3
-
-Represents the size of the JointType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### JOINT_TYPE_PIN {#JOINT_TYPE_PIN}
 
@@ -1802,7 +1600,7 @@ Represents the size of the JointType enum.
 JOINT_TYPE_PIN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to create pin joints.
 
 #### JOINT_TYPE_GROOVE {#JOINT_TYPE_GROOVE}
 
@@ -1810,7 +1608,7 @@ JOINT_TYPE_PIN = 0
 JOINT_TYPE_GROOVE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to create groove joints.
 
 #### JOINT_TYPE_DAMPED_SPRING {#JOINT_TYPE_DAMPED_SPRING}
 
@@ -1818,7 +1616,7 @@ JOINT_TYPE_GROOVE = 1
 JOINT_TYPE_DAMPED_SPRING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to create damped spring joints.
 
 #### JOINT_TYPE_MAX {#JOINT_TYPE_MAX}
 
@@ -1826,7 +1624,9 @@ JOINT_TYPE_DAMPED_SPRING = 2
 JOINT_TYPE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the JointType enum.
+
+---
 
 ### JointParam {#enum-JointParam}
 
@@ -1834,23 +1634,7 @@ JOINT_TYPE_MAX = 3
 enum JointParam { JOINT_PARAM_BIAS = 0, JOINT_PARAM_MAX_BIAS = 1, JOINT_PARAM_MAX_FORCE = 2 }
 ```
 
-JointParam JOINT_PARAM_BIAS = 0
-
-Constant to set/get how fast the joint pulls the bodies back to satisfy the joint constraint. The lower the value, the more the two bodies can pull on the joint. The default value of this parameter is 0.0.
-
-Note: In Godot Physics, this parameter is only used for pin joints and groove joints.
-
-JointParam JOINT_PARAM_MAX_BIAS = 1
-
-Constant to set/get the maximum speed with which the joint can apply corrections. The default value of this parameter is 3.40282e+38.
-
-Note: In Godot Physics, this parameter is only used for groove joints.
-
-JointParam JOINT_PARAM_MAX_FORCE = 2
-
-Constant to set/get the maximum force that the joint can use to act on the two bodies. The default value of this parameter is 3.40282e+38.
-
-Note: In Godot Physics, this parameter is only used for groove joints.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### JOINT_PARAM_BIAS {#JOINT_PARAM_BIAS}
 
@@ -1858,7 +1642,9 @@ Note: In Godot Physics, this parameter is only used for groove joints.
 JOINT_PARAM_BIAS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get how fast the joint pulls the bodies back to satisfy the joint constraint. The lower the value, the more the two bodies can pull on the joint. The default value of this parameter is 0.0.
+
+Note: In Godot Physics, this parameter is only used for pin joints and groove joints.
 
 #### JOINT_PARAM_MAX_BIAS {#JOINT_PARAM_MAX_BIAS}
 
@@ -1866,7 +1652,9 @@ JOINT_PARAM_BIAS = 0
 JOINT_PARAM_MAX_BIAS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the maximum speed with which the joint can apply corrections. The default value of this parameter is 3.40282e+38.
+
+Note: In Godot Physics, this parameter is only used for groove joints.
 
 #### JOINT_PARAM_MAX_FORCE {#JOINT_PARAM_MAX_FORCE}
 
@@ -1874,7 +1662,11 @@ JOINT_PARAM_MAX_BIAS = 1
 JOINT_PARAM_MAX_FORCE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get the maximum force that the joint can use to act on the two bodies. The default value of this parameter is 3.40282e+38.
+
+Note: In Godot Physics, this parameter is only used for groove joints.
+
+---
 
 ### PinJointParam {#enum-PinJointParam}
 
@@ -1882,21 +1674,7 @@ JOINT_PARAM_MAX_FORCE = 2
 enum PinJointParam { PIN_JOINT_SOFTNESS = 0, PIN_JOINT_LIMIT_UPPER = 1, PIN_JOINT_LIMIT_LOWER = 2, PIN_JOINT_MOTOR_TARGET_VELOCITY = 3 }
 ```
 
-PinJointParam PIN_JOINT_SOFTNESS = 0
-
-Constant to set/get a how much the bond of the pin joint can flex. The default value of this parameter is 0.0.
-
-PinJointParam PIN_JOINT_LIMIT_UPPER = 1
-
-The maximum rotation around the pin.
-
-PinJointParam PIN_JOINT_LIMIT_LOWER = 2
-
-The minimum rotation around the pin.
-
-PinJointParam PIN_JOINT_MOTOR_TARGET_VELOCITY = 3
-
-Target speed for the motor. In radians per second.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PIN_JOINT_SOFTNESS {#PIN_JOINT_SOFTNESS}
 
@@ -1904,7 +1682,7 @@ Target speed for the motor. In radians per second.
 PIN_JOINT_SOFTNESS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to set/get a how much the bond of the pin joint can flex. The default value of this parameter is 0.0.
 
 #### PIN_JOINT_LIMIT_UPPER {#PIN_JOINT_LIMIT_UPPER}
 
@@ -1912,7 +1690,7 @@ PIN_JOINT_SOFTNESS = 0
 PIN_JOINT_LIMIT_UPPER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The maximum rotation around the pin.
 
 #### PIN_JOINT_LIMIT_LOWER {#PIN_JOINT_LIMIT_LOWER}
 
@@ -1920,7 +1698,7 @@ PIN_JOINT_LIMIT_UPPER = 1
 PIN_JOINT_LIMIT_LOWER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The minimum rotation around the pin.
 
 #### PIN_JOINT_MOTOR_TARGET_VELOCITY {#PIN_JOINT_MOTOR_TARGET_VELOCITY}
 
@@ -1928,7 +1706,9 @@ PIN_JOINT_LIMIT_LOWER = 2
 PIN_JOINT_MOTOR_TARGET_VELOCITY = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Target speed for the motor. In radians per second.
+
+---
 
 ### PinJointFlag {#enum-PinJointFlag}
 
@@ -1936,13 +1716,7 @@ PIN_JOINT_MOTOR_TARGET_VELOCITY = 3
 enum PinJointFlag { PIN_JOINT_FLAG_ANGULAR_LIMIT_ENABLED = 0, PIN_JOINT_FLAG_MOTOR_ENABLED = 1 }
 ```
 
-PinJointFlag PIN_JOINT_FLAG_ANGULAR_LIMIT_ENABLED = 0
-
-If true, the pin has a maximum and a minimum rotation.
-
-PinJointFlag PIN_JOINT_FLAG_MOTOR_ENABLED = 1
-
-If true, a motor turns the pin.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PIN_JOINT_FLAG_ANGULAR_LIMIT_ENABLED {#PIN_JOINT_FLAG_ANGULAR_LIMIT_ENABLED}
 
@@ -1950,7 +1724,7 @@ If true, a motor turns the pin.
 PIN_JOINT_FLAG_ANGULAR_LIMIT_ENABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If true, the pin has a maximum and a minimum rotation.
 
 #### PIN_JOINT_FLAG_MOTOR_ENABLED {#PIN_JOINT_FLAG_MOTOR_ENABLED}
 
@@ -1958,7 +1732,9 @@ PIN_JOINT_FLAG_ANGULAR_LIMIT_ENABLED = 0
 PIN_JOINT_FLAG_MOTOR_ENABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If true, a motor turns the pin.
+
+---
 
 ### DampedSpringParam {#enum-DampedSpringParam}
 
@@ -1966,17 +1742,7 @@ PIN_JOINT_FLAG_MOTOR_ENABLED = 1
 enum DampedSpringParam { DAMPED_SPRING_REST_LENGTH = 0, DAMPED_SPRING_STIFFNESS = 1, DAMPED_SPRING_DAMPING = 2 }
 ```
 
-DampedSpringParam DAMPED_SPRING_REST_LENGTH = 0
-
-Sets the resting length of the spring joint. The joint will always try to go to back this length when pulled apart. The default value of this parameter is the distance between the joint's anchor points.
-
-DampedSpringParam DAMPED_SPRING_STIFFNESS = 1
-
-Sets the stiffness of the spring joint. The joint applies a force equal to the stiffness times the distance from its resting length. The default value of this parameter is 20.0.
-
-DampedSpringParam DAMPED_SPRING_DAMPING = 2
-
-Sets the damping ratio of the spring joint. A value of 0 indicates an undamped spring, while 1 causes the system to reach equilibrium as fast as possible (critical damping). The default value of this parameter is 1.5.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DAMPED_SPRING_REST_LENGTH {#DAMPED_SPRING_REST_LENGTH}
 
@@ -1984,7 +1750,7 @@ Sets the damping ratio of the spring joint. A value of 0 indicates an undamped s
 DAMPED_SPRING_REST_LENGTH = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets the resting length of the spring joint. The joint will always try to go to back this length when pulled apart. The default value of this parameter is the distance between the joint's anchor points.
 
 #### DAMPED_SPRING_STIFFNESS {#DAMPED_SPRING_STIFFNESS}
 
@@ -1992,7 +1758,7 @@ DAMPED_SPRING_REST_LENGTH = 0
 DAMPED_SPRING_STIFFNESS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets the stiffness of the spring joint. The joint applies a force equal to the stiffness times the distance from its resting length. The default value of this parameter is 20.0.
 
 #### DAMPED_SPRING_DAMPING {#DAMPED_SPRING_DAMPING}
 
@@ -2000,7 +1766,9 @@ DAMPED_SPRING_STIFFNESS = 1
 DAMPED_SPRING_DAMPING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Sets the damping ratio of the spring joint. A value of 0 indicates an undamped spring, while 1 causes the system to reach equilibrium as fast as possible (critical damping). The default value of this parameter is 1.5.
+
+---
 
 ### CCDMode {#enum-CCDMode}
 
@@ -2008,17 +1776,7 @@ DAMPED_SPRING_DAMPING = 2
 enum CCDMode { CCD_MODE_DISABLED = 0, CCD_MODE_CAST_RAY = 1, CCD_MODE_CAST_SHAPE = 2 }
 ```
 
-CCDMode CCD_MODE_DISABLED = 0
-
-Disables continuous collision detection. This is the fastest way to detect body collisions, but it can miss small and/or fast-moving objects.
-
-CCDMode CCD_MODE_CAST_RAY = 1
-
-Enables continuous collision detection by raycasting. It is faster than shapecasting, but less precise.
-
-CCDMode CCD_MODE_CAST_SHAPE = 2
-
-Enables continuous collision detection by shapecasting. It is the slowest CCD method, and the most precise.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CCD_MODE_DISABLED {#CCD_MODE_DISABLED}
 
@@ -2026,7 +1784,7 @@ Enables continuous collision detection by shapecasting. It is the slowest CCD me
 CCD_MODE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables continuous collision detection. This is the fastest way to detect body collisions, but it can miss small and/or fast-moving objects.
 
 #### CCD_MODE_CAST_RAY {#CCD_MODE_CAST_RAY}
 
@@ -2034,7 +1792,7 @@ CCD_MODE_DISABLED = 0
 CCD_MODE_CAST_RAY = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables continuous collision detection by raycasting. It is faster than shapecasting, but less precise.
 
 #### CCD_MODE_CAST_SHAPE {#CCD_MODE_CAST_SHAPE}
 
@@ -2042,7 +1800,9 @@ CCD_MODE_CAST_RAY = 1
 CCD_MODE_CAST_SHAPE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables continuous collision detection by shapecasting. It is the slowest CCD method, and the most precise.
+
+---
 
 ### AreaBodyStatus {#enum-AreaBodyStatus}
 
@@ -2050,13 +1810,7 @@ CCD_MODE_CAST_SHAPE = 2
 enum AreaBodyStatus { AREA_BODY_ADDED = 0, AREA_BODY_REMOVED = 1 }
 ```
 
-AreaBodyStatus AREA_BODY_ADDED = 0
-
-The value of the first parameter and area callback function receives, when an object enters one of its shapes.
-
-AreaBodyStatus AREA_BODY_REMOVED = 1
-
-The value of the first parameter and area callback function receives, when an object exits one of its shapes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AREA_BODY_ADDED {#AREA_BODY_ADDED}
 
@@ -2064,7 +1818,7 @@ The value of the first parameter and area callback function receives, when an ob
 AREA_BODY_ADDED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The value of the first parameter and area callback function receives, when an object enters one of its shapes.
 
 #### AREA_BODY_REMOVED {#AREA_BODY_REMOVED}
 
@@ -2072,7 +1826,9 @@ AREA_BODY_ADDED = 0
 AREA_BODY_REMOVED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The value of the first parameter and area callback function receives, when an object exits one of its shapes.
+
+---
 
 ### ProcessInfo {#enum-ProcessInfo}
 
@@ -2080,17 +1836,7 @@ AREA_BODY_REMOVED = 1
 enum ProcessInfo { INFO_ACTIVE_OBJECTS = 0, INFO_COLLISION_PAIRS = 1, INFO_ISLAND_COUNT = 2 }
 ```
 
-ProcessInfo INFO_ACTIVE_OBJECTS = 0
-
-Constant to get the number of objects that are not sleeping.
-
-ProcessInfo INFO_COLLISION_PAIRS = 1
-
-Constant to get the number of possible collisions.
-
-ProcessInfo INFO_ISLAND_COUNT = 2
-
-Constant to get the number of space regions where a collision could occur.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### INFO_ACTIVE_OBJECTS {#INFO_ACTIVE_OBJECTS}
 
@@ -2098,7 +1844,7 @@ Constant to get the number of space regions where a collision could occur.
 INFO_ACTIVE_OBJECTS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of objects that are not sleeping.
 
 #### INFO_COLLISION_PAIRS {#INFO_COLLISION_PAIRS}
 
@@ -2106,7 +1852,7 @@ INFO_ACTIVE_OBJECTS = 0
 INFO_COLLISION_PAIRS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of possible collisions.
 
 #### INFO_ISLAND_COUNT {#INFO_ISLAND_COUNT}
 
@@ -2114,4 +1860,6 @@ INFO_COLLISION_PAIRS = 1
 INFO_ISLAND_COUNT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Constant to get the number of space regions where a collision could occur.
+
+---

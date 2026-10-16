@@ -111,7 +111,10 @@ The diffuse texture.
 diffuse_factor: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_diffuse_factor(value: Color)
+- Color get_diffuse_factor()
+
+The reflected diffuse factor of the material.
 
 ### gloss_factor {#gloss_factor}
 
@@ -130,7 +133,10 @@ The glossiness or smoothness of the material.
 specular_factor: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_specular_factor(value: Color)
+- Color get_specular_factor()
+
+The specular RGB color of the material. The alpha channel is unused.
 
 ### spec_gloss_img {#spec_gloss_img}
 

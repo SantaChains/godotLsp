@@ -256,7 +256,7 @@ Note: The original Projection must be a perspective projection.
 x: Vector4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The projection matrix's X vector (column 0). Equivalent to array index 0.
 
 ### y {#y}
 
@@ -264,7 +264,7 @@ x: Vector4
 y: Vector4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The projection matrix's Y vector (column 1). Equivalent to array index 1.
 
 ### z {#z}
 
@@ -272,7 +272,7 @@ y: Vector4
 z: Vector4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The projection matrix's Z vector (column 2). Equivalent to array index 2.
 
 ### w {#w}
 
@@ -280,7 +280,7 @@ z: Vector4
 w: Vector4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The projection matrix's W vector (column 3). Equivalent to array index 3.
 
 ## 枚举
 
@@ -290,29 +290,7 @@ w: Vector4
 enum Planes { PLANE_NEAR = 0, PLANE_FAR = 1, PLANE_LEFT = 2, PLANE_TOP = 3, PLANE_RIGHT = 4, PLANE_BOTTOM = 5 }
 ```
 
-Planes PLANE_NEAR = 0
-
-The index value of the projection's near clipping plane.
-
-Planes PLANE_FAR = 1
-
-The index value of the projection's far clipping plane.
-
-Planes PLANE_LEFT = 2
-
-The index value of the projection's left clipping plane.
-
-Planes PLANE_TOP = 3
-
-The index value of the projection's top clipping plane.
-
-Planes PLANE_RIGHT = 4
-
-The index value of the projection's right clipping plane.
-
-Planes PLANE_BOTTOM = 5
-
-The index value of the projection bottom clipping plane.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PLANE_NEAR {#PLANE_NEAR}
 
@@ -320,7 +298,7 @@ The index value of the projection bottom clipping plane.
 PLANE_NEAR = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The index value of the projection's near clipping plane.
 
 #### PLANE_FAR {#PLANE_FAR}
 
@@ -328,7 +306,7 @@ PLANE_NEAR = 0
 PLANE_FAR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The index value of the projection's far clipping plane.
 
 #### PLANE_LEFT {#PLANE_LEFT}
 
@@ -336,7 +314,7 @@ PLANE_FAR = 1
 PLANE_LEFT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The index value of the projection's left clipping plane.
 
 #### PLANE_TOP {#PLANE_TOP}
 
@@ -344,7 +322,7 @@ PLANE_LEFT = 2
 PLANE_TOP = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The index value of the projection's top clipping plane.
 
 #### PLANE_RIGHT {#PLANE_RIGHT}
 
@@ -352,7 +330,7 @@ PLANE_TOP = 3
 PLANE_RIGHT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The index value of the projection's right clipping plane.
 
 #### PLANE_BOTTOM {#PLANE_BOTTOM}
 
@@ -360,7 +338,9 @@ PLANE_RIGHT = 4
 PLANE_BOTTOM = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The index value of the projection bottom clipping plane.
+
+---
 
 ## 常量
 
@@ -370,7 +350,11 @@ PLANE_BOTTOM = 5
 const IDENTITY = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A Projection with no transformation defined. When applied to other data structures, no transformation is performed.
+
+ZERO = Projection(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) 
+
+A Projection with all values initialized to 0. When applied to other data structures, they will be zeroed.
 
 ### ZERO {#ZERO}
 

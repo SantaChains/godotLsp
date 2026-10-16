@@ -36,4 +36,7 @@ void set_position(position: Vector2)
 position: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_position(value: Vector2)
+- Vector2 get_position()
+
+The local gesture position relative to the Viewport. If used in Control._gui_input(), the position is relative to the current Control that received this gesture.

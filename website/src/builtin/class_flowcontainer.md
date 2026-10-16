@@ -142,17 +142,7 @@ When using a vertical FlowContainer with a right to left Control.layout_directio
 enum AlignmentMode { ALIGNMENT_BEGIN = 0, ALIGNMENT_CENTER = 1, ALIGNMENT_END = 2 }
 ```
 
-AlignmentMode ALIGNMENT_BEGIN = 0
-
-The child controls will be arranged at the beginning of the container, i.e. top if orientation is vertical, left if orientation is horizontal (right for RTL layout).
-
-AlignmentMode ALIGNMENT_CENTER = 1
-
-The child controls will be centered in the container.
-
-AlignmentMode ALIGNMENT_END = 2
-
-The child controls will be arranged at the end of the container, i.e. bottom if orientation is vertical, right if orientation is horizontal (left for RTL layout).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ALIGNMENT_BEGIN {#ALIGNMENT_BEGIN}
 
@@ -160,7 +150,7 @@ The child controls will be arranged at the end of the container, i.e. bottom if 
 ALIGNMENT_BEGIN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The child controls will be arranged at the beginning of the container, i.e. top if orientation is vertical, left if orientation is horizontal (right for RTL layout).
 
 #### ALIGNMENT_CENTER {#ALIGNMENT_CENTER}
 
@@ -168,7 +158,7 @@ ALIGNMENT_BEGIN = 0
 ALIGNMENT_CENTER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The child controls will be centered in the container.
 
 #### ALIGNMENT_END {#ALIGNMENT_END}
 
@@ -176,7 +166,9 @@ ALIGNMENT_CENTER = 1
 ALIGNMENT_END = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The child controls will be arranged at the end of the container, i.e. bottom if orientation is vertical, right if orientation is horizontal (left for RTL layout).
+
+---
 
 ### LastWrapAlignmentMode {#enum-LastWrapAlignmentMode}
 
@@ -184,21 +176,7 @@ ALIGNMENT_END = 2
 enum LastWrapAlignmentMode { LAST_WRAP_ALIGNMENT_INHERIT = 0, LAST_WRAP_ALIGNMENT_BEGIN = 1, LAST_WRAP_ALIGNMENT_CENTER = 2, LAST_WRAP_ALIGNMENT_END = 3 }
 ```
 
-LastWrapAlignmentMode LAST_WRAP_ALIGNMENT_INHERIT = 0
-
-The last partially filled row or column will wrap aligned to the previous row or column in accordance with alignment.
-
-LastWrapAlignmentMode LAST_WRAP_ALIGNMENT_BEGIN = 1
-
-The last partially filled row or column will wrap aligned to the beginning of the previous row or column.
-
-LastWrapAlignmentMode LAST_WRAP_ALIGNMENT_CENTER = 2
-
-The last partially filled row or column will wrap aligned to the center of the previous row or column.
-
-LastWrapAlignmentMode LAST_WRAP_ALIGNMENT_END = 3
-
-The last partially filled row or column will wrap aligned to the end of the previous row or column.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LAST_WRAP_ALIGNMENT_INHERIT {#LAST_WRAP_ALIGNMENT_INHERIT}
 
@@ -206,7 +184,7 @@ The last partially filled row or column will wrap aligned to the end of the prev
 LAST_WRAP_ALIGNMENT_INHERIT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The last partially filled row or column will wrap aligned to the previous row or column in accordance with alignment.
 
 #### LAST_WRAP_ALIGNMENT_BEGIN {#LAST_WRAP_ALIGNMENT_BEGIN}
 
@@ -214,7 +192,7 @@ LAST_WRAP_ALIGNMENT_INHERIT = 0
 LAST_WRAP_ALIGNMENT_BEGIN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The last partially filled row or column will wrap aligned to the beginning of the previous row or column.
 
 #### LAST_WRAP_ALIGNMENT_CENTER {#LAST_WRAP_ALIGNMENT_CENTER}
 
@@ -222,7 +200,7 @@ LAST_WRAP_ALIGNMENT_BEGIN = 1
 LAST_WRAP_ALIGNMENT_CENTER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The last partially filled row or column will wrap aligned to the center of the previous row or column.
 
 #### LAST_WRAP_ALIGNMENT_END {#LAST_WRAP_ALIGNMENT_END}
 
@@ -230,4 +208,6 @@ LAST_WRAP_ALIGNMENT_CENTER = 2
 LAST_WRAP_ALIGNMENT_END = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The last partially filled row or column will wrap aligned to the end of the previous row or column.
+
+---

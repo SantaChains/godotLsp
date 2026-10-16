@@ -190,21 +190,7 @@ Changes the behavior on missing sub-resources. The default behavior is to abort 
 enum ThreadLoadStatus { THREAD_LOAD_INVALID_RESOURCE = 0, THREAD_LOAD_IN_PROGRESS = 1, THREAD_LOAD_FAILED = 2, THREAD_LOAD_LOADED = 3 }
 ```
 
-ThreadLoadStatus THREAD_LOAD_INVALID_RESOURCE = 0
-
-The resource is invalid, or has not been loaded with load_threaded_request().
-
-ThreadLoadStatus THREAD_LOAD_IN_PROGRESS = 1
-
-The resource is still being loaded.
-
-ThreadLoadStatus THREAD_LOAD_FAILED = 2
-
-Some error occurred during loading and it failed.
-
-ThreadLoadStatus THREAD_LOAD_LOADED = 3
-
-The resource was loaded successfully and can be accessed via load_threaded_get().
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### THREAD_LOAD_INVALID_RESOURCE {#THREAD_LOAD_INVALID_RESOURCE}
 
@@ -212,7 +198,7 @@ The resource was loaded successfully and can be accessed via load_threaded_get()
 THREAD_LOAD_INVALID_RESOURCE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The resource is invalid, or has not been loaded with load_threaded_request().
 
 #### THREAD_LOAD_IN_PROGRESS {#THREAD_LOAD_IN_PROGRESS}
 
@@ -220,7 +206,7 @@ THREAD_LOAD_INVALID_RESOURCE = 0
 THREAD_LOAD_IN_PROGRESS = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The resource is still being loaded.
 
 #### THREAD_LOAD_FAILED {#THREAD_LOAD_FAILED}
 
@@ -228,7 +214,7 @@ THREAD_LOAD_IN_PROGRESS = 1
 THREAD_LOAD_FAILED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Some error occurred during loading and it failed.
 
 #### THREAD_LOAD_LOADED {#THREAD_LOAD_LOADED}
 
@@ -236,7 +222,9 @@ THREAD_LOAD_FAILED = 2
 THREAD_LOAD_LOADED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The resource was loaded successfully and can be accessed via load_threaded_get().
+
+---
 
 ### CacheMode {#enum-CacheMode}
 
@@ -244,25 +232,7 @@ THREAD_LOAD_LOADED = 3
 enum CacheMode { CACHE_MODE_IGNORE = 0, CACHE_MODE_REUSE = 1, CACHE_MODE_REPLACE = 2, CACHE_MODE_IGNORE_DEEP = 3, CACHE_MODE_REPLACE_DEEP = 4 }
 ```
 
-CacheMode CACHE_MODE_IGNORE = 0
-
-Neither the main resource (the one requested to be loaded) nor any of its subresources are retrieved from cache nor stored into it. Dependencies (external resources) are loaded with CACHE_MODE_REUSE.
-
-CacheMode CACHE_MODE_REUSE = 1
-
-The main resource (the one requested to be loaded), its subresources, and its dependencies (external resources) are retrieved from cache if present, instead of loaded. Those not cached are loaded and then stored into the cache. The same rules are propagated recursively down the tree of dependencies (external resources).
-
-CacheMode CACHE_MODE_REPLACE = 2
-
-Like CACHE_MODE_REUSE, but the cache is checked for the main resource (the one requested to be loaded) as well as for each of its subresources. Those already in the cache, as long as the loaded and cached types match, have their data refreshed from storage into the already existing instances. Otherwise, they are recreated as completely new objects.
-
-CacheMode CACHE_MODE_IGNORE_DEEP = 3
-
-Like CACHE_MODE_IGNORE, but propagated recursively down the tree of dependencies (external resources).
-
-CacheMode CACHE_MODE_REPLACE_DEEP = 4
-
-Like CACHE_MODE_REPLACE, but propagated recursively down the tree of dependencies (external resources).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### CACHE_MODE_IGNORE {#CACHE_MODE_IGNORE}
 
@@ -270,7 +240,7 @@ Like CACHE_MODE_REPLACE, but propagated recursively down the tree of dependencie
 CACHE_MODE_IGNORE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Neither the main resource (the one requested to be loaded) nor any of its subresources are retrieved from cache nor stored into it. Dependencies (external resources) are loaded with CACHE_MODE_REUSE.
 
 #### CACHE_MODE_REUSE {#CACHE_MODE_REUSE}
 
@@ -278,7 +248,7 @@ CACHE_MODE_IGNORE = 0
 CACHE_MODE_REUSE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The main resource (the one requested to be loaded), its subresources, and its dependencies (external resources) are retrieved from cache if present, instead of loaded. Those not cached are loaded and then stored into the cache. The same rules are propagated recursively down the tree of dependencies (external resources).
 
 #### CACHE_MODE_REPLACE {#CACHE_MODE_REPLACE}
 
@@ -286,7 +256,7 @@ CACHE_MODE_REUSE = 1
 CACHE_MODE_REPLACE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Like CACHE_MODE_REUSE, but the cache is checked for the main resource (the one requested to be loaded) as well as for each of its subresources. Those already in the cache, as long as the loaded and cached types match, have their data refreshed from storage into the already existing instances. Otherwise, they are recreated as completely new objects.
 
 #### CACHE_MODE_IGNORE_DEEP {#CACHE_MODE_IGNORE_DEEP}
 
@@ -294,7 +264,7 @@ CACHE_MODE_REPLACE = 2
 CACHE_MODE_IGNORE_DEEP = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Like CACHE_MODE_IGNORE, but propagated recursively down the tree of dependencies (external resources).
 
 #### CACHE_MODE_REPLACE_DEEP {#CACHE_MODE_REPLACE_DEEP}
 
@@ -302,4 +272,6 @@ CACHE_MODE_IGNORE_DEEP = 3
 CACHE_MODE_REPLACE_DEEP = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Like CACHE_MODE_REPLACE, but propagated recursively down the tree of dependencies (external resources).
+
+---

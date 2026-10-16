@@ -324,7 +324,10 @@ void set_vertex_colors(vertex_colors: PackedColorArray)
 color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_color(value: Color)
+- Color get_color()
+
+The polygon's fill color. If texture is set, it will be multiplied by this color. It will also be the default color for vertices not set in vertex_colors.
 
 ### offset {#offset}
 
@@ -332,7 +335,10 @@ color: Color
 offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset(value: Vector2)
+- Vector2 get_offset()
+
+The offset applied to each vertex.
 
 ### antialiased {#antialiased}
 
@@ -362,7 +368,10 @@ The polygon's fill texture. Use uv to set texture coordinates.
 texture_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_texture_offset(value: Vector2)
+- Vector2 get_texture_offset()
+
+Amount to offset the polygon's texture. If set to Vector2(0, 0), the texture's origin (its top-left corner) will be placed at the polygon's position.
 
 ### texture_scale {#texture_scale}
 
@@ -370,7 +379,10 @@ texture_offset: Vector2
 texture_scale: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_texture_scale(value: Vector2)
+- Vector2 get_texture_scale()
+
+Amount to multiply the uv coordinates when using texture. Larger values make the texture smaller, and vice versa.
 
 ### texture_rotation {#texture_rotation}
 
@@ -389,7 +401,10 @@ The texture's rotation in radians.
 skeleton: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_skeleton(value: NodePath)
+- NodePath get_skeleton()
+
+Path to a Skeleton2D node used for skeleton-based deformations of this polygon. If empty or invalid, skeletal deformations will not be used.
 
 ### invert_enabled {#invert_enabled}
 
@@ -419,7 +434,12 @@ Added padding applied to the bounding box when invert_enabled is set to true. Se
 polygon: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_polygon(value: PackedVector2Array)
+- PackedVector2Array get_polygon()
+
+The polygon's list of vertices. The final point will be connected to the first.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.
 
 ### uv {#uv}
 
@@ -427,7 +447,12 @@ polygon: PackedVector2Array
 uv: PackedVector2Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_uv(value: PackedVector2Array)
+- PackedVector2Array get_uv()
+
+Texture coordinates for each vertex of the polygon. There should be one UV value per polygon vertex. If there are fewer, undefined vertices will use Vector2(0, 0).
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedVector2Array for more details.
 
 ### vertex_colors {#vertex_colors}
 
@@ -435,7 +460,12 @@ uv: PackedVector2Array
 vertex_colors: PackedColorArray
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_vertex_colors(value: PackedColorArray)
+- PackedColorArray get_vertex_colors()
+
+Color for each vertex. Colors are interpolated between vertices, resulting in smooth gradients. There should be one per polygon vertex. If there are fewer, undefined vertices will use color.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedColorArray for more details.
 
 ### polygons {#polygons}
 

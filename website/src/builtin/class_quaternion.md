@@ -238,4 +238,8 @@ Note: Quaternion components should usually not be manipulated directly.
 const IDENTITY = Quaternion(0, 0, 0, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The identity quaternion, representing no rotation. This has the same rotation as Basis.IDENTITY.
+
+If a Vector3 is rotated (multiplied) by this quaternion, it does not change.
+
+Note: In GDScript, this constant is equivalent to creating a Quaternion without any arguments. It can be used to make your code clearer, and for consistency with C#.

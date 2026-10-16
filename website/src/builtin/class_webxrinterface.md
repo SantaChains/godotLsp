@@ -499,21 +499,7 @@ Emitted after the display's refresh rate has changed.
 enum TargetRayMode { TARGET_RAY_MODE_UNKNOWN = 0, TARGET_RAY_MODE_GAZE = 1, TARGET_RAY_MODE_TRACKED_POINTER = 2, TARGET_RAY_MODE_SCREEN = 3 }
 ```
 
-TargetRayMode TARGET_RAY_MODE_UNKNOWN = 0
-
-We don't know the target ray mode.
-
-TargetRayMode TARGET_RAY_MODE_GAZE = 1
-
-Target ray originates at the viewer's eyes and points in the direction they are looking.
-
-TargetRayMode TARGET_RAY_MODE_TRACKED_POINTER = 2
-
-Target ray from a handheld pointer, most likely a VR touch controller.
-
-TargetRayMode TARGET_RAY_MODE_SCREEN = 3
-
-Target ray from touch screen, mouse or other tactile input device.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TARGET_RAY_MODE_UNKNOWN {#TARGET_RAY_MODE_UNKNOWN}
 
@@ -521,7 +507,7 @@ Target ray from touch screen, mouse or other tactile input device.
 TARGET_RAY_MODE_UNKNOWN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+We don't know the target ray mode.
 
 #### TARGET_RAY_MODE_GAZE {#TARGET_RAY_MODE_GAZE}
 
@@ -529,7 +515,7 @@ TARGET_RAY_MODE_UNKNOWN = 0
 TARGET_RAY_MODE_GAZE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Target ray originates at the viewer's eyes and points in the direction they are looking.
 
 #### TARGET_RAY_MODE_TRACKED_POINTER {#TARGET_RAY_MODE_TRACKED_POINTER}
 
@@ -537,7 +523,7 @@ TARGET_RAY_MODE_GAZE = 1
 TARGET_RAY_MODE_TRACKED_POINTER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Target ray from a handheld pointer, most likely a VR touch controller.
 
 #### TARGET_RAY_MODE_SCREEN {#TARGET_RAY_MODE_SCREEN}
 
@@ -545,4 +531,6 @@ TARGET_RAY_MODE_TRACKED_POINTER = 2
 TARGET_RAY_MODE_SCREEN = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Target ray from touch screen, mouse or other tactile input device.
+
+---

@@ -140,17 +140,7 @@ Returns true if the layers have generated mipmaps.
 enum LayeredType { LAYERED_TYPE_2D_ARRAY = 0, LAYERED_TYPE_CUBEMAP = 1, LAYERED_TYPE_CUBEMAP_ARRAY = 2 }
 ```
 
-LayeredType LAYERED_TYPE_2D_ARRAY = 0
-
-Texture is a generic Texture2DArray.
-
-LayeredType LAYERED_TYPE_CUBEMAP = 1
-
-Texture is a Cubemap, with each side in its own layer (6 in total).
-
-LayeredType LAYERED_TYPE_CUBEMAP_ARRAY = 2
-
-Texture is a CubemapArray, with each cubemap being made of 6 layers.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LAYERED_TYPE_2D_ARRAY {#LAYERED_TYPE_2D_ARRAY}
 
@@ -158,7 +148,7 @@ Texture is a CubemapArray, with each cubemap being made of 6 layers.
 LAYERED_TYPE_2D_ARRAY = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture is a generic Texture2DArray.
 
 #### LAYERED_TYPE_CUBEMAP {#LAYERED_TYPE_CUBEMAP}
 
@@ -166,7 +156,7 @@ LAYERED_TYPE_2D_ARRAY = 0
 LAYERED_TYPE_CUBEMAP = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture is a Cubemap, with each side in its own layer (6 in total).
 
 #### LAYERED_TYPE_CUBEMAP_ARRAY {#LAYERED_TYPE_CUBEMAP_ARRAY}
 
@@ -174,4 +164,6 @@ LAYERED_TYPE_CUBEMAP = 1
 LAYERED_TYPE_CUBEMAP_ARRAY = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Texture is a CubemapArray, with each cubemap being made of 6 layers.
+
+---

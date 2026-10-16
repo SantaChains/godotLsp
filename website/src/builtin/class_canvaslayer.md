@@ -230,7 +230,10 @@ Unlike CanvasItem.visible, visibility of a CanvasLayer isn't propagated to under
 offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset(value: Vector2)
+- Vector2 get_offset()
+
+The layer's base offset.
 
 ### rotation {#rotation}
 
@@ -249,7 +252,10 @@ The layer's rotation in radians.
 scale: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_scale(value: Vector2)
+- Vector2 get_scale()
+
+The layer's scale.
 
 ### transform {#transform}
 
@@ -257,7 +263,10 @@ scale: Vector2
 transform: Transform2D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_transform(value: Transform2D)
+- Transform2D get_transform()
+
+The layer's transform.
 
 ### custom_viewport {#custom_viewport}
 

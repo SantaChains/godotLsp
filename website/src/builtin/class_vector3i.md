@@ -180,17 +180,7 @@ The vector's Z component. Also accessible by using the index position [2].
 enum Axis { AXIS_X = 0, AXIS_Y = 1, AXIS_Z = 2 }
 ```
 
-Axis AXIS_X = 0
-
-Enumerated value for the X axis. Returned by max_axis_index() and min_axis_index().
-
-Axis AXIS_Y = 1
-
-Enumerated value for the Y axis. Returned by max_axis_index() and min_axis_index().
-
-Axis AXIS_Z = 2
-
-Enumerated value for the Z axis. Returned by max_axis_index() and min_axis_index().
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### AXIS_X {#AXIS_X}
 
@@ -198,7 +188,7 @@ Enumerated value for the Z axis. Returned by max_axis_index() and min_axis_index
 AXIS_X = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the X axis. Returned by max_axis_index() and min_axis_index().
 
 #### AXIS_Y {#AXIS_Y}
 
@@ -206,7 +196,7 @@ AXIS_X = 0
 AXIS_Y = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the Y axis. Returned by max_axis_index() and min_axis_index().
 
 #### AXIS_Z {#AXIS_Z}
 
@@ -214,7 +204,9 @@ AXIS_Y = 1
 AXIS_Z = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enumerated value for the Z axis. Returned by max_axis_index() and min_axis_index().
+
+---
 
 ## 常量
 
@@ -224,7 +216,43 @@ AXIS_Z = 2
 const ZERO = Vector3i(0, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Zero vector, a vector with all components set to 0.
+
+ONE = Vector3i(1, 1, 1) 
+
+One vector, a vector with all components set to 1.
+
+MIN = Vector3i(-2147483648, -2147483648, -2147483648) 
+
+Min vector, a vector with all components equal to INT32_MIN. Can be used as a negative integer equivalent of Vector3.INF.
+
+MAX = Vector3i(2147483647, 2147483647, 2147483647) 
+
+Max vector, a vector with all components equal to INT32_MAX. Can be used as an integer equivalent of Vector3.INF.
+
+LEFT = Vector3i(-1, 0, 0) 
+
+Left unit vector. Represents the local direction of left, and the global direction of west.
+
+RIGHT = Vector3i(1, 0, 0) 
+
+Right unit vector. Represents the local direction of right, and the global direction of east.
+
+UP = Vector3i(0, 1, 0) 
+
+Up unit vector.
+
+DOWN = Vector3i(0, -1, 0) 
+
+Down unit vector.
+
+FORWARD = Vector3i(0, 0, -1) 
+
+Forward unit vector. Represents the local direction of forward, and the global direction of north.
+
+BACK = Vector3i(0, 0, 1) 
+
+Back unit vector. Represents the local direction of back, and the global direction of south.
 
 ### ONE {#ONE}
 

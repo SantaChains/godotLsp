@@ -628,199 +628,7 @@ Sets element text value.
 enum AccessibilityRole { ROLE_UNKNOWN = 0, ROLE_DEFAULT_BUTTON = 1, ROLE_AUDIO = 2, ROLE_VIDEO = 3, ROLE_STATIC_TEXT = 4, ROLE_CONTAINER = 5, ROLE_PANEL = 6, ROLE_BUTTON = 7, ROLE_LINK = 8, ROLE_CHECK_BOX = 9, ROLE_RADIO_BUTTON = 10, ROLE_CHECK_BUTTON = 11, ROLE_SCROLL_BAR = 12, ROLE_SCROLL_VIEW = 13, ROLE_SPLITTER = 14, ROLE_SLIDER = 15, ROLE_SPIN_BUTTON = 16, ROLE_PROGRESS_INDICATOR = 17, ROLE_TEXT_FIELD = 18, ROLE_MULTILINE_TEXT_FIELD = 19, ROLE_COLOR_PICKER = 20, ROLE_TABLE = 21, ROLE_CELL = 22, ROLE_ROW = 23, ROLE_ROW_GROUP = 24, ROLE_ROW_HEADER = 25, ROLE_COLUMN_HEADER = 26, ROLE_TREE = 27, ROLE_TREE_ITEM = 28, ROLE_LIST = 29, ROLE_LIST_ITEM = 30, ROLE_LIST_BOX = 31, ROLE_LIST_BOX_OPTION = 32, ROLE_TAB_BAR = 33, ROLE_TAB = 34, ROLE_TAB_PANEL = 35, ROLE_MENU_BAR = 36, ROLE_MENU = 37, ROLE_MENU_ITEM = 38, ROLE_MENU_ITEM_CHECK_BOX = 39, ROLE_MENU_ITEM_RADIO = 40, ROLE_IMAGE = 41, ROLE_WINDOW = 42, ROLE_TITLE_BAR = 43, ROLE_DIALOG = 44, ROLE_TOOLTIP = 45, ROLE_REGION = 46, ROLE_TEXT_RUN = 47 }
 ```
 
-AccessibilityRole ROLE_UNKNOWN = 0
-
-Unknown or custom role.
-
-AccessibilityRole ROLE_DEFAULT_BUTTON = 1
-
-Default dialog button element.
-
-AccessibilityRole ROLE_AUDIO = 2
-
-Audio player element.
-
-AccessibilityRole ROLE_VIDEO = 3
-
-Video player element.
-
-AccessibilityRole ROLE_STATIC_TEXT = 4
-
-Non-editable text label.
-
-AccessibilityRole ROLE_CONTAINER = 5
-
-Container element. Elements with this role are used for internal structure and ignored by screen readers.
-
-AccessibilityRole ROLE_PANEL = 6
-
-Panel container element.
-
-AccessibilityRole ROLE_BUTTON = 7
-
-Button element.
-
-AccessibilityRole ROLE_LINK = 8
-
-Link element.
-
-AccessibilityRole ROLE_CHECK_BOX = 9
-
-Check box element.
-
-AccessibilityRole ROLE_RADIO_BUTTON = 10
-
-Radio button element.
-
-AccessibilityRole ROLE_CHECK_BUTTON = 11
-
-Check button element.
-
-AccessibilityRole ROLE_SCROLL_BAR = 12
-
-Scroll bar element.
-
-AccessibilityRole ROLE_SCROLL_VIEW = 13
-
-Scroll container element.
-
-AccessibilityRole ROLE_SPLITTER = 14
-
-Container splitter handle element.
-
-AccessibilityRole ROLE_SLIDER = 15
-
-Slider element.
-
-AccessibilityRole ROLE_SPIN_BUTTON = 16
-
-Spin box element.
-
-AccessibilityRole ROLE_PROGRESS_INDICATOR = 17
-
-Progress indicator element.
-
-AccessibilityRole ROLE_TEXT_FIELD = 18
-
-Editable text field element.
-
-AccessibilityRole ROLE_MULTILINE_TEXT_FIELD = 19
-
-Multiline editable text field element.
-
-AccessibilityRole ROLE_COLOR_PICKER = 20
-
-Color picker element.
-
-AccessibilityRole ROLE_TABLE = 21
-
-Table element.
-
-AccessibilityRole ROLE_CELL = 22
-
-Table/tree cell element.
-
-AccessibilityRole ROLE_ROW = 23
-
-Table/tree row element.
-
-AccessibilityRole ROLE_ROW_GROUP = 24
-
-Table/tree row group element.
-
-AccessibilityRole ROLE_ROW_HEADER = 25
-
-Table/tree row header element.
-
-AccessibilityRole ROLE_COLUMN_HEADER = 26
-
-Table/tree column header element.
-
-AccessibilityRole ROLE_TREE = 27
-
-Tree view element.
-
-AccessibilityRole ROLE_TREE_ITEM = 28
-
-Tree view item element.
-
-AccessibilityRole ROLE_LIST = 29
-
-List element.
-
-AccessibilityRole ROLE_LIST_ITEM = 30
-
-List item element.
-
-AccessibilityRole ROLE_LIST_BOX = 31
-
-List view element.
-
-AccessibilityRole ROLE_LIST_BOX_OPTION = 32
-
-List view item element.
-
-AccessibilityRole ROLE_TAB_BAR = 33
-
-Tab bar element.
-
-AccessibilityRole ROLE_TAB = 34
-
-Tab bar item element.
-
-AccessibilityRole ROLE_TAB_PANEL = 35
-
-Tab panel element.
-
-AccessibilityRole ROLE_MENU_BAR = 36
-
-Menu bar element.
-
-AccessibilityRole ROLE_MENU = 37
-
-Popup menu element.
-
-AccessibilityRole ROLE_MENU_ITEM = 38
-
-Popup menu item element.
-
-AccessibilityRole ROLE_MENU_ITEM_CHECK_BOX = 39
-
-Popup menu check button item element.
-
-AccessibilityRole ROLE_MENU_ITEM_RADIO = 40
-
-Popup menu radio button item element.
-
-AccessibilityRole ROLE_IMAGE = 41
-
-Image element.
-
-AccessibilityRole ROLE_WINDOW = 42
-
-Window element.
-
-AccessibilityRole ROLE_TITLE_BAR = 43
-
-Embedded window title bar element.
-
-AccessibilityRole ROLE_DIALOG = 44
-
-Dialog window element.
-
-AccessibilityRole ROLE_TOOLTIP = 45
-
-Tooltip element.
-
-AccessibilityRole ROLE_REGION = 46
-
-Region/landmark element. Screen readers can navigate between regions using landmark navigation.
-
-AccessibilityRole ROLE_TEXT_RUN = 47
-
-Unifor text run.
-
-Note: This role is used for internal text elements, and should not be assigned to nodes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ROLE_UNKNOWN {#ROLE_UNKNOWN}
 
@@ -828,7 +636,7 @@ Note: This role is used for internal text elements, and should not be assigned t
 ROLE_UNKNOWN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unknown or custom role.
 
 #### ROLE_DEFAULT_BUTTON {#ROLE_DEFAULT_BUTTON}
 
@@ -836,7 +644,7 @@ ROLE_UNKNOWN = 0
 ROLE_DEFAULT_BUTTON = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Default dialog button element.
 
 #### ROLE_AUDIO {#ROLE_AUDIO}
 
@@ -844,7 +652,7 @@ ROLE_DEFAULT_BUTTON = 1
 ROLE_AUDIO = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Audio player element.
 
 #### ROLE_VIDEO {#ROLE_VIDEO}
 
@@ -852,7 +660,7 @@ ROLE_AUDIO = 2
 ROLE_VIDEO = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Video player element.
 
 #### ROLE_STATIC_TEXT {#ROLE_STATIC_TEXT}
 
@@ -860,7 +668,7 @@ ROLE_VIDEO = 3
 ROLE_STATIC_TEXT = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Non-editable text label.
 
 #### ROLE_CONTAINER {#ROLE_CONTAINER}
 
@@ -868,7 +676,7 @@ ROLE_STATIC_TEXT = 4
 ROLE_CONTAINER = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Container element. Elements with this role are used for internal structure and ignored by screen readers.
 
 #### ROLE_PANEL {#ROLE_PANEL}
 
@@ -876,7 +684,7 @@ ROLE_CONTAINER = 5
 ROLE_PANEL = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Panel container element.
 
 #### ROLE_BUTTON {#ROLE_BUTTON}
 
@@ -884,7 +692,7 @@ ROLE_PANEL = 6
 ROLE_BUTTON = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Button element.
 
 #### ROLE_LINK {#ROLE_LINK}
 
@@ -892,7 +700,7 @@ ROLE_BUTTON = 7
 ROLE_LINK = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Link element.
 
 #### ROLE_CHECK_BOX {#ROLE_CHECK_BOX}
 
@@ -900,7 +708,7 @@ ROLE_LINK = 8
 ROLE_CHECK_BOX = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Check box element.
 
 #### ROLE_RADIO_BUTTON {#ROLE_RADIO_BUTTON}
 
@@ -908,7 +716,7 @@ ROLE_CHECK_BOX = 9
 ROLE_RADIO_BUTTON = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Radio button element.
 
 #### ROLE_CHECK_BUTTON {#ROLE_CHECK_BUTTON}
 
@@ -916,7 +724,7 @@ ROLE_RADIO_BUTTON = 10
 ROLE_CHECK_BUTTON = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Check button element.
 
 #### ROLE_SCROLL_BAR {#ROLE_SCROLL_BAR}
 
@@ -924,7 +732,7 @@ ROLE_CHECK_BUTTON = 11
 ROLE_SCROLL_BAR = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll bar element.
 
 #### ROLE_SCROLL_VIEW {#ROLE_SCROLL_VIEW}
 
@@ -932,7 +740,7 @@ ROLE_SCROLL_BAR = 12
 ROLE_SCROLL_VIEW = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll container element.
 
 #### ROLE_SPLITTER {#ROLE_SPLITTER}
 
@@ -940,7 +748,7 @@ ROLE_SCROLL_VIEW = 13
 ROLE_SPLITTER = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Container splitter handle element.
 
 #### ROLE_SLIDER {#ROLE_SLIDER}
 
@@ -948,7 +756,7 @@ ROLE_SPLITTER = 14
 ROLE_SLIDER = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Slider element.
 
 #### ROLE_SPIN_BUTTON {#ROLE_SPIN_BUTTON}
 
@@ -956,7 +764,7 @@ ROLE_SLIDER = 15
 ROLE_SPIN_BUTTON = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Spin box element.
 
 #### ROLE_PROGRESS_INDICATOR {#ROLE_PROGRESS_INDICATOR}
 
@@ -964,7 +772,7 @@ ROLE_SPIN_BUTTON = 16
 ROLE_PROGRESS_INDICATOR = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Progress indicator element.
 
 #### ROLE_TEXT_FIELD {#ROLE_TEXT_FIELD}
 
@@ -972,7 +780,7 @@ ROLE_PROGRESS_INDICATOR = 17
 ROLE_TEXT_FIELD = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Editable text field element.
 
 #### ROLE_MULTILINE_TEXT_FIELD {#ROLE_MULTILINE_TEXT_FIELD}
 
@@ -980,7 +788,7 @@ ROLE_TEXT_FIELD = 18
 ROLE_MULTILINE_TEXT_FIELD = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multiline editable text field element.
 
 #### ROLE_COLOR_PICKER {#ROLE_COLOR_PICKER}
 
@@ -988,7 +796,7 @@ ROLE_MULTILINE_TEXT_FIELD = 19
 ROLE_COLOR_PICKER = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Color picker element.
 
 #### ROLE_TABLE {#ROLE_TABLE}
 
@@ -996,7 +804,7 @@ ROLE_COLOR_PICKER = 20
 ROLE_TABLE = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Table element.
 
 #### ROLE_CELL {#ROLE_CELL}
 
@@ -1004,7 +812,7 @@ ROLE_TABLE = 21
 ROLE_CELL = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Table/tree cell element.
 
 #### ROLE_ROW {#ROLE_ROW}
 
@@ -1012,7 +820,7 @@ ROLE_CELL = 22
 ROLE_ROW = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Table/tree row element.
 
 #### ROLE_ROW_GROUP {#ROLE_ROW_GROUP}
 
@@ -1020,7 +828,7 @@ ROLE_ROW = 23
 ROLE_ROW_GROUP = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Table/tree row group element.
 
 #### ROLE_ROW_HEADER {#ROLE_ROW_HEADER}
 
@@ -1028,7 +836,7 @@ ROLE_ROW_GROUP = 24
 ROLE_ROW_HEADER = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Table/tree row header element.
 
 #### ROLE_COLUMN_HEADER {#ROLE_COLUMN_HEADER}
 
@@ -1036,7 +844,7 @@ ROLE_ROW_HEADER = 25
 ROLE_COLUMN_HEADER = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Table/tree column header element.
 
 #### ROLE_TREE {#ROLE_TREE}
 
@@ -1044,7 +852,7 @@ ROLE_COLUMN_HEADER = 26
 ROLE_TREE = 27
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tree view element.
 
 #### ROLE_TREE_ITEM {#ROLE_TREE_ITEM}
 
@@ -1052,7 +860,7 @@ ROLE_TREE = 27
 ROLE_TREE_ITEM = 28
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tree view item element.
 
 #### ROLE_LIST {#ROLE_LIST}
 
@@ -1060,7 +868,7 @@ ROLE_TREE_ITEM = 28
 ROLE_LIST = 29
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+List element.
 
 #### ROLE_LIST_ITEM {#ROLE_LIST_ITEM}
 
@@ -1068,7 +876,7 @@ ROLE_LIST = 29
 ROLE_LIST_ITEM = 30
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+List item element.
 
 #### ROLE_LIST_BOX {#ROLE_LIST_BOX}
 
@@ -1076,7 +884,7 @@ ROLE_LIST_ITEM = 30
 ROLE_LIST_BOX = 31
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+List view element.
 
 #### ROLE_LIST_BOX_OPTION {#ROLE_LIST_BOX_OPTION}
 
@@ -1084,7 +892,7 @@ ROLE_LIST_BOX = 31
 ROLE_LIST_BOX_OPTION = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+List view item element.
 
 #### ROLE_TAB_BAR {#ROLE_TAB_BAR}
 
@@ -1092,7 +900,7 @@ ROLE_LIST_BOX_OPTION = 32
 ROLE_TAB_BAR = 33
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tab bar element.
 
 #### ROLE_TAB {#ROLE_TAB}
 
@@ -1100,7 +908,7 @@ ROLE_TAB_BAR = 33
 ROLE_TAB = 34
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tab bar item element.
 
 #### ROLE_TAB_PANEL {#ROLE_TAB_PANEL}
 
@@ -1108,7 +916,7 @@ ROLE_TAB = 34
 ROLE_TAB_PANEL = 35
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tab panel element.
 
 #### ROLE_MENU_BAR {#ROLE_MENU_BAR}
 
@@ -1116,7 +924,7 @@ ROLE_TAB_PANEL = 35
 ROLE_MENU_BAR = 36
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Menu bar element.
 
 #### ROLE_MENU {#ROLE_MENU}
 
@@ -1124,7 +932,7 @@ ROLE_MENU_BAR = 36
 ROLE_MENU = 37
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Popup menu element.
 
 #### ROLE_MENU_ITEM {#ROLE_MENU_ITEM}
 
@@ -1132,7 +940,7 @@ ROLE_MENU = 37
 ROLE_MENU_ITEM = 38
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Popup menu item element.
 
 #### ROLE_MENU_ITEM_CHECK_BOX {#ROLE_MENU_ITEM_CHECK_BOX}
 
@@ -1140,7 +948,7 @@ ROLE_MENU_ITEM = 38
 ROLE_MENU_ITEM_CHECK_BOX = 39
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Popup menu check button item element.
 
 #### ROLE_MENU_ITEM_RADIO {#ROLE_MENU_ITEM_RADIO}
 
@@ -1148,7 +956,7 @@ ROLE_MENU_ITEM_CHECK_BOX = 39
 ROLE_MENU_ITEM_RADIO = 40
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Popup menu radio button item element.
 
 #### ROLE_IMAGE {#ROLE_IMAGE}
 
@@ -1156,7 +964,7 @@ ROLE_MENU_ITEM_RADIO = 40
 ROLE_IMAGE = 41
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Image element.
 
 #### ROLE_WINDOW {#ROLE_WINDOW}
 
@@ -1164,7 +972,7 @@ ROLE_IMAGE = 41
 ROLE_WINDOW = 42
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Window element.
 
 #### ROLE_TITLE_BAR {#ROLE_TITLE_BAR}
 
@@ -1172,7 +980,7 @@ ROLE_WINDOW = 42
 ROLE_TITLE_BAR = 43
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Embedded window title bar element.
 
 #### ROLE_DIALOG {#ROLE_DIALOG}
 
@@ -1180,7 +988,7 @@ ROLE_TITLE_BAR = 43
 ROLE_DIALOG = 44
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Dialog window element.
 
 #### ROLE_TOOLTIP {#ROLE_TOOLTIP}
 
@@ -1188,7 +996,7 @@ ROLE_DIALOG = 44
 ROLE_TOOLTIP = 45
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tooltip element.
 
 #### ROLE_REGION {#ROLE_REGION}
 
@@ -1196,7 +1004,7 @@ ROLE_TOOLTIP = 45
 ROLE_REGION = 46
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Region/landmark element. Screen readers can navigate between regions using landmark navigation.
 
 #### ROLE_TEXT_RUN {#ROLE_TEXT_RUN}
 
@@ -1204,7 +1012,11 @@ ROLE_REGION = 46
 ROLE_TEXT_RUN = 47
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Unifor text run.
+
+Note: This role is used for internal text elements, and should not be assigned to nodes.
+
+---
 
 ### AccessibilityPopupType {#enum-AccessibilityPopupType}
 
@@ -1212,21 +1024,7 @@ ROLE_TEXT_RUN = 47
 enum AccessibilityPopupType { POPUP_MENU = 0, POPUP_LIST = 1, POPUP_TREE = 2, POPUP_DIALOG = 3 }
 ```
 
-AccessibilityPopupType POPUP_MENU = 0
-
-Popup menu.
-
-AccessibilityPopupType POPUP_LIST = 1
-
-Popup list.
-
-AccessibilityPopupType POPUP_TREE = 2
-
-Popup tree view.
-
-AccessibilityPopupType POPUP_DIALOG = 3
-
-Popup dialog.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### POPUP_MENU {#POPUP_MENU}
 
@@ -1234,7 +1032,7 @@ Popup dialog.
 POPUP_MENU = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Popup menu.
 
 #### POPUP_LIST {#POPUP_LIST}
 
@@ -1242,7 +1040,7 @@ POPUP_MENU = 0
 POPUP_LIST = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Popup list.
 
 #### POPUP_TREE {#POPUP_TREE}
 
@@ -1250,7 +1048,7 @@ POPUP_LIST = 1
 POPUP_TREE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Popup tree view.
 
 #### POPUP_DIALOG {#POPUP_DIALOG}
 
@@ -1258,7 +1056,9 @@ POPUP_TREE = 2
 POPUP_DIALOG = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Popup dialog.
+
+---
 
 ### AccessibilityFlags {#enum-AccessibilityFlags}
 
@@ -1266,45 +1066,7 @@ POPUP_DIALOG = 3
 enum AccessibilityFlags { FLAG_HIDDEN = 0, FLAG_MULTISELECTABLE = 1, FLAG_REQUIRED = 2, FLAG_VISITED = 3, FLAG_BUSY = 4, FLAG_MODAL = 5, FLAG_TOUCH_PASSTHROUGH = 6, FLAG_READONLY = 7, FLAG_DISABLED = 8, FLAG_CLIPS_CHILDREN = 9 }
 ```
 
-AccessibilityFlags FLAG_HIDDEN = 0
-
-Element is hidden for accessibility tools.
-
-AccessibilityFlags FLAG_MULTISELECTABLE = 1
-
-Element supports multiple item selection.
-
-AccessibilityFlags FLAG_REQUIRED = 2
-
-Element require user input.
-
-AccessibilityFlags FLAG_VISITED = 3
-
-Element is a visited link.
-
-AccessibilityFlags FLAG_BUSY = 4
-
-Element content is not ready (e.g. loading).
-
-AccessibilityFlags FLAG_MODAL = 5
-
-Element is modal window.
-
-AccessibilityFlags FLAG_TOUCH_PASSTHROUGH = 6
-
-Element allows touches to be passed through when a screen reader is in touch exploration mode.
-
-AccessibilityFlags FLAG_READONLY = 7
-
-Element is text field with selectable but read-only text.
-
-AccessibilityFlags FLAG_DISABLED = 8
-
-Element is disabled.
-
-AccessibilityFlags FLAG_CLIPS_CHILDREN = 9
-
-Element clips children.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FLAG_HIDDEN {#FLAG_HIDDEN}
 
@@ -1312,7 +1074,7 @@ Element clips children.
 FLAG_HIDDEN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Element is hidden for accessibility tools.
 
 #### FLAG_MULTISELECTABLE {#FLAG_MULTISELECTABLE}
 
@@ -1320,7 +1082,7 @@ FLAG_HIDDEN = 0
 FLAG_MULTISELECTABLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Element supports multiple item selection.
 
 #### FLAG_REQUIRED {#FLAG_REQUIRED}
 
@@ -1328,7 +1090,7 @@ FLAG_MULTISELECTABLE = 1
 FLAG_REQUIRED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Element require user input.
 
 #### FLAG_VISITED {#FLAG_VISITED}
 
@@ -1336,7 +1098,7 @@ FLAG_REQUIRED = 2
 FLAG_VISITED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Element is a visited link.
 
 #### FLAG_BUSY {#FLAG_BUSY}
 
@@ -1344,7 +1106,7 @@ FLAG_VISITED = 3
 FLAG_BUSY = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Element content is not ready (e.g. loading).
 
 #### FLAG_MODAL {#FLAG_MODAL}
 
@@ -1352,7 +1114,7 @@ FLAG_BUSY = 4
 FLAG_MODAL = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Element is modal window.
 
 #### FLAG_TOUCH_PASSTHROUGH {#FLAG_TOUCH_PASSTHROUGH}
 
@@ -1360,7 +1122,7 @@ FLAG_MODAL = 5
 FLAG_TOUCH_PASSTHROUGH = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Element allows touches to be passed through when a screen reader is in touch exploration mode.
 
 #### FLAG_READONLY {#FLAG_READONLY}
 
@@ -1368,7 +1130,7 @@ FLAG_TOUCH_PASSTHROUGH = 6
 FLAG_READONLY = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Element is text field with selectable but read-only text.
 
 #### FLAG_DISABLED {#FLAG_DISABLED}
 
@@ -1376,7 +1138,7 @@ FLAG_READONLY = 7
 FLAG_DISABLED = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Element is disabled.
 
 #### FLAG_CLIPS_CHILDREN {#FLAG_CLIPS_CHILDREN}
 
@@ -1384,7 +1146,9 @@ FLAG_DISABLED = 8
 FLAG_CLIPS_CHILDREN = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Element clips children.
+
+---
 
 ### AccessibilityAction {#enum-AccessibilityAction}
 
@@ -1392,43 +1156,85 @@ FLAG_CLIPS_CHILDREN = 9
 enum AccessibilityAction { ACTION_CLICK = 0, ACTION_FOCUS = 1, ACTION_BLUR = 2, ACTION_COLLAPSE = 3, ACTION_EXPAND = 4, ACTION_DECREMENT = 5, ACTION_INCREMENT = 6, ACTION_HIDE_TOOLTIP = 7, ACTION_SHOW_TOOLTIP = 8, ACTION_SET_TEXT_SELECTION = 9, ACTION_REPLACE_SELECTED_TEXT = 10, ACTION_SCROLL_BACKWARD = 11, ACTION_SCROLL_DOWN = 12, ACTION_SCROLL_FORWARD = 13, ACTION_SCROLL_LEFT = 14, ACTION_SCROLL_RIGHT = 15, ACTION_SCROLL_UP = 16, ACTION_SCROLL_INTO_VIEW = 17, ACTION_SCROLL_TO_POINT = 18, ACTION_SET_SCROLL_OFFSET = 19, ACTION_SET_VALUE = 20, ACTION_SHOW_CONTEXT_MENU = 21, ACTION_CUSTOM = 22 }
 ```
 
-AccessibilityAction ACTION_CLICK = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### ACTION_CLICK {#ACTION_CLICK}
+
+```gdscript
+ACTION_CLICK = 0
+```
 
 Single click action, callback argument is not set.
 
-AccessibilityAction ACTION_FOCUS = 1
+#### ACTION_FOCUS {#ACTION_FOCUS}
+
+```gdscript
+ACTION_FOCUS = 1
+```
 
 Focus action, callback argument is not set.
 
-AccessibilityAction ACTION_BLUR = 2
+#### ACTION_BLUR {#ACTION_BLUR}
+
+```gdscript
+ACTION_BLUR = 2
+```
 
 Blur action, callback argument is not set.
 
-AccessibilityAction ACTION_COLLAPSE = 3
+#### ACTION_COLLAPSE {#ACTION_COLLAPSE}
+
+```gdscript
+ACTION_COLLAPSE = 3
+```
 
 Collapse action, callback argument is not set.
 
-AccessibilityAction ACTION_EXPAND = 4
+#### ACTION_EXPAND {#ACTION_EXPAND}
+
+```gdscript
+ACTION_EXPAND = 4
+```
 
 Expand action, callback argument is not set.
 
-AccessibilityAction ACTION_DECREMENT = 5
+#### ACTION_DECREMENT {#ACTION_DECREMENT}
+
+```gdscript
+ACTION_DECREMENT = 5
+```
 
 Decrement action, callback argument is not set.
 
-AccessibilityAction ACTION_INCREMENT = 6
+#### ACTION_INCREMENT {#ACTION_INCREMENT}
+
+```gdscript
+ACTION_INCREMENT = 6
+```
 
 Increment action, callback argument is not set.
 
-AccessibilityAction ACTION_HIDE_TOOLTIP = 7
+#### ACTION_HIDE_TOOLTIP {#ACTION_HIDE_TOOLTIP}
+
+```gdscript
+ACTION_HIDE_TOOLTIP = 7
+```
 
 Hide tooltip action, callback argument is not set.
 
-AccessibilityAction ACTION_SHOW_TOOLTIP = 8
+#### ACTION_SHOW_TOOLTIP {#ACTION_SHOW_TOOLTIP}
+
+```gdscript
+ACTION_SHOW_TOOLTIP = 8
+```
 
 Show tooltip action, callback argument is not set.
 
-AccessibilityAction ACTION_SET_TEXT_SELECTION = 9
+#### ACTION_SET_TEXT_SELECTION {#ACTION_SET_TEXT_SELECTION}
+
+```gdscript
+ACTION_SET_TEXT_SELECTION = 9
+```
 
 Set text selection action, callback argument is set to Dictionary with the following keys:
 
@@ -1437,145 +1243,13 @@ Set text selection action, callback argument is set to Dictionary with the follo
 - "end_element" accessibility element of the selection end.
 - "end_char" character offset relative to the accessibility element of the selection end.
 
-AccessibilityAction ACTION_REPLACE_SELECTED_TEXT = 10
-
-Replace text action, callback argument is set to String with the replacement text.
-
-AccessibilityAction ACTION_SCROLL_BACKWARD = 11
-
-Scroll backward action, callback argument is not set.
-
-AccessibilityAction ACTION_SCROLL_DOWN = 12
-
-Scroll down action, callback argument is set to AccessibilityScrollUnit.
-
-AccessibilityAction ACTION_SCROLL_FORWARD = 13
-
-Scroll forward action, callback argument is not set.
-
-AccessibilityAction ACTION_SCROLL_LEFT = 14
-
-Scroll left action, callback argument is set to AccessibilityScrollUnit.
-
-AccessibilityAction ACTION_SCROLL_RIGHT = 15
-
-Scroll right action, callback argument is set to AccessibilityScrollUnit.
-
-AccessibilityAction ACTION_SCROLL_UP = 16
-
-Scroll up action, callback argument is set to AccessibilityScrollUnit.
-
-AccessibilityAction ACTION_SCROLL_INTO_VIEW = 17
-
-Scroll into view action, callback argument is set to AccessibilityScrollHint.
-
-AccessibilityAction ACTION_SCROLL_TO_POINT = 18
-
-Scroll to point action, callback argument is set to Vector2 with the relative point coordinates.
-
-AccessibilityAction ACTION_SET_SCROLL_OFFSET = 19
-
-Set scroll offset action, callback argument is set to Vector2 with the scroll offset.
-
-AccessibilityAction ACTION_SET_VALUE = 20
-
-Set value action, callback argument is set to String or number with the new value.
-
-AccessibilityAction ACTION_SHOW_CONTEXT_MENU = 21
-
-Show context menu action, callback argument is not set.
-
-AccessibilityAction ACTION_CUSTOM = 22
-
-Custom action, callback argument is set to the integer action ID.
-
-#### ACTION_CLICK {#ACTION_CLICK}
-
-```gdscript
-ACTION_CLICK = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_FOCUS {#ACTION_FOCUS}
-
-```gdscript
-ACTION_FOCUS = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_BLUR {#ACTION_BLUR}
-
-```gdscript
-ACTION_BLUR = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_COLLAPSE {#ACTION_COLLAPSE}
-
-```gdscript
-ACTION_COLLAPSE = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_EXPAND {#ACTION_EXPAND}
-
-```gdscript
-ACTION_EXPAND = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_DECREMENT {#ACTION_DECREMENT}
-
-```gdscript
-ACTION_DECREMENT = 5
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_INCREMENT {#ACTION_INCREMENT}
-
-```gdscript
-ACTION_INCREMENT = 6
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_HIDE_TOOLTIP {#ACTION_HIDE_TOOLTIP}
-
-```gdscript
-ACTION_HIDE_TOOLTIP = 7
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_SHOW_TOOLTIP {#ACTION_SHOW_TOOLTIP}
-
-```gdscript
-ACTION_SHOW_TOOLTIP = 8
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### ACTION_SET_TEXT_SELECTION {#ACTION_SET_TEXT_SELECTION}
-
-```gdscript
-ACTION_SET_TEXT_SELECTION = 9
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### ACTION_REPLACE_SELECTED_TEXT {#ACTION_REPLACE_SELECTED_TEXT}
 
 ```gdscript
 ACTION_REPLACE_SELECTED_TEXT = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Replace text action, callback argument is set to String with the replacement text.
 
 #### ACTION_SCROLL_BACKWARD {#ACTION_SCROLL_BACKWARD}
 
@@ -1583,7 +1257,7 @@ ACTION_REPLACE_SELECTED_TEXT = 10
 ACTION_SCROLL_BACKWARD = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll backward action, callback argument is not set.
 
 #### ACTION_SCROLL_DOWN {#ACTION_SCROLL_DOWN}
 
@@ -1591,7 +1265,7 @@ ACTION_SCROLL_BACKWARD = 11
 ACTION_SCROLL_DOWN = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll down action, callback argument is set to AccessibilityScrollUnit.
 
 #### ACTION_SCROLL_FORWARD {#ACTION_SCROLL_FORWARD}
 
@@ -1599,7 +1273,7 @@ ACTION_SCROLL_DOWN = 12
 ACTION_SCROLL_FORWARD = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll forward action, callback argument is not set.
 
 #### ACTION_SCROLL_LEFT {#ACTION_SCROLL_LEFT}
 
@@ -1607,7 +1281,7 @@ ACTION_SCROLL_FORWARD = 13
 ACTION_SCROLL_LEFT = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll left action, callback argument is set to AccessibilityScrollUnit.
 
 #### ACTION_SCROLL_RIGHT {#ACTION_SCROLL_RIGHT}
 
@@ -1615,7 +1289,7 @@ ACTION_SCROLL_LEFT = 14
 ACTION_SCROLL_RIGHT = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll right action, callback argument is set to AccessibilityScrollUnit.
 
 #### ACTION_SCROLL_UP {#ACTION_SCROLL_UP}
 
@@ -1623,7 +1297,7 @@ ACTION_SCROLL_RIGHT = 15
 ACTION_SCROLL_UP = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll up action, callback argument is set to AccessibilityScrollUnit.
 
 #### ACTION_SCROLL_INTO_VIEW {#ACTION_SCROLL_INTO_VIEW}
 
@@ -1631,7 +1305,7 @@ ACTION_SCROLL_UP = 16
 ACTION_SCROLL_INTO_VIEW = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll into view action, callback argument is set to AccessibilityScrollHint.
 
 #### ACTION_SCROLL_TO_POINT {#ACTION_SCROLL_TO_POINT}
 
@@ -1639,7 +1313,7 @@ ACTION_SCROLL_INTO_VIEW = 17
 ACTION_SCROLL_TO_POINT = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scroll to point action, callback argument is set to Vector2 with the relative point coordinates.
 
 #### ACTION_SET_SCROLL_OFFSET {#ACTION_SET_SCROLL_OFFSET}
 
@@ -1647,7 +1321,7 @@ ACTION_SCROLL_TO_POINT = 18
 ACTION_SET_SCROLL_OFFSET = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Set scroll offset action, callback argument is set to Vector2 with the scroll offset.
 
 #### ACTION_SET_VALUE {#ACTION_SET_VALUE}
 
@@ -1655,7 +1329,7 @@ ACTION_SET_SCROLL_OFFSET = 19
 ACTION_SET_VALUE = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Set value action, callback argument is set to String or number with the new value.
 
 #### ACTION_SHOW_CONTEXT_MENU {#ACTION_SHOW_CONTEXT_MENU}
 
@@ -1663,7 +1337,7 @@ ACTION_SET_VALUE = 20
 ACTION_SHOW_CONTEXT_MENU = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Show context menu action, callback argument is not set.
 
 #### ACTION_CUSTOM {#ACTION_CUSTOM}
 
@@ -1671,7 +1345,9 @@ ACTION_SHOW_CONTEXT_MENU = 21
 ACTION_CUSTOM = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Custom action, callback argument is set to the integer action ID.
+
+---
 
 ### AccessibilityLiveMode {#enum-AccessibilityLiveMode}
 
@@ -1679,17 +1355,7 @@ ACTION_CUSTOM = 22
 enum AccessibilityLiveMode { LIVE_OFF = 0, LIVE_POLITE = 1, LIVE_ASSERTIVE = 2 }
 ```
 
-AccessibilityLiveMode LIVE_OFF = 0
-
-Indicates that updates to the live region should not be presented.
-
-AccessibilityLiveMode LIVE_POLITE = 1
-
-Indicates that updates to the live region should be presented at the next opportunity (for example at the end of speaking the current sentence).
-
-AccessibilityLiveMode LIVE_ASSERTIVE = 2
-
-Indicates that updates to the live region have the highest priority and should be presented immediately.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LIVE_OFF {#LIVE_OFF}
 
@@ -1697,7 +1363,7 @@ Indicates that updates to the live region have the highest priority and should b
 LIVE_OFF = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates that updates to the live region should not be presented.
 
 #### LIVE_POLITE {#LIVE_POLITE}
 
@@ -1705,7 +1371,7 @@ LIVE_OFF = 0
 LIVE_POLITE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates that updates to the live region should be presented at the next opportunity (for example at the end of speaking the current sentence).
 
 #### LIVE_ASSERTIVE {#LIVE_ASSERTIVE}
 
@@ -1713,7 +1379,9 @@ LIVE_POLITE = 1
 LIVE_ASSERTIVE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Indicates that updates to the live region have the highest priority and should be presented immediately.
+
+---
 
 ### AccessibilityScrollUnit {#enum-AccessibilityScrollUnit}
 
@@ -1721,13 +1389,7 @@ LIVE_ASSERTIVE = 2
 enum AccessibilityScrollUnit { SCROLL_UNIT_ITEM = 0, SCROLL_UNIT_PAGE = 1 }
 ```
 
-AccessibilityScrollUnit SCROLL_UNIT_ITEM = 0
-
-The amount by which to scroll. A single item of a list, line of text.
-
-AccessibilityScrollUnit SCROLL_UNIT_PAGE = 1
-
-The amount by which to scroll. A single page.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCROLL_UNIT_ITEM {#SCROLL_UNIT_ITEM}
 
@@ -1735,7 +1397,7 @@ The amount by which to scroll. A single page.
 SCROLL_UNIT_ITEM = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount by which to scroll. A single item of a list, line of text.
 
 #### SCROLL_UNIT_PAGE {#SCROLL_UNIT_PAGE}
 
@@ -1743,7 +1405,9 @@ SCROLL_UNIT_ITEM = 0
 SCROLL_UNIT_PAGE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The amount by which to scroll. A single page.
+
+---
 
 ### AccessibilityScrollHint {#enum-AccessibilityScrollHint}
 
@@ -1751,29 +1415,7 @@ SCROLL_UNIT_PAGE = 1
 enum AccessibilityScrollHint { SCROLL_HINT_TOP_LEFT = 0, SCROLL_HINT_BOTTOM_RIGHT = 1, SCROLL_HINT_TOP_EDGE = 2, SCROLL_HINT_BOTTOM_EDGE = 3, SCROLL_HINT_LEFT_EDGE = 4, SCROLL_HINT_RIGHT_EDGE = 5 }
 ```
 
-AccessibilityScrollHint SCROLL_HINT_TOP_LEFT = 0
-
-A preferred position for the node scrolled into view. Top-left edge of the scroll container.
-
-AccessibilityScrollHint SCROLL_HINT_BOTTOM_RIGHT = 1
-
-A preferred position for the node scrolled into view. Bottom-right edge of the scroll container.
-
-AccessibilityScrollHint SCROLL_HINT_TOP_EDGE = 2
-
-A preferred position for the node scrolled into view. Top edge of the scroll container.
-
-AccessibilityScrollHint SCROLL_HINT_BOTTOM_EDGE = 3
-
-A preferred position for the node scrolled into view. Bottom edge of the scroll container.
-
-AccessibilityScrollHint SCROLL_HINT_LEFT_EDGE = 4
-
-A preferred position for the node scrolled into view. Left edge of the scroll container.
-
-AccessibilityScrollHint SCROLL_HINT_RIGHT_EDGE = 5
-
-A preferred position for the node scrolled into view. Right edge of the scroll container.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCROLL_HINT_TOP_LEFT {#SCROLL_HINT_TOP_LEFT}
 
@@ -1781,7 +1423,7 @@ A preferred position for the node scrolled into view. Right edge of the scroll c
 SCROLL_HINT_TOP_LEFT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A preferred position for the node scrolled into view. Top-left edge of the scroll container.
 
 #### SCROLL_HINT_BOTTOM_RIGHT {#SCROLL_HINT_BOTTOM_RIGHT}
 
@@ -1789,7 +1431,7 @@ SCROLL_HINT_TOP_LEFT = 0
 SCROLL_HINT_BOTTOM_RIGHT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A preferred position for the node scrolled into view. Bottom-right edge of the scroll container.
 
 #### SCROLL_HINT_TOP_EDGE {#SCROLL_HINT_TOP_EDGE}
 
@@ -1797,7 +1439,7 @@ SCROLL_HINT_BOTTOM_RIGHT = 1
 SCROLL_HINT_TOP_EDGE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A preferred position for the node scrolled into view. Top edge of the scroll container.
 
 #### SCROLL_HINT_BOTTOM_EDGE {#SCROLL_HINT_BOTTOM_EDGE}
 
@@ -1805,7 +1447,7 @@ SCROLL_HINT_TOP_EDGE = 2
 SCROLL_HINT_BOTTOM_EDGE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A preferred position for the node scrolled into view. Bottom edge of the scroll container.
 
 #### SCROLL_HINT_LEFT_EDGE {#SCROLL_HINT_LEFT_EDGE}
 
@@ -1813,7 +1455,7 @@ SCROLL_HINT_BOTTOM_EDGE = 3
 SCROLL_HINT_LEFT_EDGE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A preferred position for the node scrolled into view. Left edge of the scroll container.
 
 #### SCROLL_HINT_RIGHT_EDGE {#SCROLL_HINT_RIGHT_EDGE}
 
@@ -1821,4 +1463,6 @@ SCROLL_HINT_LEFT_EDGE = 4
 SCROLL_HINT_RIGHT_EDGE = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A preferred position for the node scrolled into view. Right edge of the scroll container.
+
+---

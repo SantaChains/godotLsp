@@ -90,19 +90,37 @@ func _init():
 enum ContextMenuSlot { CONTEXT_SLOT_SCENE_TREE = 0, CONTEXT_SLOT_FILESYSTEM = 1, CONTEXT_SLOT_SCRIPT_EDITOR = 2, CONTEXT_SLOT_FILESYSTEM_CREATE = 3, CONTEXT_SLOT_SCRIPT_EDITOR_CODE = 4, CONTEXT_SLOT_SCENE_TABS = 5, CONTEXT_SLOT_2D_EDITOR = 6, CONTEXT_SLOT_INSPECTOR_PROPERTY = 7 }
 ```
 
-ContextMenuSlot CONTEXT_SLOT_SCENE_TREE = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### CONTEXT_SLOT_SCENE_TREE {#CONTEXT_SLOT_SCENE_TREE}
+
+```gdscript
+CONTEXT_SLOT_SCENE_TREE = 0
+```
 
 Context menu of Scene dock. _popup_menu() will be called with a list of paths to currently selected nodes, while option callback will receive the list of currently selected nodes.
 
-ContextMenuSlot CONTEXT_SLOT_FILESYSTEM = 1
+#### CONTEXT_SLOT_FILESYSTEM {#CONTEXT_SLOT_FILESYSTEM}
+
+```gdscript
+CONTEXT_SLOT_FILESYSTEM = 1
+```
 
 Context menu of FileSystem dock. _popup_menu() and option callback will be called with list of paths of the currently selected files.
 
-ContextMenuSlot CONTEXT_SLOT_SCRIPT_EDITOR = 2
+#### CONTEXT_SLOT_SCRIPT_EDITOR {#CONTEXT_SLOT_SCRIPT_EDITOR}
+
+```gdscript
+CONTEXT_SLOT_SCRIPT_EDITOR = 2
+```
 
 Context menu of Script editor's script tabs. _popup_menu() will be called with the path to the currently edited script, while option callback will receive reference to that script.
 
-ContextMenuSlot CONTEXT_SLOT_FILESYSTEM_CREATE = 3
+#### CONTEXT_SLOT_FILESYSTEM_CREATE {#CONTEXT_SLOT_FILESYSTEM_CREATE}
+
+```gdscript
+CONTEXT_SLOT_FILESYSTEM_CREATE = 3
+```
 
 The "Create..." submenu of FileSystem dock's context menu, or the "New" section of the main context menu when empty space is clicked. _popup_menu() and option callback will be called with the path of the currently selected folder. When clicking the empty space, the list of paths for popup method will be empty.
 
@@ -114,7 +132,11 @@ func _popup_menu(paths):
         add_context_menu_item("Image File...", create_image)
 ```
 
-ContextMenuSlot CONTEXT_SLOT_SCRIPT_EDITOR_CODE = 4
+#### CONTEXT_SLOT_SCRIPT_EDITOR_CODE {#CONTEXT_SLOT_SCRIPT_EDITOR_CODE}
+
+```gdscript
+CONTEXT_SLOT_SCRIPT_EDITOR_CODE = 4
+```
 
 Context menu of Script editor's code editor. _popup_menu() will be called with the path to the CodeEdit node. You can fetch it using this code:
 
@@ -125,11 +147,19 @@ func _popup_menu(paths):
 
 The option callback will receive reference to that node. You can use CodeEdit methods to perform symbol lookups etc.
 
-ContextMenuSlot CONTEXT_SLOT_SCENE_TABS = 5
+#### CONTEXT_SLOT_SCENE_TABS {#CONTEXT_SLOT_SCENE_TABS}
+
+```gdscript
+CONTEXT_SLOT_SCENE_TABS = 5
+```
 
 Context menu of scene tabs. _popup_menu() will be called with the path of the clicked scene, or empty PackedStringArray if the menu was opened on empty space. The option callback will receive the path of the clicked scene, or empty String if none was clicked.
 
-ContextMenuSlot CONTEXT_SLOT_2D_EDITOR = 6
+#### CONTEXT_SLOT_2D_EDITOR {#CONTEXT_SLOT_2D_EDITOR}
+
+```gdscript
+CONTEXT_SLOT_2D_EDITOR = 6
+```
 
 Context menu of 2D editor's basic right-click menu. _popup_menu() will be called with paths to all CanvasItem nodes under the cursor. You can fetch them using this code:
 
@@ -140,70 +170,12 @@ func _popup_menu(paths):
 
 The paths array is empty if there weren't any nodes under cursor. The option callback will receive a typed array of CanvasItem nodes.
 
-ContextMenuSlot CONTEXT_SLOT_INSPECTOR_PROPERTY = 7
-
-Context menu of the inspectors right-click menu. _popup_menu() will be called with an array of two items: The first will be the object's ID, the second will be the property name. An object can be retrieved from it's ID via @GlobalScope.instance_from_id() after converting it to an int. The option callback will receive the EditorProperty directly.
-
-#### CONTEXT_SLOT_SCENE_TREE {#CONTEXT_SLOT_SCENE_TREE}
-
-```gdscript
-CONTEXT_SLOT_SCENE_TREE = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### CONTEXT_SLOT_FILESYSTEM {#CONTEXT_SLOT_FILESYSTEM}
-
-```gdscript
-CONTEXT_SLOT_FILESYSTEM = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### CONTEXT_SLOT_SCRIPT_EDITOR {#CONTEXT_SLOT_SCRIPT_EDITOR}
-
-```gdscript
-CONTEXT_SLOT_SCRIPT_EDITOR = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### CONTEXT_SLOT_FILESYSTEM_CREATE {#CONTEXT_SLOT_FILESYSTEM_CREATE}
-
-```gdscript
-CONTEXT_SLOT_FILESYSTEM_CREATE = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### CONTEXT_SLOT_SCRIPT_EDITOR_CODE {#CONTEXT_SLOT_SCRIPT_EDITOR_CODE}
-
-```gdscript
-CONTEXT_SLOT_SCRIPT_EDITOR_CODE = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### CONTEXT_SLOT_SCENE_TABS {#CONTEXT_SLOT_SCENE_TABS}
-
-```gdscript
-CONTEXT_SLOT_SCENE_TABS = 5
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### CONTEXT_SLOT_2D_EDITOR {#CONTEXT_SLOT_2D_EDITOR}
-
-```gdscript
-CONTEXT_SLOT_2D_EDITOR = 6
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### CONTEXT_SLOT_INSPECTOR_PROPERTY {#CONTEXT_SLOT_INSPECTOR_PROPERTY}
 
 ```gdscript
 CONTEXT_SLOT_INSPECTOR_PROPERTY = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Context menu of the inspectors right-click menu. _popup_menu() will be called with an array of two items: The first will be the object's ID, the second will be the property name. An object can be retrieved from it's ID via @GlobalScope.instance_from_id() after converting it to an int. The option callback will receive the EditorProperty directly.
+
+---

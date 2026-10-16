@@ -49,17 +49,7 @@ A function to be applied to the texture coordinates.
 enum Function { FUNC_PANNING = 0, FUNC_SCALING = 1, FUNC_MAX = 2 }
 ```
 
-Function FUNC_PANNING = 0
-
-Translates uv by using scale and offset values using the following formula: uv = uv + offset * scale. uv port is connected to UV built-in by default.
-
-Function FUNC_SCALING = 1
-
-Scales uv by using scale and pivot values using the following formula: uv = (uv - pivot) * scale + pivot. uv port is connected to UV built-in by default.
-
-Function FUNC_MAX = 2
-
-Represents the size of the Function enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### FUNC_PANNING {#FUNC_PANNING}
 
@@ -67,7 +57,7 @@ Represents the size of the Function enum.
 FUNC_PANNING = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Translates uv by using scale and offset values using the following formula: uv = uv + offset * scale. uv port is connected to UV built-in by default.
 
 #### FUNC_SCALING {#FUNC_SCALING}
 
@@ -75,7 +65,7 @@ FUNC_PANNING = 0
 FUNC_SCALING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Scales uv by using scale and pivot values using the following formula: uv = (uv - pivot) * scale + pivot. uv port is connected to UV built-in by default.
 
 #### FUNC_MAX {#FUNC_MAX}
 
@@ -83,4 +73,6 @@ FUNC_SCALING = 1
 FUNC_MAX = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Function enum.
+
+---

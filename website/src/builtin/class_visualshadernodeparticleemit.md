@@ -49,25 +49,7 @@ Flags used to override the properties defined in the sub-emitter's process mater
 enum EmitFlags { EMIT_FLAG_POSITION = 1, EMIT_FLAG_ROT_SCALE = 2, EMIT_FLAG_VELOCITY = 4, EMIT_FLAG_COLOR = 8, EMIT_FLAG_CUSTOM = 16 }
 ```
 
-EmitFlags EMIT_FLAG_POSITION = 1
-
-If enabled, the particle starts with the position defined by this node.
-
-EmitFlags EMIT_FLAG_ROT_SCALE = 2
-
-If enabled, the particle starts with the rotation and scale defined by this node.
-
-EmitFlags EMIT_FLAG_VELOCITY = 4
-
-If enabled,the particle starts with the velocity defined by this node.
-
-EmitFlags EMIT_FLAG_COLOR = 8
-
-If enabled, the particle starts with the color defined by this node.
-
-EmitFlags EMIT_FLAG_CUSTOM = 16
-
-If enabled, the particle starts with the CUSTOM data defined by this node.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### EMIT_FLAG_POSITION {#EMIT_FLAG_POSITION}
 
@@ -75,7 +57,7 @@ If enabled, the particle starts with the CUSTOM data defined by this node.
 EMIT_FLAG_POSITION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, the particle starts with the position defined by this node.
 
 #### EMIT_FLAG_ROT_SCALE {#EMIT_FLAG_ROT_SCALE}
 
@@ -83,7 +65,7 @@ EMIT_FLAG_POSITION = 1
 EMIT_FLAG_ROT_SCALE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, the particle starts with the rotation and scale defined by this node.
 
 #### EMIT_FLAG_VELOCITY {#EMIT_FLAG_VELOCITY}
 
@@ -91,7 +73,7 @@ EMIT_FLAG_ROT_SCALE = 2
 EMIT_FLAG_VELOCITY = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled,the particle starts with the velocity defined by this node.
 
 #### EMIT_FLAG_COLOR {#EMIT_FLAG_COLOR}
 
@@ -99,7 +81,7 @@ EMIT_FLAG_VELOCITY = 4
 EMIT_FLAG_COLOR = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, the particle starts with the color defined by this node.
 
 #### EMIT_FLAG_CUSTOM {#EMIT_FLAG_CUSTOM}
 
@@ -107,4 +89,6 @@ EMIT_FLAG_COLOR = 8
 EMIT_FLAG_CUSTOM = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If enabled, the particle starts with the CUSTOM data defined by this node.
+
+---

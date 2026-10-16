@@ -825,25 +825,7 @@ Note: This is always reset to system endianness, which is little-endian on all s
 enum ModeFlags { READ = 1, WRITE = 2, READ_WRITE = 3, WRITE_READ = 7 }
 ```
 
-ModeFlags READ = 1
-
-Opens the file for read operations. The file cursor is positioned at the beginning of the file.
-
-ModeFlags WRITE = 2
-
-Opens the file for write operations. If the file exists, it is truncated to zero length and its contents are cleared. Otherwise, it is created.
-
-Note: When creating a file it must be in an already existing directory. To recursively create directories for a file path, see DirAccess.make_dir_recursive().
-
-ModeFlags READ_WRITE = 3
-
-Opens the file for read and write operations. Does not truncate the file. The file cursor is positioned at the beginning of the file.
-
-ModeFlags WRITE_READ = 7
-
-Opens the file for read and write operations. If the file exists, it is truncated to zero length and its contents are cleared. Otherwise, it is created. The file cursor is positioned at the beginning of the file.
-
-Note: When creating a file it must be in an already existing directory. To recursively create directories for a file path, see DirAccess.make_dir_recursive().
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### READ {#READ}
 
@@ -851,7 +833,7 @@ Note: When creating a file it must be in an already existing directory. To recur
 READ = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Opens the file for read operations. The file cursor is positioned at the beginning of the file.
 
 #### WRITE {#WRITE}
 
@@ -859,7 +841,9 @@ READ = 1
 WRITE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Opens the file for write operations. If the file exists, it is truncated to zero length and its contents are cleared. Otherwise, it is created.
+
+Note: When creating a file it must be in an already existing directory. To recursively create directories for a file path, see DirAccess.make_dir_recursive().
 
 #### READ_WRITE {#READ_WRITE}
 
@@ -867,7 +851,7 @@ WRITE = 2
 READ_WRITE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Opens the file for read and write operations. Does not truncate the file. The file cursor is positioned at the beginning of the file.
 
 #### WRITE_READ {#WRITE_READ}
 
@@ -875,7 +859,11 @@ READ_WRITE = 3
 WRITE_READ = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Opens the file for read and write operations. If the file exists, it is truncated to zero length and its contents are cleared. Otherwise, it is created. The file cursor is positioned at the beginning of the file.
+
+Note: When creating a file it must be in an already existing directory. To recursively create directories for a file path, see DirAccess.make_dir_recursive().
+
+---
 
 ### CompressionMode {#enum-CompressionMode}
 
@@ -883,25 +871,7 @@ WRITE_READ = 7
 enum CompressionMode { COMPRESSION_FASTLZ = 0, COMPRESSION_DEFLATE = 1, COMPRESSION_ZSTD = 2, COMPRESSION_GZIP = 3, COMPRESSION_BROTLI = 4 }
 ```
 
-CompressionMode COMPRESSION_FASTLZ = 0
-
-Uses the FastLZ [https://fastlz.org/] compression method.
-
-CompressionMode COMPRESSION_DEFLATE = 1
-
-Uses the DEFLATE [https://en.wikipedia.org/wiki/DEFLATE] compression method.
-
-CompressionMode COMPRESSION_ZSTD = 2
-
-Uses the Zstandard [https://facebook.github.io/zstd/] compression method.
-
-CompressionMode COMPRESSION_GZIP = 3
-
-Uses the gzip [https://www.gzip.org/] compression method.
-
-CompressionMode COMPRESSION_BROTLI = 4
-
-Uses the brotli [https://github.com/google/brotli] compression method (only decompression is supported).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### COMPRESSION_FASTLZ {#COMPRESSION_FASTLZ}
 
@@ -909,7 +879,7 @@ Uses the brotli [https://github.com/google/brotli] compression method (only deco
 COMPRESSION_FASTLZ = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses the FastLZ [https://fastlz.org/] compression method.
 
 #### COMPRESSION_DEFLATE {#COMPRESSION_DEFLATE}
 
@@ -917,7 +887,7 @@ COMPRESSION_FASTLZ = 0
 COMPRESSION_DEFLATE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses the DEFLATE [https://en.wikipedia.org/wiki/DEFLATE] compression method.
 
 #### COMPRESSION_ZSTD {#COMPRESSION_ZSTD}
 
@@ -925,7 +895,7 @@ COMPRESSION_DEFLATE = 1
 COMPRESSION_ZSTD = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses the Zstandard [https://facebook.github.io/zstd/] compression method.
 
 #### COMPRESSION_GZIP {#COMPRESSION_GZIP}
 
@@ -933,7 +903,7 @@ COMPRESSION_ZSTD = 2
 COMPRESSION_GZIP = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses the gzip [https://www.gzip.org/] compression method.
 
 #### COMPRESSION_BROTLI {#COMPRESSION_BROTLI}
 
@@ -941,7 +911,11 @@ COMPRESSION_GZIP = 3
 COMPRESSION_BROTLI = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Uses the brotli [https://github.com/google/brotli] compression method (only decompression is supported).
+
+---
+
+flags UnixPermissionFlags:
 
 ### UnixPermissionFlags {#enum-UnixPermissionFlags}
 
@@ -957,7 +931,7 @@ enum UnixPermissionFlags（位标志） { UNIX_READ_OWNER = 256, UNIX_WRITE_OWNE
 UNIX_READ_OWNER = 256
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Read for owner bit.
 
 #### UNIX_WRITE_OWNER {#UNIX_WRITE_OWNER}
 
@@ -965,7 +939,7 @@ UNIX_READ_OWNER = 256
 UNIX_WRITE_OWNER = 128
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Write for owner bit.
 
 #### UNIX_EXECUTE_OWNER {#UNIX_EXECUTE_OWNER}
 
@@ -973,7 +947,7 @@ UNIX_WRITE_OWNER = 128
 UNIX_EXECUTE_OWNER = 64
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Execute for owner bit.
 
 #### UNIX_READ_GROUP {#UNIX_READ_GROUP}
 
@@ -981,7 +955,7 @@ UNIX_EXECUTE_OWNER = 64
 UNIX_READ_GROUP = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Read for group bit.
 
 #### UNIX_WRITE_GROUP {#UNIX_WRITE_GROUP}
 
@@ -989,7 +963,7 @@ UNIX_READ_GROUP = 32
 UNIX_WRITE_GROUP = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Write for group bit.
 
 #### UNIX_EXECUTE_GROUP {#UNIX_EXECUTE_GROUP}
 
@@ -997,7 +971,7 @@ UNIX_WRITE_GROUP = 16
 UNIX_EXECUTE_GROUP = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Execute for group bit.
 
 #### UNIX_READ_OTHER {#UNIX_READ_OTHER}
 
@@ -1005,7 +979,7 @@ UNIX_EXECUTE_GROUP = 8
 UNIX_READ_OTHER = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Read for other bit.
 
 #### UNIX_WRITE_OTHER {#UNIX_WRITE_OTHER}
 
@@ -1013,7 +987,7 @@ UNIX_READ_OTHER = 4
 UNIX_WRITE_OTHER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Write for other bit.
 
 #### UNIX_EXECUTE_OTHER {#UNIX_EXECUTE_OTHER}
 
@@ -1021,7 +995,7 @@ UNIX_WRITE_OTHER = 2
 UNIX_EXECUTE_OTHER = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Execute for other bit.
 
 #### UNIX_SET_USER_ID {#UNIX_SET_USER_ID}
 
@@ -1029,7 +1003,7 @@ UNIX_EXECUTE_OTHER = 1
 UNIX_SET_USER_ID = 2048
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Set user id on execution bit.
 
 #### UNIX_SET_GROUP_ID {#UNIX_SET_GROUP_ID}
 
@@ -1037,7 +1011,7 @@ UNIX_SET_USER_ID = 2048
 UNIX_SET_GROUP_ID = 1024
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Set group id on execution bit.
 
 #### UNIX_RESTRICTED_DELETE {#UNIX_RESTRICTED_DELETE}
 
@@ -1045,4 +1019,6 @@ UNIX_SET_GROUP_ID = 1024
 UNIX_RESTRICTED_DELETE = 512
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Restricted deletion (sticky) bit.
+
+---

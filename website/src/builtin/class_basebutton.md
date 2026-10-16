@@ -382,25 +382,7 @@ Emitted when the button was just toggled between pressed and normal states (only
 enum DrawMode { DRAW_NORMAL = 0, DRAW_PRESSED = 1, DRAW_HOVER = 2, DRAW_DISABLED = 3, DRAW_HOVER_PRESSED = 4 }
 ```
 
-DrawMode DRAW_NORMAL = 0
-
-The normal state (i.e. not pressed, not hovered, not toggled and enabled) of buttons.
-
-DrawMode DRAW_PRESSED = 1
-
-The state of buttons are pressed.
-
-DrawMode DRAW_HOVER = 2
-
-The state of buttons are hovered.
-
-DrawMode DRAW_DISABLED = 3
-
-The state of buttons are disabled.
-
-DrawMode DRAW_HOVER_PRESSED = 4
-
-The state of buttons are both hovered and pressed.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DRAW_NORMAL {#DRAW_NORMAL}
 
@@ -408,7 +390,7 @@ The state of buttons are both hovered and pressed.
 DRAW_NORMAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The normal state (i.e. not pressed, not hovered, not toggled and enabled) of buttons.
 
 #### DRAW_PRESSED {#DRAW_PRESSED}
 
@@ -416,7 +398,7 @@ DRAW_NORMAL = 0
 DRAW_PRESSED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The state of buttons are pressed.
 
 #### DRAW_HOVER {#DRAW_HOVER}
 
@@ -424,7 +406,7 @@ DRAW_PRESSED = 1
 DRAW_HOVER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The state of buttons are hovered.
 
 #### DRAW_DISABLED {#DRAW_DISABLED}
 
@@ -432,7 +414,7 @@ DRAW_HOVER = 2
 DRAW_DISABLED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The state of buttons are disabled.
 
 #### DRAW_HOVER_PRESSED {#DRAW_HOVER_PRESSED}
 
@@ -440,7 +422,9 @@ DRAW_DISABLED = 3
 DRAW_HOVER_PRESSED = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The state of buttons are both hovered and pressed.
+
+---
 
 ### ActionMode {#enum-ActionMode}
 
@@ -448,13 +432,7 @@ DRAW_HOVER_PRESSED = 4
 enum ActionMode { ACTION_MODE_BUTTON_PRESS = 0, ACTION_MODE_BUTTON_RELEASE = 1 }
 ```
 
-ActionMode ACTION_MODE_BUTTON_PRESS = 0
-
-Require just a press to consider the button clicked.
-
-ActionMode ACTION_MODE_BUTTON_RELEASE = 1
-
-Require a press and a subsequent release before considering the button clicked.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ACTION_MODE_BUTTON_PRESS {#ACTION_MODE_BUTTON_PRESS}
 
@@ -462,7 +440,7 @@ Require a press and a subsequent release before considering the button clicked.
 ACTION_MODE_BUTTON_PRESS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Require just a press to consider the button clicked.
 
 #### ACTION_MODE_BUTTON_RELEASE {#ACTION_MODE_BUTTON_RELEASE}
 
@@ -470,4 +448,6 @@ ACTION_MODE_BUTTON_PRESS = 0
 ACTION_MODE_BUTTON_RELEASE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Require a press and a subsequent release before considering the button clicked.
+
+---

@@ -261,13 +261,7 @@ Emitted when the timer reaches the end.
 enum TimerProcessCallback { TIMER_PROCESS_PHYSICS = 0, TIMER_PROCESS_IDLE = 1 }
 ```
 
-TimerProcessCallback TIMER_PROCESS_PHYSICS = 0
-
-Update the timer every physics process frame (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS).
-
-TimerProcessCallback TIMER_PROCESS_IDLE = 1
-
-Update the timer every process (rendered) frame (see Node.NOTIFICATION_INTERNAL_PROCESS).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### TIMER_PROCESS_PHYSICS {#TIMER_PROCESS_PHYSICS}
 
@@ -275,7 +269,7 @@ Update the timer every process (rendered) frame (see Node.NOTIFICATION_INTERNAL_
 TIMER_PROCESS_PHYSICS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Update the timer every physics process frame (see Node.NOTIFICATION_INTERNAL_PHYSICS_PROCESS).
 
 #### TIMER_PROCESS_IDLE {#TIMER_PROCESS_IDLE}
 
@@ -283,4 +277,6 @@ TIMER_PROCESS_PHYSICS = 0
 TIMER_PROCESS_IDLE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Update the timer every process (rendered) frame (see Node.NOTIFICATION_INTERNAL_PROCESS).
+
+---

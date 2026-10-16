@@ -139,4 +139,9 @@ Number of vertices in the depth of the heightmap. Changing this will resize the 
 map_data: PackedFloat32Array
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_map_data(value: PackedFloat32Array)
+- PackedFloat32Array get_map_data()
+
+Heightmap data. The array's size must be equal to map_width multiplied by map_depth.
+
+Note: The returned array is copied and any changes to it will not update the original property value. See PackedFloat32Array for more details.

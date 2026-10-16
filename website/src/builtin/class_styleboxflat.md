@@ -291,7 +291,10 @@ void set_skew(skew: Vector2)
 bg_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_bg_color(value: Color)
+- Color get_bg_color()
+
+The background color of the stylebox.
 
 ### draw_center {#draw_center}
 
@@ -310,7 +313,12 @@ Toggles drawing of the inner part of the stylebox.
 skew: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_skew(value: Vector2)
+- Vector2 get_skew()
+
+If set to a non-zero value on either axis, skew distorts the StyleBox horizontally and/or vertically. This can be used for "futuristic"-style UIs. Positive values skew the StyleBox towards the right (X axis) and upwards (Y axis), while negative values skew the StyleBox towards the left (X axis) and downwards (Y axis).
+
+Note: To ensure text does not touch the StyleBox's edges, consider increasing the StyleBox's content margin (see StyleBox.content_margin_bottom). It is preferable to increase the content margin instead of the expand margin (see expand_margin_bottom), as increasing the expand margin does not increase the size of the clickable area for Controls.
 
 ### border_width_left {#border_width_left}
 
@@ -362,7 +370,10 @@ Border width for the bottom border.
 border_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_border_color(value: Color)
+- Color get_border_color()
+
+Sets the color of the border.
 
 ### border_blend {#border_blend}
 
@@ -492,7 +503,10 @@ Note: Unlike StyleBox.content_margin_bottom, expand_margin_bottom does not affec
 shadow_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_shadow_color(value: Color)
+- Color get_shadow_color()
+
+The color of the shadow. This has no effect if shadow_size is lower than 1.
 
 ### shadow_size {#shadow_size}
 
@@ -511,7 +525,10 @@ The shadow size in pixels.
 shadow_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_shadow_offset(value: Vector2)
+- Vector2 get_shadow_offset()
+
+The shadow offset in pixels. Adjusts the position of the shadow relatively to the stylebox.
 
 ### anti_aliasing {#anti_aliasing}
 

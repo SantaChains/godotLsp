@@ -1282,49 +1282,7 @@ Note: symbol_tooltip_on_hover must be true for this signal to be emitted.
 enum CodeCompletionKind { KIND_CLASS = 0, KIND_FUNCTION = 1, KIND_SIGNAL = 2, KIND_VARIABLE = 3, KIND_MEMBER = 4, KIND_ENUM = 5, KIND_CONSTANT = 6, KIND_NODE_PATH = 7, KIND_FILE_PATH = 8, KIND_PLAIN_TEXT = 9, KIND_KEYWORD = 10 }
 ```
 
-CodeCompletionKind KIND_CLASS = 0
-
-Marks the option as a class.
-
-CodeCompletionKind KIND_FUNCTION = 1
-
-Marks the option as a function.
-
-CodeCompletionKind KIND_SIGNAL = 2
-
-Marks the option as a Godot signal.
-
-CodeCompletionKind KIND_VARIABLE = 3
-
-Marks the option as a variable.
-
-CodeCompletionKind KIND_MEMBER = 4
-
-Marks the option as a member.
-
-CodeCompletionKind KIND_ENUM = 5
-
-Marks the option as an enum entry.
-
-CodeCompletionKind KIND_CONSTANT = 6
-
-Marks the option as a constant.
-
-CodeCompletionKind KIND_NODE_PATH = 7
-
-Marks the option as a Godot node path.
-
-CodeCompletionKind KIND_FILE_PATH = 8
-
-Marks the option as a file path.
-
-CodeCompletionKind KIND_PLAIN_TEXT = 9
-
-Marks the option as unclassified or plain text.
-
-CodeCompletionKind KIND_KEYWORD = 10
-
-Marks the option as a keyword.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### KIND_CLASS {#KIND_CLASS}
 
@@ -1332,7 +1290,7 @@ Marks the option as a keyword.
 KIND_CLASS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as a class.
 
 #### KIND_FUNCTION {#KIND_FUNCTION}
 
@@ -1340,7 +1298,7 @@ KIND_CLASS = 0
 KIND_FUNCTION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as a function.
 
 #### KIND_SIGNAL {#KIND_SIGNAL}
 
@@ -1348,7 +1306,7 @@ KIND_FUNCTION = 1
 KIND_SIGNAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as a Godot signal.
 
 #### KIND_VARIABLE {#KIND_VARIABLE}
 
@@ -1356,7 +1314,7 @@ KIND_SIGNAL = 2
 KIND_VARIABLE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as a variable.
 
 #### KIND_MEMBER {#KIND_MEMBER}
 
@@ -1364,7 +1322,7 @@ KIND_VARIABLE = 3
 KIND_MEMBER = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as a member.
 
 #### KIND_ENUM {#KIND_ENUM}
 
@@ -1372,7 +1330,7 @@ KIND_MEMBER = 4
 KIND_ENUM = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as an enum entry.
 
 #### KIND_CONSTANT {#KIND_CONSTANT}
 
@@ -1380,7 +1338,7 @@ KIND_ENUM = 5
 KIND_CONSTANT = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as a constant.
 
 #### KIND_NODE_PATH {#KIND_NODE_PATH}
 
@@ -1388,7 +1346,7 @@ KIND_CONSTANT = 6
 KIND_NODE_PATH = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as a Godot node path.
 
 #### KIND_FILE_PATH {#KIND_FILE_PATH}
 
@@ -1396,7 +1354,7 @@ KIND_NODE_PATH = 7
 KIND_FILE_PATH = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as a file path.
 
 #### KIND_PLAIN_TEXT {#KIND_PLAIN_TEXT}
 
@@ -1404,7 +1362,7 @@ KIND_FILE_PATH = 8
 KIND_PLAIN_TEXT = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as unclassified or plain text.
 
 #### KIND_KEYWORD {#KIND_KEYWORD}
 
@@ -1412,7 +1370,9 @@ KIND_PLAIN_TEXT = 9
 KIND_KEYWORD = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Marks the option as a keyword.
+
+---
 
 ### CodeCompletionLocation {#enum-CodeCompletionLocation}
 
@@ -1420,21 +1380,7 @@ KIND_KEYWORD = 10
 enum CodeCompletionLocation { LOCATION_LOCAL = 0, LOCATION_PARENT_MASK = 256, LOCATION_OTHER_USER_CODE = 512, LOCATION_OTHER = 1024 }
 ```
 
-CodeCompletionLocation LOCATION_LOCAL = 0
-
-The option is local to the location of the code completion query - e.g. a local variable. Subsequent value of location represent options from the outer class, the exact value represent how far they are (in terms of inner classes).
-
-CodeCompletionLocation LOCATION_PARENT_MASK = 256
-
-The option is from the containing class or a parent class, relative to the location of the code completion query. Perform a bitwise OR with the class depth (e.g. 0 for the local class, 1 for the parent, 2 for the grandparent, etc.) to store the depth of an option in the class or a parent class.
-
-CodeCompletionLocation LOCATION_OTHER_USER_CODE = 512
-
-The option is from user code which is not local and not in a derived class (e.g. Autoload Singletons).
-
-CodeCompletionLocation LOCATION_OTHER = 1024
-
-The option is from other engine code, not covered by the other enum constants - e.g. built-in classes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### LOCATION_LOCAL {#LOCATION_LOCAL}
 
@@ -1442,7 +1388,7 @@ The option is from other engine code, not covered by the other enum constants - 
 LOCATION_LOCAL = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The option is local to the location of the code completion query - e.g. a local variable. Subsequent value of location represent options from the outer class, the exact value represent how far they are (in terms of inner classes).
 
 #### LOCATION_PARENT_MASK {#LOCATION_PARENT_MASK}
 
@@ -1450,7 +1396,7 @@ LOCATION_LOCAL = 0
 LOCATION_PARENT_MASK = 256
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The option is from the containing class or a parent class, relative to the location of the code completion query. Perform a bitwise OR with the class depth (e.g. 0 for the local class, 1 for the parent, 2 for the grandparent, etc.) to store the depth of an option in the class or a parent class.
 
 #### LOCATION_OTHER_USER_CODE {#LOCATION_OTHER_USER_CODE}
 
@@ -1458,7 +1404,7 @@ LOCATION_PARENT_MASK = 256
 LOCATION_OTHER_USER_CODE = 512
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The option is from user code which is not local and not in a derived class (e.g. Autoload Singletons).
 
 #### LOCATION_OTHER {#LOCATION_OTHER}
 
@@ -1466,4 +1412,6 @@ LOCATION_OTHER_USER_CODE = 512
 LOCATION_OTHER = 1024
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The option is from other engine code, not covered by the other enum constants - e.g. built-in classes.
+
+---

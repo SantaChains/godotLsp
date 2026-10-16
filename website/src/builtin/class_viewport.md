@@ -1800,37 +1800,7 @@ Note: A Control node losing focus doesn't cause this signal to be emitted.
 enum PositionalShadowAtlasQuadrantSubdiv { SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED = 0, SHADOW_ATLAS_QUADRANT_SUBDIV_1 = 1, SHADOW_ATLAS_QUADRANT_SUBDIV_4 = 2, SHADOW_ATLAS_QUADRANT_SUBDIV_16 = 3, SHADOW_ATLAS_QUADRANT_SUBDIV_64 = 4, SHADOW_ATLAS_QUADRANT_SUBDIV_256 = 5, SHADOW_ATLAS_QUADRANT_SUBDIV_1024 = 6, SHADOW_ATLAS_QUADRANT_SUBDIV_MAX = 7 }
 ```
 
-PositionalShadowAtlasQuadrantSubdiv SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED = 0
-
-This quadrant will not be used.
-
-PositionalShadowAtlasQuadrantSubdiv SHADOW_ATLAS_QUADRANT_SUBDIV_1 = 1
-
-This quadrant will only be used by one shadow map.
-
-PositionalShadowAtlasQuadrantSubdiv SHADOW_ATLAS_QUADRANT_SUBDIV_4 = 2
-
-This quadrant will be split in 4 and used by up to 4 shadow maps.
-
-PositionalShadowAtlasQuadrantSubdiv SHADOW_ATLAS_QUADRANT_SUBDIV_16 = 3
-
-This quadrant will be split 16 ways and used by up to 16 shadow maps.
-
-PositionalShadowAtlasQuadrantSubdiv SHADOW_ATLAS_QUADRANT_SUBDIV_64 = 4
-
-This quadrant will be split 64 ways and used by up to 64 shadow maps.
-
-PositionalShadowAtlasQuadrantSubdiv SHADOW_ATLAS_QUADRANT_SUBDIV_256 = 5
-
-This quadrant will be split 256 ways and used by up to 256 shadow maps. Unless the positional_shadow_atlas_size is very high, the shadows in this quadrant will be very low resolution.
-
-PositionalShadowAtlasQuadrantSubdiv SHADOW_ATLAS_QUADRANT_SUBDIV_1024 = 6
-
-This quadrant will be split 1024 ways and used by up to 1024 shadow maps. Unless the positional_shadow_atlas_size is very high, the shadows in this quadrant will be very low resolution.
-
-PositionalShadowAtlasQuadrantSubdiv SHADOW_ATLAS_QUADRANT_SUBDIV_MAX = 7
-
-Represents the size of the PositionalShadowAtlasQuadrantSubdiv enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED {#SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED}
 
@@ -1838,7 +1808,7 @@ Represents the size of the PositionalShadowAtlasQuadrantSubdiv enum.
 SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This quadrant will not be used.
 
 #### SHADOW_ATLAS_QUADRANT_SUBDIV_1 {#SHADOW_ATLAS_QUADRANT_SUBDIV_1}
 
@@ -1846,7 +1816,7 @@ SHADOW_ATLAS_QUADRANT_SUBDIV_DISABLED = 0
 SHADOW_ATLAS_QUADRANT_SUBDIV_1 = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This quadrant will only be used by one shadow map.
 
 #### SHADOW_ATLAS_QUADRANT_SUBDIV_4 {#SHADOW_ATLAS_QUADRANT_SUBDIV_4}
 
@@ -1854,7 +1824,7 @@ SHADOW_ATLAS_QUADRANT_SUBDIV_1 = 1
 SHADOW_ATLAS_QUADRANT_SUBDIV_4 = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This quadrant will be split in 4 and used by up to 4 shadow maps.
 
 #### SHADOW_ATLAS_QUADRANT_SUBDIV_16 {#SHADOW_ATLAS_QUADRANT_SUBDIV_16}
 
@@ -1862,7 +1832,7 @@ SHADOW_ATLAS_QUADRANT_SUBDIV_4 = 2
 SHADOW_ATLAS_QUADRANT_SUBDIV_16 = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This quadrant will be split 16 ways and used by up to 16 shadow maps.
 
 #### SHADOW_ATLAS_QUADRANT_SUBDIV_64 {#SHADOW_ATLAS_QUADRANT_SUBDIV_64}
 
@@ -1870,7 +1840,7 @@ SHADOW_ATLAS_QUADRANT_SUBDIV_16 = 3
 SHADOW_ATLAS_QUADRANT_SUBDIV_64 = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This quadrant will be split 64 ways and used by up to 64 shadow maps.
 
 #### SHADOW_ATLAS_QUADRANT_SUBDIV_256 {#SHADOW_ATLAS_QUADRANT_SUBDIV_256}
 
@@ -1878,7 +1848,7 @@ SHADOW_ATLAS_QUADRANT_SUBDIV_64 = 4
 SHADOW_ATLAS_QUADRANT_SUBDIV_256 = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This quadrant will be split 256 ways and used by up to 256 shadow maps. Unless the positional_shadow_atlas_size is very high, the shadows in this quadrant will be very low resolution.
 
 #### SHADOW_ATLAS_QUADRANT_SUBDIV_1024 {#SHADOW_ATLAS_QUADRANT_SUBDIV_1024}
 
@@ -1886,7 +1856,7 @@ SHADOW_ATLAS_QUADRANT_SUBDIV_256 = 5
 SHADOW_ATLAS_QUADRANT_SUBDIV_1024 = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This quadrant will be split 1024 ways and used by up to 1024 shadow maps. Unless the positional_shadow_atlas_size is very high, the shadows in this quadrant will be very low resolution.
 
 #### SHADOW_ATLAS_QUADRANT_SUBDIV_MAX {#SHADOW_ATLAS_QUADRANT_SUBDIV_MAX}
 
@@ -1894,7 +1864,9 @@ SHADOW_ATLAS_QUADRANT_SUBDIV_1024 = 6
 SHADOW_ATLAS_QUADRANT_SUBDIV_MAX = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the PositionalShadowAtlasQuadrantSubdiv enum.
+
+---
 
 ### Scaling3DMode {#enum-Scaling3DMode}
 
@@ -1902,19 +1874,37 @@ SHADOW_ATLAS_QUADRANT_SUBDIV_MAX = 7
 enum Scaling3DMode { SCALING_3D_MODE_BILINEAR = 0, SCALING_3D_MODE_FSR = 1, SCALING_3D_MODE_FSR2 = 2, SCALING_3D_MODE_METALFX_SPATIAL = 3, SCALING_3D_MODE_METALFX_TEMPORAL = 4, SCALING_3D_MODE_NEAREST = 5, SCALING_3D_MODE_MAX = 6 }
 ```
 
-Scaling3DMode SCALING_3D_MODE_BILINEAR = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### SCALING_3D_MODE_BILINEAR {#SCALING_3D_MODE_BILINEAR}
+
+```gdscript
+SCALING_3D_MODE_BILINEAR = 0
+```
 
 Use bilinear scaling for the viewport's 3D buffer. The amount of scaling can be set using scaling_3d_scale. Values less than 1.0 will result in undersampling while values greater than 1.0 will result in supersampling. A value of 1.0 disables scaling.
 
-Scaling3DMode SCALING_3D_MODE_FSR = 1
+#### SCALING_3D_MODE_FSR {#SCALING_3D_MODE_FSR}
+
+```gdscript
+SCALING_3D_MODE_FSR = 1
+```
 
 Use AMD FidelityFX Super Resolution 1.0 upscaling for the viewport's 3D buffer. The amount of scaling can be set using scaling_3d_scale. Values less than 1.0 will result in the viewport being upscaled using FSR. Values greater than 1.0 are not supported and bilinear downsampling will be used instead. A value of 1.0 disables scaling.
 
-Scaling3DMode SCALING_3D_MODE_FSR2 = 2
+#### SCALING_3D_MODE_FSR2 {#SCALING_3D_MODE_FSR2}
+
+```gdscript
+SCALING_3D_MODE_FSR2 = 2
+```
 
 Use AMD FidelityFX Super Resolution 2.2 upscaling for the viewport's 3D buffer. The amount of scaling can be set using scaling_3d_scale. Values less than 1.0 will result in the viewport being upscaled using FSR2. Values greater than 1.0 are not supported and bilinear downsampling will be used instead. A value of 1.0 will use FSR2 at native resolution as a TAA solution.
 
-Scaling3DMode SCALING_3D_MODE_METALFX_SPATIAL = 3
+#### SCALING_3D_MODE_METALFX_SPATIAL {#SCALING_3D_MODE_METALFX_SPATIAL}
+
+```gdscript
+SCALING_3D_MODE_METALFX_SPATIAL = 3
+```
 
 Use the MetalFX spatial upscaler [https://developer.apple.com/documentation/metalfx/mtlfxspatialscaler#overview] for the viewport's 3D buffer.
 
@@ -1926,7 +1916,11 @@ More information: MetalFX [https://developer.apple.com/documentation/metalfx].
 
 Note: Only supported when the Metal rendering driver is in use, which limits this scaling mode to macOS and iOS.
 
-Scaling3DMode SCALING_3D_MODE_METALFX_TEMPORAL = 4
+#### SCALING_3D_MODE_METALFX_TEMPORAL {#SCALING_3D_MODE_METALFX_TEMPORAL}
+
+```gdscript
+SCALING_3D_MODE_METALFX_TEMPORAL = 4
+```
 
 Use the MetalFX temporal upscaler [https://developer.apple.com/documentation/metalfx/mtlfxtemporalscaler#overview] for the viewport's 3D buffer.
 
@@ -1938,63 +1932,15 @@ More information: MetalFX [https://developer.apple.com/documentation/metalfx].
 
 Note: Only supported when the Metal rendering driver is in use, which limits this scaling mode to macOS and iOS.
 
-Scaling3DMode SCALING_3D_MODE_NEAREST = 5
-
-Use nearest-neighbor filtering for the viewport's 3D buffer. This looks crisper than SCALING_3D_MODE_BILINEAR and has no additional rendering cost. The amount of scaling can be set using scaling_3d_scale. Values greater than 1.0 are not supported and bilinear downsampling will be used instead. A value of 1.0 disables scaling.
-
-Note: When using the Nearest scaling mode, to avoid uneven pixel scaling, it's highly recommended to use a value equal to an integer divisor with a dividend of 1. For example, it's best to use a scale of 0.5 (1/2), 0.3333 (1/3), 0.25 (1/4), 0.2 (1/5), and so on.
-
-Scaling3DMode SCALING_3D_MODE_MAX = 6
-
-Represents the size of the Scaling3DMode enum.
-
-#### SCALING_3D_MODE_BILINEAR {#SCALING_3D_MODE_BILINEAR}
-
-```gdscript
-SCALING_3D_MODE_BILINEAR = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### SCALING_3D_MODE_FSR {#SCALING_3D_MODE_FSR}
-
-```gdscript
-SCALING_3D_MODE_FSR = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### SCALING_3D_MODE_FSR2 {#SCALING_3D_MODE_FSR2}
-
-```gdscript
-SCALING_3D_MODE_FSR2 = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### SCALING_3D_MODE_METALFX_SPATIAL {#SCALING_3D_MODE_METALFX_SPATIAL}
-
-```gdscript
-SCALING_3D_MODE_METALFX_SPATIAL = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### SCALING_3D_MODE_METALFX_TEMPORAL {#SCALING_3D_MODE_METALFX_TEMPORAL}
-
-```gdscript
-SCALING_3D_MODE_METALFX_TEMPORAL = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### SCALING_3D_MODE_NEAREST {#SCALING_3D_MODE_NEAREST}
 
 ```gdscript
 SCALING_3D_MODE_NEAREST = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use nearest-neighbor filtering for the viewport's 3D buffer. This looks crisper than SCALING_3D_MODE_BILINEAR and has no additional rendering cost. The amount of scaling can be set using scaling_3d_scale. Values greater than 1.0 are not supported and bilinear downsampling will be used instead. A value of 1.0 disables scaling.
+
+Note: When using the Nearest scaling mode, to avoid uneven pixel scaling, it's highly recommended to use a value equal to an integer divisor with a dividend of 1. For example, it's best to use a scale of 0.5 (1/2), 0.3333 (1/3), 0.25 (1/4), 0.2 (1/5), and so on.
 
 #### SCALING_3D_MODE_MAX {#SCALING_3D_MODE_MAX}
 
@@ -2002,7 +1948,9 @@ SCALING_3D_MODE_NEAREST = 5
 SCALING_3D_MODE_MAX = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the Scaling3DMode enum.
+
+---
 
 ### MSAA {#enum-MSAA}
 
@@ -2010,25 +1958,7 @@ SCALING_3D_MODE_MAX = 6
 enum MSAA { MSAA_DISABLED = 0, MSAA_2X = 1, MSAA_4X = 2, MSAA_8X = 3, MSAA_MAX = 4 }
 ```
 
-MSAA MSAA_DISABLED = 0
-
-Multisample antialiasing mode disabled. This is the default value, and is also the fastest setting.
-
-MSAA MSAA_2X = 1
-
-Use 2× Multisample Antialiasing. This has a moderate performance cost. It helps reduce aliasing noticeably, but 4× MSAA still looks substantially better.
-
-MSAA MSAA_4X = 2
-
-Use 4× Multisample Antialiasing. This has a significant performance cost, and is generally a good compromise between performance and quality.
-
-MSAA MSAA_8X = 3
-
-Use 8× Multisample Antialiasing. This has a very high performance cost. The difference between 4× and 8× MSAA may not always be visible in real gameplay conditions. Likely unsupported on low-end and older hardware.
-
-MSAA MSAA_MAX = 4
-
-Represents the size of the MSAA enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### MSAA_DISABLED {#MSAA_DISABLED}
 
@@ -2036,7 +1966,7 @@ Represents the size of the MSAA enum.
 MSAA_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Multisample antialiasing mode disabled. This is the default value, and is also the fastest setting.
 
 #### MSAA_2X {#MSAA_2X}
 
@@ -2044,7 +1974,7 @@ MSAA_DISABLED = 0
 MSAA_2X = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 2× Multisample Antialiasing. This has a moderate performance cost. It helps reduce aliasing noticeably, but 4× MSAA still looks substantially better.
 
 #### MSAA_4X {#MSAA_4X}
 
@@ -2052,7 +1982,7 @@ MSAA_2X = 1
 MSAA_4X = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 4× Multisample Antialiasing. This has a significant performance cost, and is generally a good compromise between performance and quality.
 
 #### MSAA_8X {#MSAA_8X}
 
@@ -2060,7 +1990,7 @@ MSAA_4X = 2
 MSAA_8X = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 8× Multisample Antialiasing. This has a very high performance cost. The difference between 4× and 8× MSAA may not always be visible in real gameplay conditions. Likely unsupported on low-end and older hardware.
 
 #### MSAA_MAX {#MSAA_MAX}
 
@@ -2068,7 +1998,9 @@ MSAA_8X = 3
 MSAA_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the MSAA enum.
+
+---
 
 ### AnisotropicFiltering {#enum-AnisotropicFiltering}
 
@@ -2076,29 +2008,7 @@ MSAA_MAX = 4
 enum AnisotropicFiltering { ANISOTROPY_DISABLED = 0, ANISOTROPY_2X = 1, ANISOTROPY_4X = 2, ANISOTROPY_8X = 3, ANISOTROPY_16X = 4, ANISOTROPY_MAX = 5 }
 ```
 
-AnisotropicFiltering ANISOTROPY_DISABLED = 0
-
-Anisotropic filtering is disabled.
-
-AnisotropicFiltering ANISOTROPY_2X = 1
-
-Use 2× anisotropic filtering.
-
-AnisotropicFiltering ANISOTROPY_4X = 2
-
-Use 4× anisotropic filtering. This is the default value.
-
-AnisotropicFiltering ANISOTROPY_8X = 3
-
-Use 8× anisotropic filtering.
-
-AnisotropicFiltering ANISOTROPY_16X = 4
-
-Use 16× anisotropic filtering.
-
-AnisotropicFiltering ANISOTROPY_MAX = 5
-
-Represents the size of the AnisotropicFiltering enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### ANISOTROPY_DISABLED {#ANISOTROPY_DISABLED}
 
@@ -2106,7 +2016,7 @@ Represents the size of the AnisotropicFiltering enum.
 ANISOTROPY_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Anisotropic filtering is disabled.
 
 #### ANISOTROPY_2X {#ANISOTROPY_2X}
 
@@ -2114,7 +2024,7 @@ ANISOTROPY_DISABLED = 0
 ANISOTROPY_2X = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 2× anisotropic filtering.
 
 #### ANISOTROPY_4X {#ANISOTROPY_4X}
 
@@ -2122,7 +2032,7 @@ ANISOTROPY_2X = 1
 ANISOTROPY_4X = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 4× anisotropic filtering. This is the default value.
 
 #### ANISOTROPY_8X {#ANISOTROPY_8X}
 
@@ -2130,7 +2040,7 @@ ANISOTROPY_4X = 2
 ANISOTROPY_8X = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 8× anisotropic filtering.
 
 #### ANISOTROPY_16X {#ANISOTROPY_16X}
 
@@ -2138,7 +2048,7 @@ ANISOTROPY_8X = 3
 ANISOTROPY_16X = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use 16× anisotropic filtering.
 
 #### ANISOTROPY_MAX {#ANISOTROPY_MAX}
 
@@ -2146,7 +2056,9 @@ ANISOTROPY_16X = 4
 ANISOTROPY_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the AnisotropicFiltering enum.
+
+---
 
 ### ScreenSpaceAA {#enum-ScreenSpaceAA}
 
@@ -2154,21 +2066,7 @@ ANISOTROPY_MAX = 5
 enum ScreenSpaceAA { SCREEN_SPACE_AA_DISABLED = 0, SCREEN_SPACE_AA_FXAA = 1, SCREEN_SPACE_AA_SMAA = 2, SCREEN_SPACE_AA_MAX = 3 }
 ```
 
-ScreenSpaceAA SCREEN_SPACE_AA_DISABLED = 0
-
-Do not perform any antialiasing in the full screen post-process.
-
-ScreenSpaceAA SCREEN_SPACE_AA_FXAA = 1
-
-Use fast approximate antialiasing. FXAA is a popular screen-space antialiasing method, which is fast but will make the image look blurry, especially at lower resolutions. It can still work relatively well at large resolutions such as 1440p and 4K.
-
-ScreenSpaceAA SCREEN_SPACE_AA_SMAA = 2
-
-Use subpixel morphological antialiasing. SMAA may produce clearer results than FXAA, but at a slightly higher performance cost.
-
-ScreenSpaceAA SCREEN_SPACE_AA_MAX = 3
-
-Represents the size of the ScreenSpaceAA enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SCREEN_SPACE_AA_DISABLED {#SCREEN_SPACE_AA_DISABLED}
 
@@ -2176,7 +2074,7 @@ Represents the size of the ScreenSpaceAA enum.
 SCREEN_SPACE_AA_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Do not perform any antialiasing in the full screen post-process.
 
 #### SCREEN_SPACE_AA_FXAA {#SCREEN_SPACE_AA_FXAA}
 
@@ -2184,7 +2082,7 @@ SCREEN_SPACE_AA_DISABLED = 0
 SCREEN_SPACE_AA_FXAA = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use fast approximate antialiasing. FXAA is a popular screen-space antialiasing method, which is fast but will make the image look blurry, especially at lower resolutions. It can still work relatively well at large resolutions such as 1440p and 4K.
 
 #### SCREEN_SPACE_AA_SMAA {#SCREEN_SPACE_AA_SMAA}
 
@@ -2192,7 +2090,7 @@ SCREEN_SPACE_AA_FXAA = 1
 SCREEN_SPACE_AA_SMAA = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Use subpixel morphological antialiasing. SMAA may produce clearer results than FXAA, but at a slightly higher performance cost.
 
 #### SCREEN_SPACE_AA_MAX {#SCREEN_SPACE_AA_MAX}
 
@@ -2200,7 +2098,9 @@ SCREEN_SPACE_AA_SMAA = 2
 SCREEN_SPACE_AA_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the ScreenSpaceAA enum.
+
+---
 
 ### RenderInfo {#enum-RenderInfo}
 
@@ -2208,21 +2108,7 @@ SCREEN_SPACE_AA_MAX = 3
 enum RenderInfo { RENDER_INFO_OBJECTS_IN_FRAME = 0, RENDER_INFO_PRIMITIVES_IN_FRAME = 1, RENDER_INFO_DRAW_CALLS_IN_FRAME = 2, RENDER_INFO_MAX = 3 }
 ```
 
-RenderInfo RENDER_INFO_OBJECTS_IN_FRAME = 0
-
-Amount of objects in frame.
-
-RenderInfo RENDER_INFO_PRIMITIVES_IN_FRAME = 1
-
-Amount of vertices in frame.
-
-RenderInfo RENDER_INFO_DRAW_CALLS_IN_FRAME = 2
-
-Amount of draw calls in frame.
-
-RenderInfo RENDER_INFO_MAX = 3
-
-Represents the size of the RenderInfo enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RENDER_INFO_OBJECTS_IN_FRAME {#RENDER_INFO_OBJECTS_IN_FRAME}
 
@@ -2230,7 +2116,7 @@ Represents the size of the RenderInfo enum.
 RENDER_INFO_OBJECTS_IN_FRAME = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Amount of objects in frame.
 
 #### RENDER_INFO_PRIMITIVES_IN_FRAME {#RENDER_INFO_PRIMITIVES_IN_FRAME}
 
@@ -2238,7 +2124,7 @@ RENDER_INFO_OBJECTS_IN_FRAME = 0
 RENDER_INFO_PRIMITIVES_IN_FRAME = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Amount of vertices in frame.
 
 #### RENDER_INFO_DRAW_CALLS_IN_FRAME {#RENDER_INFO_DRAW_CALLS_IN_FRAME}
 
@@ -2246,7 +2132,7 @@ RENDER_INFO_PRIMITIVES_IN_FRAME = 1
 RENDER_INFO_DRAW_CALLS_IN_FRAME = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Amount of draw calls in frame.
 
 #### RENDER_INFO_MAX {#RENDER_INFO_MAX}
 
@@ -2254,7 +2140,9 @@ RENDER_INFO_DRAW_CALLS_IN_FRAME = 2
 RENDER_INFO_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the RenderInfo enum.
+
+---
 
 ### RenderInfoType {#enum-RenderInfoType}
 
@@ -2262,21 +2150,7 @@ RENDER_INFO_MAX = 3
 enum RenderInfoType { RENDER_INFO_TYPE_VISIBLE = 0, RENDER_INFO_TYPE_SHADOW = 1, RENDER_INFO_TYPE_CANVAS = 2, RENDER_INFO_TYPE_MAX = 3 }
 ```
 
-RenderInfoType RENDER_INFO_TYPE_VISIBLE = 0
-
-Visible render pass (excluding shadows).
-
-RenderInfoType RENDER_INFO_TYPE_SHADOW = 1
-
-Shadow render pass. Objects will be rendered several times depending on the number of amounts of lights with shadows and the number of directional shadow splits.
-
-RenderInfoType RENDER_INFO_TYPE_CANVAS = 2
-
-Canvas item rendering. This includes all 2D rendering.
-
-RenderInfoType RENDER_INFO_TYPE_MAX = 3
-
-Represents the size of the RenderInfoType enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### RENDER_INFO_TYPE_VISIBLE {#RENDER_INFO_TYPE_VISIBLE}
 
@@ -2284,7 +2158,7 @@ Represents the size of the RenderInfoType enum.
 RENDER_INFO_TYPE_VISIBLE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Visible render pass (excluding shadows).
 
 #### RENDER_INFO_TYPE_SHADOW {#RENDER_INFO_TYPE_SHADOW}
 
@@ -2292,7 +2166,7 @@ RENDER_INFO_TYPE_VISIBLE = 0
 RENDER_INFO_TYPE_SHADOW = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Shadow render pass. Objects will be rendered several times depending on the number of amounts of lights with shadows and the number of directional shadow splits.
 
 #### RENDER_INFO_TYPE_CANVAS {#RENDER_INFO_TYPE_CANVAS}
 
@@ -2300,7 +2174,7 @@ RENDER_INFO_TYPE_SHADOW = 1
 RENDER_INFO_TYPE_CANVAS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Canvas item rendering. This includes all 2D rendering.
 
 #### RENDER_INFO_TYPE_MAX {#RENDER_INFO_TYPE_MAX}
 
@@ -2308,7 +2182,9 @@ RENDER_INFO_TYPE_CANVAS = 2
 RENDER_INFO_TYPE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the RenderInfoType enum.
+
+---
 
 ### DebugDraw {#enum-DebugDraw}
 
@@ -2316,27 +2192,49 @@ RENDER_INFO_TYPE_MAX = 3
 enum DebugDraw { DEBUG_DRAW_DISABLED = 0, DEBUG_DRAW_UNSHADED = 1, DEBUG_DRAW_LIGHTING = 2, DEBUG_DRAW_OVERDRAW = 3, DEBUG_DRAW_WIREFRAME = 4, DEBUG_DRAW_NORMAL_BUFFER = 5, DEBUG_DRAW_VOXEL_GI_ALBEDO = 6, DEBUG_DRAW_VOXEL_GI_LIGHTING = 7, DEBUG_DRAW_VOXEL_GI_EMISSION = 8, DEBUG_DRAW_SHADOW_ATLAS = 9, DEBUG_DRAW_DIRECTIONAL_SHADOW_ATLAS = 10, DEBUG_DRAW_SCENE_LUMINANCE = 11, DEBUG_DRAW_SSAO = 12, DEBUG_DRAW_SSIL = 13, DEBUG_DRAW_PSSM_SPLITS = 14, DEBUG_DRAW_DECAL_ATLAS = 15, DEBUG_DRAW_SDFGI = 16, DEBUG_DRAW_SDFGI_PROBES = 17, DEBUG_DRAW_GI_BUFFER = 18, DEBUG_DRAW_DISABLE_LOD = 19, DEBUG_DRAW_CLUSTER_OMNI_LIGHTS = 20, DEBUG_DRAW_CLUSTER_SPOT_LIGHTS = 21, DEBUG_DRAW_CLUSTER_DECALS = 22, DEBUG_DRAW_CLUSTER_REFLECTION_PROBES = 23, DEBUG_DRAW_OCCLUDERS = 24, DEBUG_DRAW_MOTION_VECTORS = 25, DEBUG_DRAW_INTERNAL_BUFFER = 26, DEBUG_DRAW_CLUSTER_AREA_LIGHTS = 27, DEBUG_DRAW_AREA_LIGHT_ATLAS = 28 }
 ```
 
-DebugDraw DEBUG_DRAW_DISABLED = 0
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### DEBUG_DRAW_DISABLED {#DEBUG_DRAW_DISABLED}
+
+```gdscript
+DEBUG_DRAW_DISABLED = 0
+```
 
 Objects are displayed normally.
 
-DebugDraw DEBUG_DRAW_UNSHADED = 1
+#### DEBUG_DRAW_UNSHADED {#DEBUG_DRAW_UNSHADED}
+
+```gdscript
+DEBUG_DRAW_UNSHADED = 1
+```
 
 Objects are displayed without light information.
 
-DebugDraw DEBUG_DRAW_LIGHTING = 2
+#### DEBUG_DRAW_LIGHTING {#DEBUG_DRAW_LIGHTING}
+
+```gdscript
+DEBUG_DRAW_LIGHTING = 2
+```
 
 Objects are displayed without textures and only with lighting information.
 
 Note: When using this debug draw mode, custom shaders are ignored since all materials in the scene temporarily use a debug material. This means the result from custom shader functions (such as vertex displacement) won't be visible anymore when using this debug draw mode.
 
-DebugDraw DEBUG_DRAW_OVERDRAW = 3
+#### DEBUG_DRAW_OVERDRAW {#DEBUG_DRAW_OVERDRAW}
+
+```gdscript
+DEBUG_DRAW_OVERDRAW = 3
+```
 
 Objects are displayed semi-transparent with additive blending so you can see where they are drawing over top of one another. A higher overdraw means you are wasting performance on drawing pixels that are being hidden behind others.
 
 Note: When using this debug draw mode, custom shaders are ignored since all materials in the scene temporarily use a debug material. This means the result from custom shader functions (such as vertex displacement) won't be visible anymore when using this debug draw mode.
 
-DebugDraw DEBUG_DRAW_WIREFRAME = 4
+#### DEBUG_DRAW_WIREFRAME {#DEBUG_DRAW_WIREFRAME}
+
+```gdscript
+DEBUG_DRAW_WIREFRAME = 4
+```
 
 Objects are displayed as wireframe models.
 
@@ -2344,57 +2242,97 @@ Note: RenderingServer.set_debug_generate_wireframes() must be called before load
 
 Note: In the Compatibility renderer, backfaces are always visible when using wireframe rendering. In the Forward+ and Mobile renderers, wireframes follow the material's backface culling properties instead.
 
-DebugDraw DEBUG_DRAW_NORMAL_BUFFER = 5
+#### DEBUG_DRAW_NORMAL_BUFFER {#DEBUG_DRAW_NORMAL_BUFFER}
+
+```gdscript
+DEBUG_DRAW_NORMAL_BUFFER = 5
+```
 
 Objects are displayed without lighting information and their textures replaced by normal mapping.
 
 Note: Only supported when using the Forward+ rendering method.
 
-DebugDraw DEBUG_DRAW_VOXEL_GI_ALBEDO = 6
+#### DEBUG_DRAW_VOXEL_GI_ALBEDO {#DEBUG_DRAW_VOXEL_GI_ALBEDO}
+
+```gdscript
+DEBUG_DRAW_VOXEL_GI_ALBEDO = 6
+```
 
 Objects are displayed with only the albedo value from VoxelGIs. Requires at least one visible VoxelGI node that has been baked to have a visible effect.
 
 Note: Only supported when using the Forward+ rendering method.
 
-DebugDraw DEBUG_DRAW_VOXEL_GI_LIGHTING = 7
+#### DEBUG_DRAW_VOXEL_GI_LIGHTING {#DEBUG_DRAW_VOXEL_GI_LIGHTING}
+
+```gdscript
+DEBUG_DRAW_VOXEL_GI_LIGHTING = 7
+```
 
 Objects are displayed with only the lighting value from VoxelGIs. Requires at least one visible VoxelGI node that has been baked to have a visible effect.
 
 Note: Only supported when using the Forward+ rendering method.
 
-DebugDraw DEBUG_DRAW_VOXEL_GI_EMISSION = 8
+#### DEBUG_DRAW_VOXEL_GI_EMISSION {#DEBUG_DRAW_VOXEL_GI_EMISSION}
+
+```gdscript
+DEBUG_DRAW_VOXEL_GI_EMISSION = 8
+```
 
 Objects are displayed with only the emission color from VoxelGIs. Requires at least one visible VoxelGI node that has been baked to have a visible effect.
 
 Note: Only supported when using the Forward+ rendering method.
 
-DebugDraw DEBUG_DRAW_SHADOW_ATLAS = 9
+#### DEBUG_DRAW_SHADOW_ATLAS {#DEBUG_DRAW_SHADOW_ATLAS}
+
+```gdscript
+DEBUG_DRAW_SHADOW_ATLAS = 9
+```
 
 Draws the shadow atlas that stores shadows from OmniLight3Ds and SpotLight3Ds in the upper left quadrant of the Viewport.
 
-DebugDraw DEBUG_DRAW_DIRECTIONAL_SHADOW_ATLAS = 10
+#### DEBUG_DRAW_DIRECTIONAL_SHADOW_ATLAS {#DEBUG_DRAW_DIRECTIONAL_SHADOW_ATLAS}
+
+```gdscript
+DEBUG_DRAW_DIRECTIONAL_SHADOW_ATLAS = 10
+```
 
 Draws the shadow atlas that stores shadows from DirectionalLight3Ds in the upper left quadrant of the Viewport.
 
-DebugDraw DEBUG_DRAW_SCENE_LUMINANCE = 11
+#### DEBUG_DRAW_SCENE_LUMINANCE {#DEBUG_DRAW_SCENE_LUMINANCE}
+
+```gdscript
+DEBUG_DRAW_SCENE_LUMINANCE = 11
+```
 
 Draws the scene luminance buffer (if available) in the upper left quadrant of the Viewport.
 
 Note: Only supported when using the Forward+ or Mobile rendering methods.
 
-DebugDraw DEBUG_DRAW_SSAO = 12
+#### DEBUG_DRAW_SSAO {#DEBUG_DRAW_SSAO}
+
+```gdscript
+DEBUG_DRAW_SSAO = 12
+```
 
 Draws the screen-space ambient occlusion texture instead of the scene so that you can clearly see how it is affecting objects. In order for this display mode to work, you must have Environment.ssao_enabled set in your WorldEnvironment.
 
 Note: Only supported when using the Forward+ rendering method.
 
-DebugDraw DEBUG_DRAW_SSIL = 13
+#### DEBUG_DRAW_SSIL {#DEBUG_DRAW_SSIL}
+
+```gdscript
+DEBUG_DRAW_SSIL = 13
+```
 
 Draws the screen-space indirect lighting texture instead of the scene so that you can clearly see how it is affecting objects. In order for this display mode to work, you must have Environment.ssil_enabled set in your WorldEnvironment.
 
 Note: Only supported when using the Forward+ rendering method.
 
-DebugDraw DEBUG_DRAW_PSSM_SPLITS = 14
+#### DEBUG_DRAW_PSSM_SPLITS {#DEBUG_DRAW_PSSM_SPLITS}
+
+```gdscript
+DEBUG_DRAW_PSSM_SPLITS = 14
+```
 
 Colors each PSSM split for the DirectionalLight3Ds in the scene a different color so you can see where the splits are. In order (from closest to furthest from the camera), they are colored red, green, blue, and yellow.
 
@@ -2402,13 +2340,21 @@ Note: When using this debug draw mode, custom shaders are ignored since all mate
 
 Note: Only supported when using the Forward+ or Mobile rendering methods.
 
-DebugDraw DEBUG_DRAW_DECAL_ATLAS = 15
+#### DEBUG_DRAW_DECAL_ATLAS {#DEBUG_DRAW_DECAL_ATLAS}
+
+```gdscript
+DEBUG_DRAW_DECAL_ATLAS = 15
+```
 
 Draws the decal atlas used by Decals and light projector textures in the upper left quadrant of the Viewport.
 
 Note: Only supported when using the Forward+ or Mobile rendering methods.
 
-DebugDraw DEBUG_DRAW_SDFGI = 16
+#### DEBUG_DRAW_SDFGI {#DEBUG_DRAW_SDFGI}
+
+```gdscript
+DEBUG_DRAW_SDFGI = 16
+```
 
 Draws the cascades used to render signed distance field global illumination (SDFGI).
 
@@ -2416,7 +2362,11 @@ Does nothing if the current environment's Environment.sdfgi_enabled is false.
 
 Note: Only supported when using the Forward+ rendering method.
 
-DebugDraw DEBUG_DRAW_SDFGI_PROBES = 17
+#### DEBUG_DRAW_SDFGI_PROBES {#DEBUG_DRAW_SDFGI_PROBES}
+
+```gdscript
+DEBUG_DRAW_SDFGI_PROBES = 17
+```
 
 Draws the probes used for signed distance field global illumination (SDFGI).
 
@@ -2426,221 +2376,15 @@ Does nothing if the current environment's Environment.sdfgi_enabled is false.
 
 Note: Only supported when using the Forward+ rendering method.
 
-DebugDraw DEBUG_DRAW_GI_BUFFER = 18
-
-Draws the buffer used for global illumination from VoxelGI or SDFGI. Requires VoxelGI (at least one visible baked VoxelGI node) or SDFGI (Environment.sdfgi_enabled) to be enabled to have a visible effect.
-
-Note: Only supported when using the Forward+ rendering method.
-
-DebugDraw DEBUG_DRAW_DISABLE_LOD = 19
-
-Draws all of the objects at their highest polycount regardless of their distance from the camera. No low level of detail (LOD) is applied.
-
-DebugDraw DEBUG_DRAW_CLUSTER_OMNI_LIGHTS = 20
-
-Draws the cluster used by OmniLight3D nodes to optimize light rendering.
-
-Note: Only supported when using the Forward+ rendering method.
-
-DebugDraw DEBUG_DRAW_CLUSTER_SPOT_LIGHTS = 21
-
-Draws the cluster used by SpotLight3D nodes to optimize light rendering.
-
-Note: Only supported when using the Forward+ rendering method.
-
-DebugDraw DEBUG_DRAW_CLUSTER_DECALS = 22
-
-Draws the cluster used by Decal nodes to optimize decal rendering.
-
-Note: Only supported when using the Forward+ rendering method.
-
-DebugDraw DEBUG_DRAW_CLUSTER_REFLECTION_PROBES = 23
-
-Draws the cluster used by ReflectionProbe nodes to optimize reflection probes.
-
-Note: Only supported when using the Forward+ rendering method.
-
-DebugDraw DEBUG_DRAW_OCCLUDERS = 24
-
-Draws the buffer used for occlusion culling.
-
-Note: Only supported when using the Forward+ or Mobile rendering methods.
-
-DebugDraw DEBUG_DRAW_MOTION_VECTORS = 25
-
-Draws vector lines over the viewport to indicate the movement of pixels between frames.
-
-Note: Only supported when using the Forward+ rendering method.
-
-DebugDraw DEBUG_DRAW_INTERNAL_BUFFER = 26
-
-Draws the internal resolution buffer of the scene in linear colorspace before tonemapping or post-processing is applied.
-
-Note: Only supported when using the Forward+ or Mobile rendering methods.
-
-DebugDraw DEBUG_DRAW_CLUSTER_AREA_LIGHTS = 27
-
-Draws the cluster used by AreaLight3D nodes to optimize light rendering.
-
-Note: Only supported when using the Forward+ rendering method.
-
-DebugDraw DEBUG_DRAW_AREA_LIGHT_ATLAS = 28
-
-Draws the atlas used by AreaLight3D nodes in the upper left quadrant of the Viewport.
-
-Note: Only supported when using the Forward+ or Mobile rendering method.
-
-#### DEBUG_DRAW_DISABLED {#DEBUG_DRAW_DISABLED}
-
-```gdscript
-DEBUG_DRAW_DISABLED = 0
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_UNSHADED {#DEBUG_DRAW_UNSHADED}
-
-```gdscript
-DEBUG_DRAW_UNSHADED = 1
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_LIGHTING {#DEBUG_DRAW_LIGHTING}
-
-```gdscript
-DEBUG_DRAW_LIGHTING = 2
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_OVERDRAW {#DEBUG_DRAW_OVERDRAW}
-
-```gdscript
-DEBUG_DRAW_OVERDRAW = 3
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_WIREFRAME {#DEBUG_DRAW_WIREFRAME}
-
-```gdscript
-DEBUG_DRAW_WIREFRAME = 4
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_NORMAL_BUFFER {#DEBUG_DRAW_NORMAL_BUFFER}
-
-```gdscript
-DEBUG_DRAW_NORMAL_BUFFER = 5
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_VOXEL_GI_ALBEDO {#DEBUG_DRAW_VOXEL_GI_ALBEDO}
-
-```gdscript
-DEBUG_DRAW_VOXEL_GI_ALBEDO = 6
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_VOXEL_GI_LIGHTING {#DEBUG_DRAW_VOXEL_GI_LIGHTING}
-
-```gdscript
-DEBUG_DRAW_VOXEL_GI_LIGHTING = 7
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_VOXEL_GI_EMISSION {#DEBUG_DRAW_VOXEL_GI_EMISSION}
-
-```gdscript
-DEBUG_DRAW_VOXEL_GI_EMISSION = 8
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_SHADOW_ATLAS {#DEBUG_DRAW_SHADOW_ATLAS}
-
-```gdscript
-DEBUG_DRAW_SHADOW_ATLAS = 9
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_DIRECTIONAL_SHADOW_ATLAS {#DEBUG_DRAW_DIRECTIONAL_SHADOW_ATLAS}
-
-```gdscript
-DEBUG_DRAW_DIRECTIONAL_SHADOW_ATLAS = 10
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_SCENE_LUMINANCE {#DEBUG_DRAW_SCENE_LUMINANCE}
-
-```gdscript
-DEBUG_DRAW_SCENE_LUMINANCE = 11
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_SSAO {#DEBUG_DRAW_SSAO}
-
-```gdscript
-DEBUG_DRAW_SSAO = 12
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_SSIL {#DEBUG_DRAW_SSIL}
-
-```gdscript
-DEBUG_DRAW_SSIL = 13
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_PSSM_SPLITS {#DEBUG_DRAW_PSSM_SPLITS}
-
-```gdscript
-DEBUG_DRAW_PSSM_SPLITS = 14
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_DECAL_ATLAS {#DEBUG_DRAW_DECAL_ATLAS}
-
-```gdscript
-DEBUG_DRAW_DECAL_ATLAS = 15
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_SDFGI {#DEBUG_DRAW_SDFGI}
-
-```gdscript
-DEBUG_DRAW_SDFGI = 16
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
-#### DEBUG_DRAW_SDFGI_PROBES {#DEBUG_DRAW_SDFGI_PROBES}
-
-```gdscript
-DEBUG_DRAW_SDFGI_PROBES = 17
-```
-
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
-
 #### DEBUG_DRAW_GI_BUFFER {#DEBUG_DRAW_GI_BUFFER}
 
 ```gdscript
 DEBUG_DRAW_GI_BUFFER = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the buffer used for global illumination from VoxelGI or SDFGI. Requires VoxelGI (at least one visible baked VoxelGI node) or SDFGI (Environment.sdfgi_enabled) to be enabled to have a visible effect.
+
+Note: Only supported when using the Forward+ rendering method.
 
 #### DEBUG_DRAW_DISABLE_LOD {#DEBUG_DRAW_DISABLE_LOD}
 
@@ -2648,7 +2392,7 @@ DEBUG_DRAW_GI_BUFFER = 18
 DEBUG_DRAW_DISABLE_LOD = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws all of the objects at their highest polycount regardless of their distance from the camera. No low level of detail (LOD) is applied.
 
 #### DEBUG_DRAW_CLUSTER_OMNI_LIGHTS {#DEBUG_DRAW_CLUSTER_OMNI_LIGHTS}
 
@@ -2656,7 +2400,9 @@ DEBUG_DRAW_DISABLE_LOD = 19
 DEBUG_DRAW_CLUSTER_OMNI_LIGHTS = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the cluster used by OmniLight3D nodes to optimize light rendering.
+
+Note: Only supported when using the Forward+ rendering method.
 
 #### DEBUG_DRAW_CLUSTER_SPOT_LIGHTS {#DEBUG_DRAW_CLUSTER_SPOT_LIGHTS}
 
@@ -2664,7 +2410,9 @@ DEBUG_DRAW_CLUSTER_OMNI_LIGHTS = 20
 DEBUG_DRAW_CLUSTER_SPOT_LIGHTS = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the cluster used by SpotLight3D nodes to optimize light rendering.
+
+Note: Only supported when using the Forward+ rendering method.
 
 #### DEBUG_DRAW_CLUSTER_DECALS {#DEBUG_DRAW_CLUSTER_DECALS}
 
@@ -2672,7 +2420,9 @@ DEBUG_DRAW_CLUSTER_SPOT_LIGHTS = 21
 DEBUG_DRAW_CLUSTER_DECALS = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the cluster used by Decal nodes to optimize decal rendering.
+
+Note: Only supported when using the Forward+ rendering method.
 
 #### DEBUG_DRAW_CLUSTER_REFLECTION_PROBES {#DEBUG_DRAW_CLUSTER_REFLECTION_PROBES}
 
@@ -2680,7 +2430,9 @@ DEBUG_DRAW_CLUSTER_DECALS = 22
 DEBUG_DRAW_CLUSTER_REFLECTION_PROBES = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the cluster used by ReflectionProbe nodes to optimize reflection probes.
+
+Note: Only supported when using the Forward+ rendering method.
 
 #### DEBUG_DRAW_OCCLUDERS {#DEBUG_DRAW_OCCLUDERS}
 
@@ -2688,7 +2440,9 @@ DEBUG_DRAW_CLUSTER_REFLECTION_PROBES = 23
 DEBUG_DRAW_OCCLUDERS = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the buffer used for occlusion culling.
+
+Note: Only supported when using the Forward+ or Mobile rendering methods.
 
 #### DEBUG_DRAW_MOTION_VECTORS {#DEBUG_DRAW_MOTION_VECTORS}
 
@@ -2696,7 +2450,9 @@ DEBUG_DRAW_OCCLUDERS = 24
 DEBUG_DRAW_MOTION_VECTORS = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws vector lines over the viewport to indicate the movement of pixels between frames.
+
+Note: Only supported when using the Forward+ rendering method.
 
 #### DEBUG_DRAW_INTERNAL_BUFFER {#DEBUG_DRAW_INTERNAL_BUFFER}
 
@@ -2704,7 +2460,9 @@ DEBUG_DRAW_MOTION_VECTORS = 25
 DEBUG_DRAW_INTERNAL_BUFFER = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the internal resolution buffer of the scene in linear colorspace before tonemapping or post-processing is applied.
+
+Note: Only supported when using the Forward+ or Mobile rendering methods.
 
 #### DEBUG_DRAW_CLUSTER_AREA_LIGHTS {#DEBUG_DRAW_CLUSTER_AREA_LIGHTS}
 
@@ -2712,7 +2470,9 @@ DEBUG_DRAW_INTERNAL_BUFFER = 26
 DEBUG_DRAW_CLUSTER_AREA_LIGHTS = 27
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the cluster used by AreaLight3D nodes to optimize light rendering.
+
+Note: Only supported when using the Forward+ rendering method.
 
 #### DEBUG_DRAW_AREA_LIGHT_ATLAS {#DEBUG_DRAW_AREA_LIGHT_ATLAS}
 
@@ -2720,7 +2480,11 @@ DEBUG_DRAW_CLUSTER_AREA_LIGHTS = 27
 DEBUG_DRAW_AREA_LIGHT_ATLAS = 28
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Draws the atlas used by AreaLight3D nodes in the upper left quadrant of the Viewport.
+
+Note: Only supported when using the Forward+ or Mobile rendering method.
+
+---
 
 ### DefaultCanvasItemTextureFilter {#enum-DefaultCanvasItemTextureFilter}
 
@@ -2728,33 +2492,7 @@ DEBUG_DRAW_AREA_LIGHT_ATLAS = 28
 enum DefaultCanvasItemTextureFilter { DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST = 0, DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR = 1, DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 2, DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 3, DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_PARENT_NODE = 4, DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_MAX = 5 }
 ```
 
-DefaultCanvasItemTextureFilter DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST = 0
-
-The texture filter reads from the nearest pixel only. This makes the texture look pixelated from up close, and grainy from a distance (due to mipmaps not being sampled).
-
-DefaultCanvasItemTextureFilter DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR = 1
-
-The texture filter blends between the nearest 4 pixels. This makes the texture look smooth from up close, and grainy from a distance (due to mipmaps not being sampled).
-
-DefaultCanvasItemTextureFilter DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 2
-
-The texture filter blends between the nearest 4 pixels and between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look smooth from up close, and smooth from a distance.
-
-Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to Camera2D zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
-
-DefaultCanvasItemTextureFilter DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 3
-
-The texture filter reads from the nearest pixel and blends between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look pixelated from up close, and smooth from a distance.
-
-Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to Camera2D zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
-
-DefaultCanvasItemTextureFilter DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_PARENT_NODE = 4
-
-The Viewport will inherit the filter from its parent CanvasItem or Viewport.
-
-DefaultCanvasItemTextureFilter DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_MAX = 5
-
-Represents the size of the DefaultCanvasItemTextureFilter enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST {#DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST}
 
@@ -2762,7 +2500,7 @@ Represents the size of the DefaultCanvasItemTextureFilter enum.
 DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter reads from the nearest pixel only. This makes the texture look pixelated from up close, and grainy from a distance (due to mipmaps not being sampled).
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR {#DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR}
 
@@ -2770,7 +2508,7 @@ DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST = 0
 DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter blends between the nearest 4 pixels. This makes the texture look smooth from up close, and grainy from a distance (due to mipmaps not being sampled).
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS {#DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS}
 
@@ -2778,7 +2516,9 @@ DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR = 1
 DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter blends between the nearest 4 pixels and between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look smooth from up close, and smooth from a distance.
+
+Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to Camera2D zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS {#DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS}
 
@@ -2786,7 +2526,9 @@ DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_LINEAR_WITH_MIPMAPS = 2
 DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture filter reads from the nearest pixel and blends between the nearest 2 mipmaps (or uses the nearest mipmap if ProjectSettings.rendering/textures/default_filters/use_nearest_mipmap_filter is true). This makes the texture look pixelated from up close, and smooth from a distance.
+
+Use this for non-pixel art textures that may be viewed at a low scale (e.g. due to Camera2D zoom or sprite scaling), as mipmaps are important to smooth out pixels that are smaller than on-screen pixels.
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_PARENT_NODE {#DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_PARENT_NODE}
 
@@ -2794,7 +2536,7 @@ DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_NEAREST_WITH_MIPMAPS = 3
 DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_PARENT_NODE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Viewport will inherit the filter from its parent CanvasItem or Viewport.
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_MAX {#DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_MAX}
 
@@ -2802,7 +2544,9 @@ DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_PARENT_NODE = 4
 DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_MAX = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the DefaultCanvasItemTextureFilter enum.
+
+---
 
 ### DefaultCanvasItemTextureRepeat {#enum-DefaultCanvasItemTextureRepeat}
 
@@ -2810,25 +2554,7 @@ DEFAULT_CANVAS_ITEM_TEXTURE_FILTER_MAX = 5
 enum DefaultCanvasItemTextureRepeat { DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_DISABLED = 0, DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_ENABLED = 1, DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MIRROR = 2, DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_PARENT_NODE = 3, DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MAX = 4 }
 ```
 
-DefaultCanvasItemTextureRepeat DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_DISABLED = 0
-
-Disables textures repeating. Instead, when reading UVs outside the 0-1 range, the value will be clamped to the edge of the texture, resulting in a stretched out look at the borders of the texture.
-
-DefaultCanvasItemTextureRepeat DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_ENABLED = 1
-
-Enables the texture to repeat when UV coordinates are outside the 0-1 range. If using one of the linear filtering modes, this can result in artifacts at the edges of a texture when the sampler filters across the edges of the texture.
-
-DefaultCanvasItemTextureRepeat DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MIRROR = 2
-
-Flip the texture when repeating so that the edge lines up instead of abruptly changing.
-
-DefaultCanvasItemTextureRepeat DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_PARENT_NODE = 3
-
-The Viewport will inherit the repeat mode from its parent CanvasItem or Viewport.
-
-DefaultCanvasItemTextureRepeat DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MAX = 4
-
-Represents the size of the DefaultCanvasItemTextureRepeat enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_DISABLED {#DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_DISABLED}
 
@@ -2836,7 +2562,7 @@ Represents the size of the DefaultCanvasItemTextureRepeat enum.
 DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Disables textures repeating. Instead, when reading UVs outside the 0-1 range, the value will be clamped to the edge of the texture, resulting in a stretched out look at the borders of the texture.
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_ENABLED {#DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_ENABLED}
 
@@ -2844,7 +2570,7 @@ DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_DISABLED = 0
 DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_ENABLED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Enables the texture to repeat when UV coordinates are outside the 0-1 range. If using one of the linear filtering modes, this can result in artifacts at the edges of a texture when the sampler filters across the edges of the texture.
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MIRROR {#DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MIRROR}
 
@@ -2852,7 +2578,7 @@ DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_ENABLED = 1
 DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MIRROR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Flip the texture when repeating so that the edge lines up instead of abruptly changing.
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_PARENT_NODE {#DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_PARENT_NODE}
 
@@ -2860,7 +2586,7 @@ DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MIRROR = 2
 DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_PARENT_NODE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The Viewport will inherit the repeat mode from its parent CanvasItem or Viewport.
 
 #### DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MAX {#DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MAX}
 
@@ -2868,7 +2594,9 @@ DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_PARENT_NODE = 3
 DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the DefaultCanvasItemTextureRepeat enum.
+
+---
 
 ### SDFOversize {#enum-SDFOversize}
 
@@ -2876,25 +2604,7 @@ DEFAULT_CANVAS_ITEM_TEXTURE_REPEAT_MAX = 4
 enum SDFOversize { SDF_OVERSIZE_100_PERCENT = 0, SDF_OVERSIZE_120_PERCENT = 1, SDF_OVERSIZE_150_PERCENT = 2, SDF_OVERSIZE_200_PERCENT = 3, SDF_OVERSIZE_MAX = 4 }
 ```
 
-SDFOversize SDF_OVERSIZE_100_PERCENT = 0
-
-The signed distance field only covers the viewport's own rectangle.
-
-SDFOversize SDF_OVERSIZE_120_PERCENT = 1
-
-The signed distance field is expanded to cover 20% of the viewport's size around the borders.
-
-SDFOversize SDF_OVERSIZE_150_PERCENT = 2
-
-The signed distance field is expanded to cover 50% of the viewport's size around the borders.
-
-SDFOversize SDF_OVERSIZE_200_PERCENT = 3
-
-The signed distance field is expanded to cover 100% (double) of the viewport's size around the borders.
-
-SDFOversize SDF_OVERSIZE_MAX = 4
-
-Represents the size of the SDFOversize enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SDF_OVERSIZE_100_PERCENT {#SDF_OVERSIZE_100_PERCENT}
 
@@ -2902,7 +2612,7 @@ Represents the size of the SDFOversize enum.
 SDF_OVERSIZE_100_PERCENT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The signed distance field only covers the viewport's own rectangle.
 
 #### SDF_OVERSIZE_120_PERCENT {#SDF_OVERSIZE_120_PERCENT}
 
@@ -2910,7 +2620,7 @@ SDF_OVERSIZE_100_PERCENT = 0
 SDF_OVERSIZE_120_PERCENT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The signed distance field is expanded to cover 20% of the viewport's size around the borders.
 
 #### SDF_OVERSIZE_150_PERCENT {#SDF_OVERSIZE_150_PERCENT}
 
@@ -2918,7 +2628,7 @@ SDF_OVERSIZE_120_PERCENT = 1
 SDF_OVERSIZE_150_PERCENT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The signed distance field is expanded to cover 50% of the viewport's size around the borders.
 
 #### SDF_OVERSIZE_200_PERCENT {#SDF_OVERSIZE_200_PERCENT}
 
@@ -2926,7 +2636,7 @@ SDF_OVERSIZE_150_PERCENT = 2
 SDF_OVERSIZE_200_PERCENT = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The signed distance field is expanded to cover 100% (double) of the viewport's size around the borders.
 
 #### SDF_OVERSIZE_MAX {#SDF_OVERSIZE_MAX}
 
@@ -2934,7 +2644,9 @@ SDF_OVERSIZE_200_PERCENT = 3
 SDF_OVERSIZE_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the SDFOversize enum.
+
+---
 
 ### SDFScale {#enum-SDFScale}
 
@@ -2942,21 +2654,7 @@ SDF_OVERSIZE_MAX = 4
 enum SDFScale { SDF_SCALE_100_PERCENT = 0, SDF_SCALE_50_PERCENT = 1, SDF_SCALE_25_PERCENT = 2, SDF_SCALE_MAX = 3 }
 ```
 
-SDFScale SDF_SCALE_100_PERCENT = 0
-
-The signed distance field is rendered at full resolution.
-
-SDFScale SDF_SCALE_50_PERCENT = 1
-
-The signed distance field is rendered at half the resolution of this viewport.
-
-SDFScale SDF_SCALE_25_PERCENT = 2
-
-The signed distance field is rendered at a quarter the resolution of this viewport.
-
-SDFScale SDF_SCALE_MAX = 3
-
-Represents the size of the SDFScale enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### SDF_SCALE_100_PERCENT {#SDF_SCALE_100_PERCENT}
 
@@ -2964,7 +2662,7 @@ Represents the size of the SDFScale enum.
 SDF_SCALE_100_PERCENT = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The signed distance field is rendered at full resolution.
 
 #### SDF_SCALE_50_PERCENT {#SDF_SCALE_50_PERCENT}
 
@@ -2972,7 +2670,7 @@ SDF_SCALE_100_PERCENT = 0
 SDF_SCALE_50_PERCENT = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The signed distance field is rendered at half the resolution of this viewport.
 
 #### SDF_SCALE_25_PERCENT {#SDF_SCALE_25_PERCENT}
 
@@ -2980,7 +2678,7 @@ SDF_SCALE_50_PERCENT = 1
 SDF_SCALE_25_PERCENT = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The signed distance field is rendered at a quarter the resolution of this viewport.
 
 #### SDF_SCALE_MAX {#SDF_SCALE_MAX}
 
@@ -2988,7 +2686,9 @@ SDF_SCALE_25_PERCENT = 2
 SDF_SCALE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the SDFScale enum.
+
+---
 
 ### VRSMode {#enum-VRSMode}
 
@@ -2996,21 +2696,7 @@ SDF_SCALE_MAX = 3
 enum VRSMode { VRS_DISABLED = 0, VRS_TEXTURE = 1, VRS_XR = 2, VRS_MAX = 3 }
 ```
 
-VRSMode VRS_DISABLED = 0
-
-Variable Rate Shading is disabled.
-
-VRSMode VRS_TEXTURE = 1
-
-Variable Rate Shading uses a texture. Note, for stereoscopic use a texture atlas with a texture for each view.
-
-VRSMode VRS_XR = 2
-
-Variable Rate Shading's texture is supplied by the primary XRInterface.
-
-VRSMode VRS_MAX = 3
-
-Represents the size of the VRSMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VRS_DISABLED {#VRS_DISABLED}
 
@@ -3018,7 +2704,7 @@ Represents the size of the VRSMode enum.
 VRS_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Variable Rate Shading is disabled.
 
 #### VRS_TEXTURE {#VRS_TEXTURE}
 
@@ -3026,7 +2712,7 @@ VRS_DISABLED = 0
 VRS_TEXTURE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Variable Rate Shading uses a texture. Note, for stereoscopic use a texture atlas with a texture for each view.
 
 #### VRS_XR {#VRS_XR}
 
@@ -3034,7 +2720,7 @@ VRS_TEXTURE = 1
 VRS_XR = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Variable Rate Shading's texture is supplied by the primary XRInterface.
 
 #### VRS_MAX {#VRS_MAX}
 
@@ -3042,7 +2728,9 @@ VRS_XR = 2
 VRS_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the VRSMode enum.
+
+---
 
 ### VRSUpdateMode {#enum-VRSUpdateMode}
 
@@ -3050,21 +2738,7 @@ VRS_MAX = 3
 enum VRSUpdateMode { VRS_UPDATE_DISABLED = 0, VRS_UPDATE_ONCE = 1, VRS_UPDATE_ALWAYS = 2, VRS_UPDATE_MAX = 3 }
 ```
 
-VRSUpdateMode VRS_UPDATE_DISABLED = 0
-
-The input texture for variable rate shading will not be processed.
-
-VRSUpdateMode VRS_UPDATE_ONCE = 1
-
-The input texture for variable rate shading will be processed once.
-
-VRSUpdateMode VRS_UPDATE_ALWAYS = 2
-
-The input texture for variable rate shading will be processed each frame.
-
-VRSUpdateMode VRS_UPDATE_MAX = 3
-
-Represents the size of the VRSUpdateMode enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### VRS_UPDATE_DISABLED {#VRS_UPDATE_DISABLED}
 
@@ -3072,7 +2746,7 @@ Represents the size of the VRSUpdateMode enum.
 VRS_UPDATE_DISABLED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The input texture for variable rate shading will not be processed.
 
 #### VRS_UPDATE_ONCE {#VRS_UPDATE_ONCE}
 
@@ -3080,7 +2754,7 @@ VRS_UPDATE_DISABLED = 0
 VRS_UPDATE_ONCE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The input texture for variable rate shading will be processed once.
 
 #### VRS_UPDATE_ALWAYS {#VRS_UPDATE_ALWAYS}
 
@@ -3088,7 +2762,7 @@ VRS_UPDATE_ONCE = 1
 VRS_UPDATE_ALWAYS = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The input texture for variable rate shading will be processed each frame.
 
 #### VRS_UPDATE_MAX {#VRS_UPDATE_MAX}
 
@@ -3096,4 +2770,6 @@ VRS_UPDATE_ALWAYS = 2
 VRS_UPDATE_MAX = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the VRSUpdateMode enum.
+
+---

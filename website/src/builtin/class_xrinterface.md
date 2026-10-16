@@ -358,33 +358,7 @@ Emitted when the play area is changed. This can be a result of the player resett
 enum Capabilities { XR_NONE = 0, XR_MONO = 1, XR_STEREO = 2, XR_QUAD = 4, XR_VR = 8, XR_AR = 16, XR_EXTERNAL = 32 }
 ```
 
-Capabilities XR_NONE = 0
-
-No XR capabilities.
-
-Capabilities XR_MONO = 1
-
-This interface can work with normal rendering output (non-HMD based AR).
-
-Capabilities XR_STEREO = 2
-
-This interface supports stereoscopic rendering.
-
-Capabilities XR_QUAD = 4
-
-This interface supports quad rendering (not yet supported by Godot).
-
-Capabilities XR_VR = 8
-
-This interface supports VR.
-
-Capabilities XR_AR = 16
-
-This interface supports AR (video background and real world tracking).
-
-Capabilities XR_EXTERNAL = 32
-
-This interface outputs to an external device. If the main viewport is used, the on screen output is an unmodified buffer of either the left or right eye (stretched if the viewport size is not changed to the same aspect ratio of get_render_target_size()). Using a separate viewport node frees up the main viewport for other purposes.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### XR_NONE {#XR_NONE}
 
@@ -392,7 +366,7 @@ This interface outputs to an external device. If the main viewport is used, the 
 XR_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No XR capabilities.
 
 #### XR_MONO {#XR_MONO}
 
@@ -400,7 +374,7 @@ XR_NONE = 0
 XR_MONO = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This interface can work with normal rendering output (non-HMD based AR).
 
 #### XR_STEREO {#XR_STEREO}
 
@@ -408,7 +382,7 @@ XR_MONO = 1
 XR_STEREO = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This interface supports stereoscopic rendering.
 
 #### XR_QUAD {#XR_QUAD}
 
@@ -416,7 +390,7 @@ XR_STEREO = 2
 XR_QUAD = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This interface supports quad rendering (not yet supported by Godot).
 
 #### XR_VR {#XR_VR}
 
@@ -424,7 +398,7 @@ XR_QUAD = 4
 XR_VR = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This interface supports VR.
 
 #### XR_AR {#XR_AR}
 
@@ -432,7 +406,7 @@ XR_VR = 8
 XR_AR = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This interface supports AR (video background and real world tracking).
 
 #### XR_EXTERNAL {#XR_EXTERNAL}
 
@@ -440,7 +414,9 @@ XR_AR = 16
 XR_EXTERNAL = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+This interface outputs to an external device. If the main viewport is used, the on screen output is an unmodified buffer of either the left or right eye (stretched if the viewport size is not changed to the same aspect ratio of get_render_target_size()). Using a separate viewport node frees up the main viewport for other purposes.
+
+---
 
 ### TrackingStatus {#enum-TrackingStatus}
 
@@ -448,25 +424,7 @@ XR_EXTERNAL = 32
 enum TrackingStatus { XR_NORMAL_TRACKING = 0, XR_EXCESSIVE_MOTION = 1, XR_INSUFFICIENT_FEATURES = 2, XR_UNKNOWN_TRACKING = 3, XR_NOT_TRACKING = 4 }
 ```
 
-TrackingStatus XR_NORMAL_TRACKING = 0
-
-Tracking is behaving as expected.
-
-TrackingStatus XR_EXCESSIVE_MOTION = 1
-
-Tracking is hindered by excessive motion (the player is moving faster than tracking can keep up).
-
-TrackingStatus XR_INSUFFICIENT_FEATURES = 2
-
-Tracking is hindered by insufficient features, it's too dark (for camera-based tracking), player is blocked, etc.
-
-TrackingStatus XR_UNKNOWN_TRACKING = 3
-
-We don't know the status of the tracking or this interface does not provide feedback.
-
-TrackingStatus XR_NOT_TRACKING = 4
-
-Tracking is not functional (camera not plugged in or obscured, lighthouses turned off, etc.).
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### XR_NORMAL_TRACKING {#XR_NORMAL_TRACKING}
 
@@ -474,7 +432,7 @@ Tracking is not functional (camera not plugged in or obscured, lighthouses turne
 XR_NORMAL_TRACKING = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tracking is behaving as expected.
 
 #### XR_EXCESSIVE_MOTION {#XR_EXCESSIVE_MOTION}
 
@@ -482,7 +440,7 @@ XR_NORMAL_TRACKING = 0
 XR_EXCESSIVE_MOTION = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tracking is hindered by excessive motion (the player is moving faster than tracking can keep up).
 
 #### XR_INSUFFICIENT_FEATURES {#XR_INSUFFICIENT_FEATURES}
 
@@ -490,7 +448,7 @@ XR_EXCESSIVE_MOTION = 1
 XR_INSUFFICIENT_FEATURES = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tracking is hindered by insufficient features, it's too dark (for camera-based tracking), player is blocked, etc.
 
 #### XR_UNKNOWN_TRACKING {#XR_UNKNOWN_TRACKING}
 
@@ -498,7 +456,7 @@ XR_INSUFFICIENT_FEATURES = 2
 XR_UNKNOWN_TRACKING = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+We don't know the status of the tracking or this interface does not provide feedback.
 
 #### XR_NOT_TRACKING {#XR_NOT_TRACKING}
 
@@ -506,7 +464,9 @@ XR_UNKNOWN_TRACKING = 3
 XR_NOT_TRACKING = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Tracking is not functional (camera not plugged in or obscured, lighthouses turned off, etc.).
+
+---
 
 ### PlayAreaMode {#enum-PlayAreaMode}
 
@@ -514,29 +474,7 @@ XR_NOT_TRACKING = 4
 enum PlayAreaMode { XR_PLAY_AREA_UNKNOWN = 0, XR_PLAY_AREA_3DOF = 1, XR_PLAY_AREA_SITTING = 2, XR_PLAY_AREA_ROOMSCALE = 3, XR_PLAY_AREA_STAGE = 4, XR_PLAY_AREA_CUSTOM = 2147483647 }
 ```
 
-PlayAreaMode XR_PLAY_AREA_UNKNOWN = 0
-
-Play area mode not set or not available.
-
-PlayAreaMode XR_PLAY_AREA_3DOF = 1
-
-Play area only supports orientation tracking, no positional tracking, area will center around player.
-
-PlayAreaMode XR_PLAY_AREA_SITTING = 2
-
-Player is in seated position, limited positional tracking, fixed guardian around player.
-
-PlayAreaMode XR_PLAY_AREA_ROOMSCALE = 3
-
-Player is free to move around, full positional tracking.
-
-PlayAreaMode XR_PLAY_AREA_STAGE = 4
-
-Same as XR_PLAY_AREA_ROOMSCALE but origin point is fixed to the center of the physical space. In this mode, system-level recentering may be disabled, requiring the use of XRServer.center_on_hmd().
-
-PlayAreaMode XR_PLAY_AREA_CUSTOM = 2147483647
-
-Custom play area set by a GDExtension.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### XR_PLAY_AREA_UNKNOWN {#XR_PLAY_AREA_UNKNOWN}
 
@@ -544,7 +482,7 @@ Custom play area set by a GDExtension.
 XR_PLAY_AREA_UNKNOWN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Play area mode not set or not available.
 
 #### XR_PLAY_AREA_3DOF {#XR_PLAY_AREA_3DOF}
 
@@ -552,7 +490,7 @@ XR_PLAY_AREA_UNKNOWN = 0
 XR_PLAY_AREA_3DOF = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Play area only supports orientation tracking, no positional tracking, area will center around player.
 
 #### XR_PLAY_AREA_SITTING {#XR_PLAY_AREA_SITTING}
 
@@ -560,7 +498,7 @@ XR_PLAY_AREA_3DOF = 1
 XR_PLAY_AREA_SITTING = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Player is in seated position, limited positional tracking, fixed guardian around player.
 
 #### XR_PLAY_AREA_ROOMSCALE {#XR_PLAY_AREA_ROOMSCALE}
 
@@ -568,7 +506,7 @@ XR_PLAY_AREA_SITTING = 2
 XR_PLAY_AREA_ROOMSCALE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Player is free to move around, full positional tracking.
 
 #### XR_PLAY_AREA_STAGE {#XR_PLAY_AREA_STAGE}
 
@@ -576,7 +514,7 @@ XR_PLAY_AREA_ROOMSCALE = 3
 XR_PLAY_AREA_STAGE = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Same as XR_PLAY_AREA_ROOMSCALE but origin point is fixed to the center of the physical space. In this mode, system-level recentering may be disabled, requiring the use of XRServer.center_on_hmd().
 
 #### XR_PLAY_AREA_CUSTOM {#XR_PLAY_AREA_CUSTOM}
 
@@ -584,7 +522,9 @@ XR_PLAY_AREA_STAGE = 4
 XR_PLAY_AREA_CUSTOM = 2147483647
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Custom play area set by a GDExtension.
+
+---
 
 ### EnvironmentBlendMode {#enum-EnvironmentBlendMode}
 
@@ -592,17 +532,7 @@ XR_PLAY_AREA_CUSTOM = 2147483647
 enum EnvironmentBlendMode { XR_ENV_BLEND_MODE_OPAQUE = 0, XR_ENV_BLEND_MODE_ADDITIVE = 1, XR_ENV_BLEND_MODE_ALPHA_BLEND = 2 }
 ```
 
-EnvironmentBlendMode XR_ENV_BLEND_MODE_OPAQUE = 0
-
-Opaque blend mode. This is typically used for VR devices.
-
-EnvironmentBlendMode XR_ENV_BLEND_MODE_ADDITIVE = 1
-
-Additive blend mode. This is typically used for AR devices or VR devices with passthrough.
-
-EnvironmentBlendMode XR_ENV_BLEND_MODE_ALPHA_BLEND = 2
-
-Alpha blend mode. This is typically used for AR or VR devices with passthrough capabilities. The alpha channel controls how much of the passthrough is visible. Alpha of 0.0 means the passthrough is visible and this pixel works in ADDITIVE mode. Alpha of 1.0 means that the passthrough is not visible and this pixel works in OPAQUE mode.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### XR_ENV_BLEND_MODE_OPAQUE {#XR_ENV_BLEND_MODE_OPAQUE}
 
@@ -610,7 +540,7 @@ Alpha blend mode. This is typically used for AR or VR devices with passthrough c
 XR_ENV_BLEND_MODE_OPAQUE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Opaque blend mode. This is typically used for VR devices.
 
 #### XR_ENV_BLEND_MODE_ADDITIVE {#XR_ENV_BLEND_MODE_ADDITIVE}
 
@@ -618,7 +548,7 @@ XR_ENV_BLEND_MODE_OPAQUE = 0
 XR_ENV_BLEND_MODE_ADDITIVE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Additive blend mode. This is typically used for AR devices or VR devices with passthrough.
 
 #### XR_ENV_BLEND_MODE_ALPHA_BLEND {#XR_ENV_BLEND_MODE_ALPHA_BLEND}
 
@@ -626,7 +556,9 @@ XR_ENV_BLEND_MODE_ADDITIVE = 1
 XR_ENV_BLEND_MODE_ALPHA_BLEND = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Alpha blend mode. This is typically used for AR or VR devices with passthrough capabilities. The alpha channel controls how much of the passthrough is visible. Alpha of 0.0 means the passthrough is visible and this pixel works in ADDITIVE mode. Alpha of 1.0 means that the passthrough is not visible and this pixel works in OPAQUE mode.
+
+---
 
 ### VRSTextureFormat {#enum-VRSTextureFormat}
 
@@ -634,17 +566,7 @@ XR_ENV_BLEND_MODE_ALPHA_BLEND = 2
 enum VRSTextureFormat { XR_VRS_TEXTURE_FORMAT_UNIFIED = 0, XR_VRS_TEXTURE_FORMAT_FRAGMENT_SHADING_RATE = 1, XR_VRS_TEXTURE_FORMAT_FRAGMENT_DENSITY_MAP = 2 }
 ```
 
-VRSTextureFormat XR_VRS_TEXTURE_FORMAT_UNIFIED = 0
-
-The texture format is the same as returned by XRVRS.make_vrs_texture().
-
-VRSTextureFormat XR_VRS_TEXTURE_FORMAT_FRAGMENT_SHADING_RATE = 1
-
-The texture format is the same as expected by the Vulkan VK_KHR_fragment_shading_rate extension.
-
-VRSTextureFormat XR_VRS_TEXTURE_FORMAT_FRAGMENT_DENSITY_MAP = 2
-
-The texture format is the same as expected by the Vulkan VK_EXT_fragment_density_map extension.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### XR_VRS_TEXTURE_FORMAT_UNIFIED {#XR_VRS_TEXTURE_FORMAT_UNIFIED}
 
@@ -652,7 +574,7 @@ The texture format is the same as expected by the Vulkan VK_EXT_fragment_density
 XR_VRS_TEXTURE_FORMAT_UNIFIED = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture format is the same as returned by XRVRS.make_vrs_texture().
 
 #### XR_VRS_TEXTURE_FORMAT_FRAGMENT_SHADING_RATE {#XR_VRS_TEXTURE_FORMAT_FRAGMENT_SHADING_RATE}
 
@@ -660,7 +582,7 @@ XR_VRS_TEXTURE_FORMAT_UNIFIED = 0
 XR_VRS_TEXTURE_FORMAT_FRAGMENT_SHADING_RATE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture format is the same as expected by the Vulkan VK_KHR_fragment_shading_rate extension.
 
 #### XR_VRS_TEXTURE_FORMAT_FRAGMENT_DENSITY_MAP {#XR_VRS_TEXTURE_FORMAT_FRAGMENT_DENSITY_MAP}
 
@@ -668,4 +590,6 @@ XR_VRS_TEXTURE_FORMAT_FRAGMENT_SHADING_RATE = 1
 XR_VRS_TEXTURE_FORMAT_FRAGMENT_DENSITY_MAP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The texture format is the same as expected by the Vulkan VK_EXT_fragment_density_map extension.
+
+---

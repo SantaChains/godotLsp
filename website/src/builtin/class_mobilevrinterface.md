@@ -236,7 +236,10 @@ The distance between the display and the lenses inside of the device in centimet
 offset_rect: Rect2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_offset_rect(value: Rect2)
+- Rect2 get_offset_rect()
+
+Set the offset rect relative to the area being rendered. A length of 1 represents the whole rendering area on that axis.
 
 ### oversample {#oversample}
 

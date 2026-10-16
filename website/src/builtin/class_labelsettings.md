@@ -384,7 +384,10 @@ Size of the text.
 font_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_font_color(value: Color)
+- Color get_font_color()
+
+Color of the text.
 
 ### outline_size {#outline_size}
 
@@ -403,7 +406,10 @@ Text outline size.
 outline_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_outline_color(value: Color)
+- Color get_outline_color()
+
+The color of the outline.
 
 ### shadow_size {#shadow_size}
 
@@ -422,7 +428,10 @@ Size of the shadow effect.
 shadow_color: Color
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_shadow_color(value: Color)
+- Color get_shadow_color()
+
+Color of the shadow effect. If alpha is 0, no shadow will be drawn.
 
 ### shadow_offset {#shadow_offset}
 
@@ -430,7 +439,10 @@ shadow_color: Color
 shadow_offset: Vector2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_shadow_offset(value: Vector2)
+- Vector2 get_shadow_offset()
+
+Offset of the shadow effect, in pixels.
 
 ### stacked_outline_count {#stacked_outline_count}
 

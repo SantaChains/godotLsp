@@ -170,15 +170,7 @@ Sets the number of settings in the modifier.
 enum ReferenceType { REFERENCE_TYPE_BONE = 0, REFERENCE_TYPE_NODE = 1 }
 ```
 
-ReferenceType REFERENCE_TYPE_BONE = 0
-
-The reference target is a bone. In this case, the reference target spaces is local space.
-
-ReferenceType REFERENCE_TYPE_NODE = 1
-
-The reference target is a Node3D. In this case, the reference target spaces is model space.
-
-In other words, the reference target's coordinates are treated as if it were placed directly under Skeleton3D which parent of the BoneConstraint3D.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### REFERENCE_TYPE_BONE {#REFERENCE_TYPE_BONE}
 
@@ -186,7 +178,7 @@ In other words, the reference target's coordinates are treated as if it were pla
 REFERENCE_TYPE_BONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The reference target is a bone. In this case, the reference target spaces is local space.
 
 #### REFERENCE_TYPE_NODE {#REFERENCE_TYPE_NODE}
 
@@ -194,4 +186,8 @@ REFERENCE_TYPE_BONE = 0
 REFERENCE_TYPE_NODE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The reference target is a Node3D. In this case, the reference target spaces is model space.
+
+In other words, the reference target's coordinates are treated as if it were placed directly under Skeleton3D which parent of the BoneConstraint3D.
+
+---

@@ -345,7 +345,10 @@ Sets the joint type.
 joint_offset: Transform3D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_joint_offset(value: Transform3D)
+- Transform3D get_joint_offset()
+
+Sets the joint's transform.
 
 ### joint_rotation {#joint_rotation}
 
@@ -353,7 +356,10 @@ joint_offset: Transform3D
 joint_rotation: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_joint_rotation(value: Vector3)
+- Vector3 get_joint_rotation()
+
+Sets the joint's rotation in radians.
 
 ### body_offset {#body_offset}
 
@@ -361,7 +367,10 @@ joint_rotation: Vector3
 body_offset: Transform3D
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_body_offset(value: Transform3D)
+- Transform3D get_body_offset()
+
+Sets the body's transform.
 
 ### mass {#mass}
 
@@ -476,7 +485,10 @@ See ProjectSettings.physics/3d/default_angular_damp for more details about dampi
 linear_velocity: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_linear_velocity(value: Vector3)
+- Vector3 get_linear_velocity()
+
+The body's linear velocity in units per second. Can be used sporadically, but don't set this every frame, because physics may run in another thread and runs at a different granularity. Use _integrate_forces() as your process loop for precise control of the body state.
 
 ### angular_velocity {#angular_velocity}
 
@@ -484,7 +496,10 @@ linear_velocity: Vector3
 angular_velocity: Vector3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_angular_velocity(value: Vector3)
+- Vector3 get_angular_velocity()
+
+The PhysicalBone3D's rotational velocity in radians per second.
 
 ### can_sleep {#can_sleep}
 
@@ -505,13 +520,7 @@ If true, the body is deactivated when there is no movement, so it will not take 
 enum DampMode { DAMP_MODE_COMBINE = 0, DAMP_MODE_REPLACE = 1 }
 ```
 
-DampMode DAMP_MODE_COMBINE = 0
-
-In this mode, the body's damping value is added to any value set in areas or the default value.
-
-DampMode DAMP_MODE_REPLACE = 1
-
-In this mode, the body's damping value replaces any value set in areas or the default value.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DAMP_MODE_COMBINE {#DAMP_MODE_COMBINE}
 
@@ -519,7 +528,7 @@ In this mode, the body's damping value replaces any value set in areas or the de
 DAMP_MODE_COMBINE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+In this mode, the body's damping value is added to any value set in areas or the default value.
 
 #### DAMP_MODE_REPLACE {#DAMP_MODE_REPLACE}
 
@@ -527,7 +536,9 @@ DAMP_MODE_COMBINE = 0
 DAMP_MODE_REPLACE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+In this mode, the body's damping value replaces any value set in areas or the default value.
+
+---
 
 ### JointType {#enum-JointType}
 
@@ -535,29 +546,7 @@ DAMP_MODE_REPLACE = 1
 enum JointType { JOINT_TYPE_NONE = 0, JOINT_TYPE_PIN = 1, JOINT_TYPE_CONE = 2, JOINT_TYPE_HINGE = 3, JOINT_TYPE_SLIDER = 4, JOINT_TYPE_6DOF = 5 }
 ```
 
-JointType JOINT_TYPE_NONE = 0
-
-No joint is applied to the PhysicsBone3D.
-
-JointType JOINT_TYPE_PIN = 1
-
-A pin joint is applied to the PhysicsBone3D.
-
-JointType JOINT_TYPE_CONE = 2
-
-A cone joint is applied to the PhysicsBone3D.
-
-JointType JOINT_TYPE_HINGE = 3
-
-A hinge joint is applied to the PhysicsBone3D.
-
-JointType JOINT_TYPE_SLIDER = 4
-
-A slider joint is applied to the PhysicsBone3D.
-
-JointType JOINT_TYPE_6DOF = 5
-
-A 6 degrees of freedom joint is applied to the PhysicsBone3D.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### JOINT_TYPE_NONE {#JOINT_TYPE_NONE}
 
@@ -565,7 +554,7 @@ A 6 degrees of freedom joint is applied to the PhysicsBone3D.
 JOINT_TYPE_NONE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No joint is applied to the PhysicsBone3D.
 
 #### JOINT_TYPE_PIN {#JOINT_TYPE_PIN}
 
@@ -573,7 +562,7 @@ JOINT_TYPE_NONE = 0
 JOINT_TYPE_PIN = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A pin joint is applied to the PhysicsBone3D.
 
 #### JOINT_TYPE_CONE {#JOINT_TYPE_CONE}
 
@@ -581,7 +570,7 @@ JOINT_TYPE_PIN = 1
 JOINT_TYPE_CONE = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A cone joint is applied to the PhysicsBone3D.
 
 #### JOINT_TYPE_HINGE {#JOINT_TYPE_HINGE}
 
@@ -589,7 +578,7 @@ JOINT_TYPE_CONE = 2
 JOINT_TYPE_HINGE = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A hinge joint is applied to the PhysicsBone3D.
 
 #### JOINT_TYPE_SLIDER {#JOINT_TYPE_SLIDER}
 
@@ -597,7 +586,7 @@ JOINT_TYPE_HINGE = 3
 JOINT_TYPE_SLIDER = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A slider joint is applied to the PhysicsBone3D.
 
 #### JOINT_TYPE_6DOF {#JOINT_TYPE_6DOF}
 
@@ -605,4 +594,6 @@ JOINT_TYPE_SLIDER = 4
 JOINT_TYPE_6DOF = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+A 6 degrees of freedom joint is applied to the PhysicsBone3D.
+
+---

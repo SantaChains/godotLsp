@@ -158,25 +158,7 @@ The source of the hand tracking data.
 enum HandTrackingSource { HAND_TRACKING_SOURCE_UNKNOWN = 0, HAND_TRACKING_SOURCE_UNOBSTRUCTED = 1, HAND_TRACKING_SOURCE_CONTROLLER = 2, HAND_TRACKING_SOURCE_NOT_TRACKED = 3, HAND_TRACKING_SOURCE_MAX = 4 }
 ```
 
-HandTrackingSource HAND_TRACKING_SOURCE_UNKNOWN = 0
-
-The source of hand tracking data is unknown.
-
-HandTrackingSource HAND_TRACKING_SOURCE_UNOBSTRUCTED = 1
-
-The source of hand tracking data is unobstructed, meaning that an accurate method of hand tracking is used. These include optical hand tracking, data gloves, etc.
-
-HandTrackingSource HAND_TRACKING_SOURCE_CONTROLLER = 2
-
-The source of hand tracking data is a controller, meaning that joint positions are inferred from controller inputs.
-
-HandTrackingSource HAND_TRACKING_SOURCE_NOT_TRACKED = 3
-
-No hand tracking data is tracked, this either means the hand is obscured, the controller is turned off, or tracking is not supported for the current input type.
-
-HandTrackingSource HAND_TRACKING_SOURCE_MAX = 4
-
-Represents the size of the HandTrackingSource enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HAND_TRACKING_SOURCE_UNKNOWN {#HAND_TRACKING_SOURCE_UNKNOWN}
 
@@ -184,7 +166,7 @@ Represents the size of the HandTrackingSource enum.
 HAND_TRACKING_SOURCE_UNKNOWN = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The source of hand tracking data is unknown.
 
 #### HAND_TRACKING_SOURCE_UNOBSTRUCTED {#HAND_TRACKING_SOURCE_UNOBSTRUCTED}
 
@@ -192,7 +174,7 @@ HAND_TRACKING_SOURCE_UNKNOWN = 0
 HAND_TRACKING_SOURCE_UNOBSTRUCTED = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The source of hand tracking data is unobstructed, meaning that an accurate method of hand tracking is used. These include optical hand tracking, data gloves, etc.
 
 #### HAND_TRACKING_SOURCE_CONTROLLER {#HAND_TRACKING_SOURCE_CONTROLLER}
 
@@ -200,7 +182,7 @@ HAND_TRACKING_SOURCE_UNOBSTRUCTED = 1
 HAND_TRACKING_SOURCE_CONTROLLER = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The source of hand tracking data is a controller, meaning that joint positions are inferred from controller inputs.
 
 #### HAND_TRACKING_SOURCE_NOT_TRACKED {#HAND_TRACKING_SOURCE_NOT_TRACKED}
 
@@ -208,7 +190,7 @@ HAND_TRACKING_SOURCE_CONTROLLER = 2
 HAND_TRACKING_SOURCE_NOT_TRACKED = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+No hand tracking data is tracked, this either means the hand is obscured, the controller is turned off, or tracking is not supported for the current input type.
 
 #### HAND_TRACKING_SOURCE_MAX {#HAND_TRACKING_SOURCE_MAX}
 
@@ -216,7 +198,9 @@ HAND_TRACKING_SOURCE_NOT_TRACKED = 3
 HAND_TRACKING_SOURCE_MAX = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the HandTrackingSource enum.
+
+---
 
 ### HandJoint {#enum-HandJoint}
 
@@ -224,113 +208,7 @@ HAND_TRACKING_SOURCE_MAX = 4
 enum HandJoint { HAND_JOINT_PALM = 0, HAND_JOINT_WRIST = 1, HAND_JOINT_THUMB_METACARPAL = 2, HAND_JOINT_THUMB_PHALANX_PROXIMAL = 3, HAND_JOINT_THUMB_PHALANX_DISTAL = 4, HAND_JOINT_THUMB_TIP = 5, HAND_JOINT_INDEX_FINGER_METACARPAL = 6, HAND_JOINT_INDEX_FINGER_PHALANX_PROXIMAL = 7, HAND_JOINT_INDEX_FINGER_PHALANX_INTERMEDIATE = 8, HAND_JOINT_INDEX_FINGER_PHALANX_DISTAL = 9, HAND_JOINT_INDEX_FINGER_TIP = 10, HAND_JOINT_MIDDLE_FINGER_METACARPAL = 11, HAND_JOINT_MIDDLE_FINGER_PHALANX_PROXIMAL = 12, HAND_JOINT_MIDDLE_FINGER_PHALANX_INTERMEDIATE = 13, HAND_JOINT_MIDDLE_FINGER_PHALANX_DISTAL = 14, HAND_JOINT_MIDDLE_FINGER_TIP = 15, HAND_JOINT_RING_FINGER_METACARPAL = 16, HAND_JOINT_RING_FINGER_PHALANX_PROXIMAL = 17, HAND_JOINT_RING_FINGER_PHALANX_INTERMEDIATE = 18, HAND_JOINT_RING_FINGER_PHALANX_DISTAL = 19, HAND_JOINT_RING_FINGER_TIP = 20, HAND_JOINT_PINKY_FINGER_METACARPAL = 21, HAND_JOINT_PINKY_FINGER_PHALANX_PROXIMAL = 22, HAND_JOINT_PINKY_FINGER_PHALANX_INTERMEDIATE = 23, HAND_JOINT_PINKY_FINGER_PHALANX_DISTAL = 24, HAND_JOINT_PINKY_FINGER_TIP = 25, HAND_JOINT_MAX = 26 }
 ```
 
-HandJoint HAND_JOINT_PALM = 0
-
-Palm joint.
-
-HandJoint HAND_JOINT_WRIST = 1
-
-Wrist joint.
-
-HandJoint HAND_JOINT_THUMB_METACARPAL = 2
-
-Thumb metacarpal joint.
-
-HandJoint HAND_JOINT_THUMB_PHALANX_PROXIMAL = 3
-
-Thumb phalanx proximal joint.
-
-HandJoint HAND_JOINT_THUMB_PHALANX_DISTAL = 4
-
-Thumb phalanx distal joint.
-
-HandJoint HAND_JOINT_THUMB_TIP = 5
-
-Thumb tip joint.
-
-HandJoint HAND_JOINT_INDEX_FINGER_METACARPAL = 6
-
-Index finger metacarpal joint.
-
-HandJoint HAND_JOINT_INDEX_FINGER_PHALANX_PROXIMAL = 7
-
-Index finger phalanx proximal joint.
-
-HandJoint HAND_JOINT_INDEX_FINGER_PHALANX_INTERMEDIATE = 8
-
-Index finger phalanx intermediate joint.
-
-HandJoint HAND_JOINT_INDEX_FINGER_PHALANX_DISTAL = 9
-
-Index finger phalanx distal joint.
-
-HandJoint HAND_JOINT_INDEX_FINGER_TIP = 10
-
-Index finger tip joint.
-
-HandJoint HAND_JOINT_MIDDLE_FINGER_METACARPAL = 11
-
-Middle finger metacarpal joint.
-
-HandJoint HAND_JOINT_MIDDLE_FINGER_PHALANX_PROXIMAL = 12
-
-Middle finger phalanx proximal joint.
-
-HandJoint HAND_JOINT_MIDDLE_FINGER_PHALANX_INTERMEDIATE = 13
-
-Middle finger phalanx intermediate joint.
-
-HandJoint HAND_JOINT_MIDDLE_FINGER_PHALANX_DISTAL = 14
-
-Middle finger phalanx distal joint.
-
-HandJoint HAND_JOINT_MIDDLE_FINGER_TIP = 15
-
-Middle finger tip joint.
-
-HandJoint HAND_JOINT_RING_FINGER_METACARPAL = 16
-
-Ring finger metacarpal joint.
-
-HandJoint HAND_JOINT_RING_FINGER_PHALANX_PROXIMAL = 17
-
-Ring finger phalanx proximal joint.
-
-HandJoint HAND_JOINT_RING_FINGER_PHALANX_INTERMEDIATE = 18
-
-Ring finger phalanx intermediate joint.
-
-HandJoint HAND_JOINT_RING_FINGER_PHALANX_DISTAL = 19
-
-Ring finger phalanx distal joint.
-
-HandJoint HAND_JOINT_RING_FINGER_TIP = 20
-
-Ring finger tip joint.
-
-HandJoint HAND_JOINT_PINKY_FINGER_METACARPAL = 21
-
-Pinky finger metacarpal joint.
-
-HandJoint HAND_JOINT_PINKY_FINGER_PHALANX_PROXIMAL = 22
-
-Pinky finger phalanx proximal joint.
-
-HandJoint HAND_JOINT_PINKY_FINGER_PHALANX_INTERMEDIATE = 23
-
-Pinky finger phalanx intermediate joint.
-
-HandJoint HAND_JOINT_PINKY_FINGER_PHALANX_DISTAL = 24
-
-Pinky finger phalanx distal joint.
-
-HandJoint HAND_JOINT_PINKY_FINGER_TIP = 25
-
-Pinky finger tip joint.
-
-HandJoint HAND_JOINT_MAX = 26
-
-Represents the size of the HandJoint enum.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### HAND_JOINT_PALM {#HAND_JOINT_PALM}
 
@@ -338,7 +216,7 @@ Represents the size of the HandJoint enum.
 HAND_JOINT_PALM = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Palm joint.
 
 #### HAND_JOINT_WRIST {#HAND_JOINT_WRIST}
 
@@ -346,7 +224,7 @@ HAND_JOINT_PALM = 0
 HAND_JOINT_WRIST = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Wrist joint.
 
 #### HAND_JOINT_THUMB_METACARPAL {#HAND_JOINT_THUMB_METACARPAL}
 
@@ -354,7 +232,7 @@ HAND_JOINT_WRIST = 1
 HAND_JOINT_THUMB_METACARPAL = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Thumb metacarpal joint.
 
 #### HAND_JOINT_THUMB_PHALANX_PROXIMAL {#HAND_JOINT_THUMB_PHALANX_PROXIMAL}
 
@@ -362,7 +240,7 @@ HAND_JOINT_THUMB_METACARPAL = 2
 HAND_JOINT_THUMB_PHALANX_PROXIMAL = 3
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Thumb phalanx proximal joint.
 
 #### HAND_JOINT_THUMB_PHALANX_DISTAL {#HAND_JOINT_THUMB_PHALANX_DISTAL}
 
@@ -370,7 +248,7 @@ HAND_JOINT_THUMB_PHALANX_PROXIMAL = 3
 HAND_JOINT_THUMB_PHALANX_DISTAL = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Thumb phalanx distal joint.
 
 #### HAND_JOINT_THUMB_TIP {#HAND_JOINT_THUMB_TIP}
 
@@ -378,7 +256,7 @@ HAND_JOINT_THUMB_PHALANX_DISTAL = 4
 HAND_JOINT_THUMB_TIP = 5
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Thumb tip joint.
 
 #### HAND_JOINT_INDEX_FINGER_METACARPAL {#HAND_JOINT_INDEX_FINGER_METACARPAL}
 
@@ -386,7 +264,7 @@ HAND_JOINT_THUMB_TIP = 5
 HAND_JOINT_INDEX_FINGER_METACARPAL = 6
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Index finger metacarpal joint.
 
 #### HAND_JOINT_INDEX_FINGER_PHALANX_PROXIMAL {#HAND_JOINT_INDEX_FINGER_PHALANX_PROXIMAL}
 
@@ -394,7 +272,7 @@ HAND_JOINT_INDEX_FINGER_METACARPAL = 6
 HAND_JOINT_INDEX_FINGER_PHALANX_PROXIMAL = 7
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Index finger phalanx proximal joint.
 
 #### HAND_JOINT_INDEX_FINGER_PHALANX_INTERMEDIATE {#HAND_JOINT_INDEX_FINGER_PHALANX_INTERMEDIATE}
 
@@ -402,7 +280,7 @@ HAND_JOINT_INDEX_FINGER_PHALANX_PROXIMAL = 7
 HAND_JOINT_INDEX_FINGER_PHALANX_INTERMEDIATE = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Index finger phalanx intermediate joint.
 
 #### HAND_JOINT_INDEX_FINGER_PHALANX_DISTAL {#HAND_JOINT_INDEX_FINGER_PHALANX_DISTAL}
 
@@ -410,7 +288,7 @@ HAND_JOINT_INDEX_FINGER_PHALANX_INTERMEDIATE = 8
 HAND_JOINT_INDEX_FINGER_PHALANX_DISTAL = 9
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Index finger phalanx distal joint.
 
 #### HAND_JOINT_INDEX_FINGER_TIP {#HAND_JOINT_INDEX_FINGER_TIP}
 
@@ -418,7 +296,7 @@ HAND_JOINT_INDEX_FINGER_PHALANX_DISTAL = 9
 HAND_JOINT_INDEX_FINGER_TIP = 10
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Index finger tip joint.
 
 #### HAND_JOINT_MIDDLE_FINGER_METACARPAL {#HAND_JOINT_MIDDLE_FINGER_METACARPAL}
 
@@ -426,7 +304,7 @@ HAND_JOINT_INDEX_FINGER_TIP = 10
 HAND_JOINT_MIDDLE_FINGER_METACARPAL = 11
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Middle finger metacarpal joint.
 
 #### HAND_JOINT_MIDDLE_FINGER_PHALANX_PROXIMAL {#HAND_JOINT_MIDDLE_FINGER_PHALANX_PROXIMAL}
 
@@ -434,7 +312,7 @@ HAND_JOINT_MIDDLE_FINGER_METACARPAL = 11
 HAND_JOINT_MIDDLE_FINGER_PHALANX_PROXIMAL = 12
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Middle finger phalanx proximal joint.
 
 #### HAND_JOINT_MIDDLE_FINGER_PHALANX_INTERMEDIATE {#HAND_JOINT_MIDDLE_FINGER_PHALANX_INTERMEDIATE}
 
@@ -442,7 +320,7 @@ HAND_JOINT_MIDDLE_FINGER_PHALANX_PROXIMAL = 12
 HAND_JOINT_MIDDLE_FINGER_PHALANX_INTERMEDIATE = 13
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Middle finger phalanx intermediate joint.
 
 #### HAND_JOINT_MIDDLE_FINGER_PHALANX_DISTAL {#HAND_JOINT_MIDDLE_FINGER_PHALANX_DISTAL}
 
@@ -450,7 +328,7 @@ HAND_JOINT_MIDDLE_FINGER_PHALANX_INTERMEDIATE = 13
 HAND_JOINT_MIDDLE_FINGER_PHALANX_DISTAL = 14
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Middle finger phalanx distal joint.
 
 #### HAND_JOINT_MIDDLE_FINGER_TIP {#HAND_JOINT_MIDDLE_FINGER_TIP}
 
@@ -458,7 +336,7 @@ HAND_JOINT_MIDDLE_FINGER_PHALANX_DISTAL = 14
 HAND_JOINT_MIDDLE_FINGER_TIP = 15
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Middle finger tip joint.
 
 #### HAND_JOINT_RING_FINGER_METACARPAL {#HAND_JOINT_RING_FINGER_METACARPAL}
 
@@ -466,7 +344,7 @@ HAND_JOINT_MIDDLE_FINGER_TIP = 15
 HAND_JOINT_RING_FINGER_METACARPAL = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ring finger metacarpal joint.
 
 #### HAND_JOINT_RING_FINGER_PHALANX_PROXIMAL {#HAND_JOINT_RING_FINGER_PHALANX_PROXIMAL}
 
@@ -474,7 +352,7 @@ HAND_JOINT_RING_FINGER_METACARPAL = 16
 HAND_JOINT_RING_FINGER_PHALANX_PROXIMAL = 17
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ring finger phalanx proximal joint.
 
 #### HAND_JOINT_RING_FINGER_PHALANX_INTERMEDIATE {#HAND_JOINT_RING_FINGER_PHALANX_INTERMEDIATE}
 
@@ -482,7 +360,7 @@ HAND_JOINT_RING_FINGER_PHALANX_PROXIMAL = 17
 HAND_JOINT_RING_FINGER_PHALANX_INTERMEDIATE = 18
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ring finger phalanx intermediate joint.
 
 #### HAND_JOINT_RING_FINGER_PHALANX_DISTAL {#HAND_JOINT_RING_FINGER_PHALANX_DISTAL}
 
@@ -490,7 +368,7 @@ HAND_JOINT_RING_FINGER_PHALANX_INTERMEDIATE = 18
 HAND_JOINT_RING_FINGER_PHALANX_DISTAL = 19
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ring finger phalanx distal joint.
 
 #### HAND_JOINT_RING_FINGER_TIP {#HAND_JOINT_RING_FINGER_TIP}
 
@@ -498,7 +376,7 @@ HAND_JOINT_RING_FINGER_PHALANX_DISTAL = 19
 HAND_JOINT_RING_FINGER_TIP = 20
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Ring finger tip joint.
 
 #### HAND_JOINT_PINKY_FINGER_METACARPAL {#HAND_JOINT_PINKY_FINGER_METACARPAL}
 
@@ -506,7 +384,7 @@ HAND_JOINT_RING_FINGER_TIP = 20
 HAND_JOINT_PINKY_FINGER_METACARPAL = 21
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pinky finger metacarpal joint.
 
 #### HAND_JOINT_PINKY_FINGER_PHALANX_PROXIMAL {#HAND_JOINT_PINKY_FINGER_PHALANX_PROXIMAL}
 
@@ -514,7 +392,7 @@ HAND_JOINT_PINKY_FINGER_METACARPAL = 21
 HAND_JOINT_PINKY_FINGER_PHALANX_PROXIMAL = 22
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pinky finger phalanx proximal joint.
 
 #### HAND_JOINT_PINKY_FINGER_PHALANX_INTERMEDIATE {#HAND_JOINT_PINKY_FINGER_PHALANX_INTERMEDIATE}
 
@@ -522,7 +400,7 @@ HAND_JOINT_PINKY_FINGER_PHALANX_PROXIMAL = 22
 HAND_JOINT_PINKY_FINGER_PHALANX_INTERMEDIATE = 23
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pinky finger phalanx intermediate joint.
 
 #### HAND_JOINT_PINKY_FINGER_PHALANX_DISTAL {#HAND_JOINT_PINKY_FINGER_PHALANX_DISTAL}
 
@@ -530,7 +408,7 @@ HAND_JOINT_PINKY_FINGER_PHALANX_INTERMEDIATE = 23
 HAND_JOINT_PINKY_FINGER_PHALANX_DISTAL = 24
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pinky finger phalanx distal joint.
 
 #### HAND_JOINT_PINKY_FINGER_TIP {#HAND_JOINT_PINKY_FINGER_TIP}
 
@@ -538,7 +416,7 @@ HAND_JOINT_PINKY_FINGER_PHALANX_DISTAL = 24
 HAND_JOINT_PINKY_FINGER_TIP = 25
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Pinky finger tip joint.
 
 #### HAND_JOINT_MAX {#HAND_JOINT_MAX}
 
@@ -546,7 +424,11 @@ HAND_JOINT_PINKY_FINGER_TIP = 25
 HAND_JOINT_MAX = 26
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Represents the size of the HandJoint enum.
+
+---
+
+flags HandJointFlags:
 
 ### HandJointFlags {#enum-HandJointFlags}
 
@@ -562,7 +444,7 @@ enum HandJointFlags（位标志） { HAND_JOINT_FLAG_ORIENTATION_VALID = 1, HAND
 HAND_JOINT_FLAG_ORIENTATION_VALID = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The hand joint's orientation data is valid.
 
 #### HAND_JOINT_FLAG_ORIENTATION_TRACKED {#HAND_JOINT_FLAG_ORIENTATION_TRACKED}
 
@@ -570,7 +452,7 @@ HAND_JOINT_FLAG_ORIENTATION_VALID = 1
 HAND_JOINT_FLAG_ORIENTATION_TRACKED = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The hand joint's orientation is actively tracked. May not be set if tracking has been temporarily lost.
 
 #### HAND_JOINT_FLAG_POSITION_VALID {#HAND_JOINT_FLAG_POSITION_VALID}
 
@@ -578,7 +460,7 @@ HAND_JOINT_FLAG_ORIENTATION_TRACKED = 2
 HAND_JOINT_FLAG_POSITION_VALID = 4
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The hand joint's position data is valid.
 
 #### HAND_JOINT_FLAG_POSITION_TRACKED {#HAND_JOINT_FLAG_POSITION_TRACKED}
 
@@ -586,7 +468,7 @@ HAND_JOINT_FLAG_POSITION_VALID = 4
 HAND_JOINT_FLAG_POSITION_TRACKED = 8
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The hand joint's position is actively tracked. May not be set if tracking has been temporarily lost.
 
 #### HAND_JOINT_FLAG_LINEAR_VELOCITY_VALID {#HAND_JOINT_FLAG_LINEAR_VELOCITY_VALID}
 
@@ -594,7 +476,7 @@ HAND_JOINT_FLAG_POSITION_TRACKED = 8
 HAND_JOINT_FLAG_LINEAR_VELOCITY_VALID = 16
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The hand joint's linear velocity data is valid.
 
 #### HAND_JOINT_FLAG_ANGULAR_VELOCITY_VALID {#HAND_JOINT_FLAG_ANGULAR_VELOCITY_VALID}
 
@@ -602,4 +484,6 @@ HAND_JOINT_FLAG_LINEAR_VELOCITY_VALID = 16
 HAND_JOINT_FLAG_ANGULAR_VELOCITY_VALID = 32
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The hand joint's angular velocity data is valid.
+
+---

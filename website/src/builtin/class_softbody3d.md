@@ -366,7 +366,10 @@ Note: Object A can detect a contact with object B only if object B is in any of 
 parent_collision_ignore: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_parent_collision_ignore(value: NodePath)
+- NodePath get_parent_collision_ignore()
+
+NodePath to a CollisionObject3D this SoftBody3D should avoid clipping.
 
 ### simulation_precision {#simulation_precision}
 
@@ -479,15 +482,7 @@ Defines the behavior in physics when Node.process_mode is set to Node.PROCESS_MO
 enum DisableMode { DISABLE_MODE_REMOVE = 0, DISABLE_MODE_KEEP_ACTIVE = 1 }
 ```
 
-DisableMode DISABLE_MODE_REMOVE = 0
-
-When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, remove from the physics simulation to stop all physics interactions with this SoftBody3D.
-
-Automatically re-added to the physics simulation when the Node is processed again.
-
-DisableMode DISABLE_MODE_KEEP_ACTIVE = 1
-
-When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, do not affect the physics simulation.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### DISABLE_MODE_REMOVE {#DISABLE_MODE_REMOVE}
 
@@ -495,7 +490,9 @@ When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, do not affect the p
 DISABLE_MODE_REMOVE = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, remove from the physics simulation to stop all physics interactions with this SoftBody3D.
+
+Automatically re-added to the physics simulation when the Node is processed again.
 
 #### DISABLE_MODE_KEEP_ACTIVE {#DISABLE_MODE_KEEP_ACTIVE}
 
@@ -503,4 +500,6 @@ DISABLE_MODE_REMOVE = 0
 DISABLE_MODE_KEEP_ACTIVE = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+When Node.process_mode is set to Node.PROCESS_MODE_DISABLED, do not affect the physics simulation.
+
+---

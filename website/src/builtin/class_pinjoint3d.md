@@ -36,17 +36,7 @@ Sets the value of the specified parameter.
 enum Param { PARAM_BIAS = 0, PARAM_DAMPING = 1, PARAM_IMPULSE_CLAMP = 2 }
 ```
 
-Param PARAM_BIAS = 0
-
-The force with which the pinned objects stay in positional relation to each other. The higher, the stronger.
-
-Param PARAM_DAMPING = 1
-
-The force with which the pinned objects stay in velocity relation to each other. The higher, the stronger.
-
-Param PARAM_IMPULSE_CLAMP = 2
-
-If above 0, this value is the maximum value for an impulse that this Joint3D produces.
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
 
 #### PARAM_BIAS {#PARAM_BIAS}
 
@@ -54,7 +44,7 @@ If above 0, this value is the maximum value for an impulse that this Joint3D pro
 PARAM_BIAS = 0
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The force with which the pinned objects stay in positional relation to each other. The higher, the stronger.
 
 #### PARAM_DAMPING {#PARAM_DAMPING}
 
@@ -62,7 +52,7 @@ PARAM_BIAS = 0
 PARAM_DAMPING = 1
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+The force with which the pinned objects stay in velocity relation to each other. The higher, the stronger.
 
 #### PARAM_IMPULSE_CLAMP {#PARAM_IMPULSE_CLAMP}
 
@@ -70,4 +60,6 @@ PARAM_DAMPING = 1
 PARAM_IMPULSE_CLAMP = 2
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+If above 0, this value is the maximum value for an impulse that this Joint3D produces.
+
+---

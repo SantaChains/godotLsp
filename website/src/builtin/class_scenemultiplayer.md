@@ -206,7 +206,12 @@ void set_server_relay_enabled(enabled: bool)
 root_path: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_root_path(value: NodePath)
+- NodePath get_root_path()
+
+The root path to use for RPCs and replication. Instead of an absolute path, a relative path will be used to find the node upon which the RPC should be executed.
+
+This effectively allows to have different branches of the scene tree to be managed by different MultiplayerAPI, allowing for example to run both client and server in the same scene.
 
 ### auth_callback {#auth_callback}
 
@@ -214,7 +219,10 @@ root_path: NodePath
 auth_callback: Callable
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_auth_callback(value: Callable)
+- Callable get_auth_callback()
+
+The callback to execute when receiving authentication data sent via send_auth(). If the Callable is empty (default), peers will be automatically accepted as soon as they connect.
 
 ### auth_timeout {#auth_timeout}
 

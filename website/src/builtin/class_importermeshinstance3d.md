@@ -194,7 +194,10 @@ There is currently no description for this property. Please help us by contribut
 skeleton_path: NodePath
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+- void set_skeleton_path(value: NodePath)
+- NodePath get_skeleton_path()
+
+There is currently no description for this property. Please help us by contributing one [https://contributing.godotengine.org/en/latest/documentation/class_reference.html]!
 
 ### layer_mask {#layer_mask}
 
