@@ -40,8 +40,8 @@
 
 7. [x] **服务器侧 tscn/tres 解析器**（6d3e721）：`gdscript-project/tscn.rs` 行级状态机解析 [gd_scene/gd_resource/ext_resource/sub_resource/node/connection]，宽容容错；Project 扫 .tscn/.tres 建 scenes + uid_paths 索引；scan_uid_files 扩头部自嵌 uid（1KB 快扫）；documentLink uid:// 自指跳过（路径等价比较，盘符大小写无关）、tscn 内 res:// 与 .gd 内 uid:// 双向可点；uidscene 夹具 + smoke_uid.py 端到端冒烟。
 8. **rename 跨文件**：符号表驱动，重命名 var/func/class 声明与所有引用点。
-9. **documentColor**：Color(...) 字面量行内色块装饰。
-10. **信号连接 CodeLens**：tscn [connection] 段 → 脚本里 connect() 行上方显示连接数。
+9. [x] **documentColor**（e3088b3）：词法扫描 Color(r,g,b[,a]) 全数字字面量 + Color.NAME 命名常量（引擎模型 40 色表 OnceLock）；colorPresentation 回写构造文本。变量/表达式不猜（零误报）。
+10. [x] **信号连接 CodeLens**（e3088b3）：tscn [connection]（仅 complete）引用本脚本 → func 声明行 lens "n 个场景连接" → godotlsp.openConnection 命令跳 tscn 连接行（插件已注册）。
 
 ## P3 — 诊断分级与格式化
 
