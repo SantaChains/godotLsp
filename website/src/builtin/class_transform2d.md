@@ -261,9 +261,7 @@ This can be seen as transforming with respect to the local frame.
 x: Vector2
 ```
 
-The transform basis's X axis, and the column 0 of the matrix. Combined with y, this represents the transform's rotation, scale, and skew.
-
-On the identity transform, this vector points right (Vector2.RIGHT).
+2D 变换基向量 X 轴（第一行/列）。
 
 ### y {#y}
 
@@ -271,9 +269,7 @@ On the identity transform, this vector points right (Vector2.RIGHT).
 y: Vector2
 ```
 
-The transform basis's Y axis, and the column 1 of the matrix. Combined with x, this represents the transform's rotation, scale, and skew.
-
-On the identity transform, this vector points down (Vector2.DOWN).
+2D 变换基向量 Y 轴。
 
 ### origin {#origin}
 
@@ -281,7 +277,7 @@ On the identity transform, this vector points down (Vector2.DOWN).
 origin: Vector2
 ```
 
-The translation offset of this transform, and the column 2 of the matrix. In 2D space, this can be seen as the position.
+2D 平移原点。
 
 ## 常量
 
@@ -291,37 +287,7 @@ The translation offset of this transform, and the column 2 of the matrix. In 2D 
 const IDENTITY = Transform2D(1, 0, 0, 1, 0, 0)
 ```
 
-The identity Transform2D. This is a transform with no translation, no rotation, and a scale of Vector2.ONE. This also means that:
-
-- The x points right (Vector2.RIGHT);
-- The y points down (Vector2.DOWN).
-
-```gdscript
-var transform = Transform2D.IDENTITY
-print("| X | Y | Origin")
-print("| %.f | %.f | %.f" % [transform.x.x, transform.y.x, transform.origin.x])
-print("| %.f | %.f | %.f" % [transform.x.y, transform.y.y, transform.origin.y])
-# Prints:
-# | X | Y | Origin
-# | 1 | 0 | 0
-# | 0 | 1 | 0
-```
-
-If a Vector2, a Rect2, a PackedVector2Array, or another Transform2D is transformed (multiplied) by this constant, no transformation occurs.
-
-Note: In GDScript, this constant is equivalent to creating a Transform2D without any arguments. It can be used to make your code clearer, and for consistency with C#.
-
-FLIP_X = Transform2D(-1, 0, 0, 1, 0, 0) 
-
-When any transform is multiplied by FLIP_X, it negates all components of the x axis (the X column).
-
-When FLIP_X is multiplied by any transform, it negates the Vector2.x component of all axes (the X row).
-
-FLIP_Y = Transform2D(1, 0, 0, -1, 0, 0) 
-
-When any transform is multiplied by FLIP_Y, it negates all components of the y axis (the Y column).
-
-When FLIP_Y is multiplied by any transform, it negates the Vector2.y component of all axes (the Y row).
+单位 2D 变换（无旋转缩放、零平移）。
 
 ### FLIP_X {#FLIP_X}
 
@@ -329,7 +295,7 @@ When FLIP_Y is multiplied by any transform, it negates the Vector2.y component o
 const FLIP_X = Transform2D(-1, 0, 0, 1, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+沿 X 轴翻转的变换。
 
 ### FLIP_Y {#FLIP_Y}
 
@@ -337,4 +303,4 @@ const FLIP_X = Transform2D(-1, 0, 0, 1, 0, 0)
 const FLIP_Y = Transform2D(1, 0, 0, -1, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+沿 Y 轴翻转的变换。

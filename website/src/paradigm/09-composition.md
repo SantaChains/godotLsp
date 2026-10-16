@@ -41,6 +41,7 @@ Enemy (CharacterBody2D)     ← 根节点，只做协调
 
 ```gdscript
 # health.gd —— 挂在 Health 子节点上
+class_name HealthComponent
 extends Node
 
 signal died(cause: String)
@@ -48,8 +49,8 @@ signal died(cause: String)
 var max_hp := 100
 var hp := 100
 
-func take_damage(amount: int):
-    hp = max(0, hp - amount)
+func take_damage(amount: int) -> void:
+    hp = maxi(0, hp - amount)
     if hp == 0:
         died.emit("dead")
 
@@ -59,11 +60,12 @@ func is_dead() -> bool:
 
 ```gdscript
 # movement.gd —— 挂在 Movement 子节点上
+class_name MovementComponent
 extends Node
 
 var speed := 200.0
 
-func move(direction: Vector2, delta: float):
+func move(direction: Vector2, delta: float) -> void:
     var body := get_parent() as CharacterBody2D
     body.velocity = direction * speed
     body.move_and_slide()
@@ -73,22 +75,22 @@ func move(direction: Vector2, delta: float):
 # enemy.gd —— 根节点，只做协调
 extends CharacterBody2D
 
-@onready var health := $Health as Node
-@onready var movement := $Movement as Node
+@onready var health := $Health as HealthComponent
+@onready var movement := $Movement as MovementComponent
 
-func _ready():
+func _ready() -> void:
     health.died.connect(_on_died)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
     # 协调：读输入 → 调 Movement
     var dir := Input.get_vector("left", "right", "up", "down")
     movement.move(dir, delta)
 
-func _on_died(_cause: String):
+func _on_died(_cause: String) -> void:
     queue_free()
 
 # 外部调用：受击
-func take_damage(amount: int):
+func take_damage(amount: int) -> void:
     health.take_damage(amount)
 ```
 

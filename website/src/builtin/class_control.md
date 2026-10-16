@@ -2169,9 +2169,7 @@ Controls the direction on the vertical axis in which the control should grow if 
 size: Vector2
 ```
 
-- Vector2 get_size()
-
-The size of the node's bounding rectangle, in the node's coordinate system. Container nodes update this property automatically.
+控件尺寸。
 
 ### position {#position}
 
@@ -2179,9 +2177,7 @@ The size of the node's bounding rectangle, in the node's coordinate system. Cont
 position: Vector2
 ```
 
-- Vector2 get_position()
-
-The node's position, relative to its containing node. It corresponds to the rectangle's top-left corner. The property is not affected by pivot_offset.
+控件位置（父容器坐标系）。
 
 ### global_position {#global_position}
 
@@ -2595,10 +2591,7 @@ Determines which controls can be focused together with focus_mode. See get_focus
 mouse_filter: int
 ```
 
-- void set_mouse_filter(value: MouseFilter)
-- MouseFilter get_mouse_filter()
-
-Determines which controls will be able to receive mouse button input events through _gui_input() and the mouse_entered, and mouse_exited signals. Also determines how these events should be propagated. See the constants to learn what each does. Use get_mouse_filter_with_override() to determine if a control can receive mouse input, since mouse_behavior_recursive also affects it.
+鼠标事件过滤模式。STOP/IGNORE/PASS。
 
 ### mouse_behavior_recursive {#mouse_behavior_recursive}
 

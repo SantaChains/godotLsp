@@ -77,7 +77,7 @@ LSP 跳转用稳定锚点（符号不能直接作 HTML id，故用 ASCII 名；�
 - <a id="op-plus"></a>`+` — 加法；字符串/数组拼接
 - <a id="op-minus"></a>`-` — 减法；一元取负
 - <a id="op-star"></a>`*` — 乘法；字符串/数组重复
-- <a id="op-slash"></a>`/` — 除法（int 相除也返回 float）
+- <a id="op-slash"></a>`/` — 除法；两 int 相除截断为 int，任一为 float 才返回 float
 - <a id="op-percent"></a>`%` — 取模（仅 int）；字符串语境是格式化
 - <a id="op-pow"></a>`**` — 乘方（左结合）
 - <a id="op-eq"></a>`==` — 值相等（引用比较用 `is_same`）

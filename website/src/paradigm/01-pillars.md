@@ -12,6 +12,18 @@
 - **场景**：保存为 `.tscn` 文件的一棵节点树 = 预制体。可以实例化、嵌套、复用。
 - **信号**：节点声明"我发生了什么"（如 `died`），其他节点连接后响应，不需要知道对方是谁。
 
+一棵最小玩家场景把三者合在一起：
+
+```text
+Player (CharacterBody2D, 挂 player.gd)
+├── Sprite2D            # 外观，节点自带类型，不需要空容器
+├── CollisionShape2D    # 碰撞形状
+├── Camera2D            # 跟随镜头
+└── AnimationPlayer     # 播放动画
+```
+
+Player 脚本只写移动与状态，Sprite 管绘制，CollisionShape 管形状，AnimationPlayer 管演出；它们之间用信号通信（如动画播完发 `attack_finished`），而不是互相直接调内部字段。生命周期钩子 `_ready`（节点入树后）、`_physics_process`、`_exit_tree` 见[节点](02-node.md)。
+
 ## 与 Unity / UE 对照
 
 | 概念 | Godot | Unity | Unreal |

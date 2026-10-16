@@ -31,8 +31,10 @@ extends Node
 var algo := MyAlgorithm.new()
 var result: float = algo.fast_simulate(100000)
 print(result)
-algo.free()  # RefCounted 自动管理，Node 需要手动
+# RefCounted：引用计数归零自动释放，不要手动 free()；Node 才用 queue_free()
 ```
+
+> 本节 `_bind_methods()` + `ClassDB::bind_method` 的写法在自定义 C++ 模块和 godot-cpp（GDExtension）里通用；区别只在类注册：自定义模块走引擎 `ClassDB::register_class`，godot-cpp 用 `GDREGISTER_CLASS(MyAlgorithm)` 在初始化函数里登记。
 
 ## 内存管理
 

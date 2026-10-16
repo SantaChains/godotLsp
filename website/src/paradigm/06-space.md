@@ -76,12 +76,14 @@ sprite.z_index = 100  # 画在所有 z_index < 100 的上面
 ## look_at
 
 ```gdscript
-# Node2D：让本节点的 -Y 方向指向目标
+# Node2D：让本节点的局部 +X 轴（右方向）指向目标（全局坐标）
 look_at(target_position)
 
-# Node3D：让本节点的 -Z 方向指向目标
+# Node3D：让本节点的 -Z 方向（前方向）指向目标
 look_at(target_position)
 ```
+
+> 注意两者朝向轴不同：Node2D 对齐 +X，Node3D 对齐 -Z，不能套用同一个直觉。
 
 ## 延伸阅读
 

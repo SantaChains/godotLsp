@@ -285,12 +285,7 @@ Note: Changing this property at run-time has no effect on already created duplic
 resource_path: String
 ```
 
-- void set_path(value: String)
-- String get_path()
-
-The unique path to this resource. If it has been saved to disk, the value will be its filepath. If the resource is exclusively contained within a scene, the value will be the PackedScene's filepath, followed by a unique identifier.
-
-Note: Setting this property manually may fail if a resource with the same path has already been previously loaded. If necessary, use take_over_path().
+资源在 res:// 中的路径。
 
 ### resource_name {#resource_name}
 

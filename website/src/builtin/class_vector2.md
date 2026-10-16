@@ -458,7 +458,7 @@ Returns a new vector with each component snapped to the nearest multiple of step
 x: float
 ```
 
-The vector's X component. Also accessible by using the index position [0].
+X 分量。
 
 ### y {#y}
 
@@ -466,7 +466,7 @@ The vector's X component. Also accessible by using the index position [0].
 y: float
 ```
 
-The vector's Y component. Also accessible by using the index position [1].
+Y 分量。
 
 ## 枚举
 
@@ -504,31 +504,7 @@ Enumerated value for the Y axis. Returned by max_axis_index() and min_axis_index
 const ZERO = Vector2(0, 0)
 ```
 
-Zero vector, a vector with all components set to 0.
-
-ONE = Vector2(1, 1) 
-
-One vector, a vector with all components set to 1.
-
-INF = Vector2(inf, inf) 
-
-Infinity vector, a vector with all components set to @GDScript.INF.
-
-LEFT = Vector2(-1, 0) 
-
-Left unit vector. Represents the direction of left.
-
-RIGHT = Vector2(1, 0) 
-
-Right unit vector. Represents the direction of right.
-
-UP = Vector2(0, -1) 
-
-Up unit vector. Y is down in 2D, so this vector points -Y.
-
-DOWN = Vector2(0, 1) 
-
-Down unit vector. Y is down in 2D, so this vector points +Y.
+零向量 (0, 0)。
 
 ### ONE {#ONE}
 
@@ -536,7 +512,7 @@ Down unit vector. Y is down in 2D, so this vector points +Y.
 const ONE = Vector2(1, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+单位向量 (1, 1)。
 
 ### INF {#INF}
 
@@ -544,7 +520,7 @@ const ONE = Vector2(1, 1)
 const INF = Vector2(inf, inf)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+各分量为无穷大的向量。
 
 ### LEFT {#LEFT}
 
@@ -552,7 +528,7 @@ const INF = Vector2(inf, inf)
 const LEFT = Vector2(-1, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+左向单位向量 (-1, 0)。
 
 ### RIGHT {#RIGHT}
 
@@ -560,7 +536,7 @@ const LEFT = Vector2(-1, 0)
 const RIGHT = Vector2(1, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+右向单位向量 (1, 0)。
 
 ### UP {#UP}
 
@@ -568,7 +544,7 @@ const RIGHT = Vector2(1, 0)
 const UP = Vector2(0, -1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+上向单位向量 (0, -1)（2D 屏幕坐标，向上为负 Y）。
 
 ### DOWN {#DOWN}
 
@@ -576,4 +552,4 @@ const UP = Vector2(0, -1)
 const DOWN = Vector2(0, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+下向单位向量 (0, 1)。

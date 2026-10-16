@@ -42,9 +42,10 @@ func spawn(pos: Vector2):
 ```
 
 ```gdscript
-# 回收而非销毁
-func despawn(b: CharacterBody2D):
+# 回收而非销毁：隐藏并停掉处理，等下次取出
+func despawn(b: CharacterBody2D) -> void:
     b.visible = false
+    b.process_mode = Node.PROCESS_MODE_DISABLED  # 留在树里但不参与回调/物理
     pool.append(b)
 ```
 
@@ -56,8 +57,9 @@ func despawn(b: CharacterBody2D):
 var mm := MultiMesh.new()
 mm.transform_format = MultiMesh.TRANSFORM_2D
 mm.instance_count = 1000
-for i in 1000:
-    mm.set_instance_transform_2d(i, Transform2D(0, Vector2(x, y)))
+# positions 是预算好的 PackedVector2Array，与 instance_count 等长
+for i in mm.instance_count:
+    mm.set_instance_transform_2d(i, Transform2D(0.0, positions[i]))
 ```
 
 ## Server API

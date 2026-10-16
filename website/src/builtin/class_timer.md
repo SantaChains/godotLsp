@@ -172,12 +172,7 @@ Specifies when the timer is updated during the main loop.
 wait_time: float
 ```
 
-- void set_wait_time(value: float)
-- float get_wait_time()
-
-The time required for the timer to end, in seconds. This property can also be set every time start() is called.
-
-Note: Timers can only process once per physics or process frame (depending on the process_callback). An unstable framerate may cause the timer to end inconsistently, which is especially noticeable if the wait time is lower than roughly 0.05 seconds. For very short timers, it is recommended to write your own code instead of using a Timer node. Timers are also affected by Engine.time_scale.
+等待时间（秒）。
 
 ### one_shot {#one_shot}
 
@@ -233,11 +228,7 @@ If true, the timer will ignore Engine.time_scale and update with the real, elaps
 time_left: float
 ```
 
-- float get_time_left()
-
-The timer's remaining time in seconds. This is always 0 if the timer is stopped.
-
-Note: This property is read-only and cannot be modified. It is based on wait_time.
+剩余时间。
 
 ## 信号
 

@@ -458,7 +458,7 @@ GD.Print(color.ToRgba64()); // Prints -140736629309441
 r: float
 ```
 
-The color's red component, typically on the range of 0 to 1.
+红色分量（0.0-1.0）。
 
 ### g {#g}
 
@@ -466,7 +466,7 @@ The color's red component, typically on the range of 0 to 1.
 g: float
 ```
 
-The color's green component, typically on the range of 0 to 1.
+绿色分量。
 
 ### b {#b}
 
@@ -474,7 +474,7 @@ The color's green component, typically on the range of 0 to 1.
 b: float
 ```
 
-The color's blue component, typically on the range of 0 to 1.
+蓝色分量。
 
 ### a {#a}
 
@@ -482,9 +482,7 @@ The color's blue component, typically on the range of 0 to 1.
 a: float
 ```
 
-The color's alpha component, typically on the range of 0 to 1. A value of 0 means that the color is fully transparent. A value of 1 means that the color is fully opaque.
-
-Note: The alpha channel is always stored with linear encoding, regardless of the encoding of the other color channels. The linear_to_srgb() and srgb_to_linear() methods do not affect the alpha channel.
+透明度。0.0 完全透明，1.0 不透明。
 
 ### r8 {#r8}
 
@@ -492,7 +490,7 @@ Note: The alpha channel is always stored with linear encoding, regardless of the
 r8: int
 ```
 
-Wrapper for r that uses the range 0 to 255, instead of 0 to 1.
+红色通道 0-255 整数表示。
 
 ### g8 {#g8}
 
@@ -500,7 +498,7 @@ Wrapper for r that uses the range 0 to 255, instead of 0 to 1.
 g8: int
 ```
 
-Wrapper for g that uses the range 0 to 255, instead of 0 to 1.
+绿色通道 0-255 整数表示。
 
 ### b8 {#b8}
 
@@ -508,7 +506,7 @@ Wrapper for g that uses the range 0 to 255, instead of 0 to 1.
 b8: int
 ```
 
-Wrapper for b that uses the range 0 to 255, instead of 0 to 1.
+蓝色通道 0-255 整数表示。
 
 ### a8 {#a8}
 
@@ -516,7 +514,7 @@ Wrapper for b that uses the range 0 to 255, instead of 0 to 1.
 a8: int
 ```
 
-Wrapper for a that uses the range 0 to 255, instead of 0 to 1.
+透明度 0-255 整数表示。
 
 ### h {#h}
 
@@ -524,7 +522,7 @@ Wrapper for a that uses the range 0 to 255, instead of 0 to 1.
 h: float
 ```
 
-The HSV hue of this color, on the range 0 to 1.
+HSL 色相分量（0-1）。
 
 ### s {#s}
 
@@ -532,7 +530,7 @@ The HSV hue of this color, on the range 0 to 1.
 s: float
 ```
 
-The HSV saturation of this color, on the range 0 to 1.
+HSL 饱和度分量（0-1）。
 
 ### v {#v}
 
@@ -540,7 +538,7 @@ The HSV saturation of this color, on the range 0 to 1.
 v: float
 ```
 
-The HSV value (brightness) of this color, on the range 0 to 1.
+HSL 明度（Value）分量（0-1）。
 
 ### ok_hsl_h {#ok_hsl_h}
 
@@ -548,7 +546,7 @@ The HSV value (brightness) of this color, on the range 0 to 1.
 ok_hsl_h: float
 ```
 
-The OKHSL hue of this color, on the range 0 to 1.
+OKHSL 色相分量。
 
 ### ok_hsl_s {#ok_hsl_s}
 
@@ -556,7 +554,7 @@ The OKHSL hue of this color, on the range 0 to 1.
 ok_hsl_s: float
 ```
 
-The OKHSL saturation of this color, on the range 0 to 1.
+OKHSL 饱和度分量。
 
 ### ok_hsl_l {#ok_hsl_l}
 
@@ -564,7 +562,7 @@ The OKHSL saturation of this color, on the range 0 to 1.
 ok_hsl_l: float
 ```
 
-The OKHSL lightness of this color, on the range 0 to 1.
+OKHSL 明度分量。
 
 ## 常量
 

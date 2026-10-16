@@ -917,12 +917,7 @@ Note: For controls that inherit Popup, the correct way to make them visible is t
 visible: bool
 ```
 
-- void set_visible(value: bool)
-- bool is_visible()
-
-If true, this CanvasItem may be drawn. Whether this CanvasItem is actually drawn depends on the visibility of all of its CanvasItem ancestors. In other words: this CanvasItem will be drawn when is_visible_in_tree() returns true and all CanvasItem ancestors share at least one visibility_layer with this CanvasItem.
-
-Note: For controls that inherit Popup, the correct way to make them visible is to call one of the multiple popup*() functions instead.
+节点是否可见。
 
 ### modulate {#modulate}
 
@@ -930,10 +925,7 @@ Note: For controls that inherit Popup, the correct way to make them visible is t
 modulate: Color
 ```
 
-- void set_modulate(value: Color)
-- Color get_modulate()
-
-The color applied to this CanvasItem. This property does affect child CanvasItems, unlike self_modulate which only affects the node itself.
+调制颜色。乘以此颜色影响整个节点及其子节点。
 
 ### self_modulate {#self_modulate}
 
@@ -941,12 +933,7 @@ The color applied to this CanvasItem. This property does affect child CanvasItem
 self_modulate: Color
 ```
 
-- void set_self_modulate(value: Color)
-- Color get_self_modulate()
-
-The color applied to this CanvasItem. This property does not affect child CanvasItems, unlike modulate which affects both the node itself and its children.
-
-Note: Internal children are also not affected by this property (see the include_internal parameter in Node.add_child()). For built-in nodes this includes sliders in ColorPicker, and the tab bar in TabContainer.
+自身调制颜色（不影响子节点）。
 
 ### show_behind_parent {#show_behind_parent}
 

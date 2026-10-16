@@ -38,26 +38,27 @@ func _process(delta):
 ## Time API
 
 ```gdscript
-# 获取系统时间
-var now := Time.get_ticks_msec()      # 毫秒
-var now_usec := Time.get_ticks_usec() # 微秒
+# 引擎启动以来的单调时钟（毫秒/微秒），不受系统改钟影响，用于测时长
+var now_ms := Time.get_ticks_msec()
+var now_usec := Time.get_ticks_usec()
 
-# 倒计时
+# 倒计时：用 delta 累减，帧率无关
 var timer := 3.0
-func _process(delta):
+func _process(delta: float) -> void:
     timer -= delta
-    if timer <= 0:
+    if timer <= 0.0:
         print("时间到")
 ```
 
 ## SceneTreeTimer
 
 ```gdscript
-# 等 2 秒后执行
+# 等 2 秒后继续执行后续代码（受 time_scale 影响，慢动作会一起变慢）
 await get_tree().create_timer(2.0).timeout
 print("2 秒过去了")
 
-# 不用手动记时间，一行搞定
+# 第四个参数 ignore_time_scale=true：暂停/慢动作下照常走，用于 UI 提示
+await get_tree().create_timer(2.0, true, false, true).timeout
 ```
 
 ## 时间缩放

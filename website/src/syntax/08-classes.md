@@ -70,13 +70,14 @@ var inv := Inventory.new()        # 用类名直接构造
 ## 属性 setter / getter
 
 ```gdscript
-var hp := 100:
+# 注意：setter 里给同名变量赋值会无限递归，必须用底层字段 _hp
+var _hp := 100:
     set(v):
-        hp = clampi(v, 0, max_hp)     # 拦截赋值
-        if hp == 0:
+        _hp = clampi(v, 0, max_hp)   # 写底层字段，不回进 setter
+        if _hp == 0:
             die()
     get:
-        return hp                     # 自定义读取（一般省略）
+        return _hp                    # 对外仍以 hp 语义暴露，可另起公开名
 
 # 简写：只有 setter 时
 var seen := false:
@@ -85,7 +86,7 @@ var seen := false:
         queue_redraw()
 ```
 
-在 setter 里给**同一个变量**赋值会再次进入 setter——要写底层存储需要 backing field 时用 `set` / `get` 显式分离（进阶，[官方文档 · Properties](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html) 有完整模式）。
+在 setter 里给**同一个变量**赋值会再次进入 setter 直到栈溢出——要拦截就用 `_hp` 这类 backing field 分离存储与对外属性，见[官方文档 · Properties](https://docs.godotengine.org/en/stable/tutorials/scripting/gdscript/gdscript_basics.html)。
 
 ## static var：类级状态（4.1+）
 

@@ -196,9 +196,7 @@ It can perform smoother interpolation than spherical_cubic_interpolate() by the 
 x: float
 ```
 
-X component of the quaternion. This is the value along the "imaginary" i axis.
-
-Note: Quaternion components should usually not be manipulated directly.
+四元数 X 分量（虚部）。
 
 ### y {#y}
 
@@ -206,9 +204,7 @@ Note: Quaternion components should usually not be manipulated directly.
 y: float
 ```
 
-Y component of the quaternion. This is the value along the "imaginary" j axis.
-
-Note: Quaternion components should usually not be manipulated directly.
+四元数 Y 分量（虚部）。
 
 ### z {#z}
 
@@ -216,9 +212,7 @@ Note: Quaternion components should usually not be manipulated directly.
 z: float
 ```
 
-Z component of the quaternion. This is the value along the "imaginary" k axis.
-
-Note: Quaternion components should usually not be manipulated directly.
+四元数 Z 分量（虚部）。
 
 ### w {#w}
 
@@ -226,9 +220,7 @@ Note: Quaternion components should usually not be manipulated directly.
 w: float
 ```
 
-W component of the quaternion. This is the "real" part.
-
-Note: Quaternion components should usually not be manipulated directly.
+四元数 W 分量（实部）。
 
 ## 常量
 
@@ -238,8 +230,4 @@ Note: Quaternion components should usually not be manipulated directly.
 const IDENTITY = Quaternion(0, 0, 0, 1)
 ```
 
-The identity quaternion, representing no rotation. This has the same rotation as Basis.IDENTITY.
-
-If a Vector3 is rotated (multiplied) by this quaternion, it does not change.
-
-Note: In GDScript, this constant is equivalent to creating a Quaternion without any arguments. It can be used to make your code clearer, and for consistency with C#.
+单位四元数（无旋转），分量 (0, 0, 0, 1)。

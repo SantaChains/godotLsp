@@ -108,7 +108,7 @@ Returns the orthogonal projection of point into a point in the plane.
 x: float
 ```
 
-The X component of the plane's normal vector.
+平面法线 X 分量。
 
 ### y {#y}
 
@@ -116,7 +116,7 @@ The X component of the plane's normal vector.
 y: float
 ```
 
-The Y component of the plane's normal vector.
+平面法线 Y 分量。
 
 ### z {#z}
 
@@ -124,7 +124,7 @@ The Y component of the plane's normal vector.
 z: float
 ```
 
-The Z component of the plane's normal vector.
+平面法线 Z 分量。
 
 ### d {#d}
 
@@ -132,9 +132,7 @@ The Z component of the plane's normal vector.
 d: float
 ```
 
-The distance from the origin to the plane, expressed in terms of normal (according to its direction and magnitude). Actual absolute distance from the origin to the plane can be calculated as abs(d) / normal.length() (if normal has zero length then this Plane does not represent a valid plane).
-
-In the scalar equation of the plane ax + by + cz = d, this is d, while the (a, b, c) coordinates are represented by the normal property.
+平面到原点的有符号距离。
 
 ### normal {#normal}
 
@@ -142,9 +140,7 @@ In the scalar equation of the plane ax + by + cz = d, this is d, while the (a, b
 normal: Vector3
 ```
 
-The normal of the plane, typically a unit vector. Shouldn't be a zero vector as Plane with such normal does not represent a valid plane.
-
-In the scalar equation of the plane ax + by + cz = d, this is the vector (a, b, c), where d is the d property.
+平面单位法线向量。
 
 ## 常量
 
@@ -154,15 +150,7 @@ In the scalar equation of the plane ax + by + cz = d, this is the vector (a, b, 
 const PLANE_YZ = Plane(1, 0, 0, 0)
 ```
 
-A plane that extends in the Y and Z axes (normal vector points +X).
-
-PLANE_XZ = Plane(0, 1, 0, 0) 
-
-A plane that extends in the X and Z axes (normal vector points +Y).
-
-PLANE_XY = Plane(0, 0, 1, 0) 
-
-A plane that extends in the X and Y axes (normal vector points +Z).
+YZ 平面（法线沿 X）。
 
 ### PLANE_XZ {#PLANE_XZ}
 
@@ -170,7 +158,7 @@ A plane that extends in the X and Y axes (normal vector points +Z).
 const PLANE_XZ = Plane(0, 1, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+XZ 平面（法线沿 Y）。
 
 ### PLANE_XY {#PLANE_XY}
 
@@ -178,4 +166,4 @@ const PLANE_XZ = Plane(0, 1, 0, 0)
 const PLANE_XY = Plane(0, 0, 1, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+XY 平面（法线沿 Z）。

@@ -162,7 +162,7 @@ Returns a new vector with each component snapped to the closest multiple of step
 x: int
 ```
 
-The vector's X component. Also accessible by using the index position [0].
+X 分量（整数）。
 
 ### y {#y}
 
@@ -170,7 +170,7 @@ The vector's X component. Also accessible by using the index position [0].
 y: int
 ```
 
-The vector's Y component. Also accessible by using the index position [1].
+Y 分量（整数）。
 
 ## 枚举
 
@@ -208,35 +208,7 @@ Enumerated value for the Y axis. Returned by max_axis_index() and min_axis_index
 const ZERO = Vector2i(0, 0)
 ```
 
-Zero vector, a vector with all components set to 0.
-
-ONE = Vector2i(1, 1) 
-
-One vector, a vector with all components set to 1.
-
-MIN = Vector2i(-2147483648, -2147483648) 
-
-Min vector, a vector with all components equal to INT32_MIN. Can be used as a negative integer equivalent of Vector2.INF.
-
-MAX = Vector2i(2147483647, 2147483647) 
-
-Max vector, a vector with all components equal to INT32_MAX. Can be used as an integer equivalent of Vector2.INF.
-
-LEFT = Vector2i(-1, 0) 
-
-Left unit vector. Represents the direction of left.
-
-RIGHT = Vector2i(1, 0) 
-
-Right unit vector. Represents the direction of right.
-
-UP = Vector2i(0, -1) 
-
-Up unit vector. Y is down in 2D, so this vector points -Y.
-
-DOWN = Vector2i(0, 1) 
-
-Down unit vector. Y is down in 2D, so this vector points +Y.
+整数零向量 (0, 0)。
 
 ### ONE {#ONE}
 
@@ -244,7 +216,7 @@ Down unit vector. Y is down in 2D, so this vector points +Y.
 const ONE = Vector2i(1, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+整数单位向量 (1, 1)。
 
 ### MIN {#MIN}
 
@@ -252,7 +224,7 @@ const ONE = Vector2i(1, 1)
 const MIN = Vector2i(-2147483648, -2147483648)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+各分量取整数最小的向量。
 
 ### MAX {#MAX}
 
@@ -260,7 +232,7 @@ const MIN = Vector2i(-2147483648, -2147483648)
 const MAX = Vector2i(2147483647, 2147483647)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+各分量取整数最大的向量。
 
 ### LEFT {#LEFT}
 
@@ -268,7 +240,7 @@ const MAX = Vector2i(2147483647, 2147483647)
 const LEFT = Vector2i(-1, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+整数左向向量 (-1, 0)。
 
 ### RIGHT {#RIGHT}
 
@@ -276,7 +248,7 @@ const LEFT = Vector2i(-1, 0)
 const RIGHT = Vector2i(1, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+整数右向向量 (1, 0)。
 
 ### UP {#UP}
 
@@ -284,7 +256,7 @@ const RIGHT = Vector2i(1, 0)
 const UP = Vector2i(0, -1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+整数上向向量 (0, -1)。
 
 ### DOWN {#DOWN}
 
@@ -292,4 +264,4 @@ const UP = Vector2i(0, -1)
 const DOWN = Vector2i(0, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+整数下向向量 (0, 1)。

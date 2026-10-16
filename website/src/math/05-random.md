@@ -18,14 +18,15 @@ var n = rng.randi_range(0, 9)
 ## 种子保存与复现
 
 ```gdscript
-# 对局开始时把种子存档，重放时用同一种子重现全部随机事件
+# 从头复现整局：对局开始时固定 seed
 rng.seed = save_game.rng_seed
 
-# 结束时存当前种子（或存完整 rng 状态）
-save_game.rng_seed = rng.seed
+# 中途存档要复现"接下来的随机流"：存完整内部状态，而不只是 seed
+save_game.rng_state = rng.state
+# 读档：rng.state = save_game.rng_state
 ```
 
-> 值得注意的是：固定种子 = 可复现。肉鸽的关卡、掉落、抽卡都应从一个种子派生，这样录像回放、bug 复现、对战公平性都成立。全局 `randf()` 不受实例种子控制，所以统一用 `RandomNumberGenerator` 实例。
+> 值得注意的是：固定 seed 只能从起点复现；存档时点之后已经消耗掉的随机序列，必须存 `rng.state` 才能接着复现。肉鸽关卡、掉落、抽卡从一个种子派生，回放、bug 复现、对战公平性才成立。全局 `randf()/randi()` 不受实例种子控制，统一用 `RandomNumberGenerator` 实例。
 
 ## 常用分布
 
@@ -40,18 +41,23 @@ save_game.rng_seed = rng.seed
 
 ```gdscript
 # 按权重抽物品
-var items = [
+var items := [
     {"name": "剑", "weight": 5},
     {"name": "盾", "weight": 3},
     {"name": "药水", "weight": 2},
 ]
-var total = items.reduce(func(acc, i): return acc + i.weight, 0)
-var roll = rng.randf() * total
-var acc = 0.0
-for item in items:
-    acc += item.weight
-    if roll < acc:
-        return item.name
+
+func pick_weighted(rng: RandomNumberGenerator) -> String:
+    var total := 0
+    for item in items:
+        total += item.weight
+    var roll := rng.randi_range(0, total - 1)
+    var acc := 0
+    for item in items:
+        acc += item.weight
+        if roll < acc:
+            return item["name"]
+    return items[-1]["name"]
 ```
 
 ## 延伸阅读

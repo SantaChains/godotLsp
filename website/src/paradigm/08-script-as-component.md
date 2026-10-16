@@ -17,6 +17,8 @@ func _physics_process(delta):
 
 在编辑器里把这个脚本拖到一个 CharacterBody2D 节点上，那个节点就变成了"会移动的玩家"。脚本没有独立存在，它就是节点本身。
 
+> 类型必须对上：`extends CharacterBody2D` 的脚本只能挂在 CharacterBody2D（或其子类）节点上，挂到普通 Node 上会报类型不匹配。脚本定义的是"在这个节点类型上追加行为"，不是脱离节点的独立组件。
+
 ## extends 链
 
 ```gdscript

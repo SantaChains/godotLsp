@@ -290,7 +290,7 @@ Returns a new vector with each component snapped to the nearest multiple of step
 x: float
 ```
 
-The vector's X component. Also accessible by using the index position [0].
+X 分量。
 
 ### y {#y}
 
@@ -298,7 +298,7 @@ The vector's X component. Also accessible by using the index position [0].
 y: float
 ```
 
-The vector's Y component. Also accessible by using the index position [1].
+Y 分量。
 
 ### z {#z}
 
@@ -306,7 +306,7 @@ The vector's Y component. Also accessible by using the index position [1].
 z: float
 ```
 
-The vector's Z component. Also accessible by using the index position [2].
+Z 分量。
 
 ### w {#w}
 
@@ -314,7 +314,7 @@ The vector's Z component. Also accessible by using the index position [2].
 w: float
 ```
 
-The vector's W component. Also accessible by using the index position [3].
+W 分量（四维向量/四元式的第四分量）。
 
 ## 枚举
 
@@ -368,15 +368,7 @@ Enumerated value for the W axis. Returned by max_axis_index() and min_axis_index
 const ZERO = Vector4(0, 0, 0, 0)
 ```
 
-Zero vector, a vector with all components set to 0.
-
-ONE = Vector4(1, 1, 1, 1) 
-
-One vector, a vector with all components set to 1.
-
-INF = Vector4(inf, inf, inf, inf) 
-
-Infinity vector, a vector with all components set to @GDScript.INF.
+四维零向量。
 
 ### ONE {#ONE}
 
@@ -384,7 +376,7 @@ Infinity vector, a vector with all components set to @GDScript.INF.
 const ONE = Vector4(1, 1, 1, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+四维单位向量。
 
 ### INF {#INF}
 
@@ -392,4 +384,4 @@ const ONE = Vector4(1, 1, 1, 1)
 const INF = Vector4(inf, inf, inf, inf)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+各分量为无穷大。

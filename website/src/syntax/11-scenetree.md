@@ -42,8 +42,8 @@ const BulletScene := preload("res://scenes/bullet.tscn")  # 编译期加载
 
 func spawn(pos: Vector2) -> void:
     var bullet := BulletScene.instantiate()   # 只是创建节点对象（未进树）
-    bullet.global_position = pos
-    add_child(bullet)                         # 挂进树：此刻生命周期才启动
+    add_child(bullet)                         # 先挂进树：生命周期才启动
+    bullet.global_position = pos              # 入树后再设全局位置，避免父变换换算出错
 ```
 
 | 调用 | 时机 | 适用 |
@@ -62,6 +62,56 @@ func spawn(pos: Vector2) -> void:
 ## owner 与场景归属
 
 `owner` 指向「打包进场景文件」的根：编辑器保存场景时，只有 `owner` 指向场景根的节点会被写进 `.tscn`。运行时 `add_child` 的节点 `owner` 为空——它在场景文件里**不存在**，重进场景即消失。`%` 唯一名查找同样依赖 owner 语义，边界情况见[引擎内部篇 · 静默失败](../internals/07-fatal.md)。
+
+## 分组 Groups：按类别批量寻址
+
+分组是节点的**标签**，不属于父子层级：一个节点可进多个组，组无层级。适合跨场景、跨层级地对一类节点统一发消息（所有敌人警戒、所有音乐淡入、全 UI 刷新），不必遍历树找引用。
+
+```gdscript
+# 注册：脚本内 add_to_group，或编辑器节点面板 Groups 页签勾选
+func _ready() -> void:
+    add_to_group("enemies")
+
+# 广播：对组内每个成员调方法（参数依次追加）
+get_tree().call_group("enemies", "set_alert", true)
+
+# 取全量列表自行遍历
+for e: Node in get_tree().get_nodes_in_group("enemies"):
+    e.queue_free()
+```
+
+| API | 语义 |
+|---|---|
+| `add_to_group(name)` / `remove_from_group(name)` | 进出组；节点离开树自动移除，无需手写清理 |
+| `is_in_group(name) -> bool` | 是否已在组 |
+| `get_tree().call_group(group, method, ...args)` | 对全体成员调方法；无该方法的成员被忽略 |
+| `get_tree().set_group(group, property, value)` | 对全体成员设同一属性 |
+| `get_tree().get_nodes_in_group(group) -> Array[Node]` | 取列表自行处理 |
+
+> 分组是广播工具，不是状态存储。需要"当前玩家是谁"这类唯一引用时，用 autoload 持有引用，而不是靠组去猜（多玩家/分身场景尤其如此）。
+
+## 延迟调用 deferred：避开当前迭代与物理回调限制
+
+物理回调（`_physics_process`、`body_entered` 等）里直接改场景树结构（add_child/queue_free/改 disabled）可能踩到"正在迭代中"的限制。把动作推迟到帧末安全点执行：
+
+```gdscript
+# 推迟设属性（CollisionShape2D 的 disabled 在物理回调里直接改会受限）
+$CollisionShape2D.set_deferred("disabled", true)
+
+# 推迟调用任意方法（无参/带参均可）
+call_deferred("spawn_bullet", pos)
+
+# 帧末执行一段闭包
+call_deferred(func(): spawn_bullet(pos))
+```
+
+| API | 语义 |
+|---|---|
+| `call_deferred(method, ...args)` | 帧末调用方法 |
+| `set_deferred(property, value)` | 帧末设属性（等价 call_deferred("set:"+property, value) 的便捷形式） |
+| `get_deferred(property)` | 取延迟队列里待生效的值（少用） |
+
+信号连接标志 `CONNECT_DEFERRED` 是同一思想的信号版，见[信号系统](10-signals.md)。
 
 ## 生命周期回调全表
 

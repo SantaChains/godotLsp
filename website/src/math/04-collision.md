@@ -20,10 +20,10 @@ func _physics_process(_delta):
 
 | 属性 | 作用 |
 |---|---|
-| `target_position` | 射线终点（局部坐标） |
-| `max_length` | 最大距离 |
+| `target_position` | 射线终点（局部坐标），向量长度就是探测距离 |
 | `collision_mask` | 检测哪些层 |
 | `enabled` | 是否启用 |
+| `exclude_parent` | 是否自动排除挂载它的父节点 |
 
 ## 代码查询（不挂节点）
 

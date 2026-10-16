@@ -11,14 +11,14 @@ func add(a: int, b: int) -> int:
 func greet(name: String, greeting: String = "Hello") -> void:   # 默认值
     print("%s, %s!" % [greeting, name])
 
-func sum(...nums: int) -> int:      # 变参（4.2+），nums 是 Array[int]
+func sum(...nums) -> int:          # 变参（4.2+），nums 是收集剩余实参的无类型 Array
     var t := 0
     for n in nums:
         t += n
     return t
 ```
 
-<a id="kw-return"></a><a id="kw-void"></a>`return` 从函数返回值，无返回值函数可裸 `return`；`void` 是「无返回值」的类型标注。使用准则：**返回类型一律标注**（不返回值标 `-> void`）——这是免费的编译期检查，也是编辑器补全质量的基石。
+> GDScript 的变参收集 `...nums` 是无类型 Array，不能写成 `...nums: int`；需要元素类型就在函数内逐个 `as` 收窄。<a id="kw-void"></a>`return` 从函数返回值，无返回值函数可裸 `return`；`void` 是「无返回值」的类型标注。使用准则：**返回类型一律标注**（不返回值标 `-> void`）——这是免费的编译期检查，也是编辑器补全质量的基石。
 
 <a id="kw-pass"></a>`pass` 是空语句占位：语法上需要语句但不想执行任何代码时使用（空函数体、未写完的分支），与 Python 同名语句语义一致。
 

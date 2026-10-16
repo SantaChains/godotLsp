@@ -542,12 +542,7 @@ Note: This property does nothing in release builds.
 current_scene: Node
 ```
 
-- void set_current_scene(value: Node)
-- Node get_current_scene()
-
-The root node of the currently loaded main scene, usually as a direct child of root. See also change_scene_to_file(), change_scene_to_packed(), and reload_current_scene().
-
-Warning: Setting this property directly may not work as expected, as it does not add or remove any nodes from this tree.
+当前运行场景的根节点。
 
 ### root {#root}
 
@@ -555,11 +550,7 @@ Warning: Setting this property directly may not work as expected, as it does not
 root: Node
 ```
 
-- Window get_root()
-
-The tree's root Window. This is top-most Node of the scene tree, and is always present. An absolute NodePath always starts from this node. Children of the root node may include the loaded current_scene, as well as any AutoLoad configured in the Project Settings.
-
-Warning: Do not delete this node. This will result in unstable behavior, followed by a crash.
+根视口节点。
 
 ### multiplayer_poll {#multiplayer_poll}
 

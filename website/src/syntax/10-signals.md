@@ -30,6 +30,14 @@ func _on_health_changed(new_hp: int) -> void:
 
 - `connect(callable)` 返回 `Error`（重复连接同一对返回 `ERR_INVALID_PARAMETER`，**不会自动去重**）。
 - 断开：`signal.disconnect(callable)`；查询：`signal.is_connected(callable)`。
+- **防重复连接**：`_ready` 可能在对象复用（进出树多次）时重复执行，连接前先查：
+
+```gdscript
+if not health_changed.is_connected(_on_health_changed):
+    health_changed.connect(_on_health_changed)
+```
+
+动态对象（子弹、临时 UI）在 `_exit_tree` 里主动 `disconnect` 外部信号，避免回调打到已销毁节点。
 - **连接生命周期**：连接双方都在场景树内时，任一方销毁自动断连——**同树场景不用手写清理**。野引用主要来自三类：跨树连接、`Callable.bind` 持有的外部引用、编辑器连接的 lost-connection 警告。深入语义见[范式篇 · 信号深入](../paradigm/04-signals.md)。
 
 ## bind 与参数预绑

@@ -27,12 +27,10 @@ script = ExtResource("1_abc")
 var BulletScene: PackedScene = preload("res://bullet.tscn")
 
 # instantiate() = 用模板造一棵新节点树
-var bullet = BulletScene.instantiate()
-
-# 此时 bullet 是一个 CharacterBody2D 节点，但还不在场景树里
-# 必须 add_child 才活
-bullet.position = $Gun/Muzzle.position
+var bullet := BulletScene.instantiate()
+# 先入树，再用世界坐标放置；未入树时 global_position 无父级参考
 add_child(bullet)
+bullet.global_position = $Gun/Muzzle.global_position
 ```
 
 > 值得注意的是：`instantiate()` 不进场景树。`_ready()` 不触发，`_process()` 不跑。必须 `add_child()` 之后才活。

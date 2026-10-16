@@ -19,12 +19,12 @@
 
 ## 四种写法的性能阶梯
 
-| 写法 | 每次调用做什么 | 相对开销 |
+| 写法 | 每次调用做什么 | 开销量级 |
 |---|---|---|
-| `get_node("Player/Sprite2D")` | 解析路径字符串 + 两次线性遍历 | 100% |
-| `$Player/Sprite2D` | 同上（语法糖） | 100% |
-| `%PlayerSprite` | Godot 在场景树里建了唯一节点索引表，O(1) 查找 | ~20% |
-| `@onready var s := $Player/Sprite2D` | 只在 _ready 时查一次，之后直接用成员变量 | ~0% |
+| `get_node("Player/Sprite2D")` | 解析路径字符串 + 逐段线性遍历子节点 | 高 |
+| `$Player/Sprite2D` | 同上（语法糖，无额外优化） | 高 |
+| `%PlayerSprite` | 查唯一节点字典（哈希），无线性遍历 | 中 |
+| `@onready var s := $Player/Sprite2D` | 只在 _ready 查一次，之后直接用成员变量 | 近乎零 |
 
 ## @onready 的原理
 

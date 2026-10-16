@@ -440,7 +440,7 @@ Returns a new vector with each component snapped to the nearest multiple of step
 x: float
 ```
 
-The vector's X component. Also accessible by using the index position [0].
+X 分量。
 
 ### y {#y}
 
@@ -448,7 +448,7 @@ The vector's X component. Also accessible by using the index position [0].
 y: float
 ```
 
-The vector's Y component. Also accessible by using the index position [1].
+Y 分量。
 
 ### z {#z}
 
@@ -456,7 +456,7 @@ The vector's Y component. Also accessible by using the index position [1].
 z: float
 ```
 
-The vector's Z component. Also accessible by using the index position [2].
+Z 分量。
 
 ## 枚举
 
@@ -502,63 +502,7 @@ Enumerated value for the Z axis. Returned by max_axis_index() and min_axis_index
 const ZERO = Vector3(0, 0, 0)
 ```
 
-Zero vector, a vector with all components set to 0.
-
-ONE = Vector3(1, 1, 1) 
-
-One vector, a vector with all components set to 1.
-
-INF = Vector3(inf, inf, inf) 
-
-Infinity vector, a vector with all components set to @GDScript.INF.
-
-LEFT = Vector3(-1, 0, 0) 
-
-Left unit vector. Represents the local direction of left, and the global direction of west.
-
-RIGHT = Vector3(1, 0, 0) 
-
-Right unit vector. Represents the local direction of right, and the global direction of east.
-
-UP = Vector3(0, 1, 0) 
-
-Up unit vector.
-
-DOWN = Vector3(0, -1, 0) 
-
-Down unit vector.
-
-FORWARD = Vector3(0, 0, -1) 
-
-Forward unit vector. Represents the local direction of forward, and the global direction of north. Keep in mind that the forward direction for lights, cameras, etc is different from 3D assets like characters, which face towards the camera by convention. Use MODEL_FRONT and similar constants when working in 3D asset space.
-
-BACK = Vector3(0, 0, 1) 
-
-Back unit vector. Represents the local direction of back, and the global direction of south.
-
-MODEL_LEFT = Vector3(1, 0, 0) 
-
-Unit vector pointing towards the left side of imported 3D assets.
-
-MODEL_RIGHT = Vector3(-1, 0, 0) 
-
-Unit vector pointing towards the right side of imported 3D assets.
-
-MODEL_TOP = Vector3(0, 1, 0) 
-
-Unit vector pointing towards the top side (up) of imported 3D assets.
-
-MODEL_BOTTOM = Vector3(0, -1, 0) 
-
-Unit vector pointing towards the bottom side (down) of imported 3D assets.
-
-MODEL_FRONT = Vector3(0, 0, 1) 
-
-Unit vector pointing towards the front side (facing forward) of imported 3D assets.
-
-MODEL_REAR = Vector3(0, 0, -1) 
-
-Unit vector pointing towards the rear side (back) of imported 3D assets.
+零向量 (0, 0, 0)。
 
 ### ONE {#ONE}
 
@@ -566,7 +510,7 @@ Unit vector pointing towards the rear side (back) of imported 3D assets.
 const ONE = Vector3(1, 1, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+单位向量 (1, 1, 1)。
 
 ### INF {#INF}
 
@@ -574,7 +518,7 @@ const ONE = Vector3(1, 1, 1)
 const INF = Vector3(inf, inf, inf)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+各分量为无穷大的向量。
 
 ### LEFT {#LEFT}
 
@@ -582,7 +526,7 @@ const INF = Vector3(inf, inf, inf)
 const LEFT = Vector3(-1, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+左向 (-1, 0, 0)。
 
 ### RIGHT {#RIGHT}
 
@@ -590,7 +534,7 @@ const LEFT = Vector3(-1, 0, 0)
 const RIGHT = Vector3(1, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+右向 (1, 0, 0)。
 
 ### UP {#UP}
 
@@ -598,7 +542,7 @@ const RIGHT = Vector3(1, 0, 0)
 const UP = Vector3(0, 1, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+上向 (0, 1, 0)。
 
 ### DOWN {#DOWN}
 
@@ -606,7 +550,7 @@ const UP = Vector3(0, 1, 0)
 const DOWN = Vector3(0, -1, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+下向 (0, -1, 0)。
 
 ### FORWARD {#FORWARD}
 
@@ -614,7 +558,7 @@ const DOWN = Vector3(0, -1, 0)
 const FORWARD = Vector3(0, 0, -1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+前向 (0, 0, -1)。
 
 ### BACK {#BACK}
 
@@ -622,7 +566,7 @@ const FORWARD = Vector3(0, 0, -1)
 const BACK = Vector3(0, 0, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+后向 (0, 0, 1)。
 
 ### MODEL_LEFT {#MODEL_LEFT}
 
@@ -630,7 +574,7 @@ const BACK = Vector3(0, 0, 1)
 const MODEL_LEFT = Vector3(1, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+模型空间左向。
 
 ### MODEL_RIGHT {#MODEL_RIGHT}
 
@@ -638,7 +582,7 @@ const MODEL_LEFT = Vector3(1, 0, 0)
 const MODEL_RIGHT = Vector3(-1, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+模型空间右向。
 
 ### MODEL_TOP {#MODEL_TOP}
 
@@ -646,7 +590,7 @@ const MODEL_RIGHT = Vector3(-1, 0, 0)
 const MODEL_TOP = Vector3(0, 1, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+模型空间上向。
 
 ### MODEL_BOTTOM {#MODEL_BOTTOM}
 
@@ -654,7 +598,7 @@ const MODEL_TOP = Vector3(0, 1, 0)
 const MODEL_BOTTOM = Vector3(0, -1, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+模型空间下向。
 
 ### MODEL_FRONT {#MODEL_FRONT}
 
@@ -662,7 +606,7 @@ const MODEL_BOTTOM = Vector3(0, -1, 0)
 const MODEL_FRONT = Vector3(0, 0, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+模型空间前向。
 
 ### MODEL_REAR {#MODEL_REAR}
 
@@ -670,4 +614,4 @@ const MODEL_FRONT = Vector3(0, 0, 1)
 const MODEL_REAR = Vector3(0, 0, -1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+模型空间后向。

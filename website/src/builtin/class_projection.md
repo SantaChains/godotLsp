@@ -256,7 +256,7 @@ Note: The original Projection must be a perspective projection.
 x: Vector4
 ```
 
-The projection matrix's X vector (column 0). Equivalent to array index 0.
+投影矩阵 X 行/列向量。
 
 ### y {#y}
 
@@ -264,7 +264,7 @@ The projection matrix's X vector (column 0). Equivalent to array index 0.
 y: Vector4
 ```
 
-The projection matrix's Y vector (column 1). Equivalent to array index 1.
+投影矩阵 Y 行/列向量。
 
 ### z {#z}
 
@@ -272,7 +272,7 @@ The projection matrix's Y vector (column 1). Equivalent to array index 1.
 z: Vector4
 ```
 
-The projection matrix's Z vector (column 2). Equivalent to array index 2.
+投影矩阵 Z 行/列向量。
 
 ### w {#w}
 
@@ -280,7 +280,7 @@ The projection matrix's Z vector (column 2). Equivalent to array index 2.
 w: Vector4
 ```
 
-The projection matrix's W vector (column 3). Equivalent to array index 3.
+投影矩阵 W 行/列向量。
 
 ## 枚举
 
@@ -350,11 +350,7 @@ The index value of the projection bottom clipping plane.
 const IDENTITY = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 ```
 
-A Projection with no transformation defined. When applied to other data structures, no transformation is performed.
-
-ZERO = Projection(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0) 
-
-A Projection with all values initialized to 0. When applied to other data structures, they will be zeroed.
+单位投影矩阵。
 
 ### ZERO {#ZERO}
 
@@ -362,4 +358,4 @@ A Projection with all values initialized to 0. When applied to other data struct
 const ZERO = Projection(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+零投影矩阵。

@@ -3,6 +3,13 @@
 [Introduction](intro/index.md)
 [版本与适配说明](intro/versions.md)
 
+# 入门篇
+
+- [Godot 是什么](intro/00-what-is-godot.md)
+- [项目设置与显示配置](intro/01-project-settings.md)
+- [编辑器高效快捷键](intro/02-editor-shortcuts.md)
+- [Godot 与 Blender 搭配管线](intro/03-blender-interop.md)
+
 # 语法篇
 
 - [语法篇导读](syntax/00-intro.md)
@@ -22,6 +29,7 @@
 - [错误处理模型](syntax/14-errors.md)
 - [输入系统](syntax/15-input.md)
 - [字符串格式化与惯用法](syntax/16-strings.md)
+- [文件持久化](syntax/17-persistence.md)
 
 # 范式篇
 
@@ -34,12 +42,33 @@
 - [资源 Resource](paradigm/07-resource.md)
 - [脚本即组件](paradigm/08-script-as-component.md)
 - [组合优于继承](paradigm/09-composition.md)
+- [节点选型目录](paradigm/10-node-catalog.md)
+
+# 信号参考
+
+- [信号导读](signals/00-guide.md)
+- [分类索引](signals/index.md)
+- [基类与生命周期](signals/01-core.md)
+- [输入与控件](signals/02-ui.md)
+- [物理与区域检测](signals/03-physics.md)
+- [动画与补间](signals/04-animation.md)
+- [音频 / 视频 / 粒子 / 计时](signals/05-media.md)
+- [场景树 / 导航 / 多人 / 网络](signals/06-scene-net.md)
+- [资源 / 材质 / 瓦片 / 贴图](signals/07-resource-tile.md)
+- [编辑器扩展](signals/08-editor.md)
+- [XR / OpenXR](signals/09-xr.md)
+- [Server 低层](signals/10-servers.md)
 
 # UI 架构篇
 
 - [UI 范式全景](ui/00-paradigm-survey.md)
 - [状态与控件分离](ui/01-state-separation.md)
 - [响应式封装实现](ui/02-reactive-wrapper.md)
+
+# 2D 资产与动画篇
+
+- [精灵表规范](assets/00-sprite-sheet.md)
+- [动画消费路径选型](assets/01-animation-paths.md)
 
 # 思想篇
 
@@ -83,6 +112,7 @@
 - [Variant 序列化](internals/05-variant.md)
 - [资产管线](internals/06-assets.md)
 - [脚本致命面与静默失败](internals/07-fatal.md)
+- [文档词条与 LSP 对齐路线](internals/08-lsp-alignment.md)
 
 # GDExtension 高性能篇
 

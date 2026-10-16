@@ -14,16 +14,16 @@
 
 > 值得注意的是：**不透明从前到后，透明从后到前**，顺序相反。不透明靠深度缓冲 early-Z 省片元，透明靠混合必须严格按距离排序。
 
-## Blinn-Phong 光照
+## 光照模型：Blinn-Phong 与 PBR
 
-三个向量：法线 N、光源方向 L、视线方向 V。
+教学上先用 Blinn-Phong 理解三个向量：法线 N、光源方向 L、视线方向 V。
 
 ```
 漫反射 = max(0, N·L)
-高光   = (N·半程向量) 的幂
+高光   = (N·半程向量 H) 的幂（H 归一化(L+V)）
 ```
 
-Godot 的 StandardMaterial3D 默认用 Blinn-Phong。点积越大，越亮。
+> 需要注意：**Godot 的 StandardMaterial3D 默认不是 Blinn-Phong，而是基于物理的 PBR**（GGX 高光 / Smith 几何遮蔽 / Schlick 菲涅尔 / Disney 漫反射）。Blinn-Phong 只是理解"漫反射靠 N·L、高光靠半程向量"的简化模型；Godot 的 2D 调制、自定义 canvas_item shader 里你可以自己写 Blinn-Phong 式经验光照，3D 标准材质走的是 PBR 管线。
 
 ## 后处理概念
 

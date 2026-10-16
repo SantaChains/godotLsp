@@ -424,9 +424,7 @@ GD.Print(myBasis.Z); // Prints (3, 6, 9)
 x: Vector3
 ```
 
-The basis's X axis, and the column 0 of the matrix.
-
-On the identity basis, this vector points right (Vector3.RIGHT).
+基矩阵 X 轴列向量。
 
 ### y {#y}
 
@@ -434,9 +432,7 @@ On the identity basis, this vector points right (Vector3.RIGHT).
 y: Vector3
 ```
 
-The basis's Y axis, and the column 1 of the matrix.
-
-On the identity basis, this vector points up (Vector3.UP).
+基矩阵 Y 轴列向量。
 
 ### z {#z}
 
@@ -444,9 +440,7 @@ On the identity basis, this vector points up (Vector3.UP).
 z: Vector3
 ```
 
-The basis's Z axis, and the column 2 of the matrix.
-
-On the identity basis, this vector points back (Vector3.BACK).
+基矩阵 Z 轴列向量。
 
 ## 常量
 
@@ -456,46 +450,7 @@ On the identity basis, this vector points back (Vector3.BACK).
 const IDENTITY = Basis(1, 0, 0, 0, 1, 0, 0, 0, 1)
 ```
 
-The identity Basis. This is an orthonormal basis with no rotation, no shear, and a scale of Vector3.ONE. This also means that:
-
-- The x points right (Vector3.RIGHT);
-- The y points up (Vector3.UP);
-- The z points back (Vector3.BACK).
-
-```gdscript
-var basis = Basis.IDENTITY
-print("| X | Y | Z")
-print("| %.f | %.f | %.f" % [basis.x.x, basis.y.x, basis.z.x])
-print("| %.f | %.f | %.f" % [basis.x.y, basis.y.y, basis.z.y])
-print("| %.f | %.f | %.f" % [basis.x.z, basis.y.z, basis.z.z])
-# Prints:
-# | X | Y | Z
-# | 1 | 0 | 0
-# | 0 | 1 | 0
-# | 0 | 0 | 1
-```
-
-If a Vector3 or another Basis is transformed (multiplied) by this constant, no transformation occurs.
-
-Note: In GDScript, this constant is equivalent to creating a Basis without any arguments. It can be used to make your code clearer, and for consistency with C#.
-
-FLIP_X = Basis(-1, 0, 0, 0, 1, 0, 0, 0, 1) 
-
-When any basis is multiplied by FLIP_X, it negates all components of the x axis (the X column).
-
-When FLIP_X is multiplied by any basis, it negates the Vector3.x component of all axes (the X row).
-
-FLIP_Y = Basis(1, 0, 0, 0, -1, 0, 0, 0, 1) 
-
-When any basis is multiplied by FLIP_Y, it negates all components of the y axis (the Y column).
-
-When FLIP_Y is multiplied by any basis, it negates the Vector3.y component of all axes (the Y row).
-
-FLIP_Z = Basis(1, 0, 0, 0, 1, 0, 0, 0, -1) 
-
-When any basis is multiplied by FLIP_Z, it negates all components of the z axis (the Z column).
-
-When FLIP_Z is multiplied by any basis, it negates the Vector3.z component of all axes (the Z row).
+单位基矩阵（无旋转缩放）。
 
 ### FLIP_X {#FLIP_X}
 
@@ -503,7 +458,7 @@ When FLIP_Z is multiplied by any basis, it negates the Vector3.z component of al
 const FLIP_X = Basis(-1, 0, 0, 0, 1, 0, 0, 0, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+X 轴翻转基矩阵。
 
 ### FLIP_Y {#FLIP_Y}
 
@@ -511,7 +466,7 @@ const FLIP_X = Basis(-1, 0, 0, 0, 1, 0, 0, 0, 1)
 const FLIP_Y = Basis(1, 0, 0, 0, -1, 0, 0, 0, 1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Y 轴翻转基矩阵。
 
 ### FLIP_Z {#FLIP_Z}
 
@@ -519,4 +474,4 @@ const FLIP_Y = Basis(1, 0, 0, 0, -1, 0, 0, 0, 1)
 const FLIP_Z = Basis(1, 0, 0, 0, 1, 0, 0, 0, -1)
 ```
 
-> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+Z 轴翻转基矩阵。

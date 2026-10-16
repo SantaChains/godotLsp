@@ -43,18 +43,16 @@ dot 值的几何意义：
 ## 叉积判左右（2D）
 
 ```gdscript
-# 玩家在我的左边还是右边？
+# 目标在我的朝向哪一侧？
 var to_player := player.global_position - global_position
 var cross := transform.x.cross(to_player)
 if cross > 0:
-    # 玩家在左侧
-    turn_left()
-elif cross < 0:
-    # 玩家在右侧
     turn_right()
+elif cross < 0:
+    turn_left()
 ```
 
-2D 叉积返回标量：正 = 目标在左，负 = 目标在右，0 = 正对。
+2D 叉积返回标量，正负区分目标在朝向的哪一侧。注意 Godot 2D 的 Y 轴向下，左右符号与直觉相反：`cross > 0` 对应屏幕下方（朝 +X 时即角色右侧），`cross < 0` 对应屏幕上方（左侧）；自己项目里先打印一次确认，不要背符号。
 
 ## 距离族
 

@@ -33,25 +33,28 @@ func add():
 ### 2. 热循环 get_node
 
 ```gdscript
-# 慢：每帧字符串查找
-func _process(_delta):
-    $Sprite2D.position.x += speed * delta
-
-# 快：onready 缓存
+# 慢：每帧走一遍路径解析 + 子节点线性查找
 @onready var sprite := $Sprite2D
-func _process(delta):
-    sprite.position.x += speed * delta
+
+func _physics_process(delta: float) -> void:
+    sprite.position.x += speed * delta   # 缓存后直接访问成员变量
 ```
 
-### 3. 字符串操作
+节点引用在 `_ready` 用 `@onready` 取一次存起来，不要在 `_process`/`_physics_process` 里反复写 `$Node` 或 `get_node()`，原理见[节点查找的真相](05-node-lookup.md)。
+
+### 3. 每帧拼接字符串
 
 ```gdscript
-# 慢：每帧拼接新字符串
-func _process(_delta):
+# 慢：每帧新建字符串对象，哪怕数值没变
+func _process(_delta: float) -> void:
     label.text = "HP: " + str(hp) + "/" + str(max_hp)
 
-# 快：少用字符串，或用 StringName
+# 快：数值变化时才刷新，避免无谓分配
+func _on_hp_changed(new_hp: int) -> void:
+    label.text = "HP: %d/%d" % [new_hp, max_hp]
 ```
+
+`StringName` 用于信号名、属性名这类**重复查找键**的去重，不是用来拼接显示文本，别用错场景。
 
 ### 4. 重复 connect
 

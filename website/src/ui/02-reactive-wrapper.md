@@ -117,15 +117,16 @@ func size() -> int:
 
 ```gdscript
 # hero.gd
+# 注意：不要把字段命名为 name，那是 Object 内置属性，会冲突
 class_name Hero extends Reactive
 
-var name: ReactiveString
+var display_name: ReactiveString
 var strength: ReactiveInt
 var wisdom: ReactiveInt
 
 func _init(p_name: String) -> void:
     # 每个字段的 owner 都设为 Hero，变化自动冒泡到 Hero
-    name = ReactiveString.new(p_name, self)
+    display_name = ReactiveString.new(p_name, self)
     strength = ReactiveInt.new(5, self)
     wisdom = ReactiveInt.new(5, self)
 ```
@@ -160,7 +161,7 @@ func _ready() -> void:
     # 控件 → 状态：改名
     name_edit.text_changed.connect(func(t: String) -> void:
         if GameState.selected:
-            GameState.selected.name.value = t)
+            GameState.selected.display_name.value = t)
 
     # 按钮 → 状态：雇佣 / 移除，只改数组，不碰另一个列表
     hire_btn.pressed.connect(_on_hire)
@@ -192,14 +193,14 @@ func _rebuild_left() -> void:
         c.queue_free()
     for h in GameState.available.get_items():
         var row := Button.new()
-        row.text = h.name.value
+        row.text = h.display_name.value
         row.pressed.connect(func() -> void:
             GameState.selected = h
             _show_detail(h))
         left_list.add_child(row)
 
 func _show_detail(h: Hero) -> void:
-    name_edit.text = h.name.value
+    name_edit.text = h.display_name.value
     # 力量/智慧标签同理，全部从状态读
 ```
 

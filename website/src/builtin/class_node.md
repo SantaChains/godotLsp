@@ -1456,12 +1456,7 @@ Refreshes the warnings displayed for this node in the Scene dock. Use _get_confi
 name: StringName
 ```
 
-- void set_name(value: StringName)
-- StringName get_name()
-
-The name of the node. This name must be unique among the siblings (other child nodes from the same parent). When set to an existing sibling's name, the node is automatically renamed.
-
-Note: When changing the name, the following characters will be replaced with an underscore: (. : @ / " %). In particular, the @ character is reserved for auto-generated names. See also String.validate_node_name().
+节点名称。在父节点下必须唯一。
 
 ### unique_name_in_owner {#unique_name_in_owner}
 
@@ -1493,14 +1488,7 @@ The original scene's file path, if the node has been instantiated from a PackedS
 owner: Node
 ```
 
-- void set_owner(value: Node)
-- Node get_owner()
-
-The owner of this node. The owner must be an ancestor of this node. When packing the owner node in a PackedScene, all the nodes it owns are also saved with it. See also unique_name_in_owner.
-
-Note: In the editor, nodes not owned by the scene root are usually not displayed in the Scene dock, and will not be saved. To prevent this, remember to set the owner after calling add_child().
-
-Note: The owner needs to be the current scene root. See Instancing scenes in the documentation for more information.
+场景所有者。决定实例化时哪些节点被保存。
 
 ### multiplayer {#multiplayer}
 

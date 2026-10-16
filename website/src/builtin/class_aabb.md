@@ -364,7 +364,7 @@ Returns an AABB that encloses both this bounding box and with around the edges. 
 position: Vector3
 ```
 
-The origin point. This is usually the corner on the bottom-left and forward of the bounding box.
+包围盒最小角坐标。
 
 ### size {#size}
 
@@ -372,9 +372,7 @@ The origin point. This is usually the corner on the bottom-left and forward of t
 size: Vector3
 ```
 
-The bounding box's width, height, and depth starting from position. Setting this value also affects the end point.
-
-Note: It's recommended setting the width, height, and depth to non-negative values. This is because most methods in Godot assume that the position is the bottom-left-forward corner, and the end is the top-right-back corner. To get an equivalent bounding box with non-negative size, use abs().
+包围盒三轴尺寸。
 
 ### end {#end}
 
@@ -382,4 +380,4 @@ Note: It's recommended setting the width, height, and depth to non-negative valu
 end: Vector3
 ```
 
-The ending point. This is usually the corner on the top-right and back of the bounding box, and is equivalent to position + size. Setting this point affects the size.
+包围盒最大角坐标（position + size）。

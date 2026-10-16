@@ -290,10 +290,7 @@ Translates the node by the given offset in local coordinates. This is equivalent
 position: Vector2
 ```
 
-- void set_position(value: Vector2)
-- Vector2 get_position()
-
-Position, relative to the node's parent. See also global_position.
+节点在父节点坐标系中的位置。
 
 ### rotation {#rotation}
 
@@ -301,12 +298,7 @@ Position, relative to the node's parent. See also global_position.
 rotation: float
 ```
 
-- void set_rotation(value: float)
-- float get_rotation()
-
-Rotation in radians, relative to the node's parent. See also global_rotation.
-
-Note: This property is edited in the inspector in degrees. If you want to use degrees in a script, use rotation_degrees.
+节点绕 Z 轴的旋转角度（弧度）。
 
 ### rotation_degrees {#rotation_degrees}
 
@@ -325,12 +317,7 @@ Helper property to access rotation in degrees instead of radians. See also globa
 scale: Vector2
 ```
 
-- void set_scale(value: Vector2)
-- Vector2 get_scale()
-
-The node's scale, relative to the node's parent. Unscaled value: (1, 1). See also global_scale.
-
-Note: Negative X scales in 2D are not decomposable from the transformation matrix. Due to the way scale is represented with transformation matrices in Godot, negative scales on the X axis will be changed to negative scales on the Y axis and a rotation of 180 degrees when decomposed.
+节点的缩放因子。(1,1) 为原始大小。
 
 ### skew {#skew}
 
@@ -364,10 +351,7 @@ The node's Transform2D, relative to the node's parent. See also global_transform
 global_position: Vector2
 ```
 
-- void set_global_position(value: Vector2)
-- Vector2 get_global_position()
-
-Global position. See also position.
+全局位置（世界坐标系）。
 
 ### global_rotation {#global_rotation}
 
@@ -375,10 +359,7 @@ Global position. See also position.
 global_rotation: float
 ```
 
-- void set_global_rotation(value: float)
-- float get_global_rotation()
-
-Global rotation in radians. See also rotation.
+全局旋转角度。
 
 ### global_rotation_degrees {#global_rotation_degrees}
 
@@ -397,10 +378,7 @@ Helper property to access global_rotation in degrees instead of radians. See als
 global_scale: Vector2
 ```
 
-- void set_global_scale(value: Vector2)
-- Vector2 get_global_scale()
-
-Global scale. See also scale.
+全局缩放。
 
 ### global_skew {#global_skew}
 

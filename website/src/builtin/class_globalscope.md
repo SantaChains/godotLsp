@@ -10,12 +10,7 @@
 float sin(angle_rad: float)
 ```
 
-Returns the sine of angle angle_rad in radians.
-
-```gdscript
-sin(0.523599)       # Returns 0.5
-sin(deg_to_rad(90)) # Returns 1.0
-```
+返回 angle_rad（弧度）的正弦值。
 
 ### cos {#cos}
 
@@ -23,13 +18,7 @@ sin(deg_to_rad(90)) # Returns 1.0
 float cos(angle_rad: float)
 ```
 
-Returns the cosine of angle angle_rad in radians.
-
-```gdscript
-cos(PI * 2)         # Returns 1.0
-cos(PI)             # Returns -1.0
-cos(deg_to_rad(90)) # Returns 0.0
-```
+返回 angle_rad（弧度）的余弦值。
 
 ### tan {#tan}
 
@@ -37,11 +26,7 @@ cos(deg_to_rad(90)) # Returns 0.0
 float tan(angle_rad: float)
 ```
 
-Returns the tangent of angle angle_rad in radians.
-
-```gdscript
-tan(deg_to_rad(45)) # Returns 1
-```
+返回 angle_rad（弧度）的正切值。
 
 ### sinh {#sinh}
 
@@ -49,12 +34,7 @@ tan(deg_to_rad(45)) # Returns 1
 float sinh(x: float)
 ```
 
-Returns the hyperbolic sine of x.
-
-```gdscript
-var a = log(2.0) # Returns 0.693147
-sinh(a) # Returns 0.75
-```
+返回 x 的双曲正弦。
 
 ### cosh {#cosh}
 
@@ -62,11 +42,7 @@ sinh(a) # Returns 0.75
 float cosh(x: float)
 ```
 
-Returns the hyperbolic cosine of x in radians.
-
-```gdscript
-print(cosh(1)) # Prints 1.543081
-```
+返回 x 的双曲余弦。
 
 ### tanh {#tanh}
 
@@ -74,12 +50,7 @@ print(cosh(1)) # Prints 1.543081
 float tanh(x: float)
 ```
 
-Returns the hyperbolic tangent of x.
-
-```gdscript
-var a = log(2.0) # Returns 0.693147
-tanh(a)          # Returns 0.6
-```
+返回 x 的双曲正切，值域 (-1, 1)。
 
 ### asin {#asin}
 
@@ -87,12 +58,7 @@ tanh(a)          # Returns 0.6
 float asin(x: float)
 ```
 
-Returns the arc sine of x in radians. Use to get the angle of sine x. x will be clamped between -1.0 and 1.0 (inclusive), in order to prevent asin() from returning @GDScript.NAN.
-
-```gdscript
-# s is 0.523599 or 30 degrees if converted with rad_to_deg(s)
-var s = asin(0.5)
-```
+反正弦，返回弧度；x 超出 [-1,1] 返回 NaN。
 
 ### acos {#acos}
 
@@ -100,12 +66,7 @@ var s = asin(0.5)
 float acos(x: float)
 ```
 
-Returns the arc cosine of x in radians. Use to get the angle of cosine x. x will be clamped between -1.0 and 1.0 (inclusive), in order to prevent acos() from returning @GDScript.NAN.
-
-```gdscript
-# c is 0.523599 or 30 degrees if converted with rad_to_deg(c)
-var c = acos(0.866025)
-```
+反余弦，返回弧度；x 超出 [-1,1] 返回 NaN。
 
 ### atan {#atan}
 
@@ -113,15 +74,7 @@ var c = acos(0.866025)
 float atan(x: float)
 ```
 
-Returns the arc tangent of x in radians. Use it to get the angle from an angle's tangent in trigonometry.
-
-The method cannot know in which quadrant the angle should fall. See atan2() if you have both y and x.
-
-```gdscript
-var a = atan(0.5) # a is 0.463648
-```
-
-If x is between -PI / 2 and PI / 2 (inclusive), atan(tan(x)) is equal to x.
+反正切，返回弧度，值域 (-π/2, π/2)。
 
 ### atan2 {#atan2}
 
@@ -129,13 +82,7 @@ If x is between -PI / 2 and PI / 2 (inclusive), atan(tan(x)) is equal to x.
 float atan2(y: float, x: float)
 ```
 
-Returns the arc tangent of y/x in radians. Use to get the angle of tangent y/x. To compute the value, the method takes into account the sign of both arguments in order to determine the quadrant.
-
-Important note: The Y coordinate comes first, by convention.
-
-```gdscript
-var a = atan2(0, -1) # a is 3.141593
-```
+两分量反正切 atan(y/x)，正确处理象限与 x=0。
 
 ### asinh {#asinh}
 
@@ -143,12 +90,7 @@ var a = atan2(0, -1) # a is 3.141593
 float asinh(x: float)
 ```
 
-Returns the hyperbolic arc (also called inverse) sine of x, returning a value in radians. Use it to get the angle from an angle's sine in hyperbolic space.
-
-```gdscript
-var a = asinh(0.9) # Returns 0.8088669356527824
-sinh(a) # Returns 0.9
-```
+反双曲正弦。
 
 ### acosh {#acosh}
 
@@ -156,13 +98,7 @@ sinh(a) # Returns 0.9
 float acosh(x: float)
 ```
 
-Returns the hyperbolic arc (also called inverse) cosine of x, returning a value in radians. Use it to get the angle from an angle's cosine in hyperbolic space if x is larger or equal to 1. For values of x lower than 1, it will return 0, in order to prevent acosh() from returning @GDScript.NAN.
-
-```gdscript
-var a = acosh(2) # Returns 1.31695789692482
-cosh(a) # Returns 2
-var b = acosh(-1) # Returns 0
-```
+反双曲余弦。
 
 ### atanh {#atanh}
 
@@ -170,16 +106,7 @@ var b = acosh(-1) # Returns 0
 float atanh(x: float)
 ```
 
-Returns the hyperbolic arc (also called inverse) tangent of x, returning a value in radians. Use it to get the angle from an angle's tangent in hyperbolic space if x is between -1 and 1 (non-inclusive).
-
-In mathematics, the inverse hyperbolic tangent is only defined for -1 < x < 1 in the real set, so values equal or lower to -1 for x return negative @GDScript.INF and values equal or higher than 1 return positive @GDScript.INF in order to prevent atanh() from returning @GDScript.NAN.
-
-```gdscript
-var a = atanh(0.9) # Returns 1.47221948958322
-tanh(a) # Returns 0.9
-var b = atanh(-2) # Returns -inf
-tanh(b) # Returns -1
-```
+反双曲正切；|x|>=1 返回 NaN。
 
 ### sqrt {#sqrt}
 
@@ -187,15 +114,7 @@ tanh(b) # Returns -1
 float sqrt(x: float)
 ```
 
-Returns the square root of x, where x is a non-negative number.
-
-```gdscript
-sqrt(9)     # Returns 3
-sqrt(10.24) # Returns 3.2
-sqrt(-1)    # Returns NaN
-```
-
-Note: Negative values of x return NaN ("Not a Number"). In C#, if you need negative inputs, use System.Numerics.Complex.
+平方根；负数返回 NaN。
 
 ### fmod {#fmod}
 
@@ -203,13 +122,7 @@ Note: Negative values of x return NaN ("Not a Number"). In C#, if you need negat
 float fmod(x: float, y: float)
 ```
 
-Returns the floating-point remainder of x divided by y, keeping the sign of x.
-
-```gdscript
-var remainder = fmod(7, 5.5) # remainder is 1.5
-```
-
-For the integer remainder operation, use the % operator.
+浮点取模，结果符号与除数一致。
 
 ### fposmod {#fposmod}
 
@@ -217,27 +130,7 @@ For the integer remainder operation, use the % operator.
 float fposmod(x: float, y: float)
 ```
 
-Returns the floating-point modulus of x divided by y, wrapping equally in positive and negative.
-
-```gdscript
-print(" (x)  (fmod(x, 1.5))   (fposmod(x, 1.5))")
-for i in 7:
-    var x = i * 0.5 - 1.5
-    print("%4.1f           %4.1f  | %4.1f" % [x, fmod(x, 1.5), fposmod(x, 1.5)])
-```
-
-Prints:
-
-```
- (x)  (fmod(x, 1.5))   (fposmod(x, 1.5))
--1.5           -0.0  |  0.0
--1.0           -1.0  |  0.5
--0.5           -0.5  |  1.0
- 0.0            0.0  |  0.0
- 0.5            0.5  |  0.5
- 1.0            1.0  |  1.0
- 1.5            0.0  |  0.0
-```
+浮点正取模，结果恒为非负（数学 mod）。
 
 ### posmod {#posmod}
 
@@ -245,26 +138,7 @@ Prints:
 int posmod(x: int, y: int)
 ```
 
-Returns the integer modulus of x divided by y that wraps equally in positive and negative.
-
-```gdscript
-print("#(i)  (i % 3)   (posmod(i, 3))")
-for i in range(-3, 4):
-    print("%2d       %2d  | %2d" % [i, i % 3, posmod(i, 3)])
-```
-
-Prints:
-
-```
-(i)  (i % 3)   (posmod(i, 3))
--3        0  |  0
--2       -2  |  1
--1       -1  |  2
- 0        0  |  0
- 1        1  |  1
- 2        2  |  2
- 3        0  |  0
-```
+整数正取模，结果恒为非负。
 
 ### floor {#floor}
 
@@ -272,16 +146,7 @@ Prints:
 Variant floor(x: Variant)
 ```
 
-Rounds x downward (towards negative infinity), returning the largest whole number that is not more than x. Supported types: int, float, Vector2, Vector2i, Vector3, Vector3i, Vector4, Vector4i.
-
-```gdscript
-var a = floor(2.99) # a is 2.0
-a = floor(-2.99)    # a is -3.0
-```
-
-See also ceil(), round(), and snapped().
-
-Note: For better type safety, use floorf(), floori(), Vector2.floor(), Vector3.floor(), or Vector4.floor().
+向下取整为浮点。
 
 ### floorf {#floorf}
 
@@ -289,9 +154,7 @@ Note: For better type safety, use floorf(), floori(), Vector2.floor(), Vector3.f
 float floorf(x: float)
 ```
 
-Rounds x downward (towards negative infinity), returning the largest whole number that is not more than x.
-
-A type-safe version of floor(), returning a float.
+floor 的浮点别名。
 
 ### floori {#floori}
 
@@ -299,11 +162,7 @@ A type-safe version of floor(), returning a float.
 int floori(x: float)
 ```
 
-Rounds x downward (towards negative infinity), returning the largest whole number that is not more than x.
-
-A type-safe version of floor(), returning an int.
-
-Note: This function is not the same as int(x), which rounds towards 0.
+向下取整为整数。
 
 ### ceil {#ceil}
 
@@ -311,16 +170,7 @@ Note: This function is not the same as int(x), which rounds towards 0.
 Variant ceil(x: Variant)
 ```
 
-Rounds x upward (towards positive infinity), returning the smallest whole number that is not less than x. Supported types: int, float, Vector2, Vector2i, Vector3, Vector3i, Vector4, Vector4i.
-
-```gdscript
-var i = ceil(1.45) # i is 2.0
-i = ceil(1.001)    # i is 2.0
-```
-
-See also floor(), round(), and snapped().
-
-Note: For better type safety, use ceilf(), ceili(), Vector2.ceil(), Vector3.ceil(), or Vector4.ceil().
+向上取整为浮点。
 
 ### ceilf {#ceilf}
 
@@ -328,9 +178,7 @@ Note: For better type safety, use ceilf(), ceili(), Vector2.ceil(), Vector3.ceil
 float ceilf(x: float)
 ```
 
-Rounds x upward (towards positive infinity), returning the smallest whole number that is not less than x.
-
-A type-safe version of ceil(), returning a float.
+ceil 的浮点别名。
 
 ### ceili {#ceili}
 
@@ -338,9 +186,7 @@ A type-safe version of ceil(), returning a float.
 int ceili(x: float)
 ```
 
-Rounds x upward (towards positive infinity), returning the smallest whole number that is not less than x.
-
-A type-safe version of ceil(), returning an int.
+向上取整为整数。
 
 ### round {#round}
 
@@ -348,17 +194,7 @@ A type-safe version of ceil(), returning an int.
 Variant round(x: Variant)
 ```
 
-Rounds x to the nearest whole number, with halfway cases rounded away from 0. Supported types: int, float, Vector2, Vector2i, Vector3, Vector3i, Vector4, Vector4i.
-
-```gdscript
-round(2.4) # Returns 2
-round(2.5) # Returns 3
-round(2.6) # Returns 3
-```
-
-See also floor(), ceil(), and snapped().
-
-Note: For better type safety, use roundf(), roundi(), Vector2.round(), Vector3.round(), or Vector4.round().
+四舍五入为浮点（半数远离零）。
 
 ### roundf {#roundf}
 
@@ -366,9 +202,7 @@ Note: For better type safety, use roundf(), roundi(), Vector2.round(), Vector3.r
 float roundf(x: float)
 ```
 
-Rounds x to the nearest whole number, with halfway cases rounded away from 0.
-
-A type-safe version of round(), returning a float.
+round 的浮点别名。
 
 ### roundi {#roundi}
 
@@ -376,9 +210,7 @@ A type-safe version of round(), returning a float.
 int roundi(x: float)
 ```
 
-Rounds x to the nearest whole number, with halfway cases rounded away from 0.
-
-A type-safe version of round(), returning an int.
+四舍五入为整数。
 
 ### abs {#abs}
 
@@ -386,24 +218,7 @@ A type-safe version of round(), returning an int.
 Variant abs(x: Variant)
 ```
 
-Returns the absolute value of a Variant parameter x (i.e. non-negative value). Supported types: int, float, Vector2, Vector2i, Vector3, Vector3i, Vector4, Vector4i.
-
-```gdscript
-var a = abs(-1)
-# a is 1
-var b = abs(-1.2)
-# b is 1.2
-var c = abs(Vector2(-3.5, -4))
-# c is (3.5, 4)
-var d = abs(Vector2i(-5, -6))
-# d is (5, 6)
-var e = abs(Vector3(-7, 8.5, -3.8))
-# e is (7, 8.5, 3.8)
-var f = abs(Vector3i(-7, -8, -9))
-# f is (7, 8, 9)
-```
-
-Note: For better type safety, use absf(), absi(), Vector2.abs(), Vector2i.abs(), Vector3.abs(), Vector3i.abs(), Vector4.abs(), or Vector4i.abs().
+绝对值（Variant）。
 
 ### absf {#absf}
 
@@ -411,12 +226,7 @@ Note: For better type safety, use absf(), absi(), Vector2.abs(), Vector2i.abs(),
 float absf(x: float)
 ```
 
-Returns the absolute value of float parameter x (i.e. positive value).
-
-```gdscript
-# a is 1.2
-var a = absf(-1.2)
-```
+浮点绝对值。
 
 ### absi {#absi}
 
@@ -424,12 +234,7 @@ var a = absf(-1.2)
 int absi(x: int)
 ```
 
-Returns the absolute value of int parameter x (i.e. positive value).
-
-```gdscript
-# a is 1
-var a = absi(-1)
-```
+整数绝对值。
 
 ### sign {#sign}
 
@@ -437,19 +242,7 @@ var a = absi(-1)
 Variant sign(x: Variant)
 ```
 
-Returns the same type of Variant as x, with -1 for negative values, 1 for positive values, and 0 for zeros. For nan values it returns 0.
-
-Supported types: int, float, Vector2, Vector2i, Vector3, Vector3i, Vector4, Vector4i.
-
-```gdscript
-sign(-6.0) # Returns -1
-sign(0.0)  # Returns 0
-sign(6.0)  # Returns 1
-sign(NAN)  # Returns 0
-sign(Vector3(-6.0, 0.0, 6.0)) # Returns (-1, 0, 1)
-```
-
-Note: For better type safety, use signf(), signi(), Vector2.sign(), Vector2i.sign(), Vector3.sign(), Vector3i.sign(), Vector4.sign(), or Vector4i.sign().
+符号函数：正数 1、负数 -1、零 0（Variant）。
 
 ### signf {#signf}
 
@@ -457,14 +250,7 @@ Note: For better type safety, use signf(), signi(), Vector2.sign(), Vector2i.sig
 float signf(x: float)
 ```
 
-Returns -1.0 if x is negative, 1.0 if x is positive, and 0.0 if x is zero. For nan values of x it returns 0.0.
-
-```gdscript
-signf(-6.5) # Returns -1.0
-signf(0.0)  # Returns 0.0
-signf(6.5)  # Returns 1.0
-signf(NAN)  # Returns 0.0
-```
+浮点符号函数。
 
 ### signi {#signi}
 
@@ -472,13 +258,7 @@ signf(NAN)  # Returns 0.0
 int signi(x: int)
 ```
 
-Returns -1 if x is negative, 1 if x is positive, and 0 if x is zero.
-
-```gdscript
-signi(-6) # Returns -1
-signi(0)  # Returns 0
-signi(6)  # Returns 1
-```
+整数符号函数。
 
 ### snapped {#snapped}
 
@@ -486,19 +266,7 @@ signi(6)  # Returns 1
 Variant snapped(x: Variant, step: Variant)
 ```
 
-Returns the multiple of step that is the closest to x. This can also be used to round a floating-point number to an arbitrary number of decimals.
-
-The returned value is the same type of Variant as step. Supported types: int, float, Vector2, Vector2i, Vector3, Vector3i, Vector4, Vector4i.
-
-```gdscript
-snapped(100, 32)  # Returns 96
-snapped(3.14159, 0.01)  # Returns 3.14
-snapped(Vector2(34, 70), Vector2(8, 8))  # Returns (32, 72)
-```
-
-See also ceil(), floor(), and round().
-
-Note: For better type safety, use snappedf(), snappedi(), Vector2.snapped(), Vector2i.snapped(), Vector3.snapped(), Vector3i.snapped(), Vector4.snapped(), or Vector4i.snapped().
+把值吸附到 step 的整数倍（Variant）。
 
 ### snappedf {#snappedf}
 
@@ -506,14 +274,7 @@ Note: For better type safety, use snappedf(), snappedi(), Vector2.snapped(), Vec
 float snappedf(x: float, step: float)
 ```
 
-Returns the multiple of step that is the closest to x. This can also be used to round a floating-point number to an arbitrary number of decimals.
-
-A type-safe version of snapped(), returning a float.
-
-```gdscript
-snappedf(32.0, 2.5)  # Returns 32.5
-snappedf(3.14159, 0.01)  # Returns 3.14
-```
+浮点吸附。
 
 ### snappedi {#snappedi}
 
@@ -521,14 +282,7 @@ snappedf(3.14159, 0.01)  # Returns 3.14
 int snappedi(x: float, step: int)
 ```
 
-Returns the multiple of step that is the closest to x.
-
-A type-safe version of snapped(), returning an int.
-
-```gdscript
-snappedi(53, 16)  # Returns 48
-snappedi(4096, 100)  # Returns 4100
-```
+整数吸附。
 
 ### pow {#pow}
 
@@ -536,14 +290,7 @@ snappedi(4096, 100)  # Returns 4100
 float pow(base: float, exp: float)
 ```
 
-Returns the result of base raised to the power of exp.
-
-In GDScript, this is the equivalent of the ** operator.
-
-```gdscript
-pow(2, 5)   # Returns 32.0
-pow(4, 1.5) # Returns 8.0
-```
+幂运算 pow(base, exp)。
 
 ### log {#log}
 
@@ -551,15 +298,7 @@ pow(4, 1.5) # Returns 8.0
 float log(x: float)
 ```
 
-Returns the natural logarithm [https://en.wikipedia.org/wiki/Natural_logarithm] of x (base e [https://en.wikipedia.org/wiki/E_(mathematical_constant)], with e being approximately 2.71828). This is the amount of time needed to reach a certain level of continuous growth.
-
-Note: This is not the same as the "log" function on most calculators, which uses a base 10 logarithm. To use base 10 logarithm, use log(x) / log(10).
-
-```gdscript
-log(10) # Returns 2.302585
-```
-
-Note: The logarithm of 0 returns -inf, while negative values return -nan.
+自然对数 ln(x)。
 
 ### exp {#exp}
 
@@ -567,15 +306,7 @@ Note: The logarithm of 0 returns -inf, while negative values return -nan.
 float exp(x: float)
 ```
 
-The natural exponential function. It raises the mathematical constant e to the power of x and returns it.
-
-e has an approximate value of 2.71828, and can be obtained with exp(1).
-
-For exponents to other bases use the method pow().
-
-```gdscript
-var a = exp(2) # Approximately 7.39
-```
+e 的 x 次幂。
 
 ### is_nan {#is_nan}
 
@@ -583,7 +314,7 @@ var a = exp(2) # Approximately 7.39
 bool is_nan(x: float)
 ```
 
-Returns true if x is a NaN ("Not a Number" or invalid) value. This method is needed as @GDScript.NAN is not equal to itself, which means x == NAN can't be used to check whether a value is a NaN.
+判断是否为 NaN（非数字）。
 
 ### is_inf {#is_inf}
 
@@ -591,7 +322,7 @@ Returns true if x is a NaN ("Not a Number" or invalid) value. This method is nee
 bool is_inf(x: float)
 ```
 
-Returns true if x is either positive infinity or negative infinity. See also is_finite() and is_nan().
+判断是否为无穷大。
 
 ### is_equal_approx {#is_equal_approx}
 
@@ -599,11 +330,7 @@ Returns true if x is either positive infinity or negative infinity. See also is_
 bool is_equal_approx(a: float, b: float)
 ```
 
-Returns true if a and b are approximately equal to each other.
-
-Here, "approximately equal" means that a and b are within a small internal epsilon of each other, which scales with the magnitude of the numbers.
-
-Infinity values of the same sign are considered equal.
+近似相等比较（容差 1e-6 量级），避免浮点 ==。
 
 ### is_zero_approx {#is_zero_approx}
 
@@ -611,9 +338,7 @@ Infinity values of the same sign are considered equal.
 bool is_zero_approx(x: float)
 ```
 
-Returns true if x is zero or almost zero. The comparison is done using a tolerance calculation with a small internal epsilon.
-
-This function is faster than using is_equal_approx() with one value as zero.
+近似判断是否接近零。
 
 ### is_finite {#is_finite}
 
@@ -621,7 +346,7 @@ This function is faster than using is_equal_approx() with one value as zero.
 bool is_finite(x: float)
 ```
 
-Returns whether x is a finite value, i.e. it is not @GDScript.NAN, positive infinity, or negative infinity. See also is_inf() and is_nan().
+判断是否为有限数（非 NaN、非无穷）。
 
 ### ease {#ease}
 
@@ -629,21 +354,7 @@ Returns whether x is a finite value, i.e. it is not @GDScript.NAN, positive infi
 float ease(x: float, curve: float)
 ```
 
-Returns an "eased" value of x based on an easing function defined with curve. This easing function is based on an exponent. The curve can be any floating-point number, with specific values leading to the following behaviors:
-
-```
-- Lower than -1.0 (exclusive): Ease in-out
-- -1.0: Linear
-- Between -1.0 and 0.0 (exclusive): Ease out-in
-- 0.0: Constant
-- Between 0.0 to 1.0 (exclusive): Ease out
-- 1.0: Linear
-- Greater than 1.0 (exclusive): Ease in
-```
-
-ease() curve values cheatsheet [https://raw.githubusercontent.com/godotengine/godot-docs/master/img/ease_cheatsheet.png]
-
-See also smoothstep(). If you need to perform more advanced transitions, use Tween.interpolate_value().
+按缓动曲线类型计算 easing 值。
 
 ### step_decimals {#step_decimals}
 
@@ -651,13 +362,7 @@ See also smoothstep(). If you need to perform more advanced transitions, use Twe
 int step_decimals(x: float)
 ```
 
-Returns the position of the first non-zero digit, after the decimal point. Note that the maximum return value is 10, which is a design decision in the implementation.
-
-```gdscript
-var n = step_decimals(5)       # n is 0
-n = step_decimals(1.0005)      # n is 4
-n = step_decimals(0.000000005) # n is 9
-```
+把浮点按指定小数位截断（用于显示取整）。
 
 ### lerp {#lerp}
 
@@ -665,17 +370,7 @@ n = step_decimals(0.000000005) # n is 9
 Variant lerp(from: Variant, to: Variant, weight: Variant)
 ```
 
-Linearly interpolates between two values by the factor defined in weight. To perform interpolation, weight should be between 0.0 and 1.0 (inclusive). However, values outside this range are allowed and can be used to perform extrapolation. If this is not desired, use clampf() to limit weight.
-
-Both from and to must be the same type. Supported types: int, float, Vector2, Vector3, Vector4, Color, Quaternion, Basis, Transform2D, Transform3D.
-
-```gdscript
-lerp(0, 4, 0.75) # Returns 3.0
-```
-
-See also inverse_lerp() which performs the reverse of this operation. To perform eased interpolation with lerp(), combine it with ease() or smoothstep(). See also remap() to map a continuous series of values to another.
-
-Note: For better type safety, use lerpf(), Vector2.lerp(), Vector3.lerp(), Vector4.lerp(), Color.lerp(), Quaternion.slerp(), Basis.slerp(), Transform2D.interpolate_with(), or Transform3D.interpolate_with().
+按 weight 在 from 到 to 间线性插值（Variant）。
 
 ### lerpf {#lerpf}
 
@@ -683,13 +378,7 @@ Note: For better type safety, use lerpf(), Vector2.lerp(), Vector3.lerp(), Vecto
 float lerpf(from: float, to: float, weight: float)
 ```
 
-Linearly interpolates between two values by the factor defined in weight. To perform interpolation, weight should be between 0.0 and 1.0 (inclusive). However, values outside this range are allowed and can be used to perform extrapolation. If this is not desired, use clampf() on the result of this function.
-
-```gdscript
-lerpf(0, 4, 0.75) # Returns 3.0
-```
-
-See also inverse_lerp() which performs the reverse of this operation. To perform eased interpolation with lerp(), combine it with ease() or smoothstep().
+浮点线性插值。
 
 ### cubic_interpolate {#cubic_interpolate}
 
@@ -697,7 +386,7 @@ See also inverse_lerp() which performs the reverse of this operation. To perform
 float cubic_interpolate(from: float, to: float, pre: float, post: float, weight: float)
 ```
 
-Cubic interpolates between two values by the factor defined in weight with pre and post values.
+三次插值（带前后控制点），平滑过渡。
 
 ### cubic_interpolate_angle {#cubic_interpolate_angle}
 
@@ -705,7 +394,7 @@ Cubic interpolates between two values by the factor defined in weight with pre a
 float cubic_interpolate_angle(from: float, to: float, pre: float, post: float, weight: float)
 ```
 
-Cubic interpolates between two rotation values with shortest path by the factor defined in weight with pre and post values. See also lerp_angle().
+角度的三次插值，自动绕最短弧。
 
 ### cubic_interpolate_in_time {#cubic_interpolate_in_time}
 
@@ -713,9 +402,7 @@ Cubic interpolates between two rotation values with shortest path by the factor 
 float cubic_interpolate_in_time(from: float, to: float, pre: float, post: float, weight: float, to_t: float, pre_t: float, post_t: float)
 ```
 
-Cubic interpolates between two values by the factor defined in weight with pre and post values.
-
-It can perform smoother interpolation than cubic_interpolate() by the time values.
+按时间参数的三次插值。
 
 ### cubic_interpolate_angle_in_time {#cubic_interpolate_angle_in_time}
 
@@ -723,9 +410,7 @@ It can perform smoother interpolation than cubic_interpolate() by the time value
 float cubic_interpolate_angle_in_time(from: float, to: float, pre: float, post: float, weight: float, to_t: float, pre_t: float, post_t: float)
 ```
 
-Cubic interpolates between two rotation values with shortest path by the factor defined in weight with pre and post values. See also lerp_angle().
-
-It can perform smoother interpolation than cubic_interpolate() by the time values.
+按时间参数的角度三次插值。
 
 ### bezier_interpolate {#bezier_interpolate}
 
@@ -733,7 +418,7 @@ It can perform smoother interpolation than cubic_interpolate() by the time value
 float bezier_interpolate(start: float, control_1: float, control_2: float, end: float, t: float)
 ```
 
-Returns the point at the given t on a one-dimensional Bézier curve [https://en.wikipedia.org/wiki/B%C3%A9zier_curve] defined by the given control_1, control_2, and end points.
+贝塞尔曲线插值。
 
 ### bezier_derivative {#bezier_derivative}
 
@@ -741,7 +426,7 @@ Returns the point at the given t on a one-dimensional Bézier curve [https://en.
 float bezier_derivative(start: float, control_1: float, control_2: float, end: float, t: float)
 ```
 
-Returns the derivative at the given t on a one-dimensional Bézier curve [https://en.wikipedia.org/wiki/B%C3%A9zier_curve] defined by the given control_1, control_2, and end points.
+贝塞尔曲线在参数处的导数（切线）。
 
 ### angle_difference {#angle_difference}
 
@@ -749,7 +434,7 @@ Returns the derivative at the given t on a one-dimensional Bézier curve [https:
 float angle_difference(from: float, to: float)
 ```
 
-Returns the difference between the two angles (in radians), in the range of [-PI, +PI]. When from and to are opposite, returns -PI if from is smaller than to, or PI otherwise.
+返回 from 到 to 的最短角差（弧度，绕最短方向）。
 
 ### lerp_angle {#lerp_angle}
 
@@ -757,21 +442,7 @@ Returns the difference between the two angles (in radians), in the range of [-PI
 float lerp_angle(from: float, to: float, weight: float)
 ```
 
-Linearly interpolates between two angles (in radians) by a weight value between 0.0 and 1.0.
-
-Similar to lerp(), but interpolates correctly when the angles wrap around @GDScript.TAU. To perform eased interpolation with lerp_angle(), combine it with ease() or smoothstep().
-
-```gdscript
-extends Sprite
-var elapsed = 0.0
-func _process(delta):
-    var min_angle = deg_to_rad(0.0)
-    var max_angle = deg_to_rad(90.0)
-    rotation = lerp_angle(min_angle, max_angle, elapsed)
-    elapsed += delta
-```
-
-Note: This function lerps through the shortest path between from and to. However, when these two angles are approximately PI + k * TAU apart for any integer k, it's not obvious which way they lerp due to floating-point precision errors. For example, lerp_angle(0, PI, weight) lerps counter-clockwise, while lerp_angle(0, PI + 5 * TAU, weight) lerps clockwise.
+角度线性插值，自动走最短弧。
 
 ### inverse_lerp {#inverse_lerp}
 
@@ -779,18 +450,7 @@ Note: This function lerps through the shortest path between from and to. However
 float inverse_lerp(from: float, to: float, weight: float)
 ```
 
-Returns an interpolation or extrapolation factor considering the range specified in from and to, and the interpolated value specified in weight. The returned value will be between 0.0 and 1.0 if weight is between from and to (inclusive). If weight is located outside this range, then an extrapolation factor will be returned (return value lower than 0.0 or greater than 1.0). Use clamp() on the result of inverse_lerp() if this is not desired.
-
-```gdscript
-# The interpolation ratio in the `lerp()` call below is 0.75.
-var middle = lerp(20, 30, 0.75)
-# middle is now 27.5.
-# Now, we pretend to have forgotten the original ratio and want to get it back.
-var ratio = inverse_lerp(20, 30, 27.5)
-# ratio is now 0.75.
-```
-
-See also lerp(), which performs the reverse of this operation, and remap() to map a continuous series of values to another.
+线性插值的逆：由值反求权重（0~1）。
 
 ### remap {#remap}
 
@@ -798,15 +458,7 @@ See also lerp(), which performs the reverse of this operation, and remap() to ma
 float remap(value: float, istart: float, istop: float, ostart: float, ostop: float)
 ```
 
-Maps a value from range [istart, istop] to [ostart, ostop]. See also lerp() and inverse_lerp(). If value is outside [istart, istop], then the resulting value will also be outside [ostart, ostop]. If this is not desired, use clamp() on the result of this function.
-
-```gdscript
-remap(75, 0, 100, -1, 1) # Returns 0.5
-```
-
-For complex use cases where multiple ranges are needed, consider using Curve or Gradient instead.
-
-Note: If istart == istop, the return value is undefined (most likely NaN, INF, or -INF).
+把值从输入区间映射到输出区间。
 
 ### smoothstep {#smoothstep}
 
@@ -814,26 +466,7 @@ Note: If istart == istop, the return value is undefined (most likely NaN, INF, o
 float smoothstep(from: float, to: float, x: float)
 ```
 
-Returns a smooth cubic Hermite interpolation between 0 and 1.
-
-For positive ranges (when from <= to) the return value is 0 when x <= from, and 1 when x >= to. If x lies between from and to, the return value follows an S-shaped curve that smoothly transitions from 0 to 1.
-
-For negative ranges (when from > to) the function is mirrored and returns 1 when x <= to and 0 when x >= from.
-
-This S-shaped curve is the cubic Hermite interpolator, given by f(y) = 3*y^2 - 2*y^3 where y = (x-from) / (to-from).
-
-```gdscript
-smoothstep(0, 2, -5.0) # Returns 0.0
-smoothstep(0, 2, 0.5) # Returns 0.15625
-smoothstep(0, 2, 1.0) # Returns 0.5
-smoothstep(0, 2, 2.0) # Returns 1.0
-```
-
-Compared to ease() with a curve value of -1.6521, smoothstep() returns the smoothest possible curve with no sudden changes in the derivative. If you need to perform more advanced transitions, use Tween or AnimationPlayer.
-
-Comparison between smoothstep() and ease(x, -1.6521) return values [https://raw.githubusercontent.com/godotengine/godot-docs/master/img/smoothstep_ease_comparison.png]
-
-Smoothstep() return values with positive, zero, and negative ranges [https://raw.githubusercontent.com/godotengine/godot-docs/master/img/smoothstep_range.webp]
+平滑阶跃，在 from 到 to 间输出 0~1 的缓动曲线。
 
 ### move_toward {#move_toward}
 
@@ -841,16 +474,7 @@ Smoothstep() return values with positive, zero, and negative ranges [https://raw
 float move_toward(from: float, to: float, delta: float)
 ```
 
-Moves from toward to by the delta amount. Will not go past to.
-
-Use a negative delta value to move away.
-
-```gdscript
-move_toward(5, 10, 4)    # Returns 9
-move_toward(10, 5, 4)    # Returns 6
-move_toward(5, 10, 9)    # Returns 10
-move_toward(10, 5, -1.5) # Returns 11.5
-```
+朝目标值以 delta 步进，不越过目标（数值）。
 
 ### rotate_toward {#rotate_toward}
 
@@ -858,11 +482,7 @@ move_toward(10, 5, -1.5) # Returns 11.5
 float rotate_toward(from: float, to: float, delta: float)
 ```
 
-Rotates from toward to by the delta amount. Will not go past to.
-
-Similar to move_toward(), but interpolates correctly when the angles wrap around @GDScript.TAU.
-
-If delta is negative, this function will rotate away from to, toward the opposite angle, and will not go past the opposite angle.
+角度朝目标角以 delta 弧度旋转，走最短弧，不越过。
 
 ### deg_to_rad {#deg_to_rad}
 
@@ -870,11 +490,7 @@ If delta is negative, this function will rotate away from to, toward the opposit
 float deg_to_rad(deg: float)
 ```
 
-Converts an angle expressed in degrees to radians.
-
-```gdscript
-var r = deg_to_rad(180) # r is 3.141593
-```
+角度转弧度。
 
 ### rad_to_deg {#rad_to_deg}
 
@@ -882,13 +498,7 @@ var r = deg_to_rad(180) # r is 3.141593
 float rad_to_deg(rad: float)
 ```
 
-Converts an angle expressed in radians to degrees.
-
-```gdscript
-rad_to_deg(0.523599) # Returns 30
-rad_to_deg(PI)       # Returns 180
-rad_to_deg(PI * 2)   # Returns 360
-```
+弧度转角度。
 
 ### linear_to_db {#linear_to_db}
 
@@ -896,13 +506,7 @@ rad_to_deg(PI * 2)   # Returns 360
 float linear_to_db(lin: float)
 ```
 
-Converts from linear energy to decibels (audio). Since volume is not normally linear, this can be used to implement volume sliders that behave as expected.
-
-Example: Change the Master bus's volume through a Slider node, which ranges from 0.0 to 1.0:
-
-```gdscript
-AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db($Slider.value))
-```
+线性振幅转分贝（dB）。
 
 ### db_to_linear {#db_to_linear}
 
@@ -910,7 +514,7 @@ AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(
 float db_to_linear(db: float)
 ```
 
-Converts from decibels to linear energy (audio).
+分贝转线性振幅。
 
 ### wrap {#wrap}
 
@@ -918,18 +522,7 @@ Converts from decibels to linear energy (audio).
 Variant wrap(value: Variant, min: Variant, max: Variant)
 ```
 
-Wraps the Variant value between min and max. min is inclusive while max is exclusive. This can be used for creating loop-like behavior or infinite surfaces.
-
-Variant types int and float are supported. If any of the arguments is float, this function returns a float, otherwise it returns an int.
-
-```gdscript
-var a = wrap(4, 5, 10)
-# a is 9 (int)
-var a = wrap(7, 5, 10)
-# a is 7 (int)
-var a = wrap(10.5, 5, 10)
-# a is 5.5 (float)
-```
+把值环绕进 [min, max]（Variant，超出回绕）。
 
 ### wrapi {#wrapi}
 
@@ -937,17 +530,7 @@ var a = wrap(10.5, 5, 10)
 int wrapi(value: int, min: int, max: int)
 ```
 
-Wraps the integer value between min and max. min is inclusive while max is exclusive. This can be used for creating loop-like behavior or infinite surfaces.
-
-```gdscript
-# Infinite loop between 5 and 9
-frame = wrapi(frame + 1, 5, 10)
-```
-
-```gdscript
-# result is -2
-var result = wrapi(-6, -5, -1)
-```
+整数环绕。
 
 ### wrapf {#wrapf}
 
@@ -955,24 +538,7 @@ var result = wrapi(-6, -5, -1)
 float wrapf(value: float, min: float, max: float)
 ```
 
-Wraps the float value between min and max. min is inclusive while max is exclusive. This can be used for creating loop-like behavior or infinite surfaces.
-
-```gdscript
-# Infinite loop between 5.0 and 9.9
-value = wrapf(value + 0.1, 5.0, 10.0)
-```
-
-```gdscript
-# Infinite rotation (in radians)
-angle = wrapf(angle + 0.1, 0.0, TAU)
-```
-
-```gdscript
-# Infinite rotation (in radians)
-angle = wrapf(angle + 0.1, -PI, PI)
-```
-
-Note: If min is 0, this is equivalent to fposmod(), so prefer using that instead. wrapf() is more flexible than using the fposmod() approach by giving the user control over the minimum value.
+浮点环绕。
 
 ### max {#max}
 
@@ -980,13 +546,7 @@ Note: If min is 0, this is equivalent to fposmod(), so prefer using that instead
 Variant max(arg1: Variant, arg2: Variant, ...)
 ```
 
-Returns the maximum of the given numeric values. This function can take any number of arguments.
-
-```gdscript
-max(1, 7, 3, -6, 5) # Returns 7
-```
-
-Note: When using this on vectors it will not perform component-wise maximum, and will pick the largest value when compared using x < y. To perform component-wise maximum, use Vector2.max(), Vector2i.max(), Vector3.max(), Vector3i.max(), Vector4.max(), and Vector4i.max().
+取最大值（Variant）。
 
 ### maxi {#maxi}
 
@@ -994,12 +554,7 @@ Note: When using this on vectors it will not perform component-wise maximum, and
 int maxi(a: int, b: int)
 ```
 
-Returns the maximum of two int values.
-
-```gdscript
-maxi(1, 2)   # Returns 2
-maxi(-3, -4) # Returns -3
-```
+整数最大值。
 
 ### maxf {#maxf}
 
@@ -1007,12 +562,7 @@ maxi(-3, -4) # Returns -3
 float maxf(a: float, b: float)
 ```
 
-Returns the maximum of two float values.
-
-```gdscript
-maxf(3.6, 24)   # Returns 24.0
-maxf(-3.99, -4) # Returns -3.99
-```
+浮点最大值。
 
 ### min {#min}
 
@@ -1020,13 +570,7 @@ maxf(-3.99, -4) # Returns -3.99
 Variant min(arg1: Variant, arg2: Variant, ...)
 ```
 
-Returns the minimum of the given numeric values. This function can take any number of arguments.
-
-```gdscript
-min(1, 7, 3, -6, 5) # Returns -6
-```
-
-Note: When using this on vectors it will not perform component-wise minimum, and will pick the smallest value when compared using x < y. To perform component-wise minimum, use Vector2.min(), Vector2i.min(), Vector3.min(), Vector3i.min(), Vector4.min(), and Vector4i.min().
+取最小值（Variant）。
 
 ### mini {#mini}
 
@@ -1034,12 +578,7 @@ Note: When using this on vectors it will not perform component-wise minimum, and
 int mini(a: int, b: int)
 ```
 
-Returns the minimum of two int values.
-
-```gdscript
-mini(1, 2)   # Returns 1
-mini(-3, -4) # Returns -4
-```
+整数最小值。
 
 ### minf {#minf}
 
@@ -1047,12 +586,7 @@ mini(-3, -4) # Returns -4
 float minf(a: float, b: float)
 ```
 
-Returns the minimum of two float values.
-
-```gdscript
-minf(3.6, 24)   # Returns 3.6
-minf(-3.99, -4) # Returns -4.0
-```
+浮点最小值。
 
 ### clamp {#clamp}
 
@@ -1060,18 +594,7 @@ minf(-3.99, -4) # Returns -4.0
 Variant clamp(value: Variant, min: Variant, max: Variant)
 ```
 
-Clamps the value, returning a Variant not less than min and not more than max. Any values that can be compared with the less than and greater than operators will work.
-
-```gdscript
-var a = clamp(-10, -1, 5)
-# a is -1
-var b = clamp(8.1, 0.9, 5.5)
-# b is 5.5
-```
-
-Note: For better type safety, use clampf(), clampi(), Vector2.clamp(), Vector2i.clamp(), Vector3.clamp(), Vector3i.clamp(), Vector4.clamp(), Vector4i.clamp(), or Color.clamp() (not currently supported by this method).
-
-Note: When using this on vectors it will not perform component-wise clamping, and will pick min if value < min or max if value > max. To perform component-wise clamping use the methods listed above.
+把值限制在 [min, max]（Variant）。
 
 ### clampi {#clampi}
 
@@ -1079,14 +602,7 @@ Note: When using this on vectors it will not perform component-wise clamping, an
 int clampi(value: int, min: int, max: int)
 ```
 
-Clamps the value, returning an int not less than min and not more than max.
-
-```gdscript
-var speed = 42
-var a = clampi(speed, 1, 20) # a is 20
-speed = -10
-var b = clampi(speed, -1, 1) # b is -1
-```
+整数夹取。
 
 ### clampf {#clampf}
 
@@ -1094,14 +610,7 @@ var b = clampi(speed, -1, 1) # b is -1
 float clampf(value: float, min: float, max: float)
 ```
 
-Clamps the value, returning a float not less than min and not more than max.
-
-```gdscript
-var speed = 42.1
-var a = clampf(speed, 1.0, 20.5) # a is 20.5
-speed = -10.0
-var b = clampf(speed, -1.0, 1.0) # b is -1.0
-```
+浮点夹取。
 
 ### nearest_po2 {#nearest_po2}
 
@@ -1109,17 +618,7 @@ var b = clampf(speed, -1.0, 1.0) # b is -1.0
 int nearest_po2(value: int)
 ```
 
-Returns the smallest integer power of 2 that is greater than or equal to value.
-
-```gdscript
-nearest_po2(3) # Returns 4
-nearest_po2(4) # Returns 4
-nearest_po2(5) # Returns 8
-nearest_po2(0)  # Returns 0 (this may not be expected)
-nearest_po2(-1) # Returns 0 (this may not be expected)
-```
-
-Warning: Due to its implementation, this method returns 0 rather than 1 for values less than or equal to 0, with an exception for value being the smallest negative 64-bit integer (-9223372036854775808) in which case the value is returned unchanged.
+返回不小于 n 的最近 2 的幂。
 
 ### pingpong {#pingpong}
 
@@ -1127,20 +626,7 @@ Warning: Due to its implementation, this method returns 0 rather than 1 for valu
 float pingpong(value: float, length: float)
 ```
 
-Wraps value between 0 and the length. If the limit is reached, the next value the function returns is decreased to the 0 side or increased to the length side (like a triangle wave). If length is less than zero, it becomes positive.
-
-```gdscript
-pingpong(-3.0, 3.0) # Returns 3.0
-pingpong(-2.0, 3.0) # Returns 2.0
-pingpong(-1.0, 3.0) # Returns 1.0
-pingpong(0.0, 3.0)  # Returns 0.0
-pingpong(1.0, 3.0)  # Returns 1.0
-pingpong(2.0, 3.0)  # Returns 2.0
-pingpong(3.0, 3.0)  # Returns 3.0
-pingpong(4.0, 3.0)  # Returns 2.0
-pingpong(5.0, 3.0)  # Returns 1.0
-pingpong(6.0, 3.0)  # Returns 0.0
-```
+在 0 到 length 间往返（乒乓），t 为时间。
 
 ### randomize {#randomize}
 
@@ -1148,9 +634,7 @@ pingpong(6.0, 3.0)  # Returns 0.0
 void randomize()
 ```
 
-Randomizes the seed (or the internal state) of the random number generator. The current implementation uses a number based on the device's time.
-
-Note: This function is called automatically when the project is run. If you need to fix the seed to have consistent, reproducible results, use seed() to initialize the random number generator.
+用当前时间重置随机种子（每次启动不同序列）。
 
 ### randi {#randi}
 
@@ -1158,21 +642,7 @@ Note: This function is called automatically when the project is run. If you need
 int randi()
 ```
 
-Returns a random unsigned 32-bit integer. Use remainder to obtain a random value in the interval [0, N - 1] (where N is smaller than 2^32).
-
-```
-randi()           # Returns random integer between 0 and 2^32 - 1
-randi() % 20      # Returns random integer between 0 and 19
-randi() % 100     # Returns random integer between 0 and 99
-randi() % 100 + 1 # Returns random integer between 1 and 100
-```
-
-```
-GD.Randi();           // Returns random integer between 0 and 2^32 - 1
-GD.Randi() % 20;      // Returns random integer between 0 and 19
-GD.Randi() % 100;     // Returns random integer between 0 and 99
-GD.Randi() % 100 + 1; // Returns random integer between 1 and 100
-```
+返回 [0, 2^32-1] 的随机整数。
 
 ### randf {#randf}
 
@@ -1180,15 +650,7 @@ GD.Randi() % 100 + 1; // Returns random integer between 1 and 100
 float randf()
 ```
 
-Returns a random floating-point value between 0.0 and 1.0 (inclusive).
-
-```
-randf() # Returns e.g. 0.375671
-```
-
-```
-GD.Randf(); // Returns e.g. 0.375671
-```
+返回 [0.0, 1.0] 的随机浮点。
 
 ### randi_range {#randi_range}
 
@@ -1196,17 +658,7 @@ GD.Randf(); // Returns e.g. 0.375671
 int randi_range(from: int, to: int)
 ```
 
-Returns a random signed 32-bit integer between from and to (inclusive). If to is lesser than from, they are swapped.
-
-```
-randi_range(0, 1)      # Returns either 0 or 1
-randi_range(-10, 1000) # Returns random integer between -10 and 1000
-```
-
-```
-GD.RandRange(0, 1);      // Returns either 0 or 1
-GD.RandRange(-10, 1000); // Returns random integer between -10 and 1000
-```
+返回 [from, to] 闭区间随机整数。
 
 ### randf_range {#randf_range}
 
@@ -1214,17 +666,7 @@ GD.RandRange(-10, 1000); // Returns random integer between -10 and 1000
 float randf_range(from: float, to: float)
 ```
 
-Returns a random floating-point value between from and to (inclusive).
-
-```
-randf_range(0, 20.5) # Returns e.g. 7.45315
-randf_range(-10, 10) # Returns e.g. -3.844535
-```
-
-```
-GD.RandRange(0.0, 20.5);   // Returns e.g. 7.45315
-GD.RandRange(-10.0, 10.0); // Returns e.g. -3.844535
-```
+返回 [from, to] 随机浮点。
 
 ### randfn {#randfn}
 
@@ -1232,9 +674,7 @@ GD.RandRange(-10.0, 10.0); // Returns e.g. -3.844535
 float randfn(mean: float, deviation: float)
 ```
 
-Returns a normally-distributed [https://en.wikipedia.org/wiki/Normal_distribution], pseudo-random floating-point value from the specified mean and a standard deviation. This is also known as a Gaussian distribution.
-
-Note: This method uses the Box-Muller transform [https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform] algorithm.
+正态（高斯）分布随机数，给定均值与标准差。
 
 ### seed {#seed}
 
@@ -1242,25 +682,7 @@ Note: This method uses the Box-Muller transform [https://en.wikipedia.org/wiki/B
 void seed(base: int)
 ```
 
-Sets the seed for the random number generator to base. Setting the seed manually can ensure consistent, repeatable results for most random functions.
-
-```
-var my_seed = "Godot Rocks".hash()
-seed(my_seed)
-var a = randf() + randi()
-seed(my_seed)
-var b = randf() + randi()
-# a and b are now identical
-```
-
-```
-ulong mySeed = (ulong)GD.Hash("Godot Rocks");
-GD.Seed(mySeed);
-var a = GD.Randf() + GD.Randi();
-GD.Seed(mySeed);
-var b = GD.Randf() + GD.Randi();
-// a and b are now identical
-```
+显式设置随机种子，使序列可复现。
 
 ### rand_from_seed {#rand_from_seed}
 
@@ -1268,15 +690,7 @@ var b = GD.Randf() + GD.Randi();
 PackedInt64Array rand_from_seed(seed: int)
 ```
 
-Given a seed, returns a PackedInt64Array of size 2, where its first element is the randomized int value, and the second element is the same as seed. Passing the same seed consistently returns the same array.
-
-Note: "Seed" here refers to the internal state of the pseudo random number generator, currently implemented as a 64 bit integer.
-
-```gdscript
-var a = rand_from_seed(4)
-print(a[0]) # Prints 2879024997
-print(a[1]) # Prints 4
-```
+按给定种子生成随机数（无状态，不影响全局 RNG）。
 
 ### weakref {#weakref}
 
@@ -1284,9 +698,7 @@ print(a[1]) # Prints 4
 Variant weakref(obj: Variant)
 ```
 
-Returns a WeakRef instance holding a weak reference to obj. Returns an empty WeakRef instance if obj is null. Prints an error and returns null if obj is neither Object-derived nor null.
-
-A weak reference to an object is not enough to keep the object alive: when the only remaining references to a referent are weak references, garbage collection is free to destroy the referent and reuse its memory for something else. However, until the object is actually destroyed the weak reference may return the object even if there are no strong references to it.
+创建对象的弱引用，对象销毁后为 null，用于防悬空。
 
 ### typeof {#typeof}
 
@@ -1294,19 +706,7 @@ A weak reference to an object is not enough to keep the object alive: when the o
 int typeof(variable: Variant)
 ```
 
-Returns the internal type of the given variable, using the Variant.Type values.
-
-```gdscript
-var json = JSON.new()
-json.parse('["a", "b", "c"]')
-var result = json.get_data()
-if typeof(result) == TYPE_ARRAY:
-    print(result[0]) # Prints "a"
-else:
-    print("Unexpected result!")
-```
-
-See also type_string().
+返回值的 Variant 类型整数常量（TYPE_INT/TYPE_STRING…）。
 
 ### type_convert {#type_convert}
 
@@ -1314,19 +714,7 @@ See also type_string().
 Variant type_convert(variant: Variant, type: int)
 ```
 
-Converts the given variant to the given type, using the Variant.Type values. This method is generous with how it handles types, it can automatically convert between array types, convert numeric Strings to int, and converting most things to String.
-
-If the type conversion cannot be done, this method will return the default value for that type, for example converting Rect2 to Vector2 will always return Vector2.ZERO. This method will never show error messages as long as type is a valid Variant type.
-
-The returned value is a Variant, but the data inside and its type will be the same as the requested type.
-
-```gdscript
-type_convert("Hi!", TYPE_INT) # Returns 0
-type_convert("123", TYPE_INT) # Returns 123
-type_convert(123.4, TYPE_INT) # Returns 123
-type_convert(5, TYPE_VECTOR2) # Returns (0, 0)
-type_convert("Hi!", TYPE_NIL) # Returns null
-```
+在兼容 Variant 类型间转换，失败返回空值。
 
 ### str {#str}
 
@@ -1334,14 +722,7 @@ type_convert("Hi!", TYPE_NIL) # Returns null
 String str(arg1: Variant, ...)
 ```
 
-Converts one or more arguments of any Variant type to a String in the best way possible.
-
-```gdscript
-var a = [10, 20, 30]
-var b = str(a)
-print(len(a)) # Prints 3 (the number of elements in the array).
-print(len(b)) # Prints 12 (the length of the string "[10, 20, 30]").
-```
+把参数转为字符串表示。
 
 ### error_string {#error_string}
 
@@ -1349,14 +730,7 @@ print(len(b)) # Prints 12 (the length of the string "[10, 20, 30]").
 String error_string(error: int)
 ```
 
-Returns a human-readable name for the given Error code.
-
-```gdscript
-print(OK)                              # Prints 0
-print(error_string(OK))                # Prints "OK"
-print(error_string(ERR_BUSY))          # Prints "Busy"
-print(error_string(ERR_OUT_OF_MEMORY)) # Prints "Out of memory"
-```
+把错误码整数转为可读错误名（如 ERR_FILE_NOT_FOUND）。
 
 ### type_string {#type_string}
 
@@ -1364,15 +738,7 @@ print(error_string(ERR_OUT_OF_MEMORY)) # Prints "Out of memory"
 String type_string(type: int)
 ```
 
-Returns a human-readable name of the given type, using the Variant.Type values.
-
-```gdscript
-print(TYPE_INT) # Prints 2
-print(type_string(TYPE_INT)) # Prints "int"
-print(type_string(TYPE_STRING)) # Prints "String"
-```
-
-See also typeof().
+返回值类型的可读字符串（如 "int"、"Vector2"）。
 
 ### print {#print}
 
@@ -1380,19 +746,7 @@ See also typeof().
 void print(arg1: Variant, ...)
 ```
 
-Converts one or more arguments of any type to string in the best way possible and prints them to the console.
-
-```
-var a = [1, 2, 3]
-print("a", "b", a) # Prints "ab[1, 2, 3]"
-```
-
-```
-Godot.Collections.Array a = [1, 2, 3];
-GD.Print("a", "b", a); // Prints "ab[1, 2, 3]"
-```
-
-Note: Consider using push_error() and push_warning() to print error and warning messages instead of print() or print_rich(). This distinguishes them from print messages used for debugging purposes, while also displaying a stack trace when an error or warning is printed. See also Engine.print_to_stdout and ProjectSettings.application/run/disable_stdout.
+把任意类型参数转字符串打印到控制台，参数间空格分隔，末尾换行。
 
 ### print_rich {#print_rich}
 
@@ -1400,25 +754,7 @@ Note: Consider using push_error() and push_warning() to print error and warning 
 void print_rich(arg1: Variant, ...)
 ```
 
-Converts one or more arguments of any type to string in the best way possible and prints them to the console.
-
-The following BBCode tags are supported: b, i, u, s, indent, code, url, center, right, color, bgcolor, fgcolor.
-
-URL tags only support URLs wrapped by a URL tag, not URLs with a different title.
-
-When printing to standard output, the supported subset of BBCode is converted to ANSI escape codes for the terminal emulator to display. Support for ANSI escape codes varies across terminal emulators, especially for italic and strikethrough. In standard output, code is represented with faint text but without any font change. Unsupported tags are left as-is in standard output.
-
-```
-print_rich("[color=green][b]Hello world![/b][/color]") # Prints "Hello world!", in green with a bold font.
-```
-
-```
-GD.PrintRich("[color=green][b]Hello world![/b][/color]"); // Prints "Hello world!", in green with a bold font.
-```
-
-Note: Consider using push_error() and push_warning() to print error and warning messages instead of print() or print_rich(). This distinguishes them from print messages used for debugging purposes, while also displaying a stack trace when an error or warning is printed.
-
-Note: Output displayed in the editor supports clickable text tags. The [url] tag's address value is handled by OS.shell_open() when clicked.
+以富文本 BBCode 样式打印。
 
 ### printerr {#printerr}
 
@@ -1426,15 +762,7 @@ Note: Output displayed in the editor supports clickable text tags. The [url] tag
 void printerr(arg1: Variant, ...)
 ```
 
-Prints one or more arguments to strings in the best way possible to standard error line.
-
-```
-printerr("prints to stderr")
-```
-
-```
-GD.PrintErr("prints to stderr");
-```
+打印到标准错误流（控制台红色）。
 
 ### printt {#printt}
 
@@ -1442,15 +770,7 @@ GD.PrintErr("prints to stderr");
 void printt(arg1: Variant, ...)
 ```
 
-Prints one or more arguments to the console with a tab between each argument.
-
-```
-printt("A", "B", "C") # Prints "A       B       C"
-```
-
-```
-GD.PrintT("A", "B", "C"); // Prints "A       B       C"
-```
+参数间用制表符分隔打印。
 
 ### prints {#prints}
 
@@ -1458,15 +778,7 @@ GD.PrintT("A", "B", "C"); // Prints "A       B       C"
 void prints(arg1: Variant, ...)
 ```
 
-Prints one or more arguments to the console with a space between each argument.
-
-```
-prints("A", "B", "C") # Prints "A B C"
-```
-
-```
-GD.PrintS("A", "B", "C"); // Prints "A B C"
-```
+参数间用空格分隔打印（无末尾换行）。
 
 ### printraw {#printraw}
 
@@ -1474,23 +786,7 @@ GD.PrintS("A", "B", "C"); // Prints "A B C"
 void printraw(arg1: Variant, ...)
 ```
 
-Prints one or more arguments to strings in the best way possible to the OS terminal. Unlike print(), no newline is automatically added at the end.
-
-Note: The OS terminal is not the same as the editor's Output dock. The output sent to the OS terminal can be seen when running Godot from a terminal. On Windows, this requires using the console.exe executable.
-
-```
-# Prints "ABC" to terminal.
-printraw("A")
-printraw("B")
-printraw("C")
-```
-
-```
-// Prints "ABC" to terminal.
-GD.PrintRaw("A");
-GD.PrintRaw("B");
-GD.PrintRaw("C");
-```
+原样打印，不加空格与换行。
 
 ### print_verbose {#print_verbose}
 
@@ -1498,7 +794,7 @@ GD.PrintRaw("C");
 void print_verbose(arg1: Variant, ...)
 ```
 
-If verbose mode is enabled (OS.is_stdout_verbose() returning true), converts one or more arguments of any type to string in the best way possible and prints them to the console.
+仅在详细模式（OS.is_stdout_verbose()）下打印。
 
 ### push_error {#push_error}
 
@@ -1506,17 +802,7 @@ If verbose mode is enabled (OS.is_stdout_verbose() returning true), converts one
 void push_error(arg1: Variant, ...)
 ```
 
-Pushes an error message to Godot's built-in debugger and to the OS terminal.
-
-```
-push_error("test error") # Prints "test error" to debugger and terminal as an error.
-```
-
-```
-GD.PushError("test error"); // Prints "test error" to debugger and terminal as an error.
-```
-
-Note: This function does not pause project execution. To print an error message and pause project execution in debug builds, use assert(false, "test error") instead.
+向调试器推送一条错误（计入错误计数，显示在调试器错误面板）。
 
 ### push_warning {#push_warning}
 
@@ -1524,15 +810,7 @@ Note: This function does not pause project execution. To print an error message 
 void push_warning(arg1: Variant, ...)
 ```
 
-Pushes a warning message to Godot's built-in debugger and to the OS terminal.
-
-```
-push_warning("test warning") # Prints "test warning" to debugger and terminal as a warning.
-```
-
-```
-GD.PushWarning("test warning"); // Prints "test warning" to debugger and terminal as a warning.
-```
+向调试器推送一条警告。
 
 ### var_to_str {#var_to_str}
 
@@ -1540,28 +818,7 @@ GD.PushWarning("test warning"); // Prints "test warning" to debugger and termina
 String var_to_str(variable: Variant)
 ```
 
-Converts a Variant variable to a formatted String that can then be parsed using str_to_var().
-
-```
-var a = { "a": 1, "b": 2 }
-print(var_to_str(a))
-```
-
-```
-var a = new Godot.Collections.Dictionary { ["a"] = 1, ["b"] = 2 };
-GD.Print(GD.VarToStr(a));
-```
-
-Prints:
-
-```
-{
-    "a": 1,
-    "b": 2
-}
-```
-
-Note: Converting Signal or Callable is not supported and will result in an empty value for these types, regardless of their data.
+把 Variant 转为可解析回读的字符串表示。
 
 ### str_to_var {#str_to_var}
 
@@ -1569,19 +826,7 @@ Note: Converting Signal or Callable is not supported and will result in an empty
 Variant str_to_var(string: String)
 ```
 
-Converts a formatted string that was returned by var_to_str() to the original Variant.
-
-```
-var data = '{ "a": 1, "b": 2 }' # data is a String
-var dict = str_to_var(data)     # dict is a Dictionary
-print(dict["a"])                # Prints 1
-```
-
-```
-string data = "{ \"a\": 1, \"b\": 2 }";           // data is a string
-var dict = GD.StrToVar(data).AsGodotDictionary(); // dict is a Dictionary
-GD.Print(dict["a"]);                              // Prints 1
-```
+把 var_to_str 产生的字符串还原为 Variant。
 
 ### var_to_bytes {#var_to_bytes}
 
@@ -1589,11 +834,7 @@ GD.Print(dict["a"]);                              // Prints 1
 PackedByteArray var_to_bytes(variable: Variant)
 ```
 
-Encodes a Variant value to a byte array, without encoding objects. Deserialization can be done with bytes_to_var().
-
-Note: If you need object serialization, see var_to_bytes_with_objects().
-
-Note: Encoding Callable is not supported and will result in an empty value, regardless of the data.
+把 Variant 序列化为 PackedByteArray（不含对象引用）。
 
 ### bytes_to_var {#bytes_to_var}
 
@@ -1601,9 +842,7 @@ Note: Encoding Callable is not supported and will result in an empty value, rega
 Variant bytes_to_var(bytes: PackedByteArray)
 ```
 
-Decodes a byte array back to a Variant value, without decoding objects.
-
-Note: If you need object deserialization, see bytes_to_var_with_objects().
+把 var_to_bytes 的字节还原为 Variant。
 
 ### var_to_bytes_with_objects {#var_to_bytes_with_objects}
 
@@ -1611,9 +850,7 @@ Note: If you need object deserialization, see bytes_to_var_with_objects().
 PackedByteArray var_to_bytes_with_objects(variable: Variant)
 ```
 
-Encodes a Variant value to a byte array. Encoding objects is allowed (and can potentially include executable code). Deserialization can be done with bytes_to_var_with_objects().
-
-Note: Encoding Callable is not supported and will result in an empty value, regardless of the data.
+序列化 Variant，连同内嵌 Object 一起保存。
 
 ### bytes_to_var_with_objects {#bytes_to_var_with_objects}
 
@@ -1621,9 +858,7 @@ Note: Encoding Callable is not supported and will result in an empty value, rega
 Variant bytes_to_var_with_objects(bytes: PackedByteArray)
 ```
 
-Decodes a byte array back to a Variant value. Decoding objects is allowed.
-
-Warning: Deserialized object can contain code which gets executed. Do not use this option if the serialized object comes from untrusted sources to avoid potential security threats (remote code execution).
+还原带对象的序列化字节。
 
 ### hash {#hash}
 
@@ -1631,15 +866,7 @@ Warning: Deserialized object can contain code which gets executed. Do not use th
 int hash(variable: Variant)
 ```
 
-Returns the integer hash of the passed variable.
-
-```
-print(hash("a")) # Prints 177670
-```
-
-```
-GD.Print(GD.Hash("a")); // Prints 177670
-```
+计算值的 32 位哈希。
 
 ### instance_from_id {#instance_from_id}
 
@@ -1647,28 +874,7 @@ GD.Print(GD.Hash("a")); // Prints 177670
 Object instance_from_id(instance_id: int)
 ```
 
-Returns the Object that corresponds to instance_id. All Objects have a unique instance ID. See also Object.get_instance_id().
-
-```
-var drink = "water"
-func _ready():
-    var id = get_instance_id()
-    var instance = instance_from_id(id)
-    print(instance.drink) # Prints "water"
-```
-
-```
-public partial class MyNode : Node
-{
-    public string Drink { get; set; } = "water";
-    public override void _Ready()
-    {
-        ulong id = GetInstanceId();
-        var instance = (MyNode)InstanceFromId(Id);
-        GD.Print(instance.Drink); // Prints "water"
-    }
-}
-```
+按实例 id 取回 Object，无效返回 null。
 
 ### is_instance_id_valid {#is_instance_id_valid}
 
@@ -1676,7 +882,7 @@ public partial class MyNode : Node
 bool is_instance_id_valid(id: int)
 ```
 
-Returns true if the Object that corresponds to id is a valid object (e.g. has not been deleted from memory). All Objects have a unique instance ID.
+判断实例 id 是否仍有效（对象未销毁）。
 
 ### is_instance_valid {#is_instance_valid}
 
@@ -1684,7 +890,7 @@ Returns true if the Object that corresponds to id is a valid object (e.g. has no
 bool is_instance_valid(instance: Variant)
 ```
 
-Returns true if instance is a valid Object (e.g. has not been deleted from memory).
+判断对象引用是否有效（未被释放）。
 
 ### rid_allocate_id {#rid_allocate_id}
 
@@ -1692,7 +898,7 @@ Returns true if instance is a valid Object (e.g. has not been deleted from memor
 int rid_allocate_id()
 ```
 
-Allocates a unique ID which can be used by the implementation to construct an RID. This is used mainly from native extensions to implement servers.
+分配一个新的空 RID。
 
 ### rid_from_int64 {#rid_from_int64}
 
@@ -1700,7 +906,7 @@ Allocates a unique ID which can be used by the implementation to construct an RI
 RID rid_from_int64(base: int)
 ```
 
-Creates an RID from a base. This is used mainly from native extensions to build servers.
+由 64 位整数构造 RID。
 
 ### is_same {#is_same}
 
@@ -1708,26 +914,7 @@ Creates an RID from a base. This is used mainly from native extensions to build 
 bool is_same(a: Variant, b: Variant)
 ```
 
-Returns true, for value types, if a and b share the same value. Returns true, for reference types, if the references of a and b are the same.
-
-```gdscript
-# Vector2 is a value type
-var vec2_a = Vector2(0, 0)
-var vec2_b = Vector2(0, 0)
-var vec2_c = Vector2(1, 1)
-is_same(vec2_a, vec2_a)  # true
-is_same(vec2_a, vec2_b)  # true
-is_same(vec2_a, vec2_c)  # false
-# Array is a reference type
-var arr_a = []
-var arr_b = []
-is_same(arr_a, arr_a)  # true
-is_same(arr_a, arr_b)  # false
-```
-
-These are Variant value types: null, bool, int, float, String, StringName, Vector2, Vector2i, Vector3, Vector3i, Vector4, Vector4i, Rect2, Rect2i, Transform2D, Transform3D, Plane, Quaternion, AABB, Basis, Projection, Color, NodePath, RID, Callable and Signal.
-
-These are Variant reference types: Object, Dictionary, Array, PackedByteArray, PackedInt32Array, PackedInt64Array, PackedFloat32Array, PackedFloat64Array, PackedStringArray, PackedVector2Array, PackedVector3Array, PackedVector4Array, and PackedColorArray.
+判断两个 RID/对象是否指向同一资源。
 
 ## 全局枚举
 
