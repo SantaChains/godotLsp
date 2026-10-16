@@ -1,0 +1,53 @@
+# mdBook 中文参考站部署到 GitHub Pages
+# 暂以 .bak 后缀停用（文档尚未完成），启用时将文件重命名为 deploy-pages.yml
+# 仓库 Settings -> Pages -> Build and deployment -> Source 需选择「GitHub Actions」
+# 安全基线：action 全部按 commit SHA 固定、job 级最小权限、关闭凭据持久化、锁定构建版本
+name: Deploy Pages
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "website/**"
+      - ".github/workflows/deploy-pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5.1.0
+        with:
+          persist-credentials: false
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5.0.0
+      - name: 安装 mdBook
+        run: cargo install mdbook --version 0.4.52 --locked
+      - name: 构建
+        run: mdbook build website
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3.0.1
+        with:
+          path: website/book/html
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4.0.5

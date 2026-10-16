@@ -1,11 +1,37 @@
 # 资源 Resource
 
-> 🚧 **骨架阶段占位页**。本页正文按里程碑填充（语法篇 W3、范式/内部篇 W4、类参考由生成管线产出）。
-> 规划见仓库 `docs/gdscript-docs-site-plan.md`。
+**资源是与节点分离的数据容器。可被多节点共享，保存为 .tres/.res 文件。**
 
-## 本章计划小节
+## 节点 vs 资源
 
-- 与节点分离的数据容器
-- 多节点共享同一份
-- 内置资源（贴图/材质/音频/动画）
-- 自定义 Resource 子类
+| | Node | Resource |
+|---|---|---|
+| 用途 | 逻辑、渲染、物理 | 数据、配置、资产 |
+| 树结构 | 是 | 否 |
+| 生命周期 | 进入/离开场景树 | 引用计数，无引用自动释放 |
+| 文件 | .tscn | .tres/.res |
+
+## 共享资源
+
+```gdscript
+# 三个敌人共享同一个 AnimationLibrary
+# 改一处，三处生效
+var anim_lib = preload("res://enemy_anim.tres")
+```
+
+## 自定义资源
+
+```gdscript
+# 定义自定义资源类
+class_name ItemData extends Resource
+@export var item_name: String
+@export var damage: int
+@export var icon: Texture2D
+```
+
+在编辑器里可以创建 `.tres` 文件，配置 ItemData 的字段。
+
+## 延伸阅读
+
+- 本站：[场景](03-scene.md)
+- 官方：[Resources](https://docs.godotengine.org/en/stable/getting_started/step_by_step/resources.html)

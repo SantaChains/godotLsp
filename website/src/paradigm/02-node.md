@@ -1,11 +1,65 @@
 # 节点 Node
 
-> 🚧 **骨架阶段占位页**。本页正文按里程碑填充（语法篇 W3、范式/内部篇 W4、类参考由生成管线产出）。
-> 规划见仓库 `docs/gdscript-docs-site-plan.md`。
+**一切都是节点。节点构成树，树承载一切逻辑。**
 
-## 本章计划小节
+## 继承树
 
-- 一切都是节点（继承树）
-- 单父多子的树形约束（继承坐标/激活态）
-- 内置属性与功能
-- 反巨型单脚本：功能拆分到子节点
+```
+Object
+  └── Node
+       ├── Node2D          # 2D 世界
+       │    ├── Sprite2D
+       │    ├── CharacterBody2D
+       │    └── Camera2D
+       ├── Node3D          # 3D 世界
+       │    ├── MeshInstance3D
+       │    └── Camera3D
+       ├── Control          # UI
+       │    ├── Button
+       │    └── Label
+       └── AnimationPlayer  # 工具节点
+```
+
+## 树形约束
+
+- **单父多子**：每个节点只有一个父节点，但可以有任意多子节点。
+- **坐标继承**：子节点的 position 是相对于父节点的。移动父节点，所有子节点跟着移动。
+- **激活态继承**：父节点不可见，子节点全部不可见。
+- **顺序即层级**：在编辑器里上下拖动节点改变绘制顺序（2D）或渲染顺序（3D）。
+
+## 组合式设计
+
+> 需要注意的是：**不要写一个 500 行的 Player.gd**。把功能拆到子节点：
+
+```
+Player (CharacterBody2D)
+├── Sprite2D          # 显示
+├── CollisionShape2D  # 碰撞
+├── Camera2D         # 跟随
+├── AnimationPlayer   # 动画
+└── AudioStreamPlayer # 音效
+```
+
+每个子节点管自己的事，根节点只负责协调。这就是 Godot 的"组合大于继承"。
+
+## 生命周期回调
+
+| 回调 | 触发时机 |
+|---|---|
+| `_init()` | 对象被构造时（还不在树中） |
+| `_enter_tree()` | 节点进入场景树 |
+| `_ready()` | 节点及其所有子节点都进入树后 |
+| `_process(delta)` | 每帧 |
+| `_physics_process(delta)` | 每物理帧（默认 60Hz） |
+| `_exit_tree()` | 节点离开场景树 |
+
+```gdscript
+func _ready():
+    # 子节点都已就绪，可以安全引用
+    $Sprite2D.modulate = Color.GREEN
+```
+
+## 延伸阅读
+
+- 本站：[场景](03-scene.md)、[delta 与时间](05-delta.md)
+- 官方：[Nodes](https://docs.godotengine.org/en/stable/classes/class_node.html)
