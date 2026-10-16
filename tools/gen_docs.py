@@ -336,7 +336,8 @@ def gen_class_page(name: str, cls: dict, kind: str, docs: dict, api: dict, inh_l
             L.append(render_property(p))
             L.append("```")
             L.append("")
-            L.append(md_desc(docs["properties"].get(p["name"], "")))
+            pcn = tr(f"member:{name}.{p['name']}")
+            L.append(md_desc(pcn or docs["properties"].get(p["name"], "")))
             L.append("")
 
     # 信号
@@ -351,7 +352,8 @@ def gen_class_page(name: str, cls: dict, kind: str, docs: dict, api: dict, inh_l
             L.append(render_signal(s))
             L.append("```")
             L.append("")
-            L.append(md_desc(docs["signals"].get(s["name"], "")))
+            scn = tr(f"member:{name}.{s['name']}")
+            L.append(md_desc(scn or docs["signals"].get(s["name"], "")))
             L.append("")
 
     # 枚举（容器锚 enum-<名>；每个值独立锚 <值名>，供 Class.VALUE 直达）
@@ -373,7 +375,8 @@ def gen_class_page(name: str, cls: dict, kind: str, docs: dict, api: dict, inh_l
                 L.append("")
                 L.append(f"```gdscript\n{v['name']} = {v['value']}\n```")
                 L.append("")
-                L.append(md_desc(docs["enums"].get(v["name"], "")))
+                ven = tr(f"member:{name}.{v['name']}")
+                L.append(md_desc(ven or docs["enums"].get(v["name"], "")))
                 L.append("")
 
     # 常量（跳过已作为枚举值渲染的名字，避免重复锚点）
@@ -388,7 +391,8 @@ def gen_class_page(name: str, cls: dict, kind: str, docs: dict, api: dict, inh_l
             L.append("")
             L.append(f"```gdscript\nconst {cn} = {cv}\n```")
             L.append("")
-            L.append(md_desc(docs["constants"].get(cn, "")))
+            ccn = tr(f"member:{name}.{cn}")
+            L.append(md_desc(ccn or docs["constants"].get(cn, "")))
             L.append("")
 
     return "\n".join(L).rstrip() + "\n"
@@ -481,7 +485,8 @@ def gen_global_scope_page(api: dict, docs: dict) -> str:
         L.append(render_method(f))
         L.append("```")
         L.append("")
-        L.append(md_desc(docs["methods"].get(nm, "")))
+        cn = tr(f"member:@GlobalScope.{nm}")
+        L.append(md_desc(cn or docs["methods"].get(nm, "")))
         L.append("")
 
     L.append("## 全局枚举")
