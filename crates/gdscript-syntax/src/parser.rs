@@ -100,6 +100,9 @@ impl<'a> Parser<'a> {
     fn expect(&mut self, k: TokenKind) -> Option<Token> {
         if self.at(k) {
             Some(self.advance())
+        } else if self.at(TokenKind::Eof) {
+            // 截断输入容错：文件在期望 token 处结束，静默恢复不报错（LSP 增量解析硬需求）。
+            None
         } else {
             self.error(format!("期望 {:?}", k), self.peek());
             None
@@ -338,7 +341,15 @@ impl<'a> Parser<'a> {
                 let lhs = self.parse_expr();
                 if let Some(aop) = self.assign_op() {
                     self.advance();
-                    let rhs = self.parse_expr();
+                    // 截断赋值容错：`x = ` 后直接行尾/缩进边界/EOF，RHS 补空（LSP 增量解析）。
+                    let rhs = if matches!(
+                        self.peek().kind,
+                        TokenKind::Newline | TokenKind::Dedent | TokenKind::Eof
+                    ) {
+                        Expr::Literal(Literal::Null)
+                    } else {
+                        self.parse_expr()
+                    };
                     let span = (self.cur_start(), self.last_end);
                     Stmt::Assign {
                         target: lhs,
@@ -541,6 +552,18 @@ impl<'a> Parser<'a> {
     fn parse_func_decl(&mut self, anns: Vec<Annotation>, static_: bool) -> Stmt {
         let start = self.cur_start();
         self.advance(); // Func
+        // 截断函数声明容错：`func ` 后直接行尾/缩进边界/EOF，按空声明返回。
+        if matches!(self.peek().kind, TokenKind::Newline | TokenKind::Dedent | TokenKind::Eof) {
+            return Stmt::Func(FuncDecl {
+                annotations: anns,
+                static_,
+                name: Ident::new(String::new(), (self.cur_start(), self.cur_start())),
+                params: Vec::new(),
+                ret_ty: None,
+                body: Block { stmts: Vec::new(), span: (start, self.last_end) },
+                span: (start, self.last_end),
+            });
+        }
         let name = self.parse_ident();
         self.expect(TokenKind::LParen);
         let params = self.parse_params();
@@ -790,7 +813,10 @@ impl<'a> Parser<'a> {
         let start = self.cur_start();
         self.advance(); // Match
         let expr = self.parse_expr();
-        self.expect(TokenKind::Colon);
+        // 截断 match 容错：主题后直接行尾/缩进边界/EOF，不期望冒号。
+        if !matches!(self.peek().kind, TokenKind::Newline | TokenKind::Dedent | TokenKind::Eof) {
+            self.expect(TokenKind::Colon);
+        }
         self.bump_if(TokenKind::Newline);
         self.bump_if(TokenKind::Indent);
         let mut arms = Vec::new();
@@ -820,8 +846,17 @@ impl<'a> Parser<'a> {
             } else {
                 None
             };
-            self.expect(TokenKind::Colon);
-            let body = self.parse_block();
+            // 不完整分支容错：模式后直接换行/缩进边界/EOF（光标停在模式后，如 `match t: AutoTranslateMode.`），
+            // 不期望冒号、按空分支体处理。
+            let body = if matches!(
+                self.peek().kind,
+                TokenKind::Newline | TokenKind::Dedent | TokenKind::Eof
+            ) {
+                Block { stmts: Vec::new(), span: (self.cur_start(), self.last_end) }
+            } else {
+                self.expect(TokenKind::Colon);
+                self.parse_block()
+            };
             arms.push(MatchArm {
                 pattern,
                 guard,
@@ -1124,6 +1159,29 @@ impl<'a> Parser<'a> {
             match self.peek().kind {
                 TokenKind::Dot => {
                     self.advance();
+                    // 悬空成员访问容错（LSP 增量解析硬需求）：`.` 后紧跟行尾 / 闭合符 / EOF，
+                    // 说明用户光标正停在此处输入（`obj.`、`$Node.`、`match X.`）。
+                    // 视作不完整表达式：不报错，产空名 Attribute 并停止 postfix。
+                    if matches!(
+                        self.peek().kind,
+                        TokenKind::Newline
+                            | TokenKind::Dedent
+                            | TokenKind::Eof
+                            | TokenKind::RParen
+                            | TokenKind::RBracket
+                            | TokenKind::RBrace
+                            | TokenKind::Comma
+                            | TokenKind::Colon
+                            | TokenKind::Assign
+                    ) {
+                        let span = (self.cur_start(), self.last_end);
+                        e = Expr::Attribute {
+                            target: Box::new(e),
+                            name: Ident::new(String::new(), span),
+                            span,
+                        };
+                        break;
+                    }
                     let name = self.parse_member_name();
                     let span = (self.cur_start(), self.last_end);
                     e = Expr::Attribute {
@@ -1280,6 +1338,8 @@ impl<'a> Parser<'a> {
                 }
             }
             TokenKind::Func => self.parse_lambda(),
+            // 截断输入容错：表达式位置遇 EOF，静默补 Null，不报错。
+            TokenKind::Eof => Expr::Literal(Literal::Null),
             _ => {
                 self.error(format!("意外的 token {:?}", t.kind), t);
                 self.advance();
@@ -1313,8 +1373,12 @@ impl<'a> Parser<'a> {
                 let val = self.parse_expr();
                 entries.push((key, val));
             } else {
-                // 非键值对（容忍：当作残缺）
+                // 坏条目（无键值分隔符）：错误恢复——跳到下一个 Comma / RBrace，
+                // 把坏条目 containment 在字典内，避免级联到语句层。
                 entries.push((key, Expr::Literal(Literal::Null)));
+                while !matches!(self.peek().kind, TokenKind::Comma | TokenKind::RBrace | TokenKind::Eof) {
+                    self.advance();
+                }
             }
             if !self.bump_if(TokenKind::Comma) {
                 break;
@@ -1376,7 +1440,40 @@ impl<'a> Parser<'a> {
             ret_ty = Some(Box::new(self.parse_expr()));
         }
         self.expect(TokenKind::Colon);
-        let body = LambdaBody::Block(self.parse_block());
+        // lambda 体：支持调用括号内的多行多语句（`other(func(): print(1) print(2))`、
+        // `(func(): return true).call()`）。括号内不注入 Newline/Indent token，
+        // 故以 Newline/Dedent/EOF 及闭合括号/Comma 界定体边界，允许多语句无分号串联。
+        let block = if self.at(TokenKind::Newline) {
+            self.parse_block()
+        } else {
+            let mut stmts = Vec::new();
+            loop {
+                if self.at_any(&[
+                    TokenKind::Newline,
+                    TokenKind::Dedent,
+                    TokenKind::Eof,
+                    TokenKind::RParen,
+                    TokenKind::RBracket,
+                    TokenKind::RBrace,
+                    TokenKind::Comma,
+                ]) {
+                    break;
+                }
+                let before = self.pos;
+                if let Some(s) = self.parse_item() {
+                    stmts.push(s);
+                }
+                if self.pos == before {
+                    self.advance();
+                    break;
+                }
+                if self.at(TokenKind::Semicolon) {
+                    self.advance();
+                }
+            }
+            Block { stmts, span: (start, self.last_end) }
+        };
+        let body = LambdaBody::Block(block);
         Expr::Lambda(
             Lambda {
                 params,

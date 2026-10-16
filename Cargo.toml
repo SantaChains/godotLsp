@@ -2,7 +2,7 @@
 resolver = "3"
 # R0 硬切:godotlsp 已从构建集移除,其 gdscript-ide/base/api 依赖已删除(见 crates/godotlsp/Cargo.toml 注释)。
 # godotlsp 将在 R2 重写分析层后重新加入,改用 gdscript-syntax + gdscript-engine。
-members = ["crates/gdscript-syntax", "crates/gdscript-engine"]
+members = ["crates/gdscript-syntax", "crates/gdscript-engine", "crates/gdscript-project", "crates/godotlsp"]
 
 # 注意:`gdscript-analyzer/` 是 git submodule(钉在 v0.6.1),仅作**参考源码**,
 # 用于从零重写时借鉴其实现思路与 GDScript 语法/语义建模,**不是构建依赖**。

@@ -1,14 +1,17 @@
 [package]
 name = "gdscript-engine"
-version = "0.1.0"
+version = "0.1.3"
 edition = "2024"
 rust-version = "1.88"
 license = "MIT OR Apache-2.0"
 description = "Godot engine API model ingestion for godotlsp (engine-free, static dataset)"
 
 [dependencies]
+serde = { version = "1", features = ["derive"] }
+serde_json = { version = "1", public = true }
 
 [dev-dependencies]
 
 [lints.rust]
 unsafe_code = "deny"
+

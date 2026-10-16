@@ -1,14 +1,16 @@
 [package]
 name = "gdscript-syntax"
-version = "0.1.0"
+version = "0.1.3"
 edition = "2024"
 rust-version = "1.88"
 license = "MIT OR Apache-2.0"
 description = "GDScript 2.0 lexer + parser, written from scratch (engine-free, safe Rust)"
 
 [dependencies]
+gdscript-engine = { path = "../gdscript-engine", public = true }
 
 [dev-dependencies]
 
 [lints.rust]
 unsafe_code = "deny"
+

@@ -72,7 +72,10 @@ fn godot_corpus_parser_is_panic_free_and_bounded() {
         std::collections::BTreeMap::new();
 
     for f in &files {
-        let src = std::fs::read_to_string(f).expect("read");
+        let raw = std::fs::read_to_string(f).expect("read");
+        // Godot 上游 completion 夹具用 U+27A1(➡) 标记光标位置，它不是 GDScript 语法；
+        // 测试框架在解析前剥离游标标记。对齐该约定：剥离后再 parse。
+        let src: String = raw.chars().filter(|&c| c != '\u{27a1}').collect();
         let (_ast, errs) = parse(&src); // 若 panic，测试即失败——这正是我们要抓住的
         errors_total += errs.len();
         max_errs = max_errs.max(errs.len());

@@ -89,7 +89,10 @@ fn main() {
         .open("diagnose_progress.log")
         .unwrap();
     for f in &files {
-        let src = std::fs::read_to_string(f).expect("read");
+        let raw = std::fs::read_to_string(f).expect("read");
+        // Godot 上游 completion 夹具用 U+27A1(➡) 标记光标位置，它不是 GDScript 语法；
+        // 测试框架在解析前会剥离游标标记并记录偏移。这里对齐该约定：剥离后再 parse。
+        let src: String = raw.chars().filter(|&c| c != '\u{27a1}').collect();
         let rel = f.strip_prefix(&root).unwrap_or(f);
         let _ = writeln!(prog, "PARSE {}", rel.display());
         let _ = prog.flush();
