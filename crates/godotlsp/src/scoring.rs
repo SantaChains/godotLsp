@@ -11,6 +11,7 @@
 /// relevance 桶（值越小越靠前）。0x00-0x0F 段预留给 C3 本文件词条面。
 pub mod bucket {
     /// C3 预留：本文件标识符 / 局部变量。
+    #[allow(dead_code)]
     pub const LOCAL: u8 = 0x00;
     /// 成员面（`recv.` 之后的方法/属性/常量/枚举）与注解面（`@` 独立面）。
     pub const MEMBER: u8 = 0x10;
@@ -20,8 +21,10 @@ pub mod bucket {
     pub const TYPE: u8 = 0x21;
     /// 全局常量 + 枚举值展开。
     pub const CONST: u8 = 0x22;
-    /// 语言关键字。
+    /// 关键字。
     pub const KEYWORD: u8 = 0x23;
+    /// 上下文模板（虚方法/语句/复合 snippet），C2。
+    pub const SNIPPET: u8 = 0x11;
 }
 
 /// fuzzy 分数带（高 = 优）。带区间互不重叠，带内按匹配质量单调递减。
@@ -98,6 +101,12 @@ fn subsequence(prefix: &str, label: &str) -> Option<usize> {
 /// 取反使高分 → 小字符串 → 排前（对齐 rust-analyzer `score ^ 0xFFFFFFFF`）。
 pub fn sort_text(bucket: u8, fuzzy_score: u16) -> String {
     format!("{bucket:02x}{:04x}", 0xFFFF - fuzzy_score)
+}
+
+/// 该 fuzzy 分是否构成真实词面匹配（≥ 子序列带）。
+/// 上下文模板只对「与输入有词面关系」的输入出现——空前缀不泛滥。
+pub fn is_match(score: u16) -> bool {
+    score >= band::SUBSEQ
 }
 
 #[cfg(test)]

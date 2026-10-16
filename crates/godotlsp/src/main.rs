@@ -21,6 +21,7 @@ mod doclinks;
 mod hoverdata;
 mod langdocs;
 mod scoring;
+mod snippets;
 
 struct State {
     engine: std::sync::Arc<EngineApi>,
@@ -42,6 +43,8 @@ struct State {
     root: Option<std::path::PathBuf>,
     /// 后台诊断发送端（150ms 去抖）。
     diag_sender: std::sync::mpsc::Sender<(Uri, String)>,
+    /// C2：客户端声明了 completionItem.snippetSupport（initialize 协商）。
+    snippets: bool,
 }
 
 fn main() {
@@ -105,6 +108,16 @@ fn main() {
     };
     let initialize_params: InitializeParams = serde_json::from_value(initialize_value).expect("解析 initialize 参数");
 
+    // C2：snippetSupport 协商——客户端不声明则 snippet 面整体不出现。
+    let snippets = initialize_params
+        .capabilities
+        .text_document
+        .as_ref()
+        .and_then(|td| td.completion.as_ref())
+        .and_then(|c| c.completion_item.as_ref())
+        .and_then(|ci| ci.snippet_support)
+        .unwrap_or(false);
+
     // 五级摄取梯度（简化版）：workspace .godot/extension_api.json -> 内嵌出厂面。
     #[allow(deprecated)]
     let root = initialize_params
@@ -153,7 +166,7 @@ fn main() {
     let (diag_tx, diag_rx) = std::sync::mpsc::channel::<(Uri, String)>();
     let mut state = State {
         engine, real_lower, docs: HashMap::new(), asts: HashMap::new(), doc_versions: HashMap::new(),
-        cancelled: HashSet::new(), uid_map, project, root, diag_sender: diag_tx,
+        cancelled: HashSet::new(), uid_map, project, root, diag_sender: diag_tx, snippets,
     };
 
     eprintln!("[godotlsp] 就绪，引擎 {} (来源: {})，项目文件 {}，uid 映射 {}",
@@ -709,21 +722,47 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
                 });
             }
         }
-        // 语言关键字（func/if/await…）。
+        // 语言关键字（func/if/await…）；C2：控制流关键字升级为 snippet 插入（label 不变）。
         for (kw, desc, _) in langdocs::keywords() {
-            items.push(CompletionItem {
+            let mut it = CompletionItem {
                 label: kw.to_string(),
                 kind: Some(CompletionItemKind::KEYWORD),
                 detail: Some(desc.to_string()),
                 ..CompletionItem::default()
-            });
+            };
+            if state.snippets
+                && let Some(body) = snippets::keyword_snippet(kw) {
+                    it.insert_text = Some(body.to_string());
+                    it.insert_text_format = Some(InsertTextFormat::SNIPPET);
+                }
+            items.push(it);
+        }
+        // C2：snippet 面（snippetSupport 协商，客户端不声明则整体不出现）。
+        if state.snippets {
+            let line_start = line_start_offset(src, offset.line as usize);
+            let line_prefix = &src[line_start..word_start];
+            // `func _<|` → 虚方法模板，按宿主继承链过滤（无 extends 默认 RefCounted）。
+            if line_prefix.trim_end().ends_with("func") && prefix.starts_with('_') {
+                let file = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+                let host = file.extends.as_ref().map(|e| expr_to_text(src, e)).unwrap_or_else(|| "RefCounted".to_string());
+                let chain = state.engine.ancestor_chain(&host);
+                items.extend(snippets::virtual_items(&chain, prefix));
+            }
+            // 语句位（行首空白后）→ 复合模板，仅词面命中项。
+            if line_prefix.trim().is_empty() {
+                items.extend(snippets::statement_items(prefix));
+            }
         }
         // C1：全局面按 kind 归桶（函数/单例 > 类型 > 常量枚举 > 关键字）+ fuzzy 细分。
         for i in &mut items {
+            if i.sort_text.is_some() {
+                continue; // snippet 项已在 snippets.rs 编码。
+            }
             let bucket = match i.kind {
                 Some(CompletionItemKind::FUNCTION) | Some(CompletionItemKind::VARIABLE) => scoring::bucket::FN_GLOBAL,
                 Some(CompletionItemKind::CLASS) | Some(CompletionItemKind::TYPE_PARAMETER) => scoring::bucket::TYPE,
                 Some(CompletionItemKind::CONSTANT) | Some(CompletionItemKind::ENUM_MEMBER) => scoring::bucket::CONST,
+                Some(CompletionItemKind::SNIPPET) => scoring::bucket::SNIPPET,
                 _ => scoring::bucket::KEYWORD,
             };
             i.sort_text = Some(scoring::sort_text(bucket, scoring::fuzzy(prefix, &i.label)));
@@ -1788,6 +1827,7 @@ mod hover_tests {
             project: None,
             root: None,
             diag_sender: tx,
+            snippets: false,
         }
     }
 
@@ -1805,6 +1845,7 @@ mod hover_tests {
             project: None,
             root: None,
             diag_sender: state.diag_sender.clone(),
+            snippets: false,
         }
     }
 
@@ -1947,6 +1988,66 @@ func _ready() -> void:
         };
         assert!(st("normalized") < st("ONE"), "前缀分应排序: normalized={} ONE={}", st("normalized"), st("ONE"));
     }
+
+    /// C2 snippet 面：协商开关两侧 + 上下文感知（宿主过滤/语句位）。
+    #[test]
+    fn completion_snippet_surfaces() {
+        let base = test_state();
+        let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+        let ask = |state: &State, line: u32, ch: u32| -> Vec<CompletionItem> {
+            let p: CompletionParams = serde_json::from_value(serde_json::json!({
+                "textDocument": {"uri": uri},
+                "position": {"line": line, "character": ch}
+            }))
+            .unwrap();
+            match completion(state, &p) {
+                CompletionResponse::Array(items) => items,
+                _ => vec![],
+            }
+        };
+
+        // 开启：`extends Node` + `func _re` → _ready/_process 模板,无 _draw（Node 非 CanvasItem）。
+        let mut st = state_with(&base, "extends Node\nfunc _re\n");
+        st.snippets = true;
+        let items = ask(&st, 1, 8);
+        let ready = items.iter().find(|i| i.label == "_ready").expect("Node 系应出 _ready 模板");
+        assert_eq!(ready.insert_text.as_deref(), Some("_ready() -> void:\n\t$0"));
+        assert_eq!(ready.insert_text_format, Some(InsertTextFormat::SNIPPET));
+        assert!(!items.iter().any(|i| i.label == "_draw"), "Node 系不应出 _draw");
+        assert!(ready.sort_text.as_deref().unwrap().starts_with("11"), "SNIPPET 桶编码");
+
+        // 无 extends → RefCounted 默认 → 不出 _ready（Object 级 _notification 不匹配前缀 _re）。
+        let mut st2 = state_with(&base, "func _re\n");
+        st2.snippets = true;
+        let items2 = ask(&st2, 0, 8);
+        assert!(!items2.iter().any(|i| i.label == "_ready"), "RefCounted 默认不出 _ready");
+
+        // 语句位复合模板：`inst` → instantiate_scene；非语句位（跟在标识符后）不出。
+        let mut st3 = state_with(&base, "inst\n");
+        st3.snippets = true;
+        let items3 = ask(&st3, 0, 4);
+        let comp = items3.iter().find(|i| i.label == "instantiate_scene").expect("语句位应出 instantiate_scene");
+        assert_eq!(comp.insert_text_format, Some(InsertTextFormat::SNIPPET));
+        assert!(comp.insert_text.as_deref().unwrap().starts_with("var ${1:node}"));
+        let st4 = state_with(&base, "var inst\n");
+        let items4 = ask(&st4, 0, 8);
+        assert!(!items4.iter().any(|i| i.label == "instantiate_scene"), "非语句位不出复合模板");
+
+        // 关闭：整套模板不存在,控制流关键字保持纯文本。
+        let st5 = state_with(&base, "for\n");
+        let items5 = ask(&st5, 0, 3);
+        let for_kw = items5.iter().find(|i| i.label == "for").expect("关键字 for 应在");
+        assert!(for_kw.insert_text.is_none(), "snippetSupport=false 时关键字不应升级");
+        assert!(!items5.iter().any(|i| i.label == "instantiate_scene"));
+
+        // 开启：`for` 关键字升级为 snippet 插入（label 不变）。
+        let mut st6 = state_with(&base, "for\n");
+        st6.snippets = true;
+        let items6 = ask(&st6, 0, 3);
+        let for_kw6 = items6.iter().find(|i| i.label == "for").unwrap();
+        assert_eq!(for_kw6.insert_text_format, Some(InsertTextFormat::SNIPPET));
+        assert!(for_kw6.insert_text.as_deref().unwrap().starts_with("for ${1:i}"));
+    }
 }
 
 #[cfg(test)]
@@ -1984,6 +2085,7 @@ mod color_codelens_tests {
             project: None,
             root: None,
             diag_sender: state.diag_sender.clone(),
+            snippets: false,
         };
         let colors = document_color(&st, &DocumentColorParams {
             text_document: TextDocumentIdentifier { uri: uri.clone() },
@@ -2034,6 +2136,7 @@ mod color_codelens_tests {
             project: Some(std::sync::Arc::new(project)),
             root: Some(root.clone()),
             diag_sender: tx,
+            snippets: false,
         };
         // 模拟 didOpen：路径须在 root 之下（code_lens 做 strip_prefix）。
         let gd = root.join("main.gd");
@@ -2081,6 +2184,7 @@ mod rename_tests {
             project: Some(std::sync::Arc::new(project)),
             root: Some(dir.to_path_buf()),
             diag_sender: tx,
+            snippets: false,
         };
         st.docs.insert(uri.clone(), src.to_string());
         (st, uri)
