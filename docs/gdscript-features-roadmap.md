@@ -80,7 +80,7 @@
 ### P1 — 交互(服务器侧场景感知 + 编辑器侧入口)
 
 6. ✅ **运行/调试入口(运行类)**:插件提供「运行项目/运行当前场景」命令(集成终端调 `godot --path`,可配 `godotlsp.godotExecutable`);DAP 调试仍走 P2-13 独立适配器,**不进服务器协议**(域隔离准则)。
-7. ✅ **`$NodePath` / `%Unique` 场景感知增强**:内核 M2 链路已具备(补全带节点 `type=` detail、hover 类型推断、跳转定义);服务器补节点路径上下文识别,`$`/`%` 上下文下不再合并全局面(探针实测 1662 项污染 → 纯节点列表);取模 `%` 经操作数前缀启发式排除。
+7. ✅ **`$NodePath` / `%Unique` 场景感知增强(止血层,2026-10-17 C7.3)**:fa7d645 的服务器侧 `$`/`%` 上下文抑制已恢复(`in_node_path_context` 镜像原实现;E2E 实测 `$Panel/` 1808→0 项、`%Panel` 0 项、取模 `7 % 3` 不误伤;单测 `node_path_context_detection` + `completion_node_path_no_global_pollution` 锁定)。取模 `%` 经操作数前缀启发式排除。**节点名补全/hover/跳转面未恢复**——R4 重写(22882f7)后旧内核 M2 链路不在本构建集,需在新栈上用 `project.scenes`(tscn NodeDecl)重建,排入 `completion-roadmap.md` C7.3+(get_node 桶 0/33 即此面)。
 8. **格式化桥接**:优先内建格式化器;提供 `godotlsp.format.engine: gdformat` 开关,外部工具存在时委托(行为兼容诉求)。
 9. ✅ **snippet 集**:`@export`/`@onready`/信号声明、`_ready`/`_process`/`_physics_process`/`_input` 回调、`match`、lambda、定时器、信号连接、场景实例化等 16 组模板(插件 contributes,中文描述)。
 10. **信号连接视图**:场景侧 ✅ 已实现(2026-10-16,插件第四树 `godotlsp.connections`:parsers.ts `parseConnections` 纯解析四字段 + 缺字段警告呈现——引擎对缺字段硬拒载(engine-analyzer.md S1),视图即 AI 生成工程损坏连接的最早暴露点;`parseScene` 补 `nodePaths` 供端点子节点跳转;37 个 node:test 全绿)。脚本侧 `connect()` 调用扫描与 `@rpc` 列举待后续增量。

@@ -68,6 +68,27 @@
 - **附带健壮性修复**：completion 光标越界 clamp(`at.min(src.len())`)——此前超界 position 会导致切片 panic,catch_unwind 吞掉后**不回 Response**,客户端死等(smoke 实证)。hover/rename/highlight 走 position_to_offset 本有 Option 兜底,不受影响。
 - smoke 4e 段:didChangeConfiguration 推送 → fileWords/snippets 开关端到端生效。
 
+## P3.6 — 引擎数据面补齐（C6-C9,2026-10-16 立项,依据 lsp-design.md §6.9）
+
+> 上游全景:官方 GDScript LSP 在 `modules/gdscript/language_server/`(跑在编辑器进程内,TCP 6005;4.2+/3.6+ 支持 `--headless --lsp-port`),但其补全语义层是编辑器共用引擎 `GDScriptEditorLanguage::complete_code`(`gdscript_editor.cpp:3554`,18 个 CompletionContext)。我方定位仍是"零引擎依赖 + 内嵌模型",只借鉴数据契约,不外挂。
+>
+> **完整排期、差距量化、验收标准、来源治理见 `docs/completion-roadmap.md`**(本节目录):
+
+| 期 | 项 | 内容 | 状态 |
+|---|---|---|---|
+| P0 | V0 | 引擎补全 oracle harness(`corpus/godot-engine-tests/completion/` 140 可判定夹具 = 146 .gd − 6 .notest,量化基线) | ✅ 已实施(2026-10-17,基线 24/140;`tools/completion_oracle.py`) |
+| P1 | C6 | 模型层:RawApi 解析 signals 503/is_virtual 1437/builtin operators 等(附加式 serde);消费=信号入成员面、虚方法模型化(替代手维护 VIRTUALS 12 条)、函数 insertText `($1)` | 🔶 C6.4 函数 insertText 约定已落地(+3 夹具);C6.6 `Class.Enum.<|>` 枚举值面已落地;模型解析层由并发会话在建(signals 已见 EngineClass.signals) |
+| P1 | C7.3 | R4 回归止血:恢复 $/% 节点路径上下文(fa7d645 实现,22882f7 重写丢失) | ✅ 已落地(单测 + E2E:`$Panel/` 1808→0 项,取模不误伤) |
+| P2 | C7.1/C7.2 | 工程面:class_name/autoload 全局面 + `preload("res://` 路径补全(gdscript-project 已索引未消费) | 未实施 |
+| P3 | C8 | 注解参数面:slider/rpc/easing 手搬表 + 模型全局枚举 + docs 语料(oracle `argument_options/` 验收) | 未实施 |
+| P4 | C9 | snippet 对齐(插件 16→~40,`tools/fetch_snippets.py` pinned 双仓库)+ 官方 9 个 script_templates 入库备料 | 未实施 |
+
+> **oracle 首跑普查(2026-10-17)**:24/140;差距地图与 vacuous-pass 清单见
+> `docs/completion-roadmap.md` §3.6——其中 self 成员面 + 字符串上下文抑制(N1/N2)为
+> 证据最充分的新面(C10,设计后排期)。
+
+- **验收总则**:每项单测 + oracle 分桶 + smoke 断言;bench_load 基准不回退;实施后回本文件打勾。
+
 ## 负载基准 — 真实工程语料（2026-10-16 立项）
 
 - **语料**：`tools/fetch_bench.py`（pinned tarball 全量解出,不入库）拉取三个大型真实工程到 `corpus/bench/`——Pixelorama（249 .gd / 59,717 行 / 120 .tscn,唯一带 project.godot 的完整工程）、Dialogic（270 .gd / 35,202 行,插件仓库形态）、gdUnit4（235 .gd / 27,181 行）。合计 754 .gd / ~122,100 行。来源记录见 `corpus/README.md`。

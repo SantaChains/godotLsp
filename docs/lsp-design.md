@@ -177,3 +177,57 @@
 - **snippet**:能力经 `completionItem.snippetSupport` 协商;rust-analyzer 模式补全(pattern snippet)与 clangd 函数括号 snippet 均按客户端声明降级为纯文本。上下文感知(如 `func _` 后才出虚方法模板)靠服务端判断,比编辑器静态 snippet 文件精准。
 - **无现成 Godot API 频率数据集**:官方无遥测统计 API 使用频率;可行替代 = 构建期语料挖掘(godot-docs 代码块 + 上游测试语料,pinned commit 可复现),与既有 drift-table/fetch_corpus.py 模式同构。
 - **godotlsp 落地序**(P3,详见 capabilities-roadmap):sortText 分桶骨架 → snippet 面 → 本文件词条面 → 频率表 → 类型感知评分(前置 locals_at/类型推断)。**不做**:ML/LLM/ghost-text inline completion(零依赖 + 隐私定位冲突,Copilot 类职责不属 LSP)、postfix 补全(GDScript 无点链宏生态)。
+
+### 6.9 引擎内部补全数据源与官方 snippet 借鉴(2026-10-16 深挖,实施依据)
+
+**A. 官方引擎已有完整 LSP——但它不在引擎外,也不可复用为我们的运行时**(源码锚点:godotengine/godot master,2026-10 核验):
+
+- **协议层** `modules/gdscript/language_server/gdscript_language_protocol.cpp`:TCP JSON-RPC 服务,**跑在编辑器进程内**(`LSP_MAX_CLIENTS=8`、`LSP_MAX_BUFFER_SIZE=4MB`、Content-Length 分帧);端口 6005(Godot 4.x)/6008(3.x),开关在 EditorSettings `network/language_server/*`;Godot 3.6+/4.2+ 支持 `--headless --no-window --lsp-port <port>` 无头模式(官方 godot-vscode-plugin `ClientConnectionManager` 实证)。
+- **补全语义层不在 LSP 模块**,而在编辑器共用引擎 `GDScriptEditorLanguage::complete_code`(`gdscript_editor.cpp:3554`):LSP 路径 = `GDScriptWorkspace::completion` → `parser.get_text_for_completion(position)` → complete_code,并把**场景缓存 owner 节点**(`language_server/scene_cache.cpp`,didOpen/didClose 时按依赖图加载 .tscn)作 `p_owner` 传入——节点路径补全因此是"真场景树"而非文本猜测。
+- **18 个补全上下文**(`GDScriptParser::CompletionContext`):IDENTIFIER / METHOD / ATTRIBUTE / ATTRIBUTE_METHOD / SUBSCRIPT / TYPE_ATTRIBUTE / ASSIGN / CALL_ARGUMENTS / ANNOTATION / ANNOTATION_ARGUMENTS / BUILT_IN_TYPE_CONSTANT_OR_STATIC_METHOD / INHERIT_TYPE / TYPE_NAME(_OR_VOID) / PROPERTY_DECLARATION(_OR_TYPE) / PROPERTY_METHOD / OVERRIDE_METHOD / GET_NODE / RESOURCE_PATH / SUPER(_METHOD)。
+
+**B. 引擎内部可复用表(全部有源码锚点,均与 extension_api.json 同源或可手搬)**:
+
+- **虚方法表**:`COMPLETION_OVERRIDE_METHOD` 用 `ClassDB::get_virtual_methods(class_name)` 出带完整签名的 override 提示(静态另出 `_static_init`)——与 extension_api.json 方法字段 `is_virtual` **同源**(testdata 4.7.0 实测 1437 个虚方法)。
+- **关键字三表**(`gdscript_editor.cpp:1741-1773`):裸关键字(true/false/PI/TAU/INF/NAN/null/self/super/break/breakpoint/continue/pass/return)、带空格后缀(and/not/or/in/as/class/class_name/extends/is/func/signal/await/const/enum/static/var/if/elif/else/for/match/when/while)、带参数(assert/preload)。我方 KEYWORD_DOCS 已全覆盖(缺 true/false/null 三个字面量)。
+- **注解参数表**(`_find_annotation_arguments`,`gdscript_editor.cpp:1028`):`@export_range` 第 4 参 slider 串(or_greater/or_less/prefer_slider/hide_control/exp/radians_as_degrees/degrees/suffix:unit)、`@export_exp_easing`(attenuation/positive_only)、`@rpc`(mode/sync/transfer 三组 + 已用去重)、`@warning_ignore*`(GDScriptWarning 全名小写)、`@export_custom`(arg0=PropertyHint / arg2=PropertyUsageFlags 枚举)、`@export_node_path`(Node 全继承树 + 工程全局类)。
+- **内建静态面**:`Variant::get_constants_for_type` + `get_builtin_method_list`(仅静态)——builtin_classes.constants/methods 同源(我方已摄取)。
+- **全局面合成**(`_find_identifiers`):locals(含参数)→ 当前类成员(变量/常量/枚举/信号/函数/内部类)→ GDScriptUtilityFunctions 13 个编译器内建 → Variant 内建类型 → 关键字三表 → Variant utility functions 114 个 → autoload → ClassDB 全局映射(类/单例/常量)→ 全局枚举 → 工程全局类(class_name)。
+- **insertText 约定**:函数补全 `insert_text += "("`,display 追加 `(…)`/`()`;LSP 层按 `snippetSupport` 决定补 `"$1)"` 还是裁掉 `(`(上游 2026-03 commit 7ab735f 才补 closing-brace 模式——**我方 C2 只做了模板类 snippet,函数名括号 snippet 是缺口**)。
+- **工程/资源面**:`p_owner->get_argument_options("get_node", 0)`(场景实树 + autoload `/root/<名>`);`EditorFileSystem` 目录树补 res:// 路径;`dict[<|>` 对常量字典 property_list 出键。
+
+**C. 我方模型已在吞咽却丢弃的字段**(testdata `extension_api.json` = Godot 4.7.0 stable 实测):
+
+| 字段 | 规模 | 现状 | 用途 |
+|---|---|---|---|
+| `classes[].signals` | 503 条 | RawClass 未解析 | 接收者信号补全(引擎有,我方成员面缺) |
+| `methods[].is_virtual` | 1437 个 | RawFunction 未解析 | override 面模型化(替代手维护 VIRTUALS 12 条) |
+| `builtin_classes.operators/constructors/is_keyed/indexing_return_type` | — | 未解析 | 内建面完备性(运算符/构造/按键类型) |
+| `classes[].api_type`(NONE/CORE/EDITOR/EXTENSION) | — | 未解析 | editor-only 类过滤(可选) |
+| `is_refcounted` / `global_constants[].is_bitfield` / `header.version_full_name` | — | 未解析 | 语义标注 / 位域标志 / 版本展示 |
+
+> **2026-10-16 晚审计补记(以 `int` 为样本)**:语料 `gdd_1559_int.md` 的 Constructors/Constructor
+> Descriptions/Operators/Operator Descriptions 四区块**数据完整**(5 构造 + 64 运算符,与官方中文文档
+> 同构);但 `tools/gen_docs.py` 与 `hoverdata.json` 生成面**只解析 Description/Method/Property/
+> Enumerations**,904 个内建/类页零"构造函数/运算符"节——第二消费管线的缺口与 RawApi 丢弃同源。
+> 已升级为 `completion-roadmap.md` C6.5 工作面(a 模型解析 / b 文档生成 / c 构造补全+类型名 hover)。
+
+**D. 社区 snippet 源(可克隆,已核对内容)**:
+
+- **官方 godot-vscode-plugin `configurations/snippets.json`**(MIT,~45 条):ready/init/process/physics/input/**inpute2D/inpute3D**/uinput/draw/guii/for/if/while/func/match/signal/export/var/onready/is/in/gdscript/loadres/preloadres/**gs/vargetset**/xp/tween/wait。维护方 = Godot 官方组织。
+- **loyal-disloyal/gdscript-zed-snippets**(MIT,Zed 向,~45 条):**cn**(class_name)/**stfunc/stvar**/lamb/clamp/lerp/onvar/loadres/preloadres/**waitsec/waitframe**/**prwarn/prerr**/signal/sc/class——与我方多 IDE(zed/nvim/helix)定位直接相关。
+- **官方 script_templates**(`modules/gdscript/editor/script_templates/`,9 个:Node/CharacterBody2D/CharacterBody3D/EditorPlugin/EditorScenePostImport/EditorScript/Object/RichTextEffect/VisualShaderNodeCustom):`_BASE_`/`_TS_`/`%CLASS%` 占位 + `# meta-description` 头,`extends CharacterBody2D` 的 basic_movement 即出自此处。
+- **已过时勿用**:Calinou/godot-snippets(CC0,但是 Godot 3 API:instance()/get_node("StreamPlayer"))、Leleat/AGodotCodeSnippetPlugin(3.2 时代)。
+
+**E. R4 回归(诚实记录,非新设计)**:fa7d645 实现的 `$`/`%` 节点路径上下文抑制在 22882f7(R4 服务层重写)中丢失,gdscript-features-roadmap 第 7 项仍标 ✅,smoke 无覆盖——C7 一并修复并补回归测试。
+
+**F. godotlsp 设计(C6-C9,合理取舍)——排期与验收见 `docs/completion-roadmap.md`**:
+
+- **oracle 基建已建(2026-10-17,V0)**:`tools/completion_oracle.py` 对引擎自带 146 夹具跑 LSP 补全,分桶通过率 = 量化验收(基线 24/140)。C6.4(函数 `name(…)` label + `name($1)` insertText 约定)、C6.6(`Class.Enum.<|>` 枚举值面)、C7.3($/% 上下文抑制)已按本表落地;普查发现的 self 成员面/字符串上下文抑制(N1/N2)列入 C10,设计后排期。
+
+- **C6 模型层补齐**(gdscript-engine,附加式 serde,零行为风险):解析 signals / is_virtual / api_type / is_refcounted / is_bitfield / builtin operators+constructors+is_keyed+indexing_return_type / version_full_name;配套查询方法(类信号表、链上虚方法表)。消费侧:① 成员面补信号(kind Event,detail 带参数签名);② 函数补全 insertText `(` + display `(…)`,snippetSupport 时 `($1)`;③ `func _<|>` 虚方法面改**模型驱动**(沿 ancestor_chain 收 is_virtual,签名取模型),仅保留 9 个非 ClassDB 回调手表(_init/_notification/_get/_set/_to_string/_property_can_revert/_property_get_revert/_get_property_list/_validate_property)。
+- **C7 工程面接入**(godotlsp,数据已在 gdscript-project 索引,只补消费):① 全局面补 class_name + autoload(引擎同等行为,保留名去重扩面);② `preload("res://` / `load("res://` 字符串字面量内补全项目文件(scripts/scenes/resources + uid 映射,服务端按已输入路径前缀过滤);③ 恢复 $/% 节点路径上下文(镜像内核向后字节扫描,% 取模操作数启发式)+ smoke 回归。
+- **C8 注解参数面**:slider/rpc/easing 三张小表直接手搬(注明源码锚点);@warning_ignore* 名字取自 godot-docs `gdd_0310` 语料表;@export_custom 两参取模型全局枚举 PropertyHint/PropertyUsageFlags(实测在 22 个全局枚举内);@export_node_path 取 Node 继承树 + 工程 class_name。
+- **C9 snippet 对齐与官方模板入库**:以官方 vscode snippets + zed snippets 为基准,交叉核对现有 16 条插件 snippet 与 C2 模板,补齐高价值缺口(_input_event 2D/3D、inner class、is/in、loadres/preloadres、vargetset、cn、waitsec/waitframe、prwarn/prerr、stfunc/stvar、enum decl);官方 9 个 script_templates 入库 `editors/vscode/templates/`(MIT,pinned commit + fetch 更新脚本),为 features-roadmap 缺失项「类/文件模板」特性备料——按 vendoring 判据,产品特性素材必须入库(clone 即可用),未修改上游资产注明来源。
+- **明确不做**:① **不外挂 godot --headless LSP**:需用户自备引擎 + 全量 import(秒级)+ 编辑器缓存语义,违背"零引擎依赖"定位;只借鉴其数据契约(snippet 括号、kind 映射、scene cache 概念)。② **不移植 `_guess_*` 千行推断引擎**:现有 semantic + 模型覆盖务实面;类型未知时降级不出成员(与引擎行为一致)。③ **字典键补全**:需字面常量折叠,性价比低。④ **@export_tool_button 图标表**:编辑器主题数据,无头不可得。⑤ **不全文克隆引擎仓库**:目标文件 raw 拉取 + pinned 引用;复用表随消费点入库并注源。
+- **验收**:C6/C7/C8 各带单元测试 + smoke 断言(成员面含信号 / override 面签名正确 / class_name 全局面 / res:// 路径面 / `$Panel/` 回归);每阶段跑 bench_load 负载基准不回退;docs/lsp-engine-capabilities-roadmap.md 同步打勾。

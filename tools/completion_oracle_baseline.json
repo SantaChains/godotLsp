@@ -1,0 +1,3101 @@
+{
+ "generated_at": "2026-10-17 00:40:24",
+ "server": "D:\\LocalSend\\Files\\pro\\godotlsp\\target\\debug\\godotlsp.exe mtime=10-17 00:38",
+ "corpus": "corpus\\godot-engine-tests\\completion",
+ "summary": {
+  "pass": 24,
+  "fail": 116,
+  "error": 0,
+  "total": 140
+ },
+ "fixtures": {
+  "argument_options/connect.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "\"signal_a\""
+    },
+    {
+     "display": "\"child_entered_tree\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "argument_options/play_inferred.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "\"bounce\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "argument_options/play_typed.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "\"bounce\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "argument_options/play_untyped.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "\"bounce\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "argument_options/string_literals/add_node_path_tween.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "insert_text": "^\"property_of_a\""
+    },
+    {
+     "insert_text": "^\"name\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "argument_options/string_literals/add_node_path_tween_prepended.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "insert_text": "\"property_of_a\""
+    },
+    {
+     "insert_text": "\"name\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "argument_options/string_literals/add_string_name_input_event.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "insert_text": "&\"test_input_action\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "argument_options/string_literals/add_string_name_input_event_prepended.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "insert_text": "\"test_input_action\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "argument_options/string_literals/argument_options_inside_string_literal.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "insert_text": "\"property_of_a\""
+    },
+    {
+     "insert_text": "\"name\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "argument_options/string_literals/dont_add_node_path_tween.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "insert_text": "\"property_of_a\""
+    },
+    {
+     "insert_text": "\"name\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "argument_options/string_literals/dont_add_string_name_input_event.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "insert_text": "\"test_input_action\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "assignment_options/enum_attribute.gd": {
+   "status": "fail",
+   "n_items": 782,
+   "missing": [
+    {
+     "display": "new(…)"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "_has_point(…)",
+    "_structured_text_parser(…)",
+    "_get_maximum_size(…)",
+    "_get_minimum_size(…)",
+    "_get_tooltip(…)",
+    "_get_tooltip_auto_translate_mode_at(…)",
+    "_get_drag_data(…)",
+    "_can_drop_data(…)",
+    "_drop_data(…)",
+    "_make_custom_tooltip(…)",
+    "_get_cursor_shape(…)",
+    "_accessibility_get_contextual_info(…)"
+   ]
+  },
+  "assignment_options/enum_attribute_identifier.gd": {
+   "status": "fail",
+   "n_items": 782,
+   "missing": [
+    {
+     "display": "new(…)"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "_has_point(…)",
+    "_structured_text_parser(…)",
+    "_get_maximum_size(…)",
+    "_get_minimum_size(…)",
+    "_get_tooltip(…)",
+    "_get_tooltip_auto_translate_mode_at(…)",
+    "_get_drag_data(…)",
+    "_can_drop_data(…)",
+    "_drop_data(…)",
+    "_make_custom_tooltip(…)",
+    "_get_cursor_shape(…)",
+    "_accessibility_get_contextual_info(…)"
+   ]
+  },
+  "assignment_options/enum_identifier.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "Control.SIZE_EXPAND"
+    },
+    {
+     "display": "Control.SIZE_EXPAND_FILL"
+    },
+    {
+     "display": "Control.SIZE_FILL"
+    },
+    {
+     "display": "Control.SIZE_SHRINK_BEGIN"
+    },
+    {
+     "display": "Control.SIZE_SHRINK_CENTER"
+    },
+    {
+     "display": "Control.SIZE_SHRINK_END"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "assignment_options/enum_no_identifier.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "Control.SIZE_EXPAND"
+    },
+    {
+     "display": "Control.SIZE_EXPAND_FILL"
+    },
+    {
+     "display": "Control.SIZE_FILL"
+    },
+    {
+     "display": "Control.SIZE_SHRINK_BEGIN"
+    },
+    {
+     "display": "Control.SIZE_SHRINK_CENTER"
+    },
+    {
+     "display": "Control.SIZE_SHRINK_END"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "builtin_enum/builtin_enum_autocomplete.gd": {
+   "status": "pass",
+   "n_items": 826,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "_pressed(…)",
+    "_toggled(…)",
+    "set_pressed(…)",
+    "is_pressed(…)",
+    "set_pressed_no_signal(…)",
+    "is_hovered(…)",
+    "set_toggle_mode(…)",
+    "is_toggle_mode(…)",
+    "set_shortcut_in_tooltip(…)",
+    "is_shortcut_in_tooltip_enabled(…)",
+    "set_disabled(…)",
+    "is_disabled(…)"
+   ]
+  },
+  "builtin_enum/builtin_enum_in_type_hint.gd": {
+   "status": "pass",
+   "n_items": 826,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "_pressed(…)",
+    "_toggled(…)",
+    "set_pressed(…)",
+    "is_pressed(…)",
+    "set_pressed_no_signal(…)",
+    "is_hovered(…)",
+    "set_toggle_mode(…)",
+    "is_toggle_mode(…)",
+    "set_shortcut_in_tooltip(…)",
+    "is_shortcut_in_tooltip_enabled(…)",
+    "set_disabled(…)",
+    "is_disabled(…)"
+   ]
+  },
+  "builtin_enum/builtin_enum_no_autocomplete_on_value_explicit_metatype.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "builtin_enum/builtin_enum_no_autocomplete_on_value_inferred_metatype.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "builtin_enum/builtin_enum_values_autocompletion.gd": {
+   "status": "pass",
+   "n_items": 5,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "HEURISTIC_EUCLIDEAN",
+    "HEURISTIC_MANHATTAN",
+    "HEURISTIC_OCTILE",
+    "HEURISTIC_CHEBYSHEV",
+    "HEURISTIC_MAX"
+   ]
+  },
+  "common/assign_local_variant.gd": {
+   "status": "pass",
+   "n_items": 105,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "pack(…)",
+    "instantiate(…)",
+    "can_instantiate(…)",
+    "get_state(…)",
+    "GenEditState",
+    "GEN_EDIT_STATE_DISABLED",
+    "GEN_EDIT_STATE_INSTANCE",
+    "GEN_EDIT_STATE_MAIN",
+    "GEN_EDIT_STATE_MAIN_INHERITED",
+    "_setup_local_to_scene(…)",
+    "_get_rid(…)",
+    "_reset_state(…)"
+   ]
+  },
+  "common/identifiers_in_call.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    },
+    {
+     "display": "test_signal_1"
+    },
+    {
+     "display": "test_signal_2"
+    },
+    {
+     "display": "test_var_1"
+    },
+    {
+     "display": "test_var_2"
+    },
+    {
+     "display": "test_func_1(…)"
+    },
+    {
+     "display": "test_func_2(…)"
+    },
+    {
+     "display": "test_parameter_1"
+    },
+    {
+     "display": "test_parameter_2"
+    },
+    {
+     "display": "local_test_var_1"
+    },
+    {
+     "display": "local_test_var_2"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "common/identifiers_in_function_body.gd": {
+   "status": "fail",
+   "n_items": 1812,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    },
+    {
+     "display": "test_signal_1"
+    },
+    {
+     "display": "test_signal_2"
+    },
+    {
+     "display": "test_var_1"
+    },
+    {
+     "display": "test_var_2"
+    },
+    {
+     "display": "test_func_1(…)"
+    },
+    {
+     "display": "test_func_2(…)"
+    },
+    {
+     "display": "test_parameter_1"
+    },
+    {
+     "display": "test_parameter_2"
+    },
+    {
+     "display": "local_test_var_1"
+    },
+    {
+     "display": "local_test_var_2"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "common/identifiers_in_unclosed_call.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    },
+    {
+     "display": "test_signal_1"
+    },
+    {
+     "display": "test_signal_2"
+    },
+    {
+     "display": "test_var_1"
+    },
+    {
+     "display": "test_var_2"
+    },
+    {
+     "display": "test_func_1(…)"
+    },
+    {
+     "display": "test_func_2(…)"
+    },
+    {
+     "display": "test_parameter_1"
+    },
+    {
+     "display": "test_parameter_2"
+    },
+    {
+     "display": "local_test_var_1"
+    },
+    {
+     "display": "local_test_var_2"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "common/infer_return_type_without_value.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "begins_with(…)"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "common/invalid_super_call_1.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "func_of_a()"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "common/invalid_super_call_2.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "func_of_a()"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "common/no_completion_in_string.gd": {
+   "status": "pass",
+   "n_items": 1808,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "common/no_constructor_abstract_inner_class.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "common/no_constructor_abstract_native.gd": {
+   "status": "pass",
+   "n_items": 429,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "_draw(…)",
+    "get_canvas_item(…)",
+    "set_visible(…)",
+    "is_visible(…)",
+    "is_visible_in_tree(…)",
+    "show(…)",
+    "hide(…)",
+    "queue_redraw(…)",
+    "move_to_front(…)",
+    "set_as_top_level(…)",
+    "is_set_as_top_level(…)",
+    "set_light_mask(…)"
+   ]
+  },
+  "common/no_constructor_abstract_script.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "common/no_constructor_global_singleton.gd": {
+   "status": "pass",
+   "n_items": 106,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "set_physics_ticks_per_second(…)",
+    "get_physics_ticks_per_second(…)",
+    "set_max_physics_steps_per_frame(…)",
+    "get_max_physics_steps_per_frame(…)",
+    "set_physics_jitter_fix(…)",
+    "get_physics_jitter_fix(…)",
+    "get_physics_interpolation_fraction(…)",
+    "set_max_fps(…)",
+    "get_max_fps(…)",
+    "set_time_scale(…)",
+    "get_time_scale(…)",
+    "get_frames_drawn(…)"
+   ]
+  },
+  "common/no_constructor_inner_class_extends_abstract_native.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "common/no_constructor_script_extends_abstract_native.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "common/override_function_abstract.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "test(x: int) -> void:",
+     "insert_text": "test(x: int) -> void:"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "common/override_function_full_name.gd": {
+   "status": "fail",
+   "n_items": 1810,
+   "missing": [
+    {
+     "display": "_get(property: StringName) -> Variant:"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "common/override_function_no_underscore.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "func_of_a():"
+    },
+    {
+     "display": "func_of_a_args(a: int):"
+    },
+    {
+     "display": "func_of_a_callable(call := func():\n\tvar x_of_a = 10):"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "common/override_function_static.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "_static_init() -> void:"
+    },
+    {
+     "display": "func_of_a_static():"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "common/override_function_underscore.gd": {
+   "status": "fail",
+   "n_items": 1809,
+   "missing": [
+    {
+     "display": "_func_of_a_underscore():"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "common/self.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    },
+    {
+     "display": "test_signal_1"
+    },
+    {
+     "display": "test_signal_2"
+    },
+    {
+     "display": "test_var_1"
+    },
+    {
+     "display": "test_var_2"
+    },
+    {
+     "display": "test_func_1(…)"
+    },
+    {
+     "display": "test_func_2(…)"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/lua_key_2.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/lua_value_1.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/lua_value_2.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "VALUE"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/lua_value_3.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/lua_value_4.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "VALUE"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/lua_value_5.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/py_key_1.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/py_key_2.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/py_key_3.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "VALUE"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/py_key_4.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/py_value_1.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/py_value_2.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "VALUE"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_dictionary/py_value_3.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_match/in_branch_1.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_match/in_branch_2.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "VALUE"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_match/in_branch_3.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "VALUE"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_match/in_test_1.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_match/in_test_2.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "VALUE"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_match/in_test_3.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AUTO_TRANSLATE_MODE_INHERIT"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "enum_values_in_match/in_test_4.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "VALUE"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "extends/extends_inherited_inner_class.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "InnerClassA"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "extends/extends_self.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "InnerClassA"
+    },
+    {
+     "display": "InnerClassB"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "filter/organized_export.gd": {
+   "status": "pass",
+   "n_items": 1812,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "filter/usage_internal.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/literal/dollar.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/literal/percent.gd": {
+   "status": "fail",
+   "n_items": 422,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "animation_set_next(…)",
+    "animation_get_next(…)",
+    "set_blend_time(…)",
+    "get_blend_time(…)",
+    "set_default_blend_time(…)",
+    "get_default_blend_time(…)",
+    "set_auto_capture(…)",
+    "is_auto_capture(…)",
+    "set_auto_capture_duration(…)",
+    "get_auto_capture_duration(…)",
+    "set_auto_capture_transition_type(…)",
+    "get_auto_capture_transition_type(…)"
+   ]
+  },
+  "get_node/literal_scene/dollar_class_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/literal_scene/dollar_native_scene.gd": {
+   "status": "fail",
+   "n_items": 422,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "animation_changed"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "animation_set_next(…)",
+    "animation_get_next(…)",
+    "set_blend_time(…)",
+    "get_blend_time(…)",
+    "set_default_blend_time(…)",
+    "get_default_blend_time(…)",
+    "set_auto_capture(…)",
+    "is_auto_capture(…)",
+    "set_auto_capture_duration(…)",
+    "get_auto_capture_duration(…)",
+    "set_auto_capture_transition_type(…)",
+    "get_auto_capture_transition_type(…)"
+   ]
+  },
+  "get_node/literal_scene/dollar_unique.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "%UniqueA"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/literal_scene/percent_class_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/literal_scene/percent_native_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "autoplay"
+    },
+    {
+     "display": "play(…)"
+    },
+    {
+     "display": "animation_changed"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/local/local.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/local_inferred/local_inferred.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/local_inferred_scene/class_local_inferred_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/local_inferred_scene/native_local_inferred_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "autoplay"
+    },
+    {
+     "display": "play(…)"
+    },
+    {
+     "display": "animation_changed"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/local_scene/class_local_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/local_scene/native_local_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "autoplay"
+    },
+    {
+     "display": "play(…)"
+    },
+    {
+     "display": "animation_changed"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/local_typehint/class_local_typehint.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/local_typehint/native_local_typehint.gd": {
+   "status": "fail",
+   "n_items": 422,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "animation_changed"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "animation_set_next(…)",
+    "animation_get_next(…)",
+    "set_blend_time(…)",
+    "get_blend_time(…)",
+    "set_default_blend_time(…)",
+    "get_default_blend_time(…)",
+    "set_auto_capture(…)",
+    "is_auto_capture(…)",
+    "set_auto_capture_duration(…)",
+    "get_auto_capture_duration(…)",
+    "set_auto_capture_transition_type(…)",
+    "get_auto_capture_transition_type(…)"
+   ]
+  },
+  "get_node/local_typehint_scene/class_local_typehint_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/local_typehint_scene/native_local_typehint_scene.gd": {
+   "status": "fail",
+   "n_items": 422,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "animation_changed"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "animation_set_next(…)",
+    "animation_get_next(…)",
+    "set_blend_time(…)",
+    "get_blend_time(…)",
+    "set_default_blend_time(…)",
+    "get_default_blend_time(…)",
+    "set_auto_capture(…)",
+    "is_auto_capture(…)",
+    "set_auto_capture_duration(…)",
+    "get_auto_capture_duration(…)",
+    "set_auto_capture_transition_type(…)",
+    "get_auto_capture_transition_type(…)"
+   ]
+  },
+  "get_node/local_typehint_scene_incompatible/class_local_typehint_scene_incompatible.gd": {
+   "status": "fail",
+   "n_items": 581,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "get_overlapping_areas()"
+    },
+    {
+     "display": "area_entered"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "set_gravity_space_override_mode(…)",
+    "get_gravity_space_override_mode(…)",
+    "set_gravity_is_point(…)",
+    "is_gravity_a_point(…)",
+    "set_gravity_point_unit_distance(…)",
+    "get_gravity_point_unit_distance(…)",
+    "set_gravity_point_center(…)",
+    "get_gravity_point_center(…)",
+    "set_gravity_direction(…)",
+    "get_gravity_direction(…)",
+    "set_gravity(…)",
+    "get_gravity(…)"
+   ]
+  },
+  "get_node/local_typehint_scene_incompatible/native_local_typehint_scene_incompatible.gd": {
+   "status": "fail",
+   "n_items": 581,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "get_overlapping_areas()"
+    },
+    {
+     "display": "area_entered"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "set_gravity_space_override_mode(…)",
+    "get_gravity_space_override_mode(…)",
+    "set_gravity_is_point(…)",
+    "is_gravity_a_point(…)",
+    "set_gravity_point_unit_distance(…)",
+    "get_gravity_point_unit_distance(…)",
+    "set_gravity_point_center(…)",
+    "get_gravity_point_center(…)",
+    "set_gravity_direction(…)",
+    "get_gravity_direction(…)",
+    "set_gravity(…)",
+    "get_gravity(…)"
+   ]
+  },
+  "get_node/member/member.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/member_inferred/member_inferred.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/member_inferred_scene/class_member_inferred_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/member_inferred_scene/native_member_inferred_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "autoplay"
+    },
+    {
+     "display": "play(…)"
+    },
+    {
+     "display": "animation_changed"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/member_scene/class_member_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/member_scene/native_member_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "autoplay"
+    },
+    {
+     "display": "play(…)"
+    },
+    {
+     "display": "animation_changed"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/member_typehint/class_member_typehint.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/member_typehint/native_member_typehint.gd": {
+   "status": "fail",
+   "n_items": 422,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "animation_changed"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "animation_set_next(…)",
+    "animation_get_next(…)",
+    "set_blend_time(…)",
+    "get_blend_time(…)",
+    "set_default_blend_time(…)",
+    "get_default_blend_time(…)",
+    "set_auto_capture(…)",
+    "is_auto_capture(…)",
+    "set_auto_capture_duration(…)",
+    "get_auto_capture_duration(…)",
+    "set_auto_capture_transition_type(…)",
+    "get_auto_capture_transition_type(…)"
+   ]
+  },
+  "get_node/member_typehint_scene/class_member_typehint_scene.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "get_node/member_typehint_scene/native_member_typehint_scene.gd": {
+   "status": "fail",
+   "n_items": 422,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "animation_changed"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "animation_set_next(…)",
+    "animation_get_next(…)",
+    "set_blend_time(…)",
+    "get_blend_time(…)",
+    "set_default_blend_time(…)",
+    "get_default_blend_time(…)",
+    "set_auto_capture(…)",
+    "is_auto_capture(…)",
+    "set_auto_capture_duration(…)",
+    "get_auto_capture_duration(…)",
+    "set_auto_capture_transition_type(…)",
+    "get_auto_capture_transition_type(…)"
+   ]
+  },
+  "get_node/member_typehint_scene_broad/class_member_typehint_scene_broad.gd": {
+   "status": "fail",
+   "n_items": 287,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "_process(…)",
+    "_physics_process(…)",
+    "_enter_tree(…)",
+    "_exit_tree(…)",
+    "_ready(…)",
+    "_get_configuration_warnings(…)",
+    "_get_accessibility_configuration_warnings(…)",
+    "_input(…)",
+    "_shortcut_input(…)",
+    "_unhandled_input(…)",
+    "_unhandled_key_input(…)",
+    "_get_focused_accessibility_element(…)"
+   ]
+  },
+  "get_node/member_typehint_scene_broad/native_member_typehint_scene_broad.gd": {
+   "status": "fail",
+   "n_items": 287,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "_process(…)",
+    "_physics_process(…)",
+    "_enter_tree(…)",
+    "_exit_tree(…)",
+    "_ready(…)",
+    "_get_configuration_warnings(…)",
+    "_get_accessibility_configuration_warnings(…)",
+    "_input(…)",
+    "_shortcut_input(…)",
+    "_unhandled_input(…)",
+    "_unhandled_key_input(…)",
+    "_get_focused_accessibility_element(…)"
+   ]
+  },
+  "get_node/member_typehint_scene_incompatible/class_member_typehint_scene_incompatible.gd": {
+   "status": "fail",
+   "n_items": 581,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "get_overlapping_areas()"
+    },
+    {
+     "display": "area_entered"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "set_gravity_space_override_mode(…)",
+    "get_gravity_space_override_mode(…)",
+    "set_gravity_is_point(…)",
+    "is_gravity_a_point(…)",
+    "set_gravity_point_unit_distance(…)",
+    "get_gravity_point_unit_distance(…)",
+    "set_gravity_point_center(…)",
+    "get_gravity_point_center(…)",
+    "set_gravity_direction(…)",
+    "get_gravity_direction(…)",
+    "set_gravity(…)",
+    "get_gravity(…)"
+   ]
+  },
+  "get_node/member_typehint_scene_incompatible/native_member_typehint_scene_incompatible.gd": {
+   "status": "fail",
+   "n_items": 581,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "get_overlapping_areas()"
+    },
+    {
+     "display": "area_entered"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "set_gravity_space_override_mode(…)",
+    "get_gravity_space_override_mode(…)",
+    "set_gravity_is_point(…)",
+    "is_gravity_a_point(…)",
+    "set_gravity_point_unit_distance(…)",
+    "get_gravity_point_unit_distance(…)",
+    "set_gravity_point_center(…)",
+    "get_gravity_point_center(…)",
+    "set_gravity_direction(…)",
+    "get_gravity_direction(…)",
+    "set_gravity(…)",
+    "get_gravity(…)"
+   ]
+  },
+  "global_enum/global_enum_identifier.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "Key"
+    },
+    {
+     "display": "KeyLocation"
+    },
+    {
+     "display": "Error"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "global_enum/global_enum_in_extends.gd": {
+   "status": "pass",
+   "n_items": 1808,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "global_enum/global_enum_in_type_hint.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "Key"
+    },
+    {
+     "display": "KeyLocation"
+    },
+    {
+     "display": "Error"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "global_enum/global_enum_no_autocomplete_on_value_explicit_metatype.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "global_enum/global_enum_no_autocomplete_on_value_inferred_metatype.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "global_enum/global_enum_values.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "KEY_A"
+    },
+    {
+     "display": "KEY_B"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "index/array_type.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "outer"
+    },
+    {
+     "display": "inner"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "index/array_value.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "outer"
+    },
+    {
+     "display": "inner"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "index/const_dictionary_keys.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "\"key1\""
+    },
+    {
+     "display": "\"key2\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "index/dictionary_type.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "outer"
+    },
+    {
+     "display": "inner"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "index/dictionary_value.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "outer"
+    },
+    {
+     "display": "inner"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "index/local_dictionary_keys.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "\"key1\""
+    },
+    {
+     "display": "\"key2\""
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "index/property_dictionary_keys.gd": {
+   "status": "pass",
+   "n_items": 1808,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "index/untyped_local.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "outer"
+    },
+    {
+     "display": "inner"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "index/untyped_property.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "outer"
+    },
+    {
+     "display": "inner"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "no_parenthesis_when_callable_is_expected/builtin_complete_braces.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "hello_world",
+     "insert_text": "hello_world"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "no_parenthesis_when_callable_is_expected/builtin_incomplete_braces.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "hello_world",
+     "insert_text": "hello_world"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "no_parenthesis_when_callable_is_expected/lambda_body.gd": {
+   "status": "pass",
+   "n_items": 1808,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "no_parenthesis_when_callable_is_expected/lambda_parameter.gd": {
+   "status": "pass",
+   "n_items": 1808,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "no_parenthesis_when_callable_is_expected/local_method_callable_arg_0.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "hello_world",
+     "insert_text": "hello_world"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "no_parenthesis_when_callable_is_expected/local_method_callable_arg_1.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "hello_world",
+     "insert_text": "hello_world"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "no_parenthesis_when_callable_is_expected/local_method_variant_arg_0.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "hello_world()",
+     "insert_text": "hello_world()"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "no_parenthesis_when_callable_is_expected/native.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "hello_world",
+     "insert_text": "hello_world"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "script_enum/script_enum_no_autocomplete_on_value_explicit_metatype.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/hints/index_0.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "A"
+    },
+    {
+     "display": "B"
+    },
+    {
+     "display": "LocalInnerClass"
+    },
+    {
+     "display": "LocalInnerEnum"
+    },
+    {
+     "display": "ConnectFlags"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "types/hints/index_0_inner_class.gd": {
+   "status": "fail",
+   "n_items": 1808,
+   "missing": [
+    {
+     "display": "A"
+    },
+    {
+     "display": "AInner"
+    },
+    {
+     "display": "B"
+    },
+    {
+     "display": "LocalInnerClass"
+    },
+    {
+     "display": "LocalInnerInnerClass"
+    },
+    {
+     "display": "LocalInnerEnum"
+    },
+    {
+     "display": "LocalInnerInnerEnum"
+    },
+    {
+     "display": "ConnectFlags"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
+  "types/hints/index_1_global_class.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "InnerB"
+    },
+    {
+     "display": "EnumOfB"
+    },
+    {
+     "display": "ConnectFlags"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/hints/index_1_local_class.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "InnerInnerClass"
+    },
+    {
+     "display": "InnerInnerEnum"
+    },
+    {
+     "display": "ConnectFlags"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/hints/index_1_local_enum.gd": {
+   "status": "pass",
+   "n_items": 0,
+   "missing": [],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/hints/index_1_preload.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "InnerA"
+    },
+    {
+     "display": "EnumOfA"
+    },
+    {
+     "display": "ConnectFlags"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/hints/index_2.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "AInnerInner"
+    },
+    {
+     "display": "InnerInnerInnerEnum"
+    },
+    {
+     "display": "InnerInnerInnerClass"
+    },
+    {
+     "display": "ConnectFlags"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/local/inferred.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/local/no_type/builtin_type.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "begins_with(…)"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/local/no_type/gdscript_utility_function.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "begins_with(…)"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/local/no_type/script.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/local/typehint.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/local/typehint_broad.gd": {
+   "status": "fail",
+   "n_items": 287,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "_process(…)",
+    "_physics_process(…)",
+    "_enter_tree(…)",
+    "_exit_tree(…)",
+    "_ready(…)",
+    "_get_configuration_warnings(…)",
+    "_get_accessibility_configuration_warnings(…)",
+    "_input(…)",
+    "_shortcut_input(…)",
+    "_unhandled_input(…)",
+    "_unhandled_key_input(…)",
+    "_get_focused_accessibility_element(…)"
+   ]
+  },
+  "types/local/typehint_incompatible.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/member/inferred.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/member/no_type.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/member/typehint.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  },
+  "types/member/typehint_broad.gd": {
+   "status": "fail",
+   "n_items": 287,
+   "missing": [
+    {
+     "display": "child_entered_tree"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "_process(…)",
+    "_physics_process(…)",
+    "_enter_tree(…)",
+    "_exit_tree(…)",
+    "_ready(…)",
+    "_get_configuration_warnings(…)",
+    "_get_accessibility_configuration_warnings(…)",
+    "_input(…)",
+    "_shortcut_input(…)",
+    "_unhandled_input(…)",
+    "_unhandled_key_input(…)",
+    "_get_focused_accessibility_element(…)"
+   ]
+  },
+  "types/member/typehint_incompatible.gd": {
+   "status": "fail",
+   "n_items": 0,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    }
+   ],
+   "illegal": [],
+   "labels_head": []
+  }
+ }
+}
