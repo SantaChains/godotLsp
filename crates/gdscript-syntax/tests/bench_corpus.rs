@@ -46,10 +46,9 @@ fn walk(dir: &std::path::Path, f: &mut dyn FnMut(&std::path::Path, &str)) {
         let p = e.path();
         if p.is_dir() {
             walk(&p, f);
-        } else if p.extension().map(|x| x == "gd").unwrap_or(false) {
-            if let Ok(s) = std::fs::read_to_string(&p) {
+        } else if p.extension().map(|x| x == "gd").unwrap_or(false)
+            && let Ok(s) = std::fs::read_to_string(&p) {
                 f(&p, &s);
             }
-        }
     }
 }

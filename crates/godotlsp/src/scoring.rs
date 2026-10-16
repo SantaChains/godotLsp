@@ -143,6 +143,8 @@ mod tests {
     }
 
     #[test]
+    // 常量排序是刻意钉死的带序契约(文档性断言),非计算结果。
+    #[allow(clippy::assertions_on_constants)]
     fn fuzzy_empty_prefix_is_neutral() {
         assert_eq!(fuzzy("", "anything"), band::NEUTRAL);
         // 中性分低于一切匹配带、高于不匹配——空前缀时桶序纯净主导。

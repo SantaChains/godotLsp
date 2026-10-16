@@ -487,9 +487,9 @@ fn inject_structure(raw: Vec<Token>, src: &str, cont: &HashSet<u32>) -> Vec<Toke
                         break;
                     }
                 }
-            } else if had && depth > 0 {
-                if let Some((base, header_ind, stack)) = lambda.as_mut() {
-                    if depth == *base {
+            } else if had && depth > 0
+                && let Some((base, header_ind, stack)) = lambda.as_mut()
+                    && depth == *base {
                         // lambda 体块行:按体缩进栈注入。
                         // 闭括号行(RParen 等)无条件终结体——闭括号的缩进
                         // 在真实工程里可以是任意值(常与体对齐)。
@@ -536,8 +536,6 @@ fn inject_structure(raw: Vec<Token>, src: &str, cont: &HashSet<u32>) -> Vec<Toke
                         }
                     }
                     // depth > base:lambda 体内嵌套括号的续行,不注入。
-                }
-            }
         }
         prev_line = Some(tok.line);
         match tok.kind {

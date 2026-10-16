@@ -193,11 +193,10 @@ fn main() {
     }
     if let Some(folders) = &initialize_params.workspace_folders {
         for f in folders {
-            if let Some(p) = url_to_path(&f.uri) {
-                if !scan_roots.iter().any(|e| e == &p) {
+            if let Some(p) = url_to_path(&f.uri)
+                && !scan_roots.iter().any(|e| e == &p) {
                     scan_roots.push(p);
                 }
-            }
         }
     }
 
@@ -295,6 +294,9 @@ fn main() {
         let project = project_arc;
         loop {
             let Ok((uri, src)) = recv.recv() else { break };
+            // lsp_types::Uri 内部含可变性,clippy 误报 mutable_key_type;
+            // 此处只做插入/覆盖合并不读 key,合入后不再改动 key,安全。
+            #[allow(clippy::mutable_key_type)]
             let mut batch: HashMap<Uri, String> = HashMap::new();
             batch.insert(uri, src);
             while let Ok((u, s)) = recv.recv_timeout(std::time::Duration::from_millis(150)) {
@@ -1196,6 +1198,9 @@ fn class_members(engine: &EngineApi, class: &str, snippet_support: bool) -> Vec<
 // ───────────────────────── documentSymbol ─────────────────────────
 
 /// 侧边栏符号树：把文件顶层声明转成嵌套 DocumentSymbol。
+// lsp-types 0.97 将 DocumentSymbol/SymbolInformation 的 deprecated 字段标废但未删除,
+// 且结构体无 Default——构造仍需显式 `deprecated: None`。
+#[allow(deprecated)]
 fn document_symbols(state: &State, p: &DocumentSymbolParams) -> Vec<DocumentSymbol> {
     let uri = &p.text_document.uri;
     let Some(src) = state.docs.get(uri) else {
@@ -1233,6 +1238,7 @@ fn stmts_symbols(src: &str, body: &[Stmt]) -> Vec<DocumentSymbol> {
     }).collect()
 }
 
+#[allow(deprecated)]
 fn func_symbol(src: &str, f: &FuncDecl) -> DocumentSymbol {
     let params = f.params.iter().map(|p| p.name.name.clone()).collect::<Vec<_>>().join(", ");
     let ret = f.ret_ty.as_ref().map(|r| format!(" -> {}", expr_to_text(src, r))).unwrap_or_default();
@@ -1248,6 +1254,7 @@ fn func_symbol(src: &str, f: &FuncDecl) -> DocumentSymbol {
     }
 }
 
+#[allow(deprecated)]
 fn var_symbol(src: &str, v: &VarDecl) -> DocumentSymbol {
     let ty = v.ty.as_ref().map(|t| format!(": {}", expr_to_text(src, t))).unwrap_or_default();
     DocumentSymbol {
@@ -1262,6 +1269,7 @@ fn var_symbol(src: &str, v: &VarDecl) -> DocumentSymbol {
     }
 }
 
+#[allow(deprecated)]
 fn const_symbol(src: &str, c: &ConstDecl) -> DocumentSymbol {
     DocumentSymbol {
         name: c.name.name.clone(),
@@ -1275,6 +1283,7 @@ fn const_symbol(src: &str, c: &ConstDecl) -> DocumentSymbol {
     }
 }
 
+#[allow(deprecated)]
 fn signal_symbol(src: &str, s: &SignalDecl) -> DocumentSymbol {
     let params = s.params.iter().map(|p| p.name.name.clone()).collect::<Vec<_>>().join(", ");
     DocumentSymbol {
@@ -1289,6 +1298,7 @@ fn signal_symbol(src: &str, s: &SignalDecl) -> DocumentSymbol {
     }
 }
 
+#[allow(deprecated)]
 fn enum_symbol(src: &str, e: &EnumDecl) -> DocumentSymbol {
     let children: Vec<DocumentSymbol> = e.entries.iter().map(|(ident, _)| DocumentSymbol {
         name: ident.name.clone(),
@@ -1312,6 +1322,7 @@ fn enum_symbol(src: &str, e: &EnumDecl) -> DocumentSymbol {
     }
 }
 
+#[allow(deprecated)]
 fn class_symbol(src: &str, c: &ClassDecl) -> DocumentSymbol {
     DocumentSymbol {
         name: c.name.name.clone(),
@@ -1483,9 +1494,9 @@ fn goto_definition(state: &State, p: &GotoDefinitionParams) -> Option<GotoDefini
 
     // 3. 引擎类/内建/全局函数/单例/常量 → 本地文档站 URL（§8.4-1 修正）。
     let real = |b: &str| state.real_lower.contains(b);
-    let doc_url: Option<String> = if state.engine.class_by_name(&word).is_some() {
-        Some(doclinks::class_url(&word, real))
-    } else if state.engine.builtin_by_name(&word).is_some() {
+    let doc_url: Option<String> = if state.engine.class_by_name(&word).is_some()
+        || state.engine.builtin_by_name(&word).is_some()
+    {
         Some(doclinks::class_url(&word, real))
     } else if state.engine.utility_function(&word).is_some() {
         Some(doclinks::member_url("@GlobalScope", &word, false, real))
@@ -1554,6 +1565,7 @@ fn collect_word(src: &str, word: &str, uri: &Uri, out: &mut Vec<Location>) {
     }
 }
 
+#[allow(deprecated)]
 fn workspace_symbol(state: &State, query: &str) -> Vec<SymbolInformation> {
     let mut syms = Vec::new();
     if let (Some(proj), Some(root)) = (&state.project, &state.root) {
@@ -1697,15 +1709,14 @@ fn document_color(state: &State, p: &DocumentColorParams) -> Vec<ColorInformatio
                     }
                 } else if let Some(rest) = after.strip_prefix('(') {
                     // Color( 构造调用
-                    if let Some(close) = rest.find(')') {
-                        if let Some(rgba) = parse_color_args(&rest[..close]) {
+                    if let Some(close) = rest.find(')')
+                        && let Some(rgba) = parse_color_args(&rest[..close]) {
                             let end = i + 5 + 1 + close + 1;
                             out.push(ColorInformation {
                                 range: offset_range(src, i, end),
                                 color: Color { red: rgba[0], green: rgba[1], blue: rgba[2], alpha: rgba[3] },
                             });
                         }
-                    }
                 }
             }
             i += 5;
@@ -1855,10 +1866,13 @@ fn rename(state: &State, p: &RenameParams) -> Result<WorkspaceEdit, String> {
         return Err(format!("\"{}\" 与引擎/语言保留名冲突", p.new_name));
     }
 
+    // 同上:Uri 作 key 的 mutable_key_type 为 lsp-types 内部表示误报。
+    #[allow(clippy::mutable_key_type)]
     let mut changes: HashMap<Uri, Vec<TextEdit>> = HashMap::new();
     // 打开文档：以编辑器缓冲（state.docs）为准。
     let self_path = url::Url::parse(uri.as_str()).ok().and_then(|u| u.to_file_path().ok());
-    let mut push_edits = |text: &str, u: &Uri, changes: &mut HashMap<Uri, Vec<TextEdit>>| {
+    #[allow(clippy::mutable_key_type)]
+    let push_edits = |text: &str, u: &Uri, changes: &mut HashMap<Uri, Vec<TextEdit>>| {
         let edits: Vec<TextEdit> = collect_spans(text, &old)
             .into_iter()
             .map(|(s, e)| TextEdit { range: offset_range(text, s, e), new_text: p.new_name.clone() })
@@ -2108,7 +2122,7 @@ fn compute_semantic_tokens(src: &str) -> SemanticTokens {
     }
 
     // 按 (line, col) 排序后做相对增量编码（LSP 要求）。
-    rows.sort_by(|a, b| (a.0, a.1).cmp(&(b.0, b.1)));
+    rows.sort_by_key(|a| (a.0, a.1));
     let mut data = Vec::with_capacity(rows.len());
     let mut prev_line = 0u32;
     let mut prev_col = 0u32;
@@ -2319,13 +2333,12 @@ fn percent_decode(s: &str) -> String {
     let mut out: Vec<u8> = Vec::with_capacity(bytes.len());
     let mut i = 0;
     while i < bytes.len() {
-        if bytes[i] == b'%' && i + 2 < bytes.len() {
-            if let (Some(h), Some(l)) = (hex_val(bytes[i + 1]), hex_val(bytes[i + 2])) {
+        if bytes[i] == b'%' && i + 2 < bytes.len()
+            && let (Some(h), Some(l)) = (hex_val(bytes[i + 1]), hex_val(bytes[i + 2])) {
                 out.push((h << 4) | l);
                 i += 3;
                 continue;
             }
-        }
         out.push(bytes[i]);
         i += 1;
     }
@@ -2441,7 +2454,7 @@ fn file_words(src: &str, cursor: usize) -> (Vec<String>, Vec<(String, u32)>) {
             break;
         }
         let t = line.trim_start();
-        let mut push = |name: &str, locals: &mut Vec<String>, seen: &mut std::collections::HashSet<String>| {
+        let push = |name: &str, locals: &mut Vec<String>, seen: &mut std::collections::HashSet<String>| {
             if !name.is_empty()
                 && (name.as_bytes()[0].is_ascii_alphabetic() || name.as_bytes()[0] == b'_')
                 && seen.insert(name.to_string())
@@ -2578,6 +2591,8 @@ mod hover_tests {
     }
 
     fn state_with(state: &State, src: &str) -> State {
+        // Uri 作 key 的 mutable_key_type 为 lsp-types 内部表示误报(仅插入不改 key)。
+        #[allow(clippy::mutable_key_type)]
         let mut docs = HashMap::new();
         docs.insert("file:///tmp/t.gd".parse::<Uri>().unwrap(), src.to_string());
         State {
@@ -2722,9 +2737,9 @@ func _ready() -> void:
         // % unique:"var q = %Sprite"
         assert!(in_node_path_context(t, l2 + 1), "% 后");
         // 取模:"7 % 3" — 光标在结果操作数之后,不得视为路径
-        assert!(!in_node_path_context(t, (l3 + 5) as usize), "取模结果后");
+        assert!(!in_node_path_context(t, l3 + 5), "取模结果后");
         // a%b:% 前是操作数 → 取模
-        assert!(!in_node_path_context(t, (l4 + 3) as usize), "a%b 的 b 后");
+        assert!(!in_node_path_context(t, l4 + 3), "a%b 的 b 后");
     }
 
     /// C7.3 回归锁:`$Panel/` / `%Sprite` 上下文不再合并全局面
@@ -2989,6 +3004,8 @@ mod color_codelens_tests {
     #[test]
     fn document_color_literal_and_named() {
         let state = super::hover_tests::test_state();
+        // Uri 作 key 的 mutable_key_type 为 lsp-types 内部表示误报。
+        #[allow(clippy::mutable_key_type)]
         let mut docs = HashMap::new();
         let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
         docs.insert(uri.clone(), "var a := Color(0.5, 0.25, 1.0, 0.8)\nvar b := Color.RED\nvar c := Color(1, 0, 0)\nvar bad := Color(x, 0, 0)\nvar not_color := XColor(1, 0, 0)\n".into());
@@ -3063,6 +3080,7 @@ mod color_codelens_tests {
         let gd = root.join("main.gd");
         let uri = path_to_uri(&gd).unwrap();
         let src = std::fs::read_to_string(&gd).unwrap();
+        #[allow(clippy::mutable_key_type)]
         let mut docs = HashMap::new();
         docs.insert(uri.clone(), src);
         let mut st = st;
@@ -3165,6 +3183,8 @@ mod rename_tests {
             new_name: "do_task".to_string(),
             work_done_progress_params: Default::default(),
         }).unwrap();
+        // 同上:Uri 作 key 的 mutable_key_type 为 lsp-types 内部表示误报。
+        #[allow(clippy::mutable_key_type)]
         let changes = we.changes.unwrap();
         assert_eq!(changes.len(), 2, "a.gd（声明+调用）与 b.gd（引用）都应被改: {changes:?}");
         // 按 uri 精确取（HashMap 无序，勿用 values().find）。

@@ -41,7 +41,7 @@ fn finds_method_and_property_up_the_chain() {
     assert_eq!(m.return_type, "Vector2");
     // get_child 定义在 Node，沿链可查到。
     let gc = api.find_method("Node2D", "get_child").expect("get_child");
-    assert!(gc.arguments.len() >= 1);
+    assert!(!gc.arguments.is_empty());
     // position 属性在 Node2D 自身。
     let p = api.find_property("Node2D", "position").expect("position");
     assert_eq!(p.ty, "Vector2");
