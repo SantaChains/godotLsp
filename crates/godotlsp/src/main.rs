@@ -458,6 +458,10 @@ fn member_hover(state: &State, recv_ty: &str, member: &str) -> Option<Hover> {
         let sig = format!("{}.{}: {}", recv_ty, prop.name, prop.ty);
         let (host, desc) = member_anchor_along(engine, recv_ty, member);
         hover_md(sig, desc, doclinks::member_url(host, member, false, real))
+    } else if let Some((k, host)) = engine.find_const(recv_ty, member) {
+        // 常量引用（Vector2.ZERO / Node.NOTIFICATION_READY）；描述与锚点同宿主。
+        let sig = format!("const {recv_ty}.{member} = {}", const_value_str(&k.value));
+        hover_md(sig, hoverdata::member(host, member), doclinks::member_url(host, member, false, real))
     } else if let Some(f) = engine.find_method(recv_ty, member) {
         let sig = format!("{}.{}", recv_ty, render_function(f));
         let (host, desc) = member_anchor_along(engine, recv_ty, member);
@@ -470,7 +474,7 @@ fn member_hover(state: &State, recv_ty: &str, member: &str) -> Option<Hover> {
         // 枚举名引用（`Node.ProcessMode` / `Vector3.Axis`）；宿主类 = 声明枚举的祖先。
         let vals = e.values.iter().map(|(n, v)| format!("{n} = {v}")).collect::<Vec<_>>().join(", ");
         let sig = format!("enum {} ({})", member, vals);
-        hover_md(sig, hoverdata::member(&enum_host, member), doclinks::member_url(&enum_host, member, true, real))
+        hover_md(sig, hoverdata::member(enum_host, member), doclinks::member_url(enum_host, member, true, real))
     } else if let Some((enum_name, value, host)) = enum_value_in_class(engine, recv_ty, member) {
         // 枚举值引用（`Vector3.AXIS_X` / `Vector3.Axis.X` → member 直接或经枚举名命中）。
         let sig = format!("const {recv_ty}.{member} = {value} ({enum_name})");
@@ -581,15 +585,31 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
     let mut items: Vec<CompletionItem> = Vec::new();
 
     if after_dot {
-        if let Some(recv_ty) = recv_type_at(src, at) {
+        if let Some(recv_ty) = recv_type_at(state, src, at) {
             items.extend(class_members(&state.engine, &recv_ty));
         }
-    } else {
-        for name in state.engine.classes.keys().take(80) {
-            items.push(CompletionItem { label: name.clone(), kind: Some(CompletionItemKind::CLASS), ..CompletionItem::default() });
+    } else if at > 0 && b[at - 1] == b'@' {
+        // 注解面：`@<|` 只出注解（36 个），不与全局面混淆。
+        for (name, desc) in hoverdata::annotations() {
+            items.push(CompletionItem {
+                label: name.to_string(),
+                kind: Some(CompletionItemKind::PROPERTY),
+                detail: Some(desc.to_string()),
+                ..CompletionItem::default()
+            });
         }
-        for name in state.engine.builtins.keys() {
-            items.push(CompletionItem { label: name.clone(), kind: Some(CompletionItemKind::TYPE_PARAMETER), ..CompletionItem::default() });
+    } else {
+        // 全量返回 + 稳定排序（HashMap 迭代序随机，take(n) 会导致补全时有时无）；
+        // 前缀/fuzzy 过滤由客户端负责。
+        let mut names: Vec<&str> = state.engine.classes.keys().map(String::as_str).collect();
+        names.sort_unstable();
+        for name in names {
+            items.push(CompletionItem { label: name.to_string(), kind: Some(CompletionItemKind::CLASS), ..CompletionItem::default() });
+        }
+        let mut names: Vec<&str> = state.engine.builtins.keys().map(String::as_str).collect();
+        names.sort_unstable();
+        for name in names {
+            items.push(CompletionItem { label: name.to_string(), kind: Some(CompletionItemKind::TYPE_PARAMETER), ..CompletionItem::default() });
         }
         for f in &state.engine.utility_functions {
             items.push(CompletionItem {
@@ -615,14 +635,56 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
                 ..CompletionItem::default()
             });
         }
+        // 全局枚举值展开（Key.LEFT / Error.Ok / EULER_ORDER_XYZ…）。
+        for e in &state.engine.global_enums {
+            for (n, v) in &e.values {
+                items.push(CompletionItem {
+                    label: n.clone(),
+                    kind: Some(CompletionItemKind::ENUM_MEMBER),
+                    detail: Some(format!("{}.{n} = {v}", e.name)),
+                    ..CompletionItem::default()
+                });
+            }
+        }
+        // 编译器内建函数（len/preload/range…，不在 extension_api.json）。
+        for (name, bf) in hoverdata::gdscript_fns() {
+            items.push(CompletionItem {
+                label: name,
+                kind: Some(CompletionItemKind::FUNCTION),
+                detail: Some(bf.0),
+                ..CompletionItem::default()
+            });
+        }
+        // @GDScript 常量（PI/TAU/INF/NAN）。
+        for name in ["PI", "TAU", "INF", "NAN"] {
+            if let Some(desc) = hoverdata::member("@GDScript", name) {
+                items.push(CompletionItem {
+                    label: name.to_string(),
+                    kind: Some(CompletionItemKind::CONSTANT),
+                    detail: Some(desc.to_string()),
+                    ..CompletionItem::default()
+                });
+            }
+        }
+        // 语言关键字（func/if/await…）。
+        for (kw, desc, _) in langdocs::keywords() {
+            items.push(CompletionItem {
+                label: kw.to_string(),
+                kind: Some(CompletionItemKind::KEYWORD),
+                detail: Some(desc.to_string()),
+                ..CompletionItem::default()
+            });
+        }
     }
     CompletionResponse::Array(items)
 }
 
 /// 在 `recv.<|` 位置向前找 recv 标识符并推断其类型。
-fn recv_type_at(src: &str, at: usize) -> Option<String> {
+/// 光标在 `.` 之后（after_dot 已判定），扫描从 `.` 前开始；
+/// 变量（AST 语义解析）→ 静态类名 / 内建类名回退（`Node.ProcessMode` 补全）。
+fn recv_type_at(state: &State, src: &str, at: usize) -> Option<String> {
     let b = src.as_bytes();
-    let mut j = at;
+    let mut j = at - 1; // 跳过紧邻的 '.'
     while j > 0 && (b[j - 1].is_ascii_alphanumeric() || b[j - 1] == b'_') {
         j -= 1;
     }
@@ -630,14 +692,19 @@ fn recv_type_at(src: &str, at: usize) -> Option<String> {
     if recv.is_empty() {
         return None;
     }
-    // AST cache 由调用方传入；这里从 src 粗扫，后续改走缓存。
     let info = FileInfo::from_file(&parse(src).0);
-    info.resolve_var(src, recv)
+    info.resolve_var(src, recv).or_else(|| {
+        if state.engine.class_by_name(recv).is_some() || state.engine.builtin_by_name(recv).is_some() {
+            Some(recv.to_string())
+        } else {
+            None
+        }
+    })
 }
 
 /// 收集某类（含祖先）的方法与属性补全项。
 fn class_members(engine: &EngineApi, class: &str) -> Vec<CompletionItem> {
-    let mut items = Vec::new();
+    let mut items: Vec<CompletionItem> = Vec::new();
     for cls in engine.ancestor_chain(class) {
         if let Some(c) = engine.classes.get(cls) {
             for m in &c.methods {
@@ -655,6 +722,34 @@ fn class_members(engine: &EngineApi, class: &str) -> Vec<CompletionItem> {
                     detail: Some(format!("{}: {}", p.name, p.ty)),
                     ..CompletionItem::default()
                 });
+            }
+            for k in &c.constants {
+                items.push(CompletionItem {
+                    label: k.name.clone(),
+                    kind: Some(CompletionItemKind::CONSTANT),
+                    detail: Some(format!("const {}.{} = {}", cls, k.name, const_value_str(&k.value))),
+                    ..CompletionItem::default()
+                });
+            }
+            for e in &c.enums {
+                items.push(CompletionItem {
+                    label: e.name.clone(),
+                    kind: Some(CompletionItemKind::ENUM),
+                    detail: Some(format!(
+                        "enum {} ({})",
+                        e.name,
+                        e.values.iter().map(|(n, _)| n.as_str()).collect::<Vec<_>>().join(", ")
+                    )),
+                    ..CompletionItem::default()
+                });
+                for (n, v) in &e.values {
+                    items.push(CompletionItem {
+                        label: n.clone(),
+                        kind: Some(CompletionItemKind::ENUM_MEMBER),
+                        detail: Some(format!("const {}.{} = {v} ({})", cls, n, e.name)),
+                        ..CompletionItem::default()
+                    });
+                }
             }
         }
     }
@@ -674,6 +769,24 @@ fn class_members(engine: &EngineApi, class: &str) -> Vec<CompletionItem> {
                 detail: Some(format!("{}: {}", p.name, p.ty)),
                 ..CompletionItem::default()
             });
+        }
+        for k in &b.constants {
+            items.push(CompletionItem {
+                label: k.name.clone(),
+                kind: Some(CompletionItemKind::CONSTANT),
+                detail: Some(format!("const {class}.{} = {}", k.name, const_value_str(&k.value))),
+                ..CompletionItem::default()
+            });
+        }
+        for e in &b.enums {
+            for (n, v) in &e.values {
+                items.push(CompletionItem {
+                    label: n.clone(),
+                    kind: Some(CompletionItemKind::ENUM_MEMBER),
+                    detail: Some(format!("const {class}.{n} = {v} ({})", e.name)),
+                    ..CompletionItem::default()
+                });
+            }
         }
     }
     items
@@ -1035,8 +1148,8 @@ fn workspace_symbol(state: &State, query: &str) -> Vec<SymbolInformation> {
     let mut syms = Vec::new();
     if let (Some(proj), Some(root)) = (&state.project, &state.root) {
         for script in &proj.scripts {
-            if let Some(cn) = &script.ast.class_name {
-                if (query.is_empty() || cn.name.to_lowercase().contains(&query.to_lowercase()))
+            if let Some(cn) = &script.ast.class_name
+                && (query.is_empty() || cn.name.to_lowercase().contains(&query.to_lowercase()))
                     && let Some(uri) = root_file_uri(root, &script.path) {
                         syms.push(SymbolInformation {
                             name: cn.name.clone(),
@@ -1050,7 +1163,6 @@ fn workspace_symbol(state: &State, query: &str) -> Vec<SymbolInformation> {
                             deprecated: None,
                         });
                     }
-            }
         }
     }
     syms
@@ -1413,5 +1525,49 @@ func _ready() -> void:
         assert!(e.contains("X axis"), "枚举值 hover 应含描述: {e}");
         let en = hover_md_of(&state, src, "ProcessMode").unwrap_or_else(|| panic!("Node.ProcessMode hover 缺失"));
         assert!(en.contains("enum ProcessMode"), "枚举名 hover 应含签名: {en}");
+    }
+
+    /// completion 面覆盖：全局面（内建函数/常量/关键字/全局枚举值）+
+    /// @ 触发注解面 + 成员面（内建枚举值/常量/类枚举名）。
+    #[test]
+    fn completion_surfaces() {
+        let base = test_state();
+
+        // labels：对给定 src 在 (line, ch) 取 completion 标签集。
+        let labels = |src: &str, line: u32, ch: u32| -> Vec<String> {
+            let state = state_with(&base, src);
+            let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+            let p: CompletionParams = serde_json::from_value(serde_json::json!({
+                "textDocument": {"uri": uri},
+                "position": {"line": line, "character": ch}
+            }))
+            .unwrap();
+            match completion(&state, &p) {
+                CompletionResponse::Array(items) => items.into_iter().map(|i| i.label).collect(),
+                _ => vec![],
+            }
+        };
+
+        // 全局面：内建函数 / @GDScript 常量 / 关键字 / 全局枚举值 / 类 / 单例。
+        let all = labels("# comment\n", 0, 2);
+        for need in ["len", "preload", "PI", "func", "KEY_LEFT", "Sprite2D", "Input"] {
+            assert!(all.iter().any(|l| l == need), "全局面应含 {need}: 命中数 {}", all.len());
+        }
+
+        // @ 触发：注解面只出注解，不混类名，且恰好全量。
+        let annos = labels("@\n", 0, 1);
+        assert!(annos.iter().any(|l| l == "export"), "注解面应含 export: {annos:?}");
+        assert!(!annos.iter().any(|l| l == "Node2D"), "注解面不应混入类名");
+        assert_eq!(annos.len(), hoverdata::annotations().len(), "注解面应恰好是全量注解");
+
+        // 成员面（内建）：Vector3. → 枚举值 / 常量 / 方法。
+        let mem = labels("var v := Vector3.\n", 0, 17);
+        for need in ["AXIS_X", "ZERO", "normalized"] {
+            assert!(mem.iter().any(|l| l == need), "Vector3 成员面应含 {need}: 命中数 {}", mem.len());
+        }
+
+        // 成员面（静态类名回退）：Node. → ProcessMode 枚举名。
+        let mem = labels("var x = Node.\n", 0, 13);
+        assert!(mem.iter().any(|l| l == "ProcessMode"), "Node 成员面应含枚举名 ProcessMode: 命中数 {}", mem.len());
     }
 }

@@ -49,3 +49,17 @@ pub fn gdscript_fn(name: &str) -> Option<(String, String)> {
 pub fn annotation(name: &str) -> Option<&'static str> {
     data().a.get(name).map(|s| s.as_str())
 }
+
+/// 全部注解，按名排序（completion 注解面消费）。
+pub fn annotations() -> Vec<(String, String)> {
+    let mut v: Vec<_> = data().a.iter().map(|(k, d)| (k.clone(), d.clone())).collect();
+    v.sort();
+    v
+}
+
+/// 全部 @GDScript 内建函数，(名, (签名, 描述))，按名排序。
+pub fn gdscript_fns() -> Vec<(String, (String, String))> {
+    let mut v: Vec<_> = data().f.iter().map(|(k, bf)| (k.clone(), (bf.s.clone(), bf.d.clone()))).collect();
+    v.sort();
+    v
+}

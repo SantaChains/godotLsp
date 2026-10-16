@@ -92,6 +92,8 @@ pub struct BuiltinClass {
     pub members: Vec<Property>,
     /// 内建类自带枚举（Vector3.Axis / Variant.Type 等，extension_api.json builtin_classes.enums）。
     pub enums: Vec<Enum>,
+    /// 内建类常量（Vector2.ZERO / ONE / LEFT…，值为字符串表达式）。
+    pub constants: Vec<Constant>,
 }
 
 /// 单例（autoload 全局节点）。
@@ -147,11 +149,10 @@ impl EngineApi {
     /// 沿继承链查找方法（自身优先，再祖先）。
     pub fn find_method(&self, class: &str, name: &str) -> Option<&Function> {
         for cls in self.ancestor_chain(class) {
-            if let Some(c) = self.classes.get(cls) {
-                if let Some(m) = c.methods.iter().find(|m| m.name == name) {
+            if let Some(c) = self.classes.get(cls)
+                && let Some(m) = c.methods.iter().find(|m| m.name == name) {
                     return Some(m);
                 }
-            }
         }
         // builtin 兜底（Vector2 等内建类型方法）。
         if let Some(b) = self.builtins.get(class) {
@@ -163,23 +164,35 @@ impl EngineApi {
     /// 沿继承链查找属性；内建类型同时查其值成员（Vector2.x）。
     pub fn find_property(&self, class: &str, name: &str) -> Option<&Property> {
         for cls in self.ancestor_chain(class) {
-            if let Some(c) = self.classes.get(cls) {
-                if let Some(p) = c.properties.iter().find(|p| p.name == name) {
+            if let Some(c) = self.classes.get(cls)
+                && let Some(p) = c.properties.iter().find(|p| p.name == name) {
                     return Some(p);
                 }
-            }
         }
         self.builtins.get(class).and_then(|b| b.members.iter().find(|p| p.name == name))
+    }
+
+    /// 常量查找：类级（含继承链）+ 内建类常量兜底（Vector2.ZERO / ONE）。
+    /// 返回 (常量, 声明宿主类)——描述与文档锚点都挂宿主。
+    pub fn find_const(&self, class: &str, name: &str) -> Option<(&Constant, &str)> {
+        for cls in self.ancestor_chain(class) {
+            if let Some(c) = self.classes.get(cls)
+                && let Some(k) = c.constants.iter().find(|k| k.name == name) {
+                    return Some((k, c.name.as_str()));
+                }
+        }
+        self.builtins.get(class).and_then(|b| {
+            b.constants.iter().find(|k| k.name == name).map(|k| (k, b.name.as_str()))
+        })
     }
 
     /// 沿继承链查找枚举；内建类型兜底（Vector3.Axis）。
     pub fn find_enum(&self, class: &str, name: &str) -> Option<&Enum> {
         for cls in self.ancestor_chain(class) {
-            if let Some(c) = self.classes.get(cls) {
-                if let Some(e) = c.enums.iter().find(|e| e.name == name) {
+            if let Some(c) = self.classes.get(cls)
+                && let Some(e) = c.enums.iter().find(|e| e.name == name) {
                     return Some(e);
                 }
-            }
         }
         self.builtins.get(class).and_then(|b| b.enums.iter().find(|e| e.name == name))
     }
@@ -255,6 +268,8 @@ struct RawBuiltin {
     members: Vec<RawMember>,
     #[serde(default)]
     enums: Vec<RawEnum>,
+    #[serde(default)]
+    constants: Vec<RawConst>,
 }
 
 #[derive(Deserialize)]
@@ -371,6 +386,7 @@ impl RawApi {
                         name: b.name,
                         methods: b.methods.into_iter().map(into_fn).collect(),
                         enums: b.enums.into_iter().map(into_enum).collect(),
+                        constants: b.constants.into_iter().map(into_const).collect(),
                         members: b
                             .members
                             .into_iter()

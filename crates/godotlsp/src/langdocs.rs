@@ -75,6 +75,11 @@ const OPERATOR_DOCS: &[(&str, &str, &str)] = &[
     ("??=", r#"空合并赋值：当 a 为 null 时把 b 赋给 a。"#, "op-coalesce-assign"),
 ];
 
+/// 关键字表（completion 关键字面消费）：(名, 描述, 语法篇页)。
+pub fn keywords() -> &'static [(&'static str, &'static str, &'static str)] {
+    KEYWORD_DOCS
+}
+
 /// 关键字 hover markdown：描述 + 语法篇站内链接。非关键字返回 None。
 pub fn keyword_hover(word: &str) -> Option<String> {
     let (_, desc, page) = KEYWORD_DOCS.iter().find(|(k, _, _)| *k == word)?;
