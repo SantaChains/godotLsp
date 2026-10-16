@@ -31,6 +31,19 @@
   **许可证：MIT**。拉取用 `uv run tools/fetch_demo.py`（pinned tag
   `4.7-6ad6167`，2026-10 收录，456 个 .gd）。
   消费方：`tools/gen_freq.py` 的补全频率表挖掘（权重 ×2,真实工程）。
+- `bench/`：**大型真实工程**（完整 tarball,含 project.godot/.tscn/.tres），
+  专供 LSP 能力与负载基准（`crates/godotlsp/tests/bench_load.py`）。
+  **许可证：均为 MIT**。不入库，拉取用 `uv run tools/fetch_bench.py`
+  （pinned commit,2026-10-16 收录）：
+
+  | 工程 | 仓库 | pinned commit | 规模（收录时实测） |
+  |---|---|---|---|
+  | `pixelorama` | Orama-Interactive/Pixelorama | `e64b476` | 249 .gd / 59,717 行 / 120 .tscn |
+  | `dialogic` | dialogic-godot/dialogic | `701b67b` | 270 .gd / 35,202 行 / 84 .tscn |
+  | `gdunit4` | MikeSchulze/gdUnit4 | `306eb30` | 235 .gd / 27,181 行 / 16 .tscn |
+
+  合计 754 个 .gd / ~122,100 行,是官方 demo 语料（456 个小文件）之外的
+  「大文件 + 深目录 + 真实 UI 工程」负载维度。
 
 ## 使用约定
 

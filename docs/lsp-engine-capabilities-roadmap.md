@@ -68,6 +68,13 @@
 - **附带健壮性修复**：completion 光标越界 clamp(`at.min(src.len())`)——此前超界 position 会导致切片 panic,catch_unwind 吞掉后**不回 Response**,客户端死等(smoke 实证)。hover/rename/highlight 走 position_to_offset 本有 Option 兜底,不受影响。
 - smoke 4e 段:didChangeConfiguration 推送 → fileWords/snippets 开关端到端生效。
 
+## 负载基准 — 真实工程语料（2026-10-16 立项）
+
+- **语料**：`tools/fetch_bench.py`（pinned tarball 全量解出,不入库）拉取三个大型真实工程到 `corpus/bench/`——Pixelorama（249 .gd / 59,717 行 / 120 .tscn,唯一带 project.godot 的完整工程）、Dialogic（270 .gd / 35,202 行,插件仓库形态）、gdUnit4（235 .gd / 27,181 行）。合计 754 .gd / ~122,100 行。来源记录见 `corpus/README.md`。
+- **harness**：`crates/godotlsp/tests/bench_load.py`——全量 didOpen 洪峰 + 诊断收敛计时 + documentSymbol/hover/completion 采样分位数 + 增量编辑诊断延迟 + 服务器峰值 RSS（GetProcessMemoryInfo）。用法：`python -u crates/godotlsp/tests/bench_load.py <release-exe> corpus/bench/<proj>`。
+- **首跑即抓到真实缺陷并修复**：诊断线程 drain 是 latest-wins——多文件批量打开只发布**最后一个文件**的诊断（Pixelorama 249 文件仅覆盖 1 个）。修复为窗口内按 uri 批量合并逐个发布后 249/249 全覆盖。单文件编辑场景永远暴露不了,bench 的价值实证。
+- **基线（release,2026-10-16,留作回归参照）**：Pixelorama 249 文件/5.97 万行——didOpen 发送 1.15s、诊断收敛 512ms（10,717 条）、symbol p50 1.1ms / completion p50 8.6ms p95 16.4ms、增量诊断 237ms、峰值 RSS 163MB。
+
 ## P5 — 高级导航与着色（原 P4）
 
 19. **semanticTokens**：类型/函数/变量/字符串语义着色。**前置：CST trivia**。
