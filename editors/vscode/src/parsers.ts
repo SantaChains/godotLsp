@@ -44,16 +44,19 @@ export interface SNode {
 export interface SceneFile {
   ext: Map<string, { type: string; path: string }>;
   roots: SNode[];
+  /** NodePath(含根 ".")→ 节点;[connection] from/to 的跳转定位用。 */
+  nodePaths: Map<string, SNode>;
 }
 
 const RE_NODE = /^\s*\[node\s+([^\]]*)\]/;
 const RE_EXT = /^\s*\[ext_resource\s+([^\]]*)\]/;
-const RE_ATTR = /(\w+)\s*=\s*(?:"((?:\\.|[^"\\])*)"|ExtResource\("([^"]+)"\))/g;
+// 值的三形态:引号串 / ExtResource("id") / 裸值(connection 的 binds=1 等数值字段无引号)。
+const RE_ATTR = /(\w+)\s*=\s*(?:"((?:\\.|[^"\\])*)"|ExtResource\("([^"]+)"\)|([^\s\]]+))/g;
 
 function parseAttrs(source: string): Map<string, string> {
   const attrs = new Map<string, string>();
   for (const a of source.matchAll(RE_ATTR)) {
-    attrs.set(a[1], a[3] ?? a[2] ?? "");
+    attrs.set(a[1], a[3] ?? a[4] ?? a[2] ?? "");
   }
   return attrs;
 }
@@ -107,5 +110,66 @@ export function parseScene(text: string): SceneFile {
       }
     }
   }
-  return { ext, roots };
+  return { ext, roots, nodePaths: byPath };
+}
+
+export interface SceneConnection {
+  /** 发射者 NodePath(引擎存时 simplified(),"." 为场景根)。 */
+  from: string;
+  /** 接收者 NodePath。 */
+  to: string;
+  signal: string;
+  method: string;
+  /** [connection] 标签行号(0 基)。 */
+  line: number;
+  /**
+   * 缺失的必填字段。规格(engine-analyzer.md S1):四字段缺一引擎即
+   * ERR_FILE_CORRUPT 拒载——解析层不丢弃,由视图以警告呈现,
+   * 恰好暴露 AI 生成/手改工程的损坏连接。
+   */
+  missing: string[];
+  /** 可选字段原样保留(flags=3 即默认 CONNECT_PERSIST;binds/unbinds 为参数个数)。 */
+  flags?: string;
+  binds?: string;
+  unbinds?: string;
+}
+
+// [connection] 可完全无属性(损坏 tag)——四字段全 missing,引擎拒载。
+const RE_CONN = /^\s*\[connection(?:\s+([^\]]*))?\]/;
+
+/** 解析 .tscn 的 [connection] 段:信号连接的声明式数据(非代码)。 */
+export function parseConnections(text: string): SceneConnection[] {
+  const out: SceneConnection[] = [];
+  const lines = text.split(/\r?\n/);
+  for (let i = 0; i < lines.length; i++) {
+    const c = RE_CONN.exec(lines[i]);
+    if (!c) {
+      continue;
+    }
+    const attrs = parseAttrs(c[1] ?? "");
+    const conn: SceneConnection = {
+      from: attrs.get("from") ?? "",
+      to: attrs.get("to") ?? "",
+      signal: attrs.get("signal") ?? "",
+      method: attrs.get("method") ?? "",
+      line: i,
+      missing: [],
+    };
+    for (const key of ["from", "to", "signal", "method"] as const) {
+      if (!conn[key]) {
+        conn.missing.push(key);
+      }
+    }
+    if (attrs.has("flags")) {
+      conn.flags = attrs.get("flags");
+    }
+    if (attrs.has("binds")) {
+      conn.binds = attrs.get("binds");
+    }
+    if (attrs.has("unbinds")) {
+      conn.unbinds = attrs.get("unbinds");
+    }
+    out.push(conn);
+  }
+  return out;
 }

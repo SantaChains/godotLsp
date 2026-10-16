@@ -20,11 +20,12 @@
 
 ## 侧边栏
 
-活动栏的 **godotlsp** 视图提供三个树视图,点击即跳转:
+活动栏的 **godotlsp** 视图提供四个树视图,点击即跳转:
 
 - **当前文件符号**:类、函数、枚举、信号、常量(LSP `documentSymbol`,VS Code 内建「大纲」同样可用)
 - **项目结构**:`[autoload]` 单例 → `class_name` 全局类注册表 → 展开任意脚本即见其函数/类/枚举大纲
 - **场景结构**:当前 `.tscn` 的节点层级(`[node name/type/parent/instance]`),instance 节点直接显示被实例化资源路径
+- **信号连接**:当前 `.tscn` 的 `[connection]` 声明(发射者 → 信号 → 接收者.方法),点击跳连接行,展开可跳端点节点;缺字段的损坏连接以警告标注(引擎对此拒载)
 
 ## 支持的文件类型
 
@@ -69,6 +70,7 @@ code --install-extension godotlsp-0.1.0.vsix
 | `godotlsp.symbols.refresh` | 刷新侧边栏符号树 |
 | `godotlsp.project.refresh` | 刷新项目结构(重建 class_name 注册表) |
 | `godotlsp.scene.refresh` | 刷新场景结构 |
+| `godotlsp.connections.refresh` | 刷新信号连接 |
 
 ## 从源码构建
 

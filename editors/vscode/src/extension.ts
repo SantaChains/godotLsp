@@ -11,6 +11,7 @@ import {
 import { SymbolTreeProvider } from "./symbols";
 import { ProjectTreeProvider, PTreeDataProvider } from "./projectTree";
 import { SceneTreeProvider } from "./sceneTree";
+import { ConnectionTreeProvider } from "./connections";
 import { ConfigCompletionProvider, ConfigHoverProvider } from "./configAssist";
 import { highlightClampMiddleware } from "./highlight";
 import { copyInfoFrom } from "./copyable";
@@ -23,6 +24,7 @@ let status: vscode.StatusBarItem;
 let symbols: SymbolTreeProvider | undefined;
 let projectTree: ProjectTreeProvider | undefined;
 let sceneTree: SceneTreeProvider | undefined;
+let connTree: ConnectionTreeProvider | undefined;
 
 /**
  * 注册侧边栏视图。
@@ -58,21 +60,32 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
   status.command = "godotlsp.showOutput";
   context.subscriptions.push(output, status);
 
-  // 侧边栏三视图:当前文件符号 / 项目结构(autoload + class_name)/ 场景结构(tscn 节点树)。
+  // 侧边栏四视图:当前文件符号 / 项目结构(autoload + class_name)/ 场景结构(tscn 节点树)/ 信号连接(tscn [connection])。
   symbols = new SymbolTreeProvider(() => client, output);
   projectTree = new ProjectTreeProvider(() => client, output);
   sceneTree = new SceneTreeProvider();
+  connTree = new ConnectionTreeProvider();
   const tree = createView("godotlsp.symbols", symbols);
   const projectProvider = new PTreeDataProvider(() => projectTree!.roots());
   const sceneProvider = new PTreeDataProvider(() => sceneTree!.roots());
+  const connProvider = new PTreeDataProvider(() => connTree!.roots());
   const projectView = createView("godotlsp.project", projectProvider);
   const sceneView = createView("godotlsp.scene", sceneProvider);
+  const connView = createView("godotlsp.connections", connProvider);
   const isGd = (d: vscode.TextDocument) => d.languageId === "gdscript";
   const isRes = (d: vscode.TextDocument) => d.languageId === "godot-resource";
+  // 场景结构与信号连接同为 tscn 派生视图,失效与刷新条件完全一致。
+  const refreshSceneDerived = () => {
+    sceneTree?.invalidate();
+    sceneProvider.refresh();
+    connTree?.invalidate();
+    connProvider.refresh();
+  };
   context.subscriptions.push(
     tree,
     projectView,
     sceneView,
+    connView,
     // ConfigFile 家族(project.godot/.gdextension/.import/.cfg)的键/值补全与
     // hover:数据集来自 Godot 源码提取,与语言服务器相互独立。
     vscode.languages.registerCompletionItemProvider(
@@ -95,6 +108,10 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
       sceneTree?.invalidate();
       sceneProvider.refresh();
     }),
+    vscode.commands.registerCommand("godotlsp.connections.refresh", () => {
+      connTree?.invalidate();
+      connProvider.refresh();
+    }),
     vscode.commands.registerCommand("godotlsp.goto", gotoSymbol),
     // 侧边栏条目右键快速复制(三视图共用,载荷解析见 copyable.ts)。
     vscode.commands.registerCommand("godotlsp.tree.copyName", async (node?: unknown) => {
@@ -115,8 +132,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     vscode.window.onDidChangeActiveTextEditor((e) => {
       symbols?.refresh();
       if (!e || isRes(e.document)) {
-        sceneTree?.invalidate();
-        sceneProvider.refresh();
+        refreshSceneDerived();
       }
     }),
     vscode.workspace.onDidOpenTextDocument((d) => {
@@ -124,8 +140,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         symbols?.refresh();
       }
       if (isRes(d)) {
-        sceneTree?.invalidate();
-        sceneProvider.refresh();
+        refreshSceneDerived();
       }
     }),
     vscode.workspace.onDidChangeTextDocument((e) => {
@@ -133,8 +148,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         symbols?.refresh();
       }
       if (isRes(e.document)) {
-        sceneTree?.invalidate();
-        sceneProvider.refresh();
+        refreshSceneDerived();
       }
     }),
     // class_name 注册表只在保存时重建,避免每次击键全工程扫描。

@@ -45,6 +45,25 @@
 - **gdls**(kurushimee/gdls)— `--dump-extension-api-with-docs` 自动 dump 工程学文档级实证(ClassDB 完备性、dump 落点、退出 abort 仍采纳、5 分钟上限、解析梯度),P2-15 引擎模型 v2 的对照参照;其 `doc/classes/*.xml` 否决结论一并采纳。
 - **VS Code 接口面**:WebviewView(侧边栏常驻)/ WebviewPanel(标签页);TreeView + TreeDataProvider(结构视图);内建「调用层次/类型层次」UI 消费 LSP callHierarchy/typeHierarchy——图视图的数据与交互一律走这些公开接口,不自造协议。
 
+**调试/工作流与 shader 生态参照(2026-10-16 四插件调研)**:
+- **godot-rust-vscode**(dsobotta,README 调研)— godot-rust 绑定一站式工作流:生成 tasks.json/launch.json、build→launch→debug 全程不出 VS Code、**三档调试目标(launch Debug / launch Release / Attach to Game)**、与 godot-tools 共存声明。借鉴:三档目标进 P2-13 配置面;**反面教训——其配置生成会 clobber 已有 tasks.json/launch.json(README 自警告)**,我们任何配置写入必须 merge-not-clobber;佐证「编辑→构建→运行→调试不离开编辑器」是真实高频诉求。
+- **Godot JavaScript Debug**(koush QuickJS debugger fork)— DAP launch/attach + watch/eval + SourceMap 是调试器标配面;Godot 4 JS 绑定已弃,无独立借鉴,仅佐证 P2-13 能力面。
+- **Godot Tools**(官方,README 全文核验增补 2026-10-16):①**launch.json 配置面**(scene: main|current|pinned 三档 + 引擎 flags 全集:profiling/debug_collisions/debug_paths/debug_navigation/fixed_fps/frame_delay/time_scale/disable_vsync/single_threaded_scene + additional_options)→ P2-13 DAP schema 直接参照;②**headless LSP 模式**(Godot 4.2+ 无窗编辑器实例当语言服务器)——引擎自带 LSP 的形态与天花板,印证我们的差异化(脱离引擎 + 内嵌模型 + 零引擎依赖);③pinned file 调试交互;④官方同样有 tscn/tres inlay hints 与 alt+o gd↔tscn 切换(印证 21f);⑤**GDShader 只有语法高亮**——官方 shader 支持缺口实证,P2.6 的立项依据之一。
+- **Godot Files**(AlfishSoftware,Public Domain,README 全文核验 2026-10-16)— 与本项目同构哲学(纯解析、零引擎依赖、可与 godot-tools 共存);其 GDAsset/GDShader 增强是最完整的同类实现。借鉴清单:①**uid:// 解析 + 双击 inlay hint 替换 uid→path**(进 P2-17);②hover 资源预览(图片/字体 MarkdownString 内嵌;场景缩略图走 Godot 编辑器 cache,自包含模式需另配 cache 路径);③**documentColor 行内颜色装饰器**(Color(...) 字面量色块,VS Code 标准能力,插件侧正则可做);④GDShader 语言层的分级路径(preprocessor→lexer/parser(ANTLR4)→语法诊断→outline→inactive region 变暗;**semantic 明示未做**)→ P2.6 分期直接依据;⑤#include sourcemap 把错误映射回被包含文件;⑥嵌入代码着色(gdshader docs 注释里 [gdscript] BBCode 块);⑦知识点:**VS Code hover 词 token 只在前 32 字符有效**(长资源路径 hover 须落在路径前段);⑧已知边界:行式 INI 解析在 ext_resource 路径含 `#`/`;` 时破解析(我们 tscn 解析器同样要防);⑨donation-unlock early access 商业模式不采纳(全功能免费是我们的立场)。
+
+**GDShader LSP 竞争格局(2026-10-16 网络核验,P2.6 输入)**:
+
+| 项目 | 语言 | 状态 | 缺陷(各自 README/评述) |
+|---|---|---|---|
+| GodOfAvacyn/gdshader-lsp | Rust | 停摆 1.5 年后重写中 | **大量误报诊断**(armsnyder 评述);VS Code 扩展 Linux-only;无跳转定义/宏支持 |
+| armsnyder/gdshader-language-server | Go | 活跃(2025-07 v0.6.0) | 自述 infancy,仅关键字补全;其余全在 roadmap |
+| Godot Files(Alfish) | TS(插件内置) | 商业 early access | VS Code-only;preprocessor/lexer/parser 完成但 **semantic 零实现** |
+| 官方 godot-tools | TS | 活跃 | shader 仅语法高亮 |
+
+**结论:无赢家、真实空窗**;但语义层(swizzle/类型/stage 校验)是全部竞品的共同坟场,立项须谨慎(见 P2.6 S3 条件)。
+
+**Blender↔Godot 材质工作流实证(2026-10-16 网络核验,X3 输入)**:glTF 导出器**只读 Principled BSDF 标准输入**,程序化节点/自定义节点组永不存活(Blender 5.0 亦然),正道是 bake 到纹理后引擎侧重建;Godot 导入 glTF 得 StandardMaterial3D/ShaderMaterial stub,高级效果须手写 gdshader——即 **Blender 维度对本项目的真实交集只有两条:资源图谱可见性(E1-G 已覆盖)+ gdshader 手写体验(P2.6)**,材质自动转译为伪需求(详见 rejected-designs)。
+
 **社区高频诉求**(godot-vscode-plugin issues 与 GDScript 社区常年重复的主题):
 断点调试、不开编辑器运行、gdformat 一键格式化、`$NodePath` 场景节点补全与跳转、信号连接可视化、悬浮文档中文、实时的类型错误提示、类/文件模板。
 
@@ -64,7 +83,7 @@
 7. ✅ **`$NodePath` / `%Unique` 场景感知增强**:内核 M2 链路已具备(补全带节点 `type=` detail、hover 类型推断、跳转定义);服务器补节点路径上下文识别,`$`/`%` 上下文下不再合并全局面(探针实测 1662 项污染 → 纯节点列表);取模 `%` 经操作数前缀启发式排除。
 8. **格式化桥接**:优先内建格式化器;提供 `godotlsp.format.engine: gdformat` 开关,外部工具存在时委托(行为兼容诉求)。
 9. ✅ **snippet 集**:`@export`/`@onready`/信号声明、`_ready`/`_process`/`_physics_process`/`_input` 回调、`match`、lambda、定时器、信号连接、场景实例化等 16 组模板(插件 contributes,中文描述)。
-10. **信号连接视图**:列出脚本内 `connect`/`@rpc` 与场景信号连接(读 .tscn `connection` 段),CodeLens 或面板。
+10. **信号连接视图**:场景侧 ✅ 已实现(2026-10-16,插件第四树 `godotlsp.connections`:parsers.ts `parseConnections` 纯解析四字段 + 缺字段警告呈现——引擎对缺字段硬拒载(engine-analyzer.md S1),视图即 AI 生成工程损坏连接的最早暴露点;`parseScene` 补 `nodePaths` 供端点子节点跳转;37 个 node:test 全绿)。脚本侧 `connect()` 调用扫描与 `@rpc` 列举待后续增量。
 
 ### P1.5 — 插件完备性(编辑器侧,2026-10-15 追加)
 
@@ -90,7 +109,7 @@
 
 11. ~~**离线中文文档集成**~~ → **并入 P2-16**(范围扩大:在线跳转 + 离线索引 + 双语回退策略)。
 12. **`godotlsp check` CLI**:CI 静态检查,与服务器共享内核。
-13. **DAP 适配器**:独立子命令 `godotlsp dap`,桥接 Godot 调试协议。
+13. **DAP 适配器**:独立子命令 `godotlsp dap`,桥接 Godot 调试协议。**配置面参照(2026-10-16 调研)**:godot-tools launch.json 全集(scene: main|current|pinned + profiling/debug_collisions/fixed_fps/disable_vsync/time_scale 等引擎 flags)+ godot-rust-vscode 三档目标(launch Debug / launch Release / attach);**纪律:任何配置文件生成必须 merge-not-clobber**(godot-rust-vscode clobber 事件为反面教材)。
 14. **多根工作区**、诊断节流、线程模型(见 lsp-design.md P0/P1,前置项)。
 15. **引擎模型摄取 v2(服务器侧,P2 首位)**:按 `from-scratch-design.md` §7 执行——主源改为
     `godot --headless --dump-extension-api-with-docs` 产物(走 ClassDB,完备-by-construction;已核验,gdls 同款结论),
@@ -111,6 +130,7 @@
     - `documentLink`:`.tscn`/`.tres`/`project.godot` 中的 `res://` 路径与 `uid://` 引用可点击跳转(服务器侧,待 R2);
     - `$NodePath`/`%Unique` 补全联动 uid 映射(场景被改名/移动后仍可解析);
     - 验收:对 `corpus` 内真实工程夹具,uid 映射覆盖 100% 带.uid 文件;documentLink 协议合规(范围精确到字符串字面量)。
+    - **交互增强包(2026-10-16 Godot Files 实证追加,插件侧)**:① uid→path **双击 inlay hint 替换**(点击 uid 提示以 res:// 路径覆写源串,project.godot 与 `@export_file` 场景高频);② **hover 资源预览**(图片 SVG/PNG/WebP/JPEG/BMP/GIF 与字体 TTF/OTF/WOFF2,MarkdownString 嵌入;场景缩略图读 Godot 编辑器 cache `.godot/imported`,自包含模式需暴露 cache 路径配置);③ **documentColor/ColorPresentation**(tscn/tres/gd 中 `Color(...)` 与 vec4 颜色字面量的行内色块装饰器,VS Code 标准能力,正则级成本);④ 长路径 hover 落点须在前 32 字符内(VS Code 词 token 限制,Godot Files 实证知识点)。
 18. **项目结构视图(fnmap/outmap,大纲式组织 + 跳转)**✅ 已实现(2026-10-16,`editors/vscode/src/projectTree.ts`):
     - ✅ 「项目结构」TreeView:autoload 单例(解析 project.godot `[autoload]` 段,`*res://` 前缀剥离)→ `class_name` 全局类注册表(工作区 .gd 扫描:只看前 64 行、排除 `.godot`/`.git`、上限 5000 文件)→ 任意脚本惰性展开复用 LSP `documentSymbol`(与符号树同源);
     - ✅ 点击跳转统一走 `godotlsp.symbols.goto`(零基行列,越界钳制);class_name 注册表**仅保存时重建**(防击键级全工程扫描);三个视图各带 view/title 刷新按钮;
@@ -174,7 +194,20 @@
     - 落地:**L3 进 P2-19 C 方案增强**(大纲节点右键「显示引用」→ QuickPick/树内子节点展示,点击跳转);L4 的图视图入口从大纲节点发起(root=该符号),与 SourceDive 双击下钻同构;
     - **变量识别增益**:变量的关系通常只需 L3(定义 + N 个引用点),L4 图对变量只在其作为跨文件数据流枢纽时才有价值——关系图的节点默认聚合到「类/场景」粒度,变量级展开按需(L3 已覆盖),避免图爆炸。
 
-### P3 — 可视化蓝图 GDBlue(2026-10-16 立项)
+### P2.6 — GDShader 语言支持(2026-10-16 立项;「godot + blender 的 shader 支持路线」落地)
+
+> **定位**:GDShader(.gdshader/.gdshaderinc)是我们语言服务能力的自然延伸——竞争格局全部无赢家(见参照系竞争格局表),且 Blender↔Godot 工作流的终点正是「手写 gdshader 重建高级材质」(glTF 只带 PBR 参数,见 X3 实证)。立项纪律与全局一致:**脱离引擎、内嵌模型、多 IDE 共享**。
+> **与 GDScript 的关系**:shader 与 gdscript 语法完全不同(GLSL 家族,{} 分号、stage 函数),**不共用内核解析**,但完整复用基建——lsp-server-tokio 协议层、salsa 增量框架、插件侧 vendored/打包/测试体系、构建期文档提取管线。同一服务器二进制按文件类型分流,或独立子命令,实现期按耦合度定。
+
+- **数据纪律(shader 特有)**:shader 内建函数/常量/函数组**不在 extension_api.json**(shader API 不走 ClassDB)。双源改为:名单取 godot-docs shader 参考页(`shading_language.rst` 与 per-type 参考),**签名/常量值以引擎源码 `servers/rendering/shader_compiler.cpp` + `shader_language.cpp` 内建表为权威**(extract_docs.py 管线扩展,同一「文档取名、源码定签」纪律)。
+- **shader type 感知(与 gdscript 的关键差异)**:内建面随 `shader_type`(spatial/canvas_item/particles/sky/fog)与 `render_mode` 变化——uniforms/builtins/varyings/stage 函数(vertex/fragment/light)全是 per-type 集;诊断与补全必须按声明分流,这是「识别」而非「高亮」的分水岭,也是全部竞品未做完整的地方(armsnyder roadmap 才到「spatial 之外的内建」)。
+- **分期(按依赖与成本排)**:
+  - **S1 插件侧完备性(零服务器依赖,可立即)**:① gdshader/gdshaderinc TextMate 语法(当前插件只有 .tscn/.tres/.godot/.uid 四种,gdshader 缺位;基础结构参照官方 godot-tools,增强点抄 Godot Files:inactive region 弱化着色可选);② 文件图标(21f-⑤ 图标主题已含 .gdshader 项,此处补语法);③ **documentColor**(字面量色块装饰器,P2-17 交互增强包第③项同源);④ gdshader snippet(shader_type 骨架/uniform 区块/stage 函数,高频模板);⑤ gdshaderinc 的 `#include res://` documentLink(纯文本解析,复用 tscn 同款管线)。
+  - **S2 数据层(构建期提取,服务器侧)**:① per-type 内建表(uniforms/builtins/varyings/stage 函数签名+文档)进引擎模型,双源纪律如上;② `#include` 依赖图边进 E1-G 资源图谱(shader→shader/shader→texture 的 `res://` 引用泛化边);③ shader type/render_mode 解析器(纯文本级,进 parsers 同构层)。
+  - **S3 gdshader LSP(P3 域;立项条件:R2 GDScript 重写稳定 + S2 数据层就位)**:功能梯度按 Godot Files 已证明的顺序:preprocessor(#include 跳转 + sourcemap 错误回源)→ documentSymbol(outline)→ 词法/语法诊断 → hover/补全(stage 感知)→ goto def/find ref;**inactive region 变暗**(#if…#endif 弱化)作为低成本差异化;**语义级检查(swizzle 合法性/类型转换/stage 约束)是全部竞品的共同坟场,也是最差异化机会——🟡 仅在 S3 前四档稳定后单独立项**,验收基准:零误报优先于覆盖率(GodOfAvacyn 因误报失去社区信任是前车之鉴)。
+- **验收(S1 即刻可验)**:gdshader 语料(自建 5-10 个跨 type 夹具入 corpus)高亮/图标/色块/链接全过;S2 后:per-type 补全与官方文档逐条对账(include 解析器与 engine-analyzer.md V 节序列化规则一致)。
+
+
 
 > **已迁移至独立文档 `docs/gdblue-roadmap.md`**(含构想、源码依据、38 节点分类学、BIR 规范、V1-V4 分期、状态图/ECS、AI 协同、画布体系取舍)。
 > 一句话:把 Godot 3.x Visual Script 以现代化蓝图形态复活在 VS Code(类 ComfyUI / Unity Visual Scripting)——静态类型端口 + JSON IR(.gdblue.json)+ transpile 生成 GDScript 进 gdscript-engine 验证闭环;蓝图是人机共享 IR(AI 写 JSON、人操作编辑器);V4 原生 State Graph 生成组合式状态机(组合大于继承)。依赖 P2-19 E1 webview 基建,图谱先行。
@@ -191,3 +224,4 @@
 
 - **X1 — AI 资源管线(uid 生成器 + 资源绑定器)**:为「纯 AI 生成 Godot 工程」铺路——程序化生成合法 uid、写 `.uid` 侧写、绑定 ext_resource、一次 `--import` 注册、四门验证闭环。**规格已完整写在 `docs/engine-analyzer.md` UID 节(U1-U4,源码逐行核验)**,实现是照规格搬运,复杂度低;等有真实「AI 生成工程」消费方再落地。
 - **X2 — 确定性路径派生 uid(复刻 `create_id_for_path`)**:需移植 Godot 私有 `String::hash64` + `RandomPCG`(PCG 变体)两个算法才能与引擎 bit 级一致;仅在出现「同路径必须稳定产出同 uid、且不能依赖引擎运行」的硬需求时立项,否则永远用 X1 的随机方案(resource_uid.cpp:134-155)。
+- **X3 — Blender→Godot 管线交集(shader 维度,2026-10-16 实证收敛)**:生态事实——glTF 导出器只读 Principled BSDF 标准输入,程序化节点/自定义组永不存活(Blender 5.0 亦然,正道是 bake 纹理);Godot 侧导入产物为 StandardMaterial3D/ShaderMaterial stub,高级效果**手写 gdshader 重建**。故本项目的 Blender 交集收敛为:①资源图谱可见性(.glb/.gltf 材质/纹理引用边,E1-G 泛化已覆盖,零新增);②gdshader 手写体验(P2.6 全线);③gdshader 模板/snippet(S1-④ 顺带,覆盖「新建 spatial/canvas shader 骨架」高频动作)。**不做**:Blender 材质节点→gdshader 自动转译(见 rejected-designs);若未来官方 glTF 生态出现标准材质中间表示再评估。
