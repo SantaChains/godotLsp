@@ -1,0 +1,470 @@
+# GLTFDocument
+
+**继承**：[Resource](class_resource.md) → [RefCounted](class_refcounted.md) → [Object](class_object.md) → **GLTFDocument**
+
+> GLTFDocument supports reading data from a glTF file, buffer, or Godot scene. This data can then be written to the filesystem, buffer, or used to create a Godot scene.
+
+<details><summary>官方英文描述（中文精译进行中）</summary>
+
+GLTFDocument supports reading data from a glTF file, buffer, or Godot scene. This data can then be written to the filesystem, buffer, or used to create a Godot scene.
+
+All of the data in a glTF scene is stored in the GLTFState class. GLTFDocument processes state objects, but does not contain any scene data itself. GLTFDocument has member variables to store export configuration settings such as the image format, but is otherwise stateless. Multiple scenes can be processed with the same settings using the same GLTFDocument object and different GLTFState objects.
+
+GLTFDocument can be extended with arbitrary functionality by extending the GLTFDocumentExtension class and registering it with GLTFDocument via register_gltf_document_extension(). This allows for custom data to be imported and exported.
+
+</details>
+
+## 方法
+
+### append_from_buffer {#append_from_buffer}
+
+```gdscript
+Error append_from_buffer(bytes: PackedByteArray, base_path: String, state: GLTFState, flags: int = 0)
+```
+
+Takes a PackedByteArray defining a glTF and imports the data to the given GLTFState object through the state parameter.
+
+Note: The base_path tells append_from_buffer() where to find dependencies and can be empty.
+
+### append_from_file {#append_from_file}
+
+```gdscript
+Error append_from_file(path: String, state: GLTFState, flags: int = 0, base_path: String = "")
+```
+
+Takes a path to a glTF file and imports the data at that file path to the given GLTFState object through the state parameter.
+
+Note: The base_path tells append_from_file() where to find dependencies and can be empty.
+
+### append_from_scene {#append_from_scene}
+
+```gdscript
+Error append_from_scene(node: Node, state: GLTFState, flags: int = 0)
+```
+
+Takes a Godot Engine scene node and exports it and its descendants to the given GLTFState object through the state parameter.
+
+### export_object_model_property {#export_object_model_property}
+
+```gdscript
+static GLTFObjectModelProperty export_object_model_property(state: GLTFState, node_path: NodePath, godot_node: Node, gltf_node_index: int)
+```
+
+Determines a mapping between the given Godot node_path and the corresponding glTF Object Model JSON pointer(s) in the generated glTF file. The details of this mapping are returned in a GLTFObjectModelProperty object. Additional mappings can be supplied via the GLTFDocumentExtension._import_object_model_property() callback method.
+
+### generate_buffer {#generate_buffer}
+
+```gdscript
+PackedByteArray generate_buffer(state: GLTFState)
+```
+
+Takes a GLTFState object through the state parameter and returns a glTF PackedByteArray.
+
+### generate_scene {#generate_scene}
+
+```gdscript
+Node generate_scene(state: GLTFState, bake_fps: float = 30, trimming: bool = false, remove_immutable_tracks: bool = true)
+```
+
+Takes a GLTFState object through the state parameter and returns a Godot Engine scene node.
+
+The bake_fps parameter overrides the bake_fps in state.
+
+### get_fallback_image_format {#get_fallback_image_format}
+
+```gdscript
+String get_fallback_image_format() const
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### get_fallback_image_quality {#get_fallback_image_quality}
+
+```gdscript
+float get_fallback_image_quality() const
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### get_image_format {#get_image_format}
+
+```gdscript
+String get_image_format() const
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### get_lossy_quality {#get_lossy_quality}
+
+```gdscript
+float get_lossy_quality() const
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### get_root_node_mode {#get_root_node_mode}
+
+```gdscript
+GLTFDocument.RootNodeMode get_root_node_mode() const
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### get_supported_gltf_extensions {#get_supported_gltf_extensions}
+
+```gdscript
+static PackedStringArray get_supported_gltf_extensions()
+```
+
+Returns a list of all support glTF extensions, including extensions supported directly by the engine, and extensions supported by user plugins registering GLTFDocumentExtension classes.
+
+Note: If this method is run before a GLTFDocumentExtension is registered, its extensions won't be included in the list. Be sure to only run this method after all extensions are registered. If you run this when the engine starts, consider waiting a frame before calling this method to ensure all extensions are registered.
+
+### get_texture_map_mode {#get_texture_map_mode}
+
+```gdscript
+GLTFDocument.TextureMapMode get_texture_map_mode() const
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### get_visibility_mode {#get_visibility_mode}
+
+```gdscript
+GLTFDocument.VisibilityMode get_visibility_mode() const
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### import_object_model_property {#import_object_model_property}
+
+```gdscript
+static GLTFObjectModelProperty import_object_model_property(state: GLTFState, json_pointer: String)
+```
+
+Determines a mapping between the given glTF Object Model json_pointer and the corresponding Godot node path(s) in the generated Godot scene. The details of this mapping are returned in a GLTFObjectModelProperty object. Additional mappings can be supplied via the GLTFDocumentExtension._export_object_model_property() callback method.
+
+### register_gltf_document_extension {#register_gltf_document_extension}
+
+```gdscript
+static void register_gltf_document_extension(extension: GLTFDocumentExtension, first_priority: bool = false)
+```
+
+Registers the given GLTFDocumentExtension instance with GLTFDocument. If first_priority is true, this extension will be run first. Otherwise, it will be run last.
+
+Note: Like GLTFDocument itself, all GLTFDocumentExtension classes must be stateless in order to function properly. If you need to store data, use the set_additional_data and get_additional_data methods in GLTFState or GLTFNode.
+
+### set_fallback_image_format {#set_fallback_image_format}
+
+```gdscript
+void set_fallback_image_format(fallback_image_format: String)
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### set_fallback_image_quality {#set_fallback_image_quality}
+
+```gdscript
+void set_fallback_image_quality(fallback_image_quality: float)
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### set_image_format {#set_image_format}
+
+```gdscript
+void set_image_format(image_format: String)
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### set_lossy_quality {#set_lossy_quality}
+
+```gdscript
+void set_lossy_quality(lossy_quality: float)
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### set_root_node_mode {#set_root_node_mode}
+
+```gdscript
+void set_root_node_mode(root_node_mode: GLTFDocument.RootNodeMode)
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### set_texture_map_mode {#set_texture_map_mode}
+
+```gdscript
+void set_texture_map_mode(texture_map_mode: GLTFDocument.TextureMapMode)
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### set_visibility_mode {#set_visibility_mode}
+
+```gdscript
+void set_visibility_mode(visibility_mode: GLTFDocument.VisibilityMode)
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### unregister_gltf_document_extension {#unregister_gltf_document_extension}
+
+```gdscript
+static void unregister_gltf_document_extension(extension: GLTFDocumentExtension)
+```
+
+Unregisters the given GLTFDocumentExtension instance.
+
+### write_to_filesystem {#write_to_filesystem}
+
+```gdscript
+Error write_to_filesystem(state: GLTFState, path: String)
+```
+
+Takes a GLTFState object through the state parameter and writes a glTF file to the filesystem.
+
+Note: The extension of the glTF file determines if it is a .glb binary file or a .gltf text file.
+
+## 属性
+
+### image_format {#image_format}
+
+```gdscript
+image_format: String
+```
+
+- void set_image_format(value: String)
+- String get_image_format()
+
+The user-friendly name of the export image format. This is used when exporting the glTF file, including writing to a file and writing to a byte array.
+
+By default, Godot allows the following options: "None", "PNG", "JPEG", "Lossless WebP", and "Lossy WebP". Support for more image formats can be added in GLTFDocumentExtension classes. A single extension class can provide multiple options for the specific format to use, or even an option that uses multiple formats at once.
+
+### lossy_quality {#lossy_quality}
+
+```gdscript
+lossy_quality: float
+```
+
+- void set_lossy_quality(value: float)
+- float get_lossy_quality()
+
+If image_format is a lossy image format, this determines the lossy quality of the image. On a range of 0.0 to 1.0, where 0.0 is the lowest quality and 1.0 is the highest quality. A lossy quality of 1.0 is not the same as lossless.
+
+### fallback_image_format {#fallback_image_format}
+
+```gdscript
+fallback_image_format: String
+```
+
+- void set_fallback_image_format(value: String)
+- String get_fallback_image_format()
+
+The user-friendly name of the fallback image format. This is used when exporting the glTF file, including writing to a file and writing to a byte array.
+
+This property may only be one of "None", "PNG", or "JPEG", and is only used when the image_format is not one of "None", "PNG", or "JPEG". If having multiple extension image formats is desired, that can be done using a GLTFDocumentExtension class - this property only covers the use case of providing a base glTF fallback image when using a custom image format.
+
+### fallback_image_quality {#fallback_image_quality}
+
+```gdscript
+fallback_image_quality: float
+```
+
+- void set_fallback_image_quality(value: float)
+- float get_fallback_image_quality()
+
+The quality of the fallback image, if any. For PNG files, this downscales the image on both dimensions by this factor. For JPEG files, this is the lossy quality of the image. A low value is recommended, since including multiple high quality images in a glTF file defeats the file size gains of using a more efficient image format.
+
+### root_node_mode {#root_node_mode}
+
+```gdscript
+root_node_mode: int
+```
+
+- void set_root_node_mode(value: RootNodeMode)
+- RootNodeMode get_root_node_mode()
+
+How to process the root node during export. The default and recommended value is ROOT_NODE_MODE_SINGLE_ROOT.
+
+Note: Regardless of how the glTF file is exported, when importing, the root node type and name can be overridden in the scene import settings tab.
+
+### texture_map_mode {#texture_map_mode}
+
+```gdscript
+texture_map_mode: int
+```
+
+- void set_texture_map_mode(value: TextureMapMode)
+- TextureMapMode get_texture_map_mode()
+
+How to handle texture maps during import. The default and recommended value is TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL, which automatically remaps from glTF's flexible texture map system to the more specific texture map slots in Godot's StandardMaterial3D class. Alternatively, TEXTURE_MAP_MODE_DO_NOT_REMAP can be used to preserve the original texture maps from the glTF file, which may be desirable if using the glTF file with custom shaders, but may not display correctly with Godot's built-in materials.
+
+### visibility_mode {#visibility_mode}
+
+```gdscript
+visibility_mode: int
+```
+
+- void set_visibility_mode(value: VisibilityMode)
+- VisibilityMode get_visibility_mode()
+
+How to deal with node visibility during export. This setting does nothing if all nodes are visible. The default and recommended value is VISIBILITY_MODE_INCLUDE_REQUIRED, which uses the KHR_node_visibility extension.
+
+## 枚举
+
+### RootNodeMode {#enum-RootNodeMode}
+
+```gdscript
+enum RootNodeMode { ROOT_NODE_MODE_SINGLE_ROOT = 0, ROOT_NODE_MODE_KEEP_ROOT = 1, ROOT_NODE_MODE_MULTI_ROOT = 2 }
+```
+
+RootNodeMode ROOT_NODE_MODE_SINGLE_ROOT = 0
+
+Treat the Godot scene's root node as the root node of the glTF file, and mark it as the single root node via the GODOT_single_root glTF extension. This will be parsed the same as ROOT_NODE_MODE_KEEP_ROOT if the implementation does not support GODOT_single_root.
+
+RootNodeMode ROOT_NODE_MODE_KEEP_ROOT = 1
+
+Treat the Godot scene's root node as the root node of the glTF file, but do not mark it as anything special. An extra root node will be generated when importing into Godot. This uses only vanilla glTF features. This is equivalent to the behavior in Godot 4.1 and earlier.
+
+RootNodeMode ROOT_NODE_MODE_MULTI_ROOT = 2
+
+Treat the Godot scene's root node as the name of the glTF scene, and add all of its children as root nodes of the glTF file. This uses only vanilla glTF features. This avoids an extra root node, but only the name of the Godot scene's root node will be preserved, as it will not be saved as a node.
+
+#### ROOT_NODE_MODE_SINGLE_ROOT {#ROOT_NODE_MODE_SINGLE_ROOT}
+
+```gdscript
+ROOT_NODE_MODE_SINGLE_ROOT = 0
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### ROOT_NODE_MODE_KEEP_ROOT {#ROOT_NODE_MODE_KEEP_ROOT}
+
+```gdscript
+ROOT_NODE_MODE_KEEP_ROOT = 1
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### ROOT_NODE_MODE_MULTI_ROOT {#ROOT_NODE_MODE_MULTI_ROOT}
+
+```gdscript
+ROOT_NODE_MODE_MULTI_ROOT = 2
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### TextureMapMode {#enum-TextureMapMode}
+
+```gdscript
+enum TextureMapMode { TEXTURE_MAP_MODE_DO_NOT_REMAP = 0, TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL = 1 }
+```
+
+TextureMapMode TEXTURE_MAP_MODE_DO_NOT_REMAP = 0
+
+Import the texture maps in the glTF file as they are, without trying to fit them into specific texture slots suitable for Godot's built-in materials. This may be desirable if using the glTF file with custom shaders, but may not display correctly with Godot's built-in materials. This is equivalent to the behavior in Godot 4.6 and earlier.
+
+TextureMapMode TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL = 1
+
+Import the texture maps in the glTF file remapped to the most suitable texture slots based on Godot's StandardMaterial3D class. This is the default behavior.
+
+#### TEXTURE_MAP_MODE_DO_NOT_REMAP {#TEXTURE_MAP_MODE_DO_NOT_REMAP}
+
+```gdscript
+TEXTURE_MAP_MODE_DO_NOT_REMAP = 0
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL {#TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL}
+
+```gdscript
+TEXTURE_MAP_MODE_REMAP_TO_STANDARD_MATERIAL = 1
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### VisibilityMode {#enum-VisibilityMode}
+
+```gdscript
+enum VisibilityMode { VISIBILITY_MODE_INCLUDE_REQUIRED = 0, VISIBILITY_MODE_INCLUDE_OPTIONAL = 1, VISIBILITY_MODE_EXCLUDE = 2 }
+```
+
+VisibilityMode VISIBILITY_MODE_INCLUDE_REQUIRED = 0
+
+If the scene contains any non-visible nodes, include them, mark them as non-visible with KHR_node_visibility, and require that importers respect their non-visibility. Downside: If the importer does not support KHR_node_visibility, the file cannot be imported.
+
+VisibilityMode VISIBILITY_MODE_INCLUDE_OPTIONAL = 1
+
+If the scene contains any non-visible nodes, include them, mark them as non-visible with KHR_node_visibility, and do not impose any requirements on importers. Downside: If the importer does not support KHR_node_visibility, invisible objects will be visible.
+
+VisibilityMode VISIBILITY_MODE_EXCLUDE = 2
+
+If the scene contains any non-visible nodes, do not include them in the export. This is the same as the behavior in Godot 4.4 and earlier. Downside: Invisible nodes will not exist in the exported file.
+
+#### VISIBILITY_MODE_INCLUDE_REQUIRED {#VISIBILITY_MODE_INCLUDE_REQUIRED}
+
+```gdscript
+VISIBILITY_MODE_INCLUDE_REQUIRED = 0
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### VISIBILITY_MODE_INCLUDE_OPTIONAL {#VISIBILITY_MODE_INCLUDE_OPTIONAL}
+
+```gdscript
+VISIBILITY_MODE_INCLUDE_OPTIONAL = 1
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### VISIBILITY_MODE_EXCLUDE {#VISIBILITY_MODE_EXCLUDE}
+
+```gdscript
+VISIBILITY_MODE_EXCLUDE = 2
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+### ImportFlags {#enum-ImportFlags}
+
+```gdscript
+enum ImportFlags（位标志） { IMPORT_FLAG_GENERATE_TANGENT_ARRAYS = 8, IMPORT_FLAG_USE_NAMED_SKIN_BINDS = 16, IMPORT_FLAG_DISCARD_MESHES_AND_MATERIALS = 32, IMPORT_FLAG_FORCE_DISABLE_MESH_COMPRESSION = 64 }
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### IMPORT_FLAG_GENERATE_TANGENT_ARRAYS {#IMPORT_FLAG_GENERATE_TANGENT_ARRAYS}
+
+```gdscript
+IMPORT_FLAG_GENERATE_TANGENT_ARRAYS = 8
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### IMPORT_FLAG_USE_NAMED_SKIN_BINDS {#IMPORT_FLAG_USE_NAMED_SKIN_BINDS}
+
+```gdscript
+IMPORT_FLAG_USE_NAMED_SKIN_BINDS = 16
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### IMPORT_FLAG_DISCARD_MESHES_AND_MATERIALS {#IMPORT_FLAG_DISCARD_MESHES_AND_MATERIALS}
+
+```gdscript
+IMPORT_FLAG_DISCARD_MESHES_AND_MATERIALS = 32
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
+
+#### IMPORT_FLAG_FORCE_DISABLE_MESH_COMPRESSION {#IMPORT_FLAG_FORCE_DISABLE_MESH_COMPRESSION}
+
+```gdscript
+IMPORT_FLAG_FORCE_DISABLE_MESH_COMPRESSION = 64
+```
+
+> 🚧 描述待补（P0 精译）。参见官方 [godot-docs](https://docs.godotengine.org/en/stable/)。
