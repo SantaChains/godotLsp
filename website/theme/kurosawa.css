@@ -1,0 +1,148 @@
+/* 「影」——黑泽明意象深色主题
+ *
+ * 意象来源（黑泽明电影的物象与配色）：
+ * - 墨黑底色：《影武者》《乱》的夜幕与墨画
+ * - 朱红  #c73e3a：《乱》的赤备、《蜘蛛巢城》的血与旗
+ * - 麦金  #d4a843：《七武士》《梦》的麦浪与篝火
+ * - 靛青  #7a9cc4：《影武者》夜战的火把蓝
+ * - 米白前景：《罗生门》的障子纸与信纸
+ *
+ * 机制：mdbook 0.5 主题切换 = html class；navy 档自动启用
+ * tomorrow-night 代码高亮，本文件在其后加载并覆盖为暖墨调。
+ */
+
+html.navy {
+    --bg: #1a1815;             /* 墨夜暖黑 */
+    --fg: #d8d1c0;             /* 障子纸米白 */
+
+    --sidebar-bg: #12100d;     /* 浓墨 */
+    --sidebar-fg: #b5ac99;
+    --sidebar-non-existant: #4d473c;
+    --sidebar-active: #c73e3a; /* 朱红 */
+    --sidebar-spacer: #26221c;
+
+    --scrollbar: #4a4438;
+
+    --icons: #8a8070;
+    --icons-hover: #d8d1c0;
+
+    --links: #d4a843;          /* 麦金 */
+
+    --inline-code-color: #e0a458;
+
+    --theme-popup-bg: #201d18;
+    --theme-popup-border: #4a4438;
+    --theme-hover: #2c2820;
+
+    --quote-bg: #211e19;
+    --quote-border: #3a352a;
+
+    --warning-border: #d98e4a;
+
+    --table-border-color: #2e2a22;
+    --table-header-bg: #2a2620;
+    --table-alternate-bg: #1e1b16;
+
+    --searchbar-border-color: #4a4438;
+    --searchbar-bg: #26221c;
+    --searchbar-fg: #d8d1c0;
+    --searchbar-shadow-color: rgba(0, 0, 0, 0.6);
+    --searchresults-header-fg: #8a8070;
+    --searchresults-border-color: #3a352a;
+    --searchresults-li-bg: #26221c;
+    --search-mark-bg: #8a6d2b;
+
+    --color-scheme: dark;
+
+    /* 复制按钮滤镜：暖米色系 */
+    --copy-button-filter: invert(63%) sepia(14%) saturate(280%) hue-rotate(3deg) brightness(90%) contrast(88%);
+    --copy-button-filter-hover: invert(72%) sepia(34%) saturate(520%) hue-rotate(2deg) brightness(95%) contrast(92%);
+
+    --footnote-highlight: #c73e3a;
+
+    --overlay-bg: rgba(10, 8, 5, 0.5);
+
+    --blockquote-note-color: #7a9cc4;      /* 靛青 */
+    --blockquote-tip-color: #8fae5d;      /* 苔绿 */
+    --blockquote-important-color: #b085d6;
+    --blockquote-warning-color: #d4a843;  /* 麦金 */
+    --blockquote-caution-color: #e05a4e;  /* 赤红 */
+
+    --sidebar-header-border-color: #c73e3a;
+}
+
+/* —— 代码高亮：tomorrow-night 调为暖墨调 —— */
+
+html.navy .hljs {
+    color: #d8d1c0;
+    background: #1e1b16;       /* 墨纸 */
+}
+
+html.navy .hljs-comment,
+html.navy .hljs-quote {
+    color: #756c5a;            /* 灰褐，雨痕 */
+    font-style: italic;
+}
+
+html.navy .hljs-keyword,
+html.navy .hljs-selector-tag,
+html.navy .hljs-doctag {
+    color: #d95b56;            /* 朱红（亮一档保可读） */
+}
+
+html.navy .hljs-string,
+html.navy .hljs-regexp {
+    color: #d4a843;            /* 麦金 */
+}
+
+html.navy .hljs-number,
+html.navy .hljs-literal {
+    color: #7aa5b8;            /* 靛青 */
+}
+
+html.navy .hljs-title,
+html.navy .hljs-name,
+html.navy .hljs-function {
+    color: #ece4d0;
+}
+
+html.navy .hljs-attr,
+html.navy .hljs-attribute,
+html.navy .hljs-selector-id,
+html.navy .hljs-selector-class {
+    color: #d98e4a;            /* 篝火橙 */
+}
+
+html.navy .hljs-built_in,
+html.navy .hljs-class .hljs-title,
+html.navy .hljs-type {
+    color: #92b4c7;            /* 淡靛 */
+}
+
+html.navy .hljs-symbol,
+html.navy .hljs-bullet,
+html.navy .hljs-link {
+    color: #b085d6;
+}
+
+html.navy .hljs-meta {
+    color: #756c5a;
+}
+
+html.navy .hljs-addition {
+    color: #8fae5d;
+    background: #1e2416;
+}
+
+html.navy .hljs-deletion {
+    color: #e05a4e;
+    background: #2a1714;
+}
+
+html.navy .hljs-emphasis {
+    font-style: italic;
+}
+
+html.navy .hljs-strong {
+    font-weight: bold;
+}

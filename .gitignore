@@ -19,4 +19,5 @@ godot-test/
 
 *.txt
 *.log
-godotlsp.code-workspace
+godotlsp.code-workspace# 本地参考仓库（上游完全一致资源，不入库）
+refs/
