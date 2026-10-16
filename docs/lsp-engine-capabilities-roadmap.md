@@ -38,7 +38,7 @@
 
 ## P2 — 资源文件与工程理解
 
-7. **服务器侧 tscn/tres 解析器**：按 engine-analyzer.md N1-N4 规格，解析 [node]/[ext_resource]/[connection] 节头，建 uid↔path 双向映射。documentLink 扩展到 tscn/tres 里的 res:// 路径。
+7. [x] **服务器侧 tscn/tres 解析器**（6d3e721）：`gdscript-project/tscn.rs` 行级状态机解析 [gd_scene/gd_resource/ext_resource/sub_resource/node/connection]，宽容容错；Project 扫 .tscn/.tres 建 scenes + uid_paths 索引；scan_uid_files 扩头部自嵌 uid（1KB 快扫）；documentLink uid:// 自指跳过（路径等价比较，盘符大小写无关）、tscn 内 res:// 与 .gd 内 uid:// 双向可点；uidscene 夹具 + smoke_uid.py 端到端冒烟。
 8. **rename 跨文件**：符号表驱动，重命名 var/func/class 声明与所有引用点。
 9. **documentColor**：Color(...) 字面量行内色块装饰。
 10. **信号连接 CodeLens**：tscn [connection] 段 → 脚本里 connect() 行上方显示连接数。
