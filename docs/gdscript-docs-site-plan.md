@@ -163,6 +163,84 @@ src/
    parent 消失节点被静默删除（P2 章 + ⚪ 静默失败合集）——
    此篇同时是「为什么 LSP 要做这些检查」的说明书，与 godotlsp 诊断能力互相印证。
 
+## 三之四、思想篇（DOD / ECS / Jai —— 组合大于继承之后的"为什么"）
+
+定位：讲清现代游戏范式的思想源头。范式篇讲「怎么用 Godot」，本篇讲「为什么业界往
+这个方向走」。**概念内容，不入 LSP 锚点契约**（无对应 API，hover 不指向这里）。
+
+1. **数据导向设计（DOD）** ⭐：硬件真相——cache line（L1 命中 ~4 周期 vs 内存
+   ~200-300 周期）、SoA vs AoS 布局、分支预测与批量处理；核心句「先按访问方式
+   布局数据，再写代码」；与 OOP 的取舍边界（不是替代，是热路径武器）。
+2. **ECS 架构** ⭐：Entity(ID)/Component(纯数据)/System(批量逻辑) 三支柱；
+   组合优于继承的架构化表达——深继承的真正死因（组合爆炸 + fragile base class，
+   非"代码丑"）；「ECS 只在规模上更快」的精确边界；Unity DOTS / Bevy / Unreal Mass
+   对照表；**Godot 为什么不是 ECS**（节点树是 scene graph + 组件混合体）。
+3. **Jai 与 Jonathan Blow 理念** ⭐：为游戏而生的语言（Braid/The Witness 作者）——
+   无隐藏控制流（无异常/无 RAII/无隐式构造析构/无隐式分配）、`#run` 编译时执行、
+   context allocator、百万行秒级编译（80k 行 <1s 实测）、"给好程序员的工具，不防
+   傻瓜"；对 Zig/Odin 的血统影响；与本项目 godotlsp 的共鸣（快编译=快迭代=生产力）。
+4. **Godot Server 架构即 DOD**：RenderingServer/PhysicsServer/AudioServer——场景系统
+   是可选层，一切高阶 API 的底层都是 RID 句柄 + 批量指令；何时不走节点树
+   （万级同屏实例）；Bullet Shower 官方示例。
+
+## 三之五、性能篇（Godot 优化手段 + 高性能代码实施）
+
+定位：官方 performance 文档体系（general_optimization / cpu / gpu / using_servers /
+high-end 诸篇）+ 社区实证的 GDScript 热点知识的体系化。**同不入 LSP 锚点契约**。
+
+1. **优化方法论**：三类慢（每帧持续低帧率/间歇卡顿/加载慢）→ 测量先行
+   （内置 Profiler、Monitors、`Time.get_ticks_usec()` 手动计时、外部 Tracy/Perfetto/
+   RenderDoc）；假设检验 + 二分定位；Knuth 原则——先怀疑算法再怀疑代码；
+   「烟雾与镜子」（能用骗的不用算的）。
+2. **GDScript 高性能实施** ⭐：四类热点杀手——①无类型变量/数组（typed GDScript
+   是真实加速：跳过运行时类型解析，`Array[T]` 防 Variant 装箱）②热循环里
+   `get_node`/`get_nodes_in_group`（树遍历，须 @onready 缓存）③_process 内字符串
+   操作（每帧两次分配）④重复 connect（不去重，槽位翻倍）；升级阶梯：
+   修算法 → 加类型 → 移植单热点到 C# → GDExtension（顺序不可颠倒）。
+3. **批量与结构优化**：万 Node 各跑 `_process` 的调度开销 → 单管理器遍历
+   typed array；MultiMesh；Server API 绕过场景树；Nystrom 优化模式 Godot 版——
+   对象池（子弹/特效）、脏标识（world transform 缓存）、数据局部性、事件队列。
+4. **物理与渲染预算**：physics tick 降档 + 物理插值；碰撞形状 primitive 优先；
+   睡眠与远距 body；渲染三后端选型（Forward+/Mobile/Compatibility）；
+   GI 分档（lightmap 静态世界 / VoxelGI 动态室内 / SDFGI 开放世界）；
+   AA 取舍（TAA 真实向 / MSAA 2x-4x 风格化 / FXAA 兜底）；Environment 开销
+   静默叠加警告。
+
+## 三之六、算法篇（游戏算法与设计）
+
+定位：游戏专用算法的「原理讲透 + Godot 落地 + 延伸阅读」（延伸资源：Nystrom
+《Game Programming Patterns》免费在线、Red Blob Games 交互可视化、Gaffer on Games）。
+
+1. **游戏循环与时间**：fixed timestep 与可变 timestep、Gaffer「Fix Your Timestep」
+   （accumulator + 插值渲染）、与 `_process`/`_physics_process` 的精确映射、
+   delta 与时间缩放。
+2. **AI 与寻路** ⭐：A*（F=G+H、启发函数表：曼哈顿/欧几里得/对角线、admissible
+   准则）、Grid vs NavMesh、flow field（群体寻路）、状态机/下推自动机/行为树、
+   steering behaviors 与 boids 三定律。
+3. **空间数据结构**：hash grid/quadtree/BVH——O(n²) 碰撞对查询 → 邻域查询；
+   Godot 物理内部即此结构；何时自己造（boids 上百实例）。
+4. **噪声与程序化生成**：value noise → Perlin/Simplex → fBm 分形叠加；
+   Roguelike 地牢（房间放置 + 迷宫回溯连接）；高度图着色地形；
+   深入指向 Red Blob Games（多边形地图/蓝噪声/Voronoi）。
+
+## 三之七、数学篇（游戏数学 + 图形学速览）
+
+定位：quant67「游戏中的数学」路线的 Godot 版——解释引擎 Mathf/Vector API 背后的
+数学，而非 API 罗列。语法篇 04-types 只做类型速览，数学原理全部归此篇。
+
+1. **向量实战**：点积/叉积的几何意义与应用（朝向判断、视野锥、法线、左右手系）、
+   距离族（欧氏/曼哈顿/切比雪夫）。
+2. **插值家族**：lerp/InverseLerp/Remap/Clamp/SmoothStep、缓动函数、
+   贝塞尔曲线（相机路径/轨迹）。
+3. **变换与四元数**：矩阵/欧拉角/四元数三表示对比、万向节死锁、slerp、
+   Transform2D/3D 与 Godot 变换语义（local/global）。
+4. **几何检测**：Raycast 原理、AABB、圆-圆/矩形碰撞、SAT 分离轴、
+   到 Godot Physics2D/3D API 的映射。
+5. **随机与概率**：RNG 种子与可复现、RPG 伤害概率分布、加权抽取。
+6. **图形学速览** ⭐：渲染管线五阶段（剔除→阴影→不透明→透明排序→后处理）、
+   Blinn-Phong 光照模型（点积直觉）、法线贴图/阴影映射/后处理概念层、
+   Godot shader 入口（衔接 P2.6 GDShader 支持）与 gdshader 内建速查页互链。
+
 ## 四、类参考篇（生成部分，分期）
 
 规模现实：Godot 4.x ~900 类，逐类中文精译是数月级工作。分期：
@@ -187,12 +265,31 @@ src/
 
 ## 六、执行顺序（确认后开工）
 
-1. W1 清空 `website/` 重建骨架：book.toml + SUMMARY + intro（半天量）。
+1. W1 清空 `website/` 重建骨架：book.toml + SUMMARY + intro（✅ 2026-10-16）。
 2. W2 `tools/gen_docs.py` + P0 类生成 + 内核 `url` 模块改造 + 防漂移测试（核心闭环）。
 3. W3 语法篇 16 篇（AI 起草，godot-docs 语料逐篇核验）。
 4. W4 范式篇 8 篇 + 引擎内部篇 7 篇（engine-analyzer.md 改写）。
 5. W5 P1 全类骨架 + Pages 工作流上线。
 6. 迭代：P2 精译、附录（高频坑/迁移表/学习路线）、插件入口链接。
+7. **P3 思想篇 4 章 + 性能篇 4 章**（范式思考的纵深；素材：官方 performance
+   文档、Nystrom、Jai 公开资料——三之四/三之五）。
+8. **P4 算法篇 4 章 + 数学篇 6 章**（素材：Red Blob Games、quant67 游戏数学、
+   Gaffer on Games——三之六/三之七）。
+9. W3 起执行 §五之二 写作规范；paradigm 补 09-composition（组合优于继承深挖，
+   与思想篇 01-02 互链）。
+
+### 取舍声明（明确不做）
+
+- **不做完整图形学教材**：GPU 架构/光栅推导/BRDF 数学不展开，图形学速览止于
+  「看懂 Godot 渲染选项在买什么」的深度，深水区走延伸阅读。
+- **不复刻 Nystrom/Red Blob 全书**：模式与算法只收 Godot 语境下高频者
+  （约 15%），其余链接延伸；避免与原书重复劳动。
+- **ECS 不教自研**：Godot 无官方 ECS，教「何时用组合/何时上 Server/MultiMesh」
+  而非在 GDScript 里手写 ECS 框架（性能和语言都不支持，反模式）。
+- **Jai 只讲理念不讲语法**：语言未公开发布，理念层（无隐藏控制流/DOD/编译时）
+  用于校准思维，代码示例一概不用 Jai。
+- **思想/性能/算法/数学四篇全部不入 LSP 锚点契约**：hover/doc_link 只指向
+  syntax/builtin，概念篇纯阅读向，防漂移测试范围不变。
 
 ## 五之二、写作风格规范（参照系：rust-course，refs/rust-course 实证抽样）
 
