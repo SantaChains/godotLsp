@@ -206,6 +206,20 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
       connProvider.refresh();
     }),
     vscode.commands.registerCommand("godotlsp.goto", gotoSymbol),
+    // P2.10 codeLens:跳到 tscn [connection] 行（服务器 lens 命令载荷 [uri, line]）。
+    vscode.commands.registerCommand(
+      "godotlsp.openConnection",
+      async (uri?: string, line?: number) => {
+        if (typeof uri !== "string" || typeof line !== "number") {
+          return;
+        }
+        const doc = await vscode.workspace.openTextDocument(vscode.Uri.parse(uri));
+        const editor = await vscode.window.showTextDocument(doc, { preview: true });
+        const pos = new vscode.Position(line, 0);
+        editor.revealRange(new vscode.Range(pos, pos), vscode.TextEditorRevealType.InCenter);
+        editor.selection = new vscode.Selection(pos, pos);
+      },
+    ),
     // 侧边栏条目右键快速复制(三视图共用,载荷解析见 copyable.ts)。
     vscode.commands.registerCommand("godotlsp.tree.copyName", async (node?: unknown) => {
       const info = copyInfoFrom(node);

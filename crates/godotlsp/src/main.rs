@@ -8,7 +8,7 @@
 
 use std::collections::{HashMap, HashSet};
 
-use gdscript_engine::EngineApi;
+use gdscript_engine::{ConstValue, EngineApi};
 use gdscript_project::Project;
 use gdscript_syntax::ast::{ClassDecl, ConstDecl, EnumDecl, FuncDecl, SignalDecl, Stmt, VarDecl};
 use gdscript_syntax::parse;
@@ -64,6 +64,8 @@ fn main() {
         document_highlight_provider: Some(OneOf::Left(true)),
         inlay_hint_provider: Some(OneOf::Left(true)),
         folding_range_provider: Some(FoldingRangeProviderCapability::Simple(true)),
+        color_provider: Some(ColorProviderCapability::Simple(true)),
+        code_lens_provider: Some(CodeLensOptions { resolve_provider: Some(false) }),
         workspace: Some(WorkspaceServerCapabilities {
             workspace_folders: Some(WorkspaceFoldersServerCapabilities {
                 supported: Some(true),
@@ -282,6 +284,18 @@ fn handle_request(req: Request, state: &mut State) -> Response {
         "textDocument/documentHighlight" => {
             let p: DocumentHighlightParams = serde_json::from_value(params).unwrap();
             serde_json::to_value(document_highlight(state, &p)).unwrap()
+        }
+        "textDocument/documentColor" => {
+            let p: DocumentColorParams = serde_json::from_value(params).unwrap();
+            serde_json::to_value(document_color(state, &p)).unwrap()
+        }
+        "textDocument/colorPresentation" => {
+            let p: ColorPresentationParams = serde_json::from_value(params).unwrap();
+            serde_json::to_value(color_presentation(&p)).unwrap()
+        }
+        "textDocument/codeLens" => {
+            let p: CodeLensParams = serde_json::from_value(params).unwrap();
+            serde_json::to_value(code_lens(state, &p)).unwrap()
         }
         "workspace/symbol" => {
             let p: WorkspaceSymbolParams = serde_json::from_value(params).unwrap();
@@ -1219,6 +1233,172 @@ fn document_links(state: &State, p: &DocumentLinkParams) -> Vec<DocumentLink> {
     links
 }
 
+// ───────────────────────── P2.9 documentColor ─────────────────────────
+
+/// 解析 `a, b, c[, d]` 参数串为 RGBA；全部为数字字面量才成功（变量一律不猜，零误报优先）。
+fn parse_color_args(args: &str) -> Option<[f32; 4]> {
+    let mut comps = Vec::new();
+    for a in args.split(',') {
+        let t = a.trim().trim_end_matches(',');
+        let body = t.strip_prefix(['-', '+']).unwrap_or(t);
+        if body.is_empty() || !body.chars().all(|c| c.is_ascii_digit() || c == '.') || body == "." {
+            return None;
+        }
+        comps.push(t.parse::<f32>().ok()?);
+    }
+    match comps.len() {
+        3 => Some([comps[0], comps[1], comps[2], 1.0]),
+        4 => Some([comps[0], comps[1], comps[2], comps[3]]),
+        _ => None,
+    }
+}
+
+/// 引擎 Color 命名常量表：NAME -> RGBA（首访构建，值形如 "Color(r, g, b, a)"）。
+fn color_named_constants(engine: &EngineApi) -> &'static HashMap<String, [f32; 4]> {
+    static TABLE: std::sync::OnceLock<HashMap<String, [f32; 4]>> = std::sync::OnceLock::new();
+    TABLE.get_or_init(|| {
+        let mut m = HashMap::new();
+        if let Some(color) = engine.builtins.get("Color") {
+            for c in &color.constants {
+                if let ConstValue::String(s) = &c.value
+                    && let Some(inner) = s.strip_prefix("Color(").and_then(|s| s.strip_suffix(')'))
+                    && let Some(rgba) = parse_color_args(inner) {
+                        m.insert(c.name.clone(), rgba);
+                    }
+            }
+        }
+        m
+    })
+}
+
+/// 扫描 .gd 文本中的颜色：`Color(r,g,b[,a])` 构造 + `Color.NAME` 命名常量。
+/// 词法级扫描（不做 AST 下钻），字符串/注释中的命中一并产出（装饰性，无害）。
+fn document_color(state: &State, p: &DocumentColorParams) -> Vec<ColorInformation> {
+    let uri = &p.text_document.uri;
+    let Some(src) = state.docs.get(uri) else { return vec![] };
+    let named = color_named_constants(&state.engine);
+    let b = src.as_bytes();
+    let mut out = Vec::new();
+
+    let mut i = 0;
+    while i < b.len() {
+        // 词边界匹配 "Color"
+        if b[i] == b'C' && src[i..].starts_with("Color") {
+            let boundary_before =
+                i == 0 || !(b[i - 1].is_ascii_alphanumeric() || b[i - 1] == b'_');
+            if boundary_before {
+                let after = &src[i + 5..];
+                if let Some(rest) = after.strip_prefix('.') {
+                    // Color.NAME 命名常量
+                    let name: String =
+                        rest.chars().take_while(|c| c.is_ascii_alphanumeric() || *c == '_').collect();
+                    if let Some(&rgba) = named.get(&name) {
+                        let end = i + 5 + 1 + name.len();
+                        out.push(ColorInformation {
+                            range: offset_range(src, i, end),
+                            color: Color { red: rgba[0], green: rgba[1], blue: rgba[2], alpha: rgba[3] },
+                        });
+                    }
+                } else if let Some(rest) = after.strip_prefix('(') {
+                    // Color( 构造调用
+                    if let Some(close) = rest.find(')') {
+                        if let Some(rgba) = parse_color_args(&rest[..close]) {
+                            let end = i + 5 + 1 + close + 1;
+                            out.push(ColorInformation {
+                                range: offset_range(src, i, end),
+                                color: Color { red: rgba[0], green: rgba[1], blue: rgba[2], alpha: rgba[3] },
+                            });
+                        }
+                    }
+                }
+            }
+            i += 5;
+        } else {
+            i += 1;
+        }
+    }
+    out
+}
+
+/// colorPresentation：把色值回写为 GDScript 构造文本。
+fn color_presentation(p: &ColorPresentationParams) -> Vec<ColorPresentation> {
+    let c = p.color;
+    let label = format!("Color({}, {}, {}, {})", c.red, c.green, c.blue, c.alpha);
+    vec![ColorPresentation {
+        label,
+        text_edit: Some(TextEdit {
+            range: p.range,
+            new_text: format!("Color({:.6}, {:.6}, {:.6}, {:.6})", c.red, c.green, c.blue, c.alpha),
+        }),
+        additional_text_edits: None,
+    }]
+}
+
+// ───────────────────────── P2.10 codeLens（场景信号连接） ─────────────────────────
+
+/// tscn [connection] → 脚本方法声明行上方的连接数 lens。
+/// 仅统计 ext_resource 引用本脚本且四字段完整的 connection；命令跳转 tscn 连接行。
+fn code_lens(state: &State, p: &CodeLensParams) -> Vec<CodeLens> {
+    let uri = &p.text_document.uri;
+    let Some(src) = state.docs.get(uri) else { return vec![] };
+    let (Some(root), Some(project)) = (&state.root, &state.project) else { return vec![] };
+
+    // uri → res:// 相对路径。
+    let Some(path) = url::Url::parse(uri.as_str()).ok().and_then(|u| u.to_file_path().ok()) else {
+        return vec![];
+    };
+    let Ok(rel) = path.strip_prefix(root) else { return vec![] };
+    let res_path = format!("res://{}", rel.to_string_lossy().replace('\\', "/"));
+
+    // method 名 → (场景, 连接) 列表（只看引用了本脚本的场景）。
+    let mut by_method: HashMap<&str, Vec<(&gdscript_project::tscn::SceneFile, &gdscript_project::tscn::Connection)>> = HashMap::new();
+    for scene in &project.scenes {
+        let refs_me = scene.ext_resources.iter().any(|e| e.path == res_path);
+        if !refs_me {
+            continue;
+        }
+        for c in &scene.connections {
+            if c.complete {
+                by_method.entry(c.method.as_str()).or_default().push((scene, c));
+            }
+        }
+    }
+    if by_method.is_empty() {
+        return vec![];
+    }
+
+    // 顶层 func 声明行 → lens。
+    let file = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+    let mut lenses = Vec::new();
+    for stmt in &file.body {
+        let Stmt::Func(f) = stmt else { continue };
+        let Some(conns) = by_method.get(f.name.name.as_str()) else { continue };
+        let line = offset_to_position(src, f.span.0).line;
+        let (scene, conn) = conns[0];
+        let target = path_to_uri(&root.join(&scene.path));
+        lenses.push(CodeLens {
+            range: Range {
+                start: Position { line, character: 0 },
+                end: Position { line, character: 0 },
+            },
+            command: target.map(|t| Command {
+                title: if conns.len() == 1 {
+                    "1 个场景连接".into()
+                } else {
+                    format!("{} 个场景连接", conns.len())
+                },
+                command: "godotlsp.openConnection".into(),
+                arguments: Some(vec![
+                    serde_json::Value::String(t.as_str().to_string()),
+                    serde_json::json!(conn.line),
+                ]),
+            }),
+            data: None,
+        });
+    }
+    lenses
+}
+
 // ───────────────────────── inlayHints / foldingRange ─────────────────────────
 
 fn inlay_hints(state: &State, p: &InlayHintParams) -> Vec<InlayHint> {
@@ -1449,7 +1629,7 @@ fn scan_uid_files(base: &std::path::Path, dir: &std::path::Path, map: &mut HashM
 mod hover_tests {
     use super::*;
 
-    fn test_state() -> State {
+    pub(super) fn test_state() -> State {
         let json = include_str!("../../gdscript-engine/testdata/extension_api.json");
         let engine = std::sync::Arc::new(EngineApi::from_json(json).unwrap());
         let real_lower: HashSet<String> =
@@ -1587,5 +1767,114 @@ func _ready() -> void:
         // 成员面（静态类名回退）：Node. → ProcessMode 枚举名。
         let mem = labels("var x = Node.\n", 0, 13);
         assert!(mem.iter().any(|l| l == "ProcessMode"), "Node 成员面应含枚举名 ProcessMode: 命中数 {}", mem.len());
+    }
+}
+
+#[cfg(test)]
+mod color_codelens_tests {
+    use super::*;
+
+    #[test]
+    fn parse_color_args_basics() {
+        assert_eq!(parse_color_args("0.5, 0.25, 1.0"), Some([0.5, 0.25, 1.0, 1.0]));
+        assert_eq!(parse_color_args("1, 0, 0"), Some([1.0, 0.0, 0.0, 1.0]));
+        assert_eq!(parse_color_args("0.5,0.25,1.0,0.8"), Some([0.5, 0.25, 1.0, 0.8]));
+        assert_eq!(parse_color_args("-0.1, 0, 0"), Some([-0.1, 0.0, 0.0, 1.0]));
+        // 变量 / 空 / 缺参 / 表达式一律拒绝（零误报）。
+        assert_eq!(parse_color_args("r, 0, 0"), None);
+        assert_eq!(parse_color_args("0.5, 0.25"), None);
+        assert_eq!(parse_color_args(""), None);
+        assert_eq!(parse_color_args("a+b, 0, 0"), None);
+    }
+
+    #[test]
+    fn document_color_literal_and_named() {
+        let state = super::hover_tests::test_state();
+        let mut docs = HashMap::new();
+        let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+        docs.insert(uri.clone(), "var a := Color(0.5, 0.25, 1.0, 0.8)\nvar b := Color.RED\nvar c := Color(1, 0, 0)\nvar bad := Color(x, 0, 0)\nvar not_color := XColor(1, 0, 0)\n".into());
+        // 直接构造一个带 docs 的 state（test_state 返回空 docs，手动填充）。
+        let st = State {
+            engine: state.engine.clone(),
+            real_lower: state.real_lower.clone(),
+            docs,
+            asts: HashMap::new(),
+            doc_versions: HashMap::new(),
+            cancelled: HashSet::new(),
+            uid_map: HashMap::new(),
+            project: None,
+            root: None,
+            diag_sender: state.diag_sender.clone(),
+        };
+        let colors = document_color(&st, &DocumentColorParams {
+            text_document: TextDocumentIdentifier { uri: uri.clone() },
+            work_done_progress_params: Default::default(),
+            partial_result_params: Default::default(),
+        });
+        assert_eq!(colors.len(), 3, "应命中构造×2 + 命名×1, 变量与 XColor 不算: {colors:?}");
+        // 第一条 = 构造调用。
+        assert!((colors[0].color.red - 0.5).abs() < 1e-6);
+        assert!((colors[0].color.alpha - 0.8).abs() < 1e-6);
+        // 第二条 = Color.RED。
+        assert!(colors[1].color.red > 0.8 && colors[1].color.green < 0.2);
+    }
+
+    #[test]
+    fn color_presentation_roundtrip() {
+        let p = ColorPresentationParams {
+            text_document: TextDocumentIdentifier { uri: "file:///tmp/t.gd".parse().unwrap() },
+            color: Color { red: 1.0, green: 0.5, blue: 0.0, alpha: 1.0 },
+            range: Range::default(),
+            work_done_progress_params: Default::default(),
+            partial_result_params: Default::default(),
+        };
+        let pres = color_presentation(&p);
+        assert_eq!(pres.len(), 1);
+        assert_eq!(pres[0].text_edit.as_ref().unwrap().new_text, "Color(1.000000, 0.500000, 0.000000, 1.000000)");
+    }
+
+    #[test]
+    fn code_lens_scene_connections() {
+        // 用 uidscene 夹具：main.tscn [connection] method="_ready" 引用 main.gd。
+        let json = include_str!("../../gdscript-engine/testdata/extension_api.json");
+        let engine = std::sync::Arc::new(EngineApi::from_json(json).unwrap());
+        let real_lower: HashSet<String> =
+            engine.classes.keys().chain(engine.builtins.keys()).map(|s| s.to_lowercase()).collect();
+        let (tx, _rx) = std::sync::mpsc::channel();
+        let manifest = env!("CARGO_MANIFEST_DIR");
+        let root = std::path::PathBuf::from(manifest).join("tests/fixtures/uidscene");
+        let project = Project::open(&root, Some(json)).unwrap();
+        let st = State {
+            engine,
+            real_lower,
+            docs: HashMap::new(),
+            asts: HashMap::new(),
+            doc_versions: HashMap::new(),
+            cancelled: HashSet::new(),
+            uid_map: HashMap::new(),
+            project: Some(std::sync::Arc::new(project)),
+            root: Some(root.clone()),
+            diag_sender: tx,
+        };
+        // 模拟 didOpen：路径须在 root 之下（code_lens 做 strip_prefix）。
+        let gd = root.join("main.gd");
+        let uri = path_to_uri(&gd).unwrap();
+        let src = std::fs::read_to_string(&gd).unwrap();
+        let mut docs = HashMap::new();
+        docs.insert(uri.clone(), src);
+        let mut st = st;
+        st.docs = docs;
+
+        let lenses = code_lens(&st, &CodeLensParams {
+            text_document: TextDocumentIdentifier { uri },
+            work_done_progress_params: Default::default(),
+            partial_result_params: Default::default(),
+        });
+        assert_eq!(lenses.len(), 1, "func _ready 应有 1 条 lens: {lenses:?}");
+        let cmd = lenses[0].command.as_ref().unwrap();
+        assert_eq!(cmd.title, "1 个场景连接");
+        assert_eq!(cmd.command, "godotlsp.openConnection");
+        let args = cmd.arguments.as_ref().unwrap();
+        assert!(args[0].as_str().unwrap().ends_with("main.tscn"));
     }
 }

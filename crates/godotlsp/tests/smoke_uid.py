@@ -67,7 +67,28 @@ for l in tlinks:
     print("  - ->", l.get("target"))
 assert any(l["target"].endswith("main.gd") for l in tlinks), tlinks
 
-# 5. shutdown + exit
+# 5. P2.9 documentColor：main.gd 的 Color(0.5,...) + Color.RED 应各出一条
+colors = request(5, "textDocument/documentColor", {"textDocument":{"uri":gd_uri}}) or []
+print("OK documentColor(main.gd):", len(colors), "条")
+for c in colors:
+    print("  -", c["color"])
+assert len(colors) == 2, colors
+lit = [c for c in colors if abs(c["color"]["red"] - 0.5) < 1e-6]
+named = [c for c in colors if c["color"]["red"] > 0.8]
+assert lit and named, colors
+
+# 6. P2.10 codeLens：func _ready 上方应有场景连接 lens（main.tscn [connection]）
+lenses = request(6, "textDocument/codeLens", {"textDocument":{"uri":gd_uri}}) or []
+print("OK codeLens(main.gd):", len(lenses), "条")
+for l in lenses:
+    print("  -", l.get("command", {}).get("title"), "@line", l["range"]["start"]["line"])
+assert len(lenses) == 1, lenses
+cmd = lenses[0]["command"]
+assert cmd["title"] == "1 个场景连接", cmd
+assert cmd["command"] == "godotlsp.openConnection", cmd
+assert cmd["arguments"][0].endswith("main.tscn"), cmd
+
+# 7. shutdown + exit
 send({"jsonrpc":"2.0","id":2,"method":"shutdown","params":None})
 sh = recv()
 assert "result" in sh, sh

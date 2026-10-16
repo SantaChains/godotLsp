@@ -209,6 +209,11 @@
         "category": "godotlsp"
       },
       {
+        "command": "godotlsp.openConnection",
+        "title": "打开场景连接",
+        "category": "godotlsp"
+      },
+      {
         "command": "godotlsp.tree.copyName",
         "title": "复制名称",
         "category": "godotlsp",
