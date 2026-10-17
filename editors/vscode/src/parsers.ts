@@ -57,10 +57,13 @@ export interface SceneFile {
   nodePaths: Map<string, SNode>;
   /** 全场景 ext id → 引用次数(instance + 任意属性行绑定),A3 资源分组用。 */
   refCounts: Map<string, number>;
+  /** sub_resource id → 类型(A5 hover 展示;纯场景内资源无 path)。 */
+  subs: Map<string, string>;
 }
 
 const RE_NODE = /^\s*\[node\s+([^\]]*)\]/;
 const RE_EXT = /^\s*\[ext_resource\s+([^\]]*)\]/;
+const RE_SUB = /^\s*\[sub_resource\s+([^\]]*)\]/;
 // 值的三形态:引号串 / ExtResource("id") / 裸值(connection 的 binds=1 等数值字段无引号)。
 const RE_ATTR = /(\w+)\s*=\s*(?:"((?:\\.|[^"\\])*)"|ExtResource\("([^"]+)"\)|([^\s\]]+))/g;
 
@@ -79,6 +82,7 @@ const RE_PROP = /^\s*([\w/]+)\s*=\s*ExtResource\("([^"]+)"\)/;
 export function parseScene(text: string): SceneFile {
   const lines = text.split(/\r?\n/);
   const ext = new Map<string, { type: string; path: string }>();
+  const subs = new Map<string, string>();
   const nodes: SNode[] = [];
   // 当前归属节点:属性行归最近一个 [node];其他标签(sub_resource/resource/
   // connection/gd_scene…)切断归属——其下属性不属于任何场景节点。
@@ -93,6 +97,15 @@ export function parseScene(text: string): SceneFile {
         const id = attrs.get("id") ?? "";
         if (id) {
           ext.set(id, { type: attrs.get("type") ?? "", path: attrs.get("path") ?? "" });
+        }
+        continue;
+      }
+      const s = RE_SUB.exec(line);
+      if (s) {
+        const attrs = parseAttrs(s[1]);
+        const id = attrs.get("id") ?? "";
+        if (id) {
+          subs.set(id, attrs.get("type") ?? "");
         }
         continue;
       }
@@ -150,7 +163,7 @@ export function parseScene(text: string): SceneFile {
       refCounts.set(id, (refCounts.get(id) ?? 0) + 1);
     }
   }
-  return { ext, roots, nodePaths: byPath, refCounts };
+  return { ext, roots, nodePaths: byPath, refCounts, subs };
 }
 
 export interface SceneConnection {

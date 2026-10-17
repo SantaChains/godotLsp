@@ -85,8 +85,8 @@ PackedScene 实例化；**:1634** `ExtResource("id")` 序列化格式；**:541**
 | **A2** | **节点树绑定展示 + 打开对应文件** | 绑定脚本/实例化场景的节点：description 显示资源文件名（`main.gd`），图标区分（脚本 `symbol-file`、场景 `symbol-reference`）；**点击 jump 指向目标文件 uri**（`godotlsp.goto` 已支持任意 uri 的 showTextDocument+reveal，基建现成）；同节点多绑定（script + texture）时子节点展开各资源条目 |
 | **A3** | **外部资源分组（根级，按类去重）** | 场景树根级新增「外部资源」分组：按 kind 分类——脚本 Script / 场景 PackedScene / 纹理 Texture2D / 音频 AudioStream / 字体 Font / 材质与其他。**kind 推断：ext.type 字段优先，path 扩展名兜底**（.png/.svg→纹理、.ogg/.wav/.mp3→音频）；**同 path 多 ext id 合并去重**（用户明确要求「不重复显示」）；点击行为分流：文本资源（.gd/.tscn/.tres/.cfg）goto 跳转，二进制（png/ogg 等）`vscode.open` 原生编辑器打开（图片有内置预览）。条目描述显示引用次数（`×2 节点引用`） |
 | **A4** | **res:// 链接 Ctrl+点击**（DocumentLinkProvider，gd + tscn 双语言） | gd 里 `res://...` 字符串、tscn 里 `path="res://..."` 变可点击链接；res:// → workspace folder fsPath 映射；纯客户端零协议成本。官方插件同款，成本最低价值最高 |
-| **A5** | **ExtResource hover 预览 + 行尾 inlay** | hover `ExtResource("1")`：显示资源 type/path（后续可扩：图片 hover 显示缩略图 data-URI img，Image preview 插件模式）；inlay hint：ext_resource 行尾 `← Texture2D · icon.png` 类注释可视化（官方插件「inlay hints visualize External/Sub Resources」同款）；两者共用 A1 的 ext 注册表 |
-| **A6** | **脚本↔场景互跳命令**（Alt+O 类） | 打开 .gd → 扫描 workspace `*.tscn` 的 script 绑定反向索引（与 projectTree class_name 缓存同模式：保存时重建），多命中 quick pick；打开 .tscn → 跳根节点绑定脚本 |
+| **A5** ✅ 已实施(2026-10-18,0.1.10) | **ExtResource hover 预览 + 使用侧行尾 inlay** | hover `ExtResource("1")`：显示资源 type/path（后续可扩：图片 hover 显示缩略图 data-URI img，Image preview 插件模式）；inlay hint：ext_resource 行尾 `← Texture2D · icon.png` 类注释可视化（官方插件「inlay hints visualize External/Sub Resources」同款）；两者共用 A1 的 ext 注册表 |
+| **A6** ✅ 已实施(2026-10-18,0.1.10) | **脚本↔场景互跳命令**（Alt+O） | 打开 .gd → 扫描 workspace `*.tscn` 的 script 绑定反向索引（与 projectTree class_name 缓存同模式：保存时重建），多命中 quick pick；打开 .tscn → 跳根节点绑定脚本 |
 
 ### 3.5.2 B 系列（借鉴细节，后排）
 

@@ -14,6 +14,8 @@ import { SceneTreeProvider } from "./sceneTree";
 import { ConnectionTreeProvider } from "./connections";
 import { ConfigCompletionProvider, ConfigHoverProvider } from "./configAssist";
 import { highlightClampMiddleware } from "./highlight";
+import { SceneHintsProvider } from "./sceneHints";
+import { registerSceneSwitch } from "./sceneSwitch";
 import { ResLinkProvider } from "./resLinks";
 import { isRunning } from "./lsp";
 import { copyInfoFrom } from "./copyable";
@@ -68,6 +70,13 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
       new ResLinkProvider(),
     ),
   );
+  // A5:ExtResource/SubResource hover 预览 + 使用侧行尾 inlay(tscn)。
+  context.subscriptions.push(
+    vscode.languages.registerHoverProvider("godot-resource", new SceneHintsProvider()),
+    vscode.languages.registerInlayHintsProvider("godot-resource", new SceneHintsProvider()),
+  );
+  // A6:脚本↔场景互跳(Alt+O)。
+  context.subscriptions.push(...registerSceneSwitch());
 
   // 侧边栏四视图:当前文件符号 / 项目结构(autoload + class_name)/ 场景结构(tscn 节点树)/ 信号连接(tscn [connection])。
   symbols = new SymbolTreeProvider(() => client, output);

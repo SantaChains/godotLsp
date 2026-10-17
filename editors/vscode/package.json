@@ -2,7 +2,7 @@
   "name": "godotlsp",
   "displayName": "godotlsp:独立 GDScript 语言服务器",
   "description": "独立于 Godot 引擎运行的 GDScript 语言服务器:悬停文档、补全、导航、诊断与格式化,无需打开 Godot 编辑器。",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "publisher": "SantaChains",
   "license": "MIT",
   "repository": {
@@ -177,6 +177,11 @@
       {
         "command": "godotlsp.runScene",
         "title": "运行当前场景",
+        "category": "godotlsp"
+      },
+      {
+        "command": "godotlsp.switchSource",
+        "title": "脚本与场景互相跳转",
         "category": "godotlsp"
       },
       {
@@ -395,7 +400,14 @@
           "markdownDescription": "「运行项目/运行当前场景」命令所用的 Godot 可执行文件路径。留空时使用 `PATH` 中的 `godot`。支持 `${workspaceFolder}` 与 `~`。"
         }
       }
-    }
+    },
+    "keybindings": [
+      {
+        "command": "godotlsp.switchSource",
+        "key": "alt+o",
+        "when": "editorTextFocus && (editorLangId == gdscript || editorLangId == godot-resource)"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run build",
