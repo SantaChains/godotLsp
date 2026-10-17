@@ -26,12 +26,26 @@ export class SceneTreeProvider {
     const editor = vscode.window.activeTextEditor;
     const uri = editor?.document.uri.toString();
     if (!editor || !uri || !/\.(tscn|scn)$/i.test(editor.document.fileName)) {
-      return [new PNode("打开一个 .tscn 场景文件以查看结构", undefined, "info", undefined, undefined)];
+      // 占位引导:点击弹 quick pick 选择工程内场景(不必先手动打开 tscn)。
+      return [
+        new PNode(
+          "点击选择要查看的 .tscn 场景…",
+          undefined,
+          "list-unordered",
+          undefined,
+          undefined,
+          undefined,
+          undefined,
+          { command: "godotlsp.pickScene", title: "选择场景" },
+        ),
+      ];
     }
     if (!this.cache || this.cache.uri !== uri) {
       this.index.clear();
       const scene = parseScene(editor.document.getText());
-      this.cache = { uri, scene, nodes: scene.roots.map((n) => this.toNode(n, uri)) };
+      // 注意:toNode 以参数收 scene,不读 this.cache——对象字面量构造期
+      // this.cache 仍是旧值(undefined/上一文档),字段读取会退化或崩。
+      this.cache = { uri, scene, nodes: scene.roots.map((n) => this.toNode(n, uri, scene)) };
     }
     // 根级:外部资源分组(A3)置顶,其后场景节点树。
     const resGroup = this.resGroup(uri);
@@ -89,12 +103,11 @@ export class SceneTreeProvider {
     return new PNode("外部资源", String(scene.ext.size), "file-media", undefined, undefined, kindNodes);
   }
 
-  private toNode(n: SNode, uri: string): PNode {
-    const scene = this.cache?.scene;
-    const ext = n.instanceId ? scene?.ext.get(n.instanceId) : undefined;
+  private toNode(n: SNode, uri: string, scene: ReturnType<typeof parseScene>): PNode {
+    const ext = n.instanceId ? scene.ext.get(n.instanceId) : undefined;
     // A2:script 绑定最常关心(引擎 resource_format_text.cpp:1985 同键语义),
     // 优先进 description;其余绑定降为子资源条目。
-    const scriptExt = n.bindings.has("script") ? scene?.ext.get(n.bindings.get("script")!) : undefined;
+    const scriptExt = n.bindings.has("script") ? scene.ext.get(n.bindings.get("script")!) : undefined;
     const scriptName = scriptExt?.path.split("/").pop();
     const description = scriptName
       ? `${scriptName} (${n.type ?? ext?.type ?? "instance"})`
@@ -104,7 +117,7 @@ export class SceneTreeProvider {
     const bindingNodes = [...n.bindings.entries()]
       .filter(([attr]) => attr !== "script")
       .map(([attr, id]) => {
-        const e = scene?.ext.get(id);
+        const e = scene.ext.get(id);
         const kind = e ? kindOf(e.type, e.path) : "other";
         return new PNode(
           e?.path.split("/").pop() ?? attr,
@@ -116,7 +129,7 @@ export class SceneTreeProvider {
           e?.type,
         );
       });
-    const children = [...bindingNodes, ...n.children.map((c) => this.toNode(c, uri))];
+    const children = [...bindingNodes, ...n.children.map((c) => this.toNode(c, uri, scene))];
     const node = new PNode(
       n.name,
       description,

@@ -19,6 +19,8 @@ export class PNode {
     children?: PNode[],
     /** 悬停详情(资源类型等);缺省时 pTreeItem 不覆盖 TreeItem 默认 tooltip。 */
     readonly tooltip?: string,
+    /** 直连命令(占位引导条目等);与 jump 互斥,jump 优先。 */
+    readonly command?: { command: string; title: string; arguments?: unknown[] },
   ) {
     this.children = children;
   }
@@ -41,8 +43,7 @@ export function pTreeItem(node: PNode): vscode.TreeItem {
       command: "godotlsp.goto",
       title: "跳转",
       arguments: [node.jump.uri, node.jump.line, 0, node.label],
-    };
-    // 21d:诊断旗标——按跳转行与该行诊断求交,仅在有旗标时改写 description
+    };    // 21d:诊断旗标——按跳转行与该行诊断求交,仅在有旗标时改写 description
     // (图标保留类别语义,severity 计数后缀,消息进 tooltip)。
     const { suffix, tooltip } = diagSuffix(
       vscode.languages.getDiagnostics(vscode.Uri.parse(node.jump.uri)),
@@ -55,6 +56,8 @@ export function pTreeItem(node: PNode): vscode.TreeItem {
         item.tooltip = tooltip;
       }
     }
+  } else if (node.command) {
+    item.command = { command: node.command.command, title: node.command.title, arguments: node.command.arguments };
   }
   return withCopy(item, {
     name: node.label,

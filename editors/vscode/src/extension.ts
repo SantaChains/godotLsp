@@ -224,6 +224,21 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
       connProvider.refresh();
     }),
     vscode.commands.registerCommand("godotlsp.goto", gotoSymbol),
+    // 场景 quick pick:占位引导条目与「选择场景」入口共用(不必先手动打开 tscn)。
+    vscode.commands.registerCommand("godotlsp.pickScene", async () => {
+      const files = await vscode.workspace.findFiles("{**/*.tscn,**/*.scn}", "**/{.godot,.git}/**");
+      if (!files.length) {
+        void vscode.window.showInformationMessage("工程内没有找到 .tscn 场景");
+        return;
+      }
+      const items = files
+        .map((f) => ({ label: vscode.workspace.asRelativePath(f), uri: f }))
+        .sort((a, b) => a.label.localeCompare(b.label));
+      const pick = await vscode.window.showQuickPick(items, { placeHolder: "选择要查看的场景" });
+      if (pick) {
+        await vscode.commands.executeCommand("godotlsp.goto", pick.uri.toString(), 0);
+      }
+    }),
     // P2.10 codeLens:跳到 tscn [connection] 行（服务器 lens 命令载荷 [uri, line]）。
     vscode.commands.registerCommand(
       "godotlsp.openConnection",
@@ -258,6 +273,9 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
       symbols?.refresh();
       if (!e || isRes(e.document)) {
         refreshSceneDerived();
+      } else if (isGd(e.document)) {
+        // 连接视图双源:gd 编辑器显示代码级 connect() 调用。
+        connProvider.refresh();
       }
     }),
     vscode.workspace.onDidOpenTextDocument((d) => {
@@ -271,6 +289,7 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
     vscode.workspace.onDidChangeTextDocument((e) => {
       if (isGd(e.document)) {
         symbols?.refresh();
+        connProvider.refresh();
       }
       if (isRes(e.document)) {
         refreshSceneDerived();

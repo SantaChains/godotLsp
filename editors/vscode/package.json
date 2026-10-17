@@ -185,6 +185,11 @@
         "category": "godotlsp"
       },
       {
+        "command": "godotlsp.pickScene",
+        "title": "选择场景打开",
+        "category": "godotlsp"
+      },
+      {
         "command": "godotlsp.symbols.refresh",
         "title": "刷新符号",
         "category": "godotlsp",

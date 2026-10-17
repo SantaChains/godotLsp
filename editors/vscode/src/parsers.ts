@@ -226,3 +226,38 @@ export function parseConnections(text: string): SceneConnection[] {
   }
   return out;
 }
+
+export interface GdConnect {
+  /** connect 调用所在的 0 基行号。 */
+  line: number;
+  /** 信号源表达式原文(接收者链),如 `self.pressed` / `$Button.pressed`。 */
+  source: string;
+  /** 信号名(点号后最后一段);匿名 callable 形态下尽力提取。 */
+  signal: string;
+  /** 整行trim 后文本(描述展示)。 */
+  text: string;
+}
+
+/**
+ * GDScript 侧 connect() 调用静态扫描(代码级信号连接,与 tscn [connection]
+ * 声明式连接互补——engine-analyzer.md S 节:运行期连接归代码,静态可见
+ * 只能靠文本扫描)。识别 `X.connect(` 行,X 为点链表达式(`$Node.prop` 与
+ * `self.x` 同支持);lambda/多行实参只报首行(静态可见化,不求全)。
+ * 索引链(items[0].ready)退化为只报信号段——`[` 前无点链段可续。
+ */
+export function parseGdConnects(text: string): GdConnect[] {
+  const out: GdConnect[] = [];
+  const lines = text.split(/\r?\n/);
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    if (line.includes(".connect(") && !/^\s*#/.test(line)) {
+      const m = /([$A-Za-z_][\w$]*(?:\.[\w$]+|\["[^"]+"\])*)\s*\.\s*connect\s*\(/.exec(line);
+      if (m) {
+        const source = m[1];
+        const segs = source.split(".");
+        out.push({ line: i, source, signal: segs[segs.length - 1], text: line.trim() });
+      }
+    }
+  }
+  return out;
+}

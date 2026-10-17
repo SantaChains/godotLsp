@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { parseAutoloads, parseConnections, parseScene } from "../src/parsers";
+import { parseAutoloads, parseConnections, parseGdConnects, parseScene } from "../src/parsers";
 
 test("parseAutoloads:提取 [autoload] 段并剥离单例前导 *", () => {
   const text = [
@@ -177,4 +177,27 @@ test("parseScene:属性行 ExtResource 绑定与归属切断", () => {
     'theme_override_styles/normal = ExtResource("9_st")',
   ].join("\n");
   assert.equal(parseScene(text2).roots[0].bindings.get("theme_override_styles/normal"), "9_st");
+});
+
+test("parseGdConnects:点链 connect 提取与注释行跳过", () => {
+  const text = [
+    "func _ready():",
+    "\t$Button.pressed.connect(_on_pressed)",
+    "\t# self.deleted.connect(_x) 注释不报",
+    "\tself.health_changed.connect(_on_hp)",
+    "\tsignal_bus.game_over.connect(func(): pass)",
+    "\titems[0].ready.connect(_on_ready)",
+  ].join("\n");
+  const out = parseGdConnects(text);
+  assert.deepEqual(
+    out.map((c) => [c.line, c.signal, c.source]),
+    [
+      [1, "pressed", "$Button.pressed"],
+      [3, "health_changed", "self.health_changed"],
+      [4, "game_over", "signal_bus.game_over"],
+      // items[0] 索引链:点链段无法跨越 `]`,退化只报信号段(静态可见化降级)。
+      [5, "ready", "ready"],
+    ],
+  );
+  assert.equal(parseGdConnects("").length, 0);
 });
