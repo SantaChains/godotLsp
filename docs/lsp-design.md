@@ -211,6 +211,9 @@
 > 同构);但 `tools/gen_docs.py` 与 `hoverdata.json` 生成面**只解析 Description/Method/Property/
 > Enumerations**,904 个内建/类页零"构造函数/运算符"节——第二消费管线的缺口与 RawApi 丢弃同源。
 > 已升级为 `completion-roadmap.md` C6.5 工作面(a 模型解析 / b 文档生成 / c 构造补全+类型名 hover)。
+> **P9 已实施(2026-10-18)**:缺口闭合——`Constructors`/`Operators`(+Descriptions)四区块并入
+> gen_docs 统一管线(网站 37 内建页两节 + hoverdata `k` 键 154c+351o);C6.5c① 按引擎锚点
+> (gdscript_editor.cpp:3399-3416)修正为 **signatureHelp** 多重载(引擎 `Vector2(` 内不出补全项)。
 
 **D. 社区 snippet 源(可克隆,已核对内容)**:
 

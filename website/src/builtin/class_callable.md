@@ -70,6 +70,28 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Callable()
+```
+
+Constructs an empty Callable, with no object nor method bound.
+
+```gdscript
+Callable(from: Callable)
+```
+
+Constructs a Callable as a copy of the given Callable.
+
+```gdscript
+Callable(object: Object, method: StringName)
+```
+
+Creates a new Callable for the method named method in the specified object.
+
+Note: For methods of built-in Variant types, use create() instead.
+
 ## 方法
 
 ### bind {#bind}
@@ -290,3 +312,17 @@ func _ready():
     foo.unbind(1).call(1, 2) # Calls foo(1).
     foo.bind(3, 4).unbind(1).call(1, 2) # Calls foo(1, 3, 4), note that it does not change the arguments from bind.
 ```
+
+## 运算符
+
+```gdscript
+operator !=(right: Callable)
+```
+
+Returns true if both Callables invoke different targets.
+
+```gdscript
+operator ==(right: Callable)
+```
+
+Returns true if both Callables invoke the same custom target.

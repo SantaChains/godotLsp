@@ -18,6 +18,34 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Projection()
+```
+
+Constructs a default-initialized Projection identical to IDENTITY.
+
+Note: In C#, this constructs a Projection identical to ZERO.
+
+```gdscript
+Projection(from: Projection)
+```
+
+Constructs a Projection as a copy of the given Projection.
+
+```gdscript
+Projection(from: Transform3D)
+```
+
+Constructs a Projection as a copy of the given Transform3D.
+
+```gdscript
+Projection(x_axis: Vector4, y_axis: Vector4, z_axis: Vector4, w_axis: Vector4)
+```
+
+Constructs a Projection from four Vector4 values (matrix columns).
+
 ## 方法
 
 ### create_depth_correction {#create_depth_correction}
@@ -247,6 +275,44 @@ Projection perspective_znear_adjusted(new_znear: float) const
 Returns a Projection with the near clipping distance adjusted to be new_znear.
 
 Note: The original Projection must be a perspective projection.
+
+## 运算符
+
+```gdscript
+operator !=(right: Projection)
+```
+
+Returns true if the projections are not equal.
+
+Note: Due to floating-point precision errors, this may return true, even if the projections are virtually equal. An is_equal_approx method may be added in a future version of Godot.
+
+```gdscript
+operator *(right: Projection)
+```
+
+Returns a Projection that applies the combined transformations of this Projection and right.
+
+```gdscript
+operator *(right: Vector4)
+```
+
+Projects (multiplies) the given Vector4 by this Projection matrix.
+
+```gdscript
+operator ==(right: Projection)
+```
+
+Returns true if the projections are equal.
+
+Note: Due to floating-point precision errors, this may return false, even if the projections are virtually equal. An is_equal_approx method may be added in a future version of Godot.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the column of the Projection with the given index.
+
+Indices are in the following order: x, y, z, w.
 
 ## 属性
 

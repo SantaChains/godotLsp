@@ -18,6 +18,42 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Transform3D()
+```
+
+Constructs a Transform3D identical to IDENTITY.
+
+Note: In C#, this constructs a Transform3D with its origin and the components of its basis set to Vector3.ZERO.
+
+```gdscript
+Transform3D(from: Transform3D)
+```
+
+Constructs a Transform3D as a copy of the given Transform3D.
+
+```gdscript
+Transform3D(basis: Basis, origin: Vector3)
+```
+
+Constructs a Transform3D from a Basis and Vector3.
+
+```gdscript
+Transform3D(from: Projection)
+```
+
+Constructs a Transform3D from a Projection. Because Transform3D is a 3×4 matrix and Projection is a 4×4 matrix, this operation trims the last row of the projection matrix (from.x.w, from.y.w, from.z.w, and from.w.w are not included in the new transform).
+
+```gdscript
+Transform3D(x_axis: Vector3, y_axis: Vector3, z_axis: Vector3, origin: Vector3)
+```
+
+Constructs a Transform3D from four Vector3 values (also called matrix columns).
+
+The first three arguments are the basis's axes (Basis.x, Basis.y, and Basis.z).
+
 ## 方法
 
 ### affine_inverse {#affine_inverse}
@@ -161,6 +197,88 @@ Returns a copy of this transform translated by the given offset.
 This method is an optimized version of multiplying the given transform X with a corresponding translation transform T from the right, i.e., X * T.
 
 This can be seen as transforming with respect to the local frame.
+
+## 运算符
+
+```gdscript
+operator !=(right: Transform3D)
+```
+
+Returns true if the components of both transforms are not equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator *(right: AABB)
+```
+
+Transforms (multiplies) the AABB by this transformation matrix.
+
+```gdscript
+operator *(right: PackedVector3Array)
+```
+
+Transforms (multiplies) every Vector3 element of the given PackedVector3Array by this transformation matrix.
+
+On larger arrays, this operation is much faster than transforming each Vector3 individually.
+
+```gdscript
+operator *(right: Plane)
+```
+
+Transforms (multiplies) the Plane by this transformation matrix.
+
+```gdscript
+operator *(right: Transform3D)
+```
+
+Transforms (multiplies) this transform by the right transform.
+
+This is the operation performed between parent and child Node3Ds.
+
+Note: If you need to only modify one attribute of this transform, consider using one of the following methods, instead:
+
+- For translation, see translated() or translated_local().
+- For rotation, see rotated() or rotated_local().
+- For scale, see scaled() or scaled_local().
+
+```gdscript
+operator *(right: Vector3)
+```
+
+Transforms (multiplies) the Vector3 by this transformation matrix.
+
+```gdscript
+operator *(right: float)
+```
+
+Multiplies all components of the Transform3D by the given float, including the origin. This affects the transform's scale uniformly, scaling the basis.
+
+```gdscript
+operator *(right: int)
+```
+
+Multiplies all components of the Transform3D by the given int, including the origin. This affects the transform's scale uniformly, scaling the basis.
+
+```gdscript
+operator /(right: float)
+```
+
+Divides all components of the Transform3D by the given float, including the origin. This affects the transform's scale uniformly, scaling the basis.
+
+```gdscript
+operator /(right: int)
+```
+
+Divides all components of the Transform3D by the given int, including the origin. This affects the transform's scale uniformly, scaling the basis.
+
+```gdscript
+operator ==(right: Transform3D)
+```
+
+Returns true if the components of both transforms are exactly equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
 
 ## 属性
 

@@ -18,6 +18,32 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+PackedVector4Array()
+```
+
+Constructs an empty PackedVector4Array.
+
+```gdscript
+PackedVector4Array(from: PackedVector4Array)
+```
+
+Constructs a PackedVector4Array as a copy of the given PackedVector4Array.
+
+```gdscript
+PackedVector4Array(from: Array)
+```
+
+Constructs a new PackedVector4Array. Optionally, you can pass in a generic Array that will be converted.
+
+Note: When initializing a PackedVector4Array with elements, it must be initialized with an Array of Vector4 values:
+
+```gdscript
+var array = PackedVector4Array([Vector4(12, 34, 56, 78), Vector4(90, 12, 34, 56)])
+```
+
 ## 方法
 
 ### append {#append}
@@ -227,3 +253,29 @@ PackedByteArray to_byte_array() const
 ```
 
 Returns a PackedByteArray with each vector encoded as bytes.
+
+## 运算符
+
+```gdscript
+operator !=(right: PackedVector4Array)
+```
+
+Returns true if contents of the arrays differ.
+
+```gdscript
+operator +(right: PackedVector4Array)
+```
+
+Returns a new PackedVector4Array with contents of right added at the end of this array. For better performance, consider using append_array() instead.
+
+```gdscript
+operator ==(right: PackedVector4Array)
+```
+
+Returns true if contents of both arrays are the same, i.e. they have all equal Vector4s at the corresponding indices.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the Vector4 at index index. Negative indices can be used to access the elements starting from the end. Using index out of array's bounds will result in an error.

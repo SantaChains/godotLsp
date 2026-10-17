@@ -18,6 +18,26 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+PackedByteArray()
+```
+
+Constructs an empty PackedByteArray.
+
+```gdscript
+PackedByteArray(from: PackedByteArray)
+```
+
+Constructs a PackedByteArray as a copy of the given PackedByteArray.
+
+```gdscript
+PackedByteArray(from: Array)
+```
+
+Constructs a new PackedByteArray. Optionally, you can pass in a generic Array that will be converted.
+
 ## 方法
 
 ### append {#append}
@@ -628,3 +648,31 @@ PackedVector4Array to_vector4_array() const
 Returns a copy of the data converted to a PackedVector4Array, where each block of 16 or 32 bytes (32-bit or 64-bit) has been converted to a Vector4 variant.
 
 Note: The size of the input array must be a multiple of 16 or 32 (depending on the build settings, see Vector4 for more details). The size of the new array will be byte_array.size() / (16 or 32). If the original data can't be converted to Vector4 variants, the resulting data is undefined.
+
+## 运算符
+
+```gdscript
+operator !=(right: PackedByteArray)
+```
+
+Returns true if contents of the arrays differ.
+
+```gdscript
+operator +(right: PackedByteArray)
+```
+
+Returns a new PackedByteArray with contents of right added at the end of this array. For better performance, consider using append_array() instead.
+
+```gdscript
+operator ==(right: PackedByteArray)
+```
+
+Returns true if contents of both arrays are the same, i.e. they have all equal bytes at the corresponding indices.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the byte at index index. Negative indices can be used to access the elements starting from the end. Using index out of array's bounds will result in an error.
+
+Note that the byte is returned as a 64-bit int.

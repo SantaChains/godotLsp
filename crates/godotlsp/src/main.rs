@@ -633,7 +633,27 @@ fn hover_word(state: &State, word: &str, is_annotation: bool) -> Option<String> 
         return Some(hover_md(sig, hoverdata::class_brief(word), doclinks::class_url(word, real)));
     }
     if engine.builtin_by_name(word).is_some() {
-        return Some(hover_md(word.to_string(), hoverdata::class_brief(word), doclinks::class_url(word, real)));
+        // C6.5c②：类型名 hover 追加构造重载列表（签名 + 描述，语料序）。
+        let ctors = hoverdata::builtin_ctors(word);
+        let mut md = format!("```gdscript\n{word}\n```\n");
+        if let Some(d) = hoverdata::class_brief(word)
+            && !d.is_empty()
+        {
+            md.push_str(d);
+            md.push_str("\n\n");
+        }
+        if !ctors.is_empty() {
+            md.push_str("---\n\n**构造函数**\n\n");
+            for (sig, doc) in &ctors {
+                md.push_str(&format!("```gdscript\n{sig}\n```\n"));
+                if !doc.is_empty() {
+                    md.push_str(doc);
+                    md.push_str("\n\n");
+                }
+            }
+        }
+        md.push_str(&format!("[文档]({})", doclinks::class_url(word, real)));
+        return Some(md);
     }
     // @GDScript 内建函数（len/preload/range/…，不在 extension_api.json）。
     if let Some((sig, desc)) = hoverdata::gdscript_fn(word) {
@@ -3340,6 +3360,51 @@ fn signature_help(state: &State, p: &SignatureHelpParams) -> Option<SignatureHel
         let info = FileInfo::from_file(&parse(src).0);
         let ty = info.resolve_var(src, recv)?;
         state.engine.find_method(&ty, method)?
+    } else if state.engine.builtin_by_name(call).is_some() {
+        // C6.5c①：内建类型构造调用（`Vector2(` 内）——镜像引擎 call hint
+        // （gdscript_editor.cpp:3399-3416：构造重载逐条列出、跳过参数数
+        // ≤ 当前参数索引的重载；引擎此处不出补全项）。
+        let ctors = state.engine.builtin_constructors(call)?;
+        let corpus = hoverdata::builtin_ctors(call);
+        let active_param = count_top_commas(&src[open_paren + 1..offset]);
+        let signatures: Vec<SignatureInformation> = ctors
+            .iter()
+            .enumerate()
+            .filter(|(_, params)| active_param < params.len())
+            .map(|(i, params)| {
+                let (label, doc) = corpus
+                    .get(i)
+                    .cloned()
+                    .unwrap_or_else(|| (format!("{call}(…)"), String::new()));
+                let parameters = if params.is_empty() {
+                    None
+                } else {
+                    Some(
+                        params
+                            .iter()
+                            .map(|p| ParameterInformation {
+                                label: lsp_types::ParameterLabel::Simple(format!("{}: {}", p.name, p.ty)),
+                                documentation: None,
+                            })
+                            .collect(),
+                    )
+                };
+                SignatureInformation {
+                    label,
+                    documentation: if doc.is_empty() { None } else { Some(lsp_types::Documentation::String(doc)) },
+                    parameters,
+                    active_parameter: Some(active_param as u32),
+                }
+            })
+            .collect();
+        if signatures.is_empty() {
+            return None;
+        }
+        return Some(SignatureHelp {
+            signatures,
+            active_signature: Some(0),
+            active_parameter: Some(active_param as u32),
+        });
     } else {
         state.engine.utility_function(call)?
     };
@@ -5705,7 +5770,7 @@ class Derived extends Base:
             "Node 链无 _draw（CanvasItem 系）"
         );
         assert!(
-            !labels.contains(&"_get_property_list() -> Array[Dictionary]:") == false,
+            labels.contains(&"_get_property_list() -> Array[Dictionary]:"),
             "core _get_property_list 应出"
         );
     }
@@ -5751,5 +5816,88 @@ class Derived extends Base:
             labels.contains(&"_get(property: StringName) -> Variant:"),
             "未声明的 core 项仍应出: {labels:?}"
         );
+    }
+
+    // ── P9 C6.5：builtin 构造 signatureHelp + hover 构造重载 ──
+
+    fn sig_help_at(state: &State, src: &str, needle: &str) -> Option<SignatureHelp> {
+        let off = src.find(needle).unwrap() + needle.len();
+        let p = SignatureHelpParams {
+            context: None,
+            text_document_position_params: TextDocumentPositionParams {
+                text_document: TextDocumentIdentifier { uri: "file:///tmp/t.gd".parse::<Uri>().unwrap() },
+                position: offset_to_position(src, off),
+            },
+            work_done_progress_params: Default::default(),
+        };
+        signature_help(state, &p)
+    }
+
+    /// P9 C6.5c①：`Vector2(` 内出构造重载 signatureHelp（引擎 call hint 同款）。
+    #[test]
+    fn p9_sig_help_builtin_ctor() {
+        let base = test_state();
+        let src = "func f():
+	var v = Vector2(1, 2)
+";
+        let state = state_with(&base, src);
+        // 光标在 `Vector2(1, ` 之后：argidx=1
+        let help = sig_help_at(&state, src, "Vector2(1, ").expect("Vector2(1, 应出构造签名帮助");
+        // argidx=1：镜像引擎过滤——0/1 参重载跳过，2 参重载保留
+        let labels: Vec<&str> = help.signatures.iter().map(|s| s.label.as_str()).collect();
+        assert_eq!(labels, vec!["Vector2(x: float, y: float)"], "argidx=1 只剩 2 参重载: {labels:?}");
+        assert_eq!(help.active_parameter, Some(1));
+        // 首条签名带语料描述
+        assert!(
+            help.signatures[0]
+                .documentation
+                .as_ref()
+                .is_some_and(|d| matches!(d, lsp_types::Documentation::String(s) if !s.is_empty())),
+            "构造重载应带描述"
+        );
+    }
+
+    /// P9：`Vector2(` 光标在第一参（argidx=0）→ 默认构造（0 参）仍被过滤（引擎
+    /// `p_argidx >= E.arguments.size()` 同款），其余 3 条重载全出。
+    #[test]
+    fn p9_sig_help_ctor_argidx_zero() {
+        let base = test_state();
+        let src = "func f():
+	var v = Vector2()
+";
+        let state = state_with(&base, src);
+        let help = sig_help_at(&state, src, "Vector2(").expect("构造签名帮助");
+        let labels: Vec<&str> = help.signatures.iter().map(|s| s.label.as_str()).collect();
+        assert_eq!(labels.len(), 3, "argidx=0 剩 3 条带参重载: {labels:?}");
+        assert_eq!(help.active_parameter, Some(0));
+    }
+
+    /// P9：未知裸名不出签名帮助（utility/builtin 都不是）。
+    #[test]
+    fn p9_sig_help_unknown_none() {
+        let base = test_state();
+        let src = "func f():
+	frobnicate(1)
+";
+        let state = state_with(&base, src);
+        assert!(sig_help_at(&state, src, "frobnicate(").is_none());
+    }
+
+    /// P9 C6.5c②：builtin 类型名 hover 追加构造重载列表。
+    #[test]
+    fn p9_hover_builtin_ctor_overloads() {
+        let base = test_state();
+        let src = "var v = Vector2.ZERO
+";
+        let st = state_with(&base, src);
+        let md = hover_word(
+            &st,
+            "Vector2",
+            false,
+        )
+        .expect("Vector2 hover");
+        assert!(md.contains("构造函数"), "hover 应含构造函数节: {md}");
+        assert!(md.contains("Vector2(x: float, y: float)"), "hover 应含 2 参重载: {md}");
+        assert!(md.contains("Vector2(from: Vector2i)"), "hover 应含 Vector2i 重载: {md}");
     }
 }

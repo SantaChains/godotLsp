@@ -45,3 +45,341 @@ int z = 10_000_000; // z is 10000000
 ```
 
 </details>
+
+## 构造函数
+
+```gdscript
+int()
+```
+
+Constructs an int set to 0.
+
+```gdscript
+int(from: int)
+```
+
+Constructs an int as a copy of the given int.
+
+```gdscript
+int(from: String)
+```
+
+Constructs a new int from a String, following the same rules as String.to_int().
+
+```gdscript
+int(from: bool)
+```
+
+Constructs a new int from a bool. true is converted to 1 and false is converted to 0.
+
+```gdscript
+int(from: float)
+```
+
+Constructs a new int from a float. This will truncate the float, discarding anything after the floating point.
+
+## 运算符
+
+```gdscript
+operator !=(right: float)
+```
+
+Returns true if the int is not equivalent to the float.
+
+```gdscript
+operator !=(right: int)
+```
+
+Returns true if the ints are not equal.
+
+```gdscript
+operator %(right: int)
+```
+
+Returns the remainder after dividing two ints. Uses truncated division, which returns a negative number if the dividend is negative. If this is not desired, consider using @GlobalScope.posmod().
+
+```gdscript
+print(6 % 2) # Prints 0
+print(11 % 4) # Prints 3
+print(-5 % 3) # Prints -2
+```
+
+```gdscript
+operator &(right: int)
+```
+
+Performs the bitwise AND operation.
+
+```gdscript
+print(0b1100 & 0b1010) # Prints 8 (binary 1000)
+```
+
+This is useful for retrieving binary flags from a variable.
+
+```gdscript
+var flags = 0b101
+# Check if the first or second bit are enabled.
+if flags & 0b011:
+    do_stuff() # This line will run.
+```
+
+```gdscript
+operator *(right: Color)
+```
+
+Multiplies each component of the Color by the int.
+
+```gdscript
+operator *(right: Quaternion)
+```
+
+Multiplies each component of the Quaternion by the int. This operation is not meaningful on its own, but it can be used as a part of a larger expression.
+
+```gdscript
+operator *(right: Vector2)
+```
+
+Multiplies each component of the Vector2 by the int.
+
+```gdscript
+print(2 * Vector2(1, 4)) # Prints (2, 8)
+```
+
+```gdscript
+operator *(right: Vector2i)
+```
+
+Multiplies each component of the Vector2i by the int.
+
+```gdscript
+operator *(right: Vector3)
+```
+
+Multiplies each component of the Vector3 by the int.
+
+```gdscript
+operator *(right: Vector3i)
+```
+
+Multiplies each component of the Vector3i by the int.
+
+```gdscript
+operator *(right: Vector4)
+```
+
+Multiplies each component of the Vector4 by the int.
+
+```gdscript
+operator *(right: Vector4i)
+```
+
+Multiplies each component of the Vector4i by the int.
+
+```gdscript
+operator *(right: float)
+```
+
+Multiplies the float by the int. The result is a float.
+
+```gdscript
+operator *(right: int)
+```
+
+Multiplies the two ints.
+
+```gdscript
+operator **(right: float)
+```
+
+Raises an int to a power of a float. The result is a float.
+
+```gdscript
+print(2 ** 0.5) # Prints 1.4142135623731
+```
+
+```gdscript
+operator **(right: int)
+```
+
+Raises the left int to a power of the right int.
+
+```gdscript
+print(3 ** 4) # Prints 81
+```
+
+```gdscript
+operator +(right: float)
+```
+
+Adds the int and the float. The result is a float.
+
+```gdscript
+operator +(right: int)
+```
+
+Adds the two ints.
+
+```gdscript
+operator -(right: float)
+```
+
+Subtracts the float from the int. The result is a float.
+
+```gdscript
+operator -(right: int)
+```
+
+Subtracts the two ints.
+
+```gdscript
+operator /(right: float)
+```
+
+Divides the int by the float. The result is a float.
+
+```gdscript
+print(10 / 3.0) # Prints 3.33333333333333
+```
+
+```gdscript
+operator /(right: int)
+```
+
+Divides the two ints. The result is an int. This will truncate the float, discarding anything after the floating point.
+
+```gdscript
+print(6 / 2) # Prints 3
+print(5 / 3) # Prints 1
+```
+
+```gdscript
+operator <(right: float)
+```
+
+Returns true if the int is less than the float.
+
+```gdscript
+operator <(right: int)
+```
+
+Returns true if the left int is less than the right int.
+
+```gdscript
+operator <<(right: int)
+```
+
+Performs the bitwise shift left operation. Effectively the same as multiplying by a power of 2.
+
+```gdscript
+print(0b1010 << 1) # Prints 20 (binary 10100)
+print(0b1010 << 3) # Prints 80 (binary 1010000)
+```
+
+```gdscript
+operator <=(right: float)
+```
+
+Returns true if the int is less than or equal to the float.
+
+```gdscript
+operator <=(right: int)
+```
+
+Returns true if the left int is less than or equal to the right int.
+
+```gdscript
+operator ==(right: float)
+```
+
+Returns true if the int is equal to the float.
+
+```gdscript
+operator ==(right: int)
+```
+
+Returns true if the two ints are equal.
+
+```gdscript
+operator >(right: float)
+```
+
+Returns true if the int is greater than the float.
+
+```gdscript
+operator >(right: int)
+```
+
+Returns true if the left int is greater than the right int.
+
+```gdscript
+operator >=(right: float)
+```
+
+Returns true if the int is greater than or equal to the float.
+
+```gdscript
+operator >=(right: int)
+```
+
+Returns true if the left int is greater than or equal to the right int.
+
+```gdscript
+operator >>(right: int)
+```
+
+Performs the bitwise shift right operation. Effectively the same as dividing by a power of 2.
+
+```gdscript
+print(0b1010 >> 1) # Prints 5 (binary 101)
+print(0b1010 >> 2) # Prints 2 (binary 10)
+```
+
+```gdscript
+operator ^(right: int)
+```
+
+Performs the bitwise XOR operation.
+
+```gdscript
+print(0b1100 ^ 0b1010) # Prints 6 (binary 110)
+```
+
+```gdscript
+operator unary+()
+```
+
+Returns the same value as if the + was not there. Unary + does nothing, but sometimes it can make your code more readable.
+
+```gdscript
+operator unary-()
+```
+
+Returns the negated value of the int. If positive, turns the number negative. If negative, turns the number positive. If zero, does nothing.
+
+```gdscript
+operator |(right: int)
+```
+
+Performs the bitwise OR operation.
+
+```gdscript
+print(0b1100 | 0b1010) # Prints 14 (binary 1110)
+```
+
+This is useful for storing binary flags in a variable.
+
+```gdscript
+var flags = 0
+flags |= 0b101 # Turn the first and third bits on.
+```
+
+```gdscript
+operator ~()
+```
+
+Performs the bitwise NOT operation on the int. Due to 2's complement [https://en.wikipedia.org/wiki/Two%27s_complement], it's effectively equal to -(int + 1).
+
+```gdscript
+print(~4) # Prints -5
+print(~(-7)) # Prints 6
+```

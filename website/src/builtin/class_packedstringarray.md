@@ -26,6 +26,26 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+PackedStringArray()
+```
+
+Constructs an empty PackedStringArray.
+
+```gdscript
+PackedStringArray(from: PackedStringArray)
+```
+
+Constructs a PackedStringArray as a copy of the given PackedStringArray.
+
+```gdscript
+PackedStringArray(from: Array)
+```
+
+Constructs a new PackedStringArray. Optionally, you can pass in a generic Array that will be converted.
+
 ## 方法
 
 ### append {#append}
@@ -221,3 +241,29 @@ PackedByteArray to_byte_array() const
 ```
 
 Returns a PackedByteArray with each string encoded as UTF-8. Strings are null terminated.
+
+## 运算符
+
+```gdscript
+operator !=(right: PackedStringArray)
+```
+
+Returns true if contents of the arrays differ.
+
+```gdscript
+operator +(right: PackedStringArray)
+```
+
+Returns a new PackedStringArray with contents of right added at the end of this array. For better performance, consider using append_array() instead.
+
+```gdscript
+operator ==(right: PackedStringArray)
+```
+
+Returns true if contents of both arrays are the same, i.e. they have all equal Strings at the corresponding indices.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the String at index index. Negative indices can be used to access the elements starting from the end. Using index out of array's bounds will result in an error.

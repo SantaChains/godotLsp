@@ -149,6 +149,26 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Signal()
+```
+
+Constructs an empty Signal with no object nor signal name bound.
+
+```gdscript
+Signal(from: Signal)
+```
+
+Constructs a Signal as a copy of the given Signal.
+
+```gdscript
+Signal(object: Object, signal: StringName)
+```
+
+Creates a Signal object referencing a signal named signal in the specified object.
+
 ## 方法
 
 ### connect {#connect}
@@ -234,3 +254,17 @@ bool is_null() const
 ```
 
 Returns true if this Signal has no object and the signal name is empty. Equivalent to signal == Signal().
+
+## 运算符
+
+```gdscript
+operator !=(right: Signal)
+```
+
+Returns true if the signals do not share the same object and name.
+
+```gdscript
+operator ==(right: Signal)
+```
+
+Returns true if both signals share the same object and name.

@@ -14,6 +14,32 @@ Note: In a boolean context, a Vector3 will evaluate to false if it's equal to Ve
 
 </details>
 
+## 构造函数
+
+```gdscript
+Vector3()
+```
+
+Constructs a default-initialized Vector3 with all components set to 0.
+
+```gdscript
+Vector3(from: Vector3)
+```
+
+Constructs a Vector3 as a copy of the given Vector3.
+
+```gdscript
+Vector3(from: Vector3i)
+```
+
+Constructs a new Vector3 from Vector3i.
+
+```gdscript
+Vector3(x: float, y: float, z: float)
+```
+
+Returns a Vector3 with the given components.
+
 ## 方法
 
 ### abs {#abs}
@@ -431,6 +457,170 @@ Vector3 snappedf(step: float) const
 ```
 
 Returns a new vector with each component snapped to the nearest multiple of step. This can also be used to round the components to an arbitrary number of decimals.
+
+## 运算符
+
+```gdscript
+operator !=(right: Vector3)
+```
+
+Returns true if the vectors are not equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator *(right: Basis)
+```
+
+Inversely transforms (multiplies) the Vector3 by the given Basis matrix, under the assumption that the basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not).
+
+vector * basis is equivalent to basis.transposed() * vector. See Basis.transposed().
+
+For transforming by inverse of a non-orthonormal basis (e.g. with scaling) basis.inverse() * vector can be used instead. See Basis.inverse().
+
+```gdscript
+operator *(right: Quaternion)
+```
+
+Inversely transforms (multiplies) the Vector3 by the given Quaternion.
+
+vector * quaternion is equivalent to quaternion.inverse() * vector. See Quaternion.inverse().
+
+```gdscript
+operator *(right: Transform3D)
+```
+
+Inversely transforms (multiplies) the Vector3 by the given Transform3D transformation matrix, under the assumption that the transformation basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not).
+
+vector * transform is equivalent to transform.inverse() * vector. See Transform3D.inverse().
+
+For transforming by inverse of an affine transformation (e.g. with scaling) transform.affine_inverse() * vector can be used instead. See Transform3D.affine_inverse().
+
+```gdscript
+operator *(right: Vector3)
+```
+
+Multiplies each component of the Vector3 by the components of the given Vector3.
+
+```gdscript
+print(Vector3(10, 20, 30) * Vector3(3, 4, 5)) # Prints (30.0, 80.0, 150.0)
+```
+
+```gdscript
+operator *(right: float)
+```
+
+Multiplies each component of the Vector3 by the given float.
+
+```gdscript
+operator *(right: int)
+```
+
+Multiplies each component of the Vector3 by the given int.
+
+```gdscript
+operator +(right: Vector3)
+```
+
+Adds each component of the Vector3 by the components of the given Vector3.
+
+```gdscript
+print(Vector3(10, 20, 30) + Vector3(3, 4, 5)) # Prints (13.0, 24.0, 35.0)
+```
+
+```gdscript
+operator -(right: Vector3)
+```
+
+Subtracts each component of the Vector3 by the components of the given Vector3.
+
+```gdscript
+print(Vector3(10, 20, 30) - Vector3(3, 4, 5)) # Prints (7.0, 16.0, 25.0)
+```
+
+```gdscript
+operator /(right: Vector3)
+```
+
+Divides each component of the Vector3 by the components of the given Vector3.
+
+```gdscript
+print(Vector3(10, 20, 30) / Vector3(2, 5, 3)) # Prints (5.0, 4.0, 10.0)
+```
+
+```gdscript
+operator /(right: float)
+```
+
+Divides each component of the Vector3 by the given float.
+
+```gdscript
+operator /(right: int)
+```
+
+Divides each component of the Vector3 by the given int.
+
+```gdscript
+operator <(right: Vector3)
+```
+
+Compares two Vector3 vectors by first checking if the X value of the left vector is less than the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors, and then with the Z values. This operator is useful for sorting vectors.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator <=(right: Vector3)
+```
+
+Compares two Vector3 vectors by first checking if the X value of the left vector is less than or equal to the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors, and then with the Z values. This operator is useful for sorting vectors.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator ==(right: Vector3)
+```
+
+Returns true if the vectors are exactly equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator >(right: Vector3)
+```
+
+Compares two Vector3 vectors by first checking if the X value of the left vector is greater than the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors, and then with the Z values. This operator is useful for sorting vectors.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator >=(right: Vector3)
+```
+
+Compares two Vector3 vectors by first checking if the X value of the left vector is greater than or equal to the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors, and then with the Z values. This operator is useful for sorting vectors.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator [](index: int)
+```
+
+Access vector components using their index. v[0] is equivalent to v.x, v[1] is equivalent to v.y, and v[2] is equivalent to v.z.
+
+```gdscript
+operator unary+()
+```
+
+Returns the same value as if the + was not there. Unary + does nothing, but sometimes it can make your code more readable.
+
+```gdscript
+operator unary-()
+```
+
+Returns the negative value of the Vector3. This is the same as writing Vector3(-v.x, -v.y, -v.z). This operation flips the direction of the vector while keeping the same magnitude. With floats, the number zero can be either positive or negative.
 
 ## 属性
 

@@ -30,6 +30,44 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Basis()
+```
+
+Constructs a Basis identical to IDENTITY.
+
+Note: In C#, this constructs a Basis with all of its components set to Vector3.ZERO.
+
+```gdscript
+Basis(from: Basis)
+```
+
+Constructs a Basis as a copy of the given Basis.
+
+```gdscript
+Basis(axis: Vector3, angle: float)
+```
+
+Constructs a Basis that only represents rotation, rotated around the axis by the given angle, in radians. The axis must be a normalized vector.
+
+Note: This is the same as using rotated() on the IDENTITY basis. With more than one angle consider using from_euler(), instead.
+
+```gdscript
+Basis(from: Quaternion)
+```
+
+Constructs a Basis that only represents rotation from the given Quaternion.
+
+Note: Quaternions only store rotation, not scale. Because of this, conversions from Basis to Quaternion cannot always be reversed.
+
+```gdscript
+Basis(x_axis: Vector3, y_axis: Vector3, z_axis: Vector3)
+```
+
+Constructs a Basis from 3 axis vectors. These are the columns of the basis matrix.
+
 ## 方法
 
 ### determinant {#determinant}
@@ -415,6 +453,82 @@ GD.Print(myBasis.X); // Prints (1, 4, 7)
 GD.Print(myBasis.Y); // Prints (2, 5, 8)
 GD.Print(myBasis.Z); // Prints (3, 6, 9)
 ```
+
+## 运算符
+
+```gdscript
+operator !=(right: Basis)
+```
+
+Returns true if the components of both Basis matrices are not equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator *(right: Basis)
+```
+
+Transforms (multiplies) the right basis by this basis.
+
+This is the operation performed between parent and child Node3Ds.
+
+```gdscript
+operator *(right: Vector3)
+```
+
+Transforms (multiplies) the right vector by this basis, returning a Vector3.
+
+```
+# Basis that swaps the X/Z axes and doubles the scale.
+var my_basis = Basis(Vector3(0, 2, 0), Vector3(2, 0, 0), Vector3(0, 0, 2))
+print(my_basis * Vector3(1, 2, 3)) # Prints (4.0, 2.0, 6.0)
+```
+
+```
+// Basis that swaps the X/Z axes and doubles the scale.
+var myBasis = new Basis(new Vector3(0, 2, 0), new Vector3(2, 0, 0), new Vector3(0, 0, 2));
+GD.Print(myBasis * new Vector3(1, 2, 3)); // Prints (4, 2, 6)
+```
+
+```gdscript
+operator *(right: float)
+```
+
+Multiplies all components of the Basis by the given float. This affects the basis's scale uniformly, resizing all 3 axes by the right value.
+
+```gdscript
+operator *(right: int)
+```
+
+Multiplies all components of the Basis by the given int. This affects the basis's scale uniformly, resizing all 3 axes by the right value.
+
+```gdscript
+operator /(right: float)
+```
+
+Divides all components of the Basis by the given float. This affects the basis's scale uniformly, resizing all 3 axes by the right value.
+
+```gdscript
+operator /(right: int)
+```
+
+Divides all components of the Basis by the given int. This affects the basis's scale uniformly, resizing all 3 axes by the right value.
+
+```gdscript
+operator ==(right: Basis)
+```
+
+Returns true if the components of both Basis matrices are exactly equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator [](index: int)
+```
+
+Accesses each axis (column) of this basis by their index. Index 0 is the same as x, index 1 is the same as y, and index 2 is the same as z.
+
+Note: In C++, this operator accesses the rows of the basis matrix, not the columns. For the same behavior as scripting languages, use the set_column and get_column methods.
 
 ## 属性
 

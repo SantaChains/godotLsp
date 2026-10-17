@@ -52,6 +52,47 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+NodePath()
+```
+
+Constructs an empty NodePath.
+
+```gdscript
+NodePath(from: NodePath)
+```
+
+Constructs a NodePath as a copy of the given NodePath.
+
+```gdscript
+NodePath(from: String)
+```
+
+Constructs a NodePath from a String. The created path is absolute if prefixed with a slash (see is_absolute()).
+
+The "subnames" optionally included after the path to the target node can point to properties, and can also be nested.
+
+The following strings can be valid node paths:
+
+```gdscript
+# Points to the Sprite2D node.
+"Level/RigidBody2D/Sprite2D"
+# Points to the Sprite2D node and its "texture" resource.
+# get_node() would retrieve the Sprite2D, while get_node_and_resource()
+# would retrieve both the Sprite2D node and the "texture" resource.
+"Level/RigidBody2D/Sprite2D:texture"
+# Points to the Sprite2D node and its "position" property.
+"Level/RigidBody2D/Sprite2D:position"
+# Points to the Sprite2D node and the "x" component of its "position" property.
+"Level/RigidBody2D/Sprite2D:position:x"
+# Points to the RigidBody2D node as an absolute path beginning from the SceneTree.
+"/root/Level/RigidBody2D"
+```
+
+Note: In GDScript, it's also possible to convert a constant string into a node path by prefixing it with ^. ^"path/to/node" is equivalent to NodePath("path/to/node").
+
 ## 方法
 
 ### get_as_property_path {#get_as_property_path}
@@ -203,3 +244,17 @@ Returns the slice of the NodePath, from begin (inclusive) to end (exclusive), as
 The absolute value of begin and end will be clamped to the sum of get_name_count() and get_subname_count(), so the default value for end makes it slice to the end of the NodePath by default (i.e. path.slice(1) is a shorthand for path.slice(1, path.get_name_count() + path.get_subname_count())).
 
 If either begin or end are negative, they will be relative to the end of the NodePath (i.e. path.slice(0, -2) is a shorthand for path.slice(0, path.get_name_count() + path.get_subname_count() - 2)).
+
+## 运算符
+
+```gdscript
+operator !=(right: NodePath)
+```
+
+Returns true if two node paths are not equal.
+
+```gdscript
+operator ==(right: NodePath)
+```
+
+Returns true if two node paths are equal, that is, they are composed of the same node names and subnames in the same order.

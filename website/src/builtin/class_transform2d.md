@@ -20,6 +20,40 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Transform2D()
+```
+
+Constructs a Transform2D identical to IDENTITY.
+
+Note: In C#, this constructs a Transform2D with all of its components set to Vector2.ZERO.
+
+```gdscript
+Transform2D(from: Transform2D)
+```
+
+Constructs a Transform2D as a copy of the given Transform2D.
+
+```gdscript
+Transform2D(rotation: float, position: Vector2)
+```
+
+Constructs a Transform2D from a given angle (in radians) and position.
+
+```gdscript
+Transform2D(rotation: float, scale: Vector2, skew: float, position: Vector2)
+```
+
+Constructs a Transform2D from a given angle (in radians), scale, skew (in radians), and position.
+
+```gdscript
+Transform2D(x_axis: Vector2, y_axis: Vector2, origin: Vector2)
+```
+
+Constructs a Transform2D from 3 Vector2 values representing x, y, and the origin (the three matrix columns).
+
 ## 方法
 
 ### affine_inverse {#affine_inverse}
@@ -252,6 +286,88 @@ Returns a copy of the transform translated by the given offset.
 This method is an optimized version of multiplying the given transform X with a corresponding translation transform T from the right, i.e., X * T.
 
 This can be seen as transforming with respect to the local frame.
+
+## 运算符
+
+```gdscript
+operator !=(right: Transform2D)
+```
+
+Returns true if the components of both transforms are not equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator *(right: PackedVector2Array)
+```
+
+Transforms (multiplies) every Vector2 element of the given PackedVector2Array by this transformation matrix.
+
+On larger arrays, this operation is much faster than transforming each Vector2 individually.
+
+```gdscript
+operator *(right: Rect2)
+```
+
+Transforms (multiplies) the Rect2 by this transformation matrix.
+
+```gdscript
+operator *(right: Transform2D)
+```
+
+Transforms (multiplies) this transform by the right transform.
+
+This is the operation performed between parent and child CanvasItem nodes.
+
+Note: If you need to only modify one attribute of this transform, consider using one of the following methods, instead:
+
+- For translation, see translated() or translated_local().
+- For rotation, see rotated() or rotated_local().
+- For scale, see scaled() or scaled_local().
+
+```gdscript
+operator *(right: Vector2)
+```
+
+Transforms (multiplies) the Vector2 by this transformation matrix.
+
+```gdscript
+operator *(right: float)
+```
+
+Multiplies all components of the Transform2D by the given float, including the origin. This affects the transform's scale uniformly.
+
+```gdscript
+operator *(right: int)
+```
+
+Multiplies all components of the Transform2D by the given int, including the origin. This affects the transform's scale uniformly.
+
+```gdscript
+operator /(right: float)
+```
+
+Divides all components of the Transform2D by the given float, including the origin. This affects the transform's scale uniformly.
+
+```gdscript
+operator /(right: int)
+```
+
+Divides all components of the Transform2D by the given int, including the origin. This affects the transform's scale uniformly.
+
+```gdscript
+operator ==(right: Transform2D)
+```
+
+Returns true if the components of both transforms are exactly equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator [](index: int)
+```
+
+Accesses each axis (column) of this transform by their index. Index 0 is the same as x, index 1 is the same as y, and index 2 is the same as origin.
 
 ## 属性
 

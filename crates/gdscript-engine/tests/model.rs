@@ -127,3 +127,56 @@ fn object_core_virtuals_pinned() {
         );
     }
 }
+
+// ───────────────────────── C6.5a builtin 构造/运算符（P9） ─────────────────────────
+
+#[test]
+fn builtin_ctors_ops_pinned() {
+    let api = load();
+    // 38/38 内建类全有构造与运算符数据。
+    assert_eq!(api.builtins.len(), 38, "builtin 类计数锚定");
+    for (name, b) in &api.builtins {
+        assert!(!b.constructors.is_empty(), "{name} 应有构造重载");
+        assert!(!b.operators.is_empty(), "{name} 应有运算符");
+    }
+    // 计数锚定：Vector2 4 构造；int 5 构造 64 运算符；Array 13 构造 12 运算符。
+    assert_eq!(api.builtin_constructors("Vector2").unwrap().len(), 4);
+    assert_eq!(api.builtin_constructors("int").unwrap().len(), 5);
+    assert_eq!(api.builtin_operators("int").unwrap().len(), 64);
+    assert_eq!(api.builtin_constructors("Array").unwrap().len(), 13);
+    assert_eq!(api.builtin_operators("Array").unwrap().len(), 12);
+    // 抽查：Vector2(x: float, y: float) 重载；默认构造零参。
+    let v2 = api.builtin_constructors("Vector2").unwrap();
+    let xy = v2.iter().find(|c| c.len() == 2).expect("Vector2(x, y) 重载");
+    assert_eq!(&xy[0].name, "x");
+    assert_eq!(&xy[0].ty, "float");
+    assert!(v2.iter().any(|c| c.is_empty()), "默认构造零参");
+    // 抽查：int 运算符 `*`(right: int) -> int；一元运算符省略 right_type（空串）。
+    let mul = api
+        .builtin_operators("int")
+        .unwrap()
+        .iter()
+        .find(|o| o.name == "*" && o.right_type == "int")
+        .expect("int * int");
+    assert_eq!(mul.return_type, "int");
+    // JSON 是全超集：一元运算符在（right_type 空串），且含语言级 and/in/not。
+    let ops = api.builtin_operators("int").unwrap();
+    let unary_plus = ops.iter().find(|o| o.name == "unary+").expect("JSON 应含 unary+");
+    assert_eq!(unary_plus.right_type, "", "一元运算符 right_type 应为空串");
+    assert_eq!(unary_plus.return_type, "int");
+    assert!(ops.iter().any(|o| o.name == "in"), "JSON 应含语言级 in");
+    assert!(ops.iter().any(|o| o.name == "not"), "JSON 应含语言级 not");
+}
+
+#[test]
+fn builtin_keyed_indexing_parsed() {
+    let api = load();
+    // C6.5d 只解析：is_keyed 仅 Dictionary；indexing_return_type 24 类。
+    assert!(api.builtins["Dictionary"].is_keyed);
+    assert_eq!(api.builtins["Dictionary"].indexing_return_type.as_deref(), Some("Variant"));
+    assert_eq!(api.builtins["Array"].indexing_return_type.as_deref(), Some("Variant"));
+    assert_eq!(api.builtins["Vector2"].indexing_return_type.as_deref(), Some("float"));
+    assert!(!api.builtins["int"].is_keyed);
+    let n_indexing = api.builtins.values().filter(|b| b.indexing_return_type.is_some()).count();
+    assert_eq!(n_indexing, 24, "indexing_return_type 类计数锚定");
+}

@@ -12,6 +12,32 @@ Note: In a boolean context, a Vector2i will evaluate to false if it's equal to V
 
 </details>
 
+## 构造函数
+
+```gdscript
+Vector2i()
+```
+
+Constructs a default-initialized Vector2i with all components set to 0.
+
+```gdscript
+Vector2i(from: Vector2i)
+```
+
+Constructs a Vector2i as a copy of the given Vector2i.
+
+```gdscript
+Vector2i(from: Vector2)
+```
+
+Constructs a new Vector2i from the given Vector2 by truncating components' fractional parts (rounding towards zero). For a different behavior consider passing the result of Vector2.ceil(), Vector2.floor() or Vector2.round() to this constructor instead.
+
+```gdscript
+Vector2i(x: int, y: int)
+```
+
+Constructs a new Vector2i from the given x and y.
+
 ## 方法
 
 ### abs {#abs}
@@ -153,6 +179,154 @@ Vector2i snappedi(step: int) const
 ```
 
 Returns a new vector with each component snapped to the closest multiple of step.
+
+## 运算符
+
+```gdscript
+operator !=(right: Vector2i)
+```
+
+Returns true if the vectors are not equal.
+
+```gdscript
+operator %(right: Vector2i)
+```
+
+Gets the remainder of each component of the Vector2i with the components of the given Vector2i. This operation uses truncated division, which is often not desired as it does not work well with negative numbers. Consider using @GlobalScope.posmod() instead if you want to handle negative numbers.
+
+```gdscript
+print(Vector2i(10, -20) % Vector2i(7, 8)) # Prints (3, -4)
+```
+
+```gdscript
+operator %(right: int)
+```
+
+Gets the remainder of each component of the Vector2i with the given int. This operation uses truncated division, which is often not desired as it does not work well with negative numbers. Consider using @GlobalScope.posmod() instead if you want to handle negative numbers.
+
+```gdscript
+print(Vector2i(10, -20) % 7) # Prints (3, -6)
+```
+
+```gdscript
+operator *(right: Vector2i)
+```
+
+Multiplies each component of the Vector2i by the components of the given Vector2i.
+
+```gdscript
+print(Vector2i(10, 20) * Vector2i(3, 4)) # Prints (30, 80)
+```
+
+```gdscript
+operator *(right: float)
+```
+
+Multiplies each component of the Vector2i by the given float. Returns a Vector2.
+
+```gdscript
+print(Vector2i(10, 15) * 0.9) # Prints (9.0, 13.5)
+```
+
+```gdscript
+operator *(right: int)
+```
+
+Multiplies each component of the Vector2i by the given int.
+
+```gdscript
+operator +(right: Vector2i)
+```
+
+Adds each component of the Vector2i by the components of the given Vector2i.
+
+```gdscript
+print(Vector2i(10, 20) + Vector2i(3, 4)) # Prints (13, 24)
+```
+
+```gdscript
+operator -(right: Vector2i)
+```
+
+Subtracts each component of the Vector2i by the components of the given Vector2i.
+
+```gdscript
+print(Vector2i(10, 20) - Vector2i(3, 4)) # Prints (7, 16)
+```
+
+```gdscript
+operator /(right: Vector2i)
+```
+
+Divides each component of the Vector2i by the components of the given Vector2i.
+
+```gdscript
+print(Vector2i(10, 20) / Vector2i(2, 5)) # Prints (5, 4)
+```
+
+```gdscript
+operator /(right: float)
+```
+
+Divides each component of the Vector2i by the given float. Returns a Vector2.
+
+```gdscript
+print(Vector2i(1, 2) / 2.5) # Prints (0.4, 0.8)
+```
+
+```gdscript
+operator /(right: int)
+```
+
+Divides each component of the Vector2i by the given int.
+
+```gdscript
+operator <(right: Vector2i)
+```
+
+Compares two Vector2i vectors by first checking if the X value of the left vector is less than the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors. This operator is useful for sorting vectors.
+
+```gdscript
+operator <=(right: Vector2i)
+```
+
+Compares two Vector2i vectors by first checking if the X value of the left vector is less than or equal to the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors. This operator is useful for sorting vectors.
+
+```gdscript
+operator ==(right: Vector2i)
+```
+
+Returns true if the vectors are equal.
+
+```gdscript
+operator >(right: Vector2i)
+```
+
+Compares two Vector2i vectors by first checking if the X value of the left vector is greater than the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors. This operator is useful for sorting vectors.
+
+```gdscript
+operator >=(right: Vector2i)
+```
+
+Compares two Vector2i vectors by first checking if the X value of the left vector is greater than or equal to the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors. This operator is useful for sorting vectors.
+
+```gdscript
+operator [](index: int)
+```
+
+Access vector components using their index. v[0] is equivalent to v.x, and v[1] is equivalent to v.y.
+
+```gdscript
+operator unary+()
+```
+
+Returns the same value as if the + was not there. Unary + does nothing, but sometimes it can make your code more readable.
+
+```gdscript
+operator unary-()
+```
+
+Returns the negative value of the Vector2i. This is the same as writing Vector2i(-v.x, -v.y). This operation flips the direction of the vector while keeping the same magnitude.
 
 ## 属性
 

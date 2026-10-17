@@ -18,6 +18,26 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+AABB()
+```
+
+Constructs an AABB with its position and size set to Vector3.ZERO.
+
+```gdscript
+AABB(from: AABB)
+```
+
+Constructs an AABB as a copy of the given AABB.
+
+```gdscript
+AABB(position: Vector3, size: Vector3)
+```
+
+Constructs an AABB by position and size.
+
 ## 方法
 
 ### abs {#abs}
@@ -355,6 +375,34 @@ AABB merge(with: AABB) const
 ```
 
 Returns an AABB that encloses both this bounding box and with around the edges. See also encloses().
+
+## 运算符
+
+```gdscript
+operator !=(right: AABB)
+```
+
+Returns true if the position or size of both bounding boxes are not equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator *(right: Transform3D)
+```
+
+Inversely transforms (multiplies) the AABB by the given Transform3D transformation matrix, under the assumption that the transformation basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not).
+
+aabb * transform is equivalent to transform.inverse() * aabb. See Transform3D.inverse().
+
+For transforming by inverse of an affine transformation (e.g. with scaling) transform.affine_inverse() * aabb can be used instead. See Transform3D.affine_inverse().
+
+```gdscript
+operator ==(right: AABB)
+```
+
+Returns true if both position and size of the bounding boxes are exactly equal, respectively.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
 
 ## 属性
 

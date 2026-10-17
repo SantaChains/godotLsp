@@ -42,6 +42,21 @@ pub struct Param {
     pub ty: String,
 }
 
+/// 内建构造重载：参数列表。返回类型恒为该内建类型自身（JSON 不携带）；
+/// 描述不在 JSON（C6.5 由 XML 侧 builtin_sigs.json 补）。
+pub type Constructor = Vec<Param>;
+
+/// 内建运算符。JSON 为全超集：一元运算符（`unary±`/`~`/`not`）省略
+/// `right_type` 键（模型置空串）；`and`/`or`/`xor`/`in` 语言级运算符
+/// 仅在 JSON，XML 无。描述仅在 doc XML（C6.5 由 builtin_sigs.json 补）。
+#[derive(Clone, Debug)]
+pub struct Operator {
+    pub name: String,
+    /// 右操作数类型；一元运算符为空串。
+    pub right_type: String,
+    pub return_type: String,
+}
+
 /// 属性。
 #[derive(Clone, Debug)]
 pub struct Property {
@@ -140,6 +155,14 @@ pub struct BuiltinClass {
     pub enums: Vec<Enum>,
     /// 内建类常量（Vector2.ZERO / ONE / LEFT…，值为字符串表达式）。
     pub constants: Vec<Constant>,
+    /// 构造重载列表（C6.5a，extension_api.json builtin_classes.constructors）。
+    pub constructors: Vec<Constructor>,
+    /// 二元运算符（C6.5a，extension_api.json builtin_classes.operators）。
+    pub operators: Vec<Operator>,
+    /// 字典式下标（`d["k"]`，仅 Dictionary 为 true；C6.5d 只解析）。
+    pub is_keyed: bool,
+    /// 下标取值类型（`arr[0] -> Variant` 等，24 类有；C6.5d 只解析）。
+    pub indexing_return_type: Option<String>,
 }
 
 /// 单例（autoload 全局节点）。
@@ -174,6 +197,16 @@ impl EngineApi {
 
     pub fn builtin_by_name(&self, name: &str) -> Option<&BuiltinClass> {
         self.builtins.get(name)
+    }
+
+    /// 内建构造重载列表（C6.5a）。
+    pub fn builtin_constructors(&self, name: &str) -> Option<&[Constructor]> {
+        self.builtins.get(name).map(|b| b.constructors.as_slice())
+    }
+
+    /// 内建二元运算符列表（C6.5a）。
+    pub fn builtin_operators(&self, name: &str) -> Option<&[Operator]> {
+        self.builtins.get(name).map(|b| b.operators.as_slice())
     }
 
     /// 沿 `inherits` 链返回类名序列（含自身），祖先在前。循环继承防御。
@@ -385,6 +418,33 @@ struct RawBuiltin {
     enums: Vec<RawEnum>,
     #[serde(default)]
     constants: Vec<RawConst>,
+    #[serde(default)]
+    constructors: Vec<RawCtor>,
+    #[serde(default)]
+    operators: Vec<RawOperator>,
+    #[serde(default)]
+    is_keyed: bool,
+    #[serde(default, rename = "indexing_return_type")]
+    indexing_return_type: Option<String>,
+}
+
+/// 构造重载：参数内联；`index` 是引擎绑定表索引，模型不消费。
+#[derive(Deserialize)]
+struct RawCtor {
+    #[serde(default)]
+    #[allow(dead_code)]
+    index: Option<u32>,
+    #[serde(default)]
+    arguments: Vec<RawParam>,
+}
+
+#[derive(Deserialize)]
+struct RawOperator {
+    name: String,
+    #[serde(default)]
+    right_type: String,
+    #[serde(default)]
+    return_type: String,
 }
 
 #[derive(Deserialize)]
@@ -521,6 +581,18 @@ impl RawApi {
                             .into_iter()
                             .map(|m| Property { name: m.name, ty: m.ty, setter: String::new(), getter: String::new() })
                             .collect(),
+                        constructors: b
+                            .constructors
+                            .into_iter()
+                            .map(|c| c.arguments.into_iter().map(|p| Param { name: p.name, ty: p.ty }).collect())
+                            .collect(),
+                        operators: b
+                            .operators
+                            .into_iter()
+                            .map(|o| Operator { name: o.name, right_type: o.right_type, return_type: o.return_type })
+                            .collect(),
+                        is_keyed: b.is_keyed,
+                        indexing_return_type: b.indexing_return_type,
                     },
                 )
             })

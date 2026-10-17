@@ -10,6 +10,56 @@ Note: In a boolean context, a plane will evaluate to false if all its components
 
 </details>
 
+## 构造函数
+
+```gdscript
+Plane()
+```
+
+Constructs a default-initialized Plane with all components set to 0.
+
+```gdscript
+Plane(from: Plane)
+```
+
+Constructs a Plane as a copy of the given Plane.
+
+```gdscript
+Plane(a: float, b: float, c: float, d: float)
+```
+
+Creates a plane from the four parameters. The three components of the resulting plane's normal are a, b and c, and the plane has a distance of d from the origin.
+
+```gdscript
+Plane(normal: Vector3)
+```
+
+Creates a plane from the normal vector. The plane will intersect the origin.
+
+The normal of the plane must be a unit vector.
+
+```gdscript
+Plane(normal: Vector3, d: float)
+```
+
+Creates a plane from the normal vector and the plane's distance from the origin.
+
+The normal of the plane must be a unit vector.
+
+```gdscript
+Plane(normal: Vector3, point: Vector3)
+```
+
+Creates a plane from the normal vector and a point on the plane.
+
+The normal of the plane must be a unit vector.
+
+```gdscript
+Plane(point1: Vector3, point2: Vector3, point3: Vector3)
+```
+
+Creates a plane from the three points, given in clockwise order.
+
 ## 方法
 
 ### distance_to {#distance_to}
@@ -99,6 +149,44 @@ Vector3 project(point: Vector3) const
 ```
 
 Returns the orthogonal projection of point into a point in the plane.
+
+## 运算符
+
+```gdscript
+operator !=(right: Plane)
+```
+
+Returns true if the planes are not equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator *(right: Transform3D)
+```
+
+Inversely transforms (multiplies) the Plane by the given Transform3D transformation matrix.
+
+plane * transform is equivalent to transform.affine_inverse() * plane. See Transform3D.affine_inverse().
+
+```gdscript
+operator ==(right: Plane)
+```
+
+Returns true if the planes are exactly equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator unary+()
+```
+
+Returns the same value as if the + was not there. Unary + does nothing, but sometimes it can make your code more readable.
+
+```gdscript
+operator unary-()
+```
+
+Returns the negative value of the Plane. This is the same as writing Plane(-p.normal, -p.d). This operation flips the direction of the normal vector and also flips the distance value, resulting in a Plane that is in the same place, but facing the opposite direction.
 
 ## 属性
 

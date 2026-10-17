@@ -14,6 +14,32 @@ Note: In a boolean context, a Vector2 will evaluate to false if it's equal to Ve
 
 </details>
 
+## 构造函数
+
+```gdscript
+Vector2()
+```
+
+Constructs a default-initialized Vector2 with all components set to 0.
+
+```gdscript
+Vector2(from: Vector2)
+```
+
+Constructs a Vector2 as a copy of the given Vector2.
+
+```gdscript
+Vector2(from: Vector2i)
+```
+
+Constructs a new Vector2 from Vector2i.
+
+```gdscript
+Vector2(x: float, y: float)
+```
+
+Constructs a new Vector2 from the given x and y.
+
 ## 方法
 
 ### abs {#abs}
@@ -449,6 +475,152 @@ Vector2 snappedf(step: float) const
 ```
 
 Returns a new vector with each component snapped to the nearest multiple of step. This can also be used to round the components to an arbitrary number of decimals.
+
+## 运算符
+
+```gdscript
+operator !=(right: Vector2)
+```
+
+Returns true if the vectors are not equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator *(right: Transform2D)
+```
+
+Inversely transforms (multiplies) the Vector2 by the given Transform2D transformation matrix, under the assumption that the transformation basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not).
+
+vector * transform is equivalent to transform.inverse() * vector. See Transform2D.inverse().
+
+For transforming by inverse of an affine transformation (e.g. with scaling) transform.affine_inverse() * vector can be used instead. See Transform2D.affine_inverse().
+
+```gdscript
+operator *(right: Vector2)
+```
+
+Multiplies each component of the Vector2 by the components of the given Vector2.
+
+```gdscript
+print(Vector2(10, 20) * Vector2(3, 4)) # Prints (30.0, 80.0)
+```
+
+```gdscript
+operator *(right: float)
+```
+
+Multiplies each component of the Vector2 by the given float.
+
+```gdscript
+operator *(right: int)
+```
+
+Multiplies each component of the Vector2 by the given int.
+
+```gdscript
+operator +(right: Vector2)
+```
+
+Adds each component of the Vector2 by the components of the given Vector2.
+
+```gdscript
+print(Vector2(10, 20) + Vector2(3, 4)) # Prints (13.0, 24.0)
+```
+
+```gdscript
+operator -(right: Vector2)
+```
+
+Subtracts each component of the Vector2 by the components of the given Vector2.
+
+```gdscript
+print(Vector2(10, 20) - Vector2(3, 4)) # Prints (7.0, 16.0)
+```
+
+```gdscript
+operator /(right: Vector2)
+```
+
+Divides each component of the Vector2 by the components of the given Vector2.
+
+```gdscript
+print(Vector2(10, 20) / Vector2(2, 5)) # Prints (5.0, 4.0)
+```
+
+```gdscript
+operator /(right: float)
+```
+
+Divides each component of the Vector2 by the given float.
+
+```gdscript
+operator /(right: int)
+```
+
+Divides each component of the Vector2 by the given int.
+
+```gdscript
+operator <(right: Vector2)
+```
+
+Compares two Vector2 vectors by first checking if the X value of the left vector is less than the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors. This operator is useful for sorting vectors.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator <=(right: Vector2)
+```
+
+Compares two Vector2 vectors by first checking if the X value of the left vector is less than or equal to the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors. This operator is useful for sorting vectors.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator ==(right: Vector2)
+```
+
+Returns true if the vectors are exactly equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator >(right: Vector2)
+```
+
+Compares two Vector2 vectors by first checking if the X value of the left vector is greater than the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors. This operator is useful for sorting vectors.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator >=(right: Vector2)
+```
+
+Compares two Vector2 vectors by first checking if the X value of the left vector is greater than or equal to the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors. This operator is useful for sorting vectors.
+
+Note: Vectors with @GDScript.NAN elements don't behave the same as other vectors. Therefore, the results from this operator may not be accurate if NaNs are included.
+
+```gdscript
+operator [](index: int)
+```
+
+Access vector components using their index. v[0] is equivalent to v.x, and v[1] is equivalent to v.y.
+
+```gdscript
+operator unary+()
+```
+
+Returns the same value as if the + was not there. Unary + does nothing, but sometimes it can make your code more readable.
+
+```gdscript
+operator unary-()
+```
+
+Returns the negative value of the Vector2. This is the same as writing Vector2(-v.x, -v.y). This operation flips the direction of the vector while keeping the same magnitude. With floats, the number zero can be either positive or negative.
 
 ## 属性
 

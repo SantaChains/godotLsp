@@ -12,6 +12,32 @@ Note: In a boolean context, a Vector3i will evaluate to false if it's equal to V
 
 </details>
 
+## 构造函数
+
+```gdscript
+Vector3i()
+```
+
+Constructs a default-initialized Vector3i with all components set to 0.
+
+```gdscript
+Vector3i(from: Vector3i)
+```
+
+Constructs a Vector3i as a copy of the given Vector3i.
+
+```gdscript
+Vector3i(from: Vector3)
+```
+
+Constructs a new Vector3i from the given Vector3 by truncating components' fractional parts (rounding towards zero). For a different behavior consider passing the result of Vector3.ceil(), Vector3.floor() or Vector3.round() to this constructor instead.
+
+```gdscript
+Vector3i(x: int, y: int, z: int)
+```
+
+Returns a Vector3i with the given components.
+
 ## 方法
 
 ### abs {#abs}
@@ -145,6 +171,154 @@ Vector3i snappedi(step: int) const
 ```
 
 Returns a new vector with each component snapped to the closest multiple of step.
+
+## 运算符
+
+```gdscript
+operator !=(right: Vector3i)
+```
+
+Returns true if the vectors are not equal.
+
+```gdscript
+operator %(right: Vector3i)
+```
+
+Gets the remainder of each component of the Vector3i with the components of the given Vector3i. This operation uses truncated division, which is often not desired as it does not work well with negative numbers. Consider using @GlobalScope.posmod() instead if you want to handle negative numbers.
+
+```gdscript
+print(Vector3i(10, -20, 30) % Vector3i(7, 8, 9)) # Prints (3, -4, 3)
+```
+
+```gdscript
+operator %(right: int)
+```
+
+Gets the remainder of each component of the Vector3i with the given int. This operation uses truncated division, which is often not desired as it does not work well with negative numbers. Consider using @GlobalScope.posmod() instead if you want to handle negative numbers.
+
+```gdscript
+print(Vector3i(10, -20, 30) % 7) # Prints (3, -6, 2)
+```
+
+```gdscript
+operator *(right: Vector3i)
+```
+
+Multiplies each component of the Vector3i by the components of the given Vector3i.
+
+```gdscript
+print(Vector3i(10, 20, 30) * Vector3i(3, 4, 5)) # Prints (30, 80, 150)
+```
+
+```gdscript
+operator *(right: float)
+```
+
+Multiplies each component of the Vector3i by the given float. Returns a Vector3.
+
+```gdscript
+print(Vector3i(10, 15, 20) * 0.9) # Prints (9.0, 13.5, 18.0)
+```
+
+```gdscript
+operator *(right: int)
+```
+
+Multiplies each component of the Vector3i by the given int.
+
+```gdscript
+operator +(right: Vector3i)
+```
+
+Adds each component of the Vector3i by the components of the given Vector3i.
+
+```gdscript
+print(Vector3i(10, 20, 30) + Vector3i(3, 4, 5)) # Prints (13, 24, 35)
+```
+
+```gdscript
+operator -(right: Vector3i)
+```
+
+Subtracts each component of the Vector3i by the components of the given Vector3i.
+
+```gdscript
+print(Vector3i(10, 20, 30) - Vector3i(3, 4, 5)) # Prints (7, 16, 25)
+```
+
+```gdscript
+operator /(right: Vector3i)
+```
+
+Divides each component of the Vector3i by the components of the given Vector3i.
+
+```gdscript
+print(Vector3i(10, 20, 30) / Vector3i(2, 5, 3)) # Prints (5, 4, 10)
+```
+
+```gdscript
+operator /(right: float)
+```
+
+Divides each component of the Vector3i by the given float. Returns a Vector3.
+
+```gdscript
+print(Vector3i(1, 2, 3) / 2.5) # Prints (0.4, 0.8, 1.2)
+```
+
+```gdscript
+operator /(right: int)
+```
+
+Divides each component of the Vector3i by the given int.
+
+```gdscript
+operator <(right: Vector3i)
+```
+
+Compares two Vector3i vectors by first checking if the X value of the left vector is less than the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors, and then with the Z values. This operator is useful for sorting vectors.
+
+```gdscript
+operator <=(right: Vector3i)
+```
+
+Compares two Vector3i vectors by first checking if the X value of the left vector is less than or equal to the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors, and then with the Z values. This operator is useful for sorting vectors.
+
+```gdscript
+operator ==(right: Vector3i)
+```
+
+Returns true if the vectors are equal.
+
+```gdscript
+operator >(right: Vector3i)
+```
+
+Compares two Vector3i vectors by first checking if the X value of the left vector is greater than the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors, and then with the Z values. This operator is useful for sorting vectors.
+
+```gdscript
+operator >=(right: Vector3i)
+```
+
+Compares two Vector3i vectors by first checking if the X value of the left vector is greater than or equal to the X value of the right vector. If the X values are exactly equal, then it repeats this check with the Y values of the two vectors, and then with the Z values. This operator is useful for sorting vectors.
+
+```gdscript
+operator [](index: int)
+```
+
+Access vector components using their index. v[0] is equivalent to v.x, v[1] is equivalent to v.y, and v[2] is equivalent to v.z.
+
+```gdscript
+operator unary+()
+```
+
+Returns the same value as if the + was not there. Unary + does nothing, but sometimes it can make your code more readable.
+
+```gdscript
+operator unary-()
+```
+
+Returns the negative value of the Vector3i. This is the same as writing Vector3i(-v.x, -v.y, -v.z). This operation flips the direction of the vector while keeping the same magnitude.
 
 ## 属性
 

@@ -11,6 +11,26 @@ struct BuiltinFunc {
     s: String,
 }
 
+/// 内建构造/运算符重载条目（C6.5，sig 键——重载并列同名会撞）。
+#[derive(Debug, Deserialize)]
+struct OverloadSig {
+    #[serde(default)]
+    d: String,
+    #[serde(default)]
+    s: String,
+}
+
+#[derive(Debug, Deserialize)]
+struct BuiltinSigs {
+    #[serde(default)]
+    c: Vec<OverloadSig>,
+    /// 运算符条目（数据已入 hoverdata.json；消费面 per-type 运算符 hover
+    /// 需二元表达式类型推断，属开放问题——C6.5d 式备未来）。
+    #[serde(default)]
+    #[allow(dead_code)]
+    o: Vec<OverloadSig>,
+}
+
 #[derive(Debug, Deserialize)]
 struct HoverData {
     #[serde(default)]
@@ -21,6 +41,8 @@ struct HoverData {
     f: HashMap<String, BuiltinFunc>,
     #[serde(default)]
     a: HashMap<String, String>,
+    #[serde(default)]
+    k: HashMap<String, BuiltinSigs>,
 }
 
 static DATA: std::sync::OnceLock<HoverData> = std::sync::OnceLock::new();
@@ -62,4 +84,23 @@ pub fn gdscript_fns() -> Vec<(String, (String, String))> {
     let mut v: Vec<_> = data().f.iter().map(|(k, bf)| (k.clone(), (bf.s.clone(), bf.d.clone()))).collect();
     v.sort();
     v
+}
+
+/// 内建类型构造重载，(签名, 描述)，语料序（默认构造在前）。
+/// 语料无该类型（如 Nil）返回空。
+pub fn builtin_ctors(ty: &str) -> Vec<(String, String)> {
+    data().k
+        .get(ty)
+        .map(|b| b.c.iter().map(|e| (e.s.clone(), e.d.clone())).collect())
+        .unwrap_or_default()
+}
+
+/// 内建类型运算符条目，(签名, 描述)，语料序。
+/// 当前无消费面（per-type 运算符 hover 属开放问题），随数据一并备未来。
+#[allow(dead_code)]
+pub fn builtin_ops(ty: &str) -> Vec<(String, String)> {
+    data().k
+        .get(ty)
+        .map(|b| b.o.iter().map(|e| (e.s.clone(), e.d.clone())).collect())
+        .unwrap_or_default()
 }

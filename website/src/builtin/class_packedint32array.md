@@ -18,6 +18,26 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+PackedInt32Array()
+```
+
+Constructs an empty PackedInt32Array.
+
+```gdscript
+PackedInt32Array(from: PackedInt32Array)
+```
+
+Constructs a PackedInt32Array as a copy of the given PackedInt32Array.
+
+```gdscript
+PackedInt32Array(from: Array)
+```
+
+Constructs a new PackedInt32Array. Optionally, you can pass in a generic Array that will be converted.
+
 ## 方法
 
 ### append {#append}
@@ -215,3 +235,31 @@ PackedByteArray to_byte_array() const
 Returns a copy of the data converted to a PackedByteArray, where each element has been encoded as 4 bytes.
 
 The size of the new array will be int32_array.size() * 4.
+
+## 运算符
+
+```gdscript
+operator !=(right: PackedInt32Array)
+```
+
+Returns true if contents of the arrays differ.
+
+```gdscript
+operator +(right: PackedInt32Array)
+```
+
+Returns a new PackedInt32Array with contents of right added at the end of this array. For better performance, consider using append_array() instead.
+
+```gdscript
+operator ==(right: PackedInt32Array)
+```
+
+Returns true if contents of both arrays are the same, i.e. they have all equal ints at the corresponding indices.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the int at index index. Negative indices can be used to access the elements starting from the end. Using index out of array's bounds will result in an error.
+
+Note that int type is 64-bit, unlike the values stored in the array.

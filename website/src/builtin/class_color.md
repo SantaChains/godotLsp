@@ -24,6 +24,76 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Color()
+```
+
+Constructs a default Color from opaque black. This is the same as BLACK.
+
+Note: In C#, this constructs a Color with all of its components set to 0.0 (transparent black).
+
+```gdscript
+Color(from: Color, alpha: float)
+```
+
+Constructs a Color from the existing color, with a set to the given alpha value.
+
+```
+var red = Color(Color.RED, 0.2) # 20% opaque red.
+```
+
+```
+var red = new Color(Colors.Red, 0.2f); // 20% opaque red.
+```
+
+```gdscript
+Color(from: Color)
+```
+
+Constructs a Color as a copy of the given Color.
+
+```gdscript
+Color(code: String)
+```
+
+Constructs a Color either from an HTML color code or from a standardized color name. The supported color names are the same as the constants.
+
+```gdscript
+Color(code: String, alpha: float)
+```
+
+Constructs a Color either from an HTML color code or from a standardized color name, with alpha on the range of 0.0 to 1.0. The supported color names are the same as the constants.
+
+```gdscript
+Color(r: float, g: float, b: float)
+```
+
+Constructs a Color from RGB values, typically between 0.0 and 1.0. a is set to 1.0.
+
+```
+var color = Color(0.2, 1.0, 0.7) # Similar to `Color.from_rgba8(51, 255, 178, 255)`
+```
+
+```
+var color = new Color(0.2f, 1.0f, 0.7f); // Similar to `Color.Color8(51, 255, 178, 255)`
+```
+
+```gdscript
+Color(r: float, g: float, b: float, a: float)
+```
+
+Constructs a Color from RGBA values, typically between 0.0 and 1.0.
+
+```
+var color = Color(0.2, 1.0, 0.7, 0.8) # Similar to `Color.from_rgba8(51, 255, 178, 204)`
+```
+
+```
+var color = new Color(0.2f, 1.0f, 0.7f, 0.8f); // Similar to `Color.Color8(51, 255, 178, 255, 204)`
+```
+
 ## 方法
 
 ### blend {#blend}
@@ -449,6 +519,90 @@ print(color.to_rgba64()) # Prints -140736629309441
 var color = new Color(1, 0.5f, 0.2f);
 GD.Print(color.ToRgba64()); // Prints -140736629309441
 ```
+
+## 运算符
+
+```gdscript
+operator !=(right: Color)
+```
+
+Returns true if the colors are not exactly equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator *(right: Color)
+```
+
+Multiplies each component of the Color by the components of the given Color.
+
+```gdscript
+operator *(right: float)
+```
+
+Multiplies each component of the Color by the given float.
+
+```gdscript
+operator *(right: int)
+```
+
+Multiplies each component of the Color by the given int.
+
+```gdscript
+operator +(right: Color)
+```
+
+Adds each component of the Color with the components of the given Color.
+
+```gdscript
+operator -(right: Color)
+```
+
+Subtracts each component of the Color by the components of the given Color.
+
+```gdscript
+operator /(right: Color)
+```
+
+Divides each component of the Color by the components of the given Color.
+
+```gdscript
+operator /(right: float)
+```
+
+Divides each component of the Color by the given float.
+
+```gdscript
+operator /(right: int)
+```
+
+Divides each component of the Color by the given int.
+
+```gdscript
+operator ==(right: Color)
+```
+
+Returns true if the colors are exactly equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator [](index: int)
+```
+
+Access color components using their index. [0] is equivalent to r, [1] is equivalent to g, [2] is equivalent to b, and [3] is equivalent to a.
+
+```gdscript
+operator unary+()
+```
+
+Returns the same value as if the + was not there. Unary + does nothing, but sometimes it can make your code more readable.
+
+```gdscript
+operator unary-()
+```
+
+Inverts the given color. This is equivalent to Color.WHITE - c or Color(1 - c.r, 1 - c.g, 1 - c.b, 1 - c.a). Unlike with inverted(), the a component is inverted, too.
 
 ## 属性
 

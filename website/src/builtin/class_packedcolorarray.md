@@ -18,6 +18,32 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+PackedColorArray()
+```
+
+Constructs an empty PackedColorArray.
+
+```gdscript
+PackedColorArray(from: PackedColorArray)
+```
+
+Constructs a PackedColorArray as a copy of the given PackedColorArray.
+
+```gdscript
+PackedColorArray(from: Array)
+```
+
+Constructs a new PackedColorArray. Optionally, you can pass in a generic Array that will be converted.
+
+Note: When initializing a PackedColorArray with elements, it must be initialized with an Array of Color values:
+
+```gdscript
+var array = PackedColorArray([Color(0.1, 0.2, 0.3), Color(0.4, 0.5, 0.6)])
+```
+
 ## 方法
 
 ### append {#append}
@@ -213,3 +239,29 @@ PackedByteArray to_byte_array() const
 ```
 
 Returns a PackedByteArray with each color encoded as bytes.
+
+## 运算符
+
+```gdscript
+operator !=(right: PackedColorArray)
+```
+
+Returns true if contents of the arrays differ.
+
+```gdscript
+operator +(right: PackedColorArray)
+```
+
+Returns a new PackedColorArray with contents of right added at the end of this array. For better performance, consider using append_array() instead.
+
+```gdscript
+operator ==(right: PackedColorArray)
+```
+
+Returns true if contents of both arrays are the same, i.e. they have all equal Colors at the corresponding indices.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the Color at index index. Negative indices can be used to access the elements starting from the end. Using index out of array's bounds will result in an error.

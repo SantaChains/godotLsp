@@ -26,7 +26,7 @@
 | P6 | **C5** | gdscript-syntax | 语义层类型推断(locals_at + 返回类型推断) | 中(内核附加式) | 待 |
 | P7 | **C6.3** | gdscript-engine + godotlsp | 虚方法模型化(`is_virtual` 1437 + override 面引擎签名) | 低(附加式 serde) | 待 |
 | P8 | **C8 二期** | godotlsp | tween_property 属性面 + InputMap 单例面 + `&`/`^` 设置 plumbing | 低-中 | 待 |
-| P9 | **C6.5** | engine + tools | builtin 构造/运算符面(XML×JSON 双源:模型 + 文档 + 构造补全) | 低(无 oracle,单测+文档验收) | 待(可插空) |
+| P9 | **C6.5** | engine + tools | builtin 构造/运算符面(XML×JSON 双源:模型 + 文档 + signatureHelp) | 低(无 oracle,单测+文档验收) | ✅ 2026-10-18 |
 | P10 | **N6** | gdscript-project + godotlsp | 场景树(tscn 解析 → 节点名面 + 动画 + 连接) | 高(新解析器) | 待 |
 | P11 | **C9** | 插件 + 工具 | snippet 16→~40 对齐 + fetch 审计;templates 来源重定 | 无(纯增量) | 待(可插空) |
 
@@ -171,7 +171,7 @@ extends 0/2。未命中成因:absent 279 / paren-display 50 / string-literal 7�
 | P6 | **C5** | gdscript-syntax | 语义层类型推断:locals_at(注解 + 字面量)+ 返回类型推断 | **+9~12**(index 6 + types 3 + infer_return) | P5 数据面(部分) | 待 |
 | P7 | **C6.3** | gdscript-engine + godotlsp | 虚方法模型化:`is_virtual` 解析 + override 面引擎虚方法完整签名 | override 剩余夹具 | P5 override 面 | 待 |
 | P8 | **C8 二期** | godotlsp | tween_property 属性面 + InputMap 单例面 + `&`/`^` 设置 plumbing | `add_*` ×2(+动画 ×2 挂 P10) | P6 | 待 |
-| P9 | **C6.5** | engine + tools | builtin 构造/运算符面(XML×JSON 双源):模型解析 + 文档面 + 构造补全 | 无 oracle(单测+文档验收) | 无(可插空) | 待 |
+| P9 | **C6.5** | engine + tools | builtin 构造/运算符面(XML×JSON 双源):模型解析 + 文档面 + signatureHelp | 无 oracle(单测+文档验收) | 无(可插空) | ✅ |
 | P10 | **N6** | gdscript-project + godotlsp | 场景树:tscn 解析 → NodeDecl → 节点名面 + 场景信号 + 动画面 | **+24**(get_node 22 + play_* 2) | 大工程,独立 | 待 |
 | P11 | **C9** | 插件 + 工具 | snippet 16→~40 对齐 + fetch 审计;templates 来源重定 | 无(工具面) | 无(可插空) | 待 |
 
@@ -599,29 +599,44 @@ initialize 的 corpus 层级传错(传了上一级)导致布局错位假象,prob
 
 **仍挂 P10**:AnimationPlayer 动画面(play_*×3,需 tscn 动画库)。
 
-### P9 — C6.5 builtin 构造/运算符面(引擎数据面 × 文档生成面)
+### P9 — C6.5 builtin 构造/运算符面 ✅ 已实施(2026-10-18,106/140 保持,零回归)
 
-**数据源定论(2026-10-17 盘点)**:`extension_api.json` 的 builtin `constructors` 只有
-`index`、`operators` 只有 `name/right_type/return_type`——**均无签名/描述**;
-`.refs/godot/doc/classes/*.xml`(810 个,已抽样 int.xml 验证)带完整
-`param name/type` + `return` + `description`。→ **双源互补:XML 签名+描述,JSON 结构**。
+**实证修正(相对原计划)**:
+- **数据源**:JSON 侧 `constructors[].arguments` 参数**内联**(154 重载),运算符是全超集
+  ——一元(`unary±`/`~`/`not`)在 JSON 且**省略 `right_type` 键**,语言级 `and`/`or`/`xor`/`in`
+  仅在 JSON;XML(doc/classes)351 条带描述(含一元,缺语言级)。154 构造 + 351 运算符,
+  描述 XML/gdd 语料双源均可,实际走 gdd(中文优先)。
+- **gdd 语料区块覆盖 37/37**(Nil 无页属预期);表格尾部 `---` 分隔线需过滤
+  (曾误判为"表 40/描述 39 漂移",剔除后与 XML 计数零漂移)。
+- **C6.5c① 形态修正**:引擎锚点实测(gdscript_editor.cpp:3399-3416)——`Vector2(` 括号内
+  **不出补全项**,只出 call hint(构造重载逐条 + 过滤 `argidx >= args.size()` 重载)。
+  → 落地为 **signatureHelp** 多重载,非补全项。
+- **架构修正**:原计划的 `gen_builtin_sig.py` + `builtin_signatures.json` 独立管线**废弃**——
+  gdd 语料已含全部区块,按防漂移纪律(LSP 描述层不得另写解析器)并入 gen_docs.py 统一管线。
 
-- **C6.5a 模型解析**:`tools/gen_builtin_sig.py`(新,仿 gen_docs 管线)从 pinned XML 生成
-  `crates/gdscript-engine/testdata/builtin_signatures.json`(**生成物入库**,与 hoverdata.json
-  同律;XML 本体仍不入库)→ `RawBuiltin` 解析 + `builtin_constructors(name)`/
-  `builtin_operators(name)` 查询 API。
-- **C6.5b 文档生成面**:`tools/gen_docs.py` 增 `Constructors`/`Operators`/
-  `Constructor Descriptions`/`Operator Descriptions` 四区块解析(现有 Method/Property
-  Descriptions 解析器同构扩展,成本低)→ website 内建页补两节 + hoverdata 增条目
-  (与 `--check` 防漂移同程)。
-- **C6.5c 消费面**:① `Vector2(`/`int(` 等内建类型调用 → 构造重载补全(参数签名,
-  引擎 `BUILT_IN_TYPE` 上下文同款);② 类型名 hover 追加构造重载列表;③ per-type 运算符
-  hover **仍挂语义层**(二元表达式两侧类型推断,开放问题不变)。
-- **C6.5d 仍只解析备未来**:`is_keyed`/`indexing_return_type`/`api_type`/`is_bitfield`;
-  `version_full_name` 可进启动日志(小甜点,可选)。
-- **取舍**:无 oracle 覆盖(语料无内建构造补全夹具)→ 单测锁 38 类构造/运算符计数 +
-  `gen_docs.py --check` + smoke;英文数据,中文翻译走 P2-16。
-- **验收**:`class_int.md` 含 5 构造 + 64 运算符节;`Vector2(` 构造面单测 + E2E;零回归。
+**落地内容**:
+- **C6.5a 模型**(gdscript-engine):`RawBuiltin` + `constructors`(参数内联)/`operators`
+  /`is_keyed`/`indexing_return_type`(C6.5d 只解析);`BuiltinClass` 增四字段;
+  查询 API `builtin_constructors`/`builtin_operators`。单测:38/38 计数锚定
+  (Vector2 4 构造、int 5 构造 64 运算符、一元 right_type 空串、is_keyed 仅 Dictionary、
+  indexing 24 类)。
+- **C6.5b 生成管线**(gen_docs.py):`parse_overload_entries`(重载并列,name 键会撞)+ 签名
+  归一化(表格 `type | sig` 与描述 `type sig` 统一)→ website 内建页增「构造函数」「运算符」
+  节(37 页) + hoverdata.json 增 `k` 键(`{类型: {c/o: [{s,d}]}}`,154 c + 351 o);
+  `--check` 同程防漂移。翻译钩子 `ctor:<类型>:<签名>` / `op:<类型>:<签名>`(P2-16 用)。
+- **C6.5c 消费**(godotlsp):① signatureHelp builtin 构造分支——多重载
+  SignatureInformation(label=语料签名,documentation=语料描述),镜像引擎过滤
+  (`active_param < args.len()`),activeParameter=顶层逗号计数;② builtin 类型名 hover
+  追加「构造函数」节(签名+描述);③ per-type 运算符 hover 仍挂语义层(开放问题),
+  `builtin_ops` 访问器随数据备未来。
+
+**验收(实际)**:engine 10/10 + godotlsp 143 全绿(新增 P9 4 测试:argidx=0/1 过滤、
+未知裸名 None、hover 构造节);`gen_docs.py --check` 通过(37 页 + k 键);E2E 冒烟
+`Vector2(1, ` → `['Vector2(x: float, y: float)']` activeParam=1;oracle 106 保持零回归;
+clippy 0。**教训**:① JSON 运算符其实含一元(right_type 键省略),先跑锚定再写断言;
+② 测试 helper 传 `test_state()` 裸态(docs 空)致 signatureHelp 静默 None——先查
+早退点再加调试输出;③ heredoc 双层转义会吞 ``(变退格控制符)——含正则的补丁走
+Edit/chr() 构造。
 
 ### P10 — N6 场景树(gdscript-project + godotlsp,最大工程,末期)
 

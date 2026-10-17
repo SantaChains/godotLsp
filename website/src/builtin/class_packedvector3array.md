@@ -18,6 +18,32 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+PackedVector3Array()
+```
+
+Constructs an empty PackedVector3Array.
+
+```gdscript
+PackedVector3Array(from: PackedVector3Array)
+```
+
+Constructs a PackedVector3Array as a copy of the given PackedVector3Array.
+
+```gdscript
+PackedVector3Array(from: Array)
+```
+
+Constructs a new PackedVector3Array. Optionally, you can pass in a generic Array that will be converted.
+
+Note: When initializing a PackedVector3Array with elements, it must be initialized with an Array of Vector3 values:
+
+```gdscript
+var array = PackedVector3Array([Vector3(12, 34, 56), Vector3(78, 90, 12)])
+```
+
 ## 方法
 
 ### append {#append}
@@ -227,3 +253,39 @@ PackedByteArray to_byte_array() const
 ```
 
 Returns a PackedByteArray with each vector encoded as bytes.
+
+## 运算符
+
+```gdscript
+operator !=(right: PackedVector3Array)
+```
+
+Returns true if contents of the arrays differ.
+
+```gdscript
+operator *(right: Transform3D)
+```
+
+Returns a new PackedVector3Array with all vectors in this array inversely transformed (multiplied) by the given Transform3D transformation matrix, under the assumption that the transformation basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not).
+
+array * transform is equivalent to transform.inverse() * array. See Transform3D.inverse().
+
+For transforming by inverse of an affine transformation (e.g. with scaling) transform.affine_inverse() * array can be used instead. See Transform3D.affine_inverse().
+
+```gdscript
+operator +(right: PackedVector3Array)
+```
+
+Returns a new PackedVector3Array with contents of right added at the end of this array. For better performance, consider using append_array() instead.
+
+```gdscript
+operator ==(right: PackedVector3Array)
+```
+
+Returns true if contents of both arrays are the same, i.e. they have all equal Vector3s at the corresponding indices.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the Vector3 at index index. Negative indices can be used to access the elements starting from the end. Using index out of array's bounds will result in an error.

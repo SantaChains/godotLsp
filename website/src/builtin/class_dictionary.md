@@ -182,6 +182,26 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Dictionary()
+```
+
+Constructs an empty Dictionary.
+
+```gdscript
+Dictionary(base: Dictionary, key_type: int, key_class_name: StringName, key_script: Variant, value_type: int, value_class_name: StringName, value_script: Variant)
+```
+
+Creates a typed dictionary from the base dictionary. A typed dictionary can only contain keys and values of the given types, or that inherit from the given classes, as described by this constructor's parameters.
+
+```gdscript
+Dictionary(from: Dictionary)
+```
+
+Returns the same dictionary as from. If you need a copy of the dictionary, use duplicate().
+
 ## 方法
 
 ### assign {#assign}
@@ -547,3 +567,25 @@ Array values() const
 ```
 
 返回所有值的数组。
+
+## 运算符
+
+```gdscript
+operator !=(right: Dictionary)
+```
+
+Returns true if the two dictionaries do not contain the same keys and values.
+
+```gdscript
+operator ==(right: Dictionary)
+```
+
+Returns true if the two dictionaries contain the same keys and values. The order of the entries does not matter.
+
+Note: In C#, by convention, this operator compares by reference. If you need to compare by value, iterate over both dictionaries.
+
+```gdscript
+operator [](key: Variant)
+```
+
+Returns the corresponding value for the given key in the dictionary. If the entry does not exist, fails and returns null. For safe access, use get() or has().

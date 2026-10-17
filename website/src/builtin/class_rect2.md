@@ -18,6 +18,38 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Rect2()
+```
+
+Constructs a Rect2 with its position and size set to Vector2.ZERO.
+
+```gdscript
+Rect2(from: Rect2)
+```
+
+Constructs a Rect2 as a copy of the given Rect2.
+
+```gdscript
+Rect2(from: Rect2i)
+```
+
+Constructs a Rect2 from a Rect2i.
+
+```gdscript
+Rect2(position: Vector2, size: Vector2)
+```
+
+Constructs a Rect2 by position and size.
+
+```gdscript
+Rect2(x: float, y: float, width: float, height: float)
+```
+
+Constructs a Rect2 by setting its position to (x, y), and its size to (width, height).
+
 ## 方法
 
 ### abs {#abs}
@@ -197,6 +229,34 @@ Rect2 merge(b: Rect2) const
 ```
 
 Returns a Rect2 that encloses both this rectangle and b around the edges. See also encloses().
+
+## 运算符
+
+```gdscript
+operator !=(right: Rect2)
+```
+
+Returns true if the position or size of both rectangles are not equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator *(right: Transform2D)
+```
+
+Inversely transforms (multiplies) the Rect2 by the given Transform2D transformation matrix, under the assumption that the transformation basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not).
+
+rect * transform is equivalent to transform.inverse() * rect. See Transform2D.inverse().
+
+For transforming by inverse of an affine transformation (e.g. with scaling) transform.affine_inverse() * rect can be used instead. See Transform2D.affine_inverse().
+
+```gdscript
+operator ==(right: Rect2)
+```
+
+Returns true if both position and size of the rectangles are exactly equal, respectively.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
 
 ## 属性
 

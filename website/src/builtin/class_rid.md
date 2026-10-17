@@ -18,6 +18,20 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+RID()
+```
+
+Constructs an empty RID with the invalid ID 0.
+
+```gdscript
+RID(from: RID)
+```
+
+Constructs an RID as a copy of the given RID.
+
 ## 方法
 
 ### get_id {#get_id}
@@ -35,3 +49,41 @@ bool is_valid() const
 ```
 
 Returns true if the RID is not 0.
+
+## 运算符
+
+```gdscript
+operator !=(right: RID)
+```
+
+Returns true if the RIDs are not equal.
+
+```gdscript
+operator <(right: RID)
+```
+
+Returns true if the RID's ID is less than right's ID.
+
+```gdscript
+operator <=(right: RID)
+```
+
+Returns true if the RID's ID is less than or equal to right's ID.
+
+```gdscript
+operator ==(right: RID)
+```
+
+Returns true if both RIDs are equal, which means they both refer to the same low-level resource.
+
+```gdscript
+operator >(right: RID)
+```
+
+Returns true if the RID's ID is greater than right's ID.
+
+```gdscript
+operator >=(right: RID)
+```
+
+Returns true if the RID's ID is greater than or equal to right's ID.

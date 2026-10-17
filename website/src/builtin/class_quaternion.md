@@ -22,6 +22,50 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Quaternion()
+```
+
+Constructs a Quaternion identical to IDENTITY.
+
+Note: In C#, this constructs a Quaternion with all of its components set to 0.0.
+
+```gdscript
+Quaternion(from: Quaternion)
+```
+
+Constructs a Quaternion as a copy of the given Quaternion.
+
+```gdscript
+Quaternion(arc_from: Vector3, arc_to: Vector3)
+```
+
+Constructs a Quaternion representing the shortest arc between arc_from and arc_to. These can be imagined as two points intersecting a sphere's surface, with a radius of 1.0.
+
+```gdscript
+Quaternion(axis: Vector3, angle: float)
+```
+
+Constructs a Quaternion representing rotation around the axis by the given angle, in radians. The axis must be a normalized vector.
+
+```gdscript
+Quaternion(from: Basis)
+```
+
+Constructs a Quaternion from the given rotation Basis.
+
+This constructor is faster than Basis.get_rotation_quaternion(), but the given basis must be orthonormalized (see Basis.orthonormalized()). Otherwise, the constructor fails and returns IDENTITY.
+
+```gdscript
+Quaternion(x: float, y: float, z: float, w: float)
+```
+
+Constructs a Quaternion defined by the given values.
+
+Note: Only normalized quaternions represent rotation; if these values are not normalized, the new Quaternion will not be a valid rotation.
+
 ## 方法
 
 ### angle_to {#angle_to}
@@ -187,6 +231,104 @@ Quaternion spherical_cubic_interpolate_in_time(b: Quaternion, pre_a: Quaternion,
 Performs a spherical cubic interpolation between quaternions pre_a, this vector, b, and post_b, by the given amount weight.
 
 It can perform smoother interpolation than spherical_cubic_interpolate() by the time values.
+
+## 运算符
+
+```gdscript
+operator !=(right: Quaternion)
+```
+
+Returns true if the components of both quaternions are not exactly equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator *(right: Quaternion)
+```
+
+Composes (multiplies) two quaternions. This rotates the right quaternion (the child) by this quaternion (the parent).
+
+```gdscript
+operator *(right: Vector3)
+```
+
+Rotates (multiplies) the right vector by this quaternion, returning a Vector3.
+
+```gdscript
+operator *(right: float)
+```
+
+Multiplies each component of the Quaternion by the right float value.
+
+This operation is not meaningful on its own, but it can be used as a part of a larger expression.
+
+```gdscript
+operator *(right: int)
+```
+
+Multiplies each component of the Quaternion by the right int value.
+
+This operation is not meaningful on its own, but it can be used as a part of a larger expression.
+
+```gdscript
+operator +(right: Quaternion)
+```
+
+Adds each component of the left Quaternion to the right Quaternion.
+
+This operation is not meaningful on its own, but it can be used as a part of a larger expression, such as approximating an intermediate rotation between two nearby rotations.
+
+```gdscript
+operator -(right: Quaternion)
+```
+
+Subtracts each component of the left Quaternion by the right Quaternion.
+
+This operation is not meaningful on its own, but it can be used as a part of a larger expression.
+
+```gdscript
+operator /(right: float)
+```
+
+Divides each component of the Quaternion by the right float value.
+
+This operation is not meaningful on its own, but it can be used as a part of a larger expression.
+
+```gdscript
+operator /(right: int)
+```
+
+Divides each component of the Quaternion by the right int value.
+
+This operation is not meaningful on its own, but it can be used as a part of a larger expression.
+
+```gdscript
+operator ==(right: Quaternion)
+```
+
+Returns true if the components of both quaternions are exactly equal.
+
+Note: Due to floating-point precision errors, consider using is_equal_approx() instead, which is more reliable.
+
+```gdscript
+operator [](index: int)
+```
+
+Accesses each component of this quaternion by their index.
+
+Index 0 is the same as x, index 1 is the same as y, index 2 is the same as z, and index 3 is the same as w.
+
+```gdscript
+operator unary+()
+```
+
+Returns the same value as if the + was not there. Unary + does nothing, but sometimes it can make your code more readable.
+
+```gdscript
+operator unary-()
+```
+
+Returns the negative value of the Quaternion. This is the same as multiplying all components by -1. This operation results in a quaternion that represents the same rotation.
 
 ## 属性
 

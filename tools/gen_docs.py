@@ -128,10 +128,66 @@ def parse_entries(body: str) -> dict[str, str]:
     return {name: desc for name, (_sig, desc) in parse_entries_full(body).items()}
 
 
+def parse_overload_entries(body: str) -> list[tuple[str, str]]:
+    """'## X Descriptions' 区块 → [(签名行, 描述)]，保序不去重。
+
+    构造/运算符按重载并列（`int int()` / `int int(from: int)` …），
+    parse_entries_full 的名字键会全部撞成 "int"——专用变体，
+    与 parse_entries 同一 `---` 切分纪律（首行签名、其余描述）。
+    """
+    out: list[tuple[str, str]] = []
+    for chunk in re.split(r"^---\s*$", body, flags=re.M):
+        chunk = chunk.strip()
+        if not chunk:
+            continue
+        lines = chunk.split("\n")
+        out.append((lines[0].strip(), "\n".join(lines[1:]).strip()))
+    return out
+
+
+_SIG_DESC_RE = re.compile(r"^[\w\[\]]+\s+(?=operator\b|[\w]+\s*\()")
+
+
+def _norm_sig(line: str) -> str:
+    """签名归一化：表格 `type | sig` 与描述 `type sig` 两种形态统一为 `sig`。"""
+    s = line.strip()
+    s = re.sub(r"^[\w\[\]]+\s*\|\s*", "", s)
+    s = _SIG_DESC_RE.sub("", s)
+    return s.strip()
+
+
+def builtin_ctor_op_data(blocks: dict[str, str]) -> tuple[list[dict], list[dict]]:
+    """gdd 内建页构造/运算符数据：表格（Constructors/Operators）为权威条目集，
+    Descriptions 按归一化签名匹配补描述。
+
+    语料注记：表格尾部 `---` 水平分隔线需跳过；剔除后 int 表 39/描述 39、
+    Vector2 表 18/描述 18，与 doc XML 计数完全一致（零漂移）。
+    """
+    def merge(table_block: str, desc_block: str) -> list[dict]:
+        desc_by_norm = {_norm_sig(sig): d for sig, d in parse_overload_entries(desc_block)}
+        out: list[dict] = []
+        seen: set[str] = set()
+        for line in table_block.splitlines():
+            line = line.strip()
+            if not line or line.startswith("---"):
+                continue
+            sig = _norm_sig(line)
+            if not sig or sig in seen:
+                continue
+            seen.add(sig)
+            out.append({"s": sig, "d": desc_by_norm.get(sig, "")})
+        return out
+
+    ctors = merge(blocks.get("Constructors", ""), blocks.get("Constructor Descriptions", ""))
+    ops = merge(blocks.get("Operators", ""), blocks.get("Operator Descriptions", ""))
+    return ctors, ops
+
+
 def empty_docs() -> dict:
     return {"brief": "", "description": "", "methods": {}, "methods_full": {},
             "properties": {}, "signals": {}, "enums": {}, "enums_tree": {},
-            "constants": {}, "constants_full": {}, "annotations": {}, "annotations_full": {}}
+            "constants": {}, "constants_full": {}, "annotations": {}, "annotations_full": {},
+            "ctors": [], "ops": []}
 
 
 def parse_enum_entries(body: str) -> dict[str, dict[str, str]]:
@@ -189,7 +245,7 @@ def class_docs(file: Path) -> dict:
         for vname, vdesc in vals.items():
             if vname != ename:
                 enums_flat[vname] = vdesc
-    return {
+    ret = {
         "brief": brief,
         "description": desc,
         "methods_full": full_methods,
@@ -203,6 +259,9 @@ def class_docs(file: Path) -> dict:
         "annotations_full": full_annos,
         "annotations": {k: v[1] for k, v in full_annos.items()},
     }
+    # C6.5 内建构造/运算符（仅内建页语料有该区块；类页 blocks 无 → 空列表）
+    ret["ctors"], ret["ops"] = builtin_ctor_op_data(blocks)
+    return ret
 
 
 # ───────────────────────── 签名渲染 ─────────────────────────
@@ -308,6 +367,19 @@ def gen_class_page(name: str, cls: dict, kind: str, docs: dict, api: dict, inh_l
             L.append("</details>")
             L.append("")
 
+    # 构造函数（C6.5b，builtin 专属；重载并列无 ### 锚——同名会撞锚）
+    if docs["ctors"]:
+        L.append("## 构造函数")
+        L.append("")
+        for e in docs["ctors"]:
+            L.append("```gdscript")
+            L.append(e["s"])
+            L.append("```")
+            L.append("")
+            if e["d"]:
+                L.append(md_desc(e["d"]))
+                L.append("")
+
     # 方法
     methods = cls.get("methods", [])
     if methods:
@@ -323,6 +395,19 @@ def gen_class_page(name: str, cls: dict, kind: str, docs: dict, api: dict, inh_l
             cn = tr(f"member:{name}.{f['name']}")
             L.append(md_desc(cn or docs["methods"].get(f["name"], "")))
             L.append("")
+
+    # 运算符（C6.5b，builtin 专属；同构造函数无 ### 锚）
+    if docs["ops"]:
+        L.append("## 运算符")
+        L.append("")
+        for e in docs["ops"]:
+            L.append("```gdscript")
+            L.append(e["s"])
+            L.append("```")
+            L.append("")
+            if e["d"]:
+                L.append(md_desc(e["d"]))
+                L.append("")
 
     # 属性（builtin 用 members）
     props = cls.get("properties") or cls.get("members") or []
@@ -599,11 +684,13 @@ def build_hoverdata(entries: dict, docs_idx: dict) -> dict:
       m  成员描述：{"<类名>.<成员>": 首段}（方法/属性/信号/枚举/枚举值/常量；@GlobalScope 用类名键）
       f  @GDScript 内建函数：{名: {"s": 语料签名行, "d": 摘要}}
       a  注解：{名(去@): 摘要}
+      k  内建构造/运算符（C6.5）：{类型: {"c"/"o": [{"s": 签名, "d": 摘要}]}}
     """
     c: dict[str, str] = {}
     m: dict[str, str] = {}
     f: dict[str, dict[str, str]] = {}
     a: dict[str, str] = {}
+    k: dict[str, dict] = {}
     for name in entries:
         docs_file = docs_idx.get(name)
         docs = class_docs(docs_file) if docs_file else empty_docs()
@@ -626,6 +713,13 @@ def build_hoverdata(entries: dict, docs_idx: dict) -> dict:
             m[f"{name}.{member}"] = hover_para(desc)
         for member, desc in docs["constants"].items():
             m[f"{name}.{member}"] = hover_para(desc)
+        # C6.5：内建构造/运算符（重载并列，sig 键）
+        if docs["ctors"] or docs["ops"]:
+            k[name] = {}
+            if docs["ctors"]:
+                k[name]["c"] = [{"s": e["s"], "d": hover_para(e["d"])} for e in docs["ctors"]]
+            if docs["ops"]:
+                k[name]["o"] = [{"s": e["s"], "d": hover_para(e["d"])} for e in docs["ops"]]
     # P0 中文翻译覆盖
     for name in c:
         if t := tr(f"class:{name}"):
@@ -639,7 +733,13 @@ def build_hoverdata(entries: dict, docs_idx: dict) -> dict:
     for name in a:
         if t := tr(f"anno:{name}"):
             a[name] = t
-    return {"c": c, "m": m, "f": f, "a": a}
+    # C6.5：构造/运算符中文覆盖（翻译键 `ctor:<类型>:<签名>` / `op:<类型>:<签名>`）
+    for name, kinds in k.items():
+        for kind, prefix in (("c", "ctor"), ("o", "op")):
+            for e in kinds.get(kind, []):
+                if t := tr(f"{prefix}:{name}:{e['s']}"):
+                    e["d"] = t
+    return {"c": c, "m": m, "f": f, "a": a, "k": k}
 
 
 # ───────────────────────── 主流程 ─────────────────────────
@@ -724,7 +824,9 @@ def main() -> int:
         HOVERDATA.write_text(hover_text, encoding="utf-8", newline="\n")
 
     mode = "check" if check else "generate"
-    print(f"{mode}: {written} class pages, {len(all_names)} entries, hover members {len(hover['m'])} + fns {len(hover['f'])} + annos {len(hover['a'])}")
+    k_ct = sum(len(v.get("c", [])) for v in hover.get("k", {}).values())
+    k_op = sum(len(v.get("o", [])) for v in hover.get("k", {}).values())
+    print(f"{mode}: {written} class pages, {len(all_names)} entries, hover members {len(hover['m'])} + fns {len(hover['f'])} + annos {len(hover['a'])} + ctors {k_ct} + ops {k_op}")
     return 0
 
 

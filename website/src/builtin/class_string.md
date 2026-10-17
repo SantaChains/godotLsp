@@ -18,6 +18,32 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+String()
+```
+
+Constructs an empty String ("").
+
+```gdscript
+String(from: String)
+```
+
+Constructs a String as a copy of the given String.
+
+```gdscript
+String(from: NodePath)
+```
+
+Constructs a new String from the given NodePath.
+
+```gdscript
+String(from: StringName)
+```
+
+Constructs a new String from the given StringName.
+
 ## 方法
 
 ### begins_with {#begins_with}
@@ -1345,3 +1371,89 @@ String xml_unescape() const
 ```
 
 Returns a copy of the string with escaped characters replaced by their meanings according to the XML standard.
+
+## 运算符
+
+```gdscript
+operator !=(right: String)
+```
+
+Returns true if both strings do not contain the same sequence of characters.
+
+```gdscript
+operator !=(right: StringName)
+```
+
+Returns true if this String is not equivalent to the given StringName.
+
+```gdscript
+operator %(right: Variant)
+```
+
+Formats the String, replacing the placeholders with one or more parameters. To pass multiple parameters, right needs to be an Array.
+
+```gdscript
+print("I caught %d fishes!" % 2) # Prints "I caught 2 fishes!"
+var my_message = "Travelling to %s, at %2.2f km/h."
+var location = "Deep Valley"
+var speed = 40.3485
+print(my_message % [location, speed]) # Prints "Travelling to Deep Valley, at 40.35 km/h."
+```
+
+For more information, see the GDScript format strings tutorial.
+
+Note: In C#, this operator is not available. Instead, see how to interpolate strings with "$" [https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated].
+
+```gdscript
+operator +(right: String)
+```
+
+Appends right at the end of this String, also known as a string concatenation.
+
+```gdscript
+operator +(right: StringName)
+```
+
+Appends right at the end of this String, returning a String. This is also known as a string concatenation.
+
+```gdscript
+operator <(right: String)
+```
+
+Returns true if the left String comes before right in Unicode order [https://en.wikipedia.org/wiki/List_of_Unicode_characters], which roughly matches the alphabetical order. Useful for sorting.
+
+```gdscript
+operator <=(right: String)
+```
+
+Returns true if the left String comes before right in Unicode order [https://en.wikipedia.org/wiki/List_of_Unicode_characters], which roughly matches the alphabetical order, or if both are equal.
+
+```gdscript
+operator ==(right: String)
+```
+
+Returns true if both strings contain the same sequence of characters.
+
+```gdscript
+operator ==(right: StringName)
+```
+
+Returns true if this String is equivalent to the given StringName.
+
+```gdscript
+operator >(right: String)
+```
+
+Returns true if the left String comes after right in Unicode order [https://en.wikipedia.org/wiki/List_of_Unicode_characters], which roughly matches the alphabetical order. Useful for sorting.
+
+```gdscript
+operator >=(right: String)
+```
+
+Returns true if the left String comes after right in Unicode order [https://en.wikipedia.org/wiki/List_of_Unicode_characters], which roughly matches the alphabetical order, or if both are equal.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns a new String that only contains the character at index. Indices start from 0. If index is greater or equal to 0, the character is fetched starting from the beginning of the string. If index is a negative value, it is fetched starting from the end. Accessing a string out-of-bounds will cause a run-time error, pausing the project execution if run from the editor.

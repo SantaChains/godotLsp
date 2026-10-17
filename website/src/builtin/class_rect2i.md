@@ -18,6 +18,38 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Rect2i()
+```
+
+Constructs a Rect2i with its position and size set to Vector2i.ZERO.
+
+```gdscript
+Rect2i(from: Rect2i)
+```
+
+Constructs a Rect2i as a copy of the given Rect2i.
+
+```gdscript
+Rect2i(from: Rect2)
+```
+
+Constructs a Rect2i from a Rect2. The floating-point coordinates are truncated.
+
+```gdscript
+Rect2i(position: Vector2i, size: Vector2i)
+```
+
+Constructs a Rect2i by position and size.
+
+```gdscript
+Rect2i(x: int, y: int, width: int, height: int)
+```
+
+Constructs a Rect2i by setting its position to (x, y), and its size to (width, height).
+
 ## 方法
 
 ### abs {#abs}
@@ -175,6 +207,20 @@ Rect2i merge(b: Rect2i) const
 ```
 
 Returns a Rect2i that encloses both this rectangle and b around the edges. See also encloses().
+
+## 运算符
+
+```gdscript
+operator !=(right: Rect2i)
+```
+
+Returns true if the position or size of both rectangles are not equal.
+
+```gdscript
+operator ==(right: Rect2i)
+```
+
+Returns true if both position and size of the rectangles are equal, respectively.
 
 ## 属性
 

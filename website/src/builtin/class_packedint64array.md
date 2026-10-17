@@ -20,6 +20,26 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+PackedInt64Array()
+```
+
+Constructs an empty PackedInt64Array.
+
+```gdscript
+PackedInt64Array(from: PackedInt64Array)
+```
+
+Constructs a PackedInt64Array as a copy of the given PackedInt64Array.
+
+```gdscript
+PackedInt64Array(from: Array)
+```
+
+Constructs a new PackedInt64Array. Optionally, you can pass in a generic Array that will be converted.
+
 ## 方法
 
 ### append {#append}
@@ -217,3 +237,29 @@ PackedByteArray to_byte_array() const
 Returns a copy of the data converted to a PackedByteArray, where each element has been encoded as 8 bytes.
 
 The size of the new array will be int64_array.size() * 8.
+
+## 运算符
+
+```gdscript
+operator !=(right: PackedInt64Array)
+```
+
+Returns true if contents of the arrays differ.
+
+```gdscript
+operator +(right: PackedInt64Array)
+```
+
+Returns a new PackedInt64Array with contents of right added at the end of this array. For better performance, consider using append_array() instead.
+
+```gdscript
+operator ==(right: PackedInt64Array)
+```
+
+Returns true if contents of both arrays are the same, i.e. they have all equal ints at the corresponding indices.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the int at index index. Negative indices can be used to access the elements starting from the end. Using index out of array's bounds will result in an error.

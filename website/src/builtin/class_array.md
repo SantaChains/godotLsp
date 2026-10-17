@@ -46,6 +46,115 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+Array()
+```
+
+Constructs an empty Array.
+
+```gdscript
+Array(base: Array, type: int, class_name: StringName, script: Variant)
+```
+
+Creates a typed array from the base array. A typed array can only contain elements of the given type, or that inherit from the given class, as described by this constructor's parameters:
+
+- type is the built-in Variant type, as one the Variant.Type constants.
+- class_name is the built-in class name (see Object.get_class()).
+- script is the associated script. It must be a Script instance or null.
+
+If type is not @GlobalScope.TYPE_OBJECT, class_name must be an empty StringName and script must be null.
+
+```gdscript
+class_name Sword
+extends Node
+class Stats:
+    pass
+func _ready():
+    var a = Array([], TYPE_INT, "", null)               # Array[int]
+    var b = Array([], TYPE_OBJECT, "Node", null)        # Array[Node]
+    var c = Array([], TYPE_OBJECT, "Node", Sword)       # Array[Sword]
+    var d = Array([], TYPE_OBJECT, "RefCounted", Stats) # Array[Stats]
+```
+
+The base array's elements are converted when necessary. If this is not possible or base is already typed, this constructor fails and returns an empty Array.
+
+In GDScript, this constructor is usually not necessary, as it is possible to create a typed array through static typing:
+
+```gdscript
+var numbers: Array[float] = []
+var children: Array[Node] = [$Node, $Sprite2D, $RigidBody3D]
+var integers: Array[int] = [0.2, 4.5, -2.0]
+print(integers) # Prints [0, 4, -2]
+```
+
+```gdscript
+Array(from: Array)
+```
+
+Returns the same array as from. If you need a copy of the array, use duplicate().
+
+```gdscript
+Array(from: PackedByteArray)
+```
+
+Constructs an array from a PackedByteArray.
+
+```gdscript
+Array(from: PackedColorArray)
+```
+
+Constructs an array from a PackedColorArray.
+
+```gdscript
+Array(from: PackedFloat32Array)
+```
+
+Constructs an array from a PackedFloat32Array.
+
+```gdscript
+Array(from: PackedFloat64Array)
+```
+
+Constructs an array from a PackedFloat64Array.
+
+```gdscript
+Array(from: PackedInt32Array)
+```
+
+Constructs an array from a PackedInt32Array.
+
+```gdscript
+Array(from: PackedInt64Array)
+```
+
+Constructs an array from a PackedInt64Array.
+
+```gdscript
+Array(from: PackedStringArray)
+```
+
+Constructs an array from a PackedStringArray.
+
+```gdscript
+Array(from: PackedVector2Array)
+```
+
+Constructs an array from a PackedVector2Array.
+
+```gdscript
+Array(from: PackedVector3Array)
+```
+
+Constructs an array from a PackedVector3Array.
+
+```gdscript
+Array(from: PackedVector4Array)
+```
+
+Constructs an array from a PackedVector4Array.
+
 ## 方法
 
 ### all {#all}
@@ -805,3 +914,76 @@ Note: In C#, this method is not supported.
 Note: The sorting algorithm used is not stable [https://en.wikipedia.org/wiki/Sorting_algorithm#Stability]. This means that values considered equal may have their order changed when calling this method.
 
 Note: You should not randomize the return value of func, as the heapsort algorithm expects a consistent result. Randomizing the return value will result in unexpected behavior.
+
+## 运算符
+
+```gdscript
+operator !=(right: Array)
+```
+
+Returns true if the array's size or its elements are different than right's.
+
+```gdscript
+operator +(right: Array)
+```
+
+Appends the right array to the left operand, creating a new Array. This is also known as an array concatenation.
+
+```
+var array1 = ["One", 2]
+var array2 = [3, "Four"]
+print(array1 + array2) # Prints ["One", 2, 3, "Four"]
+```
+
+```
+// Note that concatenation is not possible with C#'s native Array type.
+Godot.Collections.Array array1 = ["One", 2];
+Godot.Collections.Array array2 = [3, "Four"];
+GD.Print(array1 + array2); // Prints ["One", 2, 3, "Four"]
+```
+
+Note: For existing arrays, append_array() is much more efficient than concatenation and assignment with the += operator.
+
+```gdscript
+operator <(right: Array)
+```
+
+Compares the elements of both arrays in order, starting from index 0 and ending on the last index in common between both arrays. For each pair of elements, returns true if this array's element is less than right's, false if this element is greater. Otherwise, continues to the next pair.
+
+If all searched elements are equal, returns true if this array's size is less than right's, otherwise returns false.
+
+```gdscript
+operator <=(right: Array)
+```
+
+Compares the elements of both arrays in order, starting from index 0 and ending on the last index in common between both arrays. For each pair of elements, returns true if this array's element is less than right's, false if this element is greater. Otherwise, continues to the next pair.
+
+If all searched elements are equal, returns true if this array's size is less or equal to right's, otherwise returns false.
+
+```gdscript
+operator ==(right: Array)
+```
+
+Compares the left operand Array against the right Array. Returns true if the sizes and contents of the arrays are equal, false otherwise.
+
+```gdscript
+operator >(right: Array)
+```
+
+Compares the elements of both arrays in order, starting from index 0 and ending on the last index in common between both arrays. For each pair of elements, returns true if this array's element is greater than right's, false if this element is less. Otherwise, continues to the next pair.
+
+If all searched elements are equal, returns true if this array's size is greater than right's, otherwise returns false.
+
+```gdscript
+operator >=(right: Array)
+```
+
+Compares the elements of both arrays in order, starting from index 0 and ending on the last index in common between both arrays. For each pair of elements, returns true if this array's element is greater than right's, false if this element is less. Otherwise, continues to the next pair.
+
+If all searched elements are equal, returns true if this array's size is greater or equal to right's, otherwise returns false.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the Variant element at the specified index. Arrays start at index 0. If index is greater or equal to 0, the element is fetched starting from the beginning of the array. If index is a negative value, the element is fetched starting from the end. Accessing an array out-of-bounds will cause a run-time error, pausing the project execution if run from the editor.

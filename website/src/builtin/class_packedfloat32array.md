@@ -18,6 +18,26 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+PackedFloat32Array()
+```
+
+Constructs an empty PackedFloat32Array.
+
+```gdscript
+PackedFloat32Array(from: PackedFloat32Array)
+```
+
+Constructs a PackedFloat32Array as a copy of the given PackedFloat32Array.
+
+```gdscript
+PackedFloat32Array(from: Array)
+```
+
+Constructs a new PackedFloat32Array. Optionally, you can pass in a generic Array that will be converted.
+
 ## 方法
 
 ### append {#append}
@@ -229,3 +249,31 @@ PackedByteArray to_byte_array() const
 Returns a copy of the data converted to a PackedByteArray, where each element has been encoded as 4 bytes.
 
 The size of the new array will be float32_array.size() * 4.
+
+## 运算符
+
+```gdscript
+operator !=(right: PackedFloat32Array)
+```
+
+Returns true if contents of the arrays differ.
+
+```gdscript
+operator +(right: PackedFloat32Array)
+```
+
+Returns a new PackedFloat32Array with contents of right added at the end of this array. For better performance, consider using append_array() instead.
+
+```gdscript
+operator ==(right: PackedFloat32Array)
+```
+
+Returns true if contents of both arrays are the same, i.e. they have all equal floats at the corresponding indices.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the float at index index. Negative indices can be used to access the elements starting from the end. Using index out of array's bounds will result in an error.
+
+Note that float type is 64-bit, unlike the values stored in the array.

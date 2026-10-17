@@ -18,6 +18,32 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+PackedVector2Array()
+```
+
+Constructs an empty PackedVector2Array.
+
+```gdscript
+PackedVector2Array(from: PackedVector2Array)
+```
+
+Constructs a PackedVector2Array as a copy of the given PackedVector2Array.
+
+```gdscript
+PackedVector2Array(from: Array)
+```
+
+Constructs a new PackedVector2Array. Optionally, you can pass in a generic Array that will be converted.
+
+Note: When initializing a PackedVector2Array with elements, it must be initialized with an Array of Vector2 values:
+
+```gdscript
+var array = PackedVector2Array([Vector2(12, 34), Vector2(56, 78)])
+```
+
 ## 方法
 
 ### append {#append}
@@ -227,3 +253,39 @@ PackedByteArray to_byte_array() const
 ```
 
 Returns a PackedByteArray with each vector encoded as bytes.
+
+## 运算符
+
+```gdscript
+operator !=(right: PackedVector2Array)
+```
+
+Returns true if contents of the arrays differ.
+
+```gdscript
+operator *(right: Transform2D)
+```
+
+Returns a new PackedVector2Array with all vectors in this array inversely transformed (multiplied) by the given Transform2D transformation matrix, under the assumption that the transformation basis is orthonormal (i.e. rotation/reflection is fine, scaling/skew is not).
+
+array * transform is equivalent to transform.inverse() * array. See Transform2D.inverse().
+
+For transforming by inverse of an affine transformation (e.g. with scaling) transform.affine_inverse() * array can be used instead. See Transform2D.affine_inverse().
+
+```gdscript
+operator +(right: PackedVector2Array)
+```
+
+Returns a new PackedVector2Array with contents of right added at the end of this array. For better performance, consider using append_array() instead.
+
+```gdscript
+operator ==(right: PackedVector2Array)
+```
+
+Returns true if contents of both arrays are the same, i.e. they have all equal Vector2s at the corresponding indices.
+
+```gdscript
+operator [](index: int)
+```
+
+Returns the Vector2 at index index. Negative indices can be used to access the elements starting from the end. Using index out of array's bounds will result in an error.

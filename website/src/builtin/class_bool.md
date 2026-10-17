@@ -49,3 +49,55 @@ Note: In modern programming languages, logical operators are evaluated in order.
 Note: By convention, built-in methods and properties that return booleans are usually defined as yes-no questions, single adjectives, or similar (String.is_empty(), Node.can_process(), Camera2D.enabled, etc.).
 
 </details>
+
+## 构造函数
+
+```gdscript
+bool()
+```
+
+Constructs a bool set to false.
+
+```gdscript
+bool(from: bool)
+```
+
+Constructs a bool as a copy of the given bool.
+
+```gdscript
+bool(from: float)
+```
+
+Casts a float value to a bool. Returns false if from is equal to 0.0 (including -0.0), and true for all other values (including @GDScript.INF and @GDScript.NAN).
+
+```gdscript
+bool(from: int)
+```
+
+Casts an int value to a bool. Returns false if from is equal to 0, and true for all other values.
+
+## 运算符
+
+```gdscript
+operator !=(right: bool)
+```
+
+Returns true if one bool is true and the other bool is false. Equivalent to logical XOR (NEQ).
+
+```gdscript
+operator <(right: bool)
+```
+
+Returns true if the left bool is false and right is true.
+
+```gdscript
+operator ==(right: bool)
+```
+
+Returns true if both bools are true, or if both bools are false. Equivalent to logical XNOR (EQ).
+
+```gdscript
+operator >(right: bool)
+```
+
+Returns true if the left bool is true and right is false.

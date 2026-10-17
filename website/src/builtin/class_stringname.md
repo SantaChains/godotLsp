@@ -22,6 +22,26 @@ There are notable differences when using this API with C#. See C# API difference
 
 </details>
 
+## 构造函数
+
+```gdscript
+StringName()
+```
+
+Constructs an empty StringName.
+
+```gdscript
+StringName(from: StringName)
+```
+
+Constructs a StringName as a copy of the given StringName.
+
+```gdscript
+StringName(from: String)
+```
+
+Creates a new StringName from the given String. In GDScript, StringName("example") is equivalent to &"example".
+
 ## 方法
 
 ### begins_with {#begins_with}
@@ -1320,3 +1340,75 @@ String xml_unescape() const
 ```
 
 Returns a copy of the string with escaped characters replaced by their meanings according to the XML standard.
+
+## 运算符
+
+```gdscript
+operator !=(right: String)
+```
+
+Returns true if this StringName is not equivalent to the given String.
+
+```gdscript
+operator !=(right: StringName)
+```
+
+Returns true if the StringName and right do not refer to the same name. Comparisons between StringNames are much faster than regular String comparisons.
+
+```gdscript
+operator %(right: Variant)
+```
+
+Formats the StringName, replacing the placeholders with one or more parameters, returning a String. To pass multiple parameters, right needs to be an Array.
+
+For more information, see the GDScript format strings tutorial.
+
+Note: In C#, this operator is not available. Instead, see how to interpolate strings with "$" [https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/tokens/interpolated].
+
+```gdscript
+operator +(right: String)
+```
+
+Appends right at the end of this StringName, returning a String. This is also known as a string concatenation.
+
+```gdscript
+operator +(right: StringName)
+```
+
+Appends right at the end of this StringName, returning a String. This is also known as a string concatenation.
+
+```gdscript
+operator <(right: StringName)
+```
+
+Returns true if the left StringName's pointer comes before right. Note that this will not match their Unicode order [https://en.wikipedia.org/wiki/List_of_Unicode_characters].
+
+```gdscript
+operator <=(right: StringName)
+```
+
+Returns true if the left StringName's pointer comes before right or if they are the same. Note that this will not match their Unicode order [https://en.wikipedia.org/wiki/List_of_Unicode_characters].
+
+```gdscript
+operator ==(right: String)
+```
+
+Returns true if this StringName is equivalent to the given String.
+
+```gdscript
+operator ==(right: StringName)
+```
+
+Returns true if the StringName and right refer to the same name. Comparisons between StringNames are much faster than regular String comparisons.
+
+```gdscript
+operator >(right: StringName)
+```
+
+Returns true if the left StringName's pointer comes after right. Note that this will not match their Unicode order [https://en.wikipedia.org/wiki/List_of_Unicode_characters].
+
+```gdscript
+operator >=(right: StringName)
+```
+
+Returns true if the left StringName's pointer comes after right or if they are the same. Note that this will not match their Unicode order [https://en.wikipedia.org/wiki/List_of_Unicode_characters].
