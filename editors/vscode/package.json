@@ -2,7 +2,7 @@
   "name": "godotlsp",
   "displayName": "godotlsp:独立 GDScript 语言服务器",
   "description": "独立于 Godot 引擎运行的 GDScript 语言服务器:悬停文档、补全、导航、诊断与格式化,无需打开 Godot 编辑器。",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "publisher": "SantaChains",
   "license": "MIT",
   "repository": {
@@ -349,10 +349,28 @@
           "default": true,
           "markdownDescription": "按语料统计的 API 使用频率对补全排序加权(构建期从官方文档、示例工程与教程语料挖掘)。关闭后按纯词面匹配度排序。"
         },
+        "godotlsp.completion.useSingleQuotes": {
+          "type": "boolean",
+          "default": false,
+          "scope": "window",
+          "markdownDescription": "补全插入的字符串字面量用单引号(引擎 `text_editor/completion/use_single_quotes` 同名语义)。影响 `connect(\"sig\")` 等信号名面与参数选项面的插入文本。"
+        },
+        "godotlsp.completion.addStringNameLiterals": {
+          "type": "boolean",
+          "default": false,
+          "scope": "window",
+          "markdownDescription": "期望 `StringName` 的参数位自动给字符串加 `&` 前缀(如 `call(\"x\")` → `call(&\"x\")`)。"
+        },
+        "godotlsp.completion.addNodePathLiterals": {
+          "type": "boolean",
+          "default": false,
+          "scope": "window",
+          "markdownDescription": "期望 `NodePath` 的参数位自动给字符串加 `^` 前缀(如 `get_node(\"n\")` → `get_node(^\"n\")`)。"
+        },
         "godotlsp.diagnostics.strict": {
           "type": "boolean",
           "default": false,
-          "markdownDescription": "启用严格模式诊断:把默认关闭的可选警告(如未使用的信号参数)也提升为可见警告,便于在编写阶段收紧代码质量。"
+          "markdownDescription": "**预留(当前不生效)**:启用严格模式诊断,把默认关闭的可选警告(如未使用的信号参数)提升为可见警告。该能力依赖服务器端的警告诊断面,落地前此设置无效果——见 `docs/vscode-extension-roadmap.md` V2。"
         },
         "godotlsp.diagnostics.ignore": {
           "type": "array",
@@ -360,7 +378,7 @@
             "type": "string"
           },
           "default": [],
-          "markdownDescription": "要忽略的诊断码列表(与 Godot 编辑器同款,如 `UNUSED_VARIABLE`、`SHADOWED_VARIABLE`),按码过滤推送的诊断。"
+          "markdownDescription": "**预留(当前不生效)**:要忽略的诊断码列表(与 Godot 编辑器同款,如 `UNUSED_VARIABLE`、`SHADOWED_VARIABLE`)。该能力依赖服务器端的警告诊断面——当前服务器只产出错误级诊断,无码可过滤,见 `docs/vscode-extension-roadmap.md` V2。"
         },
         "godotlsp.inlayHints.typeHints": {
           "type": "boolean",

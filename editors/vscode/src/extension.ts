@@ -14,6 +14,7 @@ import { SceneTreeProvider } from "./sceneTree";
 import { ConnectionTreeProvider } from "./connections";
 import { ConfigCompletionProvider, ConfigHoverProvider } from "./configAssist";
 import { highlightClampMiddleware } from "./highlight";
+import { isRunning } from "./lsp";
 import { copyInfoFrom } from "./copyable";
 
 const SECTION = "godotlsp";
@@ -279,6 +280,12 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
         vscode.workspace.isTrusted &&
         void restart(),
     ),
+    // quote 三键即时推送,无需重启进程(服务器逐键解析,缺键兜底默认值)。
+    vscode.workspace.onDidChangeConfiguration((e) => {
+      if (affectsQuotePrefs(e) && isRunning(client)) {
+        pushQuotePrefs(client);
+      }
+    }),
   );
 
   if (vscode.workspace.isTrusted) {
@@ -358,6 +365,8 @@ async function start(): Promise<void> {
 
   try {
     await client.start();
+    // initialize 握手完成后补发 quote 三键(languageclient 自动推送只含 godotlsp 段)。
+    pushQuotePrefs(client);
   } catch (err) {
     setStatus("error", `godotlsp 启动失败:${String(err)}`);
     output.error(`启动 godotlsp 失败:${String(err)}`);
@@ -380,6 +389,34 @@ async function stop(): Promise<void> {
 async function restart(): Promise<void> {
   await stop();
   await start();
+}
+
+/**
+ * quote 三键 → `settings.gdscript` 段推送(服务器侧引擎 `text_editor/completion`
+ * 同名语义,控制补全插入文本的引号与前缀行为)。
+ * vscode-languageclient 的 synchronize 只推 `godotlsp` 段;此段手动合成——
+ * 刻意不贡献全局 `gdscript.*` 配置命名空间,避免与官方 godot-tools 等插件冲突。
+ */
+function pushQuotePrefs(c: LanguageClient): void {
+  const cfg = vscode.workspace.getConfiguration(`${SECTION}.completion`);
+  c.sendNotification("workspace/didChangeConfiguration", {
+    settings: {
+      gdscript: {
+        use_single_quotes: cfg.get<boolean>("useSingleQuotes", false),
+        add_string_name_literals: cfg.get<boolean>("addStringNameLiterals", false),
+        add_node_path_literals: cfg.get<boolean>("addNodePathLiterals", false),
+      },
+    },
+  });
+}
+
+/** quote 三键是否有变动(配置变化监听用)。 */
+function affectsQuotePrefs(e: vscode.ConfigurationChangeEvent): boolean {
+  return (
+    e.affectsConfiguration(`${SECTION}.completion.useSingleQuotes`) ||
+    e.affectsConfiguration(`${SECTION}.completion.addStringNameLiterals`) ||
+    e.affectsConfiguration(`${SECTION}.completion.addNodePathLiterals`)
+  );
 }
 
 /** 服务器二进制解析:配置 → 扩展自带 → PATH;source 说明命中来源(结构化日志用)。 */
