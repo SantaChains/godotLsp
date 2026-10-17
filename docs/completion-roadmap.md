@@ -565,18 +565,39 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
   语义不同,保留 C2 手表即可);`_static_init` 与脚本链 static 方法并存(引擎 static 位
   不出脚本链 static——夹具 subset 判定无感,差异记录不修)。
 
-### P8 — C8 二期参数选项面剩余(godotlsp)
+### P8 — C8 二期参数选项面剩余(godotlsp)✅ 已实施(2026-10-18,101→106/140,+5,零回归)
 
-- **tween_property 属性面**:`Tween.tween_property(` 实参 1 → 实参 0 的局部变量类型属性表
-  (引擎类属性 + 脚本类成员);前置 = P6 的 local_types(原判"semantic 未暴露 locals 查询"的成本
-  在 P6 化解)。
-- **InputMap 单例面**:`InputMap.has_action(`/`event_is_action(` 等首参 → `[input]` 动作表
-  (与 C8 一期输入动作面同数据,入口扩到单例方法名识别;无 oracle 覆盖,单测锁定)。
-- **`&`/`^` 前缀设置 plumbing**:经 initializeOptions/`workspace/configuration` 读三项
-  编辑器设置(`use_single_quotes`/`add_string_name_literals`/`add_node_path_literals`,
-  引擎默认全 false)→ oracle `add_*` 两口;默认侧不变(回归守护)。
-- **仍挂 P10**:AnimationPlayer 动画面(需 tscn 动画库)。
-- **验收**:`argument_options` 桶 add_* 两口 + 单测;设置缺省时行为与一期一致(零回归)。
+**实施落点**:① `State.prefs: EditorPrefs`(三键默认 false)+ `workspace/didChangeConfiguration`
+的 `settings.gdscript` 段解析(oracle 单连接跑全夹具 → per-fixture didChangeConfiguration
+镜像上游 test_completion.h:132-134 每夹具 set_setting;initializeOptions 通道不可行)。
+② `quoted_option` 前缀化——`QuoteKind{Str,StringName,NodePath}` + `QuoteStyle` 聚合参数,
+镜像 `_calculate_string_insertion`(895-957):前缀 = `(expected==StringName &&
+add_string_name_literals) || 既有&`(^ 同理),`&` 优先于 `^`;label/display=最终码,
+insertText 仅 `should && !has` 带前缀;`use_single_quotes` 换引号字符;connect/输入动作面
+expected=StringName(引擎对齐,决策拍板应用),注解 hint 词/类型名 expected=Str 永不加。
+③ tween_property 属性面(argopts):argidx==1 && receiver Tween 系(`receiver_type` miss 后
+P6 `resolve_name_type` 兜底)→ 实参 0 裸标识符 → `first_arg_text`(深度 0 逗号切分,跳过
+字符串/嵌套)→ RecvType::Script 收脚本链 var(仅 var,决策拍板)+ 内部类 VARIABLE +
+`script_engine_base_by_path` 引擎链 properties(排除 internal_props);expected=NodePath;
+argopts 先于 N2 字符串抑制,inside_string 夹具连带过。④ **infer.rs 方法链推断**:infer_call_ty
+Attribute callee 泛化(`recv.m(...)` 接收者类型已知时查引擎方法表返回类型,仅引擎/内建类
+返回才推断)+ Ident 分支 names 闭包回退;main.rs names 闭包扩 self 方法(本文件
+func_return_inferred + `script_engine_root` 引擎链)——`get_tree().create_tween()` 全链推断。
+
+**修正记录**:InputMap 单例面**不做**——rg 引擎全文仅 `InputEvent contains("action")` 一处
+(3181),InputMap 单例补全无引擎锚点(roadmap 原判有误),镜像引擎原则优先(决策拍板)。
+
+**验收(实际)**:oracle **101→106/140(+5,零回归)**——`argument_options/string_literals`
+桶 3/7→7/7(add_node_path_tween `^` 前缀、prepended 整串替换、dont_add 裸版、
+add_string_name_input_event `&`、inside_string_literal);play_*×3 归 P10 不变。workspace
+139 测试全绿(godotlsp 64 + syntax lib 22/infer 13 + engine 8 等;argopts +5 单测:前缀化
+`&`/单引号/默认裸版/既有字面量替换、first_arg_text 4 态;infer +2:方法链推断/变体降级);
+clippy 0;smoke ALL OK;基线已写 106。**教训**:① oracle 单 Client 全夹具 → 探针自写
+initialize 的 corpus 层级传错(传了上一级)导致布局错位假象,probe 只看内容、**oracle 是
+唯一权威**;② Python `bool("false")` 是 True——cfg 标量字符串须显式 as_bool 解析
+(曾致 dont_add 夹具回归);③ didChangeConfiguration 后 prefs 显式三键防残留。
+
+**仍挂 P10**:AnimationPlayer 动画面(play_*×3,需 tscn 动画库)。
 
 ### P9 — C6.5 builtin 构造/运算符面(引擎数据面 × 文档生成面)
 

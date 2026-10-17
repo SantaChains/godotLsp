@@ -12,10 +12,10 @@
 //! - **独占面**：引擎 CALL_ARGUMENTS/ANNOTATION_ARGUMENTS 上下文只出选项、
 //!   不出常规标识面；`r_forced = r_result.size() > 0`（gdscript_editor.cpp:3432）
 //!   ——调用面零项时回落常规面，注解参数面无条件 forced（:3474，零项也独占）。
-//! - **引擎默认设置**（editor/settings/editor_settings.cpp:868-872）：`use_single_quotes`、
-//!   `add_string_name_literals`、`add_node_path_literals` 均 **false** →
-//!   本期一律双引号、不发 `&`/`^` 前缀；oracle `add_*` 夹具对应设置开、
-//!   `dont_*` 对应关，本期对齐默认侧（设置 plumbing 不入本期）。
+//! - **设置 plumbing（P8 C8 二期）**：`workspace/didChangeConfiguration` 的
+//!   `settings.gdscript` 段三键（`use_single_quotes`/`add_string_name_literals`/
+//!   `add_node_path_literals`，引擎默认全 false）→ State.prefs；
+//!   quoted_option 按 expected 语义（StringName→`&`、NodePath→`^`）前缀化。
 //! - **既有字面量整串替换**：光标在闭合字符串内时走 textEdit 替换整串
 //!   （含引号；`&`/`^` 前缀按引擎 final_code 规则保留），insertText 为裸引号串。
 //!
@@ -27,7 +27,7 @@
 
 use std::collections::HashSet;
 
-use lsp_types::{CompletionItem, CompletionItemKind, CompletionTextEdit, InsertTextFormat, TextEdit};
+use lsp_types::{CompletionItem, CompletionItemKind, CompletionTextEdit, InsertTextFormat, TextEdit, Uri};
 
 use gdscript_syntax::ast::{Expr, File, FuncDecl, Param, SignalDecl, Stmt};
 use gdscript_syntax::semantic::{FileInfo, ProjectContext};
@@ -60,6 +60,8 @@ struct ArgSite {
     callee: Callee,
     argidx: usize,
     literal: Option<LiteralSpan>,
+    /// 本帧 `(` 的偏移（P8 tween_property 实参 0 文本提取用）。
+    open: usize,
 }
 
 /// 前向扫描维护的调用/注解括号帧。
@@ -270,15 +272,44 @@ fn arg_site_at(src: &str, at: usize) -> Option<ArgSite> {
             closed,
         })
     });
-    Some(ArgSite { callee, argidx: frame.argidx, literal })
+    Some(ArgSite { callee, argidx: frame.argidx, literal, open: frame.open })
 }
 
 // ───────────────────────── 选项发射 ─────────────────────────
 
-/// 引号选项（镜像 `_calculate_string_insertion`，引擎默认设置侧）。
-/// - 无既有字面量：label = insertText = `"content"`。
-/// - 有闭合字面量：textEdit 替换整串，保留 `&`/`^` 前缀；label 为替换文本
-///   （引擎 display = final_code），insertText 为裸引号串（引擎 insert_text）。
+/// 实参字符串的期望变体类型（引擎 `_calculate_string_insertion` 的 `p_expected`）。
+/// 决定设置开启时的字面量前缀：StringName → `&`、NodePath → `^`（引擎
+/// `&` 优先于 `^`，gdscript_editor.cpp:912-919）。
+#[derive(Clone, Copy, PartialEq, Eq)]
+pub(crate) enum QuoteKind {
+    /// 无字符串类型预期（注解 hint 词等）——永不加前缀。
+    Str,
+    /// StringName 语义（信号名/输入动作名）。
+    StringName,
+    /// NodePath 语义（tween_property 属性路径等）。
+    NodePath,
+}
+
+/// 引号选项的发射参数（编辑器设置 + expected 语义聚合,避免超长参数表）。
+#[derive(Clone, Copy)]
+struct QuoteStyle {
+    prefs: crate::EditorPrefs,
+    expected: QuoteKind,
+}
+
+impl QuoteStyle {
+    fn new(prefs: crate::EditorPrefs, expected: QuoteKind) -> Self {
+        Self { prefs, expected }
+    }
+}
+
+/// 引号选项（镜像 `_calculate_string_insertion`，gdscript_editor.cpp:895-957）。
+/// - 前缀判定：`(expected==StringName && add_string_name_literals) || 既有 &`，
+///   NodePath 同理 `^`；`&` 优先于 `^`。
+/// - label/display = 最终码（含前缀）；insertText = 裸引号串，仅在
+///   `should && !has_既有前缀` 时才带前缀（引擎 insert_text 分支同款）。
+/// - 有闭合字面量：textEdit 替换整串（保留既有 `&`/`^` 前缀）。
+/// - use_single_quotes：引号字符换 `'`（corpus 无单引号夹具，单测锁定）。
 fn quoted_option(
     src: &str,
     content: &str,
@@ -286,23 +317,43 @@ fn quoted_option(
     detail: String,
     site: &ArgSite,
     prefix_word: &str,
+    qs: QuoteStyle,
 ) -> CompletionItem {
-    let quoted = format!("\"{content}\"");
+    let prefs = qs.prefs;
+    let expected = qs.expected;
+    let q = if prefs.use_single_quotes { '\'' } else { '"' };
+    let quoted = format!("{q}{content}{q}");
+    let has_sn = site.literal.as_ref().is_some_and(|l| l.prefix == Some('&'));
+    let has_np = site.literal.as_ref().is_some_and(|l| l.prefix == Some('^'));
+    let should_sn = (expected == QuoteKind::StringName && prefs.add_string_name_literals) || has_sn;
+    let should_np = (expected == QuoteKind::NodePath && prefs.add_node_path_literals) || has_np;
+    let final_code = if should_sn {
+        format!("&{quoted}")
+    } else if should_np {
+        format!("^{quoted}")
+    } else {
+        quoted.clone()
+    };
     let (label, insert_text, text_edit) = match &site.literal {
         Some(lit) if lit.closed => {
-            let replacement = match lit.prefix {
-                Some(p) => format!("{p}\"{content}\""),
-                None => quoted.clone(),
-            };
             let range = crate::offset_range(src, lit.full_start, lit.full_end);
-            let new_text = replacement.clone();
+            let new_text = final_code.clone();
             (
-                replacement,
+                final_code,
                 quoted,
                 Some(CompletionTextEdit::Edit(TextEdit { range, new_text })),
             )
         }
-        _ => (quoted.clone(), quoted, None),
+        _ => {
+            // 无闭合字面量：insertText 仅 should && !has 时带前缀（引擎
+            // `should_have_… && !has_…` 分支；既有前缀未闭合时保留原样）。
+            let it = if (should_sn || should_np) && !has_sn && !has_np {
+                final_code.clone()
+            } else {
+                quoted.clone()
+            };
+            (it.clone(), it, None)
+        }
     };
     CompletionItem {
         label,
@@ -343,10 +394,11 @@ fn quoted_list(
     detail: &str,
     site: &ArgSite,
     prefix_word: &str,
+    qs: QuoteStyle,
 ) -> Vec<CompletionItem> {
     names
         .iter()
-        .map(|n| quoted_option(src, n, kind, detail.to_string(), site, prefix_word))
+        .map(|n| quoted_option(src, n, kind, detail.to_string(), site, prefix_word, qs))
         .collect()
 }
 
@@ -481,7 +533,7 @@ fn script_by_root<'a>(
 
 /// 脚本的引擎根类名（沿 extends 脚本链走到引擎类；封顶 8 层，缺省 RefCounted）。
 /// 引擎类判定走 `state.engine`（不依赖工程在场），脚本解析走工程索引。
-fn script_engine_root(state: &State, start: &File) -> String {
+pub(crate) fn script_engine_root(state: &State, start: &File) -> String {
     let mut cur = start;
     for _ in 0..8 {
         let Some(root) = extends_root_name(cur) else {
@@ -573,6 +625,8 @@ fn engine_signals(state: &State, class: &str) -> Vec<(String, String)> {
 /// 站点解析的公共上下文（避免面函数参数表过长）。
 struct Ctx<'a> {
     state: &'a State,
+    /// 当前文档 uri（P8 tween_property 实参 0 类型解析用）。
+    uri: &'a Uri,
     src: &'a str,
     /// 光标字节偏移。
     at: usize,
@@ -580,6 +634,8 @@ struct Ctx<'a> {
     file: &'a File,
     /// 光标前已键入词干（fuzzy 打分用）。
     prefix_word: &'a str,
+    /// 编辑器补全设置（`&`/`^` 前缀与引号风格）。
+    prefs: crate::EditorPrefs,
 }
 
 /// 信号名面：`connect` 等首参 → 接收者信号表（自声明 + 引擎继承链）。
@@ -623,7 +679,9 @@ fn signal_items(ctx: &Ctx<'_>, receiver: Option<&str>, site: &ArgSite) -> Vec<Co
     names
         .into_iter()
         .map(|(n, d)| {
-            quoted_option(ctx.src, &n, CompletionItemKind::EVENT, d, site, ctx.prefix_word)
+            // 信号名是 StringName 语义（引擎 object.cpp:2395 面走
+            // _calculate_string_insertion(…, Variant::STRING_NAME)）。
+            quoted_option(ctx.src, &n, CompletionItemKind::EVENT, d, site, ctx.prefix_word, QuoteStyle::new(ctx.prefs, QuoteKind::StringName))
         })
         .collect()
 }
@@ -636,6 +694,8 @@ fn input_action_items(ctx: &Ctx<'_>, site: &ArgSite) -> Vec<CompletionItem> {
     proj.input_actions()
         .iter()
         .map(|a| {
+            // 输入动作名是 StringName 语义（引擎 gdscript_editor.cpp:3188
+            // _calculate_string_insertion(…, Variant::STRING_NAME)）。
             quoted_option(
                 ctx.src,
                 a,
@@ -643,6 +703,7 @@ fn input_action_items(ctx: &Ctx<'_>, site: &ArgSite) -> Vec<CompletionItem> {
                 "输入动作".to_string(),
                 site,
                 ctx.prefix_word,
+                QuoteStyle::new(ctx.prefs, QuoteKind::StringName),
             )
         })
         .collect()
@@ -668,7 +729,154 @@ fn call_options(
         let items = input_action_items(ctx, site);
         return (!items.is_empty()).then_some(items);
     }
+    if argidx == 1
+        && method == "tween_property"
+        && receiver_is_tween(ctx, receiver)
+    {
+        let items = tween_property_items(ctx, site);
+        return (!items.is_empty()).then_some(items);
+    }
     None
+}
+
+/// tween_property 接收者是否 Tween 系:常规 receiver_type（注解/类名/单例）
+/// miss 后走 P6 resolve（局部 `var tween := get_tree().create_tween()` 的
+/// 方法链推断,`create_tween` 返回 Tween）。
+fn receiver_is_tween(ctx: &Ctx<'_>, receiver: Option<&str>) -> bool {
+    let is_t = |ty: &str| ctx.state.engine.ancestor_chain(ty).contains(&"Tween");
+    if let Some(ty) = receiver_type(ctx.state, ctx.src, ctx.at, ctx.file, receiver) {
+        return is_t(&ty);
+    }
+    let Some(recv) = receiver else { return false };
+    matches!(
+        crate::resolve_name_type(ctx.state, ctx.uri, ctx.src, ctx.at, recv),
+        Some(crate::RecvType::Engine(c)) if is_t(&c)
+    )
+}
+
+/// 提取调用首实参的源码文本（`(` 之后到首个深度 0 逗号；跳过字符串与嵌套
+/// 括号）。用于 `tween_property(<obj>, ➡)` 的对象表达式定位。
+fn first_arg_text(src: &str, open: usize) -> Option<&str> {
+    let b = src.as_bytes();
+    let mut i = open + 1;
+    let mut depth = 0usize;
+    while i < b.len() {
+        match b[i] {
+            b'"' | b'\'' => i = skip_string_forward(b, i),
+            b'(' | b'[' | b'{' => {
+                depth += 1;
+                i += 1;
+            }
+            b')' | b']' | b'}' => {
+                if depth == 0 {
+                    return None;
+                }
+                depth -= 1;
+                i += 1;
+            }
+            b',' if depth == 0 => {
+                let arg = src[open + 1..i].trim();
+                return (!arg.is_empty()).then_some(arg);
+            }
+            _ => i += 1,
+        }
+    }
+    None
+}
+
+/// `Tween.tween_property(<obj>, ➡)` 次参属性面（引擎 gdscript_editor.cpp:3093-3162）：
+/// 实参 0 的类型 → 脚本链 var（仅 var，不含 const/signal/class）+ 引擎链
+/// ClassDB 属性（排除 internal）；expected=NODE_PATH。实参 0 非可解析标识符
+/// → 空面回落。
+fn tween_property_items(ctx: &Ctx<'_>, site: &ArgSite) -> Vec<CompletionItem> {
+    let state = ctx.state;
+    // 实参 0 必须是裸标识符（引擎用解析器 datatype,这里用 P6 resolve 对齐;
+    // 复杂表达式/字符串路径降级不出面）。
+    let Some(obj) = first_arg_text(ctx.src, site.open) else { return Vec::new() };
+    let is_ident = obj.bytes().all(|c| c.is_ascii_alphanumeric() || c == b'_')
+        && obj.as_bytes().first().is_some_and(|c| c.is_ascii_alphabetic() || *c == b'_');
+    if !is_ident {
+        return Vec::new();
+    }
+    let Some(rt) = crate::resolve_name_type(state, ctx.uri, ctx.src, ctx.at, obj) else {
+        return Vec::new();
+    };
+    let internal = crate::internal_props();
+    // (名, 类型 detail) 收集;同名先到先得（脚本链覆盖引擎链）。
+    let mut seen: HashSet<String> = HashSet::new();
+    let mut out: Vec<(String, String)> = Vec::new();
+    let push = |name: &str, ty: &str, seen: &mut HashSet<String>, out: &mut Vec<(String, String)>| {
+        if seen.insert(name.to_string()) {
+            out.push((name.to_string(), ty.to_string()));
+        }
+    };
+    match &rt {
+        crate::RecvType::Script { res_path, inner } => {
+            let proj = state.project.as_ref();
+            // 内部类实例（live AST 类 body var;引擎 CLASS 分支 VARIABLE）。
+            if let (Some(inner_name), Some(file)) = (inner, Some(ctx.file)) {
+                let cls = file.body.iter().find_map(|st| match st {
+                    Stmt::Class(c) if c.name.name == *inner_name => Some(c),
+                    _ => None,
+                });
+                if let Some(c) = cls {
+                    for st in &c.body {
+                        if let Stmt::Var(v) = st {
+                            let ty = v.ty.as_ref().map(expr_to_type_name).unwrap_or_else(|| "Variant".into());
+                            push(&v.name.name, &ty, &mut seen, &mut out);
+                        }
+                    }
+                }
+            }
+            if let Some(proj) = proj {
+                let key = proj.script_path_to_key(res_path);
+                if let Some(key) = key {
+                    for m in proj.script_chain_members(&key) {
+                        if m.kind == gdscript_project::DeclKind::Property {
+                            push(&m.name, "Variant", &mut seen, &mut out);
+                        }
+                    }
+                }
+                // 引擎链 native 属性（SCRIPT 分支后统一 ClassDB::get_property_list）。
+                let native = proj.script_engine_base_by_path(res_path);
+                if let Some(root) = native {
+                    for cls in state.engine.ancestor_chain(&root) {
+                        if let Some(c) = state.engine.classes.get(cls) {
+                            for p in &c.properties {
+                                if !internal.get(cls).is_some_and(|s| s.contains(&p.name)) {
+                                    push(&p.name, &p.ty, &mut seen, &mut out);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        crate::RecvType::Engine(root) => {
+            for cls in state.engine.ancestor_chain(root) {
+                if let Some(c) = state.engine.classes.get(cls) {
+                    for p in &c.properties {
+                        if !internal.get(cls).is_some_and(|s| s.contains(&p.name)) {
+                            push(&p.name, &p.ty, &mut seen, &mut out);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    out.into_iter()
+        .map(|(n, ty)| {
+            quoted_option(
+                ctx.src,
+                &n,
+                CompletionItemKind::PROPERTY,
+                format!("tween 属性: {ty}"),
+                site,
+                ctx.prefix_word,
+                QuoteStyle::new(ctx.prefs, QuoteKind::NodePath),
+            )
+        })
+        .collect()
 }
 
 /// 注解参数面（引擎 `_find_annotation_arguments` 表驱动；forced 语义——
@@ -682,6 +890,7 @@ fn annotation_options(ctx: &Ctx<'_>, name: &str, argidx: usize, site: &ArgSite) 
             "@export_range slider 提示",
             site,
             ctx.prefix_word,
+            QuoteStyle::new(ctx.prefs, QuoteKind::Str),
         ),
         "@export_exp_easing" if matches!(argidx, 0..=1) => quoted_list(
             ctx.src,
@@ -690,6 +899,7 @@ fn annotation_options(ctx: &Ctx<'_>, name: &str, argidx: usize, site: &ArgSite) 
             "@export_exp_easing 提示",
             site,
             ctx.prefix_word,
+            QuoteStyle::new(ctx.prefs, QuoteKind::Str),
         ),
         "@rpc" if argidx <= 2 => quoted_list(
             ctx.src,
@@ -706,9 +916,10 @@ fn annotation_options(ctx: &Ctx<'_>, name: &str, argidx: usize, site: &ArgSite) 
             "@rpc 选项",
             site,
             ctx.prefix_word,
+            QuoteStyle::new(ctx.prefs, QuoteKind::Str),
         ),
         "@warning_ignore" | "@warning_ignore_start" | "@warning_ignore_restore" => {
-            quoted_list(ctx.src, WARNING_NAMES, CompletionItemKind::TEXT, "GDScript 警告", site, ctx.prefix_word)
+            quoted_list(ctx.src, WARNING_NAMES, CompletionItemKind::TEXT, "GDScript 警告", site, ctx.prefix_word, QuoteStyle::new(ctx.prefs, QuoteKind::Str))
         }
         "@export_custom" if argidx == 0 => global_enum_items(ctx, "PropertyHint"),
         "@export_custom" if argidx == 2 => global_enum_items(ctx, "PropertyUsageFlags"),
@@ -774,6 +985,9 @@ fn node_path_type_items(ctx: &Ctx<'_>, site: &ArgSite) -> Vec<CompletionItem> {
                 "Node 类型".to_string(),
                 site,
                 ctx.prefix_word,
+                // 类型名非字符串语义:设置开启也不加前缀(引擎 :1000 面
+                // expected 无 STRING 语义)。
+                QuoteStyle::new(ctx.prefs, QuoteKind::Str),
             )
         })
         .collect()
@@ -785,6 +999,7 @@ fn node_path_type_items(ctx: &Ctx<'_>, site: &ArgSite) -> Vec<CompletionItem> {
 /// forced 独占）；`None` = 站点不适用/调用面零项，调用方回落后续面。
 pub(crate) fn argument_options(
     state: &State,
+    uri: &Uri,
     src: &str,
     at: usize,
     word_start: usize,
@@ -800,7 +1015,7 @@ pub(crate) fn argument_options(
             &parsed
         }
     };
-    let ctx = Ctx { state, src, at, file, prefix_word };
+    let ctx = Ctx { state, uri, src, at, file, prefix_word, prefs: state.prefs };
     match &site.callee {
         // 注解参数面：forced 独占（零项也拦）。
         Callee::Annotation(name) => Some(annotation_options(&ctx, name, site.argidx, &site)),
@@ -1121,7 +1336,7 @@ func hello_world():
         let src = "extends Node\n\nsignal signal_a()\n\nfunc _ready():\n\tconnect(➡)\n";
         let at = at_of(src, "➡");
         let file = gdscript_syntax::parse(src).0;
-        let items = argument_options(&state, src, at, at, Some(&file)).expect("信号面应命中");
+        let items = argument_options(&state, &"file:///t.gd".parse::<lsp_types::Uri>().unwrap(), src, at, at, Some(&file)).expect("信号面应命中");
         let labels: Vec<&str> = items.iter().map(|i| i.label.as_str()).collect();
         assert!(labels.contains(&"\"signal_a\""), "自声明信号: {labels:?}");
         assert!(labels.contains(&"\"child_entered_tree\""), "Node 链信号: {labels:?}");
@@ -1145,7 +1360,7 @@ func hello_world():
         let file = gdscript_syntax::parse(src).0;
         let mut s = state;
         s.project = project;
-        let items = argument_options(&s, src, at, at, Some(&file)).expect("输入动画面应命中");
+        let items = argument_options(&s, &"file:///t.gd".parse::<lsp_types::Uri>().unwrap(), src, at, at, Some(&file)).expect("输入动画面应命中");
         let labels: Vec<&str> = items.iter().map(|i| i.label.as_str()).collect();
         assert_eq!(labels, vec!["\"test_input_action\""]);
     }
@@ -1157,7 +1372,7 @@ func hello_world():
         let src = "signal test_signal\n\nfunc _init():\n\ttest_signal.connect(h➡)\n";
         let at = at_of(src, "➡");
         let file = gdscript_syntax::parse(src).0;
-        assert!(argument_options(&state, src, at, at, Some(&file)).is_none());
+        assert!(argument_options(&state, &"file:///t.gd".parse::<lsp_types::Uri>().unwrap(), src, at, at, Some(&file)).is_none());
     }
 
     #[test]
@@ -1167,7 +1382,7 @@ func hello_world():
 
         let src = "@export_range(1, 2, 3, ➡)\nvar x: int\n";
         let at = at_of(src, "➡");
-        let items = argument_options(&state, src, at, at, Some(&file)).unwrap();
+        let items = argument_options(&state, &"file:///t.gd".parse::<lsp_types::Uri>().unwrap(), src, at, at, Some(&file)).unwrap();
         let labels: Vec<&str> = items.iter().map(|i| i.label.as_str()).collect();
         assert_eq!(
             labels,
@@ -1177,17 +1392,17 @@ func hello_world():
         // @export_range 数值参位：引擎 forced 空面。
         let src = "@export_range(➡)\nvar x: int\n";
         let at = at_of(src, "➡");
-        assert!(argument_options(&state, src, at, at, Some(&file)).unwrap().is_empty());
+        assert!(argument_options(&state, &"file:///t.gd".parse::<lsp_types::Uri>().unwrap(), src, at, at, Some(&file)).unwrap().is_empty());
 
         let src = "@rpc(➡)\nfunc f():\n\tpass\n";
         let at = at_of(src, "➡");
-        let items = argument_options(&state, src, at, at, Some(&file)).unwrap();
+        let items = argument_options(&state, &"file:///t.gd".parse::<lsp_types::Uri>().unwrap(), src, at, at, Some(&file)).unwrap();
         assert_eq!(items.len(), 7);
         assert!(items.iter().any(|i| i.label == "\"any_peer\""));
 
         let src = "@warning_ignore(➡)\nfunc f():\n\tpass\n";
         let at = at_of(src, "➡");
-        let items = argument_options(&state, src, at, at, Some(&file)).unwrap();
+        let items = argument_options(&state, &"file:///t.gd".parse::<lsp_types::Uri>().unwrap(), src, at, at, Some(&file)).unwrap();
         assert!(items.iter().any(|i| i.label == "\"unused_variable\""));
         assert!(
             !items.iter().any(|i| i.label.contains("property_used_as_function")),
@@ -1197,14 +1412,14 @@ func hello_world():
         // @export_custom 走模型全局枚举（裸名，无引号）。
         let src = "@export_custom(➡)\nvar x: int\n";
         let at = at_of(src, "➡");
-        let items = argument_options(&state, src, at, at, Some(&file)).unwrap();
+        let items = argument_options(&state, &"file:///t.gd".parse::<lsp_types::Uri>().unwrap(), src, at, at, Some(&file)).unwrap();
         assert!(items.iter().any(|i| i.label == "PROPERTY_HINT_RANGE"));
         assert!(items.iter().all(|i| !i.label.starts_with('"')), "@export_custom 为裸名面");
 
         // @export_node_path：Node + 引擎继承树 + 脚本类，引号面。
         let src = "@export_node_path(➡)\nvar x: NodePath\n";
         let at = at_of(src, "➡");
-        let items = argument_options(&state, src, at, at, Some(&file)).unwrap();
+        let items = argument_options(&state, &"file:///t.gd".parse::<lsp_types::Uri>().unwrap(), src, at, at, Some(&file)).unwrap();
         assert!(items.iter().any(|i| i.label == "\"Node\""));
         assert!(items.iter().any(|i| i.label == "\"Sprite2D\""));
     }
@@ -1215,7 +1430,7 @@ func hello_world():
         let src = "extends Node\n\nsignal s()\n\nfunc _ready():\n\tconnect(\"➡\")\n";
         let at = at_of(src, "➡");
         let file = gdscript_syntax::parse(src).0;
-        let items = argument_options(&state, src, at, at, Some(&file)).unwrap();
+        let items = argument_options(&state, &"file:///t.gd".parse::<lsp_types::Uri>().unwrap(), src, at, at, Some(&file)).unwrap();
         let item = items.iter().find(|i| i.label == "\"s\"").expect("自信号");
         let Some(CompletionTextEdit::Edit(edit)) = &item.text_edit else {
             panic!("既有字面量应走 textEdit 整串替换");
@@ -1226,5 +1441,94 @@ func hello_world():
         assert_eq!(edit.new_text, "\"s\"");
         // insertText 仍是裸引号串（引擎 insert_text 语义）。
         assert_eq!(item.insert_text.as_deref(), Some("\"s\""));
+    }
+
+    // ───────────────────── P8 C8 二期：设置 plumbing ─────────────────────
+
+    fn signal_setup() -> (State, String, lsp_types::Uri, usize) {
+        let mut st = crate::hover_tests::test_state();
+        let src = "extends Node
+
+signal s
+
+func _init() -> void:
+    self.connect(➡)
+    pass
+".replace("➡", "");
+        let uri: lsp_types::Uri = "file:///p8a.gd".parse().unwrap();
+        st.docs.insert(uri.clone(), src.clone());
+        st.asts.insert(uri.clone(), crate::parse(&src).0);
+        let at = src.find("self.connect(").unwrap() + "self.connect(".len();
+        (st, src, uri, at)
+    }
+
+    #[test]
+    fn p8_add_string_name_prefix() {
+        let (mut st, src, uri, at) = signal_setup();
+        st.prefs.add_string_name_literals = true;
+        let items = argument_options(&st, &uri, &src, at, at, st.asts.get(&uri))
+            .expect("信号面命中");
+        let s = items.iter().find(|i| i.label == "&\"s\"").expect("& 前缀项");
+        assert_eq!(s.insert_text.as_deref(), Some("&\"s\""));
+        // exclude：裸版不得同时出现（独占面）。
+        assert!(!items.iter().any(|i| i.label == "\"s\""));
+    }
+
+    #[test]
+    fn p8_dont_add_bare_default() {
+        let (st, src, uri, at) = signal_setup();
+        let items = argument_options(&st, &uri, &src, at, at, st.asts.get(&uri))
+            .expect("信号面命中");
+        assert!(items.iter().any(|i| i.label == "\"s\""), "默认设置出裸版");
+        assert!(!items.iter().any(|i| i.label == "&\"s\""), "默认设置无 & 前缀");
+    }
+
+    #[test]
+    fn p8_use_single_quotes() {
+        let (mut st, src, uri, at) = signal_setup();
+        st.prefs.use_single_quotes = true;
+        let items = argument_options(&st, &uri, &src, at, at, st.asts.get(&uri))
+            .expect("信号面命中");
+        let s = items.iter().find(|i| i.label == "'s'").expect("单引号项");
+        assert_eq!(s.insert_text.as_deref(), Some("'s'"));
+    }
+
+    #[test]
+    fn p8_closed_literal_replacement_keeps_prefix() {
+        let mut st = crate::hover_tests::test_state();
+        st.prefs.add_string_name_literals = true;
+        // 既有裸字面量（无 & 前缀）→ textEdit 替换整串为 &"s"（引擎 final_code），
+        // insertText 保持裸引号串（should && has → 不加前缀）。
+        let src = "extends Node
+
+signal s
+
+func _init() -> void:
+    self.connect(\"➡\")
+    pass
+".replace("➡", "");
+        let uri: lsp_types::Uri = "file:///p8b.gd".parse().unwrap();
+        st.docs.insert(uri.clone(), src.clone());
+        st.asts.insert(uri.clone(), crate::parse(&src).0);
+        let at = src.find("self.connect(\"").unwrap() + "self.connect(\"".len();
+        let items = argument_options(&st, &uri, &src, at, at, st.asts.get(&uri))
+            .expect("信号面命中");
+        let s = items.iter().find(|i| i.label == "&\"s\"").expect("替换文本带前缀");
+        assert_eq!(s.insert_text.as_deref(), Some("\"s\""), "insertText 不加前缀（has 既有字面量）");
+    }
+
+    #[test]
+    fn p8_first_arg_text_cases() {
+        let src = "tween_property(a, )";
+        assert_eq!(first_arg_text(src, src.find('(').unwrap()), Some("a"));
+        // 嵌套括号内逗号不切分。
+        let src2 = "tween_property(get_node(\"X\")[0], )";
+        assert_eq!(first_arg_text(src2, src2.find('(').unwrap()), Some("get_node(\"X\")[0]"));
+        // 字符串内逗号不切分。
+        let src3 = "tween_property(m.get(\"a,b\"), )";
+        assert_eq!(first_arg_text(src3, src3.find('(').unwrap()), Some("m.get(\"a,b\")"));
+        // 空实参 → None。
+        let src4 = "tween_property(, )";
+        assert_eq!(first_arg_text(src4, src4.find('(').unwrap()), None);
     }
 }

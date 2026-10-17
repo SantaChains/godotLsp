@@ -171,6 +171,21 @@ class Fixture:
         self.text = raw[:idx] + raw[idx + 1 :]  # 删 sentinel,行内其余内容保留
         self.expect = parse_cfg(cfg.read_text(encoding="utf-8-sig"))
 
+    @property
+    def prefs(self) -> dict:
+        """[input] 段三键 → 编辑器补全设置(镜像上游 test_completion.h:132-134
+        每夹具 EditorSettings::set_setting;缺省 false = 引擎默认)。
+        parse_cfg 的标量保持字符串("true"/"false"),须显式转 bool——
+        bool("false") 是 True,曾致 dont_add 夹具回归。"""
+        def as_bool(v) -> bool:
+            return v is True or (isinstance(v, str) and v.strip().lower() == "true")
+        inp = self.expect.get("input", {})
+        return {
+            "use_single_quotes": as_bool(inp.get("use_single_quotes", False)),
+            "add_node_path_literals": as_bool(inp.get("add_node_path_literals", False)),
+            "add_string_name_literals": as_bool(inp.get("add_string_name_literals", False)),
+        }
+
 
 def discover(corpus: Path) -> tuple[list[Fixture], list[str]]:
     fixtures, skipped = [], []
@@ -308,6 +323,10 @@ def miss_reason(expected: dict) -> str:
 
 
 def run_fixture(client: Client, ws: Path, fx: Fixture, timeout: float) -> dict:
+    # 每夹具前同步设置(镜像上游 set_setting;服务端经 didChangeConfiguration
+    # 更新 State.prefs)。settings 形状与服务端约定:{"gdscript": {...}}。
+    client.send({"jsonrpc": "2.0", "method": "workspace/didChangeConfiguration", "params": {
+        "settings": {"gdscript": fx.prefs}}})
     # 语料镜像在 ws/completion/ 下(见 build_workspace),夹具 uri 须与工程索引路径一致。
     uri = (ws / "completion" / fx.rel).as_uri()
     client.send({"jsonrpc": "2.0", "method": "textDocument/didOpen", "params": {

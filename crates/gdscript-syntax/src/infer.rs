@@ -120,25 +120,39 @@ fn infer_call_ty(
             if let Some(ret) = fn_ret.get(name) {
                 return InferTy::Class(ret.clone());
             }
-            InferTy::Unknown
-        }
-        // `A.new()` 构造调用：接收者解析为类型 → 构造返回自身类型
-        // （脚本类 A → ScriptPath(A)；引擎类 Vector2.new() 同理）。
-        Expr::Attribute { target, name, span: _ } if name.name == "new" => {
-            if let Expr::Ident(id) = target.as_ref() {
-                return names(&id.name).unwrap_or_else(|| {
-                    if engine.class_by_name(&id.name).is_some()
-                        || engine.builtin_by_name(&id.name).is_some()
-                    {
-                        InferTy::Class(id.name.clone())
-                    } else {
-                        InferTy::Unknown
-                    }
-                });
+            // 外部名字表（P8：self 方法名 → 返回类型，供 `get_tree().m()` 链）。
+            if let Some(t) = names(name) {
+                return t;
             }
             InferTy::Unknown
         }
-        // 成员方法调用返回类型本轮不做（跨脚本/引擎方法返回类型推断属后续）。
+        // 方法调用：`A.new()` 构造返回自身类型；一般 `recv.m(...)` 在接收者
+        // 类型已知（引擎/内建 Class）时查引擎方法表返回类型（仅返回引擎类/
+        // 内建名才推断，变体/void/脚本类型静默降级——单层高置信纪律）。
+        Expr::Attribute { target, name, span: _ } => {
+            if name.name == "new" {
+                if let Expr::Ident(id) = target.as_ref() {
+                    return names(&id.name).unwrap_or_else(|| {
+                        if engine.class_by_name(&id.name).is_some()
+                            || engine.builtin_by_name(&id.name).is_some()
+                        {
+                            InferTy::Class(id.name.clone())
+                        } else {
+                            InferTy::Unknown
+                        }
+                    });
+                }
+                return InferTy::Unknown;
+            }
+            if let InferTy::Class(c) = infer_expr_ty(src, target, engine, fn_ret, names)
+                && let Some(m) = engine.find_method(&c, &name.name)
+                && (engine.class_by_name(&m.return_type).is_some()
+                    || engine.builtin_by_name(&m.return_type).is_some())
+            {
+                return InferTy::Class(m.return_type.clone());
+            }
+            InferTy::Unknown
+        }
         _ => {
             let _ = src;
             InferTy::Unknown
@@ -413,5 +427,42 @@ mod tests {
     fn ret_from_signature_parsing() {
         assert_eq!(ret_from_signature("String char(code: int)"), Some("String".into()));
         assert_eq!(ret_from_signature("char(code: int)"), None);
+    }
+
+    // ───────────────────── P8：方法调用链返回类型 ─────────────────────
+
+    #[test]
+    fn method_chain_return_type() {
+        let e = engine();
+        // get_tree().create_tween()：names 提供 self 方法 get_tree → SceneTree，
+        // 再沿引擎方法表查 create_tween → Tween。
+        let names = |n: &str| -> Option<InferTy> {
+            (n == "get_tree").then(|| InferTy::Class("SceneTree".into()))
+        };
+        let (ast, _) = parse("var t := get_tree().create_tween()");
+        let val = match ast.body.first() {
+            Some(crate::ast::Stmt::Var(v)) => v.value.as_ref().expect("有初始值"),
+            _ => panic!("应为 var 声明"),
+        };
+        let ty = infer_expr_ty("", val, &e, &table(), &names);
+        assert_eq!(ty, InferTy::Class("Tween".into()), "方法链推断");
+    }
+
+    #[test]
+    fn method_chain_variant_return_degrades() {
+        let e = engine();
+        // 返回 Variant/void 的方法不推断（单层高置信纪律）。
+        let names = |n: &str| -> Option<InferTy> {
+            (n == "get_tree").then(|| InferTy::Class("SceneTree".into()))
+        };
+        let (ast, _) = parse("var t := get_tree().create_timer(1.0)");
+        let _ = ast;
+        // create_timer 返回 Timer（引擎类）——反例用不存在的方法名。
+        let (ast2, _) = parse("var t := get_tree().no_such_method()");
+        let val = match ast2.body.first() {
+            Some(crate::ast::Stmt::Var(v)) => v.value.as_ref().expect("有初始值"),
+            _ => panic!("应为 var 声明"),
+        };
+        assert_eq!(infer_expr_ty("", val, &e, &table(), &names), InferTy::Unknown);
     }
 }

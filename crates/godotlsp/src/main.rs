@@ -53,6 +53,20 @@ struct State {
     snippet_support: bool,
     /// `godotlsp.*` 配置（didChangeConfiguration 推送更新）。
     config: Config,
+    /// 编辑器补全设置（`settings.gdscript` 段三键，镜像引擎 EditorSettings
+    /// `text_editor/completion/*`，默认全 false；oracle per-fixture 推送）。
+    prefs: EditorPrefs,
+}
+
+/// 编辑器补全字符串设置（gdscript_editor.cpp:895 `_calculate_string_insertion`）。
+#[derive(Clone, Copy, Debug, Default)]
+pub(crate) struct EditorPrefs {
+    /// 引号风格：true → `'`，false → `"`。
+    use_single_quotes: bool,
+    /// StringName 语义实参加 `&` 前缀。
+    add_string_name_literals: bool,
+    /// NodePath 语义实参加 `^` 前缀。
+    add_node_path_literals: bool,
 }
 
 /// 服务器侧配置。来源：`workspace/didChangeConfiguration` 的
@@ -279,6 +293,7 @@ fn main() {
         engine, real_lower, docs: HashMap::new(), asts: HashMap::new(), doc_versions: HashMap::new(),
         cancelled: HashSet::new(), uid_map, project, root, diag_sender: diag_tx,
         snippet_support, config: Config::default(),
+        prefs: EditorPrefs::default(),
     };
 
     log_info(format!(
@@ -525,6 +540,19 @@ fn handle_notification(notif: Notification, state: &mut State, _conn: &Connectio
             let settings = notif.params.get("settings").cloned().unwrap_or_default();
             if let Some(section) = settings.get("godotlsp") {
                 state.config = Config::from_section(section);
+            }
+            // `settings.gdscript` 段：引擎补全设置三键（gdscript_editor.cpp
+            // `EDITOR_GET("text_editor/completion/…")` 同名语义，缺省 false）。
+            if let Some(gs) = settings.get("gdscript") {
+                if let Some(b) = gs.get("use_single_quotes").and_then(|x| x.as_bool()) {
+                    state.prefs.use_single_quotes = b;
+                }
+                if let Some(b) = gs.get("add_string_name_literals").and_then(|x| x.as_bool()) {
+                    state.prefs.add_string_name_literals = b;
+                }
+                if let Some(b) = gs.get("add_node_path_literals").and_then(|x| x.as_bool()) {
+                    state.prefs.add_node_path_literals = b;
+                }
             }
         }
         "workspace/didChangeWatchedFiles" => {
@@ -1067,7 +1095,7 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
         // C7.3+ 工程面接入(project.scenes → tscn NodeDecl);在此之前不出项——
         // 空列表优于 1662 项噪声,也与引擎"只出场景子节点"同向。
     } else if let Some(arg_items) =
-        argopts::argument_options(state, src, at, word_start, state.asts.get(uri))
+        argopts::argument_options(state, uri, src, at, word_start, state.asts.get(uri))
     {
         // C8：调用实参/注解实参选项面（connect 信号名、InputEvent 输入动作、
         // @export_range/@rpc/@warning_ignore/@export_custom/@export_node_path 参数）。
@@ -1852,10 +1880,26 @@ fn decl_infer_ty(state: &State, src: &str, file: &File, ty: Option<&Expr>, value
     let engine = &state.engine;
     let fn_ret = builtin_fn_ret();
     let names = |n: &str| -> Option<InferTy> {
-        preload_consts(file)
-            .into_iter()
-            .find(|(k, _)| k == n)
-            .map(|(_, p)| InferTy::ScriptPath(p))
+        if let Some((_, p)) = preload_consts(file).into_iter().find(|(k, _)| k == n) {
+            return Some(InferTy::ScriptPath(p));
+        }
+        // self 方法调用（`get_tree()` 等，无接收者词）：本文件方法推断，
+        // miss 后引擎链方法返回类型（仅引擎/内建类；变体/void 静默降级）。
+        for st in &file.body {
+            if let Stmt::Func(f) = st
+                && f.name.name == n
+                && let Some(ret) = gdscript_syntax::func_return_inferred(src, f, engine, fn_ret)
+            {
+                return Some(InferTy::Class(ret));
+            }
+        }
+        let root = argopts::script_engine_root(state, file);
+        if let Some(m) = engine.find_method(&root, n)
+            && engine.class_by_name(&m.return_type).is_some()
+        {
+            return Some(InferTy::Class(m.return_type.clone()));
+        }
+        None
     };
     let ann = ty.and_then(|t| gdscript_syntax::type_annotation_ty(t, fn_ret));
     let val = value.map(|e| infer_expr_ty(src, e, engine, fn_ret, &names));
@@ -2994,7 +3038,7 @@ fn enum_value_completion_allowed(src: &str, word_start: usize, at: usize) -> boo
 /// 引擎 internal 属性表（CLASS → [props]）——`PROPERTY_USAGE_INTERNAL`
 /// 成员，引擎补全排除（oracle filter/usage_internal：Translation.messages；
 /// 源码提取见 tools/gen_internal_props.py，自建派生数据入库）。
-fn internal_props() -> &'static HashMap<String, HashSet<String>> {
+pub(crate) fn internal_props() -> &'static HashMap<String, HashSet<String>> {
     static TABLE: std::sync::OnceLock<HashMap<String, HashSet<String>>> = std::sync::OnceLock::new();
     TABLE.get_or_init(|| {
         serde_json::from_str::<HashMap<String, Vec<String>>>(include_str!(
@@ -4481,7 +4525,7 @@ mod hover_tests {
             root: None,
             diag_sender: tx,
             snippet_support: false,
-            config: Config::default(),
+            config: Config::default(), prefs: EditorPrefs::default(),
         }
     }
 
@@ -4502,7 +4546,7 @@ mod hover_tests {
             root: None,
             diag_sender: state.diag_sender.clone(),
             snippet_support: false,
-            config: Config::default(),
+            config: Config::default(), prefs: EditorPrefs::default(),
         }
     }
 
@@ -5046,7 +5090,7 @@ mod color_codelens_tests {
             root: None,
             diag_sender: state.diag_sender.clone(),
             snippet_support: false,
-            config: Config::default(),
+            config: Config::default(), prefs: EditorPrefs::default(),
         };
         let colors = document_color(&st, &DocumentColorParams {
             text_document: TextDocumentIdentifier { uri: uri.clone() },
@@ -5098,7 +5142,7 @@ mod color_codelens_tests {
             root: Some(root.clone()),
             diag_sender: tx,
             snippet_support: false,
-            config: Config::default(),
+            config: Config::default(), prefs: EditorPrefs::default(),
         };
         // 模拟 didOpen：路径须在 root 之下（code_lens 做 strip_prefix）。
         let gd = root.join("main.gd");
@@ -5148,7 +5192,7 @@ mod rename_tests {
             root: Some(dir.to_path_buf()),
             diag_sender: tx,
             snippet_support: false,
-            config: Config::default(),
+            config: Config::default(), prefs: EditorPrefs::default(),
         };
         st.docs.insert(uri.clone(), src.to_string());
         (st, uri)

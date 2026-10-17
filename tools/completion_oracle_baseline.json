@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-17 23:26:56",
- "server": "target-bench/release/godotlsp.exe mtime=10-17 23:25",
+ "generated_at": "2026-10-18 00:35:12",
+ "server": "target-bench/release/godotlsp.exe mtime=10-18 00:34",
  "corpus": "corpus\\godot-engine-tests\\completion",
  "summary": {
-  "pass": 101,
-  "fail": 39,
+  "pass": 106,
+  "fail": 34,
   "error": 0,
   "total": 140
  },
@@ -91,57 +91,52 @@
    ]
   },
   "argument_options/string_literals/add_node_path_tween.gd": {
-   "status": "fail",
-   "n_items": 2138,
-   "missing": [
-    {
-     "insert_text": "^\"property_of_a\""
-    },
-    {
-     "insert_text": "^\"name\""
-    }
-   ],
+   "status": "pass",
+   "n_items": 15,
+   "missing": [],
    "illegal": [],
    "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
+    "^\"property_of_a\"",
+    "^\"name\"",
+    "^\"unique_name_in_owner\"",
+    "^\"scene_file_path\"",
+    "^\"owner\"",
+    "^\"multiplayer\"",
+    "^\"process_mode\"",
+    "^\"process_priority\"",
+    "^\"process_physics_priority\"",
+    "^\"process_thread_group\"",
+    "^\"process_thread_group_order\"",
+    "^\"process_thread_messages\""
    ]
   },
   "argument_options/string_literals/add_node_path_tween_prepended.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "insert_text": "\"property_of_a\""
-    },
-    {
-     "insert_text": "\"name\""
-    }
-   ],
-   "illegal": [],
-   "labels_head": []
-  },
-  "argument_options/string_literals/add_string_name_input_event.gd": {
-   "status": "fail",
-   "n_items": 1,
-   "missing": [
-    {
-     "insert_text": "&\"test_input_action\""
-    }
-   ],
+   "status": "pass",
+   "n_items": 15,
+   "missing": [],
    "illegal": [],
    "labels_head": [
-    "\"test_input_action\""
+    "^\"property_of_a\"",
+    "^\"name\"",
+    "^\"unique_name_in_owner\"",
+    "^\"scene_file_path\"",
+    "^\"owner\"",
+    "^\"multiplayer\"",
+    "^\"process_mode\"",
+    "^\"process_priority\"",
+    "^\"process_physics_priority\"",
+    "^\"process_thread_group\"",
+    "^\"process_thread_group_order\"",
+    "^\"process_thread_messages\""
+   ]
+  },
+  "argument_options/string_literals/add_string_name_input_event.gd": {
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "&\"test_input_action\""
    ]
   },
   "argument_options/string_literals/add_string_name_input_event_prepended.gd": {
@@ -154,44 +149,43 @@
    ]
   },
   "argument_options/string_literals/argument_options_inside_string_literal.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "insert_text": "\"property_of_a\""
-    },
-    {
-     "insert_text": "\"name\""
-    }
-   ],
-   "illegal": [],
-   "labels_head": []
-  },
-  "argument_options/string_literals/dont_add_node_path_tween.gd": {
-   "status": "fail",
-   "n_items": 2138,
-   "missing": [
-    {
-     "insert_text": "\"property_of_a\""
-    },
-    {
-     "insert_text": "\"name\""
-    }
-   ],
+   "status": "pass",
+   "n_items": 15,
+   "missing": [],
    "illegal": [],
    "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
+    "\"property_of_a\"",
+    "\"name\"",
+    "\"unique_name_in_owner\"",
+    "\"scene_file_path\"",
+    "\"owner\"",
+    "\"multiplayer\"",
+    "\"process_mode\"",
+    "\"process_priority\"",
+    "\"process_physics_priority\"",
+    "\"process_thread_group\"",
+    "\"process_thread_group_order\"",
+    "\"process_thread_messages\""
+   ]
+  },
+  "argument_options/string_literals/dont_add_node_path_tween.gd": {
+   "status": "pass",
+   "n_items": 15,
+   "missing": [],
+   "illegal": [],
+   "labels_head": [
+    "\"property_of_a\"",
+    "\"name\"",
+    "\"unique_name_in_owner\"",
+    "\"scene_file_path\"",
+    "\"owner\"",
+    "\"multiplayer\"",
+    "\"process_mode\"",
+    "\"process_priority\"",
+    "\"process_physics_priority\"",
+    "\"process_thread_group\"",
+    "\"process_thread_group_order\"",
+    "\"process_thread_messages\""
    ]
   },
   "argument_options/string_literals/dont_add_string_name_input_event.gd": {
