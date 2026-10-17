@@ -22,7 +22,7 @@
 | P2 | **C7.1/C7.2** | godotlsp | class_name/autoload 全局面;res:// 路径面 + N2 字符串抑制 | 低-中 | ✅ 已落地(2026-10-17,oracle 24→**33/140**,+9 全为 C6.1 信号面战绩) |
 | P3 | **C8** | godotlsp + gdscript-project | 参数选项面(信号名/输入动作/注解参数)+ oracle harness 两处修复 | 低(表漂移可检测) | ✅ 一期已实施(2026-10-17,oracle 33→**36/140**,argument_options 0/11→3/11) |
 | P4 | **C6.6b** | godotlsp | 枚举面入口扩展(match 测试位 + `global_enums` 值面 + 全局枚举类型名入全局面 + 单点枚举名解析 + 上下文门控) | 低(数据已在,唯一种全局面增量) | ✅ 已实施(2026-10-17,oracle 36→**58/140**,+22:builtin_enum 5/5 新增、global_enum 3/6→6/6、enum_values_in_match 3/7→7/7、全局枚举类型名入全局面 +22 项、单点枚举名三态解析 + 字典键/类型标注门控) |
-| P5 | **C10** | godotlsp | 脚本成员面(簇 A:self/裸标识符/脚本接收者三层成员 + override 签名 + extends 位类名) | 中(全局面合并,设计先行) | 待(lsp-design 设计后排) |
+| P5 | **C10** | godotlsp | 脚本成员面(簇 A:self/裸标识符/脚本接收者三层成员 + override 签名 + extends 位类名) | 中(全局面合并,设计先行) | ✅ 已实施(2026-10-17,58→75/140,+17) |
 | P6 | **C5** | gdscript-syntax | 语义层类型推断(locals_at + 返回类型推断) | 中(内核附加式) | 待 |
 | P7 | **C6.3** | gdscript-engine + godotlsp | 虚方法模型化(`is_virtual` 1437 + override 面引擎签名) | 低(附加式 serde) | 待 |
 | P8 | **C8 二期** | godotlsp | tween_property 属性面 + InputMap 单例面 + `&`/`^` 设置 plumbing | 低-中 | 待 |
@@ -146,9 +146,9 @@ extends 0/2。未命中成因:absent 279 / paren-display 50 / string-literal 7�
 历史发现编号(保留索引,归并关系如下):
 | # | 发现 | oracle 证据 | 处置 |
 |---|---|---|---|
-| N1 | **self 成员面缺失**:裸标识符/self 位不出当前类成员(`owner`/`add_child(…)/property_of_a`) | common `identifiers_in_*` ×3、`self.gd`、argument_options/connect | **并入簇 A(C10 脚本成员面)**:全局面合并宿主链成员 + 新 sort 桶;N2 已落地不再构成前置,与 N3/N4 同批 |
+| N1 | ~~**self 成员面缺失**~~ | common `identifiers_in_*` ×3、`self.gd`、`invalid_super_call_*` ×2 | ✅ 已落地(P5,2026-10-17):三层成员合并 + `receiver_word` self./super. 短路 + 局部作用域面;oracle self/identifiers/super 六夹具全过 |
 | N2 | **字符串上下文不抑制** ~~:字符串字面量内仍出全局面~~ | `no_completion_in_string`(曾为 vacuous pass) | ✅ 已落地(2026-10-17,C7.2 同批):`string_literal_at` 前向状态机,字符串内返回空(路径面例外);vacuous pass 转为真实通过 |
-| N3 | **脚本类成员面缺失**:`extends "res://x.gd"` 的成员不出(`func_of_a()`) | common `invalid_super_call_*` ×2、`override_function_*` ×4 | **并入簇 A**:与 N1 同一数据面(脚本 AST 成员遍历),区别仅在接收者解析(self / 脚本父类 / 类型提示变量);override 签名展示的引擎虚方法部分归 C6.3(簇 A 二期) |
+| N3 | ~~**脚本类成员面缺失**~~ | common `invalid_super_call_*` ×2、`override_function_*` ×4 | ✅ 已落地(P5,2026-10-17):`script_base_key` 支持 Ident/字符串路径 extends;override 签名引擎虚方法部分归 P7(`_get`/`_static_init`) |
 | N4 | **枚举限定展示**:类型化 LHS 后引擎出 `Control.SIZE_EXPAND`(限定名),我方不出类枚举值 | assignment_options ×4 | ✅ 已随 P4 簇 B 落地:`enum_member_values_at` 枚举值面(含 `Class.Enum.` 限定名形式) + 上下文门控;assignment_options 的 `new(…)`/限定名展示属 C8 二期范围,本簇只覆盖枚举值入口 |
 | N5 | **callable-expected 上下文不出括号** | no_parenthesis ×8(当前 0/8,C6.4 后仍挂) | **簇 D**:需形参类型识别(C6.4 后仅剩识别层,工作量低于原估) |
 | N6 | **节点路径类型推断 + 场景树节点名** | get_node 0/33 | **簇 E**(成员面部分归簇 A):语义层 + C7.3+(project.scenes → NodeDecl),最大工程,末期 |
@@ -167,7 +167,7 @@ extends 0/2。未命中成因:absent 279 / paren-display 50 / string-literal 7�
 | 期 | 项 | 层 | 内容 | oracle 预期 | 前置 | 状态 |
 |---|---|---|---|---|---|---|
 | P4 | **C6.6b** | godotlsp | 枚举面入口扩展:match 测试位 + `global_enums` 值面 + 全局枚举类型名入全局面 + 单点枚举名三态解析 + 上下文门控 | **+22**(实际:builtin_enum +5、global_enum +3、enum_values_in_match +4、全局枚举名 +22 入全局面、单点解析 + 门控消除 2 回归) | 无(数据已在) | ✅ 已实施(2026-10-17,oracle 36→58/140) |
-| P5 | **C10** | godotlsp | 脚本成员面(簇 A):self/裸标识符/脚本接收者三层成员 + `func ` 位 override 签名 + extends 位类名 | **+20~25**(common 12 + extends 2 + types 10 + get_node 3) | lsp-design 设计(项目纪律) | 待(设计先行) |
+| P5 | **C10** | godotlsp + gdscript-project | 脚本成员面(簇 A):self/super/裸标识符三层成员 + `func ` 位 override 签名(脚本父类部分) + extends 位类名 + 局部作用域面;`Project::script_chain_members`/`script_engine_base_by_path` 列表能力 | **+17 实际**(58→75;common 8→16、extends 0→2、index 1→7) | ✅ 已实施(2026-10-17);引擎虚方法签名归 P7 | 完成 |
 | P6 | **C5** | gdscript-syntax | 语义层类型推断:locals_at(注解 + 字面量)+ 返回类型推断 | **+9~12**(index 6 + types 3 + infer_return) | P5 数据面(部分) | 待 |
 | P7 | **C6.3** | gdscript-engine + godotlsp | 虚方法模型化:`is_virtual` 解析 + override 面引擎虚方法完整签名 | override 剩余夹具 | P5 override 面 | 待 |
 | P8 | **C8 二期** | godotlsp | tween_property 属性面 + InputMap 单例面 + `&`/`^` 设置 plumbing | `add_*` ×2(+动画 ×2 挂 P10) | P6 | 待 |
@@ -360,37 +360,118 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
   `enum_values_in_match` 7/7、`script_enum` 1/1 全绿;`filter` 2/2 不回退;workspace 48 单测
   全绿;smoke ALL OK;clippy 零新增。
 
-### P5 — C10 脚本成员面(簇 A,设计先行,项目纪律)
+### P5 — C10 脚本成员面(簇 A) ✅ 已实施(2026-10-17,58→75/140,+17 零回归)
 
-**规格来源**:`common/self.gd` 一个夹具定义了三层成员面的完整契约(include 清单即规格):
+**规格来源(代码实证,2026-10-17 复核)**:`common/self.gd` 一个夹具定义三层成员面契约;
+`common/override_function_*` 定义 override 签名面;`extends/extends_inherited_inner_class.gd`
+定义 extends 位类名面。全部 include 清单 = 规格。
+
+**实际落地(与设计差异以本节为准)**:
+
+- **gdscript-syntax**:`span_slice`(反转/越界钳制 + UTF-8 边界)、`expr_span`/`expr_to_text`、
+  `FuncDecl::signature_text`(参数整段 `Param.span` 源切 + 空白折叠)/`signature_text_raw`
+  (源码原样——override display 引擎行为,oracle 以 `call := func():\n\tvar x_of_a = 10`
+  多行原文锁定)。**解析器修复**:`Param.span` 原取 `span_of(self.peek())`(指向下一 token),
+  改为参数自身区间(无消费者依赖旧语义)。
+- **gdscript-project**:`Script` 加 `src`;`ScriptMemberDecl{name,kind:DeclKind,is_static,
+  signature}`(**自有 `DeclKind`,不与语义层 `ScriptMember` 耦合;区分 Method/Property/Const/
+  Signal/Enum/Class,内部类不递归展开**)、`script_chain_members(key)`(近→远收集,近层同名
+  先到先得,depth≤16 环防御)、`script_base_key`(放宽:**引擎基类名也返回**,Ident/字符串路径
+  extends 双支持——`extends "res://…"` 此前断链是 N3 根因)、`script_base_key_by_path`、
+  `script_engine_base_by_path`(链尾引擎基类 → 层③起点)。
+- **godotlsp**:`script_self_members`(三层合并:①live AST 本脚本自声明 → ②脚本父链 → ③
+  引擎链 `class_members`;seen 先到先得即优先级;`include_live=false` 即 `super.` 位)、
+  `receiver_word`(self./super. 识别——`recv_type_at` 不识别关键字,设计原案的 recv_type_at
+  扩展改为 after_dot 分支前置短路)、`override_signatures`(func/static func 位;**不依赖
+  snippet 协商**;`insert_text = display = 签名原样`;光标在内部类内走该类 extends——
+  `override_function_abstract` 顶层 `class B extends A` 形态)、`extends_inner_class_items`
+  (兄弟内部类 + 父链内部类,排除光标所在类自身)、`local_scope_names`(光标所在函数形参 +
+  body 内 var/const 声明,含嵌套块)。
+- **span 放宽**:`enclosing_class_name`(body 最后一个 stmt 到文件尾)——不完整行尾
+  `func `/`extends ` 待补时 at 超过解析器 span 终点(override_function_abstract 因此
+  差 1 字节漏判,统一修复 override/extends/局部三处)。
+- **scoring**:新增 `SELF = 0x08` 桶(裸标识符面的脚本成员;self./super. 位由 after_dot
+  收尾统一 MEMBER;override 面用 SNIPPET 桶)。
+- **oracle harness 布局修复(基建)**:语料镜像从平铺 ws 根改为 `ws/completion/` 子目录、
+  夹具 uri 对齐——夹具源内 `res://completion/…` 引用(extends/scene=)从此真实可解析;
+  此前脚本链与场景路径全部断链(修后 index 桶 1→7/9 连带改善)。
+- **oracle 运行纪律**:`--server target-bench/debug/godotlsp.exe` 必带——默认找
+  `target/debug`(被外部 LSP 进程锁定的旧二进制),曾致"0 改善"假象。
+
+**规格细节(设计阶段实证,保留备查)**:
+
+**三层成员模型**(单一事实源:gdscript-project 已具备按名查基础设施,缺"列表"变体——见下):
 
 | 层 | 数据 | display 约定 |
 |---|---|---|
-| 本脚本自声明 | vars/consts/signals/funcs(当前 AST) | 函数带 `(…)`;信号裸名 |
-| 脚本父类链 | `extends "res://…"` → 项目脚本 AST 成员(递归至引擎根) | 同左(`func_of_a()`/`property_of_a`/`signal_of_a`) |
-| 引擎链 | extends 引擎根 → `ancestor_chain`(复用 C6.1/6.2 `class_members`) | 同左(`add_child(…)`/`owner`/`child_entered_tree`) |
+| 本脚本自声明 | `file.body` 顶层 `Var/Const/Func/Signal`(主类成员;内部 `Class`/`Enum` 另行作类型名暴露) | 函数 `name(…)`(C6.4);信号裸名;属性/常量裸名 |
+| 脚本父类链 | `extends "res://…"`/`class_name` → 沿 `Project::class_names` 链走 `Script.ast.body`,命中引擎基类名止步 | 同左(`func_of_a()`/`property_of_a`/`signal_of_a`) |
+| 引擎链 | 最终引擎基类 → `engine.ancestor_chain`(复用 C6.1/6.2 `class_members`) | 同左(`add_child(…)`/`owner`/`child_entered_tree`) |
 
-**入口族**(全部经"裸标识符/self 位"):
-1. `self.➡` 接收者(`recv_type_at` 识别 `self` → 当前脚本:三层合并);
-2. 裸标识符位(函数体/调用实参):出当前类三层成员(引擎 `identifiers_in_*` 行为)+ 既有全局面;
-3. `func ➡` 位(override 面):出可重载方法**签名**(`func_of_a():`、`func_of_a_args(a: int):`、
-   `_get(property: StringName) -> Variant:`,带默认值)——脚本父类方法取 AST(有默认值),
-   引擎虚方法取 VIRTUALS 表/模型(P7 换 `is_virtual` 源);`_static_init` 排除(引擎 :3738 特判,
-   override 面 exclude 已锁);
-4. `class X extends ➡` 位:兄弟内部类(`extends_self` exclude 自身)+ class_name 脚本类 + 引擎类。
+**入口族**:
+1. `self.➡`:`recv_type_at` 识别 `self` → 当前脚本三层合并(当前实现 `resolve_var` 不识别 `self`,故现在 `self.` 空——根因已定位);
+2. `super.➡`:识别 `super` → 父脚本类型(从 `file.extends` 解析)→ 自 layer2 起三层合并(`invalid_super_call_1/2`);
+3. 裸标识符位(函数体/调用实参):局部(参数/`var`/`const`)+ 三层类成员 + 既有全局面(`identifiers_in_*`);
+4. `func ➡` / `static func ➡` 位(override 面):可重载方法**签名**(脚本父类方法取 AST,P7 补引擎虚方法);
+5. `class X extends ➡` 位:兄弟内部类(`extends_self` exclude 自身)+ class_name 脚本类 + 引擎类。
+
+**实施设计(代码实证,2026-10-17 据 gdscript-project/src/lib.rs + semantic.rs 复核)**:
+
+- **复用已有**:`Project::walk_member_kind/walk_member_type`(按名查,已处理脚本链+引擎止步)、
+  `script_extends_base`、`class_names`、`script_by_key`、`ScriptMember{Method,Property,Const,Signal}`。
+  `main.rs` 已直接持有 `state.project`(消费 `proj.scripts`+`proj.autoloads()`)。
+- **新增 `Project` 公开方法(列表变体)**:
+  ```rust
+  pub struct ScriptMemberDecl {
+      pub name: String,
+      pub kind: ScriptMember,            // Method/Property/Const/Signal
+      pub is_static: bool,
+      pub signature: Option<String>,     // Method: "name(p: T, q := def) -> R"(AST 渲染,无 body);其余 None
+      pub origin: String,                // class_name / "script:<path>" / "engine:<Class>"
+  }
+  /// 沿脚本 extends 链收集完整成员列表(depth ≤16 环防御);命中引擎基类名即止(引擎层由 class_members 补)。
+  pub fn script_chain_members(&self, key: &str) -> Vec<ScriptMemberDecl>;
+  ```
+  实现 = 在 `walk_member_kind` 的遍历骨架上改为"收集每层全部成员"而非"按名命中即返",并回填
+  `signature`(由 `FuncDecl.params`+`ret_ty` 经 AST 渲染;默认值为 `expr_to_text` 源切 + 空白折叠,
+  处理 `func_of_a_callable` 的 `call := func(): var x_of_a = 10` 跨行默认值——**最棘手的子点**)。
+- **`main.rs` 新增 `script_self_members(state, uri, src, &file) -> Vec<CompletionItem>`**:
+  layer1 用 LIVE `file`(避免与索引时差);layer2+3 调 `proj.script_chain_members(key)`
+  (key = `file.class_name` 或 `script:<path>`),其返回的引擎基类名再接 `class_members(engine, base)`。
+- **`recv_type_at` 扩展**:`self`/`super` 关键字短路 → 分别解析为"当前脚本三层类型键"/"父脚本类型键",
+  复用 `script_chain_members` 取引擎基类名喂 `class_members`。
+- **override 签名面**:`func ` 位(prefix 匹配)→ 自 `script_chain_members`(非 static 桶)+ 引擎虚方法
+  (P7 回填)生成 `name(params):` / `name(params) -> R:` 标签(源码形态,非 C6.4 的 `name(…)` 缩写——
+  引擎 override 完成行为);`static func ` 只取 `is_static` 项,排除 `_static_init`(引擎 :3738 特判)。
 
 **设计要点(实施前入 lsp-design.md)**:
-- **sort 桶**:新增 SELF/OVERRIDE 桶(`scoring.rs`),序 = LOCAL < SELF/OVERRIDE < MEMBER < GLOBAL;
+- **sort 桶**:新增 `SELF`/`OVERRIDE` 桶(`scoring.rs`),序 = LOCAL < SELF/OVERRIDE < MEMBER < GLOBAL;
   与频率表(fuzzy)正交,不破坏 C6.4 查表剥后缀逻辑。
 - **合并规则**:同名优先级 = 局部变量 > 本脚本自声明 > 脚本父类链(近到远)> 引擎链 > 全局面;
   每层内去重;全局面与类成员同名时类成员胜出(引擎行为)。
 - **vacuous pass 联动**:`no_constructor_*`(6)+ metatype 三件套必须同批回归(§3.6 清单)。
 - **回归守位**:`filter` 桶 2/2 + E2E 全局面计数 + `types/member` 桶不回退。
 
-- **取舍**:裸标识符面不做"频率截断"(需 C5 locals,属 P6);成员面不含构造回调
-  (`_init`/`_ready` 等虚方法只在 override 面出,成员面不出——引擎同款,VIRTUALS 表现不变)。
-- **验收**:oracle common 8/20→20/20、extends 0/2→2/2、types 10 夹具、get_node 3 夹具;
-  单测锁三层合并顺序;E2E `self.` 探针;零回归后才更新基线。
+**开放决策点(待拍板,实施前)**:
+1. `script_chain_members` 落点:新增为 `Project` 公开方法(推荐,godotlsp 已持 `proj` 引用)
+   vs 加到 `ProjectContext` trait(语义更解耦,但 godotlsp 当前未走 trait 消费脚本列表)。
+2. override 引擎虚方法签名:本 P5 先做脚本父类部分 + 基础设施;引擎虚方法(`_get` 等,需
+   `is_virtual` 1437)严格归 **P7** 回填(当前 `RawApi` 其余字段未解析,见 MEMORY)——还是本 P5 用
+   既有 `snippets::virtual_items` 近似覆盖(会偏离 `name(params) -> R:` 精确形态)?**建议前者**。
+3. 内部类(`InnerA`)/命名枚举(`EnumOfA`)暴露口径:oracle 暂无强约束,先保守(命名枚举名 +
+   内部类名作类型名暴露,与 `walk_member_kind` 现有口径一致);`extends_inherited_inner_class` 的
+   `InnerClassA` 由 extends 位面单独覆盖(见入口 5),不进成员面。
+4. 成员面是否出虚方法(`_init`/`_ready` 等):引擎成员面不出(只在 override 面出),`class_members`
+   已按引擎 `methods` 表全出——需确认是否要按 `_` 前缀在成员面过滤(`_init` 等用户极少在 `.` 后调)。
+   建议:成员面全出(与引擎 `methods` 表一致),不额外过滤。
+
+- **验收(实际)**:oracle **58→75/140(+17,零回归)**——common 8→16/20(self/identifiers ×3/
+  invalid_super ×2/override no_underscore·underscore·abstract)、extends 0→2/2、index 1→7/9
+  (布局修复连带);单测锁三层合并/godotlsp 5 项 + gdscript-project 3 项;smoke ALL OK;
+  零回归后基线已更新。**剩余归界**:`override_function_full_name`(_get,引擎虚方法)与
+  `override_function_static` 的 `_static_init` → **P7 C6.3**;`infer_return_type_without_value`
+  → **P6 C5**;get_node 22 → **P10 N6**;types 17 → P6/P5 二期(preload 常量类型 + 内部类
+  作用域类型面)。
 
 ### P6 — C5 语义层类型推断(gdscript-syntax,附加式)
 

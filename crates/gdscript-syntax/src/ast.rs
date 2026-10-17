@@ -250,3 +250,116 @@ pub struct File {
     pub extends: Option<Expr>,
     pub body: Vec<Stmt>,
 }
+
+// ───────────────────────── 源切片 / 签名渲染 ─────────────────────────
+
+/// 安全字节切片:反转/越界返回空串,并钳制到字符边界(消除 `&src[a..b]` a>b panic)。
+pub fn span_slice(src: &str, a: usize, b: usize) -> &str {
+    if a >= b {
+        return "";
+    }
+    let a = a.min(src.len());
+    let b = b.min(src.len());
+    if a >= b {
+        return "";
+    }
+    let mut a = a;
+    while a > 0 && !src.is_char_boundary(a) {
+        a -= 1;
+    }
+    let mut b = b;
+    while b < src.len() && !src.is_char_boundary(b) {
+        b += 1;
+    }
+    if a >= b {
+        return "";
+    }
+    &src[a..b]
+}
+
+/// 取表达式源区间(各 Expr 变体末位自带 Span 的取之,`Literal` 无源则零长)。
+pub fn expr_span(e: &Expr) -> (usize, usize) {
+    use Expr::*;
+    match e {
+        Literal(_) => (0, 0),
+        Ident(i) => i.span,
+        Binary(_, _, _, sp) => *sp,
+        Unary(_, _, sp) => *sp,
+        Call { span, .. } => *span,
+        Index { span, .. } => *span,
+        Attribute { span, .. } => *span,
+        Lambda(_, sp) => *sp,
+        Array(_, sp) => *sp,
+        Dict(_, sp) => *sp,
+        Await(_, sp) => *sp,
+        NodePath { span, .. } => *span,
+        Generic(_, _, sp) => *sp,
+        Ternary(_, _, _, sp) => *sp,
+    }
+}
+
+/// 用源文件切片把表达式粗渲染成字符串(hover/symbol/签名 detail 用,不求完美)。
+pub fn expr_to_text(src: &str, e: &Expr) -> String {
+    let (a, b) = expr_span(e);
+    span_slice(src, a, b).to_string()
+}
+
+/// 把源片段内空白(含换行/制表)折叠为单空格并裁边——用于跨行默认值渲染归一
+/// (`func(): var x_of_a = 10` 在源里可能是两行缩进)。
+fn collapse_ws(s: &str) -> String {
+    let mut out = String::with_capacity(s.len());
+    let mut in_ws = false;
+    for c in s.chars() {
+        if c.is_whitespace() {
+            if !in_ws && !out.is_empty() {
+                out.push(' ');
+            }
+            in_ws = true;
+        } else {
+            out.push(c);
+            in_ws = false;
+        }
+    }
+    out.trim().to_string()
+}
+
+impl FuncDecl {
+    /// 渲染方法签名(源码形态,无 body):`name(p: T := def, ...) -> R:`。
+    /// 参数逐个按 `Param.span` 源切片 + 空白折叠——Literal 无 span,
+    /// 逐字段 expr_to_text 会丢字面量默认值;整段切片天然保真(处理跨行
+    /// lambda 默认值如 `call := func(): var x_of_a = 10`)。
+    pub fn signature_text(&self, src: &str) -> String {
+        self.render_signature(src, true)
+    }
+
+    /// 原样签名(保留跨行默认值的换行/缩进)——override 补全面 display 与
+    /// 引擎一致(gdscript_editor 多行签名原文;oracle override_function_*
+    /// include 以 `call := func():\n\tvar x_of_a = 10` 锁定)。
+    pub fn signature_text_raw(&self, src: &str) -> String {
+        self.render_signature(src, false)
+    }
+
+    fn render_signature(&self, src: &str, collapse: bool) -> String {
+        let params: Vec<String> = self
+            .params
+            .iter()
+            .map(|p| {
+                let s = span_slice(src, p.span.0, p.span.1);
+                if collapse { collapse_ws(s) } else { s.to_string() }
+            })
+            .collect();
+        let mut sig = String::with_capacity(
+            8 + params.iter().map(|s| s.len()).sum::<usize>(),
+        );
+        sig.push_str(&self.name.name);
+        sig.push('(');
+        sig.push_str(&params.join(", "));
+        sig.push(')');
+        if let Some(rt) = &self.ret_ty {
+            sig.push_str(" -> ");
+            sig.push_str(&expr_to_text(src, rt));
+        }
+        sig.push(':');
+        sig
+    }
+}

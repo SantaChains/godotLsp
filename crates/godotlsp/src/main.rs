@@ -11,8 +11,8 @@ use std::collections::{HashMap, HashSet};
 use gdscript_engine::{ConstValue, EngineApi};
 use gdscript_project::Project;
 use gdscript_syntax::ast::{
-    BinOp, ClassDecl, ConstDecl, EnumDecl, Expr, File, FuncDecl, Literal, SignalDecl, Stmt, UnOp,
-    VarDecl,
+    expr_to_text, span_slice, BinOp, ClassDecl, ConstDecl, EnumDecl, Expr, File, FuncDecl,
+    Literal, SignalDecl, Stmt, UnOp, VarDecl,
 };
 use gdscript_syntax::parse;
 use gdscript_syntax::semantic::{analyze_with, FileInfo, ProjectContext};
@@ -1011,11 +1011,16 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
     if after_dot {
         // 脚本枚举面兜底:didOpen/didChange 未及或竞态时现解析(与 1199 等处惯用法一致)。
         let ast_owned = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
-        // 枚举解析优先于成员面(引擎语义:receiver 是枚举则出枚举值,否则出成员;
-        // gdscript_editor.cpp `_code_completion` 先解析枚举常量再回落成员)。
-        // 否则 `enum TestEnum{}; TestEnum.` 会被 resolve_var 当成变量类型走 class_members 截胡。
-        // 类型标注(`var x: Enum.`)与字典键(`{ Enum. = }`)上下文引擎不出枚举值,门控掉。
-        if enum_value_completion_allowed(src, word_start, at) {
+        // P5 C10：self./super. 接收者 → 当前脚本三层成员面(优先于
+        // recv_type_at——后者只做变量/类名解析,不识别 self/super 关键字)。
+        let recv_word = receiver_word(src, word_start);
+        if matches!(recv_word, Some("self") | Some("super")) {
+            items.extend(script_self_members(state, uri, src, recv_word == Some("self")));
+        } else if enum_value_completion_allowed(src, word_start, at) {
+            // 枚举解析优先于成员面(引擎语义:receiver 是枚举则出枚举值,否则出成员;
+            // gdscript_editor.cpp `_code_completion` 先解析枚举常量再回落成员)。
+            // 否则 `enum TestEnum{}; TestEnum.` 会被 resolve_var 当成变量类型走 class_members 截胡。
+            // 类型标注(`var x: Enum.`)与字典键(`{ Enum. = }`)上下文引擎不出枚举值,门控掉。
             if let Some(values) = enum_member_values_at(state, src, word_start, Some(&ast_owned)) {
                 // `Class.Enum.<|>` / `Enum.<|>`：接收者是枚举名 → 出该枚举的值面
                 // (引擎成员面对 `AStarGrid2D.Heuristic.` / `Key.` / match 位同款;
@@ -1151,8 +1156,9 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
         // C6.6b：全局枚举**类型名**入裸标识符全局面（Key / Error / KeyLocation…22 个，
         // oracle `global_enum_identifier`/`in_type_hint` 两夹具）。`extends <|>` 位
         // 除外——引擎 extends 只出类名（`global_enum_in_extends` exclude 锁定）。
+        // extends 位判定含内部类 extends 行（`class X extends ➡`，行内独立词）。
         let line_prefix = &src[line_start_offset(src, offset.line as usize)..word_start];
-        let in_extends = line_prefix.split_whitespace().next() == Some("extends");
+        let in_extends = line_prefix.split_whitespace().any(|w| w == "extends");
         if !in_extends {
             for e in &state.engine.global_enums {
                 items.push(CompletionItem {
@@ -1162,6 +1168,10 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
                     ..CompletionItem::default()
                 });
             }
+        } else {
+            // P5：extends 位脚本内部类（当前文件兄弟 + 脚本父链；引擎类与
+            // class_name 脚本类由全局面既有项覆盖）。
+            items.extend(extends_inner_class_items(state, uri, src, at, prefix));
         }
         // 编译器内建函数（len/preload/range…，不在 extension_api.json）。
         for (name, bf) in hoverdata::gdscript_fns() {
@@ -1198,6 +1208,46 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
                     it.insert_text_format = Some(InsertTextFormat::SNIPPET);
                 }
             items.push(it);
+        }
+        // P5：override 签名面（`func ➡` / `static func ➡` 行位）。不依赖
+        // snippet 协商——oracle override 夹具裸连接；脚本父链方法签名源码
+        // 原样（含尾冒号），static 位只出 static。引擎虚方法模板仍走 C2 闸。
+        {
+            let line_start = line_start_offset(src, offset.line as usize);
+            let line_prefix = &src[line_start..word_start];
+            if line_prefix.trim_end().ends_with("func") {
+                let want_static = line_prefix.split_whitespace().any(|w| w == "static");
+                items.extend(override_signatures(state, uri, src, at, prefix, want_static));
+            }
+        }
+        // P5 C10：当前类三层成员入裸标识符面（引擎 identifiers_in_* 行为：
+        // 本脚本自声明 + 脚本父链 + 引擎链）。SELF 桶已随项写入（C1 桶化跳过）。
+        items.extend(script_self_members(state, uri, src, true));
+        // extends 位：脚本成员面/全局面不得含光标所在类自身（extends_self exclude）。
+        if in_extends {
+            let file_now = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+            if let Some(sn) = enclosing_class_name(&file_now, at) {
+                items.retain(|i| i.label != sn);
+            }
+        }
+        // 形参 + 函数体局部声明名（LOCAL 桶最高优先；同名让位既有面）。
+        {
+            let ast_for_scope = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+            for name in local_scope_names(&ast_for_scope, src, at) {
+                if items.iter().any(|i| i.label == name) {
+                    continue;
+                }
+                items.push(CompletionItem {
+                    label: name.clone(),
+                    kind: Some(CompletionItemKind::VARIABLE),
+                    detail: Some("局部".into()),
+                    sort_text: Some(scoring::sort_text(
+                        scoring::bucket::LOCAL,
+                        scoring::fuzzy(prefix, &name),
+                    )),
+                    ..CompletionItem::default()
+                });
+            }
         }
         // C2：snippet 面（snippetSupport 协商 × godotlsp.completion.snippets 双闸门）。
         if state.snippet_support && state.config.snippets {
@@ -1306,6 +1356,446 @@ fn recv_type_at(state: &State, src: &str, at: usize) -> Option<String> {
             None
         }
     })
+}
+
+// ───────────────────────── P5 C10 脚本成员面 ─────────────────────────
+
+/// uri → res:// 相对路径（工程相对；code_lens 同款换算，供工程索引查询）。
+fn uri_res_path(state: &State, uri: &Uri) -> Option<String> {
+    let root = state.root.as_ref()?;
+    let path = url::Url::parse(uri.as_str()).ok()?.to_file_path().ok()?;
+    let rel = path.strip_prefix(root).ok()?;
+    Some(format!("res://{}", rel.to_string_lossy().replace('\\', "/")))
+}
+
+/// `.` 前接收者词（after_dot 已判定：word_start-1 是 '.'）。
+/// 无接收者词（`().` 等）返回 None。
+fn receiver_word(src: &str, word_start: usize) -> Option<&str> {
+    if word_start < 2 {
+        return None;
+    }
+    let b = src.as_bytes();
+    let end = word_start - 1; // '.' 位置
+    let mut j = end;
+    while j > 0 && (b[j - 1].is_ascii_alphanumeric() || b[j - 1] == b'_') {
+        j -= 1;
+    }
+    if j == end {
+        None
+    } else {
+        Some(&src[j..end])
+    }
+}
+
+/// 光标所在顶层类名（span 放宽：body 最后一个 stmt 到文件尾——不完整行尾
+/// `func `/`extends ` 待补时 at 超过解析器 span 终点）。override 面 enclosing
+/// 判定、extends 位自身排除共用。
+fn enclosing_class_name(file: &File, at: usize) -> Option<String> {
+    let last_idx = file.body.len().saturating_sub(1);
+    file.body.iter().enumerate().find_map(|(i, st)| match st {
+        Stmt::Class(c) if c.span.0 <= at && (at <= c.span.1 || i == last_idx) => {
+            Some(c.name.name.clone())
+        }
+        _ => None,
+    })
+}
+
+/// 脚本方法补全项：label 零参 `name()` / 带参 `name(…)`（引擎 display 约定，
+/// oracle self.gd/identifiers 夹具锁定）；detail = 签名；insert 同 C6.4 约定。
+fn script_func_item(
+    name: &str,
+    signature: Option<&str>,
+    kind: CompletionItemKind,
+    snippet_support: bool,
+) -> CompletionItem {
+    let label = match signature {
+        Some(sig) if sig.starts_with(name) && sig.ends_with("()") => format!("{name}()"),
+        Some(_) => format!("{name}(…)"),
+        None => name.to_string(),
+    };
+    let (insert_text, insert_text_format) = if snippet_support {
+        (Some(format!("{name}($1)")), Some(InsertTextFormat::SNIPPET))
+    } else {
+        (Some(name.to_string()), None)
+    };
+    CompletionItem {
+        label,
+        kind: Some(kind),
+        detail: signature.map(str::to_string),
+        insert_text,
+        insert_text_format,
+        ..CompletionItem::default()
+    }
+}
+
+/// P5 C10：当前脚本成员面（`self.`/`super.` 接收者与裸标识符位共用）。
+/// 三层合并（近层同名优先：seen 先到先得，层序即优先级）：
+/// ① 本脚本自声明（live AST——避开工程索引时差；`include_live=false` 即
+///    `super.` 位，只出父层）；
+/// ② 脚本父类链（`extends` Ident/字符串路径 → `script_chain_members`
+///    近→远收集，宿主链类枚举/内部类/信号全 kind）；
+/// ③ 引擎链（链尾引擎基类 → `class_members`，复用 C6.1/6.2 信号/成员模型）。
+/// 输出统一 SELF 桶（局部之后、常规成员之前）。
+fn script_self_members(state: &State, uri: &Uri, src: &str, include_live: bool) -> Vec<CompletionItem> {
+    use gdscript_project::DeclKind;
+    let mut out: Vec<CompletionItem> = Vec::new();
+    let mut seen: HashSet<String> = HashSet::new();
+
+    // 层①：本脚本自声明（live AST）。
+    if include_live {
+        let file = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+        for st in &file.body {
+            let item = match st {
+                Stmt::Signal(s) => {
+                    if !seen.insert(s.name.name.clone()) {
+                        continue;
+                    }
+                    let params = s.params.iter().map(|p| p.name.name.as_str()).collect::<Vec<_>>().join(", ");
+                    CompletionItem {
+                        label: s.name.name.clone(),
+                        kind: Some(CompletionItemKind::EVENT),
+                        detail: Some(format!("signal {}({params})", s.name.name)),
+                        ..CompletionItem::default()
+                    }
+                }
+                Stmt::Var(v) => {
+                    if !seen.insert(v.name.name.clone()) {
+                        continue;
+                    }
+                    let detail = v.ty.as_ref().map(|t| {
+                        format!("{}: {}", v.name.name, expr_to_text(src, t))
+                    });
+                    CompletionItem {
+                        label: v.name.name.clone(),
+                        kind: Some(CompletionItemKind::PROPERTY),
+                        detail,
+                        ..CompletionItem::default()
+                    }
+                }
+                Stmt::Const(c) => {
+                    if !seen.insert(c.name.name.clone()) {
+                        continue;
+                    }
+                    CompletionItem {
+                        label: c.name.name.clone(),
+                        kind: Some(CompletionItemKind::CONSTANT),
+                        detail: Some(format!("const {}", c.name.name)),
+                        ..CompletionItem::default()
+                    }
+                }
+                Stmt::Enum(e) if e.name.is_some() => {
+                    let n = e.name.as_ref().expect("checked");
+                    if !seen.insert(n.name.clone()) {
+                        continue;
+                    }
+                    CompletionItem {
+                        label: n.name.clone(),
+                        kind: Some(CompletionItemKind::ENUM),
+                        detail: Some(format!(
+                            "enum {} ({})",
+                            n.name,
+                            e.entries.iter().map(|(id, _)| id.name.as_str()).collect::<Vec<_>>().join(", ")
+                        )),
+                        ..CompletionItem::default()
+                    }
+                }
+                Stmt::Enum(e) if e.name.is_none() => {
+                    for (id, _) in &e.entries {
+                        if seen.insert(id.name.clone()) {
+                            out.push(CompletionItem {
+                                label: id.name.clone(),
+                                kind: Some(CompletionItemKind::CONSTANT),
+                                detail: Some(format!("const {} (匿名枚举条目)", id.name)),
+                                ..CompletionItem::default()
+                            });
+                        }
+                    }
+                    continue;
+                }
+                Stmt::Class(c) => {
+                    if !seen.insert(c.name.name.clone()) {
+                        continue;
+                    }
+                    CompletionItem {
+                        label: c.name.name.clone(),
+                        kind: Some(CompletionItemKind::CLASS),
+                        detail: Some("内部类".to_string()),
+                        ..CompletionItem::default()
+                    }
+                }
+                Stmt::Func(f) => {
+                    if !seen.insert(f.name.name.clone()) {
+                        continue;
+                    }
+                    let sig = f.signature_text(src).trim_end_matches(':').to_string();
+                    script_func_item(&f.name.name, Some(&sig), CompletionItemKind::METHOD, state.snippet_support)
+                }
+                _ => continue,
+            };
+            out.push(item);
+        }
+    }
+
+    // SELF 桶统一赋值（裸标识符面用；self./super. 位由 after_dot 收尾重写 MEMBER）。
+    // 须在层②③的提前 return 之前，否则无工程时层①项漏桶。
+    for i in &mut out {
+        if i.sort_text.is_none() {
+            let f = scored_fuzzy("", &i.label, state.config.freq_boost);
+            i.sort_text = Some(scoring::sort_text(scoring::bucket::SELF, f));
+        }
+    }
+    // 层②③：脚本父类链 + 引擎链（工程索引）。
+    let Some(proj) = &state.project else { return out };
+    let Some(rp) = uri_res_path(state, uri) else { return out };
+    if let Some(base) = proj.script_base_key_by_path(&rp) {
+        for m in proj.script_chain_members(&base) {
+            if !seen.insert(m.name.clone()) {
+                continue;
+            }
+            let item = match m.kind {
+                DeclKind::Method => script_func_item(
+                    &m.name,
+                    m.signature.as_deref(),
+                    CompletionItemKind::METHOD,
+                    state.snippet_support,
+                ),
+                DeclKind::Property => CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::PROPERTY),
+                    detail: Some(m.name.clone()),
+                    ..CompletionItem::default()
+                },
+                DeclKind::Const => CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::CONSTANT),
+                    detail: Some(format!("const {}", m.name)),
+                    ..CompletionItem::default()
+                },
+                DeclKind::Signal => CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::EVENT),
+                    detail: Some(format!("signal {}", m.name)),
+                    ..CompletionItem::default()
+                },
+                DeclKind::Enum => CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::ENUM),
+                    detail: Some(format!("enum {}", m.name)),
+                    ..CompletionItem::default()
+                },
+                DeclKind::Class => CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::CLASS),
+                    detail: Some("内部类（脚本父类）".to_string()),
+                    ..CompletionItem::default()
+                },
+            };
+            out.push(item);
+        }
+    }
+    // 层③：引擎链（链尾引擎基类 → 引擎成员模型）。
+    if let Some(eb) = proj.script_engine_base_by_path(&rp) {
+        out.extend(class_members(&state.engine, &eb, state.snippet_support));
+    }
+    for i in &mut out {
+        if i.sort_text.is_none() {
+            let f = scored_fuzzy("", &i.label, state.config.freq_boost);
+            i.sort_text = Some(scoring::sort_text(scoring::bucket::SELF, f));
+        }
+    }
+    out
+}
+
+/// P5：`func ➡` / `static func ➡` 位 override 签名面（脚本父链方法）。
+/// display/insert = 签名**源码原样**（含尾冒号与跨行 lambda 缩进——引擎
+/// override 行为，oracle override_function_* include 以多行原文锁定）。
+/// 光标在内部类内时走该类的 extends（override_function_abstract：顶层
+/// `class B extends A`，A 为同文件内部类）；`want_static` = static 位只出
+/// static 方法、普通位只出非 static（引擎 override_function_static 语义）。
+/// 引擎虚方法（`_get`/`_static_init` 等）归 P7 C6.3 is_virtual 模型化，此处不出。
+fn override_signatures(
+    state: &State,
+    uri: &Uri,
+    src: &str,
+    at: usize,
+    prefix: &str,
+    want_static: bool,
+) -> Vec<CompletionItem> {
+    let mut out = Vec::new();
+    let file = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+    // 光标所在内部类（最内层 span 覆盖光标的顶层 class）。光标在不完整
+    // 行尾（`func ` 待补）时 at 可能超过最后声明的 span（解析器 span 止于
+    // 最后消费 token）——对 body 最后一个 stmt 放宽到文件尾。
+    let enc_name = enclosing_class_name(&file, at);
+    let enclosing = file.body.iter().find_map(|st| match st {
+        Stmt::Class(c) if enc_name.as_deref() == Some(c.name.name.as_str()) => Some(c.clone()),
+        _ => None,
+    });
+    let mut push_method = |f: &FuncDecl| {
+        if f.static_ != want_static {
+            return;
+        }
+        let display = f.signature_text_raw(src);
+        out.push(CompletionItem {
+            label: display.clone(),
+            kind: Some(CompletionItemKind::METHOD),
+            detail: Some(if want_static { "override（static，脚本父类）" } else { "override（脚本父类）" }.to_string()),
+            insert_text: Some(display),
+            sort_text: Some(scoring::sort_text(
+                scoring::bucket::SNIPPET,
+                scoring::fuzzy(prefix, &f.name.name),
+            )),
+            ..CompletionItem::default()
+        });
+    };
+    if let Some(c) = enclosing {
+        // 内部类 override 面：extends 指向同文件内部类 → 收其方法。
+        if let Some(Expr::Ident(base)) = &c.extends {
+            for st in &file.body {
+                if let Stmt::Class(p) = st
+                    && p.name.name == base.name
+                {
+                    for m in &p.body {
+                        if let Stmt::Func(f) = m {
+                            push_method(f);
+                        }
+                    }
+                }
+            }
+        }
+        return out;
+    }
+    // 文件级：走工程脚本链。
+    let Some(proj) = &state.project else { return out };
+    let Some(rp) = uri_res_path(state, uri) else { return out };
+    let Some(base) = proj.script_base_key_by_path(&rp) else { return out };
+    for m in proj.script_chain_members(&base) {
+        if m.kind != gdscript_project::DeclKind::Method {
+            continue;
+        }
+        if m.is_static != want_static {
+            continue;
+        }
+        let Some(sig) = &m.signature else { continue };
+        let display = format!("{sig}:");
+        let name = sig.split('(').next().unwrap_or(sig).to_string();
+        out.push(CompletionItem {
+            label: display.clone(),
+            kind: Some(CompletionItemKind::METHOD),
+            detail: Some(if want_static { "override（static，脚本父类）" } else { "override（脚本父类）" }.to_string()),
+            insert_text: Some(display),
+            sort_text: Some(scoring::sort_text(scoring::bucket::SNIPPET, scoring::fuzzy(prefix, &name))),
+            ..CompletionItem::default()
+        });
+    }
+    out
+}
+
+/// P5：`extends ➡` 位类型面补充——当前文件兄弟内部类 + 脚本父链内部类
+/// （引擎 extends 面出类名但不含脚本内部类；extends_self 排除光标所在类
+/// 自身）。引擎类/class_name 脚本类由全局面既有项覆盖。
+fn extends_inner_class_items(
+    state: &State,
+    uri: &Uri,
+    src: &str,
+    at: usize,
+    prefix: &str,
+) -> Vec<CompletionItem> {
+    use gdscript_project::DeclKind;
+    let mut out = Vec::new();
+    let mut seen: HashSet<String> = HashSet::new();
+    let file = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+    // 光标所在类自身排除（extends_self）。span 判定与 override 面同款：
+    // 最后一个 stmt 放宽到文件尾（不完整行尾 at 超 span.1）。
+    let self_name = enclosing_class_name(&file, at);
+    // 当前文件兄弟内部类。
+    for st in &file.body {
+        if let Stmt::Class(c) = st
+            && seen.insert(c.name.name.clone())
+            && self_name.as_ref() != Some(&c.name.name)
+        {
+            out.push(CompletionItem {
+                label: c.name.name.clone(),
+                kind: Some(CompletionItemKind::CLASS),
+                detail: Some("内部类".to_string()),
+                sort_text: Some(scoring::sort_text(
+                    scoring::bucket::TYPE,
+                    scoring::fuzzy(prefix, &c.name.name),
+                )),
+                ..CompletionItem::default()
+            });
+        }
+    }
+    // 脚本父链内部类（extends_inherited_inner_class：父脚本 class_name 的内部类）。
+    if let Some(proj) = &state.project
+        && let Some(rp) = uri_res_path(state, uri)
+        && let Some(base) = proj.script_base_key_by_path(&rp)
+    {
+        for m in proj.script_chain_members(&base) {
+            if m.kind == DeclKind::Class
+                && seen.insert(m.name.clone())
+                && self_name.as_ref() != Some(&m.name)
+            {
+                out.push(CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::CLASS),
+                    detail: Some("内部类（脚本父类）".to_string()),
+                    sort_text: Some(scoring::sort_text(
+                        scoring::bucket::TYPE,
+                        scoring::fuzzy(prefix, &m.name),
+                    )),
+                    ..CompletionItem::default()
+                });
+            }
+        }
+    }
+    out
+}
+
+/// P5：光标所在函数作用域内可直接引用的名字——形参 + 函数体内 var/const
+/// 声明（含嵌套块）。LOCAL 桶（最高优先）。
+fn local_scope_names(file: &File, src: &str, at: usize) -> Vec<String> {
+    let mut out = Vec::new();
+    // span 判定放宽（最后一个 stmt 到文件尾——不完整行尾 at 超 span.1）。
+    let last_idx = file.body.len().saturating_sub(1);
+    let Some(f) = file.body.iter().enumerate().find_map(|(i, st)| match st {
+        Stmt::Func(f) if f.span.0 <= at && (at <= f.span.1 || (i == last_idx && at <= src.len())) => Some(f),
+        _ => None,
+    }) else {
+        return out;
+    };
+    for p in &f.params {
+        if !p.name.name.is_empty() {
+            out.push(p.name.name.clone());
+        }
+    }
+    fn collect(b: &gdscript_syntax::ast::Block, out: &mut Vec<String>) {
+        for st in &b.stmts {
+            match st {
+                Stmt::Var(v) => out.push(v.name.name.clone()),
+                Stmt::Const(c) => out.push(c.name.name.clone()),
+                Stmt::If { branches, else_block, .. } => {
+                    for (_, blk) in branches {
+                        collect(blk, out);
+                    }
+                    if let Some(e) = else_block {
+                        collect(e, out);
+                    }
+                }
+                Stmt::For { body, .. } => collect(body, out),
+                Stmt::While { body, .. } => collect(body, out),
+                Stmt::Match { arms, .. } => {
+                    for a in arms {
+                        collect(&a.body, out);
+                    }
+                }
+                _ => {}
+            }
+        }
+    }
+    let _ = src;
+    collect(&f.body, &mut out);
+    out
 }
 
 /// `Class.Enum.<|>` / `Enum.<|>`：after_dot 的接收者既不是变量也不是类名时,
@@ -1814,58 +2304,8 @@ fn class_symbol(src: &str, c: &ClassDecl) -> DocumentSymbol {
     }
 }
 
-/// AST/token span → &str 的唯一安全通道：
-/// 反转（编辑器缓冲中间态可能触发）→ 空串；越界 → 钳制；并对齐 UTF-8 字符边界。
-/// 任何 span 派生的 `&src[a..b]` 都必须走这里，禁止裸切片。
-fn span_slice(src: &str, a: usize, b: usize) -> &str {
-    if a >= b {
-        return "";
-    }
-    let a = a.min(src.len());
-    let b = b.min(src.len());
-    if a >= b {
-        return "";
-    }
-    let mut a = a;
-    while a > 0 && !src.is_char_boundary(a) {
-        a -= 1;
-    }
-    let mut b = b;
-    while b < src.len() && !src.is_char_boundary(b) {
-        b += 1;
-    }
-    if a >= b {
-        return "";
-    }
-    &src[a..b]
-}
-
-/// 用源文件切片把类型表达式粗渲染成字符串（hover/symbol detail 用，不求完美）。
-fn expr_to_text(src: &str, e: &gdscript_syntax::ast::Expr) -> String {
-    let (a, b) = expr_span(e);
-    span_slice(src, a, b).to_string()
-}
-
-fn expr_span(e: &gdscript_syntax::ast::Expr) -> (usize, usize) {
-    use gdscript_syntax::ast::Expr::*;
-    match e {
-        Literal(_) => (0, 0),
-        Ident(i) => i.span,
-        Binary(_, _, _, sp) => *sp,
-        Unary(_, _, sp) => *sp,
-        Call { span, .. } => *span,
-        Index { span, .. } => *span,
-        Attribute { span, .. } => *span,
-        Lambda(_, sp) => *sp,
-        Array(_, sp) => *sp,
-        Dict(_, sp) => *sp,
-        Await(_, sp) => *sp,
-        NodePath { span, .. } => *span,
-        Generic(_, _, sp) => *sp,
-        Ternary(_, _, _, sp) => *sp,
-    }
-}
-
+// AST/token span → &str 的唯一安全通道：`span_slice`（gdscript-syntax 导出，
+// 反转/越界钳制 + UTF-8 字符边界对齐）；表达式粗渲染 `expr_to_text` 同源。
 // ───────────────────────── R5.3 signatureHelp ─────────────────────────
 
 fn signature_help(state: &State, p: &SignatureHelpParams) -> Option<SignatureHelp> {
@@ -3094,7 +3534,7 @@ mod hover_tests {
         }
     }
 
-    fn state_with(state: &State, src: &str) -> State {
+    pub(crate) fn state_with(state: &State, src: &str) -> State {
         // Uri 作 key 的 mutable_key_type 为 lsp-types 内部表示误报(仅插入不改 key)。
         #[allow(clippy::mutable_key_type)]
         let mut docs = HashMap::new();
@@ -4103,5 +4543,145 @@ mod span_sanity_tests {
         assert_eq!(span_slice(src, 999, 9999), "");
         let uni = "var 位置 = Vector2.ZERO"; // 含多字节
         assert_eq!(span_slice(uni, 4, 10), "位置", "切片须对齐字符边界");
+    }
+}
+// ───────────────────────── P5 C10 脚本成员面单测 ─────────────────────────
+
+#[cfg(test)]
+mod p5_script_member_tests {
+    use super::*;
+    use crate::hover_tests::{state_with, test_state};
+
+    fn ask(state: &State, line: u32, ch: u32) -> Vec<CompletionItem> {
+        let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+        let p: CompletionParams = serde_json::from_value(serde_json::json!({
+            "textDocument": {"uri": uri},
+            "position": {"line": line, "character": ch}
+        }))
+        .unwrap();
+        let CompletionResponse::Array(items) = completion(state, &p) else {
+            panic!("应返回数组");
+        };
+        items
+    }
+
+    /// 层①（本脚本自声明）：self. 位出信号/属性/方法，kind 与 display 约定对齐。
+    #[test]
+    fn p5_self_layer1_kinds_and_display() {
+        let base = test_state();
+        let src = "extends Node
+signal sig_a(a)
+var prop_a
+func func_a(t: int) -> void:
+	pass
+func func_b():
+	pass
+func _init():
+	self.
+";
+        let state = state_with(&base, src);
+        let items = ask(&state, 8, 6); // "	self." 词尾
+        let sig = items.iter().find(|i| i.label == "sig_a").unwrap_or_else(|| panic!("self. 面应含信号 sig_a"));
+        assert_eq!(sig.kind, Some(CompletionItemKind::EVENT));
+        let prop = items.iter().find(|i| i.label == "prop_a").unwrap_or_else(|| panic!("self. 面应含属性 prop_a"));
+        assert_eq!(prop.kind, Some(CompletionItemKind::PROPERTY));
+        let fa = items.iter().find(|i| i.label == "func_a(…)").unwrap_or_else(|| panic!("带参方法 display 应为 name(…): {:?}", items.iter().filter(|i| i.label.starts_with("func")).map(|i| &i.label).collect::<Vec<_>>()));
+        assert_eq!(fa.kind, Some(CompletionItemKind::METHOD));
+        assert!(items.iter().any(|i| i.label == "func_b()"), "零参方法 display 应为 name()");
+        // self. 位统一 MEMBER 桶（after_dot 分支收尾重写；SELF 桶只用于裸标识符面）。
+        assert!(fa.sort_text.as_deref().is_some_and(|s| s.starts_with("10")), "self. 位应入 MEMBER 桶: {:?}", fa.sort_text);
+    }
+
+    /// 层①+形参/局部：裸标识符位出本类成员 + 光标函数形参与局部声明。
+    #[test]
+    fn p5_bare_face_locals_and_params() {
+        let base = test_state();
+        let src = "var member_v
+func _ready(a_param: int):
+	var local_v := 1
+	local_v
+";
+        let state = state_with(&base, src);
+        let items = ask(&state, 3, 3); // "	local_v" 词尾
+        assert!(items.iter().any(|i| i.label == "a_param"), "裸面应含形参");
+        assert!(items.iter().any(|i| i.label == "local_v"), "裸面应含局部声明");
+        let mv = items.iter().find(|i| i.label == "member_v").unwrap();
+        assert!(mv.sort_text.as_deref().is_some_and(|s| s.starts_with("08")), "裸面脚本成员应入 SELF 桶(0x08): {:?}", mv.sort_text);
+    }
+
+    /// override 面：内部类 extends 链（光标在类尾不完整 func 行,span 放宽），
+    /// static 位只出 static 方法；签名 label = 源码形态含尾冒号。
+    #[test]
+    fn p5_override_inner_class_static_split() {
+        let base = test_state();
+        let src = "class Base:
+	func m_a() -> void:
+		pass
+	static func m_s(p: int):
+		pass
+
+class Derived extends Base:
+	func 
+";
+        let state = state_with(&base, src);
+        let items = ask(&state, 7, 7); // "	func " 尾
+        let ma = items.iter().find(|i| i.label == "m_a() -> void:").unwrap_or_else(|| panic!("override 面应含 m_a() -> void:（span 放宽）: {:?}", items.iter().filter(|i| i.label.starts_with('m')).map(|i| &i.label).collect::<Vec<_>>()));
+        assert_eq!(ma.insert_text.as_deref(), Some("m_a() -> void:"), "override insert = 签名原样");
+        assert!(
+            !items.iter().any(|i| i.label == "m_s(p: int):"),
+            "普通 func 位不得出 static 方法"
+        );
+        // static 位
+        let src_s = "class Base:
+	func m_a() -> void:
+		pass
+	static func m_s(p: int):
+		pass
+
+class Derived extends Base:
+	static func 
+";
+        let state_s = state_with(&base, src_s);
+        let items_s = ask(&state_s, 7, 14);
+        assert!(items_s.iter().any(|i| i.label == "m_s(p: int):"), "static func 位应出 static 方法");
+        assert!(!items_s.iter().any(|i| i.label == "m_a() -> void:"), "static 位不得出非 static 方法");
+    }
+
+    /// extends 位：出兄弟内部类、排除光标所在类自身（extends_self）。
+    #[test]
+    fn p5_extends_inner_class_self_exclude() {
+        let base = test_state();
+        let src = "class A:
+	pass
+
+class B extends 
+";
+        let state = state_with(&base, src);
+        let items = ask(&state, 3, 16); // 行3 "class B extends " 尾
+        assert!(items.iter().any(|i| i.label == "A" && i.kind == Some(CompletionItemKind::CLASS)), "extends 位应出兄弟内部类 A");
+        assert!(!items.iter().any(|i| i.label == "B"), "extends 位不得出自身 B");
+    }
+
+    /// 跨行 lambda 默认值签名**原样**保留（override 面 display 引擎行为）。
+    #[test]
+    fn p5_signature_raw_multiline_lambda() {
+        let base = test_state();
+        let src = "class Base:
+	func cb(call := func():
+		var x = 10):
+		pass
+
+class Derived extends Base:
+	func 
+";
+        let state = state_with(&base, src);
+        let items = ask(&state, 6, 7);
+        let want = "cb(call := func():
+		var x = 10):";
+        assert!(
+            items.iter().any(|i| i.label == want),
+            "override display 应保留多行 lambda 原文: {:?}",
+            items.iter().filter(|i| i.label.starts_with("cb")).map(|i| &i.label).collect::<Vec<_>>()
+        );
     }
 }

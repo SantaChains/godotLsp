@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-17 19:42:17",
- "server": "D:\\LocalSend\\Files\\pro\\godotlsp\\target\\debug\\godotlsp.exe mtime=10-17 19:36",
+ "generated_at": "2026-10-17 21:30:22",
+ "server": "target-bench/debug/godotlsp.exe mtime=10-17 21:29",
  "corpus": "corpus\\godot-engine-tests\\completion",
  "summary": {
-  "pass": 58,
-  "fail": 82,
+  "pass": 75,
+  "fail": 65,
   "error": 0,
   "total": 140
  },
@@ -31,7 +31,7 @@
   },
   "argument_options/play_inferred.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 2136,
    "missing": [
     {
      "display": "\"bounce\""
@@ -55,7 +55,7 @@
   },
   "argument_options/play_typed.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 2136,
    "missing": [
     {
      "display": "\"bounce\""
@@ -79,7 +79,7 @@
   },
   "argument_options/play_untyped.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 2136,
    "missing": [
     {
      "display": "\"bounce\""
@@ -103,7 +103,7 @@
   },
   "argument_options/string_literals/add_node_path_tween.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 2138,
    "missing": [
     {
      "insert_text": "^\"property_of_a\""
@@ -180,7 +180,7 @@
   },
   "argument_options/string_literals/dont_add_node_path_tween.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 2138,
    "missing": [
     {
      "insert_text": "\"property_of_a\""
@@ -264,7 +264,7 @@
   },
   "assignment_options/enum_identifier.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 2645,
    "missing": [
     {
      "display": "Control.SIZE_EXPAND"
@@ -303,7 +303,7 @@
   },
   "assignment_options/enum_no_identifier.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 2645,
    "missing": [
     {
      "display": "Control.SIZE_EXPAND"
@@ -428,58 +428,9 @@
    ]
   },
   "common/identifiers_in_call.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "add_child(…)"
-    },
-    {
-     "display": "owner"
-    },
-    {
-     "display": "child_entered_tree"
-    },
-    {
-     "display": "property_of_a"
-    },
-    {
-     "display": "func_of_a()"
-    },
-    {
-     "display": "signal_of_a"
-    },
-    {
-     "display": "test_signal_1"
-    },
-    {
-     "display": "test_signal_2"
-    },
-    {
-     "display": "test_var_1"
-    },
-    {
-     "display": "test_var_2"
-    },
-    {
-     "display": "test_func_1(…)"
-    },
-    {
-     "display": "test_func_2(…)"
-    },
-    {
-     "display": "test_parameter_1"
-    },
-    {
-     "display": "test_parameter_2"
-    },
-    {
-     "display": "local_test_var_1"
-    },
-    {
-     "display": "local_test_var_2"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2154,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -497,58 +448,9 @@
    ]
   },
   "common/identifiers_in_function_body.gd": {
-   "status": "fail",
-   "n_items": 1838,
-   "missing": [
-    {
-     "display": "add_child(…)"
-    },
-    {
-     "display": "owner"
-    },
-    {
-     "display": "child_entered_tree"
-    },
-    {
-     "display": "property_of_a"
-    },
-    {
-     "display": "func_of_a()"
-    },
-    {
-     "display": "signal_of_a"
-    },
-    {
-     "display": "test_signal_1"
-    },
-    {
-     "display": "test_signal_2"
-    },
-    {
-     "display": "test_var_1"
-    },
-    {
-     "display": "test_var_2"
-    },
-    {
-     "display": "test_func_1(…)"
-    },
-    {
-     "display": "test_func_2(…)"
-    },
-    {
-     "display": "test_parameter_1"
-    },
-    {
-     "display": "test_parameter_2"
-    },
-    {
-     "display": "local_test_var_1"
-    },
-    {
-     "display": "local_test_var_2"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2158,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -566,58 +468,9 @@
    ]
   },
   "common/identifiers_in_unclosed_call.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "add_child(…)"
-    },
-    {
-     "display": "owner"
-    },
-    {
-     "display": "child_entered_tree"
-    },
-    {
-     "display": "property_of_a"
-    },
-    {
-     "display": "func_of_a()"
-    },
-    {
-     "display": "signal_of_a"
-    },
-    {
-     "display": "test_signal_1"
-    },
-    {
-     "display": "test_signal_2"
-    },
-    {
-     "display": "test_var_1"
-    },
-    {
-     "display": "test_var_2"
-    },
-    {
-     "display": "test_func_1(…)"
-    },
-    {
-     "display": "test_func_2(…)"
-    },
-    {
-     "display": "test_parameter_1"
-    },
-    {
-     "display": "test_parameter_2"
-    },
-    {
-     "display": "local_test_var_1"
-    },
-    {
-     "display": "local_test_var_2"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2154,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -646,26 +499,44 @@
    "labels_head": []
   },
   "common/invalid_super_call_1.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "func_of_a()"
-    }
-   ],
+   "status": "pass",
+   "n_items": 309,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "InnerA",
+    "EnumOfA",
+    "signal_of_a",
+    "property_of_a",
+    "func_of_a()",
+    "_func_of_a_underscore()",
+    "func_of_a_static()",
+    "func_of_a_args(…)",
+    "func_of_a_callable(…)",
+    "_process(…)",
+    "_physics_process(…)",
+    "_enter_tree(…)"
+   ]
   },
   "common/invalid_super_call_2.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "func_of_a()"
-    }
-   ],
+   "status": "pass",
+   "n_items": 309,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "InnerA",
+    "EnumOfA",
+    "signal_of_a",
+    "property_of_a",
+    "func_of_a()",
+    "_func_of_a_underscore()",
+    "func_of_a_static()",
+    "func_of_a_args(…)",
+    "func_of_a_callable(…)",
+    "_process(…)",
+    "_physics_process(…)",
+    "_enter_tree(…)"
+   ]
   },
   "common/no_completion_in_string.gd": {
    "status": "pass",
@@ -743,14 +614,9 @@
    "labels_head": []
   },
   "common/override_function_abstract.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "test(x: int) -> void:",
-     "insert_text": "test(x: int) -> void:"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1837,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -769,7 +635,7 @@
   },
   "common/override_function_full_name.gd": {
    "status": "fail",
-   "n_items": 1836,
+   "n_items": 1897,
    "missing": [
     {
      "display": "_get(property: StringName) -> Variant:"
@@ -792,19 +658,9 @@
    ]
   },
   "common/override_function_no_underscore.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "func_of_a():"
-    },
-    {
-     "display": "func_of_a_args(a: int):"
-    },
-    {
-     "display": "func_of_a_callable(call := func():\n\tvar x_of_a = 10):"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2148,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -823,13 +679,10 @@
   },
   "common/override_function_static.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 2145,
    "missing": [
     {
      "display": "_static_init() -> void:"
-    },
-    {
-     "display": "func_of_a_static():"
     }
    ],
    "illegal": [],
@@ -849,13 +702,9 @@
    ]
   },
   "common/override_function_underscore.gd": {
-   "status": "fail",
-   "n_items": 1835,
-   "missing": [
-    {
-     "display": "_func_of_a_underscore():"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2149,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -873,48 +722,24 @@
    ]
   },
   "common/self.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "add_child(…)"
-    },
-    {
-     "display": "owner"
-    },
-    {
-     "display": "child_entered_tree"
-    },
-    {
-     "display": "property_of_a"
-    },
-    {
-     "display": "func_of_a()"
-    },
-    {
-     "display": "signal_of_a"
-    },
-    {
-     "display": "test_signal_1"
-    },
-    {
-     "display": "test_signal_2"
-    },
-    {
-     "display": "test_var_1"
-    },
-    {
-     "display": "test_var_2"
-    },
-    {
-     "display": "test_func_1(…)"
-    },
-    {
-     "display": "test_func_2(…)"
-    }
-   ],
+   "status": "pass",
+   "n_items": 316,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "test_signal_1",
+    "test_signal_2",
+    "test_var_1",
+    "test_var_2",
+    "test_func_1(…)",
+    "test_func_2(…)",
+    "_init()",
+    "InnerA",
+    "EnumOfA",
+    "signal_of_a",
+    "property_of_a",
+    "func_of_a()"
+   ]
   },
   "enum_values_in_dictionary/lua_key_2.gd": {
    "status": "pass",
@@ -1117,13 +942,9 @@
    ]
   },
   "extends/extends_inherited_inner_class.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "InnerClassA"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2114,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -1141,16 +962,9 @@
    ]
   },
   "extends/extends_self.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "InnerClassA"
-    },
-    {
-     "display": "InnerClassB"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2116,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -1169,7 +983,7 @@
   },
   "filter/organized_export.gd": {
    "status": "pass",
-   "n_items": 1838,
+   "n_items": 2508,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -1938,7 +1752,7 @@
   },
   "global_enum/global_enum_identifier.gd": {
    "status": "pass",
-   "n_items": 1834,
+   "n_items": 1896,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -1978,7 +1792,7 @@
   },
   "global_enum/global_enum_in_type_hint.gd": {
    "status": "pass",
-   "n_items": 1834,
+   "n_items": 2645,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -2031,16 +1845,9 @@
    ]
   },
   "index/array_type.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "outer"
-    },
-    {
-     "display": "inner"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2138,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -2058,16 +1865,9 @@
    ]
   },
   "index/array_value.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "outer"
-    },
-    {
-     "display": "inner"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2138,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -2099,16 +1899,9 @@
    "labels_head": []
   },
   "index/dictionary_type.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "outer"
-    },
-    {
-     "display": "inner"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2138,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -2126,16 +1919,9 @@
    ]
   },
   "index/dictionary_value.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "outer"
-    },
-    {
-     "display": "inner"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2138,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -2174,16 +1960,9 @@
    "labels_head": []
   },
   "index/untyped_local.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "outer"
-    },
-    {
-     "display": "inner"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2138,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -2201,16 +1980,9 @@
    ]
   },
   "index/untyped_property.gd": {
-   "status": "fail",
-   "n_items": 1834,
-   "missing": [
-    {
-     "display": "outer"
-    },
-    {
-     "display": "inner"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2138,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -2229,7 +2001,7 @@
   },
   "no_parenthesis_when_callable_is_expected/builtin_complete_braces.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 1837,
    "missing": [
     {
      "display": "hello_world",
@@ -2254,7 +2026,7 @@
   },
   "no_parenthesis_when_callable_is_expected/builtin_incomplete_braces.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 1836,
    "missing": [
     {
      "display": "hello_world",
@@ -2279,7 +2051,7 @@
   },
   "no_parenthesis_when_callable_is_expected/lambda_body.gd": {
    "status": "pass",
-   "n_items": 1834,
+   "n_items": 1836,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -2299,7 +2071,7 @@
   },
   "no_parenthesis_when_callable_is_expected/lambda_parameter.gd": {
    "status": "pass",
-   "n_items": 1834,
+   "n_items": 1836,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -2319,7 +2091,7 @@
   },
   "no_parenthesis_when_callable_is_expected/local_method_callable_arg_0.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 1837,
    "missing": [
     {
      "display": "hello_world",
@@ -2344,7 +2116,7 @@
   },
   "no_parenthesis_when_callable_is_expected/local_method_callable_arg_1.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 1837,
    "missing": [
     {
      "display": "hello_world",
@@ -2369,7 +2141,7 @@
   },
   "no_parenthesis_when_callable_is_expected/local_method_variant_arg_0.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 1837,
    "missing": [
     {
      "display": "hello_world()",
@@ -2394,7 +2166,7 @@
   },
   "no_parenthesis_when_callable_is_expected/native.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 2136,
    "missing": [
     {
      "display": "hello_world",
@@ -2426,17 +2198,8 @@
   },
   "types/hints/index_0.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 1838,
    "missing": [
-    {
-     "display": "A"
-    },
-    {
-     "display": "LocalInnerClass"
-    },
-    {
-     "display": "LocalInnerEnum"
-    },
     {
      "display": "ConnectFlags"
     }
@@ -2459,22 +2222,13 @@
   },
   "types/hints/index_0_inner_class.gd": {
    "status": "fail",
-   "n_items": 1834,
+   "n_items": 1837,
    "missing": [
-    {
-     "display": "A"
-    },
     {
      "display": "AInner"
     },
     {
-     "display": "LocalInnerClass"
-    },
-    {
      "display": "LocalInnerInnerClass"
-    },
-    {
-     "display": "LocalInnerEnum"
     },
     {
      "display": "LocalInnerInnerEnum"

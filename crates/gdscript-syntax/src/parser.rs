@@ -685,6 +685,8 @@ impl<'a> Parser<'a> {
         let mut params = Vec::new();
         while !self.at(TokenKind::RParen) && !self.at(TokenKind::Eof) {
             let before = self.pos;
+            // 参数自身区间起点（含 `...` 变长前缀）。
+            let start = self.peek().start;
             // 变长参数：`...args`（R1 容错消费前缀，仅取名字）。
             if self.at(TokenKind::Dot)
                 && self.peek_at(1).kind == TokenKind::Dot
@@ -711,12 +713,16 @@ impl<'a> Parser<'a> {
                     default = Some(self.parse_expr());
                 }
             }
-            let span = self.span_of(self.peek());
+            // span 覆盖参数自身（name 起、最后消费 token 止）。旧实现取
+            // span_of(self.peek()) 指向下一 token（`,`/`)`），并非参数区间；
+            // 无消费者依赖旧语义（高亮/类型推断均走 name.span），P5 签名渲染
+            // 首次消费真实区间。
+            let end = self.last_end.max(start);
             params.push(Param {
                 name,
                 ty,
                 default,
-                span,
+                span: (start, end),
             });
             if !self.bump_if(TokenKind::Comma) {
                 break;

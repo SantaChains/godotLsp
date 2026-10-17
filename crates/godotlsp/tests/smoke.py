@@ -125,13 +125,16 @@ def change_doc(ver, text):
         "textDocument":{"uri":"file:///d:/test/main.gd","version":ver},
         "contentChanges":[{"text":text}]}})
 
-# 词条面：默认关 → 显式开后局部变量 hp 出现。
-change_doc(3, "extends Node2D\nfunc _ready():\n\tvar hp := 10\n\thp\n")
+# 词条面：P5 局部作用域面在 fileWords=false 时也出局部变量 hp（引擎行为：
+# 形参/函数体声明与词频面正交）；fileWords 开启后追加非局部文档词。
+change_doc(3, "extends Node2D\nfunc _ready():\n\tvar hp := 10\n\thp\n\tprint(hp_helper)\n\tprint(hp_helper)\n")
 labels = ask_comp(6, 3, 3)  # 行4 "\thp" 词尾
-assert "hp" not in labels, "默认 fileWords=false 不应出词条: " + str(labels[:20])
+assert "hp" in labels, "P5 局部作用域面: 局部变量应始终出: " + str(labels[:20])
 push_cfg({"completion":{"fileWords":True}})
 labels = ask_comp(7, 3, 3)
 assert "hp" in labels, "fileWords=true 后局部变量应出"
+# C3 freq 面只收出现 ≥2 次的词（既有设计）。
+assert "hp_helper" in labels, "fileWords=true 后文档词应出: " + str([l for l in labels if l.startswith("hp")][:5])
 
 # snippet 面：关掉后 func _r 不出虚方法模板项；开启后恢复（snippetSupport 已协商）。
 change_doc(4, "extends Node2D\nfunc _r\n")

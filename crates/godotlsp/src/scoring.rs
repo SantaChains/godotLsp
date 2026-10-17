@@ -13,6 +13,9 @@ pub mod bucket {
     /// C3 预留：本文件标识符 / 局部变量。
     #[allow(dead_code)]
     pub const LOCAL: u8 = 0x00;
+    /// P5 C10：当前脚本三层成员面（self./super./裸标识符位的脚本成员）——
+    /// 局部之后、常规成员之前（引擎序：本类成员先于继承面）。
+    pub const SELF: u8 = 0x08;
     /// 成员面（`recv.` 之后的方法/属性/常量/枚举）与注解面（`@` 独立面）。
     pub const MEMBER: u8 = 0x10;
     /// 全局函数：内建函数 + 工具函数 + 单例。

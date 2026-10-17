@@ -15,7 +15,7 @@ use std::collections::HashMap;
 use std::path::{Path, PathBuf};
 
 use gdscript_engine::EngineApi;
-use gdscript_syntax::ast::{Expr, File, Stmt};
+use gdscript_syntax::ast::{Expr, File, Literal, Stmt};
 use gdscript_syntax::semantic::{ProjectContext, ScriptMember};
 use gdscript_syntax::parse;
 
@@ -29,6 +29,34 @@ pub struct Script {
     /// res:// 相对路径（如 "res://player.gd"）。
     pub path: String,
     pub ast: File,
+    /// 源文本（与 ast 同一解析前处理：U+27A1 已剥）。方法签名渲染用（P5）。
+    pub src: String,
+}
+
+/// 脚本链成员声明（P5 C10：全量成员列表，供补全面三层合并；与按名查询的
+/// `ScriptMember` 不同，这是列表形态——含签名与 static 位，且区分枚举名与
+/// 内部类名（`DeclKind`，列表 API 专用，不与语义层 `ScriptMember` 耦合）。
+#[derive(Clone, Debug, PartialEq)]
+pub struct ScriptMemberDecl {
+    pub name: String,
+    pub kind: DeclKind,
+    pub is_static: bool,
+    /// 方法签名（`name(p: T := def) -> R:`，零参 `name()`；**源码原样**，
+    /// 跨行 lambda 默认值保留换行/缩进——override 面 display 引擎行为）。
+    /// 非 Method 为 None。
+    pub signature: Option<String>,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum DeclKind {
+    Method,
+    Property,
+    Const,
+    Signal,
+    /// 命名枚举名（常量命名空间，类型名口径）。
+    Enum,
+    /// 内部类名（类型名口径，不递归展开成员）。
+    Class,
 }
 
 /// 项目级符号图。
@@ -74,7 +102,7 @@ impl Project {
             if let Some(cn) = &ast.class_name {
                 class_names.insert(cn.name.clone(), scripts.len());
             }
-            scripts.push(Script { path: rel, ast });
+            scripts.push(Script { path: rel, ast, src });
         });
 
         // 命名枚举全局索引（枚举名在 class_name 作用域下近似唯一，平铺即可）。
@@ -279,6 +307,106 @@ impl Project {
             return self.walk_member_type(&base, name, depth + 1);
         }
         None
+    }
+
+    /// 沿 extends 链（近→远）收集全部成员声明（P5 C10）。近层同名覆盖远层
+    /// （先到先得去重）。命中引擎基类（非项目脚本）止步——引擎成员由调用方
+    /// 走引擎模型合并。depth≤16 环防御。
+    pub fn script_chain_members(&self, key: &str) -> Vec<ScriptMemberDecl> {
+        let mut out: Vec<ScriptMemberDecl> = Vec::new();
+        let mut seen: std::collections::HashSet<String> = std::collections::HashSet::new();
+        let mut cur = Some(key.to_string());
+        let mut depth = 0u8;
+        while let Some(k) = cur {
+            if depth > 16 {
+                break; // 继承环防御
+            }
+            depth += 1;
+            let Some(script) = self.script_by_key(&k) else {
+                break; // 引擎基类或未知键 → 止步
+            };
+            for st in &script.ast.body {
+                let (name, kind, is_static, signature) = match st {
+                    Stmt::Func(f) => (
+                        f.name.name.clone(),
+                        DeclKind::Method,
+                        f.static_,
+                        // 签名去尾冒号（signature_text_raw 产 `name(...) -> R:`，
+                        // display 层按需拼回；**源码原样**保跨行 lambda）。
+                        Some(f.signature_text_raw(&script.src).trim_end_matches(':').to_string()),
+                    ),
+                    Stmt::Var(v) => (v.name.name.clone(), DeclKind::Property, false, None),
+                    Stmt::Const(c) => (c.name.name.clone(), DeclKind::Const, false, None),
+                    Stmt::Signal(s) => (s.name.name.clone(), DeclKind::Signal, false, None),
+                    // 命名枚举 = 常量命名空间（类型名暴露口径，与 walk_member_kind 一致）。
+                    Stmt::Enum(e) if e.name.is_some() => (
+                        e.name.as_ref().expect("checked").name.clone(),
+                        DeclKind::Enum,
+                        false,
+                        None,
+                    ),
+                    // 匿名枚举条目 = 文件级 int 常量。
+                    Stmt::Enum(e) if e.name.is_none() => {
+                        for (id, _) in &e.entries {
+                            if seen.insert(id.name.clone()) {
+                                out.push(ScriptMemberDecl {
+                                    name: id.name.clone(),
+                                    kind: DeclKind::Const,
+                                    is_static: false,
+                                    signature: None,
+                                });
+                            }
+                        }
+                        continue;
+                    }
+                    // 内部类名 = 类型名（不递归展开成员）。
+                    Stmt::Class(c) => (c.name.name.clone(), DeclKind::Class, false, None),
+                    _ => continue,
+                };
+                if seen.insert(name.clone()) {
+                    out.push(ScriptMemberDecl { name, kind, is_static, signature });
+                }
+            }
+            cur = self.script_base_key(&k);
+        }
+        out
+    }
+
+    /// 脚本直接基类键：项目脚本 → class_name/script:<path> 键；引擎基类 →
+    /// 引擎类名（"Node" 等，调用方以 script_by_key 判别去向）。P5：支持
+    /// 字符串路径 extends（`extends "res://x.gd"`）——此前 `extends_root`
+    /// 只认 Ident/Generic，self.gd 的父链因此断链。
+    fn script_base_key(&self, key: &str) -> Option<String> {
+        let script = self.script_by_key(key)?;
+        if let Some(Expr::Literal(Literal::Str(s))) = &script.ast.extends {
+            return self.resolve_preload(s).map(Self::script_key);
+        }
+        extends_root(&script.ast.extends)
+    }
+
+    /// res:// 路径 → 该脚本直接基类的项目脚本键（P5 layer2 起点）。
+    /// 未索引/无基类 → None。
+    pub fn script_base_key_by_path(&self, res_path: &str) -> Option<String> {
+        let script = self.resolve_preload(res_path)?;
+        self.script_base_key(&Self::script_key(script))
+    }
+
+    /// res:// 路径 → 该脚本 extends 链尾的引擎基类名（P5 layer3 起点）。
+    /// 链上全是项目脚本且无引擎根 / 环 / 超深 → None。
+    pub fn script_engine_base_by_path(&self, res_path: &str) -> Option<String> {
+        let mut cur = self.resolve_preload(res_path)?;
+        let mut depth = 0u8;
+        loop {
+            if depth > 16 {
+                return None; // 继承环防御
+            }
+            depth += 1;
+            let base = self.script_base_key(&Self::script_key(cur))?;
+            match self.script_by_key(&base) {
+                Some(s) => cur = s,           // 项目脚本 → 续沿
+                None => return Some(base),    // 引擎类名 → 链尾
+            }
+        }
     }
 }
 
@@ -518,5 +646,98 @@ mod tests {
         assert!(parse_input_actions(pg).is_empty());
         // 文件缺失同样返回空（不 panic）。
         assert!(parse_input_actions(std::env::temp_dir().join("godotlsp_nope.godot")).is_empty());
+    }
+
+    /// 写多脚本工程并打开（P5 链遍历测试用）。
+    fn write_scripts(dir: &std::path::Path, scripts: &[(&str, &str)]) -> Project {
+        let _ = std::fs::remove_dir_all(dir);
+        std::fs::create_dir_all(dir).unwrap();
+        std::fs::write(dir.join("project.godot"), "config_version=5\n").unwrap();
+        for (rel, src) in scripts {
+            let p = dir.join(rel);
+            std::fs::create_dir_all(p.parent().unwrap()).unwrap();
+            std::fs::write(p, src).unwrap();
+        }
+        Project::open(dir, None).unwrap()
+    }
+
+    #[test]
+    fn script_chain_members_string_extends_and_precedence() {
+        let dir = std::env::temp_dir().join("godotlsp_chain_members_test");
+        let proj = write_scripts(
+            &dir,
+            &[
+                // 祖先：含各 kind + 与孙层同名成员（近层必须覆盖）。
+                ("base.gd", "extends Node\nsignal sig_a\nvar prop_a\nfunc func_a():\n\tpass\nvar shadowed\n"),
+                // 中间：字符串路径 extends（self.gd 夹具形态）+ static 方法签名。
+                ("mid.gd", "extends \"res://base.gd\"\nvar mid_prop\nstatic func func_s(p: int) -> void:\n\tpass\nvar shadowed\n"),
+                // 孙层：class_name 注册（按名入口）+ 带默认值参数签名。
+                ("leaf.gd", "extends \"res://mid.gd\"\nclass_name Leaf\nfunc func_l(x := 1, y: int = 2):\n\tpass\n"),
+            ],
+        );
+        // 按名入口：Leaf → base → mid → base 链。
+        let members = proj.script_chain_members("Leaf");
+        let names: Vec<&str> = members.iter().map(|m| m.name.as_str()).collect();
+        // 近层覆盖：shadowed 只出现一次且属 mid（近层）——members 近→远序,mid 在 base 前。
+        assert_eq!(names.iter().filter(|n| **n == "shadowed").count(), 1);
+        assert!(names.iter().position(|n| *n == "shadowed").unwrap()
+            < names.iter().position(|n| *n == "prop_a").unwrap());
+        // 全 kind 收齐。
+        for expect in ["sig_a", "prop_a", "func_a", "mid_prop", "func_l"] {
+            assert!(names.contains(&expect), "缺成员 {expect}，实得 {names:?}");
+        }
+        // 签名形态：static 位 + 参数渲染 + 零参 `name()`。
+        let func_s = members.iter().find(|m| m.name == "func_s").unwrap();
+        assert!(func_s.is_static);
+        assert_eq!(func_s.signature.as_deref(), Some("func_s(p: int) -> void"));
+        let func_a = members.iter().find(|m| m.name == "func_a").unwrap();
+        assert_eq!(func_a.signature.as_deref(), Some("func_a()"));
+        let func_l = members.iter().find(|m| m.name == "func_l").unwrap();
+        assert_eq!(func_l.signature.as_deref(), Some("func_l(x := 1, y: int = 2)"));
+        // 信号/var 无签名。
+        assert!(members.iter().find(|m| m.name == "sig_a").unwrap().signature.is_none());
+        // 基类键路径入口：res 路径 → 直接基类键。
+        let base = proj.script_base_key_by_path("res://leaf.gd").unwrap();
+        assert_eq!(base, "script:mid.gd");
+    }
+
+    #[test]
+    fn script_chain_members_engine_base_stops_and_cycle_safe() {
+        let dir = std::env::temp_dir().join("godotlsp_chain_cycle_test");
+        let proj = write_scripts(
+            &dir,
+            &[
+                // 引擎基类止步：base extends Node（Node 非项目脚本）。
+                ("eng.gd", "extends Node\nvar mine\n"),
+                // 继承环：a↔b 不死循环。
+                ("a.gd", "extends \"res://b.gd\"\nclass_name CycA\nvar va\n"),
+                ("b.gd", "extends \"res://a.gd\"\nclass_name CycB\nvar vb\n"),
+            ],
+        );
+        let members = proj.script_chain_members("script:eng.gd");
+        assert_eq!(members.len(), 1);
+        assert_eq!(members[0].name, "mine");
+        // 环防御：a/b 各收集一次后止步（不 panic、不重复爆炸）。
+        let cyc = proj.script_chain_members("CycA");
+        let va = cyc.iter().filter(|m| m.name == "va").count();
+        let vb = cyc.iter().filter(|m| m.name == "vb").count();
+        assert_eq!((va, vb), (1, 1));
+    }
+
+    #[test]
+    fn script_chain_members_inner_class_and_enum_names() {
+        let dir = std::env::temp_dir().join("godotlsp_chain_inner_test");
+        let proj = write_scripts(
+            &dir,
+            &[("inner.gd", "enum Named {\n\tA,\n\tB,\n}\nenum {\n\tANON_1,\n}\nclass Inner:\n\tvar x\nvar v\n")],
+        );
+        let members = proj.script_chain_members("script:inner.gd");
+        let names: Vec<&str> = members.iter().map(|m| m.name.as_str()).collect();
+        // 保守口径：命名枚举名/内部类名/匿名条目均作常量成员名暴露，不展开内部类成员。
+        for expect in ["Named", "ANON_1", "Inner", "v"] {
+            assert!(names.contains(&expect), "缺 {expect}，实得 {names:?}");
+        }
+        assert!(!names.contains(&"x"), "内部类成员不得展开");
+        assert!(members.iter().all(|m| !m.is_static));
     }
 }

@@ -308,7 +308,8 @@ def miss_reason(expected: dict) -> str:
 
 
 def run_fixture(client: Client, ws: Path, fx: Fixture, timeout: float) -> dict:
-    uri = (ws / fx.rel).as_uri()
+    # 语料镜像在 ws/completion/ 下(见 build_workspace),夹具 uri 须与工程索引路径一致。
+    uri = (ws / "completion" / fx.rel).as_uri()
     client.send({"jsonrpc": "2.0", "method": "textDocument/didOpen", "params": {
         "textDocument": {"uri": uri, "version": 1, "languageId": "gdscript",
                          "text": fx.text}}})
@@ -347,13 +348,17 @@ def run_fixture(client: Client, ws: Path, fx: Fixture, timeout: float) -> dict:
 def build_workspace(corpus: Path) -> Path:
     """镜像语料到临时工作区(res:// 布局):.gd/.tscn 原样拷贝 + 最小 project.godot。
 
-    上游在引擎仓库根跑测试(res:// = 仓库根,scene= 路径形如 res://completion/...),
-    此处把 completion/ 目录树原状放进工作区根,scene= 的相对布局因此同构。
+    上游在引擎仓库根跑测试,夹具源内的引用路径形如 `res://completion/class_a.notest.gd`
+    (脚本 extends / scene= 都是 res://completion/ 前缀)——因此语料必须镜像到
+    `ws/completion/` 子目录(而非平铺根),使 res://completion/… 真实可解析;
+    此前平铺导致 P5 脚本链(`extends "res://…"`)与场景路径全部断链。
+    夹具 uri 相应取 ws/completion/<rel>(didOpen 文本由客户端注入,不依赖盘上路径;
+    但工程索引按盘上路径建立,uri 必须与索引路径一致才能解析脚本链)。
     """
     ws = Path(tempfile.mkdtemp(prefix="gd-oracle-"))
     for p in corpus.rglob("*"):
         if p.is_file() and p.suffix in (".gd", ".tscn"):
-            dest = ws / p.relative_to(corpus)
+            dest = ws / "completion" / p.relative_to(corpus)
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(p, dest)
     # 引擎测试环境自带 project.godot([input] test_input_action 等);
