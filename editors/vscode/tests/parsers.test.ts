@@ -134,3 +134,47 @@ test("nodePaths:connection from/to 可定位节点声明行", () => {
   assert.equal(scene.nodePaths.get("Enemy")?.line, 8);
   assert.equal(scene.nodePaths.get("Nowhere"), undefined);
 });
+
+test("parseScene:属性行 ExtResource 绑定与归属切断", () => {
+  const text = [
+    "[gd_scene load_steps=5 format=3]",
+    "",
+    '[ext_resource type="Script" path="res://player.gd" id="1_s"]',
+    '[ext_resource type="Texture2D" path="res://icon.png" id="2_t"]',
+    '[ext_resource type="AudioStream" path="res://hit.ogg" id="4_a"]',
+    "",
+    '[sub_resource type="CircleShape2D" id="CircleShape2D_1"]',
+    "radius = 12.0",
+    "",
+    '[node name="Main" type="Node2D"]',
+    'script = ExtResource("1_s")',
+    "",
+    '[node name="Sprite" type="Sprite2D" parent="."]',
+    'texture = ExtResource("2_t")',
+    "texture_filter = 1",
+    "",
+    '[node name="Snd" type="AudioStreamPlayer2D" parent="."]',
+    'stream = ExtResource("4_a")',
+    "",
+    '[connection signal="ready" from="." to="." method="_on_ready"]',
+    "flags = 3",
+  ].join("\n");
+  const scene = parseScene(text);
+  const main = scene.roots[0];
+  // 脚本绑定(resource_format_text.cpp:1985 is_script=name==script 同源)
+  assert.equal(main.bindings.get("script"), "1_s");
+  const sprite = main.children[0];
+  assert.equal(sprite.bindings.get("texture"), "2_t");
+  // 非资源属性行(数值 texture_filter)不入表
+  assert.equal(sprite.bindings.size, 1);
+  // sub_resource 段的 radius 在任何 node 之前,不归属;connection 段 flags 不误吞
+  const snd = main.children[1];
+  assert.equal(snd.bindings.get("stream"), "4_a");
+  assert.equal(snd.bindings.size, 1);
+  // 带斜杠属性名(theme_override_styles/panel 形态)
+  const text2 = [
+    '[node name="B" type="Button" parent="."]',
+    'theme_override_styles/normal = ExtResource("9_st")',
+  ].join("\n");
+  assert.equal(parseScene(text2).roots[0].bindings.get("theme_override_styles/normal"), "9_st");
+});

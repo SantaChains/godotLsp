@@ -14,6 +14,7 @@ import { SceneTreeProvider } from "./sceneTree";
 import { ConnectionTreeProvider } from "./connections";
 import { ConfigCompletionProvider, ConfigHoverProvider } from "./configAssist";
 import { highlightClampMiddleware } from "./highlight";
+import { ResLinkProvider } from "./resLinks";
 import { isRunning } from "./lsp";
 import { copyInfoFrom } from "./copyable";
 
@@ -60,6 +61,13 @@ export async function activate(context: vscode.ExtensionContext): Promise<void> 
   status = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 0);
   status.command = "godotlsp.showOutput";
   context.subscriptions.push(output, status);
+  // A4:res:// 资源路径链接(gd + tscn/tres),Ctrl+点击打开目标文件。
+  context.subscriptions.push(
+    vscode.languages.registerDocumentLinkProvider(
+      [{ language: "gdscript", scheme: "file" }, { language: "gdscript", scheme: "untitled" }, { language: "godot-resource" }],
+      new ResLinkProvider(),
+    ),
+  );
 
   // 侧边栏四视图:当前文件符号 / 项目结构(autoload + class_name)/ 场景结构(tscn 节点树)/ 信号连接(tscn [connection])。
   symbols = new SymbolTreeProvider(() => client, output);
@@ -569,7 +577,20 @@ async function gotoSymbol(
   if (!uri || line === undefined || line < 0) {
     return;
   }
-  const doc = await vscode.workspace.openTextDocument(vscode.Uri.parse(uri));
+  const vuri = vscode.Uri.parse(uri);
+  let doc: vscode.TextDocument;
+  try {
+    doc = await vscode.workspace.openTextDocument(vuri);
+  } catch {
+    // 二进制资源(png/ogg/…,场景树外部资源条目):文本打开必失败,fallback
+    // 原生编辑器打开(图片有内置预览),仍失败则静默——资源可能不存在。
+    try {
+      await vscode.commands.executeCommand("vscode.open", vuri);
+    } catch {
+      output.debug(`goto ${uri}:目标不可打开(二进制或不存在)`);
+    }
+    return;
+  }
   const editor = await vscode.window.showTextDocument(doc, { preserveFocus: false, preview: false });
   const clampedLine = Math.min(line, doc.lineCount - 1);
   const lineText = doc.lineAt(clampedLine).text;

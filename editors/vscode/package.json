@@ -2,7 +2,7 @@
   "name": "godotlsp",
   "displayName": "godotlsp:独立 GDScript 语言服务器",
   "description": "独立于 Godot 引擎运行的 GDScript 语言服务器:悬停文档、补全、导航、诊断与格式化,无需打开 Godot 编辑器。",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "publisher": "SantaChains",
   "license": "MIT",
   "repository": {

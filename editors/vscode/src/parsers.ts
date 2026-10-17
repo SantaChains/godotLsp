@@ -39,6 +39,15 @@ export interface SNode {
   parent?: string;
   line: number;
   children: SNode[];
+  /**
+   * 节点属性行里的 ExtResource 绑定:属性名 → ext id。
+   * 引擎锚点(.refs/godot/scene/resources/resource_format_text.cpp):
+   * :1985 `is_script = name == CoreStringName(script)` —— `script` 键即脚本绑定;
+   * :1634 `ExtResource("id")` 序列化形态。任意属性名不设白名单——
+   * 任何 OBJECT 属性(script/texture/stream/theme_override_styles/…)
+   * 都可能是外部资源引用。SubResource 引用不在本表(纯场景内)。
+   */
+  bindings: Map<string, string>;
 }
 
 export interface SceneFile {
@@ -46,6 +55,8 @@ export interface SceneFile {
   roots: SNode[];
   /** NodePath(含根 ".")→ 节点;[connection] from/to 的跳转定位用。 */
   nodePaths: Map<string, SNode>;
+  /** 全场景 ext id → 引用次数(instance + 任意属性行绑定),A3 资源分组用。 */
+  refCounts: Map<string, number>;
 }
 
 const RE_NODE = /^\s*\[node\s+([^\]]*)\]/;
@@ -61,34 +72,52 @@ function parseAttrs(source: string): Map<string, string> {
   return attrs;
 }
 
+// 属性赋值行的 ExtResource 引用(属性名可含 /:theme_override_styles/panel 等)。
+const RE_PROP = /^\s*([\w/]+)\s*=\s*ExtResource\("([^"]+)"\)/;
+
 /** 解析 .tscn:ext_resource 注册表 + node 层级(parent 路径 "." 为场景根)。 */
 export function parseScene(text: string): SceneFile {
   const lines = text.split(/\r?\n/);
   const ext = new Map<string, { type: string; path: string }>();
   const nodes: SNode[] = [];
+  // 当前归属节点:属性行归最近一个 [node];其他标签(sub_resource/resource/
+  // connection/gd_scene…)切断归属——其下属性不属于任何场景节点。
+  let current: SNode | undefined;
   for (let i = 0; i < lines.length; i++) {
-    const e = RE_EXT.exec(lines[i]);
-    if (e) {
-      const attrs = parseAttrs(e[1]);
-      const id = attrs.get("id") ?? "";
-      if (id) {
-        ext.set(id, { type: attrs.get("type") ?? "", path: attrs.get("path") ?? "" });
+    const line = lines[i];
+    if (/^\s*\[/.test(line)) {
+      current = undefined;
+      const e = RE_EXT.exec(line);
+      if (e) {
+        const attrs = parseAttrs(e[1]);
+        const id = attrs.get("id") ?? "";
+        if (id) {
+          ext.set(id, { type: attrs.get("type") ?? "", path: attrs.get("path") ?? "" });
+        }
+        continue;
+      }
+      const n = RE_NODE.exec(line);
+      if (n) {
+        const attrs = parseAttrs(n[1]);
+        current = {
+          name: attrs.get("name") ?? "(匿名)",
+          type: attrs.get("type"),
+          instanceId: attrs.get("instance"),
+          parent: attrs.get("parent"),
+          line: i,
+          children: [],
+          bindings: new Map(),
+        };
+        nodes.push(current);
       }
       continue;
     }
-    const n = RE_NODE.exec(lines[i]);
-    if (!n) {
-      continue;
+    if (current) {
+      const m = RE_PROP.exec(line);
+      if (m) {
+        current.bindings.set(m[1], m[2]);
+      }
     }
-    const attrs = parseAttrs(n[1]);
-    nodes.push({
-      name: attrs.get("name") ?? "(匿名)",
-      type: attrs.get("type"),
-      instanceId: attrs.get("instance"),
-      parent: attrs.get("parent"),
-      line: i,
-      children: [],
-    });
   }
   // 组装层级:parent="." 挂场景根;路径 "A/B" 逐级查找;找不到父亲的挂根级(容错)。
   const byPath = new Map<string, SNode>();
@@ -97,10 +126,11 @@ export function parseScene(text: string): SceneFile {
     if (node.parent === undefined) {
       byPath.set(".", node);
       roots.push(node);
-    } else if (node.parent === ".") {
+    } else if (node.parent === "." && byPath.has(".")) {
       byPath.set(node.name, node);
       byPath.get(".")?.children.push(node);
     } else {
+      // parent 指向不存在的节点(含 parent="." 但场景无根的损坏文件)——容错挂根级。
       const p = byPath.get(node.parent);
       if (p) {
         byPath.set(`${node.parent}/${node.name}`, node);
@@ -110,7 +140,17 @@ export function parseScene(text: string): SceneFile {
       }
     }
   }
-  return { ext, roots, nodePaths: byPath };
+  // 引用计数:instance(instanceId)与属性行绑定(bindings)都是 ext id 的引用。
+  const refCounts = new Map<string, number>();
+  for (const n of nodes) {
+    if (n.instanceId) {
+      refCounts.set(n.instanceId, (refCounts.get(n.instanceId) ?? 0) + 1);
+    }
+    for (const id of n.bindings.values()) {
+      refCounts.set(id, (refCounts.get(id) ?? 0) + 1);
+    }
+  }
+  return { ext, roots, nodePaths: byPath, refCounts };
 }
 
 export interface SceneConnection {

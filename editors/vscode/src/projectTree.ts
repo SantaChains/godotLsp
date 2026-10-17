@@ -17,6 +17,8 @@ export class PNode {
     readonly jump: { uri: string; line: number } | undefined,
     readonly expand: (() => Promise<PNode[] | undefined>) | undefined,
     children?: PNode[],
+    /** 悬停详情(资源类型等);缺省时 pTreeItem 不覆盖 TreeItem 默认 tooltip。 */
+    readonly tooltip?: string,
   ) {
     this.children = children;
   }
@@ -31,6 +33,9 @@ export function pTreeItem(node: PNode): vscode.TreeItem {
   );
   item.description = node.description;
   item.iconPath = new vscode.ThemeIcon(node.icon);
+  if (node.tooltip) {
+    item.tooltip = new vscode.MarkdownString(`\`${node.tooltip}\``);
+  }
   if (node.jump) {
     item.command = {
       command: "godotlsp.goto",
