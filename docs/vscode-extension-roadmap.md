@@ -58,6 +58,51 @@ P9 构造 signatureHelp（VS Code 自动可用）。
 | 5 | **DAP 适配器**（P2-13） | features-roadmap 112 行 | 独立子命令 `godotlsp dap`；launch.json schema 参照 godot-tools 全集 + 三档目标；**配置生成必须 merge-not-clobber**（godot-rust-vscode 反面教训） |
 | 6 | **N6 场景树节点补全** | completion-roadmap P10 | server 侧 tscn 解析落地后，`$NodePath` 补全/跳转面在 VS Code 免配置可用 |
 
+## 三·五、场景/资源引用面（tscn 侧专项，2026-10-18 立项）
+
+> 用户实测发现：场景树只显示 `instance`（实例化场景）一种引用形态，
+> 「绑定的脚本、多种纹理/音频素材全部不可见」。根因 + 设计如下。
+> 参照系：官方 Godot Tools 的 GDResource 功能面（res:// 链接 Ctrl+点击、
+> ExtResource/SubResource hover 预览、inlay 可视化、Alt+O 互跳、Scene Preview）
+> + rust-analyzer 细节（lens 分开关、hover actions）+ VS Code 生态小工具
+> （file nesting、image preview hover、documentLink）。
+
+### 3.5.0 根因（实证 2026-10-18）
+
+`parsers.ts parseScene` 只抓 `[node]`/`[ext_resource]`/`[connection]` 标签行——
+**节点下的属性行零解析**：`script = ExtResource("1")`、`texture = ExtResource("2")`
+等绑定关系全部丢失。`SceneFile.ext` 虽全量注册 ext_resource（含 type/path），
+但树视图只消费 `instanceId`。引擎绑定判定锚点（`.refs/godot/scene/resources/
+resource_format_text.cpp`）：**:1985** `is_script = name == CoreStringName(script)`
+（属性行的 `script` 键即脚本绑定）；**:234-235** `instance=ExtResource("id")` 即
+PackedScene 实例化；**:1634** `ExtResource("id")` 序列化格式；**:541** ext_resources 注册表。
+
+### 3.5.1 A 系列（数据基础 → 展示 → 跨文件跳转）
+
+| # | 项 | 设计要点 |
+|---|---|---|
+| **A1** | **属性行解析**（parsers.ts，数据基础，无它全免谈） | node 标签行**之后的缩进属性行**解析为 `bindings: Map<attr, extId>`（复用 `parseAttrs` 三形态正则）；`script`/`texture`/`stream`/`theme` 等任意 attr 不做白名单——引擎侧任意 OBJECT 属性都可能是 ExtResource。SNode 增 `bindings`；单测用真实形状夹具（script 绑定 + texture + audio 三类） |
+| **A2** | **节点树绑定展示 + 打开对应文件** | 绑定脚本/实例化场景的节点：description 显示资源文件名（`main.gd`），图标区分（脚本 `symbol-file`、场景 `symbol-reference`）；**点击 jump 指向目标文件 uri**（`godotlsp.goto` 已支持任意 uri 的 showTextDocument+reveal，基建现成）；同节点多绑定（script + texture）时子节点展开各资源条目 |
+| **A3** | **外部资源分组（根级，按类去重）** | 场景树根级新增「外部资源」分组：按 kind 分类——脚本 Script / 场景 PackedScene / 纹理 Texture2D / 音频 AudioStream / 字体 Font / 材质与其他。**kind 推断：ext.type 字段优先，path 扩展名兜底**（.png/.svg→纹理、.ogg/.wav/.mp3→音频）；**同 path 多 ext id 合并去重**（用户明确要求「不重复显示」）；点击行为分流：文本资源（.gd/.tscn/.tres/.cfg）goto 跳转，二进制（png/ogg 等）`vscode.open` 原生编辑器打开（图片有内置预览）。条目描述显示引用次数（`×2 节点引用`） |
+| **A4** | **res:// 链接 Ctrl+点击**（DocumentLinkProvider，gd + tscn 双语言） | gd 里 `res://...` 字符串、tscn 里 `path="res://..."` 变可点击链接；res:// → workspace folder fsPath 映射；纯客户端零协议成本。官方插件同款，成本最低价值最高 |
+| **A5** | **ExtResource hover 预览 + 行尾 inlay** | hover `ExtResource("1")`：显示资源 type/path（后续可扩：图片 hover 显示缩略图 data-URI img，Image preview 插件模式）；inlay hint：ext_resource 行尾 `← Texture2D · icon.png` 类注释可视化（官方插件「inlay hints visualize External/Sub Resources」同款）；两者共用 A1 的 ext 注册表 |
+| **A6** | **脚本↔场景互跳命令**（Alt+O 类） | 打开 .gd → 扫描 workspace `*.tscn` 的 script 绑定反向索引（与 projectTree class_name 缓存同模式：保存时重建），多命中 quick pick；打开 .tscn → 跳根节点绑定脚本 |
+
+### 3.5.2 B 系列（借鉴细节，后排）
+
+| # | 项 | 来源 | 说明 |
+|---|---|---|---|
+| B1 | **拖拽树节点进脚本生成 NodePath** | 官方插件 Scene Preview 独有 | TreeItem dragAndDrop API（vscode 1.66+）；按上下文生成 `$Name` / `get_node("...")` / `%UniqueName`；成本中价值高 |
+| B2 | **explorer file nesting** | VS Code 1.67 原生 | `configurationDefaults` 塞 `explorer.fileNesting.patterns`：`*.tscn` 嵌套同名 `.gd`。声明式零代码 |
+| B3 | **rust-analyzer 式细节** | features.html | lens 分开关风格（已有 P2.10 基础）、hover actions（references 按钮）、join lines；GDScript postfix 补全（`node.onready` → `onready var`）视需求 |
+
+### 3.5.3 明确不做（取舍记录）
+
+- **active scene tree inspector**（运行时场景树）：DAP 域，归 P2-13，不混入静态视图。
+- **tscn semantic tokens**：TextMate 语法已覆盖，语义着色收益低。
+- **join lines / 结构化编辑 assist**：GDScript 场景收益低，暂缓。
+- **资源缩略图 hover**：并入 A5 后续增量（先文本预览，后图片 data-URI）。
+
 ## 四、V3 — 远期/条件触发（不承诺）
 
 - **多 IDE 配置样例**（nvim/zed/helix）：服务器已天然兼容（无私有 method 纪律），
