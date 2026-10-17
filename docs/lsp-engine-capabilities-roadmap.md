@@ -84,11 +84,12 @@
 | P4 | C6.6b | 枚举面入口扩展:match 测试位 + `global_enums` 值面 + 全局枚举类型名入全局面 + 单点枚举名三态解析 + 字典键/类型标注门控 | ✅ 已实施(2026-10-17,oracle 36→58/140,+22;builtin_enum 5/5、global_enum 6/6、enum_values_in_match 7/7) |
 | P5 | C10 脚本成员面 | self/super/裸标识符三层成员 + override 签名(脚本父链) + extends 位内部类 + 局部作用域 | ✅ 已实施(2026-10-17,58→75/140,+17;P6-P11 见 `completion-roadmap.md` §四) |
 | P6 | C5 语义类型推断 | 静默推断器(infer.rs)+ 局部/类级变量类型 + preload 常量追踪 + 类型成员面(D3)+ 764 类枚举名(D2)+ 子类收窄(D1)+ N5 Callable 无括号面 + internal 属性排除 | ✅ 已实施(2026-10-17,75→99/140,+24;types/local 8、types/member 5、types/hints 8、infer_return 1、no_parenthesis 3/6) |
+| P7 | C6.3 虚方法模型化 | Function.is_virtual(1437)+ chain_virtuals(同名先到先得)+ Object core 手表 12 条 + override 面引擎链接线 + static 位 _static_init | ✅ 已实施(2026-10-17,99→101/140,+2;override 桶 5/5) |
 
 > **oracle 普查(2026-10-17 四轮)**:首跑 20/140 → C7.3/C6.4/C6.6 后 24/140 →
 > C6.1/C6.2/C7.1/C7.2/N2 后 33/140(+9 全为信号面战绩,零回归)→
 > **C8 一期后 36/140**(argument_options 0/11→3/11,零回归)→
-> **C6.6b 枚举入口后 58/140**(builtin_enum 5/5、global_enum 6/6、enum_values_in_match 7/7,零回归)。**P5 C10 后 75/140**(self/identifiers/super/override×3/extends×2 + 布局修复连带 index +6,零回归)。**P6 C5 后 99/140**(+24:types 21 + infer_return 1 + no_parenthesis 3 − 连带,零回归)。**资料盘点轮(同日)**:
+> **C6.6b 枚举入口后 58/140**(builtin_enum 5/5、global_enum 6/6、enum_values_in_match 7/7,零回归)。**P5 C10 后 75/140**(self/identifiers/super/override×3/extends×2 + 布局修复连带 index +6,零回归)。**P6 C5 后 99/140**(+24:types 21 + infer_return 1 + no_parenthesis 3 − 连带,零回归)。**P7 C6.3 后 101/140**(+2:override 桶 3/5→5/5,零回归)。**资料盘点轮(同日)**:
 > 剩余 104 失败按共同阻塞归并为 5 簇(脚本成员面 ~30 / 枚举入口 ~16 / 语义推断 ~9 /
 > callable 6 / 场景树 ~25),剩余工作重排 P4-P11(C6.6b → C10 → C5 → C6.3 → C8b → C6.5 →
 > N6 → C9,总表与逐期规格见 `completion-roadmap.md` §四);盘点纠正:引擎源码仓

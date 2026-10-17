@@ -525,7 +525,7 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
   `index/const_dictionary_keys`、`local_dictionary_keys` 维持不做(roadmap 既定);
   get_node 22 夹具归 **P10 N6**。
 
-### P7 — C6.3 虚方法模型化(gdscript-engine + godotlsp)
+### P7 — C6.3 虚方法模型化(gdscript-engine + godotlsp)✅ 已实施(2026-10-17)
 
 - **解析**:`RawMethod` 附加 `is_virtual`(JSON `methods[].is_virtual` 实测在,1437 个)+
   `EngineMethod.is_virtual`;`EngineApi::chain_virtuals(chain)` 替代 `snippets.rs` 手维护
@@ -537,6 +537,33 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
   `_static_init` 排除规则精读引擎 :4117-4119(override 面虚拟方法表的第二参数语义)后落单测。
 - **验收**:oracle override 剩余夹具(`override_function_full_name` 的 `_get(property: StringName)
   -> Variant:` 等)+ 单测锁 is_virtual 计数(1437)+ VIRTUALS→模型切换零 diff(对照测试)。
+
+**实施落点(实际,2026-10-17)**:
+- **`Function.is_virtual`**(engine):RawFunction serde 透传,`into_fn` 接线;1437 计数单测锚定。
+- **`EngineApi::chain_virtuals(class)`**:沿 ancestor_chain 收 is_virtual,**同名先到先得**
+  (镜像引擎 `options.has(mi.name)` 名字去重;Node._process 胜 MainLoop._process,单测锁)。
+- **`OBJECT_CORE_VIRTUALS` 12 条**(engine 常量表,决策点拍板):object.cpp:1919-1979
+  `ClassDB::add_virtual_method` 手工注册、**不在 extension_api** 的编辑器侧虚方法
+  (_init/_to_string/_notification/_set/_get/_get_property_list/_validate_property/
+  _property_can_revert/_property_get_revert/_iter_init/_iter_next/_iter_get)——roadmap 原
+  记 9 个漏了 `_iter_*` 3 个;`Object.free` p_virtual=false 不入表;单测锁 12 条 + api 无名断言。
+- **`push_engine_virtuals`**(godotlsp):非 static 位 = 宿主链 chain_virtuals + core 手表,
+  签名渲染镜像 `_get_visual_datatype`(`name(arg: Type) -> Ret:`,void 恒带 `-> void:`);
+  static 位不走 ClassDB,只出 `_static_init() -> void:`(引擎 :3735-3739 特造 MethodInfo);
+  宿主 = `script_engine_base_by_path` 链尾 / 内部类 extends 引擎类 / 默认 RefCounted。
+- **关键修复:光标所在函数排除**——引擎 `has_function(mi.name) && member != function_node`
+  的第二子句:declared 收集必须排除 span 覆盖 at 的 func(`func _get➡` 时 _get 不算已声明),
+  否则 full_name 夹具的 `_get` 永远被 skip(absent,oracle 100 卡 1 的根因)。
+- **C2 `snippets::virtual_items` 12 条保留**(决策点拍板):snippet 模板面与 override 全量
+  签名面语义不同,不换模型源。
+
+- **验收(实际)**:oracle **99→101/140(+2,零回归)**——override 桶 3/5→**5/5**
+  (`override_function_static` 出 `_static_init() -> void:`、`override_function_full_name`
+  出 `_get(property: StringName) -> Variant:`);workspace 测试全绿(engine +3:is_virtual
+  计数/chain_virtuals 先到先得/core 表;godotlsp +3:引擎面签名/static 位/declared 跳过);
+  clippy 0;smoke ALL OK;基线已写 101。**剩余归界**:VIRTUALS→模型对照测试未做(两边
+  语义不同,保留 C2 手表即可);`_static_init` 与脚本链 static 方法并存(引擎 static 位
+  不出脚本链 static——夹具 subset 判定无感,差异记录不修)。
 
 ### P8 — C8 二期参数选项面剩余(godotlsp)
 

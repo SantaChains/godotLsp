@@ -2477,6 +2477,21 @@ fn override_signatures(
             ..CompletionItem::default()
         });
     };
+    // 当前类（内部类或顶层）已声明的函数名——引擎 override 面跳过
+    // （gdscript_editor.cpp:3750 `current_class->has_function(mi.name)`）。
+    // **光标所在函数本身排除**（`member != function_node`）：`func _get➡`
+    // 时 _get 不算已声明，引擎同名项必须照出。
+    let in_current = |s: &(usize, usize)| s.0 <= at && at <= s.1 + 1; // 行尾放宽 1 字节（P5 教训）
+    let declared: HashSet<String> = match &enclosing {
+        Some(c) => c.body.iter().filter_map(|st| match st {
+            Stmt::Func(f) if !in_current(&f.span) => Some(f.name.name.clone()),
+            _ => None,
+        }).collect(),
+        None => file.body.iter().filter_map(|st| match st {
+            Stmt::Func(f) if !in_current(&f.span) => Some(f.name.name.clone()),
+            _ => None,
+        }).collect(),
+    };
     if let Some(c) = enclosing {
         // 内部类 override 面：extends 指向同文件内部类 → 收其方法。
         if let Some(Expr::Ident(base)) = &c.extends {
@@ -2492,16 +2507,30 @@ fn override_signatures(
                 }
             }
         }
+        // P7 C6.3：引擎虚方法面。内部类 extends 引擎类 → 沿其链；
+        // 否则默认 RefCounted（GDScript 无 extends 语义）。core 手表恒叠。
+        let host = c
+            .extends
+            .as_ref()
+            .and_then(|e| match e {
+                Expr::Ident(id) => Some(id.name.clone()),
+                _ => None,
+            })
+            .filter(|n| state.engine.class_by_name(n).is_some())
+            .unwrap_or_else(|| "RefCounted".to_string());
+        push_engine_virtuals(state, &host, prefix, want_static, &declared, &mut out);
         return out;
     }
     // 文件级：走工程脚本链。
     let Some(proj) = &state.project else { return out };
     let Some(rp) = uri_res_path(state, uri) else { return out };
     let Some(base) = proj.script_base_key_by_path(&rp) else { return out };
+    let mut scripted: HashSet<String> = HashSet::new();
     for m in proj.script_chain_members(&base) {
         if m.kind != gdscript_project::DeclKind::Method {
             continue;
         }
+        scripted.insert(m.name.clone());
         if m.is_static != want_static {
             continue;
         }
@@ -2517,7 +2546,78 @@ fn override_signatures(
             ..CompletionItem::default()
         });
     }
+    // P7 C6.3：引擎虚方法面（宿主 = 脚本 extends 链尾引擎类；默认 RefCounted）。
+    // 脚本父链同名方法覆盖引擎项（近端胜出，与引擎 options.has 语义同向）。
+    let host = proj
+        .script_engine_base_by_path(&rp)
+        .unwrap_or_else(|| "RefCounted".to_string());
+    let taken = declared.union(&scripted).cloned().collect::<HashSet<_>>();
+    push_engine_virtuals(state, &host, prefix, want_static, &taken, &mut out);
     out
+}
+
+/// P7 C6.3：引擎虚方法 override 项（ClassDB is_virtual 模型源 + Object core
+/// 手表）。签名形态镜像引擎 `_get_visual_datatype` 渲染：
+/// `name(arg: Type, …) -> Ret:`（void 返回恒带 `-> void:`）。
+/// `want_static` 位引擎不走 ClassDB——只出特造的 `_static_init`
+/// （gdscript_editor.cpp:3735-3739）。`skip` 中的名字跳过（脚本父链 /
+/// 当前类已声明胜出，镜像 `options.has(mi.name)` + `has_function`）。
+fn push_engine_virtuals(
+    state: &State,
+    host: &str,
+    prefix: &str,
+    want_static: bool,
+    skip: &HashSet<String>,
+    out: &mut Vec<CompletionItem>,
+) {
+    let mut push = |display: String, detail: &str, name_for_sort: &str| {
+        out.push(CompletionItem {
+            label: display.clone(),
+            kind: Some(CompletionItemKind::METHOD),
+            detail: Some(detail.to_string()),
+            insert_text: Some(display),
+            sort_text: Some(scoring::sort_text(
+                scoring::bucket::SNIPPET,
+                scoring::fuzzy(prefix, name_for_sort),
+            )),
+            ..CompletionItem::default()
+        });
+    };
+    if want_static {
+        if !skip.contains("_static_init") {
+            push("_static_init() -> void:".to_string(), "override（static，引擎）", "_static_init");
+        }
+        return;
+    }
+    let detail = "override（引擎虚方法）";
+    // 模型源：宿主链 is_virtual 方法（同名先到先得已由 chain_virtuals 收口）。
+    for m in state.engine.chain_virtuals(host) {
+        if skip.contains(&m.name) {
+            continue;
+        }
+        let args = m
+            .arguments
+            .iter()
+            .map(|p| format!("{}: {}", p.name, p.ty))
+            .collect::<Vec<_>>()
+            .join(", ");
+        push(format!("{}({}) -> {}:", m.name, args, m.return_type), detail, &m.name);
+    }
+    // Object core 手表：`ClassDB::add_virtual_method` 手工注册（不在
+    // extension_api），编辑器构建恒可 override（所有类都有 Object 祖先）。
+    for v in gdscript_engine::EngineApi::object_core_virtuals() {
+        if skip.contains(v.name) {
+            continue;
+        }
+        let args = v
+            .arguments
+            .iter()
+            .map(|(n, t)| format!("{n}: {t}"))
+            .collect::<Vec<_>>()
+            .join(", ");
+        let ret = v.return_type.unwrap_or("void");
+        push(format!("{}({}) -> {ret}:", v.name, args), detail, v.name);
+    }
 }
 
 /// P5：`extends ➡` 位类型面补充——当前文件兄弟内部类 + 脚本父链内部类
@@ -5533,6 +5633,79 @@ class Derived extends Base:
             items.iter().any(|i| i.label == want),
             "override display 应保留多行 lambda 原文: {:?}",
             items.iter().filter(|i| i.label.starts_with("cb")).map(|i| &i.label).collect::<Vec<_>>()
+        );
+    }
+
+    /// P7 C6.3：override 面引擎虚方法——内部类 extends Node → 引擎链
+    /// is_virtual（_process）+ Object core 手表（_init/_get/…）。
+    #[test]
+    fn p7_override_engine_virtuals() {
+        let base = test_state();
+        let src = "class Inner extends Node:
+	func 
+";
+        let state = state_with(&base, src);
+        let items = ask(&state, 1, 7);
+        let labels: Vec<&str> = items.iter().map(|i| i.label.as_str()).collect();
+        assert!(
+            labels.contains(&"_process(delta: float) -> void:"),
+            "引擎链 _process 签名: {labels:?}"
+        );
+        assert!(
+            labels.contains(&"_get(property: StringName) -> Variant:"),
+            "core 手表 _get（extension_api 之外的编辑器侧虚方法）: {labels:?}"
+        );
+        assert!(labels.contains(&"_init() -> void:"), "core _init: {labels:?}");
+        assert!(
+            !labels.contains(&"_draw() -> void:"),
+            "Node 链无 _draw（CanvasItem 系）"
+        );
+        assert!(
+            !labels.contains(&"_get_property_list() -> Array[Dictionary]:") == false,
+            "core _get_property_list 应出"
+        );
+    }
+
+    /// P7 C6.3：static 位只出 `_static_init() -> void:`（引擎 static 分支
+    /// 不走 ClassDB）。
+    #[test]
+    fn p7_override_static_static_init() {
+        let base = test_state();
+        let src = "class Inner extends Node:
+	static func 
+";
+        let state = state_with(&base, src);
+        let items = ask(&state, 1, 14);
+        let labels: Vec<&str> = items.iter().map(|i| i.label.as_str()).collect();
+        assert!(
+            labels.contains(&"_static_init() -> void:"),
+            "static 位应出 _static_init: {labels:?}"
+        );
+        assert!(
+            !labels.contains(&"_process(delta: float) -> void:"),
+            "static 位不得出引擎非 static 虚方法"
+        );
+    }
+
+    /// P7 C6.3：当前类已声明同名方法 → 引擎项跳过（has_function 语义）。
+    #[test]
+    fn p7_override_skip_declared() {
+        let base = test_state();
+        let src = "class Inner extends Node:
+	func _process(delta: float):
+		pass
+	func 
+";
+        let state = state_with(&base, src);
+        let items = ask(&state, 3, 7);
+        let labels: Vec<&str> = items.iter().map(|i| i.label.as_str()).collect();
+        assert!(
+            !labels.contains(&"_process(delta: float) -> void:"),
+            "已声明 _process 不得再出引擎项: {labels:?}"
+        );
+        assert!(
+            labels.contains(&"_get(property: StringName) -> Variant:"),
+            "未声明的 core 项仍应出: {labels:?}"
         );
     }
 }

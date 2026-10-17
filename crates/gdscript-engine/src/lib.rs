@@ -15,7 +15,7 @@
 //! let m = api.find_method("Node2D", "get_position");
 //! ```
 
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 
 use serde::Deserialize;
 
@@ -29,6 +29,9 @@ pub struct Function {
     pub is_static: bool,
     pub is_const: bool,
     pub is_vararg: bool,
+    /// ClassDB 虚方法（可被脚本 override 的引擎回调，`_process`/`_draw` 等）。
+    /// 来源 = extension_api.json `methods[].is_virtual`（C6.3 模型化）。
+    pub is_virtual: bool,
     pub arguments: Vec<Param>,
 }
 
@@ -91,6 +94,40 @@ pub struct EngineSignal {
     pub name: String,
     pub arguments: Vec<Param>,
 }
+
+/// Object core 手工注册虚方法（`ClassDB::add_virtual_method`，不在
+/// extension_api.json——见 `EngineApi::object_core_virtuals`）。
+#[derive(Clone, Copy, Debug)]
+pub struct CoreVirtual {
+    pub name: &'static str,
+    pub arguments: &'static [(&'static str, &'static str)],
+    /// `None` = void；`"Variant"` = NIL_IS_VARIANT 返回。
+    pub return_type: Option<&'static str>,
+}
+
+/// object.cpp:1919-1979 逐条对照（`_to_string` 返回 Variant::STRING；
+/// `_set`/`_property_can_revert` 返回 bool；`_get`/`_property_get_revert`
+/// 返回 NIL_IS_VARIANT → Variant；`_get_property_list` 返回
+/// Array[Dictionary]；`_iter_*` 返回 bool/Variant）。`Object.free` 虽
+/// add_virtual_method 但 p_virtual=false，不进 override 面。
+pub const OBJECT_CORE_VIRTUALS: &[CoreVirtual] = &[
+    CoreVirtual { name: "_init", arguments: &[], return_type: None },
+    CoreVirtual { name: "_to_string", arguments: &[], return_type: Some("String") },
+    CoreVirtual { name: "_notification", arguments: &[("what", "int")], return_type: None },
+    CoreVirtual {
+        name: "_set",
+        arguments: &[("property", "StringName"), ("value", "Variant")],
+        return_type: Some("bool"),
+    },
+    CoreVirtual { name: "_get", arguments: &[("property", "StringName")], return_type: Some("Variant") },
+    CoreVirtual { name: "_get_property_list", arguments: &[], return_type: Some("Array[Dictionary]") },
+    CoreVirtual { name: "_validate_property", arguments: &[("property", "Dictionary")], return_type: None },
+    CoreVirtual { name: "_property_can_revert", arguments: &[("property", "StringName")], return_type: Some("bool") },
+    CoreVirtual { name: "_property_get_revert", arguments: &[("property", "StringName")], return_type: Some("Variant") },
+    CoreVirtual { name: "_iter_init", arguments: &[("iter", "Array")], return_type: Some("bool") },
+    CoreVirtual { name: "_iter_next", arguments: &[("iter", "Array")], return_type: Some("bool") },
+    CoreVirtual { name: "_iter_get", arguments: &[("iter", "Variant")], return_type: Some("Variant") },
+];
 
 /// 内建值类型（Vector2、int、Array、Dictionary、String...）。
 #[derive(Clone, Debug)]
@@ -168,6 +205,33 @@ impl EngineApi {
             return b.methods.iter().find(|m| m.name == name);
         }
         None
+    }
+
+    /// 沿继承链收集虚方法（可 override 的引擎回调）。镜像引擎
+    /// `ClassDB::get_virtual_methods`（链式）+ 补全面的名字去重
+    /// （gdscript_editor.cpp:3746 `options.has(mi.name)`）：同名先到先得，
+    /// 近类覆盖远类（Node._process 胜过 MainLoop._process）。
+    pub fn chain_virtuals(&self, class: &str) -> Vec<&Function> {
+        let mut seen = HashSet::new();
+        let mut out = Vec::new();
+        for cls in self.ancestor_chain(class) {
+            if let Some(c) = self.classes.get(cls) {
+                for m in c.methods.iter().filter(|m| m.is_virtual) {
+                    if seen.insert(m.name.clone()) {
+                        out.push(m);
+                    }
+                }
+            }
+        }
+        out
+    }
+
+    /// `ClassDB::add_virtual_method` 手工注册的 Object core 虚方法
+    /// （object.cpp:1919-1979，`#ifdef TOOLS_ENABLED`——不在
+    /// extension_api.json，编辑器构建恒可 override）。
+    /// `(name, [(arg, ty)], Option<ret>)`；ret None = void。
+    pub fn object_core_virtuals() -> &'static [CoreVirtual] {
+        OBJECT_CORE_VIRTUALS
     }
 
     /// 沿继承链查找属性；内建类型同时查其值成员（Vector2.x）。
@@ -345,6 +409,8 @@ struct RawFunction {
     #[serde(default)]
     is_vararg: bool,
     #[serde(default)]
+    is_virtual: bool,
+    #[serde(default)]
     arguments: Vec<RawParam>,
 }
 
@@ -483,6 +549,7 @@ fn into_fn(f: RawFunction) -> Function {
         is_static: f.is_static,
         is_const: f.is_const,
         is_vararg: f.is_vararg,
+        is_virtual: f.is_virtual,
         arguments: f.arguments.into_iter().map(|p| Param { name: p.name, ty: p.ty }).collect(),
     }
 }

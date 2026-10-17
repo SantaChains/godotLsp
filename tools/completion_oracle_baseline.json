@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-17 22:50:21",
- "server": "target-bench/debug/godotlsp.exe mtime=10-17 22:45",
+ "generated_at": "2026-10-17 23:26:56",
+ "server": "target-bench/release/godotlsp.exe mtime=10-17 23:25",
  "corpus": "corpus\\godot-engine-tests\\completion",
  "summary": {
-  "pass": 99,
-  "fail": 41,
+  "pass": 101,
+  "fail": 39,
   "error": 0,
   "total": 140
  },
@@ -619,7 +619,7 @@
   },
   "common/override_function_abstract.gd": {
    "status": "pass",
-   "n_items": 1837,
+   "n_items": 1849,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -638,13 +638,9 @@
    ]
   },
   "common/override_function_full_name.gd": {
-   "status": "fail",
-   "n_items": 1897,
-   "missing": [
-    {
-     "display": "_get(property: StringName) -> Variant:"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1909,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -663,7 +659,7 @@
   },
   "common/override_function_no_underscore.gd": {
    "status": "pass",
-   "n_items": 2148,
+   "n_items": 2172,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -682,13 +678,9 @@
    ]
   },
   "common/override_function_static.gd": {
-   "status": "fail",
-   "n_items": 2145,
-   "missing": [
-    {
-     "display": "_static_init() -> void:"
-    }
-   ],
+   "status": "pass",
+   "n_items": 2146,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -707,7 +699,7 @@
   },
   "common/override_function_underscore.gd": {
    "status": "pass",
-   "n_items": 2149,
+   "n_items": 2173,
    "missing": [],
    "illegal": [],
    "labels_head": [
