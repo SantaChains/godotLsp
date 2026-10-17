@@ -356,9 +356,19 @@ def build_workspace(corpus: Path) -> Path:
             dest = ws / p.relative_to(corpus)
             dest.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(p, dest)
-    (ws / "project.godot").write_text(
-        'config_version=5\n\n[application]\nconfig/name="oracle"\n',
-        encoding="utf-8")
+    # 引擎测试环境自带 project.godot([input] test_input_action 等);
+    # 语料根在 completion/ 上一级(godot-engine-tests/),两级都探。
+    # argument_options/string_literals 的输入动作面依赖此文件
+    # (此前写最小配置导致该面永远缺数据)。
+    corpus_pg = corpus / "project.godot"
+    if not corpus_pg.is_file():
+        corpus_pg = corpus.parent / "project.godot"
+    if corpus_pg.is_file():
+        shutil.copy2(corpus_pg, ws / "project.godot")
+    else:
+        (ws / "project.godot").write_text(
+            'config_version=5\n\n[application]\nconfig/name="oracle"\n',
+            encoding="utf-8")
     return ws
 
 

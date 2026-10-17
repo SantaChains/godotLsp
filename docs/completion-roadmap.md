@@ -1,6 +1,6 @@
 # 补全增强路线图 — 引擎数据面 × 官方 snippet(2026-10-16 立项)
 
-> **状态:P0 已实施;C7.3/C6.4/C6.6/C6.1/C6.2/C7.1/C7.2/N2 已落地(2026-10-17);其余规划中。**
+> **状态:P0/P2/P3 已实施;C7.3/C6.4/C6.6/C6.1/C6.2/C7.1/C7.2/N2/C8(一期)已落地(2026-10-17);其余规划中。**
 > 本文件是 C6-C9 四项工作流的排期依据;设计论证与源码锚点见
 > `lsp-design.md` §6.9(证据深挖),能力面索引见 `lsp-engine-capabilities-roadmap.md` P3.6。
 >
@@ -8,7 +8,7 @@
 > 不动并发架构、不外挂引擎、不引运行时依赖。
 >
 > **验收基建已就位**:`tools/completion_oracle.py`(引擎 oracle harness)+
-> `tools/completion_oracle_baseline.json`(基线 **33/140**)。每期实施后重跑,
+> `tools/completion_oracle_baseline.json`(基线 **36/140**)。每期实施后重跑,
 > `--update-baseline` 前必须零回归;分桶通过率即量化验收。
 
 ## 一、结论(一屏)
@@ -19,7 +19,7 @@
 | P1 | **C6** + **C7.3** | gdscript-engine + godotlsp | 模型字段解析+三类消费+内建构造/运算符面(C6.5);$/% 回归止血 | 低(附加式 serde) | 🔶 C6.1/C6.2/C6.4/C6.6 已落地;C6.3/C6.5 待 |
 | P1 | **C7.3** | godotlsp | $/% 节点路径上下文止血 | 低 | ✅ 已落地(2026-10-17,单测+E2E) |
 | P2 | **C7.1/C7.2** | godotlsp | class_name/autoload 全局面;res:// 路径面 + N2 字符串抑制 | 低-中 | ✅ 已落地(2026-10-17,oracle 24→**33/140**,+9 全为 C6.1 信号面战绩) |
-| P3 | **C8** | godotlsp | 注解参数面(小手搬表 + 模型全局枚举) | 低(表漂移可检测) | 待 |
+| P3 | **C8** | godotlsp + gdscript-project | 参数选项面(信号名/输入动作/注解参数)+ oracle harness 两处修复 | 低(表漂移可检测) | ✅ 一期已实施(2026-10-17,oracle 33→**36/140**,argument_options 0/11→3/11) |
 | P4 | **C9** | 插件 + 工具 | snippet 16→~40 对齐;官方模板入库备料 | 无(纯增量) | 待 |
 
 **取舍主线**:先建能量化的验收基建(V0),再做零行为风险的模型层(C6),回归修复(C7.3)随 P1 止血;
@@ -94,12 +94,13 @@ class_name / autoload 全局面补全缺失(引擎有;`gdscript-project` **已�
 **结论:数据在两层源里都完整,但两个消费管线(文档生成面、LSP 模型面)都只接了方法/属性/枚举/常量;
 构造函数与运算符两条区块全线未接。** 这不是"备未来"问题,是明确的工作面缺口 → C6.5 升级(见 §四)。
 
-### 3.6 oracle 普查差距地图(2026-10-17 两轮:20/140 → 24/140 → **33/140**)
+### 3.6 oracle 普查差距地图(2026-10-17 三轮:20/140 → 24/140 → 33/140 → **36/140**)
 
-分桶通过率(当期 33/140):filter 2/2、script_enum 1/1、builtin_enum 5/5、common 8/20、
+分桶通过率(当期 36/140):filter 2/2、script_enum 1/1、builtin_enum 5/5、common 8/20、
 global_enum 3/6、index 1/9、enum_values_in_dictionary 1/13、types 2/19、get_node 8/33、
-argument_options 0/11、no_parenthesis 2/8、enum_values_in_match 0/7、assignment_options 0/4、
-extends 0/2。未命中成因:absent 281 / paren-display 55 / string-literal 9。
+**argument_options 3/11**(C8 一期:connect/dont_add_string_name/prepended 三夹具)、
+no_parenthesis 2/8、enum_values_in_match 0/7、assignment_options 0/4、
+extends 0/2。未命中成因:absent 281 / paren-display 50 / string-literal 7。
 
 按"阻塞面"归纳(而非按桶),新增/调整如下工作项:
 
@@ -112,7 +113,7 @@ extends 0/2。未命中成因:absent 281 / paren-display 55 / string-literal 9�
 | N5 | **callable-expected 上下文不出括号** | no_parenthesis ×8(当前 0/8,C6.4 后仍挂) | 需参数类型分析(语义层),缓行;桶内 `lambda_body` 已因 C6.4 通过 |
 | N6 | **节点路径类型推断 + 场景树节点名** | get_node 0/33 | 语义层 + C7.3+(project.scenes → NodeDecl),最大桶,分期 |
 | N7 | **字典键/字典内枚举值** | index 1/9、enum_values_in_dictionary 1/13 | 明确不做 #3 延续,仅观察 |
-| N8 | **字符串字面量参数面**(NodePath/StringName 建议) | argument_options/string_literals ×8 | C8 家族;N2 已落地,字符串上下文识别不再阻塞 |
+| N8 | **字符串字面量参数面**(NodePath/StringName 建议) | argument_options/string_literals ×8 | ✅ C8 一期:输入动作面(默认设置侧,3/8 过——`dont_add_*` 两口 + prepended 一口);tween_property 属性面与 AnimationPlayer 动画面缓行(见 P3 二期);N2 已落地,字符串上下文识别不再阻塞 |
 
 **vacuous pass 清单(补面时必须回归验证)**:`no_constructor_*`(6)、
 `builtin_enum/global_enum/script_enum` 的 metatype 三件套。`no_completion_in_string`
@@ -222,22 +223,50 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
 - **验收**:单测×4(成员信号/工程全局面/字符串上下文两面/状态机两函数)+ E2E 探针
   (真实二进制:路径面带 textEdit、全局面含工程名、普通字符串 0 项)+ oracle 零回归。
 
-### P3 — C8 注解参数面(godotlsp)
+### P3 — C8 参数选项面 ✅ 一期已实施(2026-10-17)
 
-现状:注解补全已能识别(特征 = label 无 `@` + kind PROPERTY + detail 空);本项扩展到
-**注解名后第一参数位**。数据三路:
+落点:`crates/godotlsp/src/argopts.rs`(新模块,前向括号帧扫描 + 面表)+ `main.rs`
+`completion()` 分支插入(节点路径面之后、字符串抑制之前)+ `gdscript-project`
+`[input]` 解析(`input_actions()`)+ `tests/fixtures/projface/project.godot` 补
+`[input] test_input_action`。
 
-| 数据 | 来源 | 说明 |
-|---|---|---|
-| slider 串 / `@rpc` 三组 / easing | 手搬(源码锚点 `gdscript_editor.cpp:1028`) | 小表,注释注明锚点与 pinned commit |
-| `@warning_ignore*` 全名 | `godot-docs/gdd_0310` 语料(GDScriptWarning 表) | 与现有注解文档管线同源 |
-| `@export_custom` arg0/arg2 | 模型 `global_enums` 的 PropertyHint/PropertyUsageFlags(22 个全局枚举内,实测在) | 模型驱动,零手搬 |
-| `@export_node_path` | Node 继承树 + 工程 class_name | 依赖 C7.1 的面 |
+**语义(全部有引擎锚点,模块头注)**:
+- **独占面**:CALL_ARGUMENTS/ANNOTATION_ARGUMENTS 上下文只出选项;调用面零项时
+  回落常规标识面(`r_forced = size > 0`,`.refs/godot/modules/gdscript/gdscript_editor.cpp:3432`),注解参数面
+  forced 独占(:3474,零项也拦)。
+- **默认设置侧**:`use_single_quotes`/`add_string_name_literals`/`add_node_path_literals`
+  引擎默认均 false(`.refs/godot/editor/settings/editor_settings.cpp:868-872`)→ 一律双引号、不发 `&`/`^` 前缀。
+  oracle `add_*`(设置开)与 `dont_*`(设置关)成对出现,本期对齐默认侧;设置
+  plumbing 不入本期。
+- **既有字面量整串替换**:光标在闭合字符串内 → textEdit 替换整串(保留 `&`/`^`
+  前缀,镜像 `_calculate_string_insertion` final_code),insertText 为裸引号串。
 
-- **验收**:oracle `argument_options/` 全桶(connect/play_typed/play_untyped/play_inferred/
-  string_literals)——引擎最全的注解参数 oracle,直接量化;`filter/` 桶(organized_export 排除
-  "Test Category")顺带验证排噪。
-- **取舍**:不做 `@export_tool_button` 图标表(编辑器主题数据,无头不可得)。
+**一期落地三面**:
+1. **信号名面**(`connect`/`is_connected`/`disconnect`/`emit_signal`/`has_signal`
+   首参):接收者 = self(裸调用,extends 链引擎信号 + 本文件 extends 脚本链自声明)
+   或已解析类型(引擎类链 / 工程脚本类);oracle `connect.gd` 转 pass。
+2. **输入动作面**(InputEvent 系接收者 + 方法名含 `action` + 首参):项目
+   `[input]` 动作名;oracle `dont_add_string_name_input_event` +
+   `add_string_name_input_event_prepended` 转 pass(后者走 `&"…"` 整串替换)。
+3. **注解参数面**:`@export_range` 参 3-5(slider 四串)、`@export_exp_easing` 参 0-1、
+   `@rpc` 参 0-2(七选项)、`@warning_ignore*`(46 个警告名,**取自引擎
+   gdscript_warning.h 枚举而非 docs 语料——本地 gdd_0310 页无警告名表,不可验证;
+   引擎头文件是补全行为的事实源,pinned @5b4e0cb0**)、`@export_custom` 参 0/2
+   (模型 `global_enums` 的 PropertyHint 45 / PropertyUsageFlags 32,零手搬)、
+   `@export_node_path` 参 0(Node + 引擎继承树 + 工程 Node 系脚本类)。无 oracle
+   覆盖(语料无注解实参位夹具),以单测锁定。
+
+**oracle harness 两处修复**(C8.a,均为基建缺口非产品问题):
+- `build_workspace` 此前写最小 project.godot(无 `[input]`),输入动作面永远缺数据;
+  改为优先采用语料根 project.godot(`completion/` 与其父级都探)。
+- 匹配器容许 include 超集语义不变;基线 33→36 且零回归后才 `--update-baseline`。
+
+**二期(明确缓行,记入开放问题)**:
+- `Tween.tween_property` 次参属性面:需实参 0 的局部变量类型推断(semantic
+  `Analysis` 未暴露 locals 查询,`FileInfo::resolve_var` 只覆盖类级成员)。
+- `AnimationPlayer.play` 等动画面:需 tscn AnimationLibrary 解析 + 接收者推断,归 N6 家族。
+- `InputMap` 单例方法动作面(`InputMap.has_action(` 等):无 oracle 覆盖。
+- `&`/`^` 前缀设置 plumbing(oracle `add_*` 夹具另一半):需 workspace/configuration 通道。
 
 ### P4 — C9 snippet 对齐与官方模板入库
 
@@ -280,12 +309,15 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
 |---|---|---|
 | C6 附加式 serde 解析失败 | 模型加载即崩(测试先炸) | `#[serde(default)]` 全套;单测锁 503/1437 计数 |
 | 信号/虚方法沿链收集拖慢补全 | completion p50(基线 8.6ms) | O(链长×成员)可忽略;每期 bench_load 监控 |
-| C8 手搬表随引擎版本漂移 | 注解参数过时 | 源码锚点注释 + oracle `argument_options` 桶检测 |
+| C8 手搬表随引擎版本漂移 | 注解参数过时 | 源码锚点注释 + oracle `argument_options` 桶检测;警告名改取引擎 `gdscript_warning.h`(补全行为事实源),与弃用项剔除规则同锚 |
 | C7.2 字符串面客户端不触发 | 特性不可见 | 主流客户端默认行为;README 说明;监控后补开关 |
 | oracle 语义差异误判 | 验收噪音 | 匹配器规范化 + 分桶趋势判断,不追求 100% |
 
 ## 八、开放问题(未来钩子,不在本期)
 
+- **C8 二期(参数选项面剩余)**:`Tween.tween_property` 次参属性面(前置:semantic
+  `Analysis` 暴露 locals 类型查询)、`AnimationPlayer.play` 动画面(前置:N6 场景
+  解析)、`InputMap` 单例方法面、`&`/`^` 前缀设置 plumbing(oracle `add_*` 夹具)。
 - **C10 self 成员面**(§3.6 N1,字符串抑制 N2 已于 2026-10-17 随 C7.2 落地):oracle
   证据最充分的新面(common `identifiers_in_*` ×3 等),但涉及全局面合并语义 + 新 sort 桶
   + 与 vacuous pass 的联动,按项目纪律先设计后实施(设计入 lsp-design.md 后再排期);

@@ -39,6 +39,8 @@ pub struct Project {
     class_names: HashMap<String, usize>,
     /// autoload 单化名 → 类型（脚本路径或引擎类名）。
     autoloads: HashMap<String, String>,
+    /// `[input]` 节动作名（C8 参数选项面；排序去重）。
+    input_actions: Vec<String>,
     /// tscn/tres 解析结果（P2.7）。
     pub scenes: Vec<SceneFile>,
     /// 自嵌 uid → res:// 路径（tscn/tres 头部 uid）。
@@ -98,6 +100,9 @@ impl Project {
         }
 
         let autoloads = parse_autoload(root.join("project.godot"));
+        let mut input_actions = parse_input_actions(root.join("project.godot"));
+        input_actions.sort_unstable();
+        input_actions.dedup();
 
         // P2.7：扫描 tscn/tres，建场景索引与自嵌 uid 映射。
         let mut scenes = Vec::new();
@@ -123,7 +128,7 @@ impl Project {
             }
         });
 
-        Ok(Project { engine, scripts, class_names, autoloads, scenes, uid_paths, enum_values, subclass_of })
+        Ok(Project { engine, scripts, class_names, autoloads, input_actions, scenes, uid_paths, enum_values, subclass_of })
     }
 
     /// class_name → 对应脚本。
@@ -135,6 +140,13 @@ impl Project {
     /// 补全全局面/悬停解析共用；HashMap 迭代序不稳定，调用方需自行排序。
     pub fn autoloads(&self) -> impl Iterator<Item = (&str, &str)> {
         self.autoloads.iter().map(|(k, v)| (k.as_str(), v.as_str()))
+    }
+
+    /// 输入动作名（`project.godot` `[input]` 节键名，排序去重）。
+    /// C8：`event.is_action_pressed(` 等 InputEvent action 方法实参面消费
+    ///（引擎 InputMap::get_argument_options 同源，锚点 core/input/input_map.cpp:90）。
+    pub fn input_actions(&self) -> &[String] {
+        &self.input_actions
     }
 
     /// preload("res://x.gd") → 对应脚本。
@@ -169,6 +181,9 @@ impl Project {
         self.scenes.extend(other.scenes);
         self.uid_paths.extend(other.uid_paths);
         self.autoloads.extend(other.autoloads);
+        self.input_actions.extend(other.input_actions);
+        self.input_actions.sort_unstable();
+        self.input_actions.dedup();
         for (n, vals) in other.enum_values {
             self.enum_values.entry(n).or_default().extend(vals);
         }
@@ -430,4 +445,78 @@ fn parse_autoload(project_godot: PathBuf) -> HashMap<String, String> {
         map.insert(name.trim().to_string(), value.to_string());
     }
     map
+}
+
+/// 解析 project.godot 的 [input] 段动作名（C8 输入动画面数据源）。
+/// 形如：
+/// ```text
+/// [input]
+///
+/// test_input_action={
+/// "deadzone": 0.2,
+/// "events": []
+/// }
+/// ```
+/// 键行 = 标识符 + `=`；值跨行时内部行（`"deadzone": …`）不含 `=` 或键段
+/// 非标识符，天然被过滤。单行形式 `name={...}` 同样命中。
+fn parse_input_actions(project_godot: PathBuf) -> Vec<String> {
+    let mut names = Vec::new();
+    let Ok(text) = std::fs::read_to_string(project_godot) else { return names };
+    let mut in_input = false;
+    for line in text.lines() {
+        let t = line.trim();
+        if t.starts_with('[') && t.ends_with(']') {
+            in_input = t == "[input]";
+            continue;
+        }
+        if !in_input || t.is_empty() {
+            continue;
+        }
+        let Some((key, _)) = t.split_once('=') else { continue };
+        let key = key.trim();
+        if !key.is_empty()
+            && key.starts_with(|c: char| c.is_ascii_alphabetic() || c == '_')
+            && key.chars().all(|c| c.is_ascii_alphanumeric() || c == '_')
+        {
+            names.push(key.to_string());
+        }
+    }
+    names
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    fn write_project(dir: &std::path::Path, text: &str) -> std::path::PathBuf {
+        let _ = std::fs::remove_dir_all(dir);
+        std::fs::create_dir_all(dir).unwrap();
+        let pg = dir.join("project.godot");
+        std::fs::write(&pg, text).unwrap();
+        pg
+    }
+
+    #[test]
+    fn parse_input_actions_multiline_and_inline() {
+        let pg = write_project(
+            &std::env::temp_dir().join("godotlsp_input_actions_test"),
+            "config_version=5\n\n[application]\nconfig/name=\"t\"\n\n[input]\n\nmove_left={\n\"deadzone\": 0.2,\n\"events\": []\n}\njump={\"deadzone\":0.5,\"events\":[]}\n\n[autoload]\nA=\"*res://a.gd\"\n",
+        );
+        let actions = parse_input_actions(pg);
+        // 文档序（排序去重发生在 Project::open 内）。
+        assert_eq!(actions, vec!["move_left".to_string(), "jump".to_string()]);
+        // [autoload] 段的 `=` 不得混入。
+        assert!(!actions.iter().any(|a| a.contains("res://")));
+    }
+
+    #[test]
+    fn parse_input_actions_absent_section() {
+        let pg = write_project(
+            &std::env::temp_dir().join("godotlsp_input_actions_test2"),
+            "config_version=5\n",
+        );
+        assert!(parse_input_actions(pg).is_empty());
+        // 文件缺失同样返回空（不 panic）。
+        assert!(parse_input_actions(std::env::temp_dir().join("godotlsp_nope.godot")).is_empty());
+    }
 }

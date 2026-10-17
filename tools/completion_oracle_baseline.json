@@ -1,39 +1,32 @@
 {
- "generated_at": "2026-10-17 10:51:28",
- "server": "D:\\LocalSend\\Files\\pro\\godotlsp\\target\\debug\\godotlsp.exe mtime=10-17 10:43",
+ "generated_at": "2026-10-17 12:57:38",
+ "server": "D:\\LocalSend\\Files\\pro\\godotlsp\\target\\debug\\godotlsp.exe mtime=10-17 12:54",
  "corpus": "corpus\\godot-engine-tests\\completion",
  "summary": {
-  "pass": 33,
-  "fail": 107,
+  "pass": 36,
+  "fail": 104,
   "error": 0,
   "total": 140
  },
  "fixtures": {
   "argument_options/connect.gd": {
-   "status": "fail",
-   "n_items": 1812,
-   "missing": [
-    {
-     "display": "\"signal_a\""
-    },
-    {
-     "display": "\"child_entered_tree\""
-    }
-   ],
+   "status": "pass",
+   "n_items": 14,
+   "missing": [],
    "illegal": [],
    "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
+    "\"signal_a\"",
+    "\"ready\"",
+    "\"renamed\"",
+    "\"tree_entered\"",
+    "\"tree_exiting\"",
+    "\"tree_exited\"",
+    "\"child_entered_tree\"",
+    "\"child_exiting_tree\"",
+    "\"child_order_changed\"",
+    "\"replacing_by\"",
+    "\"editor_description_changed\"",
+    "\"editor_state_changed\""
    ]
   },
   "argument_options/play_inferred.gd": {
@@ -151,7 +144,7 @@
   },
   "argument_options/string_literals/add_string_name_input_event.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1,
    "missing": [
     {
      "insert_text": "&\"test_input_action\""
@@ -159,30 +152,17 @@
    ],
    "illegal": [],
    "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
+    "\"test_input_action\""
    ]
   },
   "argument_options/string_literals/add_string_name_input_event_prepended.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "insert_text": "\"test_input_action\""
-    }
-   ],
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "&\"test_input_action\""
+   ]
   },
   "argument_options/string_literals/argument_options_inside_string_literal.gd": {
    "status": "fail",
@@ -226,27 +206,12 @@
    ]
   },
   "argument_options/string_literals/dont_add_string_name_input_event.gd": {
-   "status": "fail",
-   "n_items": 1812,
-   "missing": [
-    {
-     "insert_text": "\"test_input_action\""
-    }
-   ],
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
    "illegal": [],
    "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
+    "\"test_input_action\""
    ]
   },
   "assignment_options/enum_attribute.gd": {

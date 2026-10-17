@@ -17,6 +17,7 @@ use lsp_server::{Connection, Message, Notification, Request, Response};
 use lsp_types::Uri;
 use lsp_types::*;
 
+mod argopts;
 mod doclinks;
 mod freq;
 mod hoverdata;
@@ -865,7 +866,7 @@ fn in_node_path_context(text: &str, offset: usize) -> bool {
 /// `&"..."`/`^"..."` 字面量前缀(前缀字符不影响引号配对)；`#` 注释在字符串
 /// 状态外时截断该行(注释内引号不成串)。未闭合字符串按到行尾(单引号对)或
 /// 文末(三引号)处理——与引擎错误恢复同向。
-fn string_literal_at(src: &str, at: usize) -> Option<(usize, usize)> {
+pub(crate) fn string_literal_at(src: &str, at: usize) -> Option<(usize, usize)> {
     let b = src.as_bytes();
     let n = b.len();
     let mut i = 0usize;
@@ -1034,6 +1035,15 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
         // (fa7d645 探针实测 1662 项,其中 1036 个引擎类)。场景树节点面待
         // C7.3+ 工程面接入(project.scenes → tscn NodeDecl);在此之前不出项——
         // 空列表优于 1662 项噪声,也与引擎"只出场景子节点"同向。
+    } else if let Some(arg_items) =
+        argopts::argument_options(state, src, at, word_start, state.asts.get(uri))
+    {
+        // C8：调用实参/注解实参选项面（connect 信号名、InputEvent 输入动作、
+        // @export_range/@rpc/@warning_ignore/@export_custom/@export_node_path 参数）。
+        // 引擎语义(gdscript_editor.cpp:3432/3474)：调用面零项回落常规面
+        // (argument_options 返回 None)，注解参数面 forced 独占(空 Vec)；
+        // 命中即只出选项面,不与全局面混合。
+        items.extend(arg_items);
     } else if let Some((content_start, content_end)) = string_literal_at(src, at) {
         // N2：字符串字面量内默认不出补全(引擎默认行为;oracle
         // `no_completion_in_string` 锁定——此前因全局面无对应排除项而
@@ -2633,7 +2643,7 @@ fn offset_to_position(src: &str, offset: usize) -> Position {
     Position { line, character: col }
 }
 
-fn offset_range(src: &str, start: usize, end: usize) -> Range {
+pub(crate) fn offset_range(src: &str, start: usize, end: usize) -> Range {
     Range { start: offset_to_position(src, start), end: offset_to_position(src, end) }
 }
 
