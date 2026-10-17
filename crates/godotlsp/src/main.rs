@@ -14,6 +14,7 @@ use gdscript_syntax::ast::{
     expr_to_text, span_slice, BinOp, ClassDecl, ConstDecl, EnumDecl, Expr, File, FuncDecl,
     Literal, SignalDecl, Stmt, UnOp, VarDecl,
 };
+use gdscript_syntax::infer::{infer_expr_ty, preload_consts, FnRetTable, InferTy};
 use gdscript_syntax::parse;
 use gdscript_syntax::semantic::{analyze_with, FileInfo, ProjectContext};
 use lsp_server::{Connection, Message, Notification, Request, Response};
@@ -1007,6 +1008,9 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
     let prefix = &src[word_start..at];
     let after_dot = word_start > 0 && b[word_start - 1] == b'.';
     let mut items: Vec<CompletionItem> = Vec::new();
+    if std::env::var("GODOTLSP_DEBUG_RESOLVE").is_ok() {
+        eprintln!("[completion] at={at} word_start={word_start} after_dot={after_dot} prefix={prefix:?}");
+    }
 
     if after_dot {
         // 脚本枚举面兜底:didOpen/didChange 未及或竞态时现解析(与 1199 等处惯用法一致)。
@@ -1016,6 +1020,14 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
         let recv_word = receiver_word(src, word_start);
         if matches!(recv_word, Some("self") | Some("super")) {
             items.extend(script_self_members(state, uri, src, recv_word == Some("self")));
+        } else if let Some(ty_items) = type_hint_dot_path(src, word_start)
+            .and_then(|p| type_member_items(state, uri, &ast_owned, &p))
+        {
+            // P6 C5（D3）：类型标注位 after_dot（`var x: R.➡`）→ 类型成员面
+            // (内部类/枚举/常量名 + 全局枚举名；引擎不出 builtin 与实例成员,
+            // oracle types/hints/index_1_* 锁定)。path 无类型源（枚举名/全局
+            // 枚举/未知名——py_value/builtin_enum 回归教训）→ None 回落原链。
+            items.extend(ty_items);
         } else if enum_value_completion_allowed(src, word_start, at) {
             // 枚举解析优先于成员面(引擎语义:receiver 是枚举则出枚举值,否则出成员;
             // gdscript_editor.cpp `_code_completion` 先解析枚举常量再回落成员)。
@@ -1026,11 +1038,11 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
                 // (引擎成员面对 `AStarGrid2D.Heuristic.` / `Key.` / match 位同款;
                 // oracle builtin_enum / global_enum_values / enum_values_in_match 桶)。
                 items.extend(values);
-            } else if let Some(recv_ty) = recv_type_at(state, src, word_start) {
-                items.extend(class_members(&state.engine, &recv_ty, state.snippet_support));
+            } else if let Some(rt) = resolve_recv_type(state, uri, src, at, word_start) {
+                items.extend(recv_member_items(state, uri, src, &rt));
             }
-        } else if let Some(recv_ty) = recv_type_at(state, src, word_start) {
-            items.extend(class_members(&state.engine, &recv_ty, state.snippet_support));
+        } else if let Some(rt) = resolve_recv_type(state, uri, src, at, word_start) {
+            items.extend(recv_member_items(state, uri, src, &rt));
         }
         for i in &mut items {
             let f = scored_fuzzy(prefix, &i.label, state.config.freq_boost);
@@ -1062,7 +1074,18 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
         // 引擎语义(gdscript_editor.cpp:3432/3474)：调用面零项回落常规面
         // (argument_options 返回 None)，注解参数面 forced 独占(空 Vec)；
         // 命中即只出选项面,不与全局面混合。
+        // **先于 N5**——InputEvent 动作面等特判表优先于 Callable 常规面
+        // （dont_add_string_name 回归教训）。
         items.extend(arg_items);
+    } else if let Some(n5_items) = argopts::callable_arg_items(state, uri, src, at) {
+        // N5（P6 C5.3）：实参位形参 Callable → 方法名无括号；本文件方法
+        // 非 Callable 位 → 常规 name() 形态。面独占（argopts 同律）。
+        for i in n5_items {
+            let f = scored_fuzzy(prefix, &i.label, state.config.freq_boost);
+            let mut i = i;
+            i.sort_text = Some(scoring::sort_text(scoring::bucket::MEMBER, f));
+            items.push(i);
+        }
     } else if let Some((content_start, content_end)) = string_literal_at(src, at) {
         // N2：字符串字面量内默认不出补全(引擎默认行为;oracle
         // `no_completion_in_string` 锁定——此前因全局面无对应排除项而
@@ -1167,6 +1190,38 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
                     detail: Some("@GlobalScope 枚举".to_string()),
                     ..CompletionItem::default()
                 });
+            }
+            // P6 C5（D2）：类型标注位（`var x: A➡`）追加 native 类枚举名裸名
+            // （ConnectFlags 等 764 个——Object/Xxx 的类枚举，不在 global_enums；
+            // oracle types/hints/index_0 锁定）。仅类型位，全局面不膨胀。
+            let line_start = line_start_offset(src, offset.line as usize);
+            if in_type_hint_position(src, line_start, word_start) {
+                let mut enum_names: Vec<&str> = state
+                    .engine
+                    .classes
+                    .values()
+                    .flat_map(|c| c.enums.iter().map(|e| e.name.as_str()))
+                    .chain(
+                        state
+                            .engine
+                            .builtins
+                            .values()
+                            .flat_map(|b| b.enums.iter().map(|e| e.name.as_str())),
+                    )
+                    .collect();
+                enum_names.sort_unstable();
+                enum_names.dedup();
+                for n in enum_names {
+                    items.push(CompletionItem {
+                        label: n.to_string(),
+                        kind: Some(CompletionItemKind::ENUM),
+                        detail: Some("类枚举".to_string()),
+                        ..CompletionItem::default()
+                    });
+                }
+                // 类型位类作用域类型名（所在内部类的 const/enum/内部类，
+                // oracle types/hints/index_0_inner_class：AInner 等仅类内可见）。
+                items.extend(class_scope_type_names(state, uri, src, at));
             }
         } else {
             // P5：extends 位脚本内部类（当前文件兄弟 + 脚本父链；引擎类与
@@ -1335,27 +1390,137 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
     CompletionResponse::Array(items)
 }
 
-/// 在 `recv.<|` 位置向前找 recv 标识符并推断其类型。
-/// 光标在 `.` 之后（after_dot 已判定），扫描从 `.` 前开始；
-/// 变量（AST 语义解析）→ 静态类名 / 内建类名回退（`Node.ProcessMode` 补全）。
-fn recv_type_at(state: &State, src: &str, at: usize) -> Option<String> {
-    let b = src.as_bytes();
-    let mut j = at - 1; // 跳过紧邻的 '.'
-    while j > 0 && (b[j - 1].is_ascii_alphanumeric() || b[j - 1] == b'_') {
-        j -= 1;
+/// 在 `recv.<|` 位置解析接收者类型（P6 C5 管线）：
+/// ① 方法调用回溯（`a.to_str(10).➡` → 本脚本/内部类方法返回类型推断）；
+/// ② `recv` 词作用域解析（局部 → 类级 → preload 常量 → 内部类 →
+///    全局类 → 引擎类；`resolve_name_type`）。
+fn resolve_recv_type(state: &State, uri: &Uri, src: &str, at: usize, word_start: usize) -> Option<RecvType> {
+    if let Some(rt) = method_call_return_type(state, uri, src, word_start) {
+        return Some(rt);
     }
-    let recv = &src[j..at - 1];
-    if recv.is_empty() {
+    let recv = receiver_word(src, word_start)?;
+    resolve_name_type(state, uri, src, at, recv)
+}
+
+/// 接收者成员面分流：引擎类 → class_members；脚本类 → 脚本链 + 引擎链。
+fn recv_member_items(state: &State, uri: &Uri, src: &str, rt: &RecvType) -> Vec<CompletionItem> {
+    match rt {
+        RecvType::Engine(c) => class_members(&state.engine, c, state.snippet_support),
+        RecvType::Script { .. } => script_class_members(state, uri, src, rt),
+    }
+}
+
+/// 方法调用返回类型回溯（P6 C5.2 消费）：`recv.method(args).➡`——
+/// word_start-1 是 `.`，其前是 `)` 时回溯匹配括号取方法名与接收者词。
+/// 只支持一层词接收者；方法限本脚本（顶层 func 或内部类 func，live AST），
+/// 返回类型 = 注解直取 / `return <expr>` 推断（func_return_inferred）。
+/// 跨脚本方法返回类型推断不做（静默 None）。
+fn method_call_return_type(state: &State, uri: &Uri, src: &str, word_start: usize) -> Option<RecvType> {
+    let b = src.as_bytes();
+    // `.` 前必须紧邻 `)`（`word.` 已由 resolve_name_type 处理）。
+    if word_start < 3 || b[word_start - 2] != b')' {
         return None;
     }
-    let info = FileInfo::from_file(&parse(src).0);
-    info.resolve_var(src, recv).or_else(|| {
-        if state.engine.class_by_name(recv).is_some() || state.engine.builtin_by_name(recv).is_some() {
-            Some(recv.to_string())
-        } else {
-            None
+    // 括号匹配（忽略字符串内括号——夹具调用形态度，简化逐层计数）。
+    let close = word_start - 2;
+    let mut depth = 0i32;
+    let mut open = None;
+    let mut i = close;
+    while i > 0 {
+        match b[i] {
+            b')' => depth += 1,
+            b'(' => {
+                depth -= 1;
+                if depth == 0 {
+                    open = Some(i);
+                    break;
+                }
+            }
+            _ => {}
         }
-    })
+        i -= 1;
+    }
+    let open = open?;
+    // `(` 前是方法名标识符。
+    let mut m_end = open;
+    while m_end > 0 && (b[m_end - 1].is_ascii_alphanumeric() || b[m_end - 1] == b'_') {
+        m_end -= 1;
+    }
+    if m_end == open {
+        return None;
+    }
+    let method = &src[m_end..open];
+    // 方法名前是接收者词（或接收者也是调用——不支持，静默）。
+    let mut r_end = m_end;
+    while r_end > 0 && (b[r_end - 1].is_ascii_alphanumeric() || b[r_end - 1] == b'_') {
+        r_end -= 1;
+    }
+    if r_end == m_end {
+        return None; // `(...).method(` 无词接收者
+    }
+    let recv_name = &src[r_end..m_end];
+    if r_end > 0 && (b[r_end - 1] == b'.' || b[r_end - 1] == b')') {
+        return None; // 链式/嵌套调用接收者不做
+    }
+    let file = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+    // 接收者注解类型（局部/形参/类级 `var a: TestClass`）→ 本文件内部类
+    // body 的方法；否则接收者是顶层 func（`my_func(1).➡`）。
+    if let Some(ty_name) = local_annotation_text(state, uri, src, r_end, recv_name)
+        && let Some(c) = inner_class(&file, &ty_name) {
+            for st in &c.body {
+                if let Stmt::Func(f) = st
+                    && f.name.name == method {
+                        return gdscript_syntax::func_return_inferred(src, f, &state.engine, builtin_fn_ret())
+                            .map(RecvType::Engine);
+                    }
+            }
+            return None;
+        }
+    if let Some(Stmt::Func(f)) = file.body.iter().find(|st| matches!(st, Stmt::Func(f) if f.name.name == recv_name)) {
+        return gdscript_syntax::func_return_inferred(src, f, &state.engine, builtin_fn_ret())
+            .map(RecvType::Engine);
+    }
+    None
+}
+
+/// 名字的类型注解文本（局部 var/形参/类级 var 的 `: T` 注解，光标 at 前）。
+/// P6：方法调用回溯用（推断接收者是否本文件内部类）。
+fn local_annotation_text(state: &State, uri: &Uri, src: &str, at: usize, name: &str) -> Option<String> {
+    let file = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+    // 最内层 func：形参 + 局部 var。
+    let last_idx = file.body.len().saturating_sub(1);
+    if let Some(f) = file.body.iter().enumerate().find_map(|(i, st)| match st {
+        Stmt::Func(f) if f.span.0 <= at && (at <= f.span.1 || (i == last_idx && at <= src.len())) => Some(f),
+        _ => None,
+    }) {
+        for p in &f.params {
+            if p.name.name == name && p.span.1 < at {
+                return p.ty.as_ref().map(|t| type_text(src, t));
+            }
+        }
+        let mut blocks: Vec<&gdscript_syntax::ast::Block> = Vec::new();
+        collect_blocks(&f.body, &mut blocks);
+        for blk in &blocks {
+            for st in &blk.stmts {
+                if let Stmt::Var(v) = st
+                    && v.name.name == name
+                    && v.span.1 < at {
+                        return v.ty.as_ref().map(|t| type_text(src, t));
+                    }
+            }
+        }
+    }
+    // 类级 + 顶层 var。
+    for stmts in class_scope_stmts(&file, at) {
+        for st in stmts {
+            if let Stmt::Var(v) = st
+                && v.name.name == name
+                && v.span.1 < at {
+                    return v.ty.as_ref().map(|t| type_text(src, t));
+                }
+        }
+    }
+    None
 }
 
 // ───────────────────────── P5 C10 脚本成员面 ─────────────────────────
@@ -1601,6 +1766,670 @@ fn script_self_members(state: &State, uri: &Uri, src: &str, include_live: bool) 
         if i.sort_text.is_none() {
             let f = scored_fuzzy("", &i.label, state.config.freq_boost);
             i.sort_text = Some(scoring::sort_text(scoring::bucket::SELF, f));
+        }
+    }
+    out
+}
+
+// ───────────────────────── P6 C5 语义层类型推断 ─────────────────────────
+
+/// 编译器内建函数返回类型表（`char` → `String` 等，extension_api 外；
+/// hoverdata 签名 "String char(code: int)" 首词即返回类型）。进程级惰性。
+fn builtin_fn_ret() -> &'static FnRetTable {
+    static TABLE: std::sync::OnceLock<FnRetTable> = std::sync::OnceLock::new();
+    TABLE.get_or_init(|| {
+        hoverdata::gdscript_fns()
+            .into_iter()
+            .filter_map(|(n, (sig, _))| {
+                gdscript_syntax::ret_from_signature(&sig).map(|r| (n, r))
+            })
+            .collect()
+    })
+}
+
+/// 接收者类型：补全面消费的统一形态（P6 C5）。
+#[derive(Clone, Debug)]
+pub(crate) enum RecvType {
+    /// 引擎类 / 内建类型名 → class_members 面。
+    Engine(String),
+    /// 脚本类（res:// 路径 + 可选内部类名）→ 脚本链 + 引擎链成员面。
+    /// `inner` 仅支持当前文档内部类（live AST；preload 脚本的内部类
+    /// 实例成员不展开——类型位只出类型名，见 type_member_items）。
+    Script { res_path: String, inner: Option<String> },
+}
+
+/// 推断出的类型（InferTy）→ RecvType（需工程索引把 ScriptPath 落成路径；
+/// 无索引时 Unknown/ScriptPath 一律 None 静默降级）。
+fn infer_ty_to_recv(state: &State, ty: InferTy) -> Option<RecvType> {
+    match ty {
+        InferTy::Class(n) => Some(RecvType::Engine(n)),
+        InferTy::ScriptPath(p) => {
+            let proj = state.project.as_ref()?;
+            proj.resolve_preload(&p).map(|_| RecvType::Script { res_path: p, inner: None })
+        }
+        InferTy::Unknown => None,
+    }
+}
+
+/// D1 子类收窄：value 类型 is-a 注解类型时用 value（引擎行为——
+/// `var test: Node = A.new()` 补全出 A 的成员；oracle typehint_broad 锁定）。
+/// 脚本类型（ScriptPath / 工程脚本键）取 extends 链尾引擎基类为根；
+/// 引擎类型沿 inherits 链。
+fn is_subtype(state: &State, value: &InferTy, ann: &InferTy) -> bool {
+    // 类型 → 引擎链根（脚本类型经工程索引解析；引擎类型自身）。
+    let root = |ty: &InferTy| -> Option<String> {
+        match ty {
+            InferTy::Class(n) => {
+                let proj = state.project.as_ref()?;
+                if let Some(key) = proj.script_path_to_key(n) {
+                    let _ = key;
+                    return proj.script_engine_base_by_path(n).or_else(|| Some(n.clone()));
+                }
+                Some(n.clone())
+            }
+            InferTy::ScriptPath(p) => {
+                let proj = state.project.as_ref()?;
+                proj.script_engine_base_by_path(p).or_else(|| {
+                    proj.resolve_preload(p).map(|_| "Node".to_string())
+                })
+            }
+            InferTy::Unknown => None,
+        }
+    };
+    let (Some(v), Some(a)) = (root(value), root(ann)) else {
+        // 至少一方无根（preload 脚本无引擎根等）：同名即同型。
+        return value == ann;
+    };
+    if v == a {
+        return true;
+    }
+    state.engine.ancestor_chain(&v).contains(&a.as_str())
+}
+
+/// 声明类型解析（var/const/形参共用）：注解 + 初始值 + D1 收窄。
+/// `file` 供 names 表（preload 常量名 → ScriptPath）。
+fn decl_infer_ty(state: &State, src: &str, file: &File, ty: Option<&Expr>, value: Option<&Expr>) -> Option<InferTy> {
+    let engine = &state.engine;
+    let fn_ret = builtin_fn_ret();
+    let names = |n: &str| -> Option<InferTy> {
+        preload_consts(file)
+            .into_iter()
+            .find(|(k, _)| k == n)
+            .map(|(_, p)| InferTy::ScriptPath(p))
+    };
+    let ann = ty.and_then(|t| gdscript_syntax::type_annotation_ty(t, fn_ret));
+    let val = value.map(|e| infer_expr_ty(src, e, engine, fn_ret, &names));
+    match (ann, val) {
+        (Some(a), Some(v)) => Some(if is_subtype(state, &v, &a) { v } else { a }),
+        (Some(a), None) => Some(a),
+        (None, Some(v)) if !matches!(v, InferTy::Unknown) => Some(v),
+        _ => None,
+    }
+}
+
+/// 名字 → 类型（P6 C5 单文件作用域解析，静默失败）。解析顺序：
+/// 局部作用域（最内层 func：形参 + var/const，光标前已声明）→ 类级
+/// （所在内部类 body + 顶层 body）→ preload 常量表 → 本文件内部类名 /
+/// class_name → 全局 class_name 类 → 引擎类 / 内建类型名。
+pub(crate) fn resolve_name_type(state: &State, uri: &Uri, src: &str, at: usize, name: &str) -> Option<RecvType> {
+    let file = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+    let proj = state.project.as_ref();
+    if std::env::var("GODOTLSP_DEBUG_RESOLVE").is_ok() {
+        eprintln!("[resolve] name={name} at={at} top_stmts={:?}", file.body.iter().map(|s| match s {
+            Stmt::Var(v) => format!("var {} span={:?} ty={:?}", v.name.name, v.span, v.ty.as_ref().map(|t| expr_to_text(src, t))),
+            Stmt::Func(f) => format!("func {} span={:?}", f.name.name, f.span),
+            _ => "other".into(),
+        }).collect::<Vec<_>>());
+    }
+
+    // 形参/局部变量声明（嵌套块递归，只收 span 在光标前的声明）。
+    let mut scope_ty: Option<InferTy> = None;
+    let scan_stmts = |stmts: &[Stmt], out: &mut Option<InferTy>| {
+        for st in stmts {
+            let (n, sp1, t) = match st {
+                Stmt::Var(v) => (
+                    &v.name.name,
+                    v.span.1,
+                    decl_infer_ty(state, src, &file, v.ty.as_ref(), v.value.as_ref()),
+                ),
+                Stmt::Const(c) => (
+                    &c.name.name,
+                    c.span.1,
+                    decl_infer_ty(state, src, &file, c.ty.as_ref(), Some(&c.value)),
+                ),
+                _ => continue,
+            };
+            if n == name && sp1 < at && t.is_some() {
+                *out = t;
+                return;
+            }
+        }
+    };
+    // 最内层 func + 形参。
+    let last_idx = file.body.len().saturating_sub(1);
+    let func = file.body.iter().enumerate().find_map(|(i, st)| match st {
+        Stmt::Func(f) if f.span.0 <= at && (at <= f.span.1 || (i == last_idx && at <= src.len())) => Some(f),
+        _ => None,
+    });
+    if let Some(f) = func {
+        for p in &f.params {
+            if p.name.name == name && p.span.1 < at {
+                if let Some(t) = &p.ty {
+                    scope_ty = Some(InferTy::Class(type_text(src, t)));
+                }
+                break;
+            }
+        }
+        if scope_ty.is_none() {
+            let mut blocks: Vec<&gdscript_syntax::ast::Block> = Vec::new();
+            collect_blocks(&f.body, &mut blocks);
+            for b in &blocks {
+                scan_stmts(&b.stmts, &mut scope_ty);
+                if scope_ty.is_some() {
+                    break;
+                }
+            }
+        }
+    }
+    if scope_ty.is_none() {
+        // 类级 + 顶层（所在内部类优先，遮蔽顶层同名）。
+        for stmts in class_scope_stmts(&file, at) {
+            scan_stmts(stmts, &mut scope_ty);
+            if scope_ty.is_some() {
+                break;
+            }
+        }
+    }
+    if let Some(t) = scope_ty {
+        // 注解是 preload 常量名（var test: A）→ 递归一层解析。
+        if let InferTy::Class(n) = &t {
+            if let Some((_, path)) = preload_consts(&file).into_iter().find(|(k, _)| k == n) {
+                return infer_ty_to_recv(state, InferTy::ScriptPath(path));
+            }
+            // 注解是本文件内部类名 → 当前脚本 + 内部类。
+            if inner_class(&file, n).is_some() {
+                let rp = uri_res_path(state, uri).unwrap_or_default();
+                return Some(RecvType::Script { res_path: rp, inner: Some(n.clone()) });
+            }
+        }
+        return infer_ty_to_recv(state, t);
+    }
+    // preload 常量名（A / B）。
+    if let Some((_, path)) = preload_consts(&file).into_iter().find(|(k, _)| k == name) {
+        return infer_ty_to_recv(state, InferTy::ScriptPath(path));
+    }
+    // 本文件内部类名 → 当前脚本 + 内部类（`LocalInnerClass.➡` 类型成员面）。
+    if inner_class(&file, name).is_some() {
+        let rp = uri_res_path(state, uri).unwrap_or_default();
+        return Some(RecvType::Script { res_path: rp, inner: Some(name.to_string()) });
+    }
+    // 全局 class_name 类（B）。
+    if let Some(p) = proj.and_then(|p| p.class_script(name)) {
+        return Some(RecvType::Script { res_path: format!("res://{}", p.path), inner: None });
+    }
+    // 引擎类 / 内建类型名。
+    if state.engine.class_by_name(name).is_some() || state.engine.builtin_by_name(name).is_some() {
+        return Some(RecvType::Engine(name.to_string()));
+    }
+    None
+}
+
+/// 类型注解表达式 → 类型文本（`A` / `Array[int]` → base 名）。
+fn type_text(src: &str, e: &Expr) -> String {
+    match e {
+        Expr::Ident(id) => id.name.clone(),
+        Expr::Generic(base, _, _) => type_text(src, base),
+        _ => expr_to_text(src, e),
+    }
+}
+
+/// 递归收集块（含 if/for/while/match 分支体）。显式生命周期收块，
+/// 避免闭包 HRTB 推断坑（E0521）。
+fn collect_blocks<'a>(blk: &'a gdscript_syntax::ast::Block, out: &mut Vec<&'a gdscript_syntax::ast::Block>) {
+    out.push(blk);
+    for st in &blk.stmts {
+        match st {
+            Stmt::If { branches, else_block, .. } => {
+                for (_, b) in branches {
+                    collect_blocks(b, out);
+                }
+                if let Some(e) = else_block {
+                    collect_blocks(e, out);
+                }
+            }
+            Stmt::For { body, .. } | Stmt::While { body, .. } => collect_blocks(body, out),
+            Stmt::Match { arms, .. } => {
+                for a in arms {
+                    collect_blocks(&a.body, out);
+                }
+            }
+            _ => {}
+        }
+    }
+}
+
+/// 类作用域声明序列（P6）：所在内部类 body 优先，再顶层 body（同名遮蔽）。
+fn class_scope_stmts(file: &File, at: usize) -> Vec<&[Stmt]> {
+    let mut out = Vec::new();
+    if let Some(c) = enclosing_class(file, at) {
+        out.push(c.body.as_slice());
+    }
+    out.push(file.body.as_slice());
+    out
+}
+
+/// 光标所在内部类（P6：span 放宽同 enclosing_class_name）。
+fn enclosing_class(file: &File, at: usize) -> Option<&ClassDecl> {
+    let last_idx = file.body.len().saturating_sub(1);
+    file.body.iter().enumerate().find_map(|(i, st)| match st {
+        Stmt::Class(c) if c.span.0 <= at && (at <= c.span.1 || i == last_idx) => Some(c),
+        _ => None,
+    })
+}
+
+/// 本文件内部类名查找（顶层；嵌套不递归——夹具覆盖顶层形态）。
+fn inner_class<'a>(file: &'a File, name: &str) -> Option<&'a ClassDecl> {
+    file.body.iter().find_map(|st| match st {
+        Stmt::Class(c) if c.name.name == name => Some(c),
+        _ => None,
+    })
+}
+
+/// 任意脚本类成员面（P6：preload 路径 / 工程类 / 当前文件内部类）。
+/// 脚本自声明（工程索引链，近→远）+ 引擎链成员；`inner` 走 live AST
+/// （当前文档内部类 body + 宿主引擎链）。
+fn script_class_members(state: &State, uri: &Uri, src: &str, rt: &RecvType) -> Vec<CompletionItem> {
+    use gdscript_project::DeclKind;
+    let RecvType::Script { res_path, inner } = rt else {
+        return vec![];
+    };
+    let mut out: Vec<CompletionItem> = Vec::new();
+    let mut seen: HashSet<String> = HashSet::new();
+    let Some(proj) = state.project.as_ref() else { return out };
+
+    // 内部类形态：当前文档 live AST 的该类 body + 宿主引擎链。
+    if let Some(iname) = inner {
+        let file = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+        if let Some(c) = inner_class(&file, iname) {
+            for st in &c.body {
+                let item = match st {
+                    Stmt::Signal(s) => {
+                        if !seen.insert(s.name.name.clone()) { continue; }
+                        CompletionItem {
+                            label: s.name.name.clone(),
+                            kind: Some(CompletionItemKind::EVENT),
+                            detail: Some(format!("signal {}", s.name.name)),
+                            ..CompletionItem::default()
+                        }
+                    }
+                    Stmt::Var(v) => {
+                        if !seen.insert(v.name.name.clone()) { continue; }
+                        CompletionItem {
+                            label: v.name.name.clone(),
+                            kind: Some(CompletionItemKind::PROPERTY),
+                            detail: Some(v.name.name.clone()),
+                            ..CompletionItem::default()
+                        }
+                    }
+                    Stmt::Const(cc) => {
+                        if !seen.insert(cc.name.name.clone()) { continue; }
+                        CompletionItem {
+                            label: cc.name.name.clone(),
+                            kind: Some(CompletionItemKind::CONSTANT),
+                            detail: Some(format!("const {}", cc.name.name)),
+                            ..CompletionItem::default()
+                        }
+                    }
+                    Stmt::Enum(e) if e.name.is_some() => {
+                        let n = e.name.as_ref().expect("checked");
+                        if !seen.insert(n.name.clone()) { continue; }
+                        CompletionItem {
+                            label: n.name.clone(),
+                            kind: Some(CompletionItemKind::ENUM),
+                            detail: Some(format!("enum {}", n.name)),
+                            ..CompletionItem::default()
+                        }
+                    }
+                    Stmt::Enum(e) if e.name.is_none() => {
+                        for (id, _) in &e.entries {
+                            if seen.insert(id.name.clone()) {
+                                out.push(CompletionItem {
+                                    label: id.name.clone(),
+                                    kind: Some(CompletionItemKind::CONSTANT),
+                                    detail: Some(format!("const {} (匿名枚举条目)", id.name)),
+                                    ..CompletionItem::default()
+                                });
+                            }
+                        }
+                        continue;
+                    }
+                    Stmt::Class(cc) => {
+                        if !seen.insert(cc.name.name.clone()) { continue; }
+                        CompletionItem {
+                            label: cc.name.name.clone(),
+                            kind: Some(CompletionItemKind::CLASS),
+                            detail: Some("内部类".to_string()),
+                            ..CompletionItem::default()
+                        }
+                    }
+                    Stmt::Func(f) => {
+                        if !seen.insert(f.name.name.clone()) { continue; }
+                        let sig = f.signature_text(src).trim_end_matches(':').to_string();
+                        script_func_item(&f.name.name, Some(&sig), CompletionItemKind::METHOD, state.snippet_support)
+                    }
+                    _ => continue,
+                };
+                out.push(item);
+            }
+        }
+        // 宿主引擎链（当前脚本 extends 链尾）。
+        if let Some(rp) = uri_res_path(state, uri)
+            && let Some(eb) = proj.script_engine_base_by_path(&rp) {
+                out.extend(class_members(&state.engine, &eb, state.snippet_support));
+            }
+        return out;
+    }
+
+    // 脚本链成员（key 寻址，近→远）+ 引擎链。
+    if let Some(key) = proj.script_path_to_key(res_path) {
+        for m in proj.script_chain_members(&key) {
+            if !seen.insert(m.name.clone()) {
+                continue;
+            }
+            let item = match m.kind {
+                DeclKind::Method => script_func_item(
+                    &m.name,
+                    m.signature.as_deref(),
+                    CompletionItemKind::METHOD,
+                    state.snippet_support,
+                ),
+                DeclKind::Property => CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::PROPERTY),
+                    detail: Some(m.name.clone()),
+                    ..CompletionItem::default()
+                },
+                DeclKind::Const => CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::CONSTANT),
+                    detail: Some(format!("const {}", m.name)),
+                    ..CompletionItem::default()
+                },
+                DeclKind::Signal => CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::EVENT),
+                    detail: Some(format!("signal {}", m.name)),
+                    ..CompletionItem::default()
+                },
+                DeclKind::Enum => CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::ENUM),
+                    detail: Some(format!("enum {}", m.name)),
+                    ..CompletionItem::default()
+                },
+                DeclKind::Class => CompletionItem {
+                    label: m.name.clone(),
+                    kind: Some(CompletionItemKind::CLASS),
+                    detail: Some("内部类（脚本父类）".to_string()),
+                    ..CompletionItem::default()
+                },
+            };
+            out.push(item);
+        }
+    }
+    if let Some(eb) = proj.script_engine_base_by_path(res_path) {
+        out.extend(class_members(&state.engine, &eb, state.snippet_support));
+    }
+    out
+}
+
+/// 裸名位类型标注上下文判定（P6 D2）：行前缀以 `:` / `->` 结尾
+/// （`var x: A➡` / `func f(x: C➡` / `-> R➡`）→ 引擎在该位追加
+/// native 类枚举名（ConnectFlags 等裸名；oracle types/hints/index_0）。
+fn in_type_hint_position(src: &str, line_start: usize, word_start: usize) -> bool {
+    if line_start >= word_start || word_start > src.len() {
+        return false;
+    }
+    let t = src[line_start..word_start].trim_end();
+    t.ends_with(':') || t.ends_with("->")
+}
+
+/// 类型标注位 after_dot 的接收者路径（P6 D3）：`var x: R.➡` → `R`
+/// （可两段 `A.B`；`func f() -> R.➡` 同支持）。取 `:` / `->` 中更靠后者
+/// 为类型起点；**起点到词首必须同行**（防 `func f():` 块冒号跨行误判）；
+/// 校验段只含标识符字符，防字典字面量/字符串误伤。
+fn type_hint_dot_path(src: &str, word_start: usize) -> Option<String> {
+    let pre = &src[..word_start.saturating_sub(1)]; // 去掉紧邻的 '.'
+    // 只在光标所在行内找起点（跨行冒号是块冒号，非类型标注）。
+    let line_start = pre.rfind('\n').map(|p| p + 1).unwrap_or(0);
+    let t = &src[line_start..word_start.saturating_sub(1)];
+    let t = t.trim_end();
+    let colon = t.rfind(':');
+    let arrow = t.rfind("->");
+    let (start, is_arrow) = match (colon, arrow) {
+        (Some(c), Some(a)) => {
+            if a > c {
+                (a, true)
+            } else {
+                (c, false)
+            }
+        }
+        (Some(c), None) => (c, false),
+        (None, Some(a)) => (a, true),
+        (None, None) => return None,
+    };
+    let after = if is_arrow { &t[start + 2..] } else { &t[start + 1..] };
+    let rest = after.trim();
+    if rest.is_empty() || !rest.bytes().all(|c| c.is_ascii_alphanumeric() || c == b'_' || c == b'.') {
+        return None;
+    }
+    let rest = rest.trim_end_matches('.');
+    if rest.is_empty() {
+        return None;
+    }
+    Some(rest.to_string())
+}
+
+/// 类型成员面（P6 D3）：类型标注位 after_dot 出该类型的**类型名**
+/// （内部类 / 命名枚举 / const——含 preload 常量），追加全局枚举名。
+/// 引擎语义：不出 builtin 类型名与实例成员（oracle index_1_* exclude int）。
+/// path 无类型源（枚举名/未知名）→ None（调用方回落，保 P4 门控行为）。
+fn type_member_items(state: &State, uri: &Uri, file: &File, path: &str) -> Option<Vec<CompletionItem>> {
+    let proj = state.project.as_ref();
+    let segs: Vec<&str> = path.split('.').collect();
+    // 逐段下钻。终点源：本文件内部类 / 脚本（preload/工程类）/ 引擎类。
+    enum Src<'a> {
+        Local(&'a ClassDecl),
+        ScriptPath(String),
+        Engine(String),
+    }
+    let mut cur: Option<Src> = None;
+    for seg in &segs {
+        cur = match cur {
+            None => {
+                if let Some(c) = inner_class(file, seg) {
+                    Some(Src::Local(c))
+                } else if let Some((_, p)) = preload_consts(file).into_iter().find(|(k, _)| k == *seg) {
+                    Some(Src::ScriptPath(p))
+                } else if let Some(s) = proj.and_then(|p| p.class_script(seg)) {
+                    Some(Src::ScriptPath(format!("res://{}", s.path)))
+                } else if state.engine.class_by_name(seg).is_some()
+                    || state.engine.builtin_by_name(seg).is_some() {
+                        Some(Src::Engine(seg.to_string()))
+                    } else {
+                        None
+                    }
+            }
+            Some(Src::Local(c)) => c.body.iter().find_map(|st| match st {
+                Stmt::Class(cc) if cc.name.name == *seg => Some(Src::Local(cc)),
+                _ => None,
+            }),
+            // 跨脚本/引擎内部类下钻不做（夹具只覆盖本文件下钻）。
+            Some(_) => None,
+        };
+        cur.as_ref()?;
+    }
+    let mut out: Vec<CompletionItem> = Vec::new();
+    match cur {
+        Some(Src::Local(c)) => {
+            for st in &c.body {
+                match st {
+                    Stmt::Class(cc) => out.push(CompletionItem {
+                        label: cc.name.name.clone(),
+                        kind: Some(CompletionItemKind::CLASS),
+                        detail: Some("内部类".to_string()),
+                        ..CompletionItem::default()
+                    }),
+                    Stmt::Enum(e) if e.name.is_some() => {
+                        let n = e.name.as_ref().expect("checked");
+                        out.push(CompletionItem {
+                            label: n.name.clone(),
+                            kind: Some(CompletionItemKind::ENUM),
+                            detail: Some(format!("enum {}", n.name)),
+                            ..CompletionItem::default()
+                        });
+                    }
+                    Stmt::Const(cc) => out.push(CompletionItem {
+                        label: cc.name.name.clone(),
+                        kind: Some(CompletionItemKind::CONSTANT),
+                        detail: Some(format!("const {}", cc.name.name)),
+                        ..CompletionItem::default()
+                    }),
+                    _ => {}
+                }
+            }
+        }
+        Some(Src::ScriptPath(p)) => {
+            if let Some(proj) = proj
+                && let Some(key) = proj.script_path_to_key(&p)
+                && let Some(script) = proj.resolve_preload(&p) {
+                    let _ = key;
+                    for st in &script.ast.body {
+                        match st {
+                            Stmt::Class(cc) => out.push(CompletionItem {
+                                label: cc.name.name.clone(),
+                                kind: Some(CompletionItemKind::CLASS),
+                                detail: Some("内部类".to_string()),
+                                ..CompletionItem::default()
+                            }),
+                            Stmt::Enum(e) if e.name.is_some() => {
+                                let n = e.name.as_ref().expect("checked");
+                                out.push(CompletionItem {
+                                    label: n.name.clone(),
+                                    kind: Some(CompletionItemKind::ENUM),
+                                    detail: Some(format!("enum {}", n.name)),
+                                    ..CompletionItem::default()
+                                });
+                            }
+                            Stmt::Const(cc) => out.push(CompletionItem {
+                                label: cc.name.name.clone(),
+                                kind: Some(CompletionItemKind::CONSTANT),
+                                detail: Some(format!("const {}", cc.name.name)),
+                                ..CompletionItem::default()
+                            }),
+                            _ => {}
+                        }
+                    }
+                }
+        }
+        Some(Src::Engine(c)) => {
+            // 引擎类沿祖先链收枚举/常量名（BaseButton.→ DrawMode/Anchor/
+            // TextureRepeat 分散在 BaseButton/Control/CanvasItem——
+            // oracle builtin_enum_in_type_hint include 锁定）。
+            for cls in state.engine.ancestor_chain(&c) {
+                if let Some(ec) = state.engine.class_by_name(cls) {
+                    for e in &ec.enums {
+                        out.push(CompletionItem {
+                            label: e.name.clone(),
+                            kind: Some(CompletionItemKind::ENUM),
+                            detail: Some(format!("enum {cls}.{}", e.name)),
+                            ..CompletionItem::default()
+                        });
+                    }
+                    for k in &ec.constants {
+                        out.push(CompletionItem {
+                            label: k.name.clone(),
+                            kind: Some(CompletionItemKind::CONSTANT),
+                            detail: Some(format!("const {cls}.{}", k.name)),
+                            ..CompletionItem::default()
+                        });
+                    }
+                }
+            }
+        }
+        None => {}
+    }
+    // 枚举名追加（引擎类型位行为）：全局枚举 + native 类枚举裸名
+    // （ConnectFlags = Object 类枚举，不在 global_enums——与 D2 同数据源）。
+    for e in &state.engine.global_enums {
+        out.push(CompletionItem {
+            label: e.name.clone(),
+            kind: Some(CompletionItemKind::ENUM),
+            detail: Some("@GlobalScope 枚举".to_string()),
+            ..CompletionItem::default()
+        });
+    }
+    let mut enum_names: Vec<&str> = state
+        .engine
+        .classes
+        .values()
+        .flat_map(|c| c.enums.iter().map(|e| e.name.as_str()))
+        .chain(
+            state
+                .engine
+                .builtins
+                .values()
+                .flat_map(|b| b.enums.iter().map(|e| e.name.as_str())),
+        )
+        .collect();
+    enum_names.sort_unstable();
+    enum_names.dedup();
+    for n in enum_names {
+        out.push(CompletionItem {
+            label: n.to_string(),
+            kind: Some(CompletionItemKind::ENUM),
+            detail: Some("类枚举".to_string()),
+            ..CompletionItem::default()
+        });
+    }
+    let _ = uri;
+    Some(out)
+}
+
+/// 类型位类作用域类型名（P6）：光标在内部类体内时，该类的 const /
+/// 命名枚举 / 内部类名在类型标注位可见（局部遮蔽语义——调用方在全局面
+/// 之后追加，同名以类内为准需去重；此处先出，既有面同名项仍并存，
+/// oracle 只查 include/exclude 无碍）。
+fn class_scope_type_names(state: &State, uri: &Uri, src: &str, at: usize) -> Vec<CompletionItem> {
+    let file = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+    let Some(c) = enclosing_class(&file, at) else {
+        return vec![];
+    };
+    let mut out = Vec::new();
+    for st in &c.body {
+        match st {
+            Stmt::Class(cc) => out.push(CompletionItem {
+                label: cc.name.name.clone(),
+                kind: Some(CompletionItemKind::CLASS),
+                detail: Some("内部类".to_string()),
+                ..CompletionItem::default()
+            }),
+            Stmt::Enum(e) if e.name.is_some() => {
+                let n = e.name.as_ref().expect("checked");
+                out.push(CompletionItem {
+                    label: n.name.clone(),
+                    kind: Some(CompletionItemKind::ENUM),
+                    detail: Some(format!("enum {}", n.name)),
+                    ..CompletionItem::default()
+                });
+            }
+            Stmt::Const(cc) => out.push(CompletionItem {
+                label: cc.name.name.clone(),
+                kind: Some(CompletionItemKind::CONSTANT),
+                detail: Some(format!("const {}", cc.name.name)),
+                ..CompletionItem::default()
+            }),
+            _ => {}
         }
     }
     out
@@ -2062,9 +2891,26 @@ fn enum_value_completion_allowed(src: &str, word_start: usize, at: usize) -> boo
     !is_type_annotation
 }
 
+/// 引擎 internal 属性表（CLASS → [props]）——`PROPERTY_USAGE_INTERNAL`
+/// 成员，引擎补全排除（oracle filter/usage_internal：Translation.messages；
+/// 源码提取见 tools/gen_internal_props.py，自建派生数据入库）。
+fn internal_props() -> &'static HashMap<String, HashSet<String>> {
+    static TABLE: std::sync::OnceLock<HashMap<String, HashSet<String>>> = std::sync::OnceLock::new();
+    TABLE.get_or_init(|| {
+        serde_json::from_str::<HashMap<String, Vec<String>>>(include_str!(
+            "../../gdscript-engine/testdata/internal_props.json"
+        ))
+        .unwrap_or_default()
+        .into_iter()
+        .map(|(k, v)| (k, v.into_iter().collect()))
+        .collect()
+    })
+}
+
 /// 收集某类（含祖先）的方法与属性补全项。方法走 C6.4 `name(…)` 约定。
 fn class_members(engine: &EngineApi, class: &str, snippet_support: bool) -> Vec<CompletionItem> {
     let mut items: Vec<CompletionItem> = Vec::new();
+    let internal = internal_props();
     for cls in engine.ancestor_chain(class) {
         if let Some(c) = engine.classes.get(cls) {
             for m in &c.methods {
@@ -2076,6 +2922,11 @@ fn class_members(engine: &EngineApi, class: &str, snippet_support: bool) -> Vec<
                 ));
             }
             for p in &c.properties {
+                // PROPERTY_USAGE_INTERNAL 成员排除（引擎补全同向，
+                // oracle filter/usage_internal 锁定）。
+                if internal.get(cls).is_some_and(|s| s.contains(&p.name)) {
+                    continue;
+                }
                 items.push(CompletionItem {
                     label: p.name.clone(),
                     kind: Some(CompletionItemKind::PROPERTY),

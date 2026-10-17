@@ -1,0 +1,172 @@
+{
+ "AnimatedTexture": [
+  "frame_"
+ ],
+ "AnimationLibrary": [
+  "_data"
+ ],
+ "AnimationNode": [
+  "filters"
+ ],
+ "AnimationNodeBlendSpace1D": [
+  "blend_point_"
+ ],
+ "AnimationNodeBlendSpace2D": [
+  "triangles"
+ ],
+ "AnimationNodeTimeSeek": [
+  "input_"
+ ],
+ "ArrayMesh": [
+  "_blend_shape_names",
+  "_surfaces"
+ ],
+ "AudioServer": [
+  "bus/"
+ ],
+ "AudioStreamInteractive": [
+  "_transitions",
+  "clip_"
+ ],
+ "AudioStreamPlaylist": [
+  "stream_"
+ ],
+ "AudioStreamSynchronized": [
+  "stream_"
+ ],
+ "BitMap": [
+  "data"
+ ],
+ "ConcavePolygonShape3D": [
+  "data"
+ ],
+ "Control": [
+  "anchors_preset",
+  "layout_mode"
+ ],
+ "Curve": [
+  "_data",
+  "_limits"
+ ],
+ "Curve2D": [
+  "_data"
+ ],
+ "Curve3D": [
+  "_data"
+ ],
+ "DPITexture": [
+  "_source"
+ ],
+ "GLTFSkeleton": [
+  "godot_bone_node",
+  "unique_names"
+ ],
+ "GLTFSkin": [
+  "inverse_binds",
+  "joint_i_to_bone_i",
+  "joint_i_to_name"
+ ],
+ "GLTFState": [
+  "accessors",
+  "animations",
+  "buffer_views",
+  "cameras",
+  "handle_binary_image",
+  "images",
+  "lights",
+  "materials",
+  "meshes",
+  "nodes",
+  "skeletons",
+  "skins",
+  "texture_samplers",
+  "textures",
+  "unique_animation_names",
+  "unique_names"
+ ],
+ "ImageTexture": [
+  "image"
+ ],
+ "ImageTexture3D": [
+  "_images"
+ ],
+ "ImageTextureLayered": [
+  "_images"
+ ],
+ "ImporterMesh": [
+  "_data"
+ ],
+ "LightmapGIData": [
+  "_uses_packed_directional",
+  "light_textures",
+  "probe_data",
+  "user_data",
+  "uses_spherical_harmonics"
+ ],
+ "MultiplayerSpawner": [
+  "_spawnable_scenes"
+ ],
+ "NavigationMesh": [
+  "polygons",
+  "vertices"
+ ],
+ "NavigationMeshSourceGeometryData2D": [
+  "obstruction_outlines",
+  "projected_obstructions",
+  "traversable_outlines"
+ ],
+ "NavigationMeshSourceGeometryData3D": [
+  "indices",
+  "projected_obstructions",
+  "vertices"
+ ],
+ "NavigationPolygon": [
+  "outlines",
+  "polygons",
+  "vertices"
+ ],
+ "PackedDataContainer": [
+  "__data__"
+ ],
+ "PackedScene": [
+  "_bundled"
+ ],
+ "Polygon2D": [
+  "bones"
+ ],
+ "PolygonPathFinder": [
+  "data"
+ ],
+ "PortableCompressedTexture2D": [
+  "_data"
+ ],
+ "ResourcePreloader": [
+  "resources"
+ ],
+ "SpriteFrames": [
+  "animations"
+ ],
+ "Translation": [
+  "messages"
+ ],
+ "VisualShaderNode": [
+  "default_input_values",
+  "expanded_output_ports"
+ ],
+ "VisualShaderNodeCustom": [
+  "initialized",
+  "properties"
+ ],
+ "VisualShaderNodeParameterRef": [
+  "param_type"
+ ],
+ "VisualShaderNodeReroute": [
+  "port_type"
+ ],
+ "VisualShaderNodeVec4Constant": [
+  "constant_v4"
+ ],
+ "VoxelGIData": [
+  "_data"
+ ]
+}

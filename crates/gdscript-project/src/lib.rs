@@ -408,6 +408,25 @@ impl Project {
             }
         }
     }
+
+    /// 全局 class_name 类名 → 该脚本（P6 C5：`B.➡` 类型面解析全局类）。
+    pub fn class_script(&self, name: &str) -> Option<&Script> {
+        self.class_names.get(name).map(|&i| &self.scripts[i])
+    }
+
+    /// 脚本类型键（class_name 或 `script:<rel>`）→ res:// 相对路径。
+    /// P6：script_chain_members 以键寻址，引擎链起点需要路径形态。
+    pub fn script_key_to_path(&self, key: &str) -> Option<String> {
+        if let Some(&i) = self.class_names.get(key) {
+            return Some(self.scripts[i].path.clone());
+        }
+        key.strip_prefix("script:").map(str::to_string)
+    }
+
+    /// res:// 路径 → 该脚本的类型键（P6：preload 路径 → chain 查询起点）。
+    pub fn script_path_to_key(&self, res_path: &str) -> Option<String> {
+        self.resolve_preload(res_path).map(Self::script_key)
+    }
 }
 
 impl ProjectContext for Project {

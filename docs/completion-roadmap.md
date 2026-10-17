@@ -473,7 +473,7 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
   → **P6 C5**;get_node 22 → **P10 N6**;types 17 → P6/P5 二期(preload 常量类型 + 内部类
   作用域类型面)。
 
-### P6 — C5 语义层类型推断(gdscript-syntax,附加式)
+### P6 — C5 语义层类型推断(gdscript-syntax,附加式)✅ 已实施(2026-10-17)
 
 **解锁面**:`index` 桶元素成员(`outer`/`inner`)、`types/local/no_type`(`begins_with(…)`)、
 `infer_return_type_without_value`,并是 C8 二期 tween_property 与 N5(callable 形参识别)的前置。
@@ -489,8 +489,41 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
 - **取舍**:只做单层字面量推断(不做跨语句数据流、不做集合元素类型下推——`index` 桶的
   `array_value` 需元素类型,取 `Array[int]` 注解或字面量首元素);推断失败静默降级(不出成员,
   与引擎"类型未知"行为一致)。
-- **验收**:oracle index 1/9→7/9(字典键 2 个仍不做)、types no_type/inferred 转 pass、
-  no_parenthesis +6;单测锁推断器各型;bench 不回退(p50 基线 8.6ms)。
+
+**实施落点(实际)**:
+- **`gdscript-syntax/src/infer.rs`(新模块,静默推断器)**:`InferTy` 三态
+  (`Class(String)`/`ScriptPath(String)`/`Unknown`)+ `infer_expr_ty`(字面量/构造调用/utility
+  返回/`A.new()` Attribute 分支/preload·load)+ `type_annotation_ty` + `var_decl_types` +
+  `func_return_inferred`(递归收集嵌套 return,全一致才给类型)+ `preload_consts` +
+  `ret_from_signature`;与 semantic.rs 诊断分析解耦,失败一律 Unknown 静默降级;11 单测。
+- **D1 子类收窄**:`decl_infer_ty` + `is_subtype`(root 闭包统一 ScriptPath/Class 根解析)——
+  初始值类型 is-a 注解类型时用初始值(`var test: Node = A.new()` 出 A 成员);脚本类型根 =
+  `script_engine_base_by_path`,引擎类型沿 ancestor_chain。
+- **D2 类枚举名**:764 个 native 类枚举(如 Object.ConnectFlags,不在 global_enums)在类型
+  标注位(`: word$` / `-> word$`,冒号/箭头到词首必须**同行**——防 `func f():` 块冒号跨行误判)
+  专属追加;数据源 `tools/gen_internal_props.py` 同批引擎语料。
+- **D3 类型成员面**:`var x: R.➡` 经 `type_member_items` 逐段下钻(Src::{Local, ScriptPath,
+  Engine}),出内部类/枚举/const + 引擎链枚举/常量,尾部追加全局枚举+764 类枚举名;path 无
+  类型源返回 None 回落原链(保 P4 枚举值面门控,py_value 回归防线)。
+- **D4 N5 Callable 面**:`argopts::callable_arg_items`——实参位形参类型 callable → 裸方法名
+  (insert 无括号);非 Callable 位(本文件方法)出精确 `name()` 形态;**置于 argument_options
+  之后兜底** + `site.literal` 有值先退(字符串字面量/动作面不被抢)。3 单测。
+- **`RecvType` 统一消费形态**:`Engine(String)`/`Script { res_path, inner }`;
+  `resolve_name_type` 解析链:局部作用域(span<at)→ 类级+顶层 → preload 常量递归 →
+  内部类名 → 全局 class_name → 引擎类。
+- **internal 属性排除**:引擎 PROPERTY_USAGE_INTERNAL 成员(146 处,含 Translation.messages)
+  从源码 ADD_PROPERTY 提取(`tools/gen_internal_props.py` → `internal_props.json`,45 类/80
+  属性)入库 `gdscript-engine/testdata/`,`class_members` 按名过滤。
+
+- **验收(实际)**:oracle **75→99/140(+24,零回归)**——types/local 8、types/member 5、
+  types/hints 8、infer_return 1、no_parenthesis 3/6(其中 2 个 variant 形态差异)+ C8 一期
+  argument_options 0/11→3/11;workspace 126+ 测试全绿(infer.rs 11 + argopts N5 3 新测试);
+  clippy 0 warning;smoke ALL OK;零回归后基线已更新(99/140)。**剩余归界**:
+  `no_parenthesis_when_callable_is_expected` 的 `builtin_complete_braces`/`builtin_incomplete_braces`/
+  `native` 三夹具依赖「未闭合调用参数列表把后续 `func` 声明吞进实参」的**解析器层修复**
+  (根因在 gdscript-syntax 词法器括号计数抑制缩进标记,AST 层恢复无效已回滚)——独立债记 §3.6;
+  `index/const_dictionary_keys`、`local_dictionary_keys` 维持不做(roadmap 既定);
+  get_node 22 夹具归 **P10 N6**。
 
 ### P7 — C6.3 虚方法模型化(gdscript-engine + godotlsp)
 

@@ -5,6 +5,7 @@
 
 pub mod ast;
 pub mod error;
+pub mod infer;
 pub mod lexer;
 pub mod parser;
 pub mod semantic;
@@ -14,6 +15,10 @@ pub use ast::File;
 pub use error::ParseError;
 pub use parser::parse;
 pub use semantic::{analyze, Analysis, SemanticError};
+pub use infer::{
+    func_return_inferred, infer_expr_ty, preload_arg, preload_consts, ret_from_signature,
+    type_annotation_ty, var_decl_types, FnRetTable, InferTy,
+};
 pub use token::{Token, TokenKind, keyword_kind};
 
 /// 仅词法：`tokenize(source) -> Vec<Token>`（含结构 token Newline/Indent/Dedent）。

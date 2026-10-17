@@ -811,8 +811,214 @@ pub(crate) fn argument_options(
     }
 }
 
+
+// ───────────────────────── N5：Callable 实参位无括号面 ─────────────────────────
+
+/// N5（P6 C5.3）：实参位形参类型为 Callable → 本脚本方法名 insert **不带
+/// 括号**（`hello_world` 而非 `hello_world()`；oracle
+/// no_parenthesis_when_callable_is_expected 桶）。非 Callable 位（或形参无
+/// 类型注解）出常规 `name()` 形态（oracle local_method_variant_arg_0）。
+/// 面独占（argopts 惯例）；callee/形参不可判定（lambda `func(`、未知方法、
+/// 形参越界）→ None 回落常规面。引擎锚点：`_find_call_arguments` 的
+/// callable 参数特判（modules/gdscript/gdscript_editor.cpp:3328 起）。
+///
+/// 已知边界（roadmap）：未闭合调用的 AST 恢复缺失——`sort_custom(h` 会把
+/// 后续 `func` 声明吞进实参（builtin_*_braces/native 三夹具），根因在
+/// gdscript-syntax 词法器括号计数抑制缩进标记，独立债不属本面。
+pub fn callable_arg_items(
+    state: &State,
+    uri: &lsp_types::Uri,
+    src: &str,
+    at: usize,
+) -> Option<Vec<CompletionItem>> {
+    let site = arg_site_at(src, at)?;
+    let Callee::Call { method, receiver } = &site.callee else {
+        return None; // 注解实参位不走本面
+    };
+    // 字符串字面量实参位不命中（C8 字符串选项面优先——add_string_name
+    // 等 string_literals 夹具回归教训）。
+    if site.literal.is_some() {
+        return None;
+    }
+    let file = state.asts.get(uri).cloned().unwrap_or_else(|| crate::parse(src).0);
+    // 形参类型解析：位 argidx 的类型根。
+    let param_ty: Option<String> = match receiver.as_deref() {
+        None | Some("self") => {
+            // 裸调用 = 本文件方法（live AST；父链方法签名解析留后续）。
+            let f = find_local_func(&file, method)?;
+            f.params.get(site.argidx).and_then(|p| p.ty.as_ref()).and_then(type_expr_root)
+        }
+        Some(recv) => {
+            // 接收者类型：常规解析，miss 后特判 utility 调用接收者
+            // （`create_tween().tween_callback(` → Tween）。
+            let ty = receiver_type(state, src, at, &file, Some(recv)).or_else(|| {
+                state
+                    .engine
+                    .utility_functions
+                    .iter()
+                    .find(|f| f.name == *recv)
+                    .filter(|f| !f.return_type.is_empty() && f.return_type != "void")
+                    .map(|f| f.return_type.clone())
+            })?;
+            let ty = ty.as_str();
+            // 引擎类方法 → 内建类方法；都不中（脚本类接收者等）→ 保守回落。
+            let args = state
+                .engine
+                .find_method(ty, method)
+                .map(|m| &m.arguments)
+                .or_else(|| {
+                    state.engine.builtin_by_name(ty).and_then(|b| {
+                        b.methods.iter().find(|m| m.name == *method).map(|m| &m.arguments)
+                    })
+                });
+            args?.get(site.argidx).map(|a| a.ty.clone())
+        }
+    };
+    // Callable 判定：显式注解 Callable → 无括号；无注解/其他类型 → 常规。
+    let callable = param_ty.as_deref() == Some("Callable");
+
+    // 本脚本方法全集（顶层 + 内部类，同 P5 层①口径）。
+    let mut names: Vec<(String, usize)> = Vec::new();
+    fn collect(stmts: &[Stmt], out: &mut Vec<(String, usize)>) {
+        for st in stmts {
+            match st {
+                Stmt::Func(f) => out.push((f.name.name.clone(), f.params.len())),
+                Stmt::Class(c) => collect(&c.body, out),
+                _ => {}
+            }
+        }
+    }
+    collect(&file.body, &mut names);
+    if names.is_empty() {
+        return None;
+    }
+    let mut out: Vec<CompletionItem> = Vec::new();
+    for (name, nparams) in names {
+        let item = if callable {
+            CompletionItem {
+                label: name.clone(),
+                kind: Some(CompletionItemKind::METHOD),
+                detail: Some("Callable 实参（无括号插入）".into()),
+                insert_text: Some(name.clone()),
+                ..CompletionItem::default()
+            }
+        } else if nparams == 0 {
+            // 常规位零参：引擎 display/insert 都是 `name()`（oracle
+            // local_method_variant_arg_0 include 精确锁定）。
+            CompletionItem {
+                label: format!("{name}()"),
+                kind: Some(CompletionItemKind::METHOD),
+                detail: Some(format!("{name}()")),
+                insert_text: Some(format!("{name}()")),
+                ..CompletionItem::default()
+            }
+        } else {
+            CompletionItem {
+                label: format!("{name}(…)"),
+                kind: Some(CompletionItemKind::METHOD),
+                detail: Some(name.clone()),
+                insert_text: Some(format!("{name}($1)")),
+                insert_text_format: Some(InsertTextFormat::SNIPPET),
+                ..CompletionItem::default()
+            }
+        };
+        out.push(item);
+    }
+    Some(out)
+}
+
+/// 本文件方法查找（顶层 + 内部类，P6 N5 用）。
+fn find_local_func<'a>(file: &'a File, name: &str) -> Option<&'a FuncDecl> {
+    fn walk<'a>(stmts: &'a [Stmt], name: &str) -> Option<&'a FuncDecl> {
+        for st in stmts {
+            match st {
+                Stmt::Func(f) if f.name.name == name => return Some(f),
+                Stmt::Class(c) => {
+                    if let Some(f) = walk(&c.body, name) {
+                        return Some(f);
+                    }
+                }
+                _ => {}
+            }
+        }
+        None
+    }
+    walk(&file.body, name)
+}
+
 #[cfg(test)]
 mod tests {
+
+    #[test]
+    fn n5_callable_arg_bare_name() {
+        let mut st = crate::hover_tests::test_state();
+        let src = "func test(a: Callable, b):
+    pass
+
+func _init() -> void:
+    test(h➡)
+    pass
+
+func hello_world():
+	pass
+".replace("➡", "");
+        let uri: lsp_types::Uri = "file:///n5.gd".parse().unwrap();
+        st.docs.insert(uri.clone(), src.clone());
+        st.asts.insert(uri.clone(), crate::parse(&src).0);
+        let at = src.find("test(h").unwrap() + "test(h".len();
+        let items = callable_arg_items(&st, &uri, &src, at).expect("命中");
+        let hw = items.iter().find(|i| i.label == "hello_world").expect("裸名项");
+        assert_eq!(hw.insert_text.as_deref(), Some("hello_world"));
+        // exclude：无带括号变体
+        assert!(!items.iter().any(|i| i.insert_text.as_deref() == Some("hello_world(")));
+    }
+
+    #[test]
+    fn n5_non_callable_arg_regular_form() {
+        let mut st = crate::hover_tests::test_state();
+        let src = "func test(a, b: Callable):
+    pass
+
+func _init() -> void:
+    test(h➡)
+    pass
+
+func hello_world():
+	pass
+".replace("➡", "");
+        let uri: lsp_types::Uri = "file:///n5b.gd".parse().unwrap();
+        st.docs.insert(uri.clone(), src.clone());
+        st.asts.insert(uri.clone(), crate::parse(&src).0);
+        let at = src.find("test(h").unwrap() + "test(h".len();
+        let items = callable_arg_items(&st, &uri, &src, at).expect("命中");
+        let hw = items.iter().find(|i| i.label == "hello_world()").expect("常规项");
+        assert_eq!(hw.insert_text.as_deref(), Some("hello_world()"));
+        assert!(!items.iter().any(|i| i.label == "hello_world" && i.insert_text.as_deref() == Some("hello_world")));
+    }
+
+    #[test]
+    fn n5_lambda_and_string_fallthrough() {
+        let mut st = crate::hover_tests::test_state();
+        // lambda 参数位 `func(` 不是方法调用 → None。
+        let src = "func _init() -> void:
+    x.connect(func(a = p➡): pass
+    pass
+".replace("➡", "");
+        let uri: lsp_types::Uri = "file:///n5c.gd".parse().unwrap();
+        st.asts.insert(uri.clone(), crate::parse(&src).0);
+        let at = src.find("a = p").unwrap() + 5;
+        assert!(callable_arg_items(&st, &uri, &src, at).is_none());
+        // 字符串实参位 → None（C8 选项面优先）。
+        let src2 = "func _init() -> void:
+    x.is_action_pressed(\"a➡\")
+    pass
+".replace("➡", "");
+        let uri2: lsp_types::Uri = "file:///n5d.gd".parse().unwrap();
+        st.asts.insert(uri2.clone(), crate::parse(&src2).0);
+        let at2 = src2.find("\"a").unwrap() + 2;
+        assert!(callable_arg_items(&st, &uri2, &src2, at2).is_none());
+    }
+
     use super::*;
     use crate::hover_tests::test_state;
 
