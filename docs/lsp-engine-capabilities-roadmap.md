@@ -81,13 +81,16 @@
 | P1 | C7.3 | R4 回归止血:恢复 $/% 节点路径上下文(fa7d645 实现,22882f7 重写丢失) | ✅ 已落地(单测 + E2E:`$Panel/` 1808→0 项,取模不误伤) |
 | P2 | C7.1/C7.2 | 工程面:class_name/autoload 全局面 + `preload("res://` 路径补全 + N2 字符串抑制(gdscript-project 已索引未消费) | ✅ 已落地(2026-10-17,单测×4 + E2E;`Project::autoloads()` 访问器 + fixture projface) |
 | P3 | C8 | 参数选项面:信号名/输入动作(`[input]` 表)/注解参数(手搬表 + 模型全局枚举 + 引擎警告枚举)(oracle `argument_options/` 验收) | ✅ 一期已实施(2026-10-17,`argopts.rs`;33→36/140,argument_options 0/11→3/11;tween_property/动画面/`&`/`^` 设置二期) |
-| P4 | C9 | snippet 对齐(插件 16→~40,`tools/fetch_snippets.py` pinned 双仓库)+ 官方 9 个 script_templates 入库备料 | 未实施 |
+| P4-P11 | C6.6b/C10/C5/C6.3/C8b/C6.5/N6/C9 | 重排后剩余工作(阻塞簇归并):枚举入口 → 脚本成员面 → 语义推断 → 虚方法 → C8b → 构造/运算符 → 场景树 → snippet | 未实施(总表+规格见 `completion-roadmap.md` §四) |
 
-> **oracle 普查(2026-10-17 三轮)**:首跑 20/140 → C7.3/C6.4/C6.6 后 24/140 →
+> **oracle 普查(2026-10-17 四轮)**:首跑 20/140 → C7.3/C6.4/C6.6 后 24/140 →
 > C6.1/C6.2/C7.1/C7.2/N2 后 33/140(+9 全为信号面战绩,零回归)→
-> **C8 一期后 36/140**(argument_options 0/11→3/11,零回归);差距地图与
-> vacuous-pass 清单见 `completion-roadmap.md` §3.6——其中 self 成员面(N1)为
-> 证据最充分的新面(C10,设计后排期;N2 字符串抑制已于 2026-10-17 随 C7.2 落地)。
+> **C8 一期后 36/140**(argument_options 0/11→3/11,零回归)。**资料盘点轮(同日)**:
+> 剩余 104 失败按共同阻塞归并为 5 簇(脚本成员面 ~30 / 枚举入口 ~16 / 语义推断 ~9 /
+> callable 6 / 场景树 ~25),剩余工作重排 P4-P11(C6.6b → C10 → C5 → C6.3 → C8b → C6.5 →
+> N6 → C9,总表与逐期规格见 `completion-roadmap.md` §四);盘点纠正:引擎源码仓
+> **无** snippet 表/script_templates(C9 基准锁定 vscode+zed,templates 改来源考证),
+> **验证** `doc/classes/*.xml` 带完整构造/运算符签名+描述(C6.5 双源互补落地)。
 
 - **验收总则**:每项单测 + oracle 分桶 + smoke 断言;bench_load 基准不回退;实施后回本文件打勾。
 

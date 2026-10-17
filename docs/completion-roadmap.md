@@ -1,6 +1,7 @@
 # 补全增强路线图 — 引擎数据面 × 官方 snippet(2026-10-16 立项)
 
-> **状态:P0/P2/P3 已实施;C7.3/C6.4/C6.6/C6.1/C6.2/C7.1/C7.2/N2/C8(一期)已落地(2026-10-17);其余规划中。**
+> **状态:P0/P2/P3 已实施;C7.3/C6.4/C6.6/C6.1/C6.2/C7.1/C7.2/N2/C8(一期)已落地(2026-10-17);
+> 2026-10-17 资料盘点轮完成,剩余工作按阻塞簇重排为 P4-P11(见 §四)。**
 > 本文件是 C6-C9 四项工作流的排期依据;设计论证与源码锚点见
 > `lsp-design.md` §6.9(证据深挖),能力面索引见 `lsp-engine-capabilities-roadmap.md` P3.6。
 >
@@ -20,21 +21,40 @@
 | P1 | **C7.3** | godotlsp | $/% 节点路径上下文止血 | 低 | ✅ 已落地(2026-10-17,单测+E2E) |
 | P2 | **C7.1/C7.2** | godotlsp | class_name/autoload 全局面;res:// 路径面 + N2 字符串抑制 | 低-中 | ✅ 已落地(2026-10-17,oracle 24→**33/140**,+9 全为 C6.1 信号面战绩) |
 | P3 | **C8** | godotlsp + gdscript-project | 参数选项面(信号名/输入动作/注解参数)+ oracle harness 两处修复 | 低(表漂移可检测) | ✅ 一期已实施(2026-10-17,oracle 33→**36/140**,argument_options 0/11→3/11) |
-| P4 | **C9** | 插件 + 工具 | snippet 16→~40 对齐;官方模板入库备料 | 无(纯增量) | 待 |
+| P4 | **C6.6b** | godotlsp | 枚举面入口扩展(match 测试位 + `global_enums` 值面 + 全局枚举类型名入全局面) | 低(数据已在,唯一种全局面增量) | 待(资料盘点后排首位) |
+| P5 | **C10** | godotlsp | 脚本成员面(簇 A:self/裸标识符/脚本接收者三层成员 + override 签名 + extends 位类名) | 中(全局面合并,设计先行) | 待(lsp-design 设计后排) |
+| P6 | **C5** | gdscript-syntax | 语义层类型推断(locals_at + 返回类型推断) | 中(内核附加式) | 待 |
+| P7 | **C6.3** | gdscript-engine + godotlsp | 虚方法模型化(`is_virtual` 1437 + override 面引擎签名) | 低(附加式 serde) | 待 |
+| P8 | **C8 二期** | godotlsp | tween_property 属性面 + InputMap 单例面 + `&`/`^` 设置 plumbing | 低-中 | 待 |
+| P9 | **C6.5** | engine + tools | builtin 构造/运算符面(XML×JSON 双源:模型 + 文档 + 构造补全) | 低(无 oracle,单测+文档验收) | 待(可插空) |
+| P10 | **N6** | gdscript-project + godotlsp | 场景树(tscn 解析 → 节点名面 + 动画 + 连接) | 高(新解析器) | 待 |
+| P11 | **C9** | 插件 + 工具 | snippet 16→~40 对齐 + fetch 审计;templates 来源重定 | 无(纯增量) | 待(可插空) |
 
 **取舍主线**:先建能量化的验收基建(V0),再做零行为风险的模型层(C6),回归修复(C7.3)随 P1 止血;
+**2026-10-17 资料盘点后按阻塞簇重排(P4-P11):数据就绪度(入口扩展 C6.6b)> 最大证据簇(C10 脚本成员面)> 共同前置(C5 类型推断)> 模型化(C6.3)> 剩余面(C8b/C6.5)> 最大工程(N6);工具面(C9)不锁主线可插空**;
 每项独立可回退、独立可组合(遵循项目一贯的开关纪律)。
 
 ## 二、证据基线(全部本地化,可复验)
 
 | 源 | pinned | 本地位置 | 入库? | 用途 |
 |---|---|---|---|---|
-| Godot 引擎全量仓库 | `5b4e0cb0`(2026-06-17) | `.refs/godot/`(gitignore) | 否 | `modules/gdscript/` 全部源码锚点;`doc/classes/` 810 XML;9 个 script_templates |
+| Godot 引擎全量仓库 | `5b4e0cb0`(2026-06-17) | `.refs/godot/`(gitignore) | 否 | `modules/gdscript/` 全部源码锚点;**`doc/classes/` 810 XML** |
 | 引擎自带补全测试 | `9a05d57` | `corpus/godot-engine-tests/completion/` | 否(`fetch_corpus.py` 幂等) | **oracle**:146 `.gd`(➡ 光标)+ 143 `.cfg`(include/exclude)+ 2 `.tscn`,14 个分类 |
 | godot-vscode-plugin | `145a0f0`(2026-07-01,36 条) | `corpus/snippets/vscode/`(规划) | 否(`fetch_snippets.py` 规划) | 官方 snippet 基准(MIT) |
 | gdscript-zed-snippets | `eacdbf0`(2025-11-01,34 条) | `corpus/snippets/zed/`(规划) | 否(同上) | Zed 向 snippet 基准(MIT),与我方多 IDE 定位相关 |
 | extension_api.json | Godot 4.7.0 stable dump | `crates/gdscript-engine/testdata/` | 是(`include_str!` 生产数据) | 引擎模型唯一事实源 |
 | 文档站/hover 生成面 | 随语料 | `tools/gen_docs.py` → `website/src/builtin/class_*.md` + `crates/godotlsp/src/hoverdata.json` | 是(生成物) | 类描述/方法/属性/枚举/常量 hover 与文档站;**Constructor/Operator 区块未解析(见 §3.5)** |
+
+**2026-10-17 资料盘点结论(全部本地可验,纠正两处历史假设)**:
+
+| 资料 | 假设 | 实测 | 影响 |
+|---|---|---|---|
+| `.refs/godot` 内 script_templates | "9 个模板在仓" | **不存在**——全仓唯一 `.gd` 是 `tests/scripts/utils.notest.gd`;`editor/` 源码无 `script_templates` 引用(Godot 4 模板走编辑器安装目录/用户目录,不在源码仓) | C9.3 来源重定(见 §四 P11),不得再称"入库官方 9 模板" |
+| 引擎内置 snippet 表 | "可复用内部表" | **不存在**——GDScript 编辑器无 snippet 库(snippet 功能是用户自定义 EditorSettings;`editor/` 仅 `editor_help.cpp` 文档命中) | C9 基准锁定 vscode + zed 两家上游,已是定论 |
+| `doc/classes/int.xml` 构造/运算符 | (未查) | **存在且完整**:`<constructors>` 5 个 + `<operators>` 64 个,均带 `param name/type` + `return` + `description` | **C6.5 签名+描述源落地**:extension_api 只有 `constructors[].index`/`operators[]{name,right_type,return_type}`(无描述),两者互补(见 §3.5) |
+| `godot-docs/gdd_1559_int.md` | (未查) | Constructors/Operators 区块在(与 XML 同源英文) | C6.5b 备选源,与 XML 二选一即够 |
+| `godot-docs/gdd_0310` warning 表 | 路线图原计划取此 | **无警告名表**(0 个可匹配 token) | C8 已改取引擎 `gdscript_warning.h`(46 名,行为事实源),偏离已记录 |
+| `corpus/snippets/` | C9.2 规划 | **不存在**(fetch 脚本未建) | C9.2 = 全新基建,零启动成本 |
 
 oracle 分类(与工作流的对应):`argument_options/`(C8)、`get_node/`($/% 上下文 + 成员链;
 信号面 C6.2 后 8/33,余为节点名面 N6)、
@@ -94,26 +114,46 @@ class_name / autoload 全局面补全缺失(引擎有;`gdscript-project` **已�
 **结论:数据在两层源里都完整,但两个消费管线(文档生成面、LSP 模型面)都只接了方法/属性/枚举/常量;
 构造函数与运算符两条区块全线未接。** 这不是"备未来"问题,是明确的工作面缺口 → C6.5 升级(见 §四)。
 
-### 3.6 oracle 普查差距地图(2026-10-17 三轮:20/140 → 24/140 → 33/140 → **36/140**)
+**2026-10-17 数据源补充盘点**(C6.5 实施前定论):
+- `extension_api.json` builtin `constructors` **只有 `index`**(无参数签名)、`operators` 只有
+  `name/right_type/return_type`(无描述)——单靠 JSON 不够。
+- `.refs/godot/doc/classes/int.xml` 实测:`<constructors>` 5 个 + `<operators>` 64 个,
+  **均带 `param name/type` + `return` + `description`**(810 XML 全类同构,已抽样验证)。
+- **定论:C6.5 = XML(签名+描述)× JSON(结构/索引)双源互补**;英文语料,中文翻译走 P2-16 i18n 线。
+
+### 3.6 oracle 普查差距地图(2026-10-17 四轮:20/140 → 24/140 → 33/140 → **36/140**)
 
 分桶通过率(当期 36/140):filter 2/2、script_enum 1/1、builtin_enum 5/5、common 8/20、
 global_enum 3/6、index 1/9、enum_values_in_dictionary 1/13、types 2/19、get_node 8/33、
 **argument_options 3/11**(C8 一期:connect/dont_add_string_name/prepended 三夹具)、
 no_parenthesis 2/8、enum_values_in_match 0/7、assignment_options 0/4、
-extends 0/2。未命中成因:absent 281 / paren-display 50 / string-literal 7。
+extends 0/2。未命中成因:absent 279 / paren-display 50 / string-literal 7。
 
-按"阻塞面"归纳(而非按桶),新增/调整如下工作项:
+**按阻塞簇归并(2026-10-17 资料盘点轮重排依据,夹具计数为 verbose 失败明细实测)**:
 
+| 簇 | 共同阻塞 | 夹具(约) | 明细 |
+|---|---|---|---|
+| **A 脚本成员面** | 裸标识符/self/脚本接收者位不出"自声明 + 脚本父类链 + 引擎链"三层成员;`func ` 位不出可重载签名 | **~30** | common: `identifiers_in_*` ×3 + `self.gd` + `invalid_super_call_*` ×2 + `override_function_*` ×6 + `infer_return_type_without_value`;extends: `extends_self`/`extends_inherited_inner_class`(兄弟内部类);types: local ×6 + member ×5(typehint/inferred 的 `add_child(…)`/`owner`/`child_entered_tree` + `property_of_a`);get_node: `member_typehint*` ×3;assignment: `enum_identifier` ×2(部分) |
+| **B 枚举面入口** | C6.6 已有枚举值数据,缺入口:match 测试位、`global_enums` 接收者、赋值 RHS 无前缀约定 | **~16** | `enum_values_in_match` ×7(`match AutoTranslateMode.➡` → 值);`global_enum` ×3(`Key.➡` → `KEY_A/KEY_B` 值面 + `Key`/`Error`/`KeyLocation` 类型名);`assignment_options` ×4(`enum_attribute` 期望无前缀值 + `new(…)`;`enum_identifier` 期望限定名) |
+| **C 语义层类型推断** | semantic 无 locals 查询:局部变量(注解/字面量推断)/返回类型未知 → 不出成员 | **~9** | `index` ×6(`array/dictionary/untyped` 的 `outer`/`inner` 元素成员);`types/local/no_type` ×2 + `inferred`(`begins_with(…)`);`common/infer_return_type_without_value` |
+| **D callable 上下文** | Callable 形参位出函数名不带括号(需形参类型识别) | **6** | `no_parenthesis_when_callable_is_expected` ×6(`hello_world`) |
+| **E 场景树/节点名** | tscn 未解析:节点路径不出场景子节点名;动画面不出动画名 | **~25** | `get_node` 余 25(成员面 3 个归簇 A 后剩 ~22 节点名面);`argument_options/play_*` ×2(缺 `"bounce"` 动画名) |
+| **F 观察项** | — | 2 | `index/*dictionary_keys` ×2(N7 明确不做) |
+
+**簇间依赖**:C 是 A/D/C8二期的共同前置(locals 查询);但 A 的主体(自声明+引擎链成员)**不依赖 C**——
+类型提示已知的接收者(脚本类/引擎类)即可跑通,字面量推断留给 C。B 完全不依赖 A/C(数据已在)。
+
+历史发现编号(保留索引,归并关系如下):
 | # | 发现 | oracle 证据 | 处置 |
 |---|---|---|---|
-| N1 | **self 成员面缺失**:裸标识符上下文不出当前类成员(`owner`/`add_child(…)/property_of_a`) | common `identifiers_in_*` ×3、argument_options/connect | **新项 C10(设计后实施)**:全局面合并宿主链成员 + 新 sort 桶;N2 已落地不再构成前置,与 N4 同批即可 |
+| N1 | **self 成员面缺失**:裸标识符/self 位不出当前类成员(`owner`/`add_child(…)/property_of_a`) | common `identifiers_in_*` ×3、`self.gd`、argument_options/connect | **并入簇 A(C10 脚本成员面)**:全局面合并宿主链成员 + 新 sort 桶;N2 已落地不再构成前置,与 N3/N4 同批 |
 | N2 | **字符串上下文不抑制** ~~:字符串字面量内仍出全局面~~ | `no_completion_in_string`(曾为 vacuous pass) | ✅ 已落地(2026-10-17,C7.2 同批):`string_literal_at` 前向状态机,字符串内返回空(路径面例外);vacuous pass 转为真实通过 |
-| N3 | **脚本类成员面缺失**:`extends "res://x.gd"` 的成员不出(`func_of_a()`) | common `invalid_super_call_*` ×2、`override_function_*` ×4 | C7.1 的语义延伸(工程面解析 extends 路径 → 成员面);override 签名展示另属 C6.3 |
-| N4 | **枚举限定展示**:类型化 LHS 后引擎出 `Control.SIZE_EXPAND`(限定名),我方不出类枚举值 | assignment_options ×4 | 依赖 N1(裸上下文类枚举值)+ 展示约定,随 C10 |
-| N5 | **callable-expected 上下文不出括号** | no_parenthesis ×8(当前 0/8,C6.4 后仍挂) | 需参数类型分析(语义层),缓行;桶内 `lambda_body` 已因 C6.4 通过 |
-| N6 | **节点路径类型推断 + 场景树节点名** | get_node 0/33 | 语义层 + C7.3+(project.scenes → NodeDecl),最大桶,分期 |
+| N3 | **脚本类成员面缺失**:`extends "res://x.gd"` 的成员不出(`func_of_a()`) | common `invalid_super_call_*` ×2、`override_function_*` ×4 | **并入簇 A**:与 N1 同一数据面(脚本 AST 成员遍历),区别仅在接收者解析(self / 脚本父类 / 类型提示变量);override 签名展示的引擎虚方法部分归 C6.3(簇 A 二期) |
+| N4 | **枚举限定展示**:类型化 LHS 后引擎出 `Control.SIZE_EXPAND`(限定名),我方不出类枚举值 | assignment_options ×4 | **归入簇 B**:入口 + 展示约定(限定/无前缀两态),随 B 期落地 |
+| N5 | **callable-expected 上下文不出括号** | no_parenthesis ×8(当前 0/8,C6.4 后仍挂) | **簇 D**:需形参类型识别(C6.4 后仅剩识别层,工作量低于原估) |
+| N6 | **节点路径类型推断 + 场景树节点名** | get_node 0/33 | **簇 E**(成员面部分归簇 A):语义层 + C7.3+(project.scenes → NodeDecl),最大工程,末期 |
 | N7 | **字典键/字典内枚举值** | index 1/9、enum_values_in_dictionary 1/13 | 明确不做 #3 延续,仅观察 |
-| N8 | **字符串字面量参数面**(NodePath/StringName 建议) | argument_options/string_literals ×8 | ✅ C8 一期:输入动作面(默认设置侧,3/8 过——`dont_add_*` 两口 + prepended 一口);tween_property 属性面与 AnimationPlayer 动画面缓行(见 P3 二期);N2 已落地,字符串上下文识别不再阻塞 |
+| N8 | **字符串字面量参数面**(NodePath/StringName 建议) | argument_options/string_literals ×8 | ✅ C8 一期:输入动作面(默认设置侧,3/8 过——`dont_add_*` 两口 + prepended 一口);tween_property 属性面(前置簇 C)与 AnimationPlayer 动画面(前置簇 E)缓行;`add_*` 两口为设置 plumbing |
 
 **vacuous pass 清单(补面时必须回归验证)**:`no_constructor_*`(6)、
 `builtin_enum/global_enum/script_enum` 的 metatype 三件套。`no_completion_in_string`
@@ -121,6 +161,29 @@ extends 0/2。未命中成因:absent 281 / paren-display 50 / string-literal 7�
 翻转这些桶——这正是 harness 的价值。
 
 ## 四、分期路线图
+
+### 排期总表(2026-10-17 资料盘点轮重排)
+
+| 期 | 项 | 层 | 内容 | oracle 预期 | 前置 | 状态 |
+|---|---|---|---|---|---|---|
+| P4 | **C6.6b** | godotlsp | 枚举面入口扩展:match 测试位 + `global_enums` 值面 + 全局枚举类型名入全局面 | **+7~10**(match ×7 + global_enum ×3) | 无(数据已在) | 待 |
+| P5 | **C10** | godotlsp | 脚本成员面(簇 A):self/裸标识符/脚本接收者三层成员 + `func ` 位 override 签名 + extends 位类名 | **+20~25**(common 12 + extends 2 + types 10 + get_node 3) | lsp-design 设计(项目纪律) | 待(设计先行) |
+| P6 | **C5** | gdscript-syntax | 语义层类型推断:locals_at(注解 + 字面量)+ 返回类型推断 | **+9~12**(index 6 + types 3 + infer_return) | P5 数据面(部分) | 待 |
+| P7 | **C6.3** | gdscript-engine + godotlsp | 虚方法模型化:`is_virtual` 解析 + override 面引擎虚方法完整签名 | override 剩余夹具 | P5 override 面 | 待 |
+| P8 | **C8 二期** | godotlsp | tween_property 属性面 + InputMap 单例面 + `&`/`^` 设置 plumbing | `add_*` ×2(+动画 ×2 挂 P10) | P6 | 待 |
+| P9 | **C6.5** | engine + tools | builtin 构造/运算符面(XML×JSON 双源):模型解析 + 文档面 + 构造补全 | 无 oracle(单测+文档验收) | 无(可插空) | 待 |
+| P10 | **N6** | gdscript-project + godotlsp | 场景树:tscn 解析 → NodeDecl → 节点名面 + 场景信号 + 动画面 | **+24**(get_node 22 + play_* 2) | 大工程,独立 | 待 |
+| P11 | **C9** | 插件 + 工具 | snippet 16→~40 对齐 + fetch 审计;templates 来源重定 | 无(工具面) | 无(可插空) | 待 |
+
+**重排原则(实践最佳序的判据)**:
+1. **数据就绪度优先**:B 的数据(C6.6 枚举值 + `global_enums`)已在模型里,只缺入口 → 最先行;
+   A 的数据(脚本 AST + 引擎链 + `global_enums`)也全在,但动全局面合并(最大回归面)→ 设计后行。
+2. **共同阻塞优先**:C(locals 查询)是 A 二期/C8b/N5 的共同前置,排 P6;A 主体不依赖 C,先 A。
+3. **风险梯度**:B(入口扩展,零全局面污染)< C(内核附加式)< A(全局面合并,需 sort 桶设计 +
+   vacuous pass 联动)< E(全新 tscn 解析器,最大工程故末期)。
+4. **独立可插空**:C9(工具面)与 C6.5(文档面,无 oracle 覆盖)不锁主线,排后但可随时插空;
+   全局面回归每期用 `filter` 桶(2/2)+ E2E 探针守。
+5. **每期独立 commit,oracle 零回归才 `--update-baseline`**(既有纪律不变)。
 
 ### P0 — V0:oracle harness ✅ 已实施(2026-10-17)
 
@@ -268,20 +331,156 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
 - `InputMap` 单例方法动作面(`InputMap.has_action(` 等):无 oracle 覆盖。
 - `&`/`^` 前缀设置 plumbing(oracle `add_*` 夹具另一半):需 workspace/configuration 通道。
 
-### P4 — C9 snippet 对齐与官方模板入库
+### P4 — C6.6b 枚举面入口扩展(godotlsp,数据就绪度最高 → 最先行)
+
+**为什么最先**:三个面的数据都已在模型里(C6.6 `enum_member_values_at` 的枚举值解析 +
+`EngineApi.global_enums`),缺的只是入口识别与展示约定,零全局面污染(除全局枚举类型名
++22 项,见下),是剩余工作中风险最低、oracle 回报最快的一项(+7~10 预期)。
+
+1. **match 测试位枚举值**(`enum_values_in_match` ×7):`match X.➡` / `when X.➡` 的测试
+   表达式位 → 复用 `enum_member_values_at` 的枚举接收者解析(当前入口只在 `recv.` 成员面
+   分支内);入口识别 = 向前扫到 `match`/`when` 关键字且光标在其测试表达式内。
+2. **`global_enums` 接收者值面**(`global_enum/global_enum_values`):`Key.➡` → `KEY_A`/
+   `KEY_B`。接收者名查 `engine.global_enums`(22 个全局枚举),与 `EngineClass` 枚举
+   解析同构;**同名冲突按 EngineClass 优先**(实测全局枚举名与类名无交集,防御性规则)。
+3. **全局枚举类型名入全局面**(`global_enum/global_enum_identifier`):`Key`/`Error`/
+   `KeyLocation` 等 22 个枚举名进裸标识符全局面(kind ENUM_MEMBER,detail `@GlobalScope 枚举`);
+   本项唯一种全局面增量,验收须含 `filter` 桶 2/2 不回退 + E2E 全局面计数(1808+22)。
+
+- **取舍**:match 位只做测试表达式(不做 `match` 本体后的分支体——那是另一个上下文);
+  全局枚举值面的 `Key.` 形式不做 `@GlobalScope.Key.` 全限定形式(引擎也不出)。
+- **验收**:oracle `enum_values_in_match` 0/7→7/7、`global_enum` 3/6→6/6;单测锁三入口;
+  `filter` 桶不回退;全局面计数单测。
+
+### P5 — C10 脚本成员面(簇 A,设计先行,项目纪律)
+
+**规格来源**:`common/self.gd` 一个夹具定义了三层成员面的完整契约(include 清单即规格):
+
+| 层 | 数据 | display 约定 |
+|---|---|---|
+| 本脚本自声明 | vars/consts/signals/funcs(当前 AST) | 函数带 `(…)`;信号裸名 |
+| 脚本父类链 | `extends "res://…"` → 项目脚本 AST 成员(递归至引擎根) | 同左(`func_of_a()`/`property_of_a`/`signal_of_a`) |
+| 引擎链 | extends 引擎根 → `ancestor_chain`(复用 C6.1/6.2 `class_members`) | 同左(`add_child(…)`/`owner`/`child_entered_tree`) |
+
+**入口族**(全部经"裸标识符/self 位"):
+1. `self.➡` 接收者(`recv_type_at` 识别 `self` → 当前脚本:三层合并);
+2. 裸标识符位(函数体/调用实参):出当前类三层成员(引擎 `identifiers_in_*` 行为)+ 既有全局面;
+3. `func ➡` 位(override 面):出可重载方法**签名**(`func_of_a():`、`func_of_a_args(a: int):`、
+   `_get(property: StringName) -> Variant:`,带默认值)——脚本父类方法取 AST(有默认值),
+   引擎虚方法取 VIRTUALS 表/模型(P7 换 `is_virtual` 源);`_static_init` 排除(引擎 :3738 特判,
+   override 面 exclude 已锁);
+4. `class X extends ➡` 位:兄弟内部类(`extends_self` exclude 自身)+ class_name 脚本类 + 引擎类。
+
+**设计要点(实施前入 lsp-design.md)**:
+- **sort 桶**:新增 SELF/OVERRIDE 桶(`scoring.rs`),序 = LOCAL < SELF/OVERRIDE < MEMBER < GLOBAL;
+  与频率表(fuzzy)正交,不破坏 C6.4 查表剥后缀逻辑。
+- **合并规则**:同名优先级 = 局部变量 > 本脚本自声明 > 脚本父类链(近到远)> 引擎链 > 全局面;
+  每层内去重;全局面与类成员同名时类成员胜出(引擎行为)。
+- **vacuous pass 联动**:`no_constructor_*`(6)+ metatype 三件套必须同批回归(§3.6 清单)。
+- **回归守位**:`filter` 桶 2/2 + E2E 全局面计数 + `types/member` 桶不回退。
+
+- **取舍**:裸标识符面不做"频率截断"(需 C5 locals,属 P6);成员面不含构造回调
+  (`_init`/`_ready` 等虚方法只在 override 面出,成员面不出——引擎同款,VIRTUALS 表现不变)。
+- **验收**:oracle common 8/20→20/20、extends 0/2→2/2、types 10 夹具、get_node 3 夹具;
+  单测锁三层合并顺序;E2E `self.` 探针;零回归后才更新基线。
+
+### P6 — C5 语义层类型推断(gdscript-syntax,附加式)
+
+**解锁面**:`index` 桶元素成员(`outer`/`inner`)、`types/local/no_type`(`begins_with(…)`)、
+`infer_return_type_without_value`,并是 C8 二期 tween_property 与 N5(callable 形参识别)的前置。
+
+- **C5.1 `Analysis::local_types(offset)`(或等价查询)**:最内层 func 的形参 + `var` 声明
+  类型表:注解直取;无注解做**字面量推断**(int/float/String/bool/`Vector2(…)`/`Array[…]`/
+  `Dictionary`/构造调用);当前 `FileInfo::resolve_var` 只覆盖类级成员,本查询补函数级。
+- **C5.2 返回类型推断**:`func_return` 扩展——无返回注解时收集 `return <expr>` 字面量类型
+  (与 C5.1 同源推断器);`infer_return_type_without_value` 即此面。
+- **C5.3 消费**:`recv_type_at` 增加局部变量名解析(成员面);N5 分支:实参位形参类型含
+  `Callable` → 该标识位出函数名**不带括号**(no_parenthesis 语义)。
+
+- **取舍**:只做单层字面量推断(不做跨语句数据流、不做集合元素类型下推——`index` 桶的
+  `array_value` 需元素类型,取 `Array[int]` 注解或字面量首元素);推断失败静默降级(不出成员,
+  与引擎"类型未知"行为一致)。
+- **验收**:oracle index 1/9→7/9(字典键 2 个仍不做)、types no_type/inferred 转 pass、
+  no_parenthesis +6;单测锁推断器各型;bench 不回退(p50 基线 8.6ms)。
+
+### P7 — C6.3 虚方法模型化(gdscript-engine + godotlsp)
+
+- **解析**:`RawMethod` 附加 `is_virtual`(JSON `methods[].is_virtual` 实测在,1437 个)+
+  `EngineMethod.is_virtual`;`EngineApi::chain_virtuals(chain)` 替代 `snippets.rs` 手维护
+  VIRTUALS 12 条(保留作对照测试基准);9 个非 ClassDB 回调(_init/_notification/_get/_set/
+  _to_string/_property_can_revert/_property_get_revert/_get_property_list/_validate_property)
+  留手表——引擎侧同样是特判(源码锚点 :3735 注释 "Not truly a virtual method")。
+- **override 面补全**:P5 的 `func ` 位签名面,引擎虚方法部分换模型源(参数名/类型/返回值
+  ——extension_api `arguments` 有 name/type,默认值无;脚本父类方法默认值取 AST,已由 P5 覆盖);
+  `_static_init` 排除规则精读引擎 :4117-4119(override 面虚拟方法表的第二参数语义)后落单测。
+- **验收**:oracle override 剩余夹具(`override_function_full_name` 的 `_get(property: StringName)
+  -> Variant:` 等)+ 单测锁 is_virtual 计数(1437)+ VIRTUALS→模型切换零 diff(对照测试)。
+
+### P8 — C8 二期参数选项面剩余(godotlsp)
+
+- **tween_property 属性面**:`Tween.tween_property(` 实参 1 → 实参 0 的局部变量类型属性表
+  (引擎类属性 + 脚本类成员);前置 = P6 的 local_types(原判"semantic 未暴露 locals 查询"的成本
+  在 P6 化解)。
+- **InputMap 单例面**:`InputMap.has_action(`/`event_is_action(` 等首参 → `[input]` 动作表
+  (与 C8 一期输入动作面同数据,入口扩到单例方法名识别;无 oracle 覆盖,单测锁定)。
+- **`&`/`^` 前缀设置 plumbing**:经 initializeOptions/`workspace/configuration` 读三项
+  编辑器设置(`use_single_quotes`/`add_string_name_literals`/`add_node_path_literals`,
+  引擎默认全 false)→ oracle `add_*` 两口;默认侧不变(回归守护)。
+- **仍挂 P10**:AnimationPlayer 动画面(需 tscn 动画库)。
+- **验收**:`argument_options` 桶 add_* 两口 + 单测;设置缺省时行为与一期一致(零回归)。
+
+### P9 — C6.5 builtin 构造/运算符面(引擎数据面 × 文档生成面)
+
+**数据源定论(2026-10-17 盘点)**:`extension_api.json` 的 builtin `constructors` 只有
+`index`、`operators` 只有 `name/right_type/return_type`——**均无签名/描述**;
+`.refs/godot/doc/classes/*.xml`(810 个,已抽样 int.xml 验证)带完整
+`param name/type` + `return` + `description`。→ **双源互补:XML 签名+描述,JSON 结构**。
+
+- **C6.5a 模型解析**:`tools/gen_builtin_sig.py`(新,仿 gen_docs 管线)从 pinned XML 生成
+  `crates/gdscript-engine/testdata/builtin_signatures.json`(**生成物入库**,与 hoverdata.json
+  同律;XML 本体仍不入库)→ `RawBuiltin` 解析 + `builtin_constructors(name)`/
+  `builtin_operators(name)` 查询 API。
+- **C6.5b 文档生成面**:`tools/gen_docs.py` 增 `Constructors`/`Operators`/
+  `Constructor Descriptions`/`Operator Descriptions` 四区块解析(现有 Method/Property
+  Descriptions 解析器同构扩展,成本低)→ website 内建页补两节 + hoverdata 增条目
+  (与 `--check` 防漂移同程)。
+- **C6.5c 消费面**:① `Vector2(`/`int(` 等内建类型调用 → 构造重载补全(参数签名,
+  引擎 `BUILT_IN_TYPE` 上下文同款);② 类型名 hover 追加构造重载列表;③ per-type 运算符
+  hover **仍挂语义层**(二元表达式两侧类型推断,开放问题不变)。
+- **C6.5d 仍只解析备未来**:`is_keyed`/`indexing_return_type`/`api_type`/`is_bitfield`;
+  `version_full_name` 可进启动日志(小甜点,可选)。
+- **取舍**:无 oracle 覆盖(语料无内建构造补全夹具)→ 单测锁 38 类构造/运算符计数 +
+  `gen_docs.py --check` + smoke;英文数据,中文翻译走 P2-16。
+- **验收**:`class_int.md` 含 5 构造 + 64 运算符节;`Vector2(` 构造面单测 + E2E;零回归。
+
+### P10 — N6 场景树(gdscript-project + godotlsp,最大工程,末期)
+
+- **C10.1 tscn 解析**(gdscript-project 新增,附加式):`[node path="…"]` 树 →
+  `NodeDecl`(name/type/instance 占位符);`[ext_resource type="Animation"]` +
+  AnimationPlayer 的 `animations` 属性 → 动画名表;`[connection]` → 场景信号连接表。
+- **C10.2 节点名面**:填充 C7.3 之后一直悬空的 `$`/`%` 分支(当前策略 = 空列表优于噪声;
+  场景树就绪后出场景子节点名)+ `get_node("➡")` 字符串路径面。
+- **C10.3 动画面**:`AnimationPlayer.play("➡")` → 动画名(接回 P8 未竟项,
+  `argument_options/play_*` ×2)。
+- **取舍**:先节点树(主价值),后动画/连接;instance 占位符只记录不展开(需递归加载);
+  uid 解析(`.uid` → 脚本路径)作为独立小步;场景缓存失效按 mtime(与既有索引同律)。
+- **验收**:oracle get_node 余 22 + play_* ×2;单测锁 tscn 解析;E2E `$` 路径面;零回归。
+
+### P11 — C9 snippet 对齐(工具/插件面,独立于服务器主线,可插空)
 
 - **C9.1 插件面 16 → ~40**:按 §3.2 桶补齐(收全部标注桶);保留现有自造前缀(肌肉记忆),
   新增标准前缀双发;来源与许可证注记进 `corpus/snippets/README.md` 与 fetch 脚本。
 - **C9.2 `tools/fetch_snippets.py`**:pinned 双仓库 → `corpus/snippets/`(不入库,幂等,
   仿 `fetch_corpus.py`);`--check` 模式输出"union vs ours"缺口清单——**把"对齐"变成可重跑审计**,
-  上游更新时一条命令重对齐。
-- **C9.3 官方 script_templates 入库**:9 个(Node/CharacterBody2D/CharacterBody3D/EditorPlugin/
-  EditorScenePostImport/EditorScript/Object/RichTextEffect/VisualShaderNodeCustom)→
-  `editors/vscode/templates/`(MIT,pinned commit + fetch 更新脚本)。**入库判据:产品特性素材,
-  clone 即可用**——为 features-roadmap 社区高频诉求「类/文件模板」备料。
+  上游更新时一条命令重对齐。**2026-10-17 盘点:该目录尚不存在,C9.2 是零启动成本的全新基建。**
+- **C9.3 官方模板:来源重定(2026-10-17 盘点纠正)**:原计划"9 个 script_templates 入库"的
+  前提**不成立**——`.refs/godot` 全量克隆内无任何模板 `.gd`(全仓唯一 `.gd` 是测试夹具;
+  `editor/` 源码无 `script_templates` 引用;Godot 4 模板走编辑器安装目录/用户目录)。
+  新方案:fetch 时先做**来源考证**(编辑器分发包/上游组织),能 pinned 复验才入库(判据不变:
+  用户 clone 后能否直接跑);**不可 pinned 复验则明确不收**,在本文件记录来源供用户自取。
 - **C9.4 服务器 C2 面小补**:`snippets.rs` COMPOSITES 补 await signal / waitsec(与 C9.1 去重后);
   keyword_snippet 不动。
-- **验收**:`--check` 零缺口(除明确不收项);模板 9/9 在位;smoke snippet 面不回退;npm test 不受影响。
+- **验收**:`--check` 零缺口(除明确不收项);smoke snippet 面不回退;npm test 不受影响。
 
 ## 五、来源治理(克隆与入库判据)
 
@@ -302,6 +501,9 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
 3. **字典键补全**:需字面常量折叠,性价比低(oracle `index/const_dictionary_keys` 仅作观察)。
 4. **`@export_tool_button` 图标表**:编辑器主题数据,无头不可得。
 5. **全文克隆引擎入仓**:目标文件 raw 拉取 + pinned 引用;复用表随消费点入库并注源。
+6. **引擎内置 snippet 表/script_templates 复用**:2026-10-17 实测两者在引擎源码仓
+   **均不存在**(GDScript 编辑器无 snippet 库;模板走编辑器安装目录/用户目录)——C9 基准
+   锁定 vscode + zed 上游两家;templates 改为"来源考证后定,不可 pinned 复验则明确不收"。
 
 ## 七、风险总账
 
@@ -311,23 +513,24 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
 | 信号/虚方法沿链收集拖慢补全 | completion p50(基线 8.6ms) | O(链长×成员)可忽略;每期 bench_load 监控 |
 | C8 手搬表随引擎版本漂移 | 注解参数过时 | 源码锚点注释 + oracle `argument_options` 桶检测;警告名改取引擎 `gdscript_warning.h`(补全行为事实源),与弃用项剔除规则同锚 |
 | C7.2 字符串面客户端不触发 | 特性不可见 | 主流客户端默认行为;README 说明;监控后补开关 |
+| **P5 全局面合并污染**(类成员/内部类/全局枚举名进裸标识符面) | 全局面 1800+ 项噪声、filter 排噪回退 | 新 sort 桶(SELF/OVERRIDE)与频率表正交;同名优先级规则(局部>自声明>父类链>引擎链>全局面);`filter` 桶 2/2 + E2E 计数 + vacuous pass 清单三重验收;设计先行入 lsp-design |
+| **P6 语义推断误判**(字面量推断错误类型 → 出错误成员) | 成员面假阳性 | 保守策略:只做单层高置信推断,失败静默降级;单测锁各型;与引擎"类型未知不出成员"行为对齐 |
 | oracle 语义差异误判 | 验收噪音 | 匹配器规范化 + 分桶趋势判断,不追求 100% |
 
 ## 八、开放问题(未来钩子,不在本期)
 
-- **C8 二期(参数选项面剩余)**:`Tween.tween_property` 次参属性面(前置:semantic
-  `Analysis` 暴露 locals 类型查询)、`AnimationPlayer.play` 动画面(前置:N6 场景
-  解析)、`InputMap` 单例方法面、`&`/`^` 前缀设置 plumbing(oracle `add_*` 夹具)。
-- **C10 self 成员面**(§3.6 N1,字符串抑制 N2 已于 2026-10-17 随 C7.2 落地):oracle
-  证据最充分的新面(common `identifiers_in_*` ×3 等),但涉及全局面合并语义 + 新 sort 桶
-  + 与 vacuous pass 的联动,按项目纪律先设计后实施(设计入 lsp-design.md 后再排期);
-  与 N4(枚举限定展示)同批。
+- ~~**C8 二期(参数选项面剩余)**~~ → 已排入 P8(tween_property 前置在 P6 化解;动画面挂 P10;
+  InputMap 单例面与 `&`/`^` plumbing 同 P8)。
+- ~~**C10 self 成员面**~~ → 已排入 P5(簇 A,含 N3/N4 归并;设计入 lsp-design.md 后排,
+  纪律不变:先设计后实施)。
 - **per-type 运算符 hover**(如 `int * Color` 的运算符文档):需语义层对二元表达式两侧做类型推断,
   依赖类型系统完备度;当前通用 `OPERATOR_DOCS` 20 条已覆盖语义科普,per-type 留待语义层增强后
-  (与 C6.5c-③ 衔接)。
+  (与 P9 C6.5c-③ 衔接;C6.5a 的 `builtin_operators` 查询 API 是其数据前置)。
 - **autoload 成员解析**:内核缺口(autoload hover 为 null、成员不存在不报假阴性)——需内核改,
   独立立项(R2 后)。
-- **类型感知评分**:前置 semantic 层 `locals_at`(P3.15/C5),之后 completion 排序可吃局部变量。
-- **中文语料入 hover/completion**:godot-docs zh-CN(P2-16 i18n 线),与本路线图正交。
+- **类型感知评分**:前置 P6 的 `local_types`(C5),之后 completion 排序可吃局部变量
+  (与 P5 sort 桶设计联动)。
+- **中文语料入 hover/completion**:godot-docs zh-CN(P2-16 i18n 线),与本路线图正交;
+  C6.5b 生成的英文构造/运算符节是 i18n 的天然素材。
 - **`filter/` 桶的 organized export 排噪**:`@export_category` 等注解串不进普通标识面——
-  C8 实施时顺带对齐(oracle 已覆盖)。
+  随 P4 全局枚举类型名入全局面时同批验证(oracle 已覆盖)。
