@@ -323,10 +323,16 @@ async function start(): Promise<void> {
     options: { cwd: vscode.workspace.workspaceFolders?.[0]?.uri.fsPath },
   };
   const clientOptions: LanguageClientOptions = {
-    documentSelector: [{ scheme: "file", language: "gdscript" }],
+    // 支持 file 与 untitled（未保存的 GDScript 草稿也能获得补全/悬停）。
+    documentSelector: [
+      { scheme: "file", language: "gdscript" },
+      { scheme: "untitled", language: "gdscript" },
+    ],
     outputChannel: output,
     // documentHighlight 区间词级矫正(旧内核起点锚行首,详见 highlight.ts)。
     middleware: highlightClampMiddleware,
+    // 服务器进程意外退出时自动重启（有限次，防崩溃循环）。
+    connectionOptions: { maxRestartCount: 4 },
     synchronize: {
       // 服务器无需逐个打开即可感知项目文件的增删改,并在配置变化时收到推送。
       fileEvents: vscode.workspace.createFileSystemWatcher(

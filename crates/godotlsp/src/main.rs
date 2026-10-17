@@ -227,6 +227,15 @@ fn main() {
     let real_lower: HashSet<String> =
         engine.classes.keys().chain(engine.builtins.keys()).map(|s| s.to_lowercase()).collect();
 
+    // 信息日志统一走 window/logMessage（客户端输出面板按 info 级显示）；
+    // stderr 只留致命错误——vscode-languageclient 会把 stderr 一律标成 error 级。
+    let log_info = |msg: String| {
+        let _ = connection.sender.send(Message::Notification(Notification::new(
+            "window/logMessage".into(),
+            serde_json::json!({ "type": 3, "message": msg }),
+        )));
+    };
+
     // 版本对齐：读 project.godot config/features，与 dump 版本比对。
     // 优先定位真实项目根（向上查找 project.godot），否则回退到工作区根。
     let project_root = root.as_ref().and_then(|r| locate_project_root(r)).or(root.clone());
@@ -234,7 +243,7 @@ fn main() {
         && let Ok(pg) = std::fs::read_to_string(r.join("project.godot")) {
             for line in pg.lines() {
                 if line.starts_with("config/features") {
-                    eprintln!("[godotlsp] 版本对齐: dump={}, project={}", engine.version, line.trim());
+                    log_info(format!("[godotlsp] 版本对齐: dump={}, project={}", engine.version, line.trim()));
                 }
             }
         }
@@ -267,16 +276,16 @@ fn main() {
         snippet_support, config: Config::default(),
     };
 
-    eprintln!(
+    log_info(format!(
         "[godotlsp] 就绪，引擎 {} (来源: {})，扫描根 {} 个，项目文件 {}，uid 映射 {}",
         state.engine.version,
         engine_source,
         scan_roots.len(),
         state.project.as_ref().map(|p| p.scripts.len()).unwrap_or(0),
         state.uid_map.len(),
-    );
+    ));
     for r in &scan_roots {
-        eprintln!("[godotlsp]   扫描根: {}", r.display());
+        log_info(format!("[godotlsp]   扫描根: {}", r.display()));
     }
 
     // 后台诊断线程：150ms 去抖，击键不直接触发 parse+analyze。
@@ -341,13 +350,32 @@ fn main() {
                 if connection.handle_shutdown(&req).expect("shutdown 处理") {
                     continue;
                 }
-                // 请求级 panic 隔离：单请求崩溃不拖死进程。
+                // 请求级 panic 隔离：单请求崩溃不拖死进程，也必须给客户端一个应答——
+                // 悬空请求会让 VSCode 干等超时（表现为该能力静默失效）。
+                let req_id = req.id.clone();
+                let req_method = req.method.clone();
                 let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(|| {
                     handle_request(req, &mut state)
                 }));
                 match result {
                     Ok(resp) => connection.sender.send(Message::Response(resp)).expect("send response"),
-                    Err(_) => eprintln!("[godotlsp] 请求处理 panic，已隔离"),
+                    Err(err) => {
+                        let detail = err
+                            .downcast_ref::<&str>()
+                            .map(|s| s.to_string())
+                            .or_else(|| err.downcast_ref::<String>().cloned())
+                            .unwrap_or_else(|| "unknown panic".into());
+                        eprintln!("[godotlsp] 请求处理 panic，已隔离: {req_method}: {detail}");
+                        let _ = connection.sender.send(Message::Notification(Notification::new(
+                            "window/logMessage".into(),
+                            serde_json::json!({ "type": 1, "message": format!("[godotlsp] 请求 {req_method} 处理异常，已隔离: {detail}") }),
+                        )));
+                        let _ = connection.sender.send(Message::Response(Response::new_err(
+                            req_id,
+                            lsp_server::ErrorCode::InternalError as i32,
+                            format!("internal error in {req_method}"),
+                        )));
+                    }
                 }
             }
             Message::Notification(notif) => {
@@ -1527,10 +1555,36 @@ fn class_symbol(src: &str, c: &ClassDecl) -> DocumentSymbol {
     }
 }
 
+/// AST/token span → &str 的唯一安全通道：
+/// 反转（编辑器缓冲中间态可能触发）→ 空串；越界 → 钳制；并对齐 UTF-8 字符边界。
+/// 任何 span 派生的 `&src[a..b]` 都必须走这里，禁止裸切片。
+fn span_slice(src: &str, a: usize, b: usize) -> &str {
+    if a >= b {
+        return "";
+    }
+    let a = a.min(src.len());
+    let b = b.min(src.len());
+    if a >= b {
+        return "";
+    }
+    let mut a = a;
+    while a > 0 && !src.is_char_boundary(a) {
+        a -= 1;
+    }
+    let mut b = b;
+    while b < src.len() && !src.is_char_boundary(b) {
+        b += 1;
+    }
+    if a >= b {
+        return "";
+    }
+    &src[a..b]
+}
+
 /// 用源文件切片把类型表达式粗渲染成字符串（hover/symbol detail 用，不求完美）。
 fn expr_to_text(src: &str, e: &gdscript_syntax::ast::Expr) -> String {
     let (a, b) = expr_span(e);
-    src[a.min(src.len())..b.min(src.len())].to_string()
+    span_slice(src, a, b).to_string()
 }
 
 fn expr_span(e: &gdscript_syntax::ast::Expr) -> (usize, usize) {
@@ -2504,7 +2558,7 @@ fn utf16_line_col(src: &str, byte: usize) -> (u32, u32) {
 }
 
 fn utf16_len(src: &str, start: usize, end: usize) -> u32 {
-    src[start..end].chars().map(|c| c.len_utf16() as u32).sum()
+    span_slice(src, start, end).chars().map(|c| c.len_utf16() as u32).sum()
 }
 
 // ───────────────────────── 文本工具 ─────────────────────────
@@ -3525,5 +3579,270 @@ mod rename_tests {
             placeholder: "do_work".into(),
         });
         let _ = std::fs::remove_dir_all(&dir);
+    }
+}
+
+// ───────────────────── span 巡检（反转 span 一次性排查） ─────────────────────
+#[cfg(test)]
+mod span_sanity_tests {
+    use super::*;
+    use gdscript_syntax::ast::{Expr, MatchArm, MatchPattern, Stmt};
+
+    fn check_span(sp: (usize, usize), ctx: &str, bad: &mut Vec<String>) {
+        if sp.0 > sp.1 {
+            bad.push(format!("{ctx}: span ({}, {}) inverted", sp.0, sp.1));
+        }
+    }
+
+    fn walk_expr(e: &Expr, ctx: &str, bad: &mut Vec<String>) {
+        let sp = match e {
+            Expr::Literal(_) | Expr::Ident(_) => return,
+            Expr::Binary(_, _, _, sp)
+            | Expr::Unary(_, _, sp)
+            | Expr::Call { span: sp, .. }
+            | Expr::Index { span: sp, .. }
+            | Expr::Attribute { span: sp, .. }
+            | Expr::Lambda(_, sp)
+            | Expr::Array(_, sp)
+            | Expr::Dict(_, sp)
+            | Expr::Await(_, sp)
+            | Expr::NodePath { span: sp, .. }
+            | Expr::Generic(_, _, sp)
+            | Expr::Ternary(_, _, _, sp) => *sp,
+        };
+        check_span(sp, ctx, bad);
+        match e {
+            Expr::Binary(a, _, b, _) => {
+                walk_expr(a, ctx, bad);
+                walk_expr(b, ctx, bad);
+            }
+            Expr::Unary(_, a, _) => walk_expr(a, ctx, bad),
+            Expr::Call { callee, args, .. } => {
+                walk_expr(callee, ctx, bad);
+                for a in args {
+                    walk_expr(&a.value, ctx, bad);
+                }
+            }
+            Expr::Index { target, index, .. } => {
+                walk_expr(target, ctx, bad);
+                walk_expr(index, ctx, bad);
+            }
+            Expr::Attribute { target, .. } => walk_expr(target, ctx, bad),
+            Expr::Array(items, _) => {
+                for it in items {
+                    walk_expr(it, ctx, bad);
+                }
+            }
+            Expr::Dict(pairs, _) => {
+                for (k, v) in pairs {
+                    walk_expr(k, ctx, bad);
+                    walk_expr(v, ctx, bad);
+                }
+            }
+            Expr::Await(a, _) => walk_expr(a, ctx, bad),
+            Expr::Generic(base, args, _) => {
+                walk_expr(base, ctx, bad);
+                for a in args {
+                    walk_expr(a, ctx, bad);
+                }
+            }
+            Expr::Ternary(a, b, c, _) => {
+                walk_expr(a, ctx, bad);
+                walk_expr(b, ctx, bad);
+                walk_expr(c, ctx, bad);
+            }
+            _ => {}
+        }
+    }
+
+    /// MatchPattern 各变体均无 span 字段，仅做嵌套遍历占位（当前无可查内容）。
+    fn walk_pat(p: &MatchPattern) {
+        match p {
+            MatchPattern::Array(ps) => {
+                for x in ps {
+                    walk_pat(x);
+                }
+            }
+            MatchPattern::Dict(ps) => {
+                for (a, b) in ps {
+                    walk_pat(a);
+                    walk_pat(b);
+                }
+            }
+            MatchPattern::Or(ps) => {
+                for x in ps {
+                    walk_pat(x);
+                }
+            }
+            _ => {}
+        }
+    }
+
+    fn walk_stmt(s: &Stmt, ctx: &str, bad: &mut Vec<String>) {
+        match s {
+            Stmt::Expr(e) => walk_expr(e, ctx, bad),
+            Stmt::Assign { target, value, span, .. } => {
+                walk_expr(target, ctx, bad);
+                walk_expr(value, ctx, bad);
+                check_span(*span, ctx, bad);
+            }
+            Stmt::Var(v) => {
+                check_span(v.span, ctx, bad);
+                if let Some(t) = &v.ty {
+                    walk_expr(t, ctx, bad);
+                }
+                if let Some(val) = &v.value {
+                    walk_expr(val, ctx, bad);
+                }
+            }
+            Stmt::Const(c) => {
+                check_span(c.span, ctx, bad);
+                if let Some(t) = &c.ty {
+                    walk_expr(t, ctx, bad);
+                }
+                walk_expr(&c.value, ctx, bad);
+            }
+            Stmt::Func(f) => {
+                check_span(f.span, ctx, bad);
+                if let Some(r) = &f.ret_ty {
+                    walk_expr(r, ctx, bad);
+                }
+                for st in &f.body.stmts {
+                    walk_stmt(st, ctx, bad);
+                }
+            }
+            Stmt::Class(c) => {
+                check_span(c.span, ctx, bad);
+                if let Some(e) = &c.extends {
+                    walk_expr(e, ctx, bad);
+                }
+                for st in &c.body {
+                    walk_stmt(st, ctx, bad);
+                }
+            }
+            Stmt::If { branches, else_block, span, .. } => {
+                check_span(*span, ctx, bad);
+                for (cond, blk) in branches {
+                    walk_expr(cond, ctx, bad);
+                    for st in &blk.stmts {
+                        walk_stmt(st, ctx, bad);
+                    }
+                }
+                if let Some(blk) = else_block {
+                    for st in &blk.stmts {
+                        walk_stmt(st, ctx, bad);
+                    }
+                }
+            }
+            Stmt::For { iter, body, span, .. } => {
+                check_span(*span, ctx, bad);
+                walk_expr(iter, ctx, bad);
+                for st in &body.stmts {
+                    walk_stmt(st, ctx, bad);
+                }
+            }
+            Stmt::While { cond, body, span } => {
+                check_span(*span, ctx, bad);
+                walk_expr(cond, ctx, bad);
+                for st in &body.stmts {
+                    walk_stmt(st, ctx, bad);
+                }
+            }
+            Stmt::Match { expr, arms, span } => {
+                check_span(*span, ctx, bad);
+                walk_expr(expr, ctx, bad);
+                for MatchArm { pattern, guard, body, .. } in arms {
+                    walk_pat(pattern);
+                    if let Some(g) = guard {
+                        walk_expr(g, ctx, bad);
+                    }
+                    for st in &body.stmts {
+                        walk_stmt(st, ctx, bad);
+                    }
+                }
+            }
+            Stmt::Return { value: Some(e), span } => {
+                check_span(*span, ctx, bad);
+                walk_expr(e, ctx, bad);
+            }
+            _ => {}
+        }
+    }
+
+    fn probe_dir(dir: &std::path::Path, bad: &mut Vec<String>) {
+        let Ok(rd) = std::fs::read_dir(dir) else { return };
+        for entry in rd.flatten() {
+            let p = entry.path();
+            if p.is_dir() {
+                probe_dir(&p, bad);
+            } else if p.extension().is_some_and(|x| x == "gd") {
+                let Ok(src) = std::fs::read_to_string(&p) else { continue };
+                let (file, _errs) = parse(&src);
+                if let Some(e) = &file.extends {
+                    walk_expr(e, &p.display().to_string(), bad);
+                }
+                for st in &file.body {
+                    walk_stmt(st, &p.display().to_string(), bad);
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn no_inverted_spans_in_local_corpus() {
+        let mut bad = vec![];
+        probe_dir(std::path::Path::new("../godot-test"), &mut bad);
+        probe_dir(std::path::Path::new("../corpus/feature-showcase"), &mut bad);
+        probe_dir(std::path::Path::new("../corpus/bench/pixelorama"), &mut bad);
+        assert!(bad.is_empty(), "found {} inverted spans:\n{}", bad.len(), bad.join("\n"));
+    }
+
+    /// 模拟编辑器缓冲：前缀截断（用户打到一半）也必须产出良构 span。
+    /// 只跑 godot-test 小语料，O(n²) 可承受；发现反转立即 panic 报文件+偏移。
+    #[test]
+    fn no_inverted_spans_in_truncated_buffers() {
+        let mut bad = vec![];
+        let mut files = vec![];
+        collect_gd(std::path::Path::new("../godot-test"), &mut files);
+        for f in files {
+            let src = std::fs::read_to_string(&f).unwrap();
+            for (cut, _) in src.char_indices().skip(1) {
+                let ctx = format!("{}@cut{}", f.display(), cut);
+                let (file, _errs) = parse(&src[..cut]);
+                if let Some(e) = &file.extends {
+                    walk_expr(e, &ctx, &mut bad);
+                }
+                for st in &file.body {
+                    walk_stmt(st, &ctx, &mut bad);
+                }
+                if !bad.is_empty() {
+                    break;
+                }
+            }
+        }
+        assert!(bad.is_empty(), "found {} inverted spans in truncated buffers:\n{}", bad.len(), bad.join("\n"));
+    }
+
+    fn collect_gd(dir: &std::path::Path, out: &mut Vec<std::path::PathBuf>) {
+        let Ok(rd) = std::fs::read_dir(dir) else { return };
+        for entry in rd.flatten() {
+            let p = entry.path();
+            if p.is_dir() {
+                collect_gd(&p, out);
+            } else if p.extension().is_some_and(|x| x == "gd") {
+                out.push(p);
+            }
+        }
+    }
+
+    #[test]
+    fn span_slice_rejects_inverted_and_out_of_bounds() {
+        let src = "var a = 1"; // ASCII 基准
+        assert_eq!(span_slice(src, 0, 3), "var");
+        assert_eq!(span_slice(src, 5, 2), "", "反转 span 必须返回空串而非 panic");
+        assert_eq!(span_slice(src, 0, 999), src, "越界 end 钳制到 len");
+        assert_eq!(span_slice(src, 999, 9999), "");
+        let uni = "var 位置 = Vector2.ZERO"; // 含多字节
+        assert_eq!(span_slice(uni, 4, 10), "位置", "切片须对齐字符边界");
     }
 }
