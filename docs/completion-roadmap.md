@@ -1,6 +1,6 @@
 # 补全增强路线图 — 引擎数据面 × 官方 snippet(2026-10-16 立项)
 
-> **状态:P0 已实施,C7.3/C6.4/C6.6 已落地(2026-10-17);其余规划中。**
+> **状态:P0 已实施;C7.3/C6.4/C6.6/C6.1/C6.2/C7.1/C7.2/N2 已落地(2026-10-17);其余规划中。**
 > 本文件是 C6-C9 四项工作流的排期依据;设计论证与源码锚点见
 > `lsp-design.md` §6.9(证据深挖),能力面索引见 `lsp-engine-capabilities-roadmap.md` P3.6。
 >
@@ -8,17 +8,17 @@
 > 不动并发架构、不外挂引擎、不引运行时依赖。
 >
 > **验收基建已就位**:`tools/completion_oracle.py`(引擎 oracle harness)+
-> `tools/completion_oracle_baseline.json`(基线 24/140)。每期实施后重跑,
+> `tools/completion_oracle_baseline.json`(基线 **33/140**)。每期实施后重跑,
 > `--update-baseline` 前必须零回归;分桶通过率即量化验收。
 
 ## 一、结论(一屏)
 
 | 期 | 项 | 层 | 内容 | 风险 | 状态 |
 |---|---|---|---|---|---|
-| P0 | **V0** | 工具 | 引擎补全 oracle harness(140 可判定夹具 = 146 .gd − 6 .notest;量化基线) | 无(纯新增工具) | ✅ 已实施(2026-10-17,首跑 20→**24/140**) |
-| P1 | **C6** + **C7.3** | gdscript-engine + godotlsp | 模型字段解析+三类消费+内建构造/运算符面(C6.5);$/% 回归止血 | 低(附加式 serde) | 🔶 C6.4/C6.6 已落地;C6.1-6.3/6.5 待(引擎层由并发会话在建) |
+| P0 | **V0** | 工具 | 引擎补全 oracle harness(140 可判定夹具 = 146 .gd − 6 .notest;量化基线) | 无(纯新增工具) | ✅ 已实施(2026-10-17,首跑 20/140) |
+| P1 | **C6** + **C7.3** | gdscript-engine + godotlsp | 模型字段解析+三类消费+内建构造/运算符面(C6.5);$/% 回归止血 | 低(附加式 serde) | 🔶 C6.1/C6.2/C6.4/C6.6 已落地;C6.3/C6.5 待 |
 | P1 | **C7.3** | godotlsp | $/% 节点路径上下文止血 | 低 | ✅ 已落地(2026-10-17,单测+E2E) |
-| P2 | **C7.1/C7.2** | godotlsp | class_name/autoload 全局面;res:// 路径面 | 低-中 | 待 |
+| P2 | **C7.1/C7.2** | godotlsp | class_name/autoload 全局面;res:// 路径面 + N2 字符串抑制 | 低-中 | ✅ 已落地(2026-10-17,oracle 24→**33/140**,+9 全为 C6.1 信号面战绩) |
 | P3 | **C8** | godotlsp | 注解参数面(小手搬表 + 模型全局枚举) | 低(表漂移可检测) | 待 |
 | P4 | **C9** | 插件 + 工具 | snippet 16→~40 对齐;官方模板入库备料 | 无(纯增量) | 待 |
 
@@ -36,7 +36,8 @@
 | extension_api.json | Godot 4.7.0 stable dump | `crates/gdscript-engine/testdata/` | 是(`include_str!` 生产数据) | 引擎模型唯一事实源 |
 | 文档站/hover 生成面 | 随语料 | `tools/gen_docs.py` → `website/src/builtin/class_*.md` + `crates/godotlsp/src/hoverdata.json` | 是(生成物) | 类描述/方法/属性/枚举/常量 hover 与文档站;**Constructor/Operator 区块未解析(见 §3.5)** |
 
-oracle 分类(与工作流的对应):`argument_options/`(C8)、`get_node/`(C7.2/$%)、
+oracle 分类(与工作流的对应):`argument_options/`(C8)、`get_node/`($/% 上下文 + 成员链;
+信号面 C6.2 后 8/33,余为节点名面 N6)、
 `no_parenthesis_when_callable_is_expected/`(C6.4 insertText)、`filter/`(排噪/排序)、
 `types/`(C6.3 虚方法/类型面)、`assignment_options/`(C8 枚举属性)、`index/`、`extends/`、
 `builtin_enum/`、`global_enum/`、`script_enum/`、`common/` 等。
@@ -93,29 +94,30 @@ class_name / autoload 全局面补全缺失(引擎有;`gdscript-project` **已�
 **结论:数据在两层源里都完整,但两个消费管线(文档生成面、LSP 模型面)都只接了方法/属性/枚举/常量;
 构造函数与运算符两条区块全线未接。** 这不是"备未来"问题,是明确的工作面缺口 → C6.5 升级(见 §四)。
 
-### 3.6 oracle 首跑普查发现(2026-10-17,24/140 之后的差距地图)
+### 3.6 oracle 普查差距地图(2026-10-17 两轮:20/140 → 24/140 → **33/140**)
 
-分桶通过率(当期):filter 2/2、script_enum 1/1、builtin_enum 5/5、common 8/20、
-global_enum 3/6、index 1/9、enum_values_in_dictionary 1/13、types 1/19、get_node 0/33、
-argument_options 0/11、no_parenthesis 0/8、enum_values_in_match 0/7、assignment_options 0/4、
-extends 0/2。未命中成因:absent 308 / paren-display 50 / string-literal 9。
+分桶通过率(当期 33/140):filter 2/2、script_enum 1/1、builtin_enum 5/5、common 8/20、
+global_enum 3/6、index 1/9、enum_values_in_dictionary 1/13、types 2/19、get_node 8/33、
+argument_options 0/11、no_parenthesis 2/8、enum_values_in_match 0/7、assignment_options 0/4、
+extends 0/2。未命中成因:absent 281 / paren-display 55 / string-literal 9。
 
 按"阻塞面"归纳(而非按桶),新增/调整如下工作项:
 
 | # | 发现 | oracle 证据 | 处置 |
 |---|---|---|---|
-| N1 | **self 成员面缺失**:裸标识符上下文不出当前类成员(`owner`/`add_child(…)/property_of_a`) | common `identifiers_in_*` ×3、argument_options/connect | **新项 C10(设计后实施)**:全局面合并宿主链成员 + 新 sort 桶;必须与 N2 同批(否则 vacuous pass 翻转) |
-| N2 | **字符串上下文不抑制**:字符串字面量内仍出全局面 | `no_completion_in_string`(当前 vacuous pass) | **新项 C10 配对**:行内引号状态扫描(含 `"""`),字符串内返回空——引擎默认行为 |
+| N1 | **self 成员面缺失**:裸标识符上下文不出当前类成员(`owner`/`add_child(…)/property_of_a`) | common `identifiers_in_*` ×3、argument_options/connect | **新项 C10(设计后实施)**:全局面合并宿主链成员 + 新 sort 桶;N2 已落地不再构成前置,与 N4 同批即可 |
+| N2 | **字符串上下文不抑制** ~~:字符串字面量内仍出全局面~~ | `no_completion_in_string`(曾为 vacuous pass) | ✅ 已落地(2026-10-17,C7.2 同批):`string_literal_at` 前向状态机,字符串内返回空(路径面例外);vacuous pass 转为真实通过 |
 | N3 | **脚本类成员面缺失**:`extends "res://x.gd"` 的成员不出(`func_of_a()`) | common `invalid_super_call_*` ×2、`override_function_*` ×4 | C7.1 的语义延伸(工程面解析 extends 路径 → 成员面);override 签名展示另属 C6.3 |
 | N4 | **枚举限定展示**:类型化 LHS 后引擎出 `Control.SIZE_EXPAND`(限定名),我方不出类枚举值 | assignment_options ×4 | 依赖 N1(裸上下文类枚举值)+ 展示约定,随 C10 |
 | N5 | **callable-expected 上下文不出括号** | no_parenthesis ×8(当前 0/8,C6.4 后仍挂) | 需参数类型分析(语义层),缓行;桶内 `lambda_body` 已因 C6.4 通过 |
 | N6 | **节点路径类型推断 + 场景树节点名** | get_node 0/33 | 语义层 + C7.3+(project.scenes → NodeDecl),最大桶,分期 |
 | N7 | **字典键/字典内枚举值** | index 1/9、enum_values_in_dictionary 1/13 | 明确不做 #3 延续,仅观察 |
-| N8 | **字符串字面量参数面**(NodePath/StringName 建议) | argument_options/string_literals ×8 | C8 家族;依赖 N2 的字符串上下文识别先行 |
+| N8 | **字符串字面量参数面**(NodePath/StringName 建议) | argument_options/string_literals ×8 | C8 家族;N2 已落地,字符串上下文识别不再阻塞 |
 
-**vacuous pass 清单(补面时必须回归验证)**:`no_constructor_*`(6)、`no_completion_in_string`、
-`builtin_enum/global_enum/script_enum` 的 metatype 三件套。oracle 的 exclude 语义会在
-对应面补齐后自动翻转这些桶——这正是 harness 的价值。
+**vacuous pass 清单(补面时必须回归验证)**:`no_constructor_*`(6)、
+`builtin_enum/global_enum/script_enum` 的 metatype 三件套。`no_completion_in_string`
+已于 2026-10-17 随 N2 落地转为真实通过。oracle 的 exclude 语义会在对应面补齐后自动
+翻转这些桶——这正是 harness 的价值。
 
 ## 四、分期路线图
 
@@ -148,12 +150,16 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
 
 落点:`crates/gdscript-engine/src/lib.rs`(RawApi 221-350 / `into_model` 352+)。
 
-- **C6.1 解析**:`RawClass` +`signals`/`api_type`/`is_refcounted`;`RawFunction` +`is_virtual`;
-  `RawBuiltin` +`operators`/`constructors`/`is_keyed`/`indexing_return_type`;`RawHeader`
-  +`version_full_name`;全局常量 +`is_bitfield`。查询 API:`class_signals_chain(chain)`、
-  `chain_virtuals(chain) -> Vec<&Function>`(沿继承链收 `is_virtual`,子类重写优先去重)。
-- **C6.2 信号入成员面**(godotlsp completion):接收者类型 → 类链信号 → `CompletionItemKind::Event`,
-  detail 带参数签名。oracle:`argument_options/connect.cfg`。
+- **C6.1 解析** ✅(引擎层,并发会话落地):`EngineClass.signals: Vec<EngineSignal>` +
+  `find_signal`/`find_enum_value` 已在 `gdscript-engine`;`api_type`/`is_refcounted`/
+  `is_virtual`/builtin `operators`/`constructors` 仍未解析(见 C6.3/C6.5)。
+- **C6.2 信号入成员面** ✅ 已落地(2026-10-17):`class_members` 沿祖先链收
+  `EngineClass.signals` → `CompletionItemKind::Event`,detail 为 `render_signal` 签名
+  (`name(a: T, b)`,无返回类型——信号是通知)。**oracle +9 全部来自本项**:
+  `$AnimationPlayer.` 经引擎类名回退解析成成员链后,`child_entered_tree`(Node 信号)/
+  `animation_changed`(AnimationPlayer 信号)补齐,get_node 桶 0/33→8/33、
+  types/member 桶 +1;单测 `completion_member_signals`(CanvasItem.draw)+ E2E(444 项成员面)。
+  `argument_options/connect.cfg`(connect 首参信号名串)仍待 C8 参数面。
 - **C6.3 虚方法模型化**(`crates/godotlsp/src/snippets.rs` VIRTUALS 12 条 → `chain_virtuals`):
   签名取模型参数名+类型;9 个非 ClassDB 回调留手表(`_init`/`_notification`/`_get`/`_set`/
   `_to_string`/`_property_can_revert`/`_property_get_revert`/`_get_property_list`/`_validate_property`)。
@@ -191,18 +197,30 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
   (`enum_member_values_at`,引擎类+内建类;oracle builtin_enum 桶 4/5→5/5)。
 - 依赖:无。风险:低。这是已知回归,不是新设计。
 
-### P2 — C7 工程面接入(godotlsp;数据已在 gdscript-project 索引,只补消费)
+### P2 — C7 工程面接入 ✅ 已落地(2026-10-17)
 
-落点:`crates/godotlsp/src/main.rs` `fn completion`(756)。
+落点:`crates/godotlsp/src/main.rs` `fn completion`;新增 `string_literal_at` /
+`is_load_call_arg` / `preload_path_items` 三函数 + `gdscript-project::Project::autoloads()`
+访问器(附加式)。测试 fixture:`crates/godotlsp/tests/fixtures/projface/`(project.godot
+带 `[autoload]` + class_name 脚本 + tscn)。
 
-- **C7.1 全局面 class_name + autoload**:消费 `Project.class_names`/`autoloads`;同名时 class_name
-  排前(引擎两者都出);detail 带来源(脚本相对路径 / autoload 目标类型)。
-- **C7.2 res:// 路径面**:`preload("res://` / `load("res://` 字符串字面量上下文 → 项目文件面
-  (scripts/scenes/resources,`uid_paths` 归一),按已输入路径前缀过滤;仅 `res://` 前缀触发防泛滥。
-  oracle:`argument_options/string_literals/` 部分覆盖。
-- **取舍**:字符串内补全依赖客户端在引号中触发 completion 的主流默认行为;先不做配置开关
-  (误报成本低、前缀过滤已收敛),监控后按 P3.5 配置模式补。
-- **验收**:单测 + smoke(class_name 全局面 / preload 路径面);oracle `get_node/` 桶进展。
+- **C7.1 全局面 class_name + autoload** ✅:遍历 `Project.scripts` 的 `ast.class_name`
+  (kind CLASS,detail `class_name (res://…)`)与 `Project.autoloads()`(kind VARIABLE,
+  detail `类型 (autoload)`);与引擎类/内建/单例同名时让位引擎(同名注册在 Godot 中即非法)。
+  实测全局面 1808→1810 项(+Player +GameManager)。
+- **C7.2 res:// 路径面** ✅:`preload("res://` / `load("res://`(含 `ResourceLoader.load(`、
+  空白变体)字符串实参 → 项目文件面;来源 = scripts + scenes 索引路径,label 完整
+  `res://…` 路径,**textEdit 替换字符串内容区**(开引号后..光标)——不依赖客户端
+  wordPattern(各编辑器对 `/`/`.` 成词约定不一)。E2E 实测 `res://pla` → player.gd。
+- **N2 字符串抑制** ✅(C10 的一半,先落地):`string_literal_at` 前向状态机(单行/
+  `"""` 多行/转义/`#` 注释截断/未闭合到行尾/`&`/`^` 前缀);字符串内默认返回空
+  (引擎默认行为,`no_completion_in_string` 从 vacuous pass 转为真实通过),
+  C7.2 路径面是唯一例外。**N1(self 成员面)仍待设计**——它是 C10 剩下的一半,
+  落地时会翻转一批当前 vacuous pass,须与 N4 同批。
+- **取舍记录**:字符串内补全依赖客户端在引号中触发的主流默认行为;路径面不做配置开关
+  (前缀过滤已收敛);目录节点不补(只补文件);`.uid`/`.import`/`.godot` 不在索引内故不出现。
+- **验收**:单测×4(成员信号/工程全局面/字符串上下文两面/状态机两函数)+ E2E 探针
+  (真实二进制:路径面带 textEdit、全局面含工程名、普通字符串 0 项)+ oracle 零回归。
 
 ### P3 — C8 注解参数面(godotlsp)
 
@@ -268,9 +286,10 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
 
 ## 八、开放问题(未来钩子,不在本期)
 
-- **C10 self 成员面 + 字符串上下文抑制**(§3.6 N1/N2):oracle 证据最充分的新面,但涉及
-  全局面合并语义 + 新 sort 桶 + 与 vacuous pass 的联动,按项目纪律先设计后实施
-  (设计入 lsp-design.md 后再排期);两子项必须同批落地。
+- **C10 self 成员面**(§3.6 N1,字符串抑制 N2 已于 2026-10-17 随 C7.2 落地):oracle
+  证据最充分的新面(common `identifiers_in_*` ×3 等),但涉及全局面合并语义 + 新 sort 桶
+  + 与 vacuous pass 的联动,按项目纪律先设计后实施(设计入 lsp-design.md 后再排期);
+  与 N4(枚举限定展示)同批。
 - **per-type 运算符 hover**(如 `int * Color` 的运算符文档):需语义层对二元表达式两侧做类型推断,
   依赖类型系统完备度;当前通用 `OPERATOR_DOCS` 20 条已覆盖语义科普,per-type 留待语义层增强后
   (与 C6.5c-③ 衔接)。

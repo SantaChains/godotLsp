@@ -1,17 +1,17 @@
 {
- "generated_at": "2026-10-17 00:40:24",
- "server": "D:\\LocalSend\\Files\\pro\\godotlsp\\target\\debug\\godotlsp.exe mtime=10-17 00:38",
+ "generated_at": "2026-10-17 10:51:28",
+ "server": "D:\\LocalSend\\Files\\pro\\godotlsp\\target\\debug\\godotlsp.exe mtime=10-17 10:43",
  "corpus": "corpus\\godot-engine-tests\\completion",
  "summary": {
-  "pass": 24,
-  "fail": 116,
+  "pass": 33,
+  "fail": 107,
   "error": 0,
   "total": 140
  },
  "fixtures": {
   "argument_options/connect.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "\"signal_a\""
@@ -38,7 +38,7 @@
   },
   "argument_options/play_inferred.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "\"bounce\""
@@ -62,7 +62,7 @@
   },
   "argument_options/play_typed.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "\"bounce\""
@@ -86,7 +86,7 @@
   },
   "argument_options/play_untyped.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "\"bounce\""
@@ -110,7 +110,7 @@
   },
   "argument_options/string_literals/add_node_path_tween.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "insert_text": "^\"property_of_a\""
@@ -137,7 +137,7 @@
   },
   "argument_options/string_literals/add_node_path_tween_prepended.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 0,
    "missing": [
     {
      "insert_text": "\"property_of_a\""
@@ -147,24 +147,11 @@
     }
    ],
    "illegal": [],
-   "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
-   ]
+   "labels_head": []
   },
   "argument_options/string_literals/add_string_name_input_event.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "insert_text": "&\"test_input_action\""
@@ -188,31 +175,18 @@
   },
   "argument_options/string_literals/add_string_name_input_event_prepended.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 0,
    "missing": [
     {
      "insert_text": "\"test_input_action\""
     }
    ],
    "illegal": [],
-   "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
-   ]
+   "labels_head": []
   },
   "argument_options/string_literals/argument_options_inside_string_literal.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 0,
    "missing": [
     {
      "insert_text": "\"property_of_a\""
@@ -222,24 +196,11 @@
     }
    ],
    "illegal": [],
-   "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
-   ]
+   "labels_head": []
   },
   "argument_options/string_literals/dont_add_node_path_tween.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "insert_text": "\"property_of_a\""
@@ -266,7 +227,7 @@
   },
   "argument_options/string_literals/dont_add_string_name_input_event.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "insert_text": "\"test_input_action\""
@@ -290,7 +251,7 @@
   },
   "assignment_options/enum_attribute.gd": {
    "status": "fail",
-   "n_items": 782,
+   "n_items": 809,
    "missing": [
     {
      "display": "new(…)"
@@ -314,7 +275,7 @@
   },
   "assignment_options/enum_attribute_identifier.gd": {
    "status": "fail",
-   "n_items": 782,
+   "n_items": 809,
    "missing": [
     {
      "display": "new(…)"
@@ -338,7 +299,7 @@
   },
   "assignment_options/enum_identifier.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "Control.SIZE_EXPAND"
@@ -377,7 +338,7 @@
   },
   "assignment_options/enum_no_identifier.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "Control.SIZE_EXPAND"
@@ -416,7 +377,7 @@
   },
   "builtin_enum/builtin_enum_autocomplete.gd": {
    "status": "pass",
-   "n_items": 826,
+   "n_items": 857,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -436,7 +397,7 @@
   },
   "builtin_enum/builtin_enum_in_type_hint.gd": {
    "status": "pass",
-   "n_items": 826,
+   "n_items": 857,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -483,7 +444,7 @@
   },
   "common/assign_local_variant.gd": {
    "status": "pass",
-   "n_items": 105,
+   "n_items": 109,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -502,75 +463,6 @@
    ]
   },
   "common/identifiers_in_call.gd": {
-   "status": "fail",
-   "n_items": 1808,
-   "missing": [
-    {
-     "display": "add_child(…)"
-    },
-    {
-     "display": "owner"
-    },
-    {
-     "display": "child_entered_tree"
-    },
-    {
-     "display": "property_of_a"
-    },
-    {
-     "display": "func_of_a()"
-    },
-    {
-     "display": "signal_of_a"
-    },
-    {
-     "display": "test_signal_1"
-    },
-    {
-     "display": "test_signal_2"
-    },
-    {
-     "display": "test_var_1"
-    },
-    {
-     "display": "test_var_2"
-    },
-    {
-     "display": "test_func_1(…)"
-    },
-    {
-     "display": "test_func_2(…)"
-    },
-    {
-     "display": "test_parameter_1"
-    },
-    {
-     "display": "test_parameter_2"
-    },
-    {
-     "display": "local_test_var_1"
-    },
-    {
-     "display": "local_test_var_2"
-    }
-   ],
-   "illegal": [],
-   "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
-   ]
-  },
-  "common/identifiers_in_function_body.gd": {
    "status": "fail",
    "n_items": 1812,
    "missing": [
@@ -639,9 +531,78 @@
     "AnimatedTexture"
    ]
   },
+  "common/identifiers_in_function_body.gd": {
+   "status": "fail",
+   "n_items": 1816,
+   "missing": [
+    {
+     "display": "add_child(…)"
+    },
+    {
+     "display": "owner"
+    },
+    {
+     "display": "child_entered_tree"
+    },
+    {
+     "display": "property_of_a"
+    },
+    {
+     "display": "func_of_a()"
+    },
+    {
+     "display": "signal_of_a"
+    },
+    {
+     "display": "test_signal_1"
+    },
+    {
+     "display": "test_signal_2"
+    },
+    {
+     "display": "test_var_1"
+    },
+    {
+     "display": "test_var_2"
+    },
+    {
+     "display": "test_func_1(…)"
+    },
+    {
+     "display": "test_func_2(…)"
+    },
+    {
+     "display": "test_parameter_1"
+    },
+    {
+     "display": "test_parameter_2"
+    },
+    {
+     "display": "local_test_var_1"
+    },
+    {
+     "display": "local_test_var_2"
+    }
+   ],
+   "illegal": [],
+   "labels_head": [
+    "AESContext",
+    "AStar2D",
+    "AStar3D",
+    "AStarGrid2D",
+    "AcceptDialog",
+    "AccessibilityServer",
+    "AimModifier3D",
+    "AnimatableBody2D",
+    "AnimatableBody3D",
+    "AnimatedSprite2D",
+    "AnimatedSprite3D",
+    "AnimatedTexture"
+   ]
+  },
   "common/identifiers_in_unclosed_call.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "add_child(…)"
@@ -743,23 +704,10 @@
   },
   "common/no_completion_in_string.gd": {
    "status": "pass",
-   "n_items": 1808,
+   "n_items": 0,
    "missing": [],
    "illegal": [],
-   "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
-   ]
+   "labels_head": []
   },
   "common/no_constructor_abstract_inner_class.gd": {
    "status": "pass",
@@ -770,7 +718,7 @@
   },
   "common/no_constructor_abstract_native.gd": {
    "status": "pass",
-   "n_items": 429,
+   "n_items": 446,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -797,7 +745,7 @@
   },
   "common/no_constructor_global_singleton.gd": {
    "status": "pass",
-   "n_items": 106,
+   "n_items": 108,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -831,7 +779,7 @@
   },
   "common/override_function_abstract.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "test(x: int) -> void:",
@@ -856,7 +804,7 @@
   },
   "common/override_function_full_name.gd": {
    "status": "fail",
-   "n_items": 1810,
+   "n_items": 1814,
    "missing": [
     {
      "display": "_get(property: StringName) -> Variant:"
@@ -880,7 +828,7 @@
   },
   "common/override_function_no_underscore.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "func_of_a():"
@@ -910,7 +858,7 @@
   },
   "common/override_function_static.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "_static_init() -> void:"
@@ -937,7 +885,7 @@
   },
   "common/override_function_underscore.gd": {
    "status": "fail",
-   "n_items": 1809,
+   "n_items": 1813,
    "missing": [
     {
      "display": "_func_of_a_underscore():"
@@ -1221,7 +1169,7 @@
   },
   "extends/extends_inherited_inner_class.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "InnerClassA"
@@ -1245,7 +1193,7 @@
   },
   "extends/extends_self.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "InnerClassA"
@@ -1272,7 +1220,7 @@
   },
   "filter/organized_export.gd": {
    "status": "pass",
-   "n_items": 1812,
+   "n_items": 1816,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -1315,13 +1263,9 @@
    "labels_head": []
   },
   "get_node/literal/percent.gd": {
-   "status": "fail",
-   "n_items": 422,
-   "missing": [
-    {
-     "display": "child_entered_tree"
-    }
-   ],
+   "status": "pass",
+   "n_items": 444,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "animation_set_next(…)",
@@ -1365,16 +1309,9 @@
    "labels_head": []
   },
   "get_node/literal_scene/dollar_native_scene.gd": {
-   "status": "fail",
-   "n_items": 422,
-   "missing": [
-    {
-     "display": "child_entered_tree"
-    },
-    {
-     "display": "animation_changed"
-    }
-   ],
+   "status": "pass",
+   "n_items": 444,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "animation_set_next(…)",
@@ -1619,16 +1556,9 @@
    "labels_head": []
   },
   "get_node/local_typehint/native_local_typehint.gd": {
-   "status": "fail",
-   "n_items": 422,
-   "missing": [
-    {
-     "display": "child_entered_tree"
-    },
-    {
-     "display": "animation_changed"
-    }
-   ],
+   "status": "pass",
+   "n_items": 444,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "animation_set_next(…)",
@@ -1672,16 +1602,9 @@
    "labels_head": []
   },
   "get_node/local_typehint_scene/native_local_typehint_scene.gd": {
-   "status": "fail",
-   "n_items": 422,
-   "missing": [
-    {
-     "display": "child_entered_tree"
-    },
-    {
-     "display": "animation_changed"
-    }
-   ],
+   "status": "pass",
+   "n_items": 444,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "animation_set_next(…)",
@@ -1700,16 +1623,10 @@
   },
   "get_node/local_typehint_scene_incompatible/class_local_typehint_scene_incompatible.gd": {
    "status": "fail",
-   "n_items": 581,
+   "n_items": 611,
    "missing": [
     {
-     "display": "child_entered_tree"
-    },
-    {
      "display": "get_overlapping_areas()"
-    },
-    {
-     "display": "area_entered"
     }
    ],
    "illegal": [],
@@ -1730,16 +1647,10 @@
   },
   "get_node/local_typehint_scene_incompatible/native_local_typehint_scene_incompatible.gd": {
    "status": "fail",
-   "n_items": 581,
+   "n_items": 611,
    "missing": [
     {
-     "display": "child_entered_tree"
-    },
-    {
      "display": "get_overlapping_areas()"
-    },
-    {
-     "display": "area_entered"
     }
    ],
    "illegal": [],
@@ -1923,16 +1834,9 @@
    "labels_head": []
   },
   "get_node/member_typehint/native_member_typehint.gd": {
-   "status": "fail",
-   "n_items": 422,
-   "missing": [
-    {
-     "display": "child_entered_tree"
-    },
-    {
-     "display": "animation_changed"
-    }
-   ],
+   "status": "pass",
+   "n_items": 444,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "animation_set_next(…)",
@@ -1976,16 +1880,9 @@
    "labels_head": []
   },
   "get_node/member_typehint_scene/native_member_typehint_scene.gd": {
-   "status": "fail",
-   "n_items": 422,
-   "missing": [
-    {
-     "display": "child_entered_tree"
-    },
-    {
-     "display": "animation_changed"
-    }
-   ],
+   "status": "pass",
+   "n_items": 444,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "animation_set_next(…)",
@@ -2003,13 +1900,9 @@
    ]
   },
   "get_node/member_typehint_scene_broad/class_member_typehint_scene_broad.gd": {
-   "status": "fail",
-   "n_items": 287,
-   "missing": [
-    {
-     "display": "child_entered_tree"
-    }
-   ],
+   "status": "pass",
+   "n_items": 300,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "_process(…)",
@@ -2027,13 +1920,9 @@
    ]
   },
   "get_node/member_typehint_scene_broad/native_member_typehint_scene_broad.gd": {
-   "status": "fail",
-   "n_items": 287,
-   "missing": [
-    {
-     "display": "child_entered_tree"
-    }
-   ],
+   "status": "pass",
+   "n_items": 300,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "_process(…)",
@@ -2052,16 +1941,10 @@
   },
   "get_node/member_typehint_scene_incompatible/class_member_typehint_scene_incompatible.gd": {
    "status": "fail",
-   "n_items": 581,
+   "n_items": 611,
    "missing": [
     {
-     "display": "child_entered_tree"
-    },
-    {
      "display": "get_overlapping_areas()"
-    },
-    {
-     "display": "area_entered"
     }
    ],
    "illegal": [],
@@ -2082,16 +1965,10 @@
   },
   "get_node/member_typehint_scene_incompatible/native_member_typehint_scene_incompatible.gd": {
    "status": "fail",
-   "n_items": 581,
+   "n_items": 611,
    "missing": [
     {
-     "display": "child_entered_tree"
-    },
-    {
      "display": "get_overlapping_areas()"
-    },
-    {
-     "display": "area_entered"
     }
    ],
    "illegal": [],
@@ -2112,7 +1989,7 @@
   },
   "global_enum/global_enum_identifier.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "Key"
@@ -2142,7 +2019,7 @@
   },
   "global_enum/global_enum_in_extends.gd": {
    "status": "pass",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -2162,7 +2039,7 @@
   },
   "global_enum/global_enum_in_type_hint.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "Key"
@@ -2220,7 +2097,7 @@
   },
   "index/array_type.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "outer"
@@ -2247,7 +2124,7 @@
   },
   "index/array_value.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "outer"
@@ -2274,7 +2151,7 @@
   },
   "index/const_dictionary_keys.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 0,
    "missing": [
     {
      "display": "\"key1\""
@@ -2284,24 +2161,11 @@
     }
    ],
    "illegal": [],
-   "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
-   ]
+   "labels_head": []
   },
   "index/dictionary_type.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "outer"
@@ -2328,7 +2192,7 @@
   },
   "index/dictionary_value.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "outer"
@@ -2355,7 +2219,7 @@
   },
   "index/local_dictionary_keys.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 0,
    "missing": [
     {
      "display": "\"key1\""
@@ -2365,44 +2229,18 @@
     }
    ],
    "illegal": [],
-   "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
-   ]
+   "labels_head": []
   },
   "index/property_dictionary_keys.gd": {
    "status": "pass",
-   "n_items": 1808,
+   "n_items": 0,
    "missing": [],
    "illegal": [],
-   "labels_head": [
-    "AESContext",
-    "AStar2D",
-    "AStar3D",
-    "AStarGrid2D",
-    "AcceptDialog",
-    "AccessibilityServer",
-    "AimModifier3D",
-    "AnimatableBody2D",
-    "AnimatableBody3D",
-    "AnimatedSprite2D",
-    "AnimatedSprite3D",
-    "AnimatedTexture"
-   ]
+   "labels_head": []
   },
   "index/untyped_local.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "outer"
@@ -2429,7 +2267,7 @@
   },
   "index/untyped_property.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "outer"
@@ -2456,7 +2294,7 @@
   },
   "no_parenthesis_when_callable_is_expected/builtin_complete_braces.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "hello_world",
@@ -2481,7 +2319,7 @@
   },
   "no_parenthesis_when_callable_is_expected/builtin_incomplete_braces.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "hello_world",
@@ -2506,7 +2344,7 @@
   },
   "no_parenthesis_when_callable_is_expected/lambda_body.gd": {
    "status": "pass",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -2526,7 +2364,7 @@
   },
   "no_parenthesis_when_callable_is_expected/lambda_parameter.gd": {
    "status": "pass",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -2546,7 +2384,7 @@
   },
   "no_parenthesis_when_callable_is_expected/local_method_callable_arg_0.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "hello_world",
@@ -2571,7 +2409,7 @@
   },
   "no_parenthesis_when_callable_is_expected/local_method_callable_arg_1.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "hello_world",
@@ -2596,7 +2434,7 @@
   },
   "no_parenthesis_when_callable_is_expected/local_method_variant_arg_0.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "hello_world()",
@@ -2621,7 +2459,7 @@
   },
   "no_parenthesis_when_callable_is_expected/native.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "hello_world",
@@ -2653,13 +2491,10 @@
   },
   "types/hints/index_0.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "A"
-    },
-    {
-     "display": "B"
     },
     {
      "display": "LocalInnerClass"
@@ -2689,16 +2524,13 @@
   },
   "types/hints/index_0_inner_class.gd": {
    "status": "fail",
-   "n_items": 1808,
+   "n_items": 1812,
    "missing": [
     {
      "display": "A"
     },
     {
      "display": "AInner"
-    },
-    {
-     "display": "B"
     },
     {
      "display": "LocalInnerClass"
@@ -2912,11 +2744,8 @@
   },
   "types/local/typehint_broad.gd": {
    "status": "fail",
-   "n_items": 287,
+   "n_items": 300,
    "missing": [
-    {
-     "display": "child_entered_tree"
-    },
     {
      "display": "property_of_a"
     },
@@ -3048,13 +2877,9 @@
    "labels_head": []
   },
   "types/member/typehint_broad.gd": {
-   "status": "fail",
-   "n_items": 287,
-   "missing": [
-    {
-     "display": "child_entered_tree"
-    }
-   ],
+   "status": "pass",
+   "n_items": 300,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "_process(…)",

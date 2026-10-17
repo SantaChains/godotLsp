@@ -684,6 +684,17 @@ fn enum_value_in_class<'a>(engine: &'a EngineApi, class: &str, member: &str) -> 
     None
 }
 
+/// 渲染信号签名：`name(a: T, b)`（信号是通知而非调用，无返回类型）。
+fn render_signal(s: &gdscript_engine::EngineSignal) -> String {
+    let args = s
+        .arguments
+        .iter()
+        .map(|a| format!("{}: {}", a.name, a.ty))
+        .collect::<Vec<_>>()
+        .join(", ");
+    format!("{}({})", s.name, args)
+}
+
 /// 渲染函数签名：`name(a: T, b) -> R`。
 fn render_function(f: &gdscript_engine::Function) -> String {
     let args = f
@@ -820,7 +831,135 @@ fn in_node_path_context(text: &str, offset: usize) -> bool {
     }
 }
 
-fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    let uri = &p.text_document_position.text_document.uri;
+/// C7.2/N2：光标是否位于字符串字面量内；返回内容区间
+/// `(开引号后一字节, 闭引号/行尾/文末)`。
+/// 前向状态机扫描(词法层近似)：覆盖 `"..."` 与 `"""..."""`、转义 `\"`、
+/// `&"..."`/`^"..."` 字面量前缀(前缀字符不影响引号配对)；`#` 注释在字符串
+/// 状态外时截断该行(注释内引号不成串)。未闭合字符串按到行尾(单引号对)或
+/// 文末(三引号)处理——与引擎错误恢复同向。
+fn string_literal_at(src: &str, at: usize) -> Option<(usize, usize)> {
+    let b = src.as_bytes();
+    let n = b.len();
+    let mut i = 0usize;
+    while i < n {
+        match b[i] {
+            b'#' => while i < n && b[i] != b'\n' {
+                i += 1;
+            },
+            b'"' => {
+                if b.get(i..i + 3) == Some(b"\"\"\"") {
+                    // 多行字符串：内容起于三引号之后，到闭合三引号或文末。
+                    let content_start = i + 3;
+                    let mut j = content_start;
+                    while j < n && b.get(j..j + 3) != Some(b"\"\"\"") {
+                        if b[j] == b'\\' {
+                            j += 1;
+                        }
+                        j += 1;
+                    }
+                    let close = j.min(n);
+                    if at >= content_start && at <= close {
+                        return Some((content_start, close));
+                    }
+                    i = j + 3;
+                } else {
+                    // 单行字符串：内容起于开引号之后，到闭引号/行尾(转义跳过下一字节)。
+                    let content_start = i + 1;
+                    let mut j = content_start;
+                    while j < n && b[j] != b'"' && b[j] != b'\n' {
+                        if b[j] == b'\\' {
+                            j += 1;
+                        }
+                        j += 1;
+                    }
+                    let close = j.min(n);
+                    if at >= content_start && at <= close {
+                        return Some((content_start, close));
+                    }
+                    i = j + 1;
+                }
+            }
+            _ => i += 1,
+        }
+    }
+    None
+}
+
+/// 字符串是否为 `preload(` / `load(` 的实参(C7.2 路径面前提)。
+/// 从开引号左侧回扫：空白 → `(` → 空白 → 标识符 ∈ {`preload`, `load`}。
+/// `ResourceLoader.load(` 的 `load` 段同样命中(其首参也是 res:// 路径)。
+fn is_load_call_arg(src: &str, quote_pos: usize) -> bool {
+    let b = src.as_bytes();
+    let mut i = quote_pos;
+    while i > 0 && b[i - 1].is_ascii_whitespace() {
+        i -= 1;
+    }
+    if i == 0 || b[i - 1] != b'(' {
+        return false;
+    }
+    i -= 1;
+    while i > 0 && b[i - 1].is_ascii_whitespace() {
+        i -= 1;
+    }
+    let end = i;
+    while i > 0 && (b[i - 1].is_ascii_alphanumeric() || b[i - 1] == b'_') {
+        i -= 1;
+    }
+    matches!(&src[i..end], "preload" | "load")
+}
+
+/// C7.2：`preload("res://` / `load("res://` 项目文件路径面。
+/// 来源 = `project.scripts` + `project.scenes`(Project::open 已建索引,
+/// `path` 为 res:// 相对路径);label 为完整 `res://…` 路径,textEdit 替换
+/// 字符串内容区(开引号后..光标)——不依赖客户端 wordPattern(各编辑器对
+/// `/`/`.` 是否成词约定不一,显式编辑范围是 LSP 标准机制)。
+fn preload_path_items(
+    state: &State,
+    src: &str,
+    typed: &str,
+    content_start: usize,
+    cursor: usize,
+) -> Vec<CompletionItem> {
+    let Some(proj) = &state.project else {
+        return Vec::new();
+    };
+    let mut paths: Vec<&str> = proj
+        .scripts
+        .iter()
+        .map(|s| s.path.as_str())
+        .chain(proj.scenes.iter().map(|s| s.path.as_str()))
+        .collect();
+    paths.sort_unstable();
+    paths.dedup();
+    let edit_range = Range::new(
+        offset_to_position(src, content_start),
+        offset_to_position(src, cursor),
+    );
+    paths
+        .into_iter()
+        .filter(|p| p.starts_with(typed))
+        .map(|p| {
+            let label = format!("res://{p}");
+            CompletionItem {
+                label: label.clone(),
+                kind: Some(CompletionItemKind::FILE),
+                detail: Some("项目资源".to_string()),
+                text_edit: Some(CompletionTextEdit::Edit(TextEdit {
+                    range: edit_range,
+                    new_text: label.clone(),
+                })),
+                sort_text: Some(scoring::sort_text(
+                    scoring::bucket::MEMBER,
+                    scoring::fuzzy(typed, p),
+                )),
+                ..CompletionItem::default()
+            }
+        })
+        .collect()
+}
+
+fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
+    let uri = &p.text_document_position.text_document.uri;
     let Some(src) = state.docs.get(uri) else {
         return CompletionResponse::Array(vec![]);
     };
@@ -867,6 +1006,17 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    le
         // (fa7d645 探针实测 1662 项,其中 1036 个引擎类)。场景树节点面待
         // C7.3+ 工程面接入(project.scenes → tscn NodeDecl);在此之前不出项——
         // 空列表优于 1662 项噪声,也与引擎"只出场景子节点"同向。
+    } else if let Some((content_start, content_end)) = string_literal_at(src, at) {
+        // N2：字符串字面量内默认不出补全(引擎默认行为;oracle
+        // `no_completion_in_string` 锁定——此前因全局面无对应排除项而
+        // vacuous pass,抑制后面向才正确)。
+        // C7.2 例外:`preload("res://` / `load("res://` → 项目文件路径面。
+        if is_load_call_arg(src, content_start - 1) {
+            let typed = &src[content_start..at.min(content_end)];
+            if let Some(rest) = typed.strip_prefix("res://") {
+                items.extend(preload_path_items(state, src, rest, content_start, at));
+            }
+        }
     } else {
         // 全量返回 + 稳定排序（HashMap 迭代序随机，take(n) 会导致补全时有时无）；
         // 前缀/fuzzy 过滤由客户端负责。
@@ -895,6 +1045,37 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {    le
                 detail: Some(format!("{} (单例)", s.ty)),
                 ..CompletionItem::default()
             });
+        }
+        // C7.1：项目工程面——class_name 脚本类 + autoload 单例
+        // (gdscript-project 早已索引,此前只被语义层消费,补全全局面漏掉)。
+        // 与引擎类/内建/单例同名时让位引擎(同名注册在 Godot 中即非法,取任一即可)。
+        if let Some(proj) = &state.project {
+            let mut seen: HashSet<&str> = HashSet::new();
+            for s in &proj.scripts {
+                if let Some(cn) = &s.ast.class_name
+                    && seen.insert(cn.name.as_str())
+                    && !state.engine.classes.contains_key(&cn.name)
+                    && !state.engine.builtins.contains_key(&cn.name)
+                {
+                    items.push(CompletionItem {
+                        label: cn.name.clone(),
+                        kind: Some(CompletionItemKind::CLASS),
+                        detail: Some(format!("class_name (res://{})", s.path)),
+                        ..CompletionItem::default()
+                    });
+                }
+            }
+            for (name, ty) in proj.autoloads() {
+                if state.engine.singletons.iter().any(|s| s.name == name) {
+                    continue;
+                }
+                items.push(CompletionItem {
+                    label: name.to_string(),
+                    kind: Some(CompletionItemKind::VARIABLE),
+                    detail: Some(format!("{ty} (autoload)")),
+                    ..CompletionItem::default()
+                });
+            }
         }
         for c in &state.engine.global_constants {
             items.push(CompletionItem {
@@ -1122,6 +1303,16 @@ fn class_members(engine: &EngineApi, class: &str, snippet_support: bool) -> Vec<
                     label: p.name.clone(),
                     kind: Some(CompletionItemKind::PROPERTY),
                     detail: Some(format!("{}: {}", p.name, p.ty)),
+                    ..CompletionItem::default()
+                });
+            }
+            // C6.1：类声明信号（Node.ready / CanvasItem.draw…，dump 503 条，
+            // 此前 RawApi 未解析、成员面缺失；引擎成员面同含）。
+            for s in &c.signals {
+                items.push(CompletionItem {
+                    label: s.name.clone(),
+                    kind: Some(CompletionItemKind::EVENT),
+                    detail: Some(render_signal(s)),
                     ..CompletionItem::default()
                 });
             }
@@ -2611,6 +2802,17 @@ mod hover_tests {
         }
     }
 
+    /// 带工程面的 state：从磁盘 fixture 打开 Project（C7.1/C7.2 测试用）。
+    fn state_with_project(state: &State, src: &str, fixture: &str) -> State {
+        let json = include_str!("../../gdscript-engine/testdata/extension_api.json");
+        let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("tests/fixtures").join(fixture);
+        let project = Project::open(&root, Some(json)).ok().map(std::sync::Arc::new);
+        let mut s = state_with(state, src);
+        s.project = project;
+        s.root = Some(root);
+        s
+    }
+
     fn hover_md_of(state: &State, src: &str, needle: &str) -> Option<String> {
         let off = src.find(needle).unwrap() + needle.len() / 2;
         let mut line = 0u32;
@@ -2982,6 +3184,124 @@ func _ready() -> void:
             "空前缀不出高频词"
         );
     }
+
+    /// C6.1：成员面含类声明信号（dump 503 条，此前 RawApi 丢弃、成员面缺失）。
+    #[test]
+    fn completion_member_signals() {
+        let base = test_state();
+        let state = state_with(&base, "var n: CanvasItem\nn.\n");
+        let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+        let p: CompletionParams = serde_json::from_value(serde_json::json!({
+            "textDocument": {"uri": uri},
+            "position": {"line": 1, "character": 2}
+        }))
+        .unwrap();
+        let CompletionResponse::Array(items) = completion(&state, &p) else { panic!("应返回数组") };
+        let draw = items.iter().find(|i| i.label == "draw").unwrap_or_else(|| panic!("CanvasItem 成员面应含信号 draw: {:?}", items.len()));
+        assert_eq!(draw.kind, Some(CompletionItemKind::EVENT));
+        assert!(draw.detail.as_deref().is_some_and(|d| d.starts_with("draw(")), "信号 detail 应为签名: {:?}", draw.detail);
+        // 引擎模型面断言（防解析回归）。
+        assert!(base.engine.find_signal("CanvasItem", "draw").is_some(), "CanvasItem.draw 必须可查");
+    }
+
+    /// C7.1：全局面含项目 class_name 脚本类与 autoload 单例（工程面接入）。
+    #[test]
+    fn completion_project_global_face() {
+        let base = test_state();
+        let state = state_with_project(&base, "# c\n", "projface");
+        assert!(state.project.is_some(), "fixture 工程应可打开");
+        let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+        let p: CompletionParams = serde_json::from_value(serde_json::json!({
+            "textDocument": {"uri": uri},
+            "position": {"line": 0, "character": 2}
+        }))
+        .unwrap();
+        let CompletionResponse::Array(items) = completion(&state, &p) else { panic!("应返回数组") };
+        let player = items.iter().find(|i| i.label == "Player").unwrap_or_else(|| panic!("全局面应含 class_name Player"));
+        assert_eq!(player.kind, Some(CompletionItemKind::CLASS));
+        assert!(player.detail.as_deref().is_some_and(|d| d.contains("player.gd")), "detail 应指脚本: {:?}", player.detail);
+        let gm = items.iter().find(|i| i.label == "GameManager").unwrap_or_else(|| panic!("全局面应含 autoload GameManager"));
+        assert_eq!(gm.kind, Some(CompletionItemKind::VARIABLE));
+        assert!(gm.detail.as_deref().is_some_and(|d| d.contains("autoload")), "detail 应标 autoload: {:?}", gm.detail);
+        // 引擎面不得被工程面污染：Node 仍恰好一项（class_name 同名让位引擎）。
+        assert_eq!(items.iter().filter(|i| i.label == "Node").count(), 1, "引擎类不得重复");
+    }
+
+    /// N2 + C7.2：普通字符串内不出补全；`preload("res://`/`load("res://` 出项目
+    /// 文件路径面（label 完整 res:// 路径 + textEdit 替换内容区）。
+    #[test]
+    fn completion_string_context() {
+        let base = test_state();
+        let src = "extends Node\nfunc _ready():\n\tvar s := preload(\"res://pla\n\tvar t := load(\"res://game_man\n\tvar u := \"plain string\"\n\tvar v := \"esc \\\" quote\"\n";
+        let state = state_with_project(&base, src, "projface");
+        let uri: Uri = "file:///tmp/t.gd".parse().unwrap();
+        let at = |line: u32, ch: u32| -> Vec<CompletionItem> {
+            let p: CompletionParams = serde_json::from_value(serde_json::json!({
+                "textDocument": {"uri": uri},
+                "position": {"line": line, "character": ch}
+            }))
+            .unwrap();
+            match completion(&state, &p) {
+                CompletionResponse::Array(items) => items,
+                _ => vec![],
+            }
+        };
+        // preload 路径面：命中 player.gd，textEdit 覆盖开引号后..光标。
+        let pl = at(2, 28);
+        let item = pl.iter().find(|i| i.label == "res://player.gd").unwrap_or_else(|| panic!("preload 路径面应含 player.gd: {:?}", pl.len()));
+        assert_eq!(item.kind, Some(CompletionItemKind::FILE));
+        let Some(CompletionTextEdit::Edit(e)) = &item.text_edit else { panic!("路径项应带 textEdit") };
+        assert_eq!(e.range.start, Position { line: 2, character: 19 }, "替换区应起于开引号后");
+        assert_eq!(e.new_text, "res://player.gd");
+        // load 路径面：game_manager.gd；level.tscn 也应在库（前缀 pla 不命中它）。
+        assert!(at(3, 30).iter().any(|i| i.label == "res://game_manager.gd"), "load 路径面应含 game_manager.gd");
+        assert!(at(2, 28).iter().all(|i| i.label != "res://level.tscn"), "前缀 pla 不应命中 level.tscn");
+        // N2：普通字符串与转义引号字符串内一律空。
+        assert!(at(4, 15).is_empty(), "普通字符串内应无补全");
+        assert!(at(5, 21).is_empty(), "转义引号字符串内应无补全");
+        // 字符串外的全局面不受影响。
+        assert!(!at(1, 14).is_empty(), "func _ready(): 行外全局面应照常");
+    }
+
+    /// string_literal_at 状态机：单行/多行/转义/注释/未闭合。
+    #[test]
+    fn string_literal_at_scanner() {
+        let s = "x = \"ab\"\n";
+        assert_eq!(string_literal_at(s, 5), Some((5, 7)), "单行字符串内容区");
+        assert_eq!(string_literal_at(s, 7), Some((5, 7)), "闭引号前一格仍算串内");
+        assert_eq!(string_literal_at(s, 8), None, "闭引号后不算");
+        assert_eq!(string_literal_at(s, 0), None, "串前代码不算");
+        // 注释内引号不成串。
+        let c = "x = 1 # \"not a string\"\n";
+        assert_eq!(string_literal_at(c, 12), None, "注释内引号不成串");
+        // 多行字符串。
+        let m = "a = \"\"\"line1\nline2➡\n\"\"\"\n";
+        let at = m.find('➡').unwrap();
+        assert_eq!(string_literal_at(m, at), Some((7, 22)), "多行字符串内容区");
+        // 转义引号不闭合字符串。
+        let e = "a = \"x \\\" y\"\n";
+        let inner = e.find('y').unwrap();
+        assert_eq!(string_literal_at(e, inner), Some((5, 11)), "转义引号仍在串内");
+        // 未闭合字符串：到行尾。
+        let u = "a = \"oops\nb = 1\n";
+        assert_eq!(string_literal_at(u, 7), Some((5, 9)), "未闭合按到行尾");
+        assert_eq!(string_literal_at(u, 13), None, "下一行不受未闭合影响");
+        // NodePath/StringName 字面量前缀不影响配对。
+        let np = "a = &\"path\"\n";
+        assert_eq!(string_literal_at(np, 8), Some((6, 10)));
+    }
+
+    /// is_load_call_arg：preload/load 判定与回扫边界（quote_pos = 开引号下标）。
+    #[test]
+    fn is_load_call_arg_scanner() {
+        assert!(is_load_call_arg("preload(\"res://x.gd\")", 8), "preload 直调");
+        assert!(is_load_call_arg("load ( \"res://x.gd\")", 7), "load 带空白");
+        assert!(is_load_call_arg("ResourceLoader.load(\"res://x.gd\")", 20), "限定 load");
+        assert!(!is_load_call_arg("myload(\"res://x.gd\")", 7), "前缀不同名");
+        assert!(!is_load_call_arg("x = \"res://x.gd\"", 4), "赋值非调用实参");
+        assert!(!is_load_call_arg("f(g(\"res://x.gd\"))", 4), "内层调用按 f 判否");
+    }
+
 }
 
 #[cfg(test)]

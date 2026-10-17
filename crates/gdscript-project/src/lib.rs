@@ -131,6 +131,12 @@ impl Project {
         self.class_names.get(name).map(|&i| &self.scripts[i])
     }
 
+    /// autoload 单化名 → 类型（`project.godot` `[autoload]` 节，`*` 前缀已剥）。
+    /// 补全全局面/悬停解析共用；HashMap 迭代序不稳定，调用方需自行排序。
+    pub fn autoloads(&self) -> impl Iterator<Item = (&str, &str)> {
+        self.autoloads.iter().map(|(k, v)| (k.as_str(), v.as_str()))
+    }
+
     /// preload("res://x.gd") → 对应脚本。
     pub fn resolve_preload(&self, res_path: &str) -> Option<&Script> {
         let key = res_path.strip_prefix("res://").unwrap_or(res_path);

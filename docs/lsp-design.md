@@ -223,7 +223,7 @@
 
 **F. godotlsp 设计(C6-C9,合理取舍)——排期与验收见 `docs/completion-roadmap.md`**:
 
-- **oracle 基建已建(2026-10-17,V0)**:`tools/completion_oracle.py` 对引擎自带 146 夹具跑 LSP 补全,分桶通过率 = 量化验收(基线 24/140)。C6.4(函数 `name(…)` label + `name($1)` insertText 约定)、C6.6(`Class.Enum.<|>` 枚举值面)、C7.3($/% 上下文抑制)已按本表落地;普查发现的 self 成员面/字符串上下文抑制(N1/N2)列入 C10,设计后排期。
+- **oracle 基建已建(2026-10-17,V0)**:`tools/completion_oracle.py` 对引擎自带 146 夹具跑 LSP 补全,分桶通过率 = 量化验收。已按本表落地:C6.4(函数 `name(…)` label + `name($1)` insertText 约定)、C6.6(`Class.Enum.<|>` 枚举值面)、C7.3($/% 上下文抑制)、**C6.1/C6.2(信号入成员面,oracle +9 全为此项战绩,24→33/140)**、**C7.1/C7.2(class_name/autoload 全局面 + `preload("res://` 路径面(textEdit 替换内容区,不依赖客户端 wordPattern))与 N2 字符串抑制(`string_literal_at` 状态机,字符串内返回空、路径面例外)**。普查发现的 self 成员面(N1)列入 C10,设计后排期。
 
 - **C6 模型层补齐**(gdscript-engine,附加式 serde,零行为风险):解析 signals / is_virtual / api_type / is_refcounted / is_bitfield / builtin operators+constructors+is_keyed+indexing_return_type / version_full_name;配套查询方法(类信号表、链上虚方法表)。消费侧:① 成员面补信号(kind Event,detail 带参数签名);② 函数补全 insertText `(` + display `(…)`,snippetSupport 时 `($1)`;③ `func _<|>` 虚方法面改**模型驱动**(沿 ancestor_chain 收 is_virtual,签名取模型),仅保留 9 个非 ClassDB 回调手表(_init/_notification/_get/_set/_to_string/_property_can_revert/_property_get_revert/_get_property_list/_validate_property)。
 - **C7 工程面接入**(godotlsp,数据已在 gdscript-project 索引,只补消费):① 全局面补 class_name + autoload(引擎同等行为,保留名去重扩面);② `preload("res://` / `load("res://` 字符串字面量内补全项目文件(scripts/scenes/resources + uid 映射,服务端按已输入路径前缀过滤);③ 恢复 $/% 节点路径上下文(镜像内核向后字节扫描,% 取模操作数启发式)+ smoke 回归。

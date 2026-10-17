@@ -1,0 +1,8 @@
+config_version=5
+
+[application]
+config/name="projface"
+
+[autoload]
+
+GameManager="*res://game_manager.gd"
