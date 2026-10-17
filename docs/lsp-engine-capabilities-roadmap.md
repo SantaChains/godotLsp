@@ -81,11 +81,13 @@
 | P1 | C7.3 | R4 回归止血:恢复 $/% 节点路径上下文(fa7d645 实现,22882f7 重写丢失) | ✅ 已落地(单测 + E2E:`$Panel/` 1808→0 项,取模不误伤) |
 | P2 | C7.1/C7.2 | 工程面:class_name/autoload 全局面 + `preload("res://` 路径补全 + N2 字符串抑制(gdscript-project 已索引未消费) | ✅ 已落地(2026-10-17,单测×4 + E2E;`Project::autoloads()` 访问器 + fixture projface) |
 | P3 | C8 | 参数选项面:信号名/输入动作(`[input]` 表)/注解参数(手搬表 + 模型全局枚举 + 引擎警告枚举)(oracle `argument_options/` 验收) | ✅ 一期已实施(2026-10-17,`argopts.rs`;33→36/140,argument_options 0/11→3/11;tween_property/动画面/`&`/`^` 设置二期) |
-| P4-P11 | C6.6b/C10/C5/C6.3/C8b/C6.5/N6/C9 | 重排后剩余工作(阻塞簇归并):枚举入口 → 脚本成员面 → 语义推断 → 虚方法 → C8b → 构造/运算符 → 场景树 → snippet | 未实施(总表+规格见 `completion-roadmap.md` §四) |
+| P4 | C6.6b | 枚举面入口扩展:match 测试位 + `global_enums` 值面 + 全局枚举类型名入全局面 + 单点枚举名三态解析 + 字典键/类型标注门控 | ✅ 已实施(2026-10-17,oracle 36→58/140,+22;builtin_enum 5/5、global_enum 6/6、enum_values_in_match 7/7) |
+| P5-P11 | C10/C5/C6.3/C8b/C6.5/N6/C9 | 重排后剩余工作(阻塞簇归并):脚本成员面 → 语义推断 → 虚方法 → C8b → 构造/运算符 → 场景树 → snippet | 未实施(总表+规格见 `completion-roadmap.md` §四) |
 
 > **oracle 普查(2026-10-17 四轮)**:首跑 20/140 → C7.3/C6.4/C6.6 后 24/140 →
 > C6.1/C6.2/C7.1/C7.2/N2 后 33/140(+9 全为信号面战绩,零回归)→
-> **C8 一期后 36/140**(argument_options 0/11→3/11,零回归)。**资料盘点轮(同日)**:
+> **C8 一期后 36/140**(argument_options 0/11→3/11,零回归)→
+> **C6.6b 枚举入口后 58/140**(builtin_enum 5/5、global_enum 6/6、enum_values_in_match 7/7,零回归)。**资料盘点轮(同日)**:
 > 剩余 104 失败按共同阻塞归并为 5 簇(脚本成员面 ~30 / 枚举入口 ~16 / 语义推断 ~9 /
 > callable 6 / 场景树 ~25),剩余工作重排 P4-P11(C6.6b → C10 → C5 → C6.3 → C8b → C6.5 →
 > N6 → C9,总表与逐期规格见 `completion-roadmap.md` §四);盘点纠正:引擎源码仓

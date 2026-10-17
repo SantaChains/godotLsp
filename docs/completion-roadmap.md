@@ -21,7 +21,7 @@
 | P1 | **C7.3** | godotlsp | $/% 节点路径上下文止血 | 低 | ✅ 已落地(2026-10-17,单测+E2E) |
 | P2 | **C7.1/C7.2** | godotlsp | class_name/autoload 全局面;res:// 路径面 + N2 字符串抑制 | 低-中 | ✅ 已落地(2026-10-17,oracle 24→**33/140**,+9 全为 C6.1 信号面战绩) |
 | P3 | **C8** | godotlsp + gdscript-project | 参数选项面(信号名/输入动作/注解参数)+ oracle harness 两处修复 | 低(表漂移可检测) | ✅ 一期已实施(2026-10-17,oracle 33→**36/140**,argument_options 0/11→3/11) |
-| P4 | **C6.6b** | godotlsp | 枚举面入口扩展(match 测试位 + `global_enums` 值面 + 全局枚举类型名入全局面) | 低(数据已在,唯一种全局面增量) | 待(资料盘点后排首位) |
+| P4 | **C6.6b** | godotlsp | 枚举面入口扩展(match 测试位 + `global_enums` 值面 + 全局枚举类型名入全局面 + 单点枚举名解析 + 上下文门控) | 低(数据已在,唯一种全局面增量) | ✅ 已实施(2026-10-17,oracle 36→**58/140**,+22:builtin_enum 5/5 新增、global_enum 3/6→6/6、enum_values_in_match 3/7→7/7、全局枚举类型名入全局面 +22 项、单点枚举名三态解析 + 字典键/类型标注门控) |
 | P5 | **C10** | godotlsp | 脚本成员面(簇 A:self/裸标识符/脚本接收者三层成员 + override 签名 + extends 位类名) | 中(全局面合并,设计先行) | 待(lsp-design 设计后排) |
 | P6 | **C5** | gdscript-syntax | 语义层类型推断(locals_at + 返回类型推断) | 中(内核附加式) | 待 |
 | P7 | **C6.3** | gdscript-engine + godotlsp | 虚方法模型化(`is_virtual` 1437 + override 面引擎签名) | 低(附加式 serde) | 待 |
@@ -134,7 +134,7 @@ extends 0/2。未命中成因:absent 279 / paren-display 50 / string-literal 7�
 | 簇 | 共同阻塞 | 夹具(约) | 明细 |
 |---|---|---|---|
 | **A 脚本成员面** | 裸标识符/self/脚本接收者位不出"自声明 + 脚本父类链 + 引擎链"三层成员;`func ` 位不出可重载签名 | **~30** | common: `identifiers_in_*` ×3 + `self.gd` + `invalid_super_call_*` ×2 + `override_function_*` ×6 + `infer_return_type_without_value`;extends: `extends_self`/`extends_inherited_inner_class`(兄弟内部类);types: local ×6 + member ×5(typehint/inferred 的 `add_child(…)`/`owner`/`child_entered_tree` + `property_of_a`);get_node: `member_typehint*` ×3;assignment: `enum_identifier` ×2(部分) |
-| **B 枚举面入口** | C6.6 已有枚举值数据,缺入口:match 测试位、`global_enums` 接收者、赋值 RHS 无前缀约定 | **~16** | `enum_values_in_match` ×7(`match AutoTranslateMode.➡` → 值);`global_enum` ×3(`Key.➡` → `KEY_A/KEY_B` 值面 + `Key`/`Error`/`KeyLocation` 类型名);`assignment_options` ×4(`enum_attribute` 期望无前缀值 + `new(…)`;`enum_identifier` 期望限定名) |
+| **B 枚举面入口** | C6.6 已有枚举值数据,缺入口:match 测试位、`global_enums` 接收者、单点枚举名解析、上下文门控 | **~16(实际 +22)** | `enum_values_in_match` ×7(`match AutoTranslateMode.➡` → 值,3/7→7/7);`global_enum` ×3(`Key.➡` → `KEY_A/KEY_B` 值面 + `Key`/`Error`/`KeyLocation` 类型名,3/6→6/6);`builtin_enum` ×5(`Class.Enum.` 两段式,新增);单点枚举名三态解析 + 字典键/类型标注门控 |
 | **C 语义层类型推断** | semantic 无 locals 查询:局部变量(注解/字面量推断)/返回类型未知 → 不出成员 | **~9** | `index` ×6(`array/dictionary/untyped` 的 `outer`/`inner` 元素成员);`types/local/no_type` ×2 + `inferred`(`begins_with(…)`);`common/infer_return_type_without_value` |
 | **D callable 上下文** | Callable 形参位出函数名不带括号(需形参类型识别) | **6** | `no_parenthesis_when_callable_is_expected` ×6(`hello_world`) |
 | **E 场景树/节点名** | tscn 未解析:节点路径不出场景子节点名;动画面不出动画名 | **~25** | `get_node` 余 25(成员面 3 个归簇 A 后剩 ~22 节点名面);`argument_options/play_*` ×2(缺 `"bounce"` 动画名) |
@@ -149,7 +149,7 @@ extends 0/2。未命中成因:absent 279 / paren-display 50 / string-literal 7�
 | N1 | **self 成员面缺失**:裸标识符/self 位不出当前类成员(`owner`/`add_child(…)/property_of_a`) | common `identifiers_in_*` ×3、`self.gd`、argument_options/connect | **并入簇 A(C10 脚本成员面)**:全局面合并宿主链成员 + 新 sort 桶;N2 已落地不再构成前置,与 N3/N4 同批 |
 | N2 | **字符串上下文不抑制** ~~:字符串字面量内仍出全局面~~ | `no_completion_in_string`(曾为 vacuous pass) | ✅ 已落地(2026-10-17,C7.2 同批):`string_literal_at` 前向状态机,字符串内返回空(路径面例外);vacuous pass 转为真实通过 |
 | N3 | **脚本类成员面缺失**:`extends "res://x.gd"` 的成员不出(`func_of_a()`) | common `invalid_super_call_*` ×2、`override_function_*` ×4 | **并入簇 A**:与 N1 同一数据面(脚本 AST 成员遍历),区别仅在接收者解析(self / 脚本父类 / 类型提示变量);override 签名展示的引擎虚方法部分归 C6.3(簇 A 二期) |
-| N4 | **枚举限定展示**:类型化 LHS 后引擎出 `Control.SIZE_EXPAND`(限定名),我方不出类枚举值 | assignment_options ×4 | **归入簇 B**:入口 + 展示约定(限定/无前缀两态),随 B 期落地 |
+| N4 | **枚举限定展示**:类型化 LHS 后引擎出 `Control.SIZE_EXPAND`(限定名),我方不出类枚举值 | assignment_options ×4 | ✅ 已随 P4 簇 B 落地:`enum_member_values_at` 枚举值面(含 `Class.Enum.` 限定名形式) + 上下文门控;assignment_options 的 `new(…)`/限定名展示属 C8 二期范围,本簇只覆盖枚举值入口 |
 | N5 | **callable-expected 上下文不出括号** | no_parenthesis ×8(当前 0/8,C6.4 后仍挂) | **簇 D**:需形参类型识别(C6.4 后仅剩识别层,工作量低于原估) |
 | N6 | **节点路径类型推断 + 场景树节点名** | get_node 0/33 | **簇 E**(成员面部分归簇 A):语义层 + C7.3+(project.scenes → NodeDecl),最大工程,末期 |
 | N7 | **字典键/字典内枚举值** | index 1/9、enum_values_in_dictionary 1/13 | 明确不做 #3 延续,仅观察 |
@@ -166,7 +166,7 @@ extends 0/2。未命中成因:absent 279 / paren-display 50 / string-literal 7�
 
 | 期 | 项 | 层 | 内容 | oracle 预期 | 前置 | 状态 |
 |---|---|---|---|---|---|---|
-| P4 | **C6.6b** | godotlsp | 枚举面入口扩展:match 测试位 + `global_enums` 值面 + 全局枚举类型名入全局面 | **+7~10**(match ×7 + global_enum ×3) | 无(数据已在) | 待 |
+| P4 | **C6.6b** | godotlsp | 枚举面入口扩展:match 测试位 + `global_enums` 值面 + 全局枚举类型名入全局面 + 单点枚举名三态解析 + 上下文门控 | **+22**(实际:builtin_enum +5、global_enum +3、enum_values_in_match +4、全局枚举名 +22 入全局面、单点解析 + 门控消除 2 回归) | 无(数据已在) | ✅ 已实施(2026-10-17,oracle 36→58/140) |
 | P5 | **C10** | godotlsp | 脚本成员面(簇 A):self/裸标识符/脚本接收者三层成员 + `func ` 位 override 签名 + extends 位类名 | **+20~25**(common 12 + extends 2 + types 10 + get_node 3) | lsp-design 设计(项目纪律) | 待(设计先行) |
 | P6 | **C5** | gdscript-syntax | 语义层类型推断:locals_at(注解 + 字面量)+ 返回类型推断 | **+9~12**(index 6 + types 3 + infer_return) | P5 数据面(部分) | 待 |
 | P7 | **C6.3** | gdscript-engine + godotlsp | 虚方法模型化:`is_virtual` 解析 + override 面引擎虚方法完整签名 | override 剩余夹具 | P5 override 面 | 待 |
@@ -331,26 +331,34 @@ LSP `textDocument/completion`,按 `.cfg` 的 `include`(必须出现)/`exclude`(�
 - `InputMap` 单例方法动作面(`InputMap.has_action(` 等):无 oracle 覆盖。
 - `&`/`^` 前缀设置 plumbing(oracle `add_*` 夹具另一半):需 workspace/configuration 通道。
 
-### P4 — C6.6b 枚举面入口扩展(godotlsp,数据就绪度最高 → 最先行)
+### P4 — C6.6b 枚举面入口扩展(godotlsp,数据就绪度最高 → 最先行) ✅ 已实施(2026-10-17)
 
 **为什么最先**:三个面的数据都已在模型里(C6.6 `enum_member_values_at` 的枚举值解析 +
 `EngineApi.global_enums`),缺的只是入口识别与展示约定,零全局面污染(除全局枚举类型名
-+22 项,见下),是剩余工作中风险最低、oracle 回报最快的一项(+7~10 预期)。
++22 项,见下),是剩余工作中风险最低、oracle 回报最快的一项(+7~10 预期,实际 +22)。
 
+**实际落地范围**(比原三项规划更广,因实现时一并覆盖单点枚举名解析与上下文门控):
 1. **match 测试位枚举值**(`enum_values_in_match` ×7):`match X.➡` / `when X.➡` 的测试
-   表达式位 → 复用 `enum_member_values_at` 的枚举接收者解析(当前入口只在 `recv.` 成员面
-   分支内);入口识别 = 向前扫到 `match`/`when` 关键字且光标在其测试表达式内。
-2. **`global_enums` 接收者值面**(`global_enum/global_enum_values`):`Key.➡` → `KEY_A`/
-   `KEY_B`。接收者名查 `engine.global_enums`(22 个全局枚举),与 `EngineClass` 枚举
-   解析同构;**同名冲突按 EngineClass 优先**(实测全局枚举名与类名无交集,防御性规则)。
-3. **全局枚举类型名入全局面**(`global_enum/global_enum_identifier`):`Key`/`Error`/
-   `KeyLocation` 等 22 个枚举名进裸标识符全局面(kind ENUM_MEMBER,detail `@GlobalScope 枚举`);
-   本项唯一种全局面增量,验收须含 `filter` 桶 2/2 不回退 + E2E 全局面计数(1808+22)。
+   表达式位 → `after_dot` 分支枚举解析优先于成员面(引擎语义:`_code_completion` 先解析枚举
+   常量再回落成员),`enum_values_in_match` 3/7→**7/7**。
+2. **`global_enums` 接收者值面 + 两段式 `Class.Enum.`**(`global_enum` 6/6 + `builtin_enum`
+   5/5 新增):`Key.➡` → `KEY_A`/`KEY_B`;`Vector2.Axis.X` / `AStarGrid2D.Heuristic.HEURISTIC_MAX`
+   经类名查 `EngineClass.enums`/`Builtin.enums`;接收者名查 `engine.global_enums`(22 个)。
+3. **全局枚举类型名入全局面**(`global_enum_identifier` 等):`Key`/`Error`/`KeyLocation` 等
+   22 个枚举名进裸标识符全局面(kind ENUM_MEMBER,detail `@GlobalScope 枚举`);`extends <|>`
+   位除外(引擎 extends 只出类名)。
+4. **单点枚举名三态解析**(被 1/2 复用):脚本自声明枚举(顶层 `enum` + 类级 `class{enum}`)→
+   宿主 extends 链类枚举(`extends Node` → `AutoTranslateMode.`)→ 引擎全局枚举;脚本枚举
+   值未显式赋值时按声明序递增值(`const_int_value` 常量折叠 int 域)。
+5. **枚举值面上下文门控**(`enum_value_completion_allowed`):字典键(`{ Enum. = }`,光标后
+   首非空白为 `=`)与类型标注(`var x: Enum.`,独立词关键字 `var/const/signal/...`)抑制枚举
+   值面,回落 `recv_type_at`/`class_members`(消除 `index_1_local_enum`/`lua_key_2` 两回归)。
 
-- **取舍**:match 位只做测试表达式(不做 `match` 本体后的分支体——那是另一个上下文);
-  全局枚举值面的 `Key.` 形式不做 `@GlobalScope.Key.` 全限定形式(引擎也不出)。
-- **验收**:oracle `enum_values_in_match` 0/7→7/7、`global_enum` 3/6→6/6;单测锁三入口;
-  `filter` 桶不回退;全局面计数单测。
+- **取舍**:match 位只做测试表达式(不做 `match` 本体后的分支体);全局枚举值面不做
+  `@GlobalScope.Key.` 全限定形式(引擎也不出);枚举值面门控严格对齐引擎"值/表达式才出枚举值"。
+- **验收**:oracle **58/140**(基线 36,+22,回归 0);`builtin_enum` 5/5、`global_enum` 6/6、
+  `enum_values_in_match` 7/7、`script_enum` 1/1 全绿;`filter` 2/2 不回退;workspace 48 单测
+  全绿;smoke ALL OK;clippy 零新增。
 
 ### P5 — C10 脚本成员面(簇 A,设计先行,项目纪律)
 

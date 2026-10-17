@@ -10,7 +10,10 @@ use std::collections::{HashMap, HashSet};
 
 use gdscript_engine::{ConstValue, EngineApi};
 use gdscript_project::Project;
-use gdscript_syntax::ast::{ClassDecl, ConstDecl, EnumDecl, FuncDecl, SignalDecl, Stmt, VarDecl};
+use gdscript_syntax::ast::{
+    BinOp, ClassDecl, ConstDecl, EnumDecl, Expr, File, FuncDecl, Literal, SignalDecl, Stmt, UnOp,
+    VarDecl,
+};
 use gdscript_syntax::parse;
 use gdscript_syntax::semantic::{analyze_with, FileInfo, ProjectContext};
 use lsp_server::{Connection, Message, Notification, Request, Response};
@@ -1006,12 +1009,23 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
     let mut items: Vec<CompletionItem> = Vec::new();
 
     if after_dot {
-        if let Some(recv_ty) = recv_type_at(state, src, word_start) {
+        // 脚本枚举面兜底:didOpen/didChange 未及或竞态时现解析(与 1199 等处惯用法一致)。
+        let ast_owned = state.asts.get(uri).cloned().unwrap_or_else(|| parse(src).0);
+        // 枚举解析优先于成员面(引擎语义:receiver 是枚举则出枚举值,否则出成员;
+        // gdscript_editor.cpp `_code_completion` 先解析枚举常量再回落成员)。
+        // 否则 `enum TestEnum{}; TestEnum.` 会被 resolve_var 当成变量类型走 class_members 截胡。
+        // 类型标注(`var x: Enum.`)与字典键(`{ Enum. = }`)上下文引擎不出枚举值,门控掉。
+        if enum_value_completion_allowed(src, word_start, at) {
+            if let Some(values) = enum_member_values_at(state, src, word_start, Some(&ast_owned)) {
+                // `Class.Enum.<|>` / `Enum.<|>`：接收者是枚举名 → 出该枚举的值面
+                // (引擎成员面对 `AStarGrid2D.Heuristic.` / `Key.` / match 位同款;
+                // oracle builtin_enum / global_enum_values / enum_values_in_match 桶)。
+                items.extend(values);
+            } else if let Some(recv_ty) = recv_type_at(state, src, word_start) {
+                items.extend(class_members(&state.engine, &recv_ty, state.snippet_support));
+            }
+        } else if let Some(recv_ty) = recv_type_at(state, src, word_start) {
             items.extend(class_members(&state.engine, &recv_ty, state.snippet_support));
-        } else if let Some(values) = enum_member_values_at(state, src, word_start) {
-            // `Class.Enum.<|>`：接收者是枚举名而非类/变量 → 出该枚举的值面
-            // (引擎成员面对 `AStarGrid2D.Heuristic.` 同款;oracle builtin_enum 桶)。
-            items.extend(values);
         }
         for i in &mut items {
             let f = scored_fuzzy(prefix, &i.label, state.config.freq_boost);
@@ -1130,6 +1144,21 @@ fn completion(state: &State, p: &CompletionParams) -> CompletionResponse {
                     label: n.clone(),
                     kind: Some(CompletionItemKind::ENUM_MEMBER),
                     detail: Some(format!("{}.{n} = {v}", e.name)),
+                    ..CompletionItem::default()
+                });
+            }
+        }
+        // C6.6b：全局枚举**类型名**入裸标识符全局面（Key / Error / KeyLocation…22 个，
+        // oracle `global_enum_identifier`/`in_type_hint` 两夹具）。`extends <|>` 位
+        // 除外——引擎 extends 只出类名（`global_enum_in_extends` exclude 锁定）。
+        let line_prefix = &src[line_start_offset(src, offset.line as usize)..word_start];
+        let in_extends = line_prefix.split_whitespace().next() == Some("extends");
+        if !in_extends {
+            for e in &state.engine.global_enums {
+                items.push(CompletionItem {
+                    label: e.name.clone(),
+                    kind: Some(CompletionItemKind::ENUM_MEMBER),
+                    detail: Some("@GlobalScope 枚举".to_string()),
                     ..CompletionItem::default()
                 });
             }
@@ -1279,10 +1308,24 @@ fn recv_type_at(state: &State, src: &str, at: usize) -> Option<String> {
     })
 }
 
-/// `Class.Enum.<|>`：after_dot 的接收者既不是变量也不是类名时,按
-/// `类.枚举.` 两段式解析,给出该枚举的值面(label 为裸值名,与引擎成员面一致)。
-/// 覆盖引擎类与内建类(`Vector2.Axis.X` / `AStarGrid2D.Heuristic.HEURISTIC_MAX`)。
-fn enum_member_values_at(state: &State, src: &str, word_start: usize) -> Option<Vec<CompletionItem>> {
+/// `Class.Enum.<|>` / `Enum.<|>`：after_dot 的接收者既不是变量也不是类名时,
+/// 按枚举名解析,给出该枚举的值面(label 为裸值名,与引擎成员面一致)。
+/// - 两段式 `类.枚举.`:覆盖引擎类与内建类(`Vector2.Axis.X` /
+///   `AStarGrid2D.Heuristic.HEURISTIC_MAX`;oracle builtin_enum 桶)。
+/// - 单点式 `枚举.`:① 脚本自声明枚举(当前文件顶层 + 类级,遮蔽全局);
+///   ② 宿主 extends 链类枚举(`extends Node` → `AutoTranslateMode.` 即
+///   Node.AutoTranslateMode,引擎枚举解析沿继承链可见);
+///   ③ 引擎全局枚举(`Key.` / `Error.`;oracle `global_enum_values` 与
+///   `enum_values_in_match` 两桶——引擎对 match 测试位/分支体无特判,
+///   与常规成员位同构)。
+///
+/// `file` = 当前文档 AST(脚本枚举查找;无则跳过脚本层)。
+fn enum_member_values_at(
+    state: &State,
+    src: &str,
+    word_start: usize,
+    file: Option<&File>,
+) -> Option<Vec<CompletionItem>> {
     let b = src.as_bytes();
     let is_seg = |c: u8| c.is_ascii_alphanumeric() || c == b'_';
     if word_start < 2 || b[word_start - 1] != b'.' {
@@ -1294,33 +1337,239 @@ fn enum_member_values_at(state: &State, src: &str, word_start: usize) -> Option<
         e -= 1;
     }
     let enum_name = &src[e..word_start - 1];
-    if enum_name.is_empty() || e < 2 || b[e - 1] != b'.' {
+    if enum_name.is_empty() {
         return None;
     }
-    // 类名:再左侧一个 '.' 前的词。
-    let mut c = e - 1;
-    while c > 0 && is_seg(b[c - 1]) {
-        c -= 1;
-    }
-    let class_name = &src[c..e - 1];
-    let enums = state
-        .engine
-        .classes
-        .get(class_name)
-        .map(|k| &k.enums)
-        .or_else(|| state.engine.builtins.get(class_name).map(|k| &k.enums))?;
-    let en = enums.iter().find(|en| en.name == enum_name)?;
-    Some(
+    let values = if e >= 2 && b[e - 1] == b'.' {
+        // 类名:再左侧一个 '.' 前的词。
+        let mut c = e - 1;
+        while c > 0 && is_seg(b[c - 1]) {
+            c -= 1;
+        }
+        let class_name = &src[c..e - 1];
+        let enums = state
+            .engine
+            .classes
+            .get(class_name)
+            .map(|k| &k.enums)
+            .or_else(|| state.engine.builtins.get(class_name).map(|k| &k.enums))?;
+        let en = enums.iter().find(|en| en.name == enum_name)?;
         en.values
             .iter()
-            .map(|(n, v)| CompletionItem {
-                label: n.clone(),
+            .map(|(n, v)| (n.clone(), *v, format!("const {class_name}.{enum_name}.{n} = {v}")))
+            .collect::<Vec<_>>()
+    } else {
+        // 单点式:脚本自声明枚举 → 宿主链类枚举 → 引擎全局枚举(引擎遮蔽序)。
+        if let Some(vals) = file.and_then(|f| script_enum_values(f, enum_name)) {
+            vals.into_iter()
+                .map(|(n, v)| {
+                    let d = format!("const {enum_name}.{n} = {v}");
+                    (n, v, d)
+                })
+                .collect()
+        } else if let Some(vals) = file.and_then(|f| host_chain_enum_values(state, f, enum_name)) {
+            vals.into_iter()
+                .map(|(cls, n, v)| {
+                    let d = format!("const {cls}.{enum_name}.{n} = {v}");
+                    (n, v, d)
+                })
+                .collect()
+        } else {
+            let ge = state.engine.global_enums.iter().find(|en| en.name == enum_name)?;
+            ge.values
+                .iter()
+                .map(|(n, v)| {
+                    let d = format!("const {enum_name}.{n} = {v}");
+                    (n.clone(), *v, d)
+                })
+                .collect::<Vec<_>>()
+        }
+    };
+    Some(
+        values
+            .into_iter()
+            .map(|(n, _v, detail)| CompletionItem {
+                label: n,
                 kind: Some(CompletionItemKind::ENUM_MEMBER),
-                detail: Some(format!("const {class_name}.{enum_name}.{n} = {v}")),
+                detail: Some(detail),
                 ..CompletionItem::default()
             })
             .collect(),
     )
+}
+
+/// 宿主 extends 链类枚举:`extends Node` 后 `AutoTranslateMode.` 可直接引用
+/// (引擎枚举解析沿继承链向上可见;oracle `enum_values_in_match` in_test_1/3)。
+/// extends 为脚本路径(`"res://x.gd"`)时当前不追脚本链(N3/P5 面),返回 None。
+/// 返回 (定义类名, 值名, 值)。
+fn host_chain_enum_values(
+    state: &State,
+    file: &File,
+    name: &str,
+) -> Option<Vec<(String, String, i64)>> {
+    let host = match &file.extends {
+        Some(Expr::Ident(id)) => id.name.clone(),
+        _ => return None,
+    };
+    if state.engine.class_by_name(&host).is_none() && state.engine.builtin_by_name(&host).is_none()
+    {
+        return None;
+    }
+    for cls in state.engine.ancestor_chain(&host) {
+        let en = if let Some(c) = state.engine.classes.get(cls) {
+            c.enums.iter().find(|en| en.name == name)
+        } else if let Some(b) = state.engine.builtins.get(cls) {
+            b.enums.iter().find(|en| en.name == name)
+        } else {
+            None
+        };
+        if let Some(en) = en {
+            return Some(
+                en.values
+                    .iter()
+                    .map(|(n, v)| (cls.to_string(), n.clone(), *v))
+                    .collect(),
+            );
+        }
+    }
+    None
+}
+
+/// 枚举条目常量折叠(int 域):字面量 / 一元 ± / 二元算术与位运算。
+/// 不可折叠返回 None(调用方跳过该条目,宽容处理)。
+fn const_int_value(expr: &Expr) -> Option<i64> {
+    match expr {
+        Expr::Literal(Literal::Int(v)) => Some(*v),
+        Expr::Unary(op, inner, _) => {
+            let v = const_int_value(inner)?;
+            match op {
+                UnOp::Neg => Some(-v),
+                UnOp::Pos => Some(v),
+                UnOp::BitNot => Some(!v),
+                _ => None,
+            }
+        }
+        Expr::Binary(l, op, r, _) => {
+            let (a, b) = (const_int_value(l)?, const_int_value(r)?);
+            match op {
+                BinOp::Add => Some(a + b),
+                BinOp::Sub => Some(a - b),
+                BinOp::Mul => Some(a * b),
+                BinOp::Div => (b != 0).then(|| a / b),
+                BinOp::Mod => (b != 0).then(|| a % b),
+                BinOp::BitAnd => Some(a & b),
+                BinOp::BitOr => Some(a | b),
+                BinOp::BitXor => Some(a ^ b),
+                BinOp::Shl => u32::try_from(b).ok().and_then(|s| a.checked_shl(s)),
+                BinOp::Shr => u32::try_from(b).ok().and_then(|s| a.checked_shr(s)),
+                _ => None,
+            }
+        }
+        _ => None,
+    }
+}
+
+/// 脚本自声明枚举查找:当前文件顶层 `enum X {}` + 类级 `class Y { enum X {} }`
+/// (脚本内枚举遮蔽全局;取两层足覆盖 GDScript 惯用法)。值未显式赋值时按
+/// 声明序递增值(镜像引擎 EnumDecl 求值)。
+fn script_enum_values(file: &File, name: &str) -> Option<Vec<(String, i64)>> {
+    fn from_body(body: &[Stmt], name: &str) -> Option<Vec<(String, i64)>> {
+        let e = body.iter().find_map(|st| match st {
+            Stmt::Enum(e) if e.name.as_ref().map(|n| n.name.as_str()) == Some(name) => Some(e),
+            _ => None,
+        })?;
+        let mut out = Vec::new();
+        let mut next = 0i64;
+        for (ident, val) in &e.entries {
+            match val {
+                None => {
+                    out.push((ident.name.clone(), next));
+                    next += 1;
+                }
+                Some(expr) => {
+                    if let Some(v) = const_int_value(expr) {
+                        out.push((ident.name.clone(), v));
+                        next = v + 1;
+                    }
+                }
+            }
+        }
+        Some(out)
+    }
+    if let Some(v) = from_body(&file.body, name) {
+        return Some(v);
+    }
+    for st in &file.body {
+        if let Stmt::Class(c) = st
+            && let Some(v) = from_body(&c.body, name)
+        {
+            return Some(v);
+        }
+    }
+    None
+}
+
+/// 枚举值补全是否允许:引擎仅在「值/表达式」上下文出枚举值;
+/// **类型标注**(`var x: Enum.`)与**字典键**(`{ Enum. = }`)不出(oracle 两回归
+/// 夹具 `index_1_local_enum` / `lua_key_2` 锁定)。返回 false = 抑制枚举值面,
+/// 回落 `recv_type_at`/`class_members`(枚举非类,后者为空,与引擎"不出相关项"同向)。
+fn enum_value_completion_allowed(src: &str, word_start: usize, at: usize) -> bool {
+    let b = src.as_bytes();
+    let is_id = |c: u8| c.is_ascii_alphanumeric() || c == b'_';
+    // 字典键:光标之后首个非空白字符为 '='(`{ Enum. = }`——键赋值)。
+    let mut i = at;
+    while i < b.len() && (b[i] == b' ' || b[i] == b'\t') {
+        i += 1;
+    }
+    if i < b.len() && b[i] == b'=' {
+        return false;
+    }
+    // 类型标注:`var 名 : Enum.` —— 接收者前为 ':' , ':' 前为变量名,变量名前为声明关键字。
+    // 接收者起点(跳过紧邻的 '.')。
+    let mut r = word_start - 1;
+    while r > 0 && is_id(b[r - 1]) {
+        r -= 1;
+    }
+    // r..word_start-1 = 接收者;向左过空白到 ':' 前。
+    let mut p = r;
+    while p > 0 && (b[p - 1] == b' ' || b[p - 1] == b'\t') {
+        p -= 1;
+    }
+    if p == 0 || b[p - 1] != b':' {
+        return true; // 无 ':' → 非类型标注(match/赋值/表达式等)
+    }
+    // 过 ':' 及其前导空白,取变量名。
+    let mut q = p - 1;
+    while q > 0 && (b[q - 1] == b' ' || b[q - 1] == b'\t') {
+        q -= 1;
+    }
+    if q == 0 || !is_id(b[q - 1]) {
+        return true; // ':' 前非标识符(如字典值 `{"a": Enum.`)→ 仍是值上下文
+    }
+    let mut v = q;
+    while v > 0 && is_id(b[v - 1]) {
+        v -= 1;
+    }
+    let mut c = v;
+    while c > 0 && (b[c - 1] == b' ' || b[c - 1] == b'\t') {
+        c -= 1;
+    }
+    if c == 0 {
+        return true;
+    }
+    let mut e = c;
+    while e > 0 && is_id(b[e - 1]) {
+        e -= 1;
+    }
+    // 关键词必须是独立词:左侧非标识符(否则 `test_var` 末尾的 `var` 会被误判)。
+    let is_standalone_kw = e == 0 || !is_id(b[e - 1]);
+    // 命中 `var 名 : 接收者.` 类型标注模式 → 抑制枚举值面(返回 false)。
+    let is_type_annotation = is_standalone_kw
+        && matches!(
+            &src[e..c],
+            "var" | "const" | "signal" | "func" | "class" | "enum" | "static"
+        );
+    !is_type_annotation
 }
 
 /// 收集某类（含祖先）的方法与属性补全项。方法走 C6.4 `name(…)` 约定。

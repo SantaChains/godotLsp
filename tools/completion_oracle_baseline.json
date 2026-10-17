@@ -1,10 +1,10 @@
 {
- "generated_at": "2026-10-17 12:57:38",
- "server": "D:\\LocalSend\\Files\\pro\\godotlsp\\target\\debug\\godotlsp.exe mtime=10-17 12:54",
+ "generated_at": "2026-10-17 19:42:17",
+ "server": "D:\\LocalSend\\Files\\pro\\godotlsp\\target\\debug\\godotlsp.exe mtime=10-17 19:36",
  "corpus": "corpus\\godot-engine-tests\\completion",
  "summary": {
-  "pass": 36,
-  "fail": 104,
+  "pass": 58,
+  "fail": 82,
   "error": 0,
   "total": 140
  },
@@ -31,7 +31,7 @@
   },
   "argument_options/play_inferred.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "\"bounce\""
@@ -55,7 +55,7 @@
   },
   "argument_options/play_typed.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "\"bounce\""
@@ -79,7 +79,7 @@
   },
   "argument_options/play_untyped.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "\"bounce\""
@@ -103,7 +103,7 @@
   },
   "argument_options/string_literals/add_node_path_tween.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "insert_text": "^\"property_of_a\""
@@ -180,7 +180,7 @@
   },
   "argument_options/string_literals/dont_add_node_path_tween.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "insert_text": "\"property_of_a\""
@@ -264,7 +264,7 @@
   },
   "assignment_options/enum_identifier.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "Control.SIZE_EXPAND"
@@ -303,7 +303,7 @@
   },
   "assignment_options/enum_no_identifier.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "Control.SIZE_EXPAND"
@@ -429,7 +429,7 @@
   },
   "common/identifiers_in_call.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "add_child(…)"
@@ -498,7 +498,7 @@
   },
   "common/identifiers_in_function_body.gd": {
    "status": "fail",
-   "n_items": 1816,
+   "n_items": 1838,
    "missing": [
     {
      "display": "add_child(…)"
@@ -567,7 +567,7 @@
   },
   "common/identifiers_in_unclosed_call.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "add_child(…)"
@@ -744,7 +744,7 @@
   },
   "common/override_function_abstract.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "test(x: int) -> void:",
@@ -769,7 +769,7 @@
   },
   "common/override_function_full_name.gd": {
    "status": "fail",
-   "n_items": 1814,
+   "n_items": 1836,
    "missing": [
     {
      "display": "_get(property: StringName) -> Variant:"
@@ -793,7 +793,7 @@
   },
   "common/override_function_no_underscore.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "func_of_a():"
@@ -823,7 +823,7 @@
   },
   "common/override_function_static.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "_static_init() -> void:"
@@ -850,7 +850,7 @@
   },
   "common/override_function_underscore.gd": {
    "status": "fail",
-   "n_items": 1813,
+   "n_items": 1835,
    "missing": [
     {
      "display": "_func_of_a_underscore():"
@@ -924,217 +924,201 @@
    "labels_head": []
   },
   "enum_values_in_dictionary/lua_value_1.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_dictionary/lua_value_2.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "VALUE"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "VALUE"
+   ]
   },
   "enum_values_in_dictionary/lua_value_3.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_dictionary/lua_value_4.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "VALUE"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "VALUE"
+   ]
   },
   "enum_values_in_dictionary/lua_value_5.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_dictionary/py_key_1.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_dictionary/py_key_2.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_dictionary/py_key_3.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "VALUE"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "VALUE"
+   ]
   },
   "enum_values_in_dictionary/py_key_4.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_dictionary/py_value_1.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_dictionary/py_value_2.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "VALUE"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "VALUE"
+   ]
   },
   "enum_values_in_dictionary/py_value_3.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_match/in_branch_1.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_match/in_branch_2.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "VALUE"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "VALUE"
+   ]
   },
   "enum_values_in_match/in_branch_3.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "VALUE"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "VALUE"
+   ]
   },
   "enum_values_in_match/in_test_1.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_match/in_test_2.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "VALUE"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "VALUE"
+   ]
   },
   "enum_values_in_match/in_test_3.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "AUTO_TRANSLATE_MODE_INHERIT"
-    }
-   ],
+   "status": "pass",
+   "n_items": 3,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "AUTO_TRANSLATE_MODE_INHERIT",
+    "AUTO_TRANSLATE_MODE_ALWAYS",
+    "AUTO_TRANSLATE_MODE_DISABLED"
+   ]
   },
   "enum_values_in_match/in_test_4.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "VALUE"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "VALUE"
+   ]
   },
   "extends/extends_inherited_inner_class.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "InnerClassA"
@@ -1158,7 +1142,7 @@
   },
   "extends/extends_self.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "InnerClassA"
@@ -1185,7 +1169,7 @@
   },
   "filter/organized_export.gd": {
    "status": "pass",
-   "n_items": 1816,
+   "n_items": 1838,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -1953,19 +1937,9 @@
    ]
   },
   "global_enum/global_enum_identifier.gd": {
-   "status": "fail",
-   "n_items": 1812,
-   "missing": [
-    {
-     "display": "Key"
-    },
-    {
-     "display": "KeyLocation"
-    },
-    {
-     "display": "Error"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1834,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -2003,19 +1977,9 @@
    ]
   },
   "global_enum/global_enum_in_type_hint.gd": {
-   "status": "fail",
-   "n_items": 1812,
-   "missing": [
-    {
-     "display": "Key"
-    },
-    {
-     "display": "KeyLocation"
-    },
-    {
-     "display": "Error"
-    }
-   ],
+   "status": "pass",
+   "n_items": 1834,
+   "missing": [],
    "illegal": [],
    "labels_head": [
     "AESContext",
@@ -2047,22 +2011,28 @@
    "labels_head": []
   },
   "global_enum/global_enum_values.gd": {
-   "status": "fail",
-   "n_items": 0,
-   "missing": [
-    {
-     "display": "KEY_A"
-    },
-    {
-     "display": "KEY_B"
-    }
-   ],
+   "status": "pass",
+   "n_items": 193,
+   "missing": [],
    "illegal": [],
-   "labels_head": []
+   "labels_head": [
+    "KEY_NONE",
+    "KEY_SPECIAL",
+    "KEY_ESCAPE",
+    "KEY_TAB",
+    "KEY_BACKTAB",
+    "KEY_BACKSPACE",
+    "KEY_ENTER",
+    "KEY_KP_ENTER",
+    "KEY_INSERT",
+    "KEY_DELETE",
+    "KEY_PAUSE",
+    "KEY_PRINT"
+   ]
   },
   "index/array_type.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "outer"
@@ -2089,7 +2059,7 @@
   },
   "index/array_value.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "outer"
@@ -2130,7 +2100,7 @@
   },
   "index/dictionary_type.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "outer"
@@ -2157,7 +2127,7 @@
   },
   "index/dictionary_value.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "outer"
@@ -2205,7 +2175,7 @@
   },
   "index/untyped_local.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "outer"
@@ -2232,7 +2202,7 @@
   },
   "index/untyped_property.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "outer"
@@ -2259,7 +2229,7 @@
   },
   "no_parenthesis_when_callable_is_expected/builtin_complete_braces.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "hello_world",
@@ -2284,7 +2254,7 @@
   },
   "no_parenthesis_when_callable_is_expected/builtin_incomplete_braces.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "hello_world",
@@ -2309,7 +2279,7 @@
   },
   "no_parenthesis_when_callable_is_expected/lambda_body.gd": {
    "status": "pass",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -2329,7 +2299,7 @@
   },
   "no_parenthesis_when_callable_is_expected/lambda_parameter.gd": {
    "status": "pass",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [],
    "illegal": [],
    "labels_head": [
@@ -2349,7 +2319,7 @@
   },
   "no_parenthesis_when_callable_is_expected/local_method_callable_arg_0.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "hello_world",
@@ -2374,7 +2344,7 @@
   },
   "no_parenthesis_when_callable_is_expected/local_method_callable_arg_1.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "hello_world",
@@ -2399,7 +2369,7 @@
   },
   "no_parenthesis_when_callable_is_expected/local_method_variant_arg_0.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "hello_world()",
@@ -2424,7 +2394,7 @@
   },
   "no_parenthesis_when_callable_is_expected/native.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "hello_world",
@@ -2456,7 +2426,7 @@
   },
   "types/hints/index_0.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "A"
@@ -2489,7 +2459,7 @@
   },
   "types/hints/index_0_inner_class.gd": {
    "status": "fail",
-   "n_items": 1812,
+   "n_items": 1834,
    "missing": [
     {
      "display": "A"
